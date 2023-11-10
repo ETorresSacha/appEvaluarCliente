@@ -1,11 +1,13 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import Header from "../../components/header/Header";
+import DataCustomer from "../../components/dataCustomer/DataCustomer";
 
 const Home = () => {
   return (
     <View style={styles.container}>
       <Header />
+      <DataCustomer />
     </View>
   );
 };
@@ -16,6 +18,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 12,
+    backgroundColor: "red",
   },
   title: {
     fontSize: 16,

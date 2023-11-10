@@ -23,7 +23,7 @@ const Header = () => {
     );
   };
   return (
-    <View style={styles.container}>
+    <View>
       <View style={styles.containerHeader}>
         <View style={styles.client}>
           <Text style={styles.textClient}>Cliente</Text>
@@ -61,9 +61,6 @@ const Header = () => {
 export default Header;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   containerHeader: {
     display: "flex",
     flexDirection: "row",
