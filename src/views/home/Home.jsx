@@ -1,14 +1,15 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
-import Header from "../../components/header/Header";
+import Header from "../../components/customerType/CustomerType";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import Gastos from "../../components/Gastos/Gastos";
 import Ingresos from "../../components/ingresos/Ingresos";
+import CustomerType from "../../components/customerType/CustomerType";
 
 const Home = () => {
   return (
     <View style={styles.container}>
-      <Header />
+      <CustomerType />
       <DataCustomer />
       <Ingresos />
       <Gastos />

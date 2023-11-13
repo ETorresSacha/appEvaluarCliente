@@ -9,7 +9,7 @@ const data = [
   { label: "Otro", value: "3" },
 ];
 
-const Header = () => {
+const CustomerType = () => {
   const [value, setValue] = useState(null);
 
   const renderItem = (item) => {
@@ -58,7 +58,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default CustomerType;
 
 const styles = StyleSheet.create({
   containerHeader: {
