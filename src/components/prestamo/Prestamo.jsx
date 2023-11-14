@@ -16,7 +16,14 @@ import ModalDate from "../modalDate/ModalDate";
 const Prestamo = () => {
   const [showModal, setShowModal] = useState(false);
   const [dateNow, setDateNow] = useState("");
+  const [data, setData] = useState({
+    capital: "",
+    tiempo: "",
+    interes: "",
+    fecha: "",
+  });
 
+  console.log(data);
   return (
     <View style={styles.container}>
       <Text>PRESTAMO</Text>
@@ -27,7 +34,11 @@ const Prestamo = () => {
           <Text style={styles.legend}>Capital: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input style={styles.input} value="hola" />
+          <Input
+            style={styles.input}
+            value={data.capital}
+            onChangeText={(text) => setData({ ...data, capital: text })}
+          />
         </View>
       </View>
 
@@ -37,7 +48,11 @@ const Prestamo = () => {
           <Text style={styles.legend}>Tiempo: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input style={styles.input} value="hola" />
+          <Input
+            style={styles.input}
+            value={data.tiempo}
+            onChangeText={(text) => setData({ ...data, tiempo: text })}
+          />
         </View>
       </View>
 
@@ -47,7 +62,11 @@ const Prestamo = () => {
           <Text style={styles.legend}>Interes: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input style={styles.input} value="hola" />
+          <Input
+            style={styles.input}
+            value={data.interes}
+            onChangeText={(text) => setData({ ...data, interes: text })}
+          />
         </View>
       </View>
 
@@ -57,7 +76,7 @@ const Prestamo = () => {
           <Text style={styles.legend}>Fecha de primera cuota: </Text>
         </View>
         <View style={styles.inputContainerDate}>
-          <Input style={styles.input} value={dateNow} />
+          <Input style={styles.input} value={data.fecha} />
         </View>
         <TouchableOpacity
           onPress={() => setShowModal(true)}
@@ -74,7 +93,8 @@ const Prestamo = () => {
       <ModalDate
         visible={showModal}
         setShowModal={setShowModal}
-        setDateNow={setDateNow}
+        setData={setData}
+        data={data}
       />
 
       {/* ------------------ CUOTA ------------------*/}
