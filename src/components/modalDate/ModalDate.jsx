@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 
-const ModalDate = ({ visible, setShowModal }) => {
+const ModalDate = ({ visible, setShowModal, setDateNow }) => {
   const [selected, setSelected] = useState("");
   return (
     <Modal
@@ -22,7 +22,7 @@ const ModalDate = ({ visible, setShowModal }) => {
         <Calendar
           style={{ borderRadius: 10, elevation: 4, margin: 40 }}
           onDayPress={(day) => {
-            setSelected(day.dateString);
+            setDateNow(day.dateString);
             setShowModal(false);
           }}
           // markedDates={{

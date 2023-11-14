@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import {
   View,
   StyleSheet,
@@ -14,6 +15,7 @@ import ModalDate from "../modalDate/ModalDate";
 
 const Prestamo = () => {
   const [showModal, setShowModal] = useState(false);
+  const [dateNow, setDateNow] = useState("");
 
   return (
     <View style={styles.container}>
@@ -27,21 +29,6 @@ const Prestamo = () => {
           <Input style={styles.input} value="" />
         </View> 
       </View>  */}
-      <TouchableOpacity
-        onPress={() => setShowModal(true)}
-        style={{
-          backgroundColor: "black",
-          borderRadius: 10,
-          margin: 40,
-          padding: 10,
-          width: 200,
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ color: "white", fontSize: 22 }}>Show Calendar</Text>
-      </TouchableOpacity>
-
-      <ModalDate visible={showModal} setShowModal={setShowModal} />
 
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
@@ -70,14 +57,32 @@ const Prestamo = () => {
         </View>
       </View>
 
+      {/* ------------- FECHA ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Fecha de primera cuota: </Text>
         </View>
-        <View style={styles.inputContainer}>
-          <Input value="" />
+        <View style={styles.inputContainerDate}>
+          <Input value={dateNow} />
         </View>
+        <TouchableOpacity
+          onPress={() => setShowModal(true)}
+          style={{
+            backgroundColor: "rgb(68, 132, 222)",
+            borderRadius: 10,
+            width: 40,
+            alignItems: "center",
+          }}
+        >
+          <Ionicons name="calendar" size={32} color="white" />
+        </TouchableOpacity>
       </View>
+      <ModalDate
+        visible={showModal}
+        setShowModal={setShowModal}
+        setDateNow={setDateNow}
+      />
+      {/* ------------------------------------*/}
 
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
@@ -112,12 +117,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   inputContainer: {
-    flex: 2,
+    flex: 1,
     paddingRight: 40,
+  },
+  inputContainerDate: {
+    flex: 1,
   },
   legend: {
     fontWeight: "500",
-    paddingLeft: 40,
+    paddingLeft: 10,
     fontSize: 16,
   },
   legendContainer: {
