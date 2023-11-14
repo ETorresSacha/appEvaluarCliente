@@ -13,7 +13,7 @@ const data = [
 
 const DataCustomer = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>DATOS</Text>
       <View style={styles.containerInput}>
         {data?.map((element, index) => {
@@ -36,6 +36,9 @@ const DataCustomer = () => {
 export default DataCustomer;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: 10,
+  },
   containerInput: {
     gap: 5,
     display: "flex",

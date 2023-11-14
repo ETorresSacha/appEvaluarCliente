@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../views/home/Home";
 import Detail from "../views/detail/Detail";
+import NewForm from "../views/newForm/NewForm";
 
 const Tab = createBottomTabNavigator();
 //const Stack = createNativeStackNavigator();
@@ -14,7 +15,7 @@ const Routes = () => {
     <NavigationContainer style={{ backgroundColor: "blue" }}>
       <Tab.Navigator initialRouteName="Home">
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Detalle" component={Detail} />
+        <Tab.Screen name="Nuevo" component={NewForm} />
       </Tab.Navigator>
     </NavigationContainer>
   );
