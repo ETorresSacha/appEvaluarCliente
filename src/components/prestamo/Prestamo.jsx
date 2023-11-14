@@ -20,50 +20,44 @@ const Prestamo = () => {
   return (
     <View style={styles.container}>
       <Text>PRESTAMO</Text>
-      {/* <View style={styles.item}>
-        <View style={styles.item1}>
-          <Text style={styles.title}>Capital: </Text>
-          <Input style={styles.input} value="" />
-        </View>
-      <View>
-          <Input style={styles.input} value="" />
-        </View> 
-      </View>  */}
 
+      {/* ------------------ CAPITAL ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Capital: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input value="" />
+          <Input style={styles.input} value="hola" />
         </View>
       </View>
 
+      {/* ------------------ TIEMPO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Tiempo: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input value="" />
+          <Input style={styles.input} value="hola" />
         </View>
       </View>
 
+      {/* ------------------ INTERES ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Interes: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input value="" />
+          <Input style={styles.input} value="hola" />
         </View>
       </View>
 
-      {/* ------------- FECHA ------------------*/}
+      {/* ------------------ FECHA ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Fecha de primera cuota: </Text>
         </View>
         <View style={styles.inputContainerDate}>
-          <Input value={dateNow} />
+          <Input style={styles.input} value={dateNow} />
         </View>
         <TouchableOpacity
           onPress={() => setShowModal(true)}
@@ -82,14 +76,14 @@ const Prestamo = () => {
         setShowModal={setShowModal}
         setDateNow={setDateNow}
       />
-      {/* ------------------------------------*/}
 
+      {/* ------------------ CUOTA ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Cuota: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input value="" />
+          <Input style={styles.input} value="HOLA" />
         </View>
       </View>
     </View>
@@ -103,11 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
   },
-  title: {
-    flex: 1,
-    fontSize: 16,
-    paddingTop: 10,
-  },
+
   content: {
     marginVertical: 16,
   },
@@ -119,9 +109,14 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     paddingRight: 40,
+    textAlign: "center",
+    alignItems: "center",
   },
   inputContainerDate: {
     flex: 1,
+  },
+  input: {
+    textAlign: "center",
   },
   legend: {
     fontWeight: "500",

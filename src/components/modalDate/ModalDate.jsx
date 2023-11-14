@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 const ModalDate = ({ visible, setShowModal, setDateNow }) => {
-  const [selected, setSelected] = useState("");
   return (
     <Modal
       visible={visible}
@@ -23,15 +22,16 @@ const ModalDate = ({ visible, setShowModal, setDateNow }) => {
           style={{ borderRadius: 10, elevation: 4, margin: 40 }}
           onDayPress={(day) => {
             setDateNow(day.dateString);
+
             setShowModal(false);
           }}
-          // markedDates={{
-          //   [selected]: {
-          //     selected: true,
-          //     disableTouchEvent: true,
-          //     selectedDotColor: "orange",
-          //   },
-          // }}
+          //   markedDates={{
+          //     [selected]: {
+          //       selected: true,
+          //       disableTouchEvent: true,
+          //       selectedDotColor: "orange",
+          //     },
+          //   }}
         />
       </View>
     </Modal>
