@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
-import { View, StyleSheet, ScrollView, Text, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import { Calendar, LocaleConfig } from "react-native-calendars";
+import ModalDate from "../modalDate/ModalDate";
 
 const Prestamo = () => {
-  const [selected, setSelected] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <View style={styles.container}>
       <Text>PRESTAMO</Text>
@@ -17,19 +27,22 @@ const Prestamo = () => {
           <Input style={styles.input} value="" />
         </View> 
       </View>  */}
-      <Calendar
-        style={{ borderRadius: 10, elevation: 4, margin: 40 }}
-        onDayPress={(day) => {
-          setSelected(day.dateString);
+      <TouchableOpacity
+        onPress={() => setShowModal(true)}
+        style={{
+          backgroundColor: "black",
+          borderRadius: 10,
+          margin: 40,
+          padding: 10,
+          width: 200,
+          alignItems: "center",
         }}
-        markedDates={{
-          [selected]: {
-            selected: true,
-            disableTouchEvent: true,
-            selectedDotColor: "orange",
-          },
-        }}
-      />
+      >
+        <Text style={{ color: "white", fontSize: 22 }}>Show Calendar</Text>
+      </TouchableOpacity>
+
+      <ModalDate visible={showModal} setShowModal={setShowModal} />
+
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Capital: </Text>
