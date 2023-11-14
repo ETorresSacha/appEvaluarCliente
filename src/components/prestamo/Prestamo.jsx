@@ -18,8 +18,17 @@ const Prestamo = () => {
         </View> 
       </View>  */}
       <Calendar
+        style={{ borderRadius: 10, elevation: 4, margin: 40 }}
         onDayPress={(day) => {
+          console.log(day);
           setSelected(day.dateString);
+        }}
+        markedDates={{
+          [selected]: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedDotColor: "orange",
+          },
         }}
       />
       <View style={styles.formItem}>
