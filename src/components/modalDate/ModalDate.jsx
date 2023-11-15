@@ -15,7 +15,6 @@ const ModalDate = ({
   setDataPrestamo,
   dataPrestamo,
 }) => {
-  console.log(dataPrestamo);
   return (
     <Modal
       visible={visible}
