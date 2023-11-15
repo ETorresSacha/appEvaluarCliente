@@ -2,7 +2,10 @@ import React from "react";
 import { Button, Icon, Input } from "@rneui/themed";
 import { View, Text, StyleSheet, Alert, TextInput } from "react-native";
 
-const DataCustomer = ({ dataPerson, setDataPerson }) => {
+const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
+  const handleChangeData = (event, type) => {
+    setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
+  };
   return (
     <View style={styles.container}>
       <Text>DATOS</Text>
@@ -17,9 +20,14 @@ const DataCustomer = ({ dataPerson, setDataPerson }) => {
               value={dataPerson.nombre}
               style={styles.input}
               placeholder="Nombre"
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, nombre: text })
-              }
+              onChange={(event) => {
+                handleChangeData(event, "nombre");
+              }}
+              // onChangeText={(text) => {
+              //   console.log(text);
+              //   setDataPerson({ ...dataPerson, nombre: text });
+              //   setErrors(dataPerson);
+              // }}
             />
           </View>
         </View>
@@ -34,9 +42,12 @@ const DataCustomer = ({ dataPerson, setDataPerson }) => {
               value={dataPerson.apellido}
               style={styles.input}
               placeholder="Apellido"
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, apellido: text })
-              }
+              onChange={(event) => {
+                handleChangeData(event, "apellido");
+              }}
+              // onChangeText={(text) =>
+              //   setDataPerson({ ...dataPerson, apellido: text })
+              // }
             />
           </View>
         </View>
@@ -51,9 +62,13 @@ const DataCustomer = ({ dataPerson, setDataPerson }) => {
               value={dataPerson.dni}
               style={styles.input}
               placeholder="DNI"
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, dni: text })
-              }
+              onChange={(event) => {
+                handleChangeData(event, "dni");
+              }}
+              // onChangeText={(text) => {
+              //   setDataPerson({ ...dataPerson, dni: text });
+              //   setErrors(dataPerson);
+              // }}
             />
           </View>
         </View>
@@ -68,9 +83,12 @@ const DataCustomer = ({ dataPerson, setDataPerson }) => {
               value={dataPerson.correo}
               style={styles.input}
               placeholder="Correo"
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, correo: text })
-              }
+              onChange={(event) => {
+                handleChangeData(event, "correo");
+              }}
+              // onChangeText={(text) =>
+              //   setDataPerson({ ...dataPerson, correo: text })
+              // }
             />
           </View>
         </View>
@@ -85,9 +103,12 @@ const DataCustomer = ({ dataPerson, setDataPerson }) => {
               value={dataPerson.direccion}
               style={styles.input}
               placeholder="Dirección"
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, direccion: text })
-              }
+              onChange={(event) => {
+                handleChangeData(event, "direccion");
+              }}
+              // onChangeText={(text) =>
+              //   setDataPerson({ ...dataPerson, direccion: text })
+              // }
             />
           </View>
         </View>
@@ -102,9 +123,12 @@ const DataCustomer = ({ dataPerson, setDataPerson }) => {
               value={dataPerson.celular}
               style={styles.input}
               placeholder="Celular"
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, celular: text })
-              }
+              onChange={(event) => {
+                handleChangeData(event, "celular");
+              }}
+              // onChangeText={(text) =>
+              //   setDataPerson({ ...dataPerson, celular: text })
+              // }
             />
           </View>
         </View>

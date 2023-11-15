@@ -4,8 +4,10 @@ import { Button, Icon, Input } from "@rneui/themed";
 import Header from "../../components/header/Header";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import Prestamo from "../../components/prestamo/Prestamo";
+import { validationDataPerson } from "../../utils/validation/Validation";
 
 const NewForm = () => {
+  const [errors, setErrors] = useState({});
   const [dataPerson, setDataPerson] = useState({
     nombre: "",
     apellido: "",
@@ -22,16 +24,22 @@ const NewForm = () => {
     fecha: "",
     periodo: "",
   });
-  const valor = dataPrestamo.capital;
-  const result = parseInt(valor);
-  const result2 = result / 2;
-  console.log(valor);
-  console.log(result);
-  console.log(result2);
+
+  console.log(dataPerson);
+  const handleAddPress = () => {
+    setErrors(validationDataPerson(dataPerson));
+  };
+  console.log(errors);
+
   return (
     <ScrollView style={styles.container}>
       <Header />
-      <DataCustomer dataPerson={dataPerson} setDataPerson={setDataPerson} />
+      <DataCustomer
+        errors={errors}
+        setErrors={setErrors}
+        dataPerson={dataPerson}
+        setDataPerson={setDataPerson}
+      />
       <Prestamo dataPrestamo={dataPrestamo} setDataPrestamo={setDataPrestamo} />
       <View style={styles.buttonContainer}>
         <Button
@@ -39,10 +47,10 @@ const NewForm = () => {
           // icon={<Icon name="add" color="#FFF" />}
           radius="lg"
           color="#4ecb71"
-          //onPress={handleAddPress}
-          disabled={
-            dataPerson.nombre.trim() === "" || dataPrestamo.fecha.trim() === ""
-          }
+          onPress={handleAddPress}
+          // disabled={
+          //   dataPerson.nombre.trim() === "" || dataPrestamo.fecha.trim() === ""
+          //}
         />
       </View>
     </ScrollView>
