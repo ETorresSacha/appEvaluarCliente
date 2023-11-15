@@ -23,6 +23,7 @@ const infoPeriod = [
 ];
 
 const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
+  console.log(dataPrestamo);
   const [showModal, setShowModal] = useState(false);
   const [value, setValue] = useState(null);
 
@@ -227,3 +228,4 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
 });
+//!FALTA VALIDAR LOS DATOS DEL PRESTAMO Y CORREGIR LOS DATOS

@@ -9,8 +9,6 @@ export const validationDataPerson = (dataPerson) =>{
          error.incompletos = "Datos incompletos"
     }
 
-    // Datos solo texto
-
     // Datos solo número
     //Expresion Regular Solo Números
     var ExpRegSoloNumeros="^[0-9]+$";
@@ -20,7 +18,6 @@ export const validationDataPerson = (dataPerson) =>{
     }
 
     // Correo
-
     //Expresión Regular Email
     var ExpRegEmail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
 
@@ -36,7 +33,10 @@ export const validationDataPerson = (dataPerson) =>{
 }
 
 //! Validación de los datos del préstamo
-const validationDataPrestamo = () =>{
+const validationDataPrestamo = (dataPrestamo) =>{
+    const error = {}
+
+    //
 
 }
 

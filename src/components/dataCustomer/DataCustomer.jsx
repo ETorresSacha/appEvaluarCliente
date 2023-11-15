@@ -6,7 +6,7 @@ import { validationDataPerson } from "../../utils/validation/Validation";
 const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
   const handleChangeData = (event, type) => {
     setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
-    //setErrors(validationDataPerson(dataPerson));
+    //setErrors(validationDataPerson(dataPerson)); ---> ESTO ES OTRA FORMA DE VALIDAR
   };
 
   // const register = () => {
