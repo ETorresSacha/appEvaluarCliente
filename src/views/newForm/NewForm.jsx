@@ -34,11 +34,9 @@ const NewForm = () => {
           radius="lg"
           color="#4ecb71"
           //onPress={handleAddPress}
-          // disabled={
-          //   calories.trim() === "" ||
-          //   name.trim() === "" ||
-          //   portion.trim() === ""
-          // }
+          disabled={
+            dataPerson.nombre.trim() === "" || dataPrestamo.fecha.trim() === ""
+          }
         />
       </View>
     </ScrollView>
@@ -65,3 +63,5 @@ const styles = StyleSheet.create({
   },
   content: {},
 });
+
+//! VALIDAR LOS DATOS DEL CLIENTE Y EL PRESTAMO
