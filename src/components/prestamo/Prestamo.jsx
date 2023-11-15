@@ -10,12 +10,10 @@ import {
   TouchableOpacity,
   Modal,
 } from "react-native";
-import { Calendar, LocaleConfig } from "react-native-calendars";
 import ModalDate from "../modalDate/ModalDate";
 
 const Prestamo = () => {
   const [showModal, setShowModal] = useState(false);
-  const [dateNow, setDateNow] = useState("");
   const [data, setData] = useState({
     capital: "",
     tiempo: "",
@@ -23,7 +21,6 @@ const Prestamo = () => {
     fecha: "",
   });
 
-  console.log(data);
   return (
     <View style={styles.container}>
       <Text>PRESTAMO</Text>
@@ -80,12 +77,7 @@ const Prestamo = () => {
         </View>
         <TouchableOpacity
           onPress={() => setShowModal(true)}
-          style={{
-            backgroundColor: "rgb(68, 132, 222)",
-            borderRadius: 10,
-            width: 40,
-            alignItems: "center",
-          }}
+          style={styles.inputDateContainer}
         >
           <Ionicons name="calendar" size={32} color="white" />
         </TouchableOpacity>
@@ -137,6 +129,12 @@ const styles = StyleSheet.create({
   },
   input: {
     textAlign: "center",
+  },
+  inputDateContainer: {
+    backgroundColor: "rgb(68, 132, 222)",
+    borderRadius: 10,
+    width: 40,
+    alignItems: "center",
   },
   legend: {
     fontWeight: "500",

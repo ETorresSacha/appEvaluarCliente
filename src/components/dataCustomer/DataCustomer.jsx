@@ -11,23 +11,70 @@ const data = [
   { title: "Celular" },
 ];
 
-const DataCustomer = () => {
+const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
   return (
     <View style={styles.container}>
       <Text>DATOS</Text>
       <View style={styles.containerInput}>
-        {data?.map((element, index) => {
-          return (
-            <View key={index}>
-              <View>
-                <Text style={styles.title}>{element.title}</Text>
-              </View>
-              <View>
-                <TextInput style={styles.input} placeholder={element.title} />
-              </View>
-            </View>
-          );
-        })}
+        {/* ------------------- Nombre ------------------ */}
+        <View>
+          <View>
+            <Text style={styles.title}>Nombre</Text>
+          </View>
+          <View>
+            <TextInput style={styles.input} placeholder="Nombre" />
+          </View>
+        </View>
+
+        {/* ------------------- Apellido ------------------ */}
+        <View>
+          <View>
+            <Text style={styles.title}>Apellido</Text>
+          </View>
+          <View>
+            <TextInput style={styles.input} placeholder="Apellido" />
+          </View>
+        </View>
+
+        {/* ------------------- DNI ------------------ */}
+        <View>
+          <View>
+            <Text style={styles.title}>DNI</Text>
+          </View>
+          <View>
+            <TextInput style={styles.input} placeholder="DNI" />
+          </View>
+        </View>
+
+        {/* ------------------- Correo ------------------ */}
+        <View>
+          <View>
+            <Text style={styles.title}>Correo</Text>
+          </View>
+          <View>
+            <TextInput style={styles.input} placeholder="Correo" />
+          </View>
+        </View>
+
+        {/* ------------------- Dirección ------------------ */}
+        <View>
+          <View>
+            <Text style={styles.title}>Dirección</Text>
+          </View>
+          <View>
+            <TextInput style={styles.input} placeholder="Dirección" />
+          </View>
+        </View>
+
+        {/* ------------------- Celular ------------------ */}
+        <View>
+          <View>
+            <Text style={styles.title}>Celular</Text>
+          </View>
+          <View>
+            <TextInput style={styles.input} placeholder="Celular" />
+          </View>
+        </View>
       </View>
     </View>
   );
