@@ -22,7 +22,12 @@ const NewForm = () => {
     fecha: "",
     periodo: "",
   });
-
+  const valor = dataPrestamo.capital;
+  const result = parseInt(valor);
+  const result2 = result / 2;
+  console.log(valor);
+  console.log(result);
+  console.log(result2);
   return (
     <ScrollView style={styles.container}>
       <Header />
