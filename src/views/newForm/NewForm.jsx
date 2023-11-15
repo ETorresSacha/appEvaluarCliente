@@ -20,6 +20,7 @@ const NewForm = () => {
     tiempo: "",
     interes: "",
     fecha: "",
+    periodo: "",
   });
 
   return (
