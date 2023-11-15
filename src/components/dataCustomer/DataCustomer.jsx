@@ -1,11 +1,36 @@
 import React from "react";
 import { Button, Icon, Input } from "@rneui/themed";
 import { View, Text, StyleSheet, Alert, TextInput } from "react-native";
+import { validationDataPerson } from "../../utils/validation/Validation";
 
 const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
   const handleChangeData = (event, type) => {
     setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
+    //setErrors(validationDataPerson(dataPerson));
   };
+
+  // const register = () => {
+  //   if (!validateData()) {
+  //     return;
+  //   }
+  //   console.log("validado");
+  // };
+
+  // const validateData = () => {
+  //   setErrors({
+  //     nombre: "",
+  //     apellido: "",
+  //     dni: "",
+  //     correo: "",
+  //     direccion: "",
+  //     celular: "",
+  //   });
+  //   let isValid = true;
+
+  //   if (validationDataPerson) {
+  //   }
+  // };
+
   return (
     <View style={styles.container}>
       <Text>DATOS</Text>
@@ -23,6 +48,8 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
               onChange={(event) => {
                 handleChangeData(event, "nombre");
               }}
+              errorMessage="Error"
+              defaultValue={dataPerson.nombre}
               // onChangeText={(text) => {
               //   console.log(text);
               //   setDataPerson({ ...dataPerson, nombre: text });
@@ -45,6 +72,8 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
               onChange={(event) => {
                 handleChangeData(event, "apellido");
               }}
+              errorMessage="Error"
+              defaultValue={dataPerson.apellido}
               // onChangeText={(text) =>
               //   setDataPerson({ ...dataPerson, apellido: text })
               // }
@@ -65,6 +94,8 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
               onChange={(event) => {
                 handleChangeData(event, "dni");
               }}
+              errorMessage="Error"
+              defaultValue={dataPerson.dni}
               // onChangeText={(text) => {
               //   setDataPerson({ ...dataPerson, dni: text });
               //   setErrors(dataPerson);
@@ -86,6 +117,8 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
               onChange={(event) => {
                 handleChangeData(event, "correo");
               }}
+              errorMessage="Error"
+              defaultValue={dataPerson.correo}
               // onChangeText={(text) =>
               //   setDataPerson({ ...dataPerson, correo: text })
               // }
@@ -106,6 +139,8 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
               onChange={(event) => {
                 handleChangeData(event, "direccion");
               }}
+              errorMessage="Error"
+              defaultValue={dataPerson.direccion}
               // onChangeText={(text) =>
               //   setDataPerson({ ...dataPerson, direccion: text })
               // }
@@ -126,6 +161,8 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
               onChange={(event) => {
                 handleChangeData(event, "celular");
               }}
+              errorMessage="Error"
+              defaultValue={dataPerson.celular}
               // onChangeText={(text) =>
               //   setDataPerson({ ...dataPerson, celular: text })
               // }

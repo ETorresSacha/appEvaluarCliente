@@ -8,6 +8,7 @@ import { validationDataPerson } from "../../utils/validation/Validation";
 
 const NewForm = () => {
   const [errors, setErrors] = useState({});
+
   const [dataPerson, setDataPerson] = useState({
     nombre: "",
     apellido: "",
@@ -25,11 +26,10 @@ const NewForm = () => {
     periodo: "",
   });
 
-  console.log(dataPerson);
   const handleAddPress = () => {
     setErrors(validationDataPerson(dataPerson));
+    console.log(errors);
   };
-  console.log(errors);
 
   return (
     <ScrollView style={styles.container}>

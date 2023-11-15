@@ -6,7 +6,7 @@ export const validationDataPerson = (dataPerson) =>{
     
     // Datos en blanco
     if(dataPerson.nombre.trim() === "" || dataPerson.apellido.trim() === "" || dataPerson.dni.trim() === "" || dataPerson.correo.trim() === ""  || dataPerson.direccion.trim() === "" || dataPerson.celular.trim() === "" ) {
-        return error.incompletos = "Datos incompletos"
+         error.incompletos = "Datos incompletos"
     }
 
     // Datos solo texto
@@ -16,7 +16,7 @@ export const validationDataPerson = (dataPerson) =>{
     var ExpRegSoloNumeros="^[0-9]+$";
 
     if(dataPerson.dni.match(ExpRegSoloNumeros) == null || dataPerson.celular.match(ExpRegSoloNumeros) == null){
-        return error.noEsNumero = "Formato incorrecto"
+         error.noEsNumero = "Formato incorrecto"
     }
 
     // Correo
@@ -25,7 +25,7 @@ export const validationDataPerson = (dataPerson) =>{
     var ExpRegEmail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
 
     if(dataPerson.correo.match(ExpRegEmail) == null ){
-        return error.noEsCorreo = "Correo incorrecto"
+         error.noEsCorreo = "Correo incorrecto"
     }
     return error
 
