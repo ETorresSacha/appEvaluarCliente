@@ -11,7 +11,6 @@ const Home = () => {
     <View style={styles.container}>
       <Header />
       <CustomerType />
-      <DataCustomer />
       <Ingresos />
       <Gastos />
     </View>

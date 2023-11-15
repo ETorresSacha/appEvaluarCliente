@@ -2,16 +2,7 @@ import React from "react";
 import { Button, Icon, Input } from "@rneui/themed";
 import { View, Text, StyleSheet, Alert, TextInput } from "react-native";
 
-const data = [
-  { title: "Nombre" },
-  { title: "Apellido" },
-  { title: "DNI" },
-  { title: "Correo" },
-  { title: "Dirección" },
-  { title: "Celular" },
-];
-
-const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
+const DataCustomer = ({ dataPerson, setDataPerson }) => {
   return (
     <View style={styles.container}>
       <Text>DATOS</Text>
@@ -22,7 +13,14 @@ const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
             <Text style={styles.title}>Nombre</Text>
           </View>
           <View>
-            <TextInput style={styles.input} placeholder="Nombre" />
+            <TextInput
+              value={dataPerson.nombre}
+              style={styles.input}
+              placeholder="Nombre"
+              onChangeText={(text) =>
+                setDataPerson({ ...dataPerson, nombre: text })
+              }
+            />
           </View>
         </View>
 
@@ -32,7 +30,14 @@ const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
             <Text style={styles.title}>Apellido</Text>
           </View>
           <View>
-            <TextInput style={styles.input} placeholder="Apellido" />
+            <TextInput
+              value={dataPerson.apellido}
+              style={styles.input}
+              placeholder="Apellido"
+              onChangeText={(text) =>
+                setDataPerson({ ...dataPerson, apellido: text })
+              }
+            />
           </View>
         </View>
 
@@ -42,7 +47,14 @@ const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
             <Text style={styles.title}>DNI</Text>
           </View>
           <View>
-            <TextInput style={styles.input} placeholder="DNI" />
+            <TextInput
+              value={dataPerson.dni}
+              style={styles.input}
+              placeholder="DNI"
+              onChangeText={(text) =>
+                setDataPerson({ ...dataPerson, dni: text })
+              }
+            />
           </View>
         </View>
 
@@ -52,7 +64,14 @@ const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
             <Text style={styles.title}>Correo</Text>
           </View>
           <View>
-            <TextInput style={styles.input} placeholder="Correo" />
+            <TextInput
+              value={dataPerson.correo}
+              style={styles.input}
+              placeholder="Correo"
+              onChangeText={(text) =>
+                setDataPerson({ ...dataPerson, correo: text })
+              }
+            />
           </View>
         </View>
 
@@ -62,7 +81,14 @@ const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
             <Text style={styles.title}>Dirección</Text>
           </View>
           <View>
-            <TextInput style={styles.input} placeholder="Dirección" />
+            <TextInput
+              value={dataPerson.direccion}
+              style={styles.input}
+              placeholder="Dirección"
+              onChangeText={(text) =>
+                setDataPerson({ ...dataPerson, direccion: text })
+              }
+            />
           </View>
         </View>
 
@@ -72,7 +98,14 @@ const DataCustomer = ({ dataCuatomer, setDataCustomer }) => {
             <Text style={styles.title}>Celular</Text>
           </View>
           <View>
-            <TextInput style={styles.input} placeholder="Celular" />
+            <TextInput
+              value={dataPerson.celular}
+              style={styles.input}
+              placeholder="Celular"
+              onChangeText={(text) =>
+                setDataPerson({ ...dataPerson, celular: text })
+              }
+            />
           </View>
         </View>
       </View>

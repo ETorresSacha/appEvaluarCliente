@@ -9,7 +9,13 @@ import {
   Image,
 } from "react-native";
 
-const ModalDate = ({ visible, setShowModal, setData, data }) => {
+const ModalDate = ({
+  visible,
+  setShowModal,
+  setDataPrestamo,
+  dataPrestamo,
+}) => {
+  console.log(dataPrestamo);
   return (
     <Modal
       visible={visible}
@@ -21,7 +27,7 @@ const ModalDate = ({ visible, setShowModal, setData, data }) => {
         <Calendar
           style={{ borderRadius: 10, elevation: 4, margin: 40 }}
           onDayPress={(day) => {
-            setData({ ...data, fecha: day.dateString });
+            setDataPrestamo({ ...dataPrestamo, fecha: day.dateString });
 
             setShowModal(false);
           }}

@@ -6,7 +6,7 @@ import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import Prestamo from "../../components/prestamo/Prestamo";
 
 const NewForm = () => {
-  const [dataCuatomer, setDataCustomer] = useState({
+  const [dataPerson, setDataPerson] = useState({
     nombre: "",
     apellido: "",
     dni: "",
@@ -14,14 +14,19 @@ const NewForm = () => {
     direccion: "",
     celular: "",
   });
+
+  const [dataPrestamo, setDataPrestamo] = useState({
+    capital: "",
+    tiempo: "",
+    interes: "",
+    fecha: "",
+  });
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Header />
-      <DataCustomer
-        dataCuatomer={dataCuatomer}
-        setDataCustomer={setDataCustomer}
-      />
-      <Prestamo />
+      <DataCustomer dataPerson={dataPerson} setDataPerson={setDataPerson} />
+      <Prestamo dataPrestamo={dataPrestamo} setDataPrestamo={setDataPrestamo} />
       <View style={styles.buttonContainer}>
         <Button
           title="Guardar"
@@ -36,7 +41,7 @@ const NewForm = () => {
           // }
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -46,6 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    marginVertical: 16,
   },
   title: {
     fontSize: 16,
@@ -56,6 +62,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    paddingTop: 300,
   },
+  content: {},
 });

@@ -12,14 +12,8 @@ import {
 } from "react-native";
 import ModalDate from "../modalDate/ModalDate";
 
-const Prestamo = () => {
+const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
   const [showModal, setShowModal] = useState(false);
-  const [data, setData] = useState({
-    capital: "",
-    tiempo: "",
-    interes: "",
-    fecha: "",
-  });
 
   return (
     <View style={styles.container}>
@@ -33,8 +27,10 @@ const Prestamo = () => {
         <View style={styles.inputContainer}>
           <Input
             style={styles.input}
-            value={data.capital}
-            onChangeText={(text) => setData({ ...data, capital: text })}
+            value={dataPrestamo.capital}
+            onChangeText={(text) =>
+              setDataPrestamo({ ...dataPrestamo, capital: text })
+            }
           />
         </View>
       </View>
@@ -47,8 +43,10 @@ const Prestamo = () => {
         <View style={styles.inputContainer}>
           <Input
             style={styles.input}
-            value={data.tiempo}
-            onChangeText={(text) => setData({ ...data, tiempo: text })}
+            value={dataPrestamo.tiempo}
+            onChangeText={(text) =>
+              setDataPrestamo({ ...dataPrestamo, tiempo: text })
+            }
           />
         </View>
       </View>
@@ -61,8 +59,10 @@ const Prestamo = () => {
         <View style={styles.inputContainer}>
           <Input
             style={styles.input}
-            value={data.interes}
-            onChangeText={(text) => setData({ ...data, interes: text })}
+            value={dataPrestamo.interes}
+            onChangeText={(text) =>
+              setDataPrestamo({ ...dataPrestamo, interes: text })
+            }
           />
         </View>
       </View>
@@ -73,7 +73,7 @@ const Prestamo = () => {
           <Text style={styles.legend}>Fecha de primera cuota: </Text>
         </View>
         <View style={styles.inputContainerDate}>
-          <Input style={styles.input} value={data.fecha} />
+          <Input style={styles.input} value={dataPrestamo.fecha} />
         </View>
         <TouchableOpacity
           onPress={() => setShowModal(true)}
@@ -85,8 +85,8 @@ const Prestamo = () => {
       <ModalDate
         visible={showModal}
         setShowModal={setShowModal}
-        setData={setData}
-        data={data}
+        setDataPrestamo={setDataPrestamo}
+        dataPrestamo={dataPrestamo}
       />
 
       {/* ------------------ CUOTA ------------------*/}
@@ -95,7 +95,7 @@ const Prestamo = () => {
           <Text style={styles.legend}>Cuota: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input style={styles.input} value="HOLA" />
+          <Input style={styles.input} value="" />
         </View>
       </View>
     </View>
