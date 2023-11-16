@@ -26,7 +26,7 @@ const ITF = 0.005 // Impuesto a las Transacciones Financieras (0.005%)
 //TEM = ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100
 
 //! Cálculo de la tasa efectiva diaria
-//TED = ((Math.pow((1+(TEA/100)),(1/360)))-1)*100
+//TED = ((Math.pow((1+(TEA/100)),(1/30)))-1)*100
 
 //! Cálculo de la tasa de seguro de desgravamen diario
 
@@ -78,12 +78,51 @@ const ITF = 0.005 // Impuesto a las Transacciones Financieras (0.005%)
     TEA = 51.11     // %
     n= 12           // meses
     //ITF = 0.005     // %
-    P = 30          // dias
-    TSegM = 0.03    //%
+    periodo = 30          // dias
+    TSegM = 0.03    //%  
+    TSegM = 0.03/100 // convertido
 
 // CALCULO DE LA TASA EFECTIVA MENSUAL
 
-TEM = ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100
-
-TEM = ((Math.pow((1+(51.11/100)),(30/360)))-1)*100
+TEM = ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100 //%
+TEM = Number.parseFloat(TEM).toFixed(2)
 console.log(TEM);
+
+// CALCULO DE LA TED
+
+TED = ((Math.pow((1+(TEM/100)),(1/30)))-1)*100 //%
+console.log(TED);
+
+// CALCULO DE LA TASA DE SEGURO DE DESGRAVAMEN DIARIO
+
+TSegDD = (TSegM/30)*100  //%
+console.log(TSegDD);
+
+// CALCULO DEL FACTOR DE RETORNO DE CAPITAL (FRC)
+TED = TED/100
+DA = 34  // !averiguar por que es 34?
+
+FRC = (1/(Math.pow((1+TED),(DA))))
+console.log(FRC);
+
+// CALCULO DEL MONTO DE SEGURO DE DESGRAVAMEN
+
+TSegDD = TSegDD/100
+MonSegDM = TSegDD*capital*DA //!ojo
+MonSegDM = Number.parseFloat(MonSegDM).toFixed(2)
+console.log(MonSegDM);
+
+// CALCULO DEL INTERES DE LA CUOTA
+
+IntCuo = ((Math.pow((1+(TEM/100)),(DA/30)))-1)*capital
+IntCuo = Number.parseFloat(IntCuo).toFixed(2)
+console.log(IntCuo);
+
+// CALCULO DEL CAPITAL DE LA CUOTA
+
+CapitalCuo = (capital/FRCA) - IntCuo // ojo FRCA
+console.log(CapitalCuo);
+
+
+
+
