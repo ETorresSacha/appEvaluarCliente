@@ -2,59 +2,59 @@
 
 // Variables
 
-const TEA = "" // Tasa Efectiva Anual
-const TEM = "" // Tasa Efectiva Mensual
-const TED = "" // Tasa Efectiva Diaria
-const periodo="" // periodo
-const TSegM = "" // Tasa de Seguro de Desgravamen Mensual
-const TSegDD ="" // Tasa de Seguro de Desgravamen Diario
-const FRC = "" // Factor de Retorno de Capital
-const DA =""  // Dias Acumulados
-const capital = "" //capital
-const MonSegDM = "" // Monto Seguro de Desgravamen Mensual
-const TCEA ="" // Tasa de Costo Efestivo Anual
-const tm ="" // Tasa de Costo Efectivo Mensual
-const n = "" // Número de cuotas
-const IntCuo = "" // Capital de la cuota
-const CapitalCuo = "" // Capital de la cuota
+let TEA = "" // Tasa Efectiva Anual
+let TEM = "" // Tasa Efectiva Mensual
+let TED = "" // Tasa Efectiva Diaria
+let periodo="" // periodo
+let TSegM = "" // Tasa de Seguro de Desgravamen Mensual
+let TSegDD ="" // Tasa de Seguro de Desgravamen Diario
+let FRC = "" // Factor de Retorno de Capital
+let DA =""  // Dias Acumulados
+let capital = "" //capital
+let MonSegDM = "" // Monto Seguro de Desgravamen Mensual
+let TCEA ="" // Tasa de Costo Efestivo Anual
+let tm ="" // Tasa de Costo Efectivo Mensual
+let n = "" // Número de cuotas
+let IntCuo = "" // Capital de la cuota
+let CapitalCuo = "" // Capital de la cuota
 
-
+let FRCA ="" // esta para verificar que significa
 const ITF = 0.005 // Impuesto a las Transacciones Financieras (0.005%)
 
 //! Cálculo de la tasa efectiva mensual
 
-TEM = ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100
+//TEM = ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100
 
 //! Cálculo de la tasa efectiva diaria
-
-TED = ((Math.pow((1+(TEA/100)),(1/360)))-1)*100
+//TED = ((Math.pow((1+(TEA/100)),(1/360)))-1)*100
 
 //! Cálculo de la tasa de seguro de desgravamen diario
 
- TSegDD = (TSegM/30)*100
+ //TSegDD = (TSegM/30)*100
 
 //! Cálculo del factor de retorno de capital (FRC)
 
-FRC = (1/(Math.pow((1+TED),(DA))))
+//FRC = (1/(Math.pow((1+TED),(DA))))
 
 //! Cálculo del monto de seguro de desgravamen
 
- MonSegDM = TSegDD*capital*Dias(entrecuotas) //ojo
+ //MonSegDM = TSegDD*capital*Dias(entrecuotas) //ojo
 
 //! Cálculo del interés de la cuota
 
-IntCuo = ((Math.pow((1+(TEM/100)),(DA/30)))-1)*capital
+//IntCuo = ((Math.pow((1+(TEM/100)),(DA/30)))-1)*capital
 
 //! Cálculo del capital de la cuota
 
-CapitalCuo = (capital/FRCA) - IntCuo // ojo FRCA
+//CapitalCuo = (capital/FRCA) - IntCuo // ojo FRCA
+
 //! Cálculo de la cuota mensual
 
-const CM = (capital/FRCA) + MonSegDM // ojo FRCA
+//const CM = (capital/FRCA) + MonSegDM // ojo FRCA
 
 //! Cálculo de la tasa de costo efectivo anual
 
-TCEA = ((Math.pow((1+tm),(n)))-1)*100
+//TCEA = ((Math.pow((1+tm),(n)))-1)*100
 
 
 //EJEMPLO
@@ -77,7 +77,7 @@ TCEA = ((Math.pow((1+tm),(n)))-1)*100
     capital = 5000  // soles
     TEA = 51.11     // %
     n= 12           // meses
-    ITF = 0.005     // %
+    //ITF = 0.005     // %
     P = 30          // dias
     TSegM = 0.03    //%
 
