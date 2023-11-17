@@ -18,14 +18,6 @@ const NewForm = () => {
     celular: "",
   });
 
-  const [dataPrestamo, setDataPrestamo] = useState({
-    capital: "",
-    tiempo: "",
-    tea: "",
-    fecha: "",
-    periodo: "",
-  });
-
   const handleAddPress = () => {
     setErrors(validationDataPerson(dataPerson));
     console.log(errors);
@@ -40,7 +32,7 @@ const NewForm = () => {
         dataPerson={dataPerson}
         setDataPerson={setDataPerson}
       />
-      <Prestamo dataPrestamo={dataPrestamo} setDataPrestamo={setDataPrestamo} />
+
       <View style={styles.buttonContainer}>
         <Button
           title="Guardar"

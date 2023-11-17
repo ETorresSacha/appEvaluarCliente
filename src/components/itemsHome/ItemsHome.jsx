@@ -7,9 +7,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Button } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
 
 const ItemsHome = () => {
+  const navigation = useNavigation();
+
+  const handlePrestamo = () => {
+    navigation.navigate("Credito");
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.btn}>
@@ -18,7 +24,7 @@ const ItemsHome = () => {
       <TouchableOpacity style={styles.btn}>
         <Ionicons name="cash" size={100} color="rgb(36, 224, 221)" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={handlePrestamo}>
         <Ionicons name="calculator" size={100} color="rgb(224, 205, 36)" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.btn}>
