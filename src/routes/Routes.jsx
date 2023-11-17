@@ -18,11 +18,8 @@ const Routes = () => {
       <Tab.Navigator initialRouteName="Home">
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Nuevo" component={NewForm} />
-        {/* <Tab.Screen name="Credito" component={Credit} /> */}
+        <Tab.Screen name="Credito" component={Credit} />
       </Tab.Navigator>
-      <Stack.Navigator>
-        <Stack.Screen name="Credito" component={Credit} />
-      </Stack.Navigator>
     </NavigationContainer>
   );
 };
