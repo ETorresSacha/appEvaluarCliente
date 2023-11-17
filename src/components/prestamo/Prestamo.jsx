@@ -19,11 +19,10 @@ const infoPeriod = [
   { label: "Semanal", value: "2" },
   { label: "Quincenal", value: "3" },
   { label: "Mensual", value: "4" },
-  { label: "Trimestral", value: "5" },
+  // { label: "Trimestral", value: "5" },
 ];
 
 const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
-  console.log(dataPrestamo);
   const [showModal, setShowModal] = useState(false);
   const [value, setValue] = useState(null);
 
@@ -46,77 +45,6 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
   return (
     <View style={styles.container}>
       <Text>PRESTAMO</Text>
-
-      {/* ------------------ CAPITAL ------------------*/}
-      <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Capital: </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Input
-            style={styles.input}
-            value={dataPrestamo.capital}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, capital: text })
-            }
-          />
-        </View>
-      </View>
-
-      {/* ------------------ TIEMPO ------------------*/}
-      <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Tiempo: </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Input
-            style={styles.input}
-            value={dataPrestamo.tiempo}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, tiempo: text })
-            }
-          />
-        </View>
-      </View>
-
-      {/* ------------------ INTERES ------------------*/}
-      <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Interes: </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Input
-            style={styles.input}
-            value={dataPrestamo.interes}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, interes: text })
-            }
-          />
-        </View>
-      </View>
-
-      {/* ------------------ FECHA ------------------*/}
-      <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Fecha de la primera cuota: </Text>
-        </View>
-        <View style={styles.inputContainerDate}>
-          <Input style={styles.input} value={dataPrestamo.fecha} />
-        </View>
-        <TouchableOpacity
-          onPress={() => setShowModal(true)}
-          style={styles.inputDateContainer}
-        >
-          <Ionicons name="calendar" size={32} color="white" />
-        </TouchableOpacity>
-      </View>
-      <ModalDate
-        visible={showModal}
-        setShowModal={setShowModal}
-        setDataPrestamo={setDataPrestamo}
-        dataPrestamo={dataPrestamo}
-      />
-
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
@@ -144,15 +72,110 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         </View>
       </View>
 
-      {/* ------------------ CUOTA ------------------*/}
+      {/* ------------------ CAPITAL ------------------*/}
       <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Capital: </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Input
+            placeholder="soles"
+            style={styles.input}
+            value={dataPrestamo.capital}
+            onChangeText={(text) =>
+              setDataPrestamo({ ...dataPrestamo, capital: text })
+            }
+          />
+        </View>
+      </View>
+
+      {/* ------------------ INTERES ------------------*/}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>TEA: </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Input
+            placeholder="%"
+            style={styles.input}
+            value={dataPrestamo.tea}
+            onChangeText={(text) =>
+              setDataPrestamo({ ...dataPrestamo, tea: text })
+            }
+          />
+        </View>
+      </View>
+
+      {/* ------------------ NUMERO DE CUOTAS ------------------*/}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>N° Cuotas: </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Input
+            placeholder="meses"
+            style={styles.input}
+            value={dataPrestamo.tiempo}
+            onChangeText={(text) =>
+              setDataPrestamo({ ...dataPrestamo, tiempo: text })
+            }
+          />
+        </View>
+      </View>
+
+      {/* ------------------ FECHA DE DESEMBOLSO ------------------*/}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Fecha de desembolso: </Text>
+        </View>
+        <View style={styles.inputContainerDate}>
+          <Input style={styles.input} value={dataPrestamo.fecha} />
+        </View>
+        <TouchableOpacity
+          onPress={() => setShowModal(true)}
+          style={styles.inputDateContainer}
+        >
+          <Ionicons name="calendar" size={32} color="white" />
+        </TouchableOpacity>
+      </View>
+      <ModalDate
+        visible={showModal}
+        setShowModal={setShowModal}
+        setDataPrestamo={setDataPrestamo}
+        dataPrestamo={dataPrestamo}
+      />
+
+      {/* ------------------ FECHA DE LA PRIMERA CUOTA------------------*/}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Fecha de la primera cuota: </Text>
+        </View>
+        <View style={styles.inputContainerDate}>
+          <Input style={styles.input} value={dataPrestamo.fecha} />
+        </View>
+        <TouchableOpacity
+          onPress={() => setShowModal(true)}
+          style={styles.inputDateContainer}
+        >
+          <Ionicons name="calendar" size={32} color="white" />
+        </TouchableOpacity>
+      </View>
+      <ModalDate
+        visible={showModal}
+        setShowModal={setShowModal}
+        setDataPrestamo={setDataPrestamo}
+        dataPrestamo={dataPrestamo}
+      />
+
+      {/* ------------------ CUOTA ------------------*/}
+      {/* <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Cuota: </Text>
         </View>
         <View style={styles.inputContainer}>
           <Input style={styles.input} value="" />
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

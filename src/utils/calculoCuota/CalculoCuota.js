@@ -100,16 +100,17 @@ console.log(TSegDD);
 
 // CALCULO DEL FACTOR DE RETORNO DE CAPITAL (FRC)
 TED = TED/100
+console.log(Number.parseFloat(TED).toFixed(7));
 DA = 34  // !averiguar por que es 34?
 
-FRC = (1/(Math.pow((1+TED),(DA))))
+FRC = (1/(Math.pow((1+(TED)),(DA))))
 console.log(FRC);
 
 // CALCULO DEL MONTO DE SEGURO DE DESGRAVAMEN
 
 TSegDD = TSegDD/100
 MonSegDM = TSegDD*capital*DA //!ojo
-MonSegDM = Number.parseFloat(MonSegDM).toFixed(2)
+//MonSegDM = Number.parseFloat(MonSegDM).toFixed(2)
 console.log(MonSegDM);
 
 // CALCULO DEL INTERES DE LA CUOTA
@@ -120,9 +121,13 @@ console.log(IntCuo);
 
 // CALCULO DEL CAPITAL DE LA CUOTA
 
-CapitalCuo = (capital/FRCA) - IntCuo // ojo FRCA
+CapitalCuo = (capital/9.60427337) - IntCuo // ojo FRCA
 console.log(CapitalCuo);
 
+// CALCULO DE LA CUOTA MENSUAL
+
+CM = (capital/9.60427337)
+console.log(CM);
 
 
 

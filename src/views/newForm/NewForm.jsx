@@ -21,7 +21,7 @@ const NewForm = () => {
   const [dataPrestamo, setDataPrestamo] = useState({
     capital: "",
     tiempo: "",
-    interes: "",
+    tea: "",
     fecha: "",
     periodo: "",
   });
@@ -33,7 +33,7 @@ const NewForm = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Header />
+      {/* <Header /> */}
       <DataCustomer
         errors={errors}
         setErrors={setErrors}
@@ -62,8 +62,7 @@ export default NewForm;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    marginVertical: 16,
+    paddingHorizontal: 10,
   },
   title: {
     fontSize: 16,
