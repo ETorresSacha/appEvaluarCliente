@@ -101,7 +101,7 @@ console.log(TSegDD);
 // CALCULO DEL FACTOR DE RETORNO DE CAPITAL (FRC)
 TED = TED/100
 console.log(Number.parseFloat(TED).toFixed(7));
-DA = 34  // !averiguar por que es 34?
+DA = 34  // Este resultado el la resta de la fecha de la primera cuota y la fecha de desmbolso
 
 FRC = (1/(Math.pow((1+(TED)),(DA))))
 console.log(FRC);

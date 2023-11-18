@@ -217,4 +217,12 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 15,
   },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
+    textAlign: "center",
+  },
 });
