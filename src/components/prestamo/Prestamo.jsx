@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
-import Ionicons from "@expo/vector-icons/Ionicons";
+
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
@@ -13,8 +13,7 @@ import {
   TouchableOpacity,
   Modal,
 } from "react-native";
-import ModalDate from "../modalDate/ModalDate";
-import OptionsSure from "../checkBoxs/OptionsSure";
+import DatePrestamo from "../date/DatePrestamo";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -24,17 +23,7 @@ const infoPeriod = [
 ];
 
 const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
-  const [showModal, setShowModal] = useState(false);
   const [value, setValue] = useState(null);
-
-  // tipo de fecha
-
-  const [typeDatePrestamo, setTypeDatePrestamo] = useState("");
-
-  const handleTypeDatePrestamo = (element) => {
-    setShowModal(true);
-    setTypeDatePrestamo(element);
-  };
 
   const renderItem = (item) => {
     return (
@@ -134,52 +123,10 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
       </View>
 
       {/* ------------------ FECHA DE DESEMBOLSO ------------------*/}
-      {[
-        {
-          typeDate: "fechaDesembolso",
-          title: "Fecha de desembolso:",
-          fecha: dataPrestamo.fechaDesembolso,
-        },
-        {
-          typeDate: "fechaPrimeraCuota",
-          title: "Fecha de la primera cuota:",
-          fecha: dataPrestamo.fechaPrimeraCuota,
-        },
-      ].map((element, index) => {
-        return (
-          <View key={index} style={styles.formItem}>
-            <View style={styles.legendContainer}>
-              <Text style={styles.legend}>{element.title} </Text>
-            </View>
-            <View style={styles.inputContainerDate}>
-              <Input style={styles.input} value={element.fecha} />
-            </View>
-            <TouchableOpacity
-              onPress={() => handleTypeDatePrestamo(element.typeDate)}
-              style={styles.inputDateContainer}
-            >
-              <Ionicons name="calendar" size={32} color="white" />
-            </TouchableOpacity>
-          </View>
-        );
-      })}
-      <ModalDate
-        visible={showModal}
-        setShowModal={setShowModal}
-        setDataPrestamo={setDataPrestamo}
+      <DatePrestamo
         dataPrestamo={dataPrestamo}
-        typeDatePrestamo={typeDatePrestamo}
+        setDataPrestamo={setDataPrestamo}
       />
-
-      {/* ------------------ CUOTA ------------------*/}
-      {/* <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Cuota: </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Input style={styles.input} value="" />
-        </View>
-      </View> */}
 
       {/* ------------------ OPTIONS SURE ------------------*/}
       {/* <OptionsSure /> */}
