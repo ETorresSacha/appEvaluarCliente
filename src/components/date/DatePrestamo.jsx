@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import ModalDate from "../modalDate/ModalDate";
 import { Input } from "@rneui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const DatePrestamo = ({ dataPrestamo, setDataPrestamo }) => {
   const dataDate = [

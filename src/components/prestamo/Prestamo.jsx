@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
-
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-
 import {
   View,
   StyleSheet,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
-  Modal,
 } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
 
@@ -24,6 +20,7 @@ const infoPeriod = [
 
 const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
   const [value, setValue] = useState(null);
+  const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
   const renderItem = (item) => {
     return (
@@ -65,6 +62,7 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
             onChange={(item) => {
               setValue(item.value);
               setDataPrestamo({ ...dataPrestamo, periodo: item.value });
+              setPlaceholderNumCuotas(item.label);
             }}
             renderItem={renderItem}
           />
@@ -78,7 +76,7 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         </View>
         <View style={styles.inputContainer}>
           <Input
-            placeholder="soles"
+            placeholder="Soles"
             style={styles.input}
             value={dataPrestamo.capital}
             onChangeText={(text) =>
@@ -112,7 +110,7 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         </View>
         <View style={styles.inputContainer}>
           <Input
-            placeholder="meses"
+            placeholder={placeholderNumCuotas}
             style={styles.input}
             value={dataPrestamo.tiempo}
             onChangeText={(text) =>
@@ -131,6 +129,7 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
       {/* ------------------ OPTIONS SURE ------------------*/}
       {/* <OptionsSure /> */}
 
+      {/* ------------------ CALCULAR ------------------*/}
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.btnCalcular}>
           <Text style={styles.text}>Calcular</Text>
@@ -158,18 +157,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
   },
-  inputContainerDate: {
-    flex: 1,
-  },
+
   input: {
     textAlign: "center",
   },
-  inputDateContainer: {
-    backgroundColor: "rgb(68, 132, 222)",
-    borderRadius: 10,
-    width: 40,
-    alignItems: "center",
-  },
+
   legend: {
     fontWeight: "500",
     paddingLeft: 10,
@@ -224,13 +216,5 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
     borderRadius: 15,
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "white",
-    textAlign: "center",
   },
 });
