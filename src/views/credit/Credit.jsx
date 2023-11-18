@@ -5,14 +5,14 @@ import Prestamo from "../../components/prestamo/Prestamo";
 const Credit = () => {
   const [dataPrestamo, setDataPrestamo] = useState({
     capital: "",
-    tiempo: "",
+    nCuotas: "",
     tea: "",
     fechaDesembolso: "",
     fechaPrimeraCuota: "",
     periodo: "",
   });
 
-  console.log(dataPrestamo);
+  // console.log(dataPrestamo);
   return (
     <View style={styles.container}>
       <Prestamo dataPrestamo={dataPrestamo} setDataPrestamo={setDataPrestamo} />
