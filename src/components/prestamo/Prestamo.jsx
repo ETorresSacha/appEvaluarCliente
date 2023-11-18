@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
+import { Calculos } from "../../utils/calculoCuota/CalculosCuota";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -36,6 +37,11 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         )}
       </View>
     );
+  };
+
+  const handleCalcular = (data) => {
+    const result = Calculos(data);
+    console.log(result);
   };
 
   return (
@@ -131,7 +137,10 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
 
       {/* ------------------ CALCULAR ------------------*/}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.btnCalcular}>
+        <TouchableOpacity
+          style={styles.btnCalcular}
+          onPress={() => handleCalcular(dataPrestamo)}
+        >
           <Text style={styles.text}>Calcular</Text>
         </TouchableOpacity>
       </View>

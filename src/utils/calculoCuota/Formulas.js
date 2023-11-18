@@ -2,15 +2,15 @@
 // Cálculo de la tasa efectiva mensual
 export const TEM = (TEA)=>{
     const periodo = 30
-    const result =  ((Math.pow((1+(TEA/100)),(periodo/360)))-1)
-    return Number.parseFloat(result).toFixed(2)
+    const result =  ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100
+    return Number.parseFloat(result).toFixed(3)
 }
 
 // Cálculo de la tasa efectiva diaria
 export const TED = (TEM)=>{
  
-    const result =  ((Math.pow((1+(TEM/100)),(1/30)))-1)
-    return Number.parseFloat(result).toFixed(2)
+    const result =  ((Math.pow((1+(TEM/100)),(1/30)))-1)*100
+    return Number.parseFloat(result).toFixed(3)
 }
 
 // Cálculo de la tasa de seguro de desgravamen diario

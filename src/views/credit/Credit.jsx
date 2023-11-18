@@ -13,7 +13,6 @@ const Credit = () => {
   });
 
   console.log(dataPrestamo);
-
   return (
     <View style={styles.container}>
       <Prestamo dataPrestamo={dataPrestamo} setDataPrestamo={setDataPrestamo} />
