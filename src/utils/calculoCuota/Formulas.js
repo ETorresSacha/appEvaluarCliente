@@ -21,7 +21,7 @@ export const TSegDD = (TSegM) =>{
 
 // Cálculo del factor de retorno de capital (FRC)
 export const FRC = (TED,DA)=>{
-    const result = (1/(Math.pow((1+(TED)),(DA))))
+    const result = (1/(Math.pow((1+(TED/100)),(DA))))
     return Number.parseFloat(result).toFixed(10)
 }
 
