@@ -3,6 +3,7 @@ import { Button, Icon, Input } from "@rneui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
+
 import {
   View,
   StyleSheet,
@@ -13,6 +14,7 @@ import {
   Modal,
 } from "react-native";
 import ModalDate from "../modalDate/ModalDate";
+import CheckBoxs from "../checkBoxs/CheckBoxs";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -176,6 +178,15 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
           <Input style={styles.input} value="" />
         </View>
       </View> */}
+
+      {/* ------------------ CHECK BOXS ------------------*/}
+      <CheckBoxs />
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.btnCalcular}>
+          <Text style={styles.text}>Calcular</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -249,6 +260,29 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 2,
+  },
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+  },
+  btnCalcular: {
+    marginTop: 15,
+
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#4ecb71",
+    width: 200,
+    height: 40,
+    borderRadius: 15,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
+    textAlign: "center",
   },
 });
 //!FALTA VALIDAR LOS DATOS DEL PRESTAMO Y CORREGIR LOS DATOS
