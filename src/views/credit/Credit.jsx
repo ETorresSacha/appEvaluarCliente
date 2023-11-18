@@ -7,9 +7,12 @@ const Credit = () => {
     capital: "",
     tiempo: "",
     tea: "",
-    fecha: "",
+    fechaDesembolso: "",
+    fechaPrimeraCuota: "",
     periodo: "",
   });
+
+  console.log(dataPrestamo);
 
   return (
     <View style={styles.container}>

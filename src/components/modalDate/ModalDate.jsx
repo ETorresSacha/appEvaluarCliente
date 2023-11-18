@@ -14,6 +14,7 @@ const ModalDate = ({
   setShowModal,
   setDataPrestamo,
   dataPrestamo,
+  typeDatePrestamo,
 }) => {
   return (
     <Modal
@@ -26,7 +27,10 @@ const ModalDate = ({
         <Calendar
           style={{ borderRadius: 10, elevation: 4, margin: 40 }}
           onDayPress={(day) => {
-            setDataPrestamo({ ...dataPrestamo, fecha: day.dateString });
+            setDataPrestamo({
+              ...dataPrestamo,
+              [typeDatePrestamo]: day.dateString,
+            });
 
             setShowModal(false);
           }}

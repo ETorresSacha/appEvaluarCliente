@@ -14,19 +14,27 @@ import {
   Modal,
 } from "react-native";
 import ModalDate from "../modalDate/ModalDate";
-import CheckBoxs from "../checkBoxs/CheckBoxs";
+import OptionsSure from "../checkBoxs/OptionsSure";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
   { label: "Semanal", value: "2" },
   { label: "Quincenal", value: "3" },
   { label: "Mensual", value: "4" },
-  // { label: "Trimestral", value: "5" },
 ];
 
 const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
   const [showModal, setShowModal] = useState(false);
   const [value, setValue] = useState(null);
+
+  // tipo de fecha
+
+  const [typeDatePrestamo, setTypeDatePrestamo] = useState("");
+
+  const handleTypeDatePrestamo = (element) => {
+    setShowModal(true);
+    setTypeDatePrestamo(element);
+  };
 
   const renderItem = (item) => {
     return (
@@ -126,47 +134,41 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
       </View>
 
       {/* ------------------ FECHA DE DESEMBOLSO ------------------*/}
-      <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Fecha de desembolso: </Text>
-        </View>
-        <View style={styles.inputContainerDate}>
-          <Input style={styles.input} value={dataPrestamo.fecha} />
-        </View>
-        <TouchableOpacity
-          onPress={() => setShowModal(true)}
-          style={styles.inputDateContainer}
-        >
-          <Ionicons name="calendar" size={32} color="white" />
-        </TouchableOpacity>
-      </View>
+      {[
+        {
+          typeDate: "fechaDesembolso",
+          title: "Fecha de desembolso:",
+          fecha: dataPrestamo.fechaDesembolso,
+        },
+        {
+          typeDate: "fechaPrimeraCuota",
+          title: "Fecha de la primera cuota:",
+          fecha: dataPrestamo.fechaPrimeraCuota,
+        },
+      ].map((element, index) => {
+        return (
+          <View key={index} style={styles.formItem}>
+            <View style={styles.legendContainer}>
+              <Text style={styles.legend}>{element.title} </Text>
+            </View>
+            <View style={styles.inputContainerDate}>
+              <Input style={styles.input} value={element.fecha} />
+            </View>
+            <TouchableOpacity
+              onPress={() => handleTypeDatePrestamo(element.typeDate)}
+              style={styles.inputDateContainer}
+            >
+              <Ionicons name="calendar" size={32} color="white" />
+            </TouchableOpacity>
+          </View>
+        );
+      })}
       <ModalDate
         visible={showModal}
         setShowModal={setShowModal}
         setDataPrestamo={setDataPrestamo}
         dataPrestamo={dataPrestamo}
-      />
-
-      {/* ------------------ FECHA DE LA PRIMERA CUOTA------------------*/}
-      <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Fecha de la primera cuota: </Text>
-        </View>
-        <View style={styles.inputContainerDate}>
-          <Input style={styles.input} value={dataPrestamo.fecha} />
-        </View>
-        <TouchableOpacity
-          onPress={() => setShowModal(true)}
-          style={styles.inputDateContainer}
-        >
-          <Ionicons name="calendar" size={32} color="white" />
-        </TouchableOpacity>
-      </View>
-      <ModalDate
-        visible={showModal}
-        setShowModal={setShowModal}
-        setDataPrestamo={setDataPrestamo}
-        dataPrestamo={dataPrestamo}
+        typeDatePrestamo={typeDatePrestamo}
       />
 
       {/* ------------------ CUOTA ------------------*/}
@@ -179,8 +181,8 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         </View>
       </View> */}
 
-      {/* ------------------ CHECK BOXS ------------------*/}
-      <CheckBoxs />
+      {/* ------------------ OPTIONS SURE ------------------*/}
+      {/* <OptionsSure /> */}
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.btnCalcular}>
@@ -285,4 +287,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-//!FALTA VALIDAR LOS DATOS DEL PRESTAMO Y CORREGIR LOS DATOS
