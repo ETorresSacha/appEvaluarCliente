@@ -1,30 +1,39 @@
-export const diasXmes = (date)=>{
+export const diasXmes = (data,i)=>{
     let NDias = ""
     const mes30Dias = ['04','06','09','11']
     const mes28Dias = ['02'] 
-    const [dia, mes,anio] = date.split('-')
+    let accum=0
+    let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
+ 
 
-    // Si el año es biciesto o no
-    if (mes28Dias.includes(mes)){
-        if((anio % 4 === 0) && (anio % 100 !=0 || anio % 400 ==0)){
-            return NDias=29
-        }
-        else{
-            return NDias=28
-        }
-
+    if (i===0){
+        let fechaInicio = new Date(data.fechaDesembolso).getTime();
+        let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
+        let diff = fechaFin - fechaInicio;
+        const resultDA = diff/(1000*60*60*24)
+        NDias = resultDA
     }
     else{
-        if(mes30Dias.includes(mes)) { NDias=30}
-        else  {NDias=31}
+        const resultDateIni = sumarMes(data,i-1)
+        const resultDateFin = sumarMes(data,i)
+
+        let [diaI,mesI, anioI ] = resultDateIni.split('-')
+        let [diaF,mesF, anioF ] = resultDateFin.split('-')
+
+        let fechaInicio   = new Date(`${anioI}-${mesI}-${diaI}`).getTime();
+        let fechaFin   = new Date(`${anioF}-${mesF}-${diaF}`).getTime();
+        let result = (fechaFin-fechaInicio)/(1000*60*60*24)
+        NDias = result
+
     }
+
     return NDias
 }
 
 // CRONOGRAMA DE LA FECHA
-export const sumarMes = (date,i)=>{
+export const sumarMes = (data,i)=>{
     let fechaPago =""
-    let [anio, mes, dia] = date.split('-')
+    let [anio, mes, dia] = data.fechaPrimeraCuota.split('-')
 
     let nuevoAnio =""
     let parseMes = parseInt(mes)+i

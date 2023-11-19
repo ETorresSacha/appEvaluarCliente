@@ -59,19 +59,19 @@ import {  diasXmes, sumarMes } from "./CalculoDiasXMes";
     //console.log(data.fechaPrimeraCuota);
     for (let i = 1;i<=data.nCuotas;i++){
         
-        cronogrrama.push({cuota:i, fechaPago:sumarMes(data.fechaPrimeraCuota,i-1)})
+        cronogrrama.push({cuota:i, fechaPago:sumarMes(data,i-1),Dias:diasXmes(data,i-1)})
     }
    
     return cronogrrama
 }
 
 // se añade la columna con los dias por mes
-export const columnaDias = (data) =>{
-    for (let i = 1;i<=data.nCuotas;i++){
+// export const columnaDias = (data) =>{
+//     for (let i = 1;i<=data.nCuotas;i++){
         
-        cronogrrama.push(...,{cuota:i, fechaPago:sumarMes(data.fechaPrimeraCuota,i-1)})
-    }
-}
+//         cronogrrama.push(...,{cuota:i, fechaPago:sumarMes(data.fechaPrimeraCuota,i-1)})
+//     }
+// }
 
 
 //!usar despues
