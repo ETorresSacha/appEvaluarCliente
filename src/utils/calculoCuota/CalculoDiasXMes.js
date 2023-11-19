@@ -1,3 +1,4 @@
+// DIAS POR MES
 export const diasXmes = (data,i)=>{
     let NDias = ""
     const mes30Dias = ['04','06','09','11']
@@ -29,6 +30,30 @@ export const diasXmes = (data,i)=>{
 
     return NDias
 }
+
+// DIAS ACUMULADOS
+export const diasAcum = (data,i)=>{
+    let acum = 0
+    let fechaInicio = new Date(data.fechaDesembolso).getTime();
+    let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
+    
+    if (i===0){
+        let diff = fechaFin - fechaInicio;
+        acum = diff/(1000*60*60*24)
+    }
+    else{
+
+        const resultDateFin = sumarMes(data,i)
+        let [diaF,mesF, anioF ] = resultDateFin.split('-')
+
+        let fechaFin   = new Date(`${anioF}-${mesF}-${diaF}`).getTime();
+        let result = (fechaFin-fechaInicio)/(1000*60*60*24)
+        acum = result
+    }
+    return acum
+
+}
+
 
 // CRONOGRAMA DE LA FECHA
 export const sumarMes = (data,i)=>{

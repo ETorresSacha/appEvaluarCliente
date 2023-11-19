@@ -1,6 +1,6 @@
 // import { FRC, IntCuo, TED, TEM } from "./Formulas"
 
-import {  diasXmes, sumarMes } from "./CalculoDiasXMes";
+import {  diasAcum, diasXmes, sumarMes } from "./CalculoDiasXMes";
 
 // export const Calculos = (data)=>{
 
@@ -59,7 +59,7 @@ import {  diasXmes, sumarMes } from "./CalculoDiasXMes";
     //console.log(data.fechaPrimeraCuota);
     for (let i = 1;i<=data.nCuotas;i++){
         
-        cronogrrama.push({cuota:i, fechaPago:sumarMes(data,i-1),Dias:diasXmes(data,i-1)})
+        cronogrrama.push({cuota:i, fechaPago:sumarMes(data,i-1),Dias:diasXmes(data,i-1), DiasAcum:diasAcum(data,i-1)})
     }
    
     return cronogrrama
