@@ -1,8 +1,8 @@
-const diasXmes = (date)=>{
+export const diasXmes = (date)=>{
     let NDias = ""
     const mes30Dias = ['04','06','09','11']
     const mes28Dias = ['02'] 
-    const [anio, mes, dia] = date.split('-')
+    const [dia, mes,anio] = date.split('-')
 
     // Si el año es biciesto o no
     if (mes28Dias.includes(mes)){
@@ -20,3 +20,36 @@ const diasXmes = (date)=>{
     }
     return NDias
 }
+
+// CRONOGRAMA DE LA FECHA
+export const sumarMes = (date,i)=>{
+    let fechaPago =""
+    let [anio, mes, dia] = date.split('-')
+
+    let nuevoAnio =""
+    let parseMes = parseInt(mes)+i
+
+
+    if(parseMes<=12) fechaPago=`${dia.toString().padStart(2, "0")}-${parseMes.toString().padStart(2, "0")}-${anio}`
+
+    else  {
+        
+        let nuevoMes = parseInt(mes)+i
+
+        if(nuevoMes % 12 === 0){
+             nuevoAnio =parseInt(anio) + (nuevoMes/12 - 1)
+        }
+
+         if(nuevoMes % 12 !== 0){
+             nuevoAnio = parseInt(anio)+(Math.trunc(nuevoMes/12))
+         }
+
+        mes=(parseInt(mes)+i)-(12*(nuevoMes % 12 ===0 ? (nuevoMes/12)-1 : Math.trunc(nuevoMes/12)))
+
+        fechaPago=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${nuevoAnio}` 
+    }
+    return fechaPago   
+}
+
+
+
