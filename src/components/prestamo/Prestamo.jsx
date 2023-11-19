@@ -13,6 +13,7 @@ import DatePrestamo from "../date/DatePrestamo";
 import {
   Calculos,
   calculoParaCambiar,
+  resultCuotas,
 } from "../../utils/calculoCuota/CalculosCuota";
 
 const infoPeriod = [
@@ -46,8 +47,10 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
     // const result = Calculos(data);
     // console.log(result);
 
-    const resultt = calculoParaCambiar(data);
-    console.log(resultt);
+    // const resultt = calculoParaCambiar(data);
+    // console.log(resultt);
+    const result = resultCuotas(data);
+    console.log(result);
   };
 
   return (

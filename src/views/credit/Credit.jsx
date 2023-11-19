@@ -12,7 +12,7 @@ const Credit = () => {
     periodo: "",
   });
 
-  console.log(dataPrestamo);
+  //console.log(dataPrestamo);
   // console.log(dataPrestamo);
   return (
     <View style={styles.container}>

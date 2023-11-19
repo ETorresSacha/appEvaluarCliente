@@ -1,69 +1,105 @@
-// import { FRC, IntCuo, TED, TEM } from "./Formulas"
+ import { FRC, IntCuo, TED, TEM } from "./Formulas"
 
-import {  diasAcum, diasXmes, sumarMes } from "./CalculoDiasXMes";
+import {  CuotInt, diasAcum, diasXmes, solutionFRC, sumarMes } from "./CalculoDiasXMes";
 
-// export const Calculos = (data)=>{
+export const Calculos = (data)=>{
 
-//     // Cálculo de TEM
-//     const resultTEM = TEM(data.tea)
+    // Cálculo de TEM
+    const resultTEM = TEM(data.tea)
 
-//     // Cálculo de TED
-//     const resultTED = TED(resultTEM)
+    // Cálculo de TED
+    const resultTED = TED(resultTEM)
 
-//     // Cálculo de los dias acumulados
-//     let fechaInicio = new Date(data.fechaDesembolso).getTime();
-//     let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
-//     let diff = fechaFin - fechaInicio;
-//     const resultDA = diff/(1000*60*60*24)
-
-//     // Cálculo FRC
-//     const resultFRC = FRC(resultTED,resultDA)
-
-//     // Cálculo FRCA
-
-//     const calculoParaCambiar = () =>{
-//         for (let i = 1;i<=n;i++){
-//             console.log(1);
-
-//         }
-//     }
-//     const resultFRCA = FRC(resultTED,resultDA)
-
-//     // Cálculo del interés de la cuota
-//     const resultIntCuo = IntCuo(resultTEM,resultDA,data.capital) //! solo para este caso como es el primer mes los dias que es lo que va en esta formula se usara los DA. PARA LOS SIGUIENTES SE TIENE QUE CAMBIAR
-
-//     return {da:resultDA,
-//         tem:resultTEM,
-//         ted:resultTED, 
-//         frc:resultFRC,
-//         interesCuota :resultIntCuo}
-    
-
-
-// }
-
-//! tenemos que hacer un for para calcular la suma total del FRCA, desues calcular la cuota capital, el seguro desgravamen y hacer el cronograma
-
-
- export const calculoParaCambiar = (data) =>{
-    let [anio, mes, dia] = data.fechaPrimeraCuota.split('-')
-    const cronogrrama =[]
-
+    // Cálculo de los dias acumulados
     let fechaInicio = new Date(data.fechaDesembolso).getTime();
     let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
     let diff = fechaFin - fechaInicio;
     const resultDA = diff/(1000*60*60*24)
 
+    // // Cálculo FRC
+    // const resultFRC = FRC(resultTED,resultDA)
+
+    // Cálculo FRCA
+
+    // const calculoParaCambiar = () =>{
+    //     for (let i = 1;i<=n;i++){
+    //         console.log(1);
+
+    //     }
+    // }
+    // const resultFRCA = FRC(resultTED,resultDA)
+
+    // // Cálculo del interés de la cuota
+    // const resultIntCuo = IntCuo(resultTEM,resultDA,data.capital) //! solo para este caso como es el primer mes los dias que es lo que va en esta formula se usara los DA. PARA LOS SIGUIENTES SE TIENE QUE CAMBIAR
+
+    return {da:resultDA,
+        tem:resultTEM,
+        ted:resultTED, 
+        // frc:resultFRC,
+        // interesCuota :resultIntCuo}
+    }
+}
+
+//! tenemos que hacer un for para calcular la suma total del FRCA, desues calcular la cuota capital, el seguro desgravamen y hacer el cronograma
 
 
-    //console.log(data.fechaPrimeraCuota);
+ export const calculoParaCambiar = (data) =>{
+    let capital = data.capital
+   
+    const cronograma =[]
+    const resultTED = Calculos(data).ted
+    const resultTEM = Calculos(data).tem
+    let acumFRCA = []
+
+
     for (let i = 1;i<=data.nCuotas;i++){
         
-        cronogrrama.push({cuota:i, fechaPago:sumarMes(data,i-1),Dias:diasXmes(data,i-1), DiasAcum:diasAcum(data,i-1)})
+        cronograma.push(
+            {cuota:i, 
+            fechaPago:sumarMes(data,i-1),
+            Dias:diasXmes(data,i-1), 
+            DiasAcum:diasAcum(data,i-1),
+            FRC :solutionFRC(resultTED,data,i,acumFRCA),
+            capital:"",
+            cuotaCapital:"",
+            cuotaInteres:CuotInt(resultTEM,capital, data,i-1,resultFRCA)})
     }
+    
+    // FRCA
+    const resultFRCA = acumFRCA.reduce((accum, currentValue) => accum + currentValue,0);
    
-    return cronogrrama
+
+    return {
+        cronog:cronograma,
+        FRCA : resultFRCA
+    }
 }
+
+
+ export const resultCuotas = (data)=>{
+    let capital = data.capital
+    let cronograma2=[]
+    let resultFRCA = calculoParaCambiar(data).FRCA
+    const resultTED = Calculos(data).ted
+    const resultTEM = Calculos(data).tem
+    let acumFRCA = []
+
+    for (let i = 1;i<=data.nCuotas;i++){
+        
+        cronograma2.push(
+            {cuota:i, 
+            fechaPago:sumarMes(data,i-1),
+            Dias:diasXmes(data,i-1), 
+            DiasAcum:diasAcum(data,i-1),
+            FRC :solutionFRC(resultTED,data,i,acumFRCA),
+            cuotaInteres:CuotInt(resultTEM,capital, data,i-1,resultFRCA).resultInt,
+            cuotaCapital:CuotInt(resultTEM,capital, data,i-1,resultFRCA).resultCuo,
+            capital:CuotInt(resultTEM,capital, data,i-1,resultFRCA).resultCap})
+    }
+    return cronograma2
+ 
+
+ }
 
 // se añade la columna con los dias por mes
 // export const columnaDias = (data) =>{
