@@ -82,7 +82,7 @@ export const Calculos = (data)=>{
     let acumFRCA = []
 
     let newCapital = []
-    console.log(newCapital);
+    //console.log(newCapital);
 
     for (let i = 1;i<=data.nCuotas;i++){
         
@@ -93,8 +93,8 @@ export const Calculos = (data)=>{
             DiasAcum:diasAcum(data,i-1),
             FRC :solutionFRC(resultTED,data,i,acumFRCA),
             cuotaInteres:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultInt,
-            // capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
-            // cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo
+            cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo,
+            capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
             
          
         })

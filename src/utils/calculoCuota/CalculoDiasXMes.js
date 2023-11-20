@@ -90,7 +90,6 @@ export const diasAcum = (data,i)=>{
 export const solutionFRC = (ted,data,i,acumFRCA)=>{
     let acum = 0
 
-
     let resultDiasAcum = diasAcum(data,i-1)
      let resul = FRC(ted,resultDiasAcum)
      acumFRCA.push(parseFloat(resul))
@@ -111,12 +110,20 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
     let resultCuoInt
     let resultCuoCap
     //console.log(resultDiasMes);
+    //console.log("este es el capital: " + newCapital);//!
+
 
     
     if(i === 0){
          // Cuota interes
+         console.log(tem);
 
     resultCuoInt = IntCuo(tem,resultDiasMes,CAPITAL)
+    console.log(resultCuoInt);
+    //const result = ((Math.pow((1+(1.6/100)),(32/30)))-1)*10000
+    const result =  ((Math.pow((1+(20.98/100)),(30/360)))-1)*100
+    console.log(Number.parseFloat(result).toFixed(2));
+    console.log(result);
 
     // Cuota capital
 
@@ -124,6 +131,7 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
 
     //Capital restante
     resultCapital = CAPITAL-resultCuoCap
+    //console.log("dentro del i=0: "+resultCapital);
 
     newCapital.push(resultCapital)
    
@@ -132,26 +140,35 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
     }
     else{
          // Cuota interes
+         //console.log(tem);
         
-     console.log( newCapital[0]);//!
+     //console.log("inicio: "+ newCapital[0]);//!
 
     resultCuoInt = IntCuo(tem,resultDiasMes,newCapital[0])
     
 
     // Cuota capital
 
-    resultCuoCap =  CapitalCuo(newCapital[0],resultFRCA,resultCuoInt)
+    resultCuoCap =  CapitalCuo(CAPITAL,resultFRCA,resultCuoInt)
+    //console.log(resultCuoCap);
+   
 
     //Capital restante
-   resultCapital = parseFloat(newCapital[0])-resultCuoCap
+   // console.log(typeof (newCapital[0]));
+    //console.log( typeof resultCuoCap);
+   // console.log(parseFloat(newCapital[0]));
+   resultCapital = (newCapital[0])-resultCuoCap
+   resultCapital = Number.parseFloat(resultCapital).toFixed(2)
     newCapital.shift()
     newCapital.push(resultCapital)
+    //console.log(resultCapital);
+    //console.log("fin: "+ newCapital);//!
  
 
     }
    
-    console.log(resultCuoInt);
-    console.log(newCapital);
+    //console.log(resultCuoInt);
+    //console.log(newCapital);
 
     return {
         resultInt:resultCuoInt,

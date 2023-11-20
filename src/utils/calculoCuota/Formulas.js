@@ -34,7 +34,7 @@ export const MonSegDM = (TSegDD,capital,dias)=>{
 // Cálculo del interés de la cuota
 export const IntCuo = (TEM,dias,capital)=>{
     const result = ((Math.pow((1+(TEM/100)),(dias/30)))-1)*capital
-    return Number.parseFloat(result).toFixed(2)
+    return result
 }
 
 // Cálculo del capital de la cuota
