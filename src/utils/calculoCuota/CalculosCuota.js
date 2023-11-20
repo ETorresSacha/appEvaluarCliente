@@ -10,46 +10,17 @@ export const Calculos = (data)=>{
     // Cálculo de TED
     const resultTED = TED(resultTEM)
 
-    // Cálculo de los dias acumulados
-    let fechaInicio = new Date(data.fechaDesembolso).getTime();
-    let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
-    let diff = fechaFin - fechaInicio;
-    const resultDA = diff/(1000*60*60*24)
-
-    // // Cálculo FRC
-    // const resultFRC = FRC(resultTED,resultDA)
-
-    // Cálculo FRCA
-
-    // const calculoParaCambiar = () =>{
-    //     for (let i = 1;i<=n;i++){
-    //         console.log(1);
-
-    //     }
-    // }
-    // const resultFRCA = FRC(resultTED,resultDA)
-
-    // // Cálculo del interés de la cuota
-    // const resultIntCuo = IntCuo(resultTEM,resultDA,data.capital) //! solo para este caso como es el primer mes los dias que es lo que va en esta formula se usara los DA. PARA LOS SIGUIENTES SE TIENE QUE CAMBIAR
-
-    return {da:resultDA,
+    return {
         tem:resultTEM,
         ted:resultTED, 
-        // frc:resultFRC,
-        // interesCuota :resultIntCuo}
     }
 }
 
-//! tenemos que hacer un for para calcular la suma total del FRCA, desues calcular la cuota capital, el seguro desgravamen y hacer el cronograma
-
-
- export const calculoParaCambiar = (data) =>{
+export const calculoParaCambiar = (data) =>{
     let capital = data.capital
    
     const cronograma =[]
     const resultTED = Calculos(data).ted
-    const resultTEM = Calculos(data).tem
-
     let acumFRCA = []
 
 
@@ -73,28 +44,14 @@ export const Calculos = (data)=>{
     }
 }
 
-
  export const resultCuotas = (data)=>{
 
     let cronograma2=[]
+    let acumFRCA = []
+    let newCapital = []
     let resultFRCA = calculoParaCambiar(data).FRCA
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
-    //console.log("tem MANO; " +resultTEM);
-    
-    console.log("TEM MANO: "+((Math.pow((1+(20.98/100)),(30/360)))-1)*100);
-    let z = (1+0.2098)
-    let w = 0.08333333333333  //0.0833333333333333
-    let y = Math.pow(z,w)
-    console.log("w"+w);
-    console.log("y:"+(y-1));
-    console.log("TED: " + resultTED);
-    console.log("TEM: " + resultTEM);
-    console.log("FRCA: " +resultFRCA);
-    let acumFRCA = []
-
-    let newCapital = []
-    //console.log(newCapital);
 
     for (let i = 1;i<=data.nCuotas;i++){
         
@@ -111,9 +68,9 @@ export const Calculos = (data)=>{
          
         })
     }
+
     return cronograma2
  
-
  }
 
 // se añade la columna con los dias por mes
