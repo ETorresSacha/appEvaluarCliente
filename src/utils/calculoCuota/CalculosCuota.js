@@ -49,6 +49,7 @@ export const Calculos = (data)=>{
     const cronograma =[]
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
+
     let acumFRCA = []
 
 
@@ -79,6 +80,17 @@ export const Calculos = (data)=>{
     let resultFRCA = calculoParaCambiar(data).FRCA
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
+    //console.log("tem MANO; " +resultTEM);
+    
+    console.log("TEM MANO: "+((Math.pow((1+(20.98/100)),(30/360)))-1)*100);
+    let z = (1+0.2098)
+    let w = 0.08333333333333  //0.0833333333333333
+    let y = Math.pow(z,w)
+    console.log("w"+w);
+    console.log("y:"+(y-1));
+    console.log("TED: " + resultTED);
+    console.log("TEM: " + resultTEM);
+    console.log("FRCA: " +resultFRCA);
     let acumFRCA = []
 
     let newCapital = []

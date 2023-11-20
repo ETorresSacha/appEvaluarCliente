@@ -119,10 +119,10 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
          console.log(tem);
 
     resultCuoInt = IntCuo(tem,resultDiasMes,CAPITAL)
-    console.log(resultCuoInt);
-    //const result = ((Math.pow((1+(1.6/100)),(32/30)))-1)*10000
-    const result =  ((Math.pow((1+(20.98/100)),(30/360)))-1)*100
-    console.log(Number.parseFloat(result).toFixed(2));
+
+    const result = ((Math.pow((1+(tem/100)),(32/30)))-1)*10000
+    //const result =  ((Math.pow((1+(20.98/100)),(30/360)))-1)*100
+    //console.log(Number.parseFloat(result).toFixed(2));
     console.log(result);
 
     // Cuota capital
@@ -158,7 +158,7 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
     //console.log( typeof resultCuoCap);
    // console.log(parseFloat(newCapital[0]));
    resultCapital = (newCapital[0])-resultCuoCap
-   resultCapital = Number.parseFloat(resultCapital).toFixed(2)
+   resultCapital = Number.parseFloat(resultCapital).toFixed(10)
     newCapital.shift()
     newCapital.push(resultCapital)
     //console.log(resultCapital);
