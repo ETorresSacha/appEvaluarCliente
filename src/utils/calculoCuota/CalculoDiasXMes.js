@@ -1,4 +1,4 @@
-import { CapitalCuo, FRC, IntCuo } from "./Formulas"
+import { CapitalCuo, FRC, IntCuo, MonSegDM, TSegDD } from "./Formulas"
 
 // CRONOGRAMA DE LA FECHA
 export const sumarMes = (data,i)=>{
@@ -91,13 +91,16 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 }
 
 // CUOTA INTERES, CAPITAL Y CAPITAL RESTANTE
-export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
+export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
 
     let resultDiasMes = diasXmes(data,i)
     let CAPITAL = parseFloat(data.capital)
+    let resultTSegDD = TSegDD(TSegM)
+    console.log(resultTSegDD);
     let resultCapital
     let resultCuoInt
     let resultCuoCap
+    let resultMonSegDesg
 
     if(i === 0){
 
@@ -110,9 +113,21 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
          //Capital restante
          resultCapital = CAPITAL-resultCuoCap
          newCapital.push(resultCapital)
+
+        // Cálculo de la tasa de seguro de desgravamen diario
+       
+        resultMonSegDesg = MonSegDM(resultTSegDD,CAPITAL,resultDiasMes)
+        
+        // Cálculo de de la tasa de seguro de desgravamen diario
+       
+        resultMonSegDesg = MonSegDM(resultTSegDD,CAPITAL,resultDiasMes)
    
     }
     else{
+        // Cálculo de de la tasa de seguro de desgravamen diario
+
+
+        resultMonSegDesg = MonSegDM(resultTSegDD,newCapital[0],resultDiasMes)
 
         // Cuota interes
         resultCuoInt = IntCuo(tem,resultDiasMes,newCapital[0])
@@ -125,6 +140,8 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
         resultCapital = Number.parseFloat(resultCapital).toFixed(10)
         newCapital.shift()
         newCapital.push(resultCapital)
+
+
  
     }
    
@@ -132,7 +149,22 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
     return {
         resultInt:resultCuoInt,
         resultCuo: resultCuoCap,
-        resultCap:resultCapital}
+        resultCap:resultCapital,
+        resultSeg:resultMonSegDesg
+    }
+}
+
+// SEGURO DE DESGRAVAMEN
+
+export const SegDesg  = (data,i,TSegM)=>{
+        // Cálculo de de la tasa de seguro de desgravamen diario
+       
+        const resultTSegDD = TSegDD(TSegM)
+
+        const resultDiasMes = diasXmes(data,i)
+        const resultMonSegDesg = MonSegDM(resultTSegDD,data.capital,resultDiasMes)
+
+        return resultMonSegDesg
 
 }
 

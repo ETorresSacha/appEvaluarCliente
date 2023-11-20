@@ -1,6 +1,6 @@
- import { FRC, IntCuo, TED, TEM } from "./Formulas"
+ import { FRC, IntCuo, TED, TEM, TSegDD } from "./Formulas"
 
-import {  CuotInt, diasAcum, diasXmes, solutionFRC, sumarMes } from "./CalculoDiasXMes";
+import {  CuotInt, SegDesg, diasAcum, diasXmes, solutionFRC, sumarMes } from "./CalculoDiasXMes";
 
 export const Calculos = (data)=>{
 
@@ -46,6 +46,7 @@ export const calculoParaCambiar = (data) =>{
 
  export const resultCuotas = (data)=>{
 
+    const TSegM = 0.08 // %  //!este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
     let cronograma2=[]
     let acumFRCA = []
     let newCapital = []
@@ -64,6 +65,7 @@ export const calculoParaCambiar = (data) =>{
             cuotaInteres:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultInt,
             cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo,
             capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
+            SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultSeg,
             
          
         })

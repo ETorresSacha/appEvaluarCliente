@@ -15,7 +15,7 @@ export const TED = (TEM)=>{
 
 // Cálculo de la tasa de seguro de desgravamen diario
 export const TSegDD = (TSegM) =>{
-    const result = (TSegM/30)
+    const result = ((TSegM/100)/30)
     return result
 }
 
@@ -27,7 +27,7 @@ export const FRC = (TED,DA)=>{
 
 // Cálculo del monto de seguro de desgravamen
 export const MonSegDM = (TSegDD,capital,dias)=>{
-    const result = TSegDD*capital*dias
+    const result = (TSegDD*capital*dias)
     return result
 }
 
