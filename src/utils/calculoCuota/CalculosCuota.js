@@ -59,10 +59,7 @@ export const Calculos = (data)=>{
             fechaPago:sumarMes(data,i-1),
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
-            FRC :solutionFRC(resultTED,data,i,acumFRCA),
-            capital:"",
-            cuotaCapital:"",
-            cuotaInteres:CuotInt(resultTEM,capital, data,i-1,resultFRCA)})
+            FRC :solutionFRC(resultTED,data,i,acumFRCA)})
     }
     
     // FRCA
@@ -77,12 +74,15 @@ export const Calculos = (data)=>{
 
 
  export const resultCuotas = (data)=>{
-    let capital = data.capital
+
     let cronograma2=[]
     let resultFRCA = calculoParaCambiar(data).FRCA
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
     let acumFRCA = []
+
+    let newCapital = []
+    console.log(newCapital);
 
     for (let i = 1;i<=data.nCuotas;i++){
         
@@ -92,9 +92,12 @@ export const Calculos = (data)=>{
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
             FRC :solutionFRC(resultTED,data,i,acumFRCA),
-            cuotaInteres:CuotInt(resultTEM,capital, data,i-1,resultFRCA).resultInt,
-            cuotaCapital:CuotInt(resultTEM,capital, data,i-1,resultFRCA).resultCuo,
-            capital:CuotInt(resultTEM,capital, data,i-1,resultFRCA).resultCap})
+            cuotaInteres:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultInt,
+            // capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
+            // cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo
+            
+         
+        })
     }
     return cronograma2
  

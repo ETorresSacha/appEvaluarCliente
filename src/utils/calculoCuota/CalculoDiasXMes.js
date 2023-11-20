@@ -33,10 +33,10 @@ export const sumarMes = (data,i)=>{
 // DIAS POR MES
 export const diasXmes = (data,i)=>{
     let NDias = ""
-    const mes30Dias = ['04','06','09','11']
-    const mes28Dias = ['02'] 
-    let accum=0
-    let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
+    // const mes30Dias = ['04','06','09','11']
+    // const mes28Dias = ['02'] 
+    // let accum=0
+    // let fechaFin    = new Date(data.fechaPrimeraCuota).getTime();
  
 
     if (i===0){
@@ -100,46 +100,58 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 }
 
 // CUOTA INTERES
+//diasXmes("02-10-2010",1)
+export const CuotInt = (data,i,tem,resultFRCA,newCapital)=>{
+    //console.log(data);
+    let resultDiasMes = diasXmes(data,i)
+    let CAPITAL = parseFloat(data.capital)
 
-export const CuotInt = (tem,capital, data,i,resultFRCA)=>{
-    let newCapital 
+ 
     let resultCapital
     let resultCuoInt
     let resultCuoCap
-    let resultDiasMes = diasXmes(data,i)
+    //console.log(resultDiasMes);
+
     
     if(i === 0){
          // Cuota interes
 
-    resultCuoInt = IntCuo(tem,resultDiasMes,capital)
+    resultCuoInt = IntCuo(tem,resultDiasMes,CAPITAL)
 
     // Cuota capital
 
-    resultCuoCap =  CapitalCuo(capital,resultFRCA,resultCuoInt)
+    resultCuoCap =  CapitalCuo(CAPITAL,resultFRCA,resultCuoInt)
 
     //Capital restante
-    resultCapital = capital-resultCuoCap
-    newCapital =resultCapital
+    resultCapital = CAPITAL-resultCuoCap
+
+    newCapital.push(resultCapital)
+   
         
 
     }
     else{
          // Cuota interes
-         console.log(newCapital);
+        
+     console.log( newCapital[0]);//!
 
-    resultCuoInt = IntCuo(tem,resultDiasMes,newCapital)
+    resultCuoInt = IntCuo(tem,resultDiasMes,newCapital[0])
+    
 
     // Cuota capital
 
-    resultCuoCap =  CapitalCuo(newCapital,resultFRCA,resultCuoInt)
+    resultCuoCap =  CapitalCuo(newCapital[0],resultFRCA,resultCuoInt)
 
     //Capital restante
-    resultCapital = newCapital-resultCuoCap
-    newCapital =resultCapital
+   resultCapital = parseFloat(newCapital[0])-resultCuoCap
+    newCapital.shift()
+    newCapital.push(resultCapital)
+ 
 
     }
    
-
+    console.log(resultCuoInt);
+    console.log(newCapital);
 
     return {
         resultInt:resultCuoInt,
@@ -148,7 +160,11 @@ export const CuotInt = (tem,capital, data,i,resultFRCA)=>{
 
 }
 
+// let a = [3]
+//  a.shift()
+// a.push(9)
+// console.log(a);
 
 
 
-
+//! EL CAPITAL NO SE ESTA MODIFICANDO, ESO TEM¿NEMOS QUE CORREGIR
