@@ -26,7 +26,7 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
+const Prestamo = ({ dataPrestamo, setDataPrestamo, setResultCuota }) => {
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
@@ -57,7 +57,8 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
     // console.log(result);
 
     const result = resutCronograma(data);
-    console.log(result);
+    setResultCuota(result);
+    //console.log(result);
 
     const resulti = OJO(data);
     // console.log(result);
@@ -171,8 +172,8 @@ export default Prestamo;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 12,
+    backgroundColor: "red",
+    paddingVertical: 12,
   },
 
   formItem: {
