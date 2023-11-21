@@ -1,8 +1,9 @@
 import React from "react";
 import Cronograma from "../../components/cronograma/Cronograma";
+import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 
-const VerCronograma = ({ resultCuota }) => {
-  return <Cronograma resultCuota={resultCuota} />;
+const VerCronograma = () => {
+  return <Cronograma />;
 };
 
 export default VerCronograma;

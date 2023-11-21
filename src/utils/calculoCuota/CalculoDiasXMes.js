@@ -132,7 +132,6 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
         // Cálculo de la cuota con ITF
         CuoConITF = parseFloat(CuoSinITF) + parseFloat(RITF)
       
-   
     }
     else{
 

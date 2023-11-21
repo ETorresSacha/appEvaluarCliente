@@ -14,9 +14,8 @@ const Cuota = ({ resultCuota }) => {
   const navigation = useNavigation();
   const cuota = resultCuota[0]?.montoCuota;
 
-  const handleCronograma = (data) => {
+  const handleRouteCronograma = () => {
     navigation.navigate("Cronograma de pago");
-    <VerCronograma resultCuota={data} />;
   };
 
   return (
@@ -32,7 +31,7 @@ const Cuota = ({ resultCuota }) => {
       <View>
         <Pressable
           style={styles.buttonCronograma}
-          onPress={() => handleCronograma(resultCuota)}
+          onPress={handleRouteCronograma}
         >
           <Text style={styles.textCronograma}>Ver Cronograma</Text>
         </Pressable>

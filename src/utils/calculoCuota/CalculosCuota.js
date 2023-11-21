@@ -74,9 +74,8 @@ export const calculoFRCA = (data) =>{
     result.map((element) => cuotas.push(element.CuoConITF))
     let resultPromCuo = cuotas.reduce((accum, currentValue) => accum + currentValue,0);
     promCuota = resultPromCuo/data.nCuotas
-    console.log(promCuota);
 
-        // Cuota promedio
+        //! Cuota promedio 
         let cuotass = []
         result.map((element) => cuotass.push(element.cuotaCapital))
         let resultSumaCapi = cuotass.reduce((accum, currentValue) => accum + currentValue,0);
