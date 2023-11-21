@@ -12,7 +12,9 @@ import {
 import DatePrestamo from "../date/DatePrestamo";
 import {
   Calculos,
+  OJO,
   calculoParaCambiar,
+  result,
   resultCuotas,
   resutCronograma,
 } from "../../utils/calculoCuota/CalculosCuota";
@@ -45,6 +47,7 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
   };
 
   const handleCalcular = (data) => {
+    //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
     // const result = Calculos(data);
     // console.log(result);
 
@@ -55,6 +58,9 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
 
     const result = resutCronograma(data);
     console.log(result);
+
+    const resulti = OJO(data);
+    // console.log(result);
   };
 
   return (

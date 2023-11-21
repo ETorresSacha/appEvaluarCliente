@@ -90,6 +90,7 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 
 }
 
+
 // CUOTA INTERES, CAPITAL Y CAPITAL RESTANTE
 export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
 

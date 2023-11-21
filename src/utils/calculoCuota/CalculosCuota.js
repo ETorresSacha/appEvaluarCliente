@@ -16,49 +16,36 @@ export const Calculos = (data)=>{
     }
 }
 
-export const calculoParaCambiar = (data) =>{
+export const calculoFRCA = (data) =>{
    
-    const cronograma =[]
     const resultTED = Calculos(data).ted
     let acumFRCA = []
 
+    for (let i = 1;i<=data.nCuotas;i++){
+        solutionFRC(resultTED,data,i,acumFRCA)
+    }
+      
+    // FRCA
+    const resultFRCA = acumFRCA.reduce((accum, currentValue) => accum + currentValue,0);
+
+    return resultFRCA
+}
+
+ export const cronPagos = (data)=>{
+
+    const TSegM = 0.08 // %  //!este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
+    let cronograma=[]
+    let acumFRCA = []
+    let newCapital = []
+    let resultFRCA = calculoFRCA(data)
+    const resultTED = Calculos(data).ted
+    const resultTEM = Calculos(data).tem
 
     for (let i = 1;i<=data.nCuotas;i++){
         
         cronograma.push(
-            {cuota:i, 
-            fechaPago:sumarMes(data,i-1),
-            Dias:diasXmes(data,i-1), 
-            DiasAcum:diasAcum(data,i-1),
-            FRC :solutionFRC(resultTED,data,i,acumFRCA)})
-    }
-    
-    // FRCA
-    const resultFRCA = acumFRCA.reduce((accum, currentValue) => accum + currentValue,0);
-   
-
-    return {
-        cronog:cronograma,
-        FRCA : resultFRCA
-    }
-}
-
- export const resultCuotas = (data)=>{
-
-    const TSegM = 0.08 // %  //!este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
-    let cronograma2=[]
-    let acumFRCA = []
-    let newCapital = []
-    let resultFRCA = calculoParaCambiar(data).FRCA
-    const resultTED = Calculos(data).ted
-    const resultTEM = Calculos(data).tem
-
-    const CuotasT = []
-
-    for (let i = 1;i<=data.nCuotas;i++){
-        
-        cronograma2.push(
-            {cuota:i, 
+            {
+            cuota:i, 
             fechaPago:sumarMes(data,i-1),
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
@@ -69,55 +56,68 @@ export const calculoParaCambiar = (data) =>{
             SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultSeg,
             CuoSinITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoSinITF,
             CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoConITF,
-            
-         
         })
     }
-
-       // CUOTA PROMEDIO
-    //    let resultPromCuo = Cuotas.reduce((accum, currentValue) => accum + currentValue,0);
-    //    resultPromCuo = resultPromCuo/data.nCuotas
        
-
-    return cronograma2
+    return cronograma
  
  }
 
  // AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
  export const resutCronograma = (data)=>{
 
-    const result = resultCuotas(data)
+    const result = cronPagos(data)
     let cuotas = []
     let promCuota
     
-
     // Cuota promedio
     result.map((element) => cuotas.push(element.CuoConITF))
     let resultPromCuo = cuotas.reduce((accum, currentValue) => accum + currentValue,0);
     promCuota = resultPromCuo/data.nCuotas
+    console.log(promCuota);
+
+        // Cuota promedio
+        let cuotass = []
+        result.map((element) => cuotass.push(element.cuotaCapital))
+        let resultSumaCapi = cuotass.reduce((accum, currentValue) => accum + currentValue,0);
+        //promCuota = resultPromCuo/data.nCuotas
+        console.log(resultSumaCapi.toFixed(2));
 
     // ITF
-    let itf = promCuota * 0.00005
+    let itf = (promCuota * 0.00005)
+    itf = parseFloat(itf.toFixed(2))
+
 
     // result
-    let cronogramaAjustado = result.map((element) =>{
+    let cronogramaAjustado = result.map((element,index) =>{
 
         return {
+   
             cuota:element.cuota,
             fechaPago: element.fechaPago,
             capital: (promCuota-(element.cuotaInteres+element.SegDesgrvamen+itf)).toFixed(2),
             interes: element.cuotaInteres.toFixed(2),
             SegDesg:element.SegDesgrvamen.toFixed(2),
             ITF:itf.toFixed(2),
-            cuota:promCuota.toFixed(2),
+            montoCuota:promCuota.toFixed(2),
             dias:element.Dias
-
-
         }
         
     })
 
     return cronogramaAjustado
 
-
  } 
+
+ //! ver si sirve, sino eliminar
+ export const OJO =(data)=>{
+    let cuotas = []
+    let promCuota
+    const result = resutCronograma(data)
+    
+    // Cuota promedio
+    result.map((element) => cuotas.push(parseFloat(element.capital)))
+    let resultPromCuo = cuotas.reduce((accum, currentValue) => accum + currentValue,0);
+    console.log("suma total capital: "+resultPromCuo.toFixed(2));
+ }
+ //!jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
