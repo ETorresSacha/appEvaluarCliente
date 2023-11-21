@@ -9,6 +9,7 @@ import Detail from "../views/detail/Detail";
 import NewForm from "../views/newForm/NewForm";
 
 import Credit from "../views/credit/Credit";
+import VerCronograma from "../views/cronograma/VerCronograma";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ const Routes = () => {
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Nuevo" component={NewForm} />
         <Tab.Screen name="Credito" component={Credit} />
+        <Tab.Screen name="Cronograma de pago" component={VerCronograma} />
       </Tab.Navigator>
     </NavigationContainer>
   );

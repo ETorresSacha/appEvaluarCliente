@@ -7,9 +7,18 @@ import {
   Text,
   Pressable,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import VerCronograma from "../../views/cronograma/VerCronograma";
 
 const Cuota = ({ resultCuota }) => {
+  const navigation = useNavigation();
   const cuota = resultCuota[0]?.montoCuota;
+
+  const handleCronograma = (data) => {
+    navigation.navigate("Cronograma de pago");
+    <VerCronograma resultCuota={data} />;
+  };
+
   return (
     <View style={styles.container}>
       <View>
@@ -23,7 +32,7 @@ const Cuota = ({ resultCuota }) => {
       <View>
         <Pressable
           style={styles.buttonCronograma}
-          onPress={() => Alert.alert("Cannot press this one")}
+          onPress={() => handleCronograma(resultCuota)}
         >
           <Text style={styles.textCronograma}>Ver Cronograma</Text>
         </Pressable>
