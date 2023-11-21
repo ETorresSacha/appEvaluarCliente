@@ -4,7 +4,7 @@ import Prestamo from "../../components/prestamo/Prestamo";
 import Cuota from "../../components/cuota/Cuota";
 
 const Credit = () => {
-  const [resultCuota, setResultCuota] = useState([]);
+  const [resultCuota, setResultCuota] = useState();
   const [enabled, setEnabled] = useState(false);
   const [dataPrestamo, setDataPrestamo] = useState({
     capital: "",

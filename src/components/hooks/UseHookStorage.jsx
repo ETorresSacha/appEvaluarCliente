@@ -57,6 +57,11 @@ const UseStorage = () => {
       return Promise.reject(error);
     }
   };
+
+  return {
+    onSaveCronograma: handleSaveCronograma,
+    onGetCronograma: handleGetCronograma,
+  };
 };
 
 export default UseStorage;

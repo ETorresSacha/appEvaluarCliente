@@ -18,6 +18,7 @@ import {
   resultCuotas,
   resutCronograma,
 } from "../../utils/calculoCuota/CalculosCuota";
+import UseStorage from "../hooks/UseHookStorage";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -34,6 +35,7 @@ const Prestamo = ({
 }) => {
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
+  const { onSaveCronograma } = UseStorage();
 
   const renderItem = (item) => {
     return (
@@ -51,7 +53,7 @@ const Prestamo = ({
     );
   };
 
-  const handleCalcular = (data) => {
+  const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
     // const result = Calculos(data);
     // console.log(result);
@@ -64,6 +66,12 @@ const Prestamo = ({
     const result = resutCronograma(data);
     setResultCuota(result);
     setEnabled(true);
+    try {
+      await onSaveCronograma(result);
+    } catch (error) {
+      console.error(error);
+    }
+
     //console.log(result);
 
     const resulti = OJO(data);
