@@ -26,7 +26,12 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({ dataPrestamo, setDataPrestamo, setResultCuota }) => {
+const Prestamo = ({
+  dataPrestamo,
+  setDataPrestamo,
+  setResultCuota,
+  setEnabled,
+}) => {
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
@@ -58,6 +63,7 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo, setResultCuota }) => {
 
     const result = resutCronograma(data);
     setResultCuota(result);
+    setEnabled(true);
     //console.log(result);
 
     const resulti = OJO(data);

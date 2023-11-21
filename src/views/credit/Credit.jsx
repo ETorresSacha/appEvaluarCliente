@@ -5,6 +5,7 @@ import Cuota from "../../components/cuota/Cuota";
 
 const Credit = () => {
   const [resultCuota, setResultCuota] = useState([]);
+  const [enabled, setEnabled] = useState(false);
   const [dataPrestamo, setDataPrestamo] = useState({
     capital: "",
     nCuotas: "",
@@ -22,8 +23,9 @@ const Credit = () => {
         dataPrestamo={dataPrestamo}
         setDataPrestamo={setDataPrestamo}
         setResultCuota={setResultCuota}
+        setEnabled={setEnabled}
       />
-      <Cuota resultCuota={resultCuota} />
+      {enabled ? <Cuota resultCuota={resultCuota} /> : ""}
     </View>
   );
 };
