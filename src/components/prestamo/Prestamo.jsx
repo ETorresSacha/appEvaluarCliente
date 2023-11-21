@@ -14,6 +14,7 @@ import {
   Calculos,
   calculoParaCambiar,
   resultCuotas,
+  resutCronograma,
 } from "../../utils/calculoCuota/CalculosCuota";
 
 const infoPeriod = [
@@ -49,7 +50,10 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
 
     // const resultt = calculoParaCambiar(data);
     // console.log(resultt);
-    const result = resultCuotas(data);
+    // const result = resultCuotas(data);
+    // console.log(result);
+
+    const result = resutCronograma(data);
     console.log(result);
   };
 

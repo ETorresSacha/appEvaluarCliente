@@ -91,7 +91,7 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 }
 
 // CUOTA INTERES, CAPITAL Y CAPITAL RESTANTE
-export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
+export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM,Cuotas)=>{
 
     let resultDiasMes = diasXmes(data,i)
     let CAPITAL = parseFloat(data.capital)
@@ -130,6 +130,7 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
 
         // Cálculo de la cuota con ITF
         CuoConITF = parseFloat(CuoSinITF) + parseFloat(RITF)
+        Cuotas.push(CuoConITF)
    
     }
     else{
@@ -152,6 +153,7 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
 
         // Cálculo de la cuota con ITF
         CuoConITF = parseFloat(CuoSinITF) + parseFloat(RITF)
+        Cuotas.push(CuoConITF)
         
         //Capital restante
         resultCapital = (newCapital[0])-resultCuoCap

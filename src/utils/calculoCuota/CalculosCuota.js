@@ -1,6 +1,6 @@
- import { FRC, IntCuo, TED, TEM, TSegDD } from "./Formulas"
+ import {TED, TEM } from "./Formulas"
 
-import {  CuotInt, SegDesg, diasAcum, diasXmes, solutionFRC, sumarMes } from "./CalculoDiasXMes";
+import {  CuotInt, diasAcum, diasXmes, solutionFRC, sumarMes } from "./CalculoDiasXMes";
 
 export const Calculos = (data)=>{
 
@@ -17,7 +17,6 @@ export const Calculos = (data)=>{
 }
 
 export const calculoParaCambiar = (data) =>{
-    let capital = data.capital
    
     const cronograma =[]
     const resultTED = Calculos(data).ted
@@ -54,6 +53,8 @@ export const calculoParaCambiar = (data) =>{
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
 
+    const Cuotas = []
+
     for (let i = 1;i<=data.nCuotas;i++){
         
         cronograma2.push(
@@ -65,15 +66,29 @@ export const calculoParaCambiar = (data) =>{
             cuotaInteres:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultInt,
             cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo,
             capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
-            SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultSeg,
-            CuoSinITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoSinITF,
-            CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoConITF,
+            SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM,Cuotas).resultSeg,
+            CuoSinITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM,Cuotas).resultCuoSinITF,
+            CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM,Cuotas).resultCuoConITF,
             
          
         })
     }
 
-    return cronograma2
+       // CUOTA PROMEDIO
+       let resultPromCuo = Cuotas.reduce((accum, currentValue) => accum + currentValue,0);
+       resultPromCuo = resultPromCuo/data.nCuotas
+       
+
+    return {
+        cronog:cronograma2,
+        promCuota : resultPromCuo
+    }
  
  }
 
+ export const resutCronograma = (data)=>{
+
+    const result = resultCuotas(data).promCuota
+    console.log(result);
+
+ } 
