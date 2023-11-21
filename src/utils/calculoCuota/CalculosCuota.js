@@ -53,7 +53,7 @@ export const calculoParaCambiar = (data) =>{
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
 
-    const Cuotas = []
+    const CuotasT = []
 
     for (let i = 1;i<=data.nCuotas;i++){
         
@@ -66,29 +66,58 @@ export const calculoParaCambiar = (data) =>{
             cuotaInteres:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultInt,
             cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo,
             capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
-            SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM,Cuotas).resultSeg,
-            CuoSinITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM,Cuotas).resultCuoSinITF,
-            CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM,Cuotas).resultCuoConITF,
+            SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultSeg,
+            CuoSinITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoSinITF,
+            CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoConITF,
             
          
         })
     }
 
        // CUOTA PROMEDIO
-       let resultPromCuo = Cuotas.reduce((accum, currentValue) => accum + currentValue,0);
-       resultPromCuo = resultPromCuo/data.nCuotas
+    //    let resultPromCuo = Cuotas.reduce((accum, currentValue) => accum + currentValue,0);
+    //    resultPromCuo = resultPromCuo/data.nCuotas
        
 
-    return {
-        cronog:cronograma2,
-        promCuota : resultPromCuo
-    }
+    return cronograma2
  
  }
 
+ // AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
  export const resutCronograma = (data)=>{
 
-    const result = resultCuotas(data).promCuota
-    console.log(result);
+    const result = resultCuotas(data)
+    let cuotas = []
+    let promCuota
+    
+
+    // Cuota promedio
+    result.map((element) => cuotas.push(element.CuoConITF))
+    let resultPromCuo = cuotas.reduce((accum, currentValue) => accum + currentValue,0);
+    promCuota = resultPromCuo/data.nCuotas
+
+    // ITF
+    let itf = promCuota * 0.00005
+
+    // result
+    let cronogramaAjustado = result.map((element) =>{
+
+        return {
+            cuota:element.cuota,
+            fechaPago: element.fechaPago,
+            capital: (promCuota-(element.cuotaInteres+element.SegDesgrvamen+itf)).toFixed(2),
+            interes: element.cuotaInteres.toFixed(2),
+            SegDesg:element.SegDesgrvamen.toFixed(2),
+            ITF:itf.toFixed(2),
+            cuota:promCuota.toFixed(2),
+            dias:element.Dias
+
+
+        }
+        
+    })
+
+    return cronogramaAjustado
+
 
  } 
