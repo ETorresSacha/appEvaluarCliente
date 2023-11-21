@@ -96,11 +96,13 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
     let resultDiasMes = diasXmes(data,i)
     let CAPITAL = parseFloat(data.capital)
     let resultTSegDD = TSegDD(TSegM)
-    console.log(resultTSegDD);
     let resultCapital
     let resultCuoInt
     let resultCuoCap
     let resultMonSegDesg
+    let CuoSinITF
+    let RITF
+    let CuoConITF
 
     if(i === 0){
 
@@ -118,15 +120,21 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
        
         resultMonSegDesg = MonSegDM(resultTSegDD,CAPITAL,resultDiasMes)
         
-        // Cálculo de de la tasa de seguro de desgravamen diario
+        // Cálculo de la cuota sin ITF
        
-        resultMonSegDesg = MonSegDM(resultTSegDD,CAPITAL,resultDiasMes)
+        CuoSinITF = resultCuoInt + resultCuoCap + resultMonSegDesg
+
+        // Cálculo de ITF
+        let ITF = CuoSinITF*0.00005
+        RITF = Number.parseFloat(ITF).toFixed(2)
+
+        // Cálculo de la cuota con ITF
+        CuoConITF = parseFloat(CuoSinITF) + parseFloat(RITF)
    
     }
     else{
-        // Cálculo de de la tasa de seguro de desgravamen diario
 
-
+        // Cálculo de la tasa de seguro de desgravamen diario
         resultMonSegDesg = MonSegDM(resultTSegDD,newCapital[0],resultDiasMes)
 
         // Cuota interes
@@ -135,36 +143,32 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
         // Cuota capital
         resultCuoCap =  CapitalCuo(CAPITAL,resultFRCA,resultCuoInt)
         
+        // Cálculo de la cuota sin ITF
+        CuoSinITF = resultCuoInt + resultCuoCap + resultMonSegDesg
+
+        // Cálculo de ITF
+        let ITF = CuoSinITF*0.00005
+        RITF = Number.parseFloat(ITF).toFixed(2)
+
+        // Cálculo de la cuota con ITF
+        CuoConITF = parseFloat(CuoSinITF) + parseFloat(RITF)
+        
         //Capital restante
         resultCapital = (newCapital[0])-resultCuoCap
         resultCapital = Number.parseFloat(resultCapital).toFixed(10)
         newCapital.shift()
         newCapital.push(resultCapital)
-
-
  
     }
-   
 
     return {
         resultInt:resultCuoInt,
         resultCuo: resultCuoCap,
         resultCap:resultCapital,
-        resultSeg:resultMonSegDesg
+        resultSeg:resultMonSegDesg,
+        resultCuoSinITF:CuoSinITF,
+        resultCuoConITF:CuoConITF
     }
 }
 
-// SEGURO DE DESGRAVAMEN
-
-export const SegDesg  = (data,i,TSegM)=>{
-        // Cálculo de de la tasa de seguro de desgravamen diario
-       
-        const resultTSegDD = TSegDD(TSegM)
-
-        const resultDiasMes = diasXmes(data,i)
-        const resultMonSegDesg = MonSegDM(resultTSegDD,data.capital,resultDiasMes)
-
-        return resultMonSegDesg
-
-}
 

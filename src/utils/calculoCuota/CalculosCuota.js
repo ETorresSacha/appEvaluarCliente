@@ -66,6 +66,8 @@ export const calculoParaCambiar = (data) =>{
             cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo,
             capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
             SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultSeg,
+            CuoSinITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoSinITF,
+            CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoConITF,
             
          
         })
@@ -75,38 +77,3 @@ export const calculoParaCambiar = (data) =>{
  
  }
 
-// se añade la columna con los dias por mes
-// export const columnaDias = (data) =>{
-//     for (let i = 1;i<=data.nCuotas;i++){
-        
-//         cronogrrama.push(...,{cuota:i, fechaPago:sumarMes(data.fechaPrimeraCuota,i-1)})
-//     }
-// }
-
-
-//!usar despues
-// const event = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-// const options = {
-//   weekday: 'long',
-//   year: 'numeric',
-//   month: 'long',
-//   day: 'numeric',
-// };
-
-// console.log(event.toLocaleDateString('de-DE', options));
-// // Expected output (varies according to local timezone): Donnerstag, 20. Dezember 2012
-
-// console.log(event.toLocaleDateString('ar-EG', options));
-// // Expected output (varies according to local timezone): الخميس، ٢٠ ديسمبر، ٢٠١٢
-
-// console.log(event.toLocaleDateString(undefined, options));
-// // Expected output (varies according to local timezone and default locale): Thursday, December 20, 2012
-
-
-// let datasss = data.fechaPrimeraCuota
-// console.log(data.fechaPrimeraCuota);
-// const date = new Date(datasss);
-
-// // ✅ DD/MM/YYYY
-// const result1 = date.toLocaleDateString('en-GB');
-// console.log(result1); // 👉️ 24/07/2023
