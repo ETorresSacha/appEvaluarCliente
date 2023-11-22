@@ -16,9 +16,13 @@ const ItemsHome = () => {
     navigation.navigate("Credito");
   };
 
+  const handleCustomer = () => {
+    navigation.navigate("Cliente");
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={handleCustomer}>
         <Ionicons name="person" size={100} color="rgb(36, 224, 58)" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.btn}>

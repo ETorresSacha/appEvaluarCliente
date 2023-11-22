@@ -10,18 +10,19 @@ import NewForm from "../views/newForm/NewForm";
 
 import Credit from "../views/credit/Credit";
 import VerCronograma from "../views/cronograma/VerCronograma";
+import Customer from "../views/customer/Customer";
 
-const Tab = createBottomTabNavigator();
+//const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const Routes = () => {
   return (
     <NavigationContainer style={{ backgroundColor: "blue" }}>
-      <Tab.Navigator initialRouteName="Home">
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Nuevo" component={NewForm} />
-        <Tab.Screen name="Credito" component={Credit} />
-        <Tab.Screen name="Cronograma de pago" component={VerCronograma} />
-      </Tab.Navigator>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Cliente" component={Customer} />
+        <Stack.Screen name="Credito" component={Credit} />
+        <Stack.Screen name="Cronograma de pago" component={VerCronograma} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

@@ -186,7 +186,6 @@ export default Prestamo;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "red",
     paddingVertical: 12,
   },
 
