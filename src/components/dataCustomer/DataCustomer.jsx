@@ -177,9 +177,7 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
 export default DataCustomer;
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 10,
-  },
+  container: {},
   containerInput: {
     gap: 5,
     display: "flex",

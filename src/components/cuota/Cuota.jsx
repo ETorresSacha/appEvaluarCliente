@@ -33,7 +33,7 @@ const Cuota = ({ resultCuota }) => {
           style={styles.buttonCronograma}
           onPress={handleRouteCronograma}
         >
-          <Text style={styles.textCronograma}>Ver Cronograma</Text>
+          <Text style={styles.textCronograma}>Cronograma</Text>
         </Pressable>
       </View>
     </View>
@@ -47,13 +47,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-    paddingVertical: 20,
   },
 
   button: {
     alignItems: "center",
     width: 120,
-    height: 50,
+    height: 40,
     justifyContent: "center",
     paddingHorizontal: 10,
     borderRadius: 10,
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
   buttonCronograma: {
     alignItems: "center",
     width: 150,
-    height: 60,
+    height: 40,
     justifyContent: "center",
     paddingHorizontal: 10,
     borderRadius: 10,

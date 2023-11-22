@@ -59,13 +59,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingTop: 10,
   },
-  content: {
-    marginVertical: 16,
-  },
   buttonContainer: {
     flex: 1,
+    paddingTop: 15,
   },
-  content: {},
 });
 
 //! VALIDAR LOS DATOS DEL CLIENTE Y EL PRESTAMO
