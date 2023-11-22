@@ -22,6 +22,7 @@ const Routes = () => {
         <Stack.Screen name="Cliente" component={Customer} />
         <Stack.Screen name="Credito" component={Credit} />
         <Stack.Screen name="Cronograma de pago" component={VerCronograma} />
+        <Stack.Screen name="Nuevo cliente" component={NewForm} />
       </Stack.Navigator>
     </NavigationContainer>
   );

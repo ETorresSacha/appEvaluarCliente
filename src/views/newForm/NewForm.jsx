@@ -5,6 +5,8 @@ import { Button, Icon, Input } from "@rneui/themed";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 
 import { validationDataPerson } from "../../utils/validation/Validation";
+import Prestamo from "../../components/prestamo/Prestamo";
+import Credit from "../credit/Credit";
 
 const NewForm = () => {
   const [errors, setErrors] = useState({});
@@ -30,6 +32,7 @@ const NewForm = () => {
         dataPerson={dataPerson}
         setDataPerson={setDataPerson}
       />
+      <Credit />
 
       <View style={styles.buttonContainer}>
         <Button
@@ -50,6 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 10,
+    backgroundColor: "pink",
   },
   title: {
     fontSize: 16,

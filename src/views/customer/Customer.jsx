@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
 
 const Customer = () => {
+  const navigation = useNavigation();
   const handleAddPress = () => {
-    setErrors(validationDataPerson(dataPerson));
+    navigation.navigate("Nuevo cliente");
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>clientes</Text>
       <View style={styles.buttonContainer}>
         <Button

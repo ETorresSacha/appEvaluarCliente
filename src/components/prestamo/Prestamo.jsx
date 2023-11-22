@@ -27,15 +27,18 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({
-  dataPrestamo,
-  setDataPrestamo,
-  setResultCuota,
-  setEnabled,
-}) => {
+const Prestamo = ({ setResultCuota, setEnabled }) => {
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
   const { onSaveCronograma } = UseStorage();
+  const [dataPrestamo, setDataPrestamo] = useState({
+    capital: "",
+    nCuotas: "",
+    tea: "",
+    fechaDesembolso: "",
+    fechaPrimeraCuota: "",
+    periodo: "",
+  });
 
   const renderItem = (item) => {
     return (
