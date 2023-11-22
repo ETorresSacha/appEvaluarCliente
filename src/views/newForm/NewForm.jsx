@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 
@@ -10,7 +10,6 @@ import Credit from "../credit/Credit";
 
 const NewForm = () => {
   const [errors, setErrors] = useState({});
-
   const [dataPerson, setDataPerson] = useState({
     nombre: "",
     apellido: "",

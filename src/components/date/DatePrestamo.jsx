@@ -34,7 +34,11 @@ const DatePrestamo = ({ dataPrestamo, setDataPrestamo }) => {
               <Text style={styles.legend}>{element.title} </Text>
             </View>
             <View style={styles.inputContainerDate}>
-              <Input style={styles.input} value={element.fecha} />
+              <Input
+                style={styles.input}
+                value={element.fecha}
+                defaultValue={element.fecha}
+              />
             </View>
             <TouchableOpacity
               onPress={() => handleTypeDatePrestamo(element.typeDate)}

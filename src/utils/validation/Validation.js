@@ -19,24 +19,35 @@ export const validationDataPerson = (dataPerson) =>{
 
     // Correo
     //Expresión Regular Email
-    var ExpRegEmail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+    let ExpRegEmail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
 
     if(dataPerson.correo.match(ExpRegEmail) == null ){
          error.noEsCorreo = "Correo incorrecto"
     }
     return error
-
-
-
-
-
 }
 
 //! Validación de los datos del préstamo
-const validationDataPrestamo = (dataPrestamo) =>{
+export const validationDataPrestamo = (dataPrestamo) =>{
     const error = {}
 
-    //
+     // Datos en blanco
+     if(dataPrestamo.capital?.trim() === "" || dataPrestamo.nCuotas?.trim() === "" || dataPrestamo.tea?.trim() === "" || dataPrestamo.periodo?.trim() === "" ) {
+          error.incompletos = "Datos incompletos"
+     }
+     else if(dataPrestamo.capital?.trim() !== "" || dataPrestamo.nCuotas?.trim() !== "" || dataPrestamo.tea?.trim() !== "" || dataPrestamo.periodo?.trim() !== "" ) {
+          error = {}
+     }
+
+     // Datos solo número
+    //Expresion Regular Solo Números
+//     let ExpRegSoloNumeros="^[0-9]+$";
+
+//     if(dataPrestamo.capital.match(ExpRegSoloNumeros) == null || dataPrestamo.nCuotas.match(ExpRegSoloNumeros) == null || dataPrestamo.tea.match(ExpRegSoloNumeros) == null){
+//          error.noEsNumero = "Solo se aceptan números"
+//     }
+
+    return error
 
 }
 

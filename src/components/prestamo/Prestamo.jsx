@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   Text,
+  Alert,
   TouchableOpacity,
 } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
@@ -19,6 +20,11 @@ import {
   resutCronograma,
 } from "../../utils/calculoCuota/CalculosCuota";
 import UseStorage from "../hooks/UseHookStorage";
+import {
+  validationDataPerson,
+  validationDataPrestamo,
+} from "../../utils/validation/Validation";
+import { useFocusEffect } from "@react-navigation/native";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -27,8 +33,15 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({ setResultCuota, setEnabled }) => {
+const Prestamo = ({
+  setResultCuota,
+  setEnabled,
+  errorsPrestamo,
+  setErrorsPrestamo,
+  // setErrors,
+}) => {
   const [value, setValue] = useState(null);
+  const [enableCalcular, setEnableCalcular] = useState(false);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
   const { onSaveCronograma } = UseStorage();
   const [dataPrestamo, setDataPrestamo] = useState({
@@ -55,30 +68,31 @@ const Prestamo = ({ setResultCuota, setEnabled }) => {
       </View>
     );
   };
-
+  //console.log(errorsPrestamo);
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
-    // const result = Calculos(data);
-    // console.log(result);
 
-    // const resultt = calculoParaCambiar(data);
-    // console.log(resultt);
-    // const result = resultCuotas(data);
-    // console.log(result);
+    if (Object.keys(errorsPrestamo).length === 0) {
+      const result = resutCronograma(data);
+      setResultCuota(result);
+      setEnabled(true);
 
-    const result = resutCronograma(data);
-    setResultCuota(result);
-    setEnabled(true);
-    try {
-      await onSaveCronograma(result);
-    } catch (error) {
-      console.error(error);
+      try {
+        await onSaveCronograma(result);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      Alert.alert("Datos incompletos");
     }
 
-    //console.log(result);
-
     const resulti = OJO(data);
-    // console.log(result);
+  };
+
+  // Setear los datos y validando cada uno
+  const handleChangeData = (event, type) => {
+    setDataPrestamo({ ...dataPrestamo, [type]: event.nativeEvent.text });
+    setErrorsPrestamo(validationDataPrestamo(dataPrestamo));
   };
 
   return (
@@ -122,9 +136,13 @@ const Prestamo = ({ setResultCuota, setEnabled }) => {
             placeholder="Soles"
             style={styles.input}
             value={dataPrestamo.capital}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, capital: text })
-            }
+            // onChangeText={(text) =>
+            //   setDataPrestamo({ ...dataPrestamo, capital: text })
+            // }
+            onChange={(event) => {
+              handleChangeData(event, "capital");
+            }}
+            keyboardType="numeric"
           />
         </View>
       </View>
@@ -139,9 +157,14 @@ const Prestamo = ({ setResultCuota, setEnabled }) => {
             placeholder="%"
             style={styles.input}
             value={dataPrestamo.tea}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, tea: text })
-            }
+            defaultValue={dataPrestamo.tea}
+            // onChangeText={(text) =>
+            //   setDataPrestamo({ ...dataPrestamo, tea: text })
+            // }
+            onChange={(event) => {
+              handleChangeData(event, "tea");
+            }}
+            keyboardType="numeric"
           />
         </View>
       </View>
@@ -155,10 +178,15 @@ const Prestamo = ({ setResultCuota, setEnabled }) => {
           <Input
             placeholder={placeholderNumCuotas}
             style={styles.input}
-            value={dataPrestamo.tiempo}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, nCuotas: text })
-            }
+            value={dataPrestamo.nCuotas}
+            defaultValue={dataPrestamo.nCuotas}
+            // onChangeText={(text) =>
+            //   setDataPrestamo({ ...dataPrestamo, nCuotas: text })
+            // }
+            onChange={(event) => {
+              handleChangeData(event, "nCuotas");
+            }}
+            keyboardType="numeric"
           />
         </View>
       </View>

@@ -6,12 +6,19 @@ import Cuota from "../../components/cuota/Cuota";
 const Credit = () => {
   const [resultCuota, setResultCuota] = useState();
   const [enabled, setEnabled] = useState(false);
+  const [errorsPrestamo, setErrorsPrestamo] = useState({
+    error: "inicio vacio",
+  });
 
-  //console.log(dataPrestamo);
-  // console.log(dataPrestamo);
   return (
     <View style={styles.container}>
-      <Prestamo setResultCuota={setResultCuota} setEnabled={setEnabled} />
+      <Prestamo
+        setResultCuota={setResultCuota}
+        setEnabled={setEnabled}
+        errorsPrestamo={errorsPrestamo}
+        setErrorsPrestamo={setErrorsPrestamo}
+        // setErrors={setErrors}
+      />
       {enabled ? <Cuota resultCuota={resultCuota} /> : ""}
     </View>
   );
