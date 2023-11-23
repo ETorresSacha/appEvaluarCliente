@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Alert, Text } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
@@ -23,6 +23,16 @@ const NewForm = () => {
     setErrors(validationDataPerson(dataPerson));
   };
 
+  const handleDataKeep = (data) => {
+    console.log(data);
+    if (Object.keys(data).length === 0) {
+      Alert.alert("Se guardo");
+    } else {
+      Alert.alert("No se guardo");
+    }
+  };
+  console.log(errors);
+
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
@@ -39,7 +49,7 @@ const NewForm = () => {
           icon={<Icon name="add" color="#FFF" />}
           radius="lg"
           color="#4ecb71"
-          onPress={handleAddPress}
+          onPress={() => handleDataKeep(errors)}
         />
       </View>
     </ScrollView>
