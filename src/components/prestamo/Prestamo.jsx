@@ -33,15 +33,9 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({
-  setResultCuota,
-  setEnabled,
-  errorsPrestamo,
-  setErrorsPrestamo,
-  setErrors,
-}) => {
+const Prestamo = ({ setResultCuota, setEnabled }) => {
   const [value, setValue] = useState(null);
-  const [enableCalcular, setEnableCalcular] = useState(false);
+  const [errorsPrestamo, setErrorsPrestamo] = useState({});
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
   const { onSaveCronograma } = UseStorage();
   const [dataPrestamo, setDataPrestamo] = useState({
@@ -79,7 +73,6 @@ const Prestamo = ({
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
     setErrorsPrestamo(validationDataPrestamo(data));
-    setErrors(validationDataPrestamo(data));
 
     if (errorsPrestamo.incompletos === "") {
       const result = resutCronograma(data);
@@ -141,10 +134,6 @@ const Prestamo = ({
             onChangeText={(text) =>
               setDataPrestamo({ ...dataPrestamo, capital: text })
             }
-            // onChange={(event) => {
-            //   handleChangeData(event, "capital");
-            // }}
-            //onChange={handleCambios}
             keyboardType="numeric"
           />
         </View>
@@ -164,12 +153,6 @@ const Prestamo = ({
             onChangeText={(text) =>
               setDataPrestamo({ ...dataPrestamo, tea: text })
             }
-            // onChange={(event) => {
-            //   handleChangeData(event, "tea");
-            // }}
-            // onChange={(event) => {
-            //   handleCambios(event);
-            // }}
             keyboardType="numeric"
           />
         </View>
@@ -189,12 +172,6 @@ const Prestamo = ({
             onChangeText={(text) =>
               setDataPrestamo({ ...dataPrestamo, nCuotas: text })
             }
-            // onChange={(event) => {
-            //   handleChangeData(event, "nCuotas");
-            // }}
-            // onChange={(event) => {
-            //   handleCambios(event);
-            // }}
             keyboardType="numeric"
           />
         </View>
