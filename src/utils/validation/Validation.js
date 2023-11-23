@@ -35,9 +35,7 @@ export const validationDataPrestamo = (dataPrestamo) =>{
      if(dataPrestamo.capital?.trim() === "" || dataPrestamo.nCuotas?.trim() === "" || dataPrestamo.tea?.trim() === "" || dataPrestamo.periodo?.trim() === "" ) {
           error.incompletos = "Datos incompletos"
      }
-     else if(dataPrestamo.capital?.trim() !== "" || dataPrestamo.nCuotas?.trim() !== "" || dataPrestamo.tea?.trim() !== "" || dataPrestamo.periodo?.trim() !== "" ) {
-          error = {}
-     }
+     else error = {}
 
      // Datos solo número
     //Expresion Regular Solo Números

@@ -70,6 +70,7 @@ const Prestamo = ({
   };
   //console.log(errorsPrestamo);
   const handleCalcular = async (data) => {
+    //setErrorsPrestamo(validationDataPrestamo(dataPrestamo)); //! error
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
 
     if (Object.keys(errorsPrestamo).length === 0) {
@@ -77,22 +78,20 @@ const Prestamo = ({
       setResultCuota(result);
       setEnabled(true);
 
-      try {
-        await onSaveCronograma(result);
-      } catch (error) {
-        console.error(error);
-      }
+      //try {
+      await onSaveCronograma(result);
+      // } catch (error) {
+      // console.error(error);
+      //}
     } else {
       Alert.alert("Datos incompletos");
     }
-
-    const resulti = OJO(data);
   };
 
   // Setear los datos y validando cada uno
   const handleChangeData = (event, type) => {
     setDataPrestamo({ ...dataPrestamo, [type]: event.nativeEvent.text });
-    setErrorsPrestamo(validationDataPrestamo(dataPrestamo));
+    //setErrorsPrestamo(validationDataPrestamo(dataPrestamo));
   };
 
   return (

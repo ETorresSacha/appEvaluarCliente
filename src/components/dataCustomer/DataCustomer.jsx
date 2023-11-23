@@ -9,27 +9,27 @@ const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
     //setErrors(validationDataPerson(dataPerson)); ---> ESTO ES OTRA FORMA DE VALIDAR
   };
 
-  // const register = () => {
-  //   if (!validateData()) {
-  //     return;
-  //   }
-  //   console.log("validado");
-  // };
+  const register = () => {
+    if (!validateData()) {
+      return;
+    }
+    console.log("validado");
+  };
 
-  // const validateData = () => {
-  //   setErrors({
-  //     nombre: "",
-  //     apellido: "",
-  //     dni: "",
-  //     correo: "",
-  //     direccion: "",
-  //     celular: "",
-  //   });
-  //   let isValid = true;
+  const validateData = () => {
+    setErrors({
+      nombre: "",
+      apellido: "",
+      dni: "",
+      correo: "",
+      direccion: "",
+      celular: "",
+    });
+    let isValid = true;
 
-  //   if (validationDataPerson) {
-  //   }
-  // };
+    if (validationDataPerson) {
+    }
+  };
 
   return (
     <View style={styles.container}>
