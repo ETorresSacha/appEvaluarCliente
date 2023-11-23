@@ -33,7 +33,7 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({ setResultCuota, setEnabled }) => {
+const Prestamo = ({ setResultCuota, setEnabled, setErrors }) => {
   const [value, setValue] = useState(null);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
@@ -62,6 +62,9 @@ const Prestamo = ({ setResultCuota, setEnabled }) => {
       </View>
     );
   };
+  useEffect(() => {
+    setErrors !== undefined ? setErrors(errorsPrestamo) : null;
+  }, [errorsPrestamo]);
 
   useFocusEffect(
     React.useCallback(() => {

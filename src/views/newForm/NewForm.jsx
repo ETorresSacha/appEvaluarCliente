@@ -25,13 +25,13 @@ const NewForm = () => {
 
   const handleDataKeep = (data) => {
     console.log(data);
-    if (Object.keys(data).length === 0) {
+    if (data.incompletos === "") {
       Alert.alert("Se guardo");
     } else {
       Alert.alert("No se guardo");
     }
   };
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <ScrollView style={styles.container}>
@@ -41,7 +41,7 @@ const NewForm = () => {
         dataPerson={dataPerson}
         setDataPerson={setDataPerson}
       />
-      <Credit />
+      <Credit setErrors={setErrors} />
 
       <View style={styles.buttonContainer}>
         <Button
