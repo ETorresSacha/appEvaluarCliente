@@ -41,7 +41,7 @@ const NewForm = () => {
         dataPerson={dataPerson}
         setDataPerson={setDataPerson}
       />
-      <Credit setErrors={setErrors} />
+      <Credit errors={errors} setErrors={setErrors} />
 
       <View style={styles.buttonContainer}>
         <Button
