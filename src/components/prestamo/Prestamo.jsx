@@ -83,6 +83,21 @@ const Prestamo = ({ setResultCuota, setEnabled, setValuePrest }) => {
     }, [dataPrestamo])
   );
 
+  // GUARDAR LOS DATOS EN STORAGE
+  // const handleKeepPrest = async()=>{
+  //   try {
+  //     await onSaveFood({
+  //       uuid,
+  //       calories,
+  //       name,
+  //       portion,
+  //     });
+  //     onClose(true);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
     setErrorsPrestamo(validationDataPrestamo(data));

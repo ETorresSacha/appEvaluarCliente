@@ -33,10 +33,11 @@ const UseStorage = () => {
   //TODO--> CRONOGRAMA DE PAGO
   //! POST
   const handleSaveCronograma = async (data) => {
+    //console.log(data);
     try {
       const result = await saveInfoStorage(MY_CRONOGRAMA_KEY, data);
 
-      return Promise.resolve(result);
+      return result;
     } catch (error) {
       return Promise.reject(error);
     }

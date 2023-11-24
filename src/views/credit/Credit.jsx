@@ -7,6 +7,21 @@ const Credit = ({ setValuePrest }) => {
   const [resultCuota, setResultCuota] = useState();
   const [enabled, setEnabled] = useState(false);
 
+  // useEffect(() => {
+  //   setCuota !== undefined ? setCuota(resultCuota) : null;
+  //   // let resultVal = Object.values(errorsPrestamo);
+  //   // if (setValuePrest !== undefined) {
+  //   //   if (resultVal.some((error) => error === "")) {
+  //   //     setValuePrest(true);
+  //   //   } else {
+  //   //     setValuePrest(false);
+  //   //   }
+  //   // } else {
+  //   //   null;
+  //   // }
+  // }, [resultCuota]);
+  //console.log(resultCuota);
+
   return (
     <View style={styles.container}>
       <Prestamo

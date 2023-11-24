@@ -11,10 +11,9 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
     // setErrors(validationDataPerson(dataPerson));
   };
   //console.log(dataPerson);
-  console.log(errors);
+
   useEffect(() => {
     let resultVal = Object.values(errors);
-    console.log(resultVal);
     if (resultVal.some((error) => error !== "")) {
       setValuePerson(false);
     } else {
@@ -28,28 +27,6 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
       //return () => unsubscribe();
     }, [dataPerson])
   );
-
-  // const register = () => {
-  //   if (!validateData()) {
-  //     return;
-  //   }
-  //   console.log("validado");
-  // };
-
-  // const validateData = () => {
-  //   setErrors({
-  //     nombre: "",
-  //     apellido: "",
-  //     dni: "",
-  //     correo: "",
-  //     direccion: "",
-  //     celular: "",
-  //   });
-  //   let isValid = true;
-
-  //   if (validationDataPerson) {
-  //   }
-  // };
 
   return (
     <View style={styles.container}>
