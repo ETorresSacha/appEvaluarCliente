@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
 import { View, Text, StyleSheet, Alert, TextInput } from "react-native";
 import { validationDataPerson } from "../../utils/validation/Validation";
 import { useFocusEffect } from "@react-navigation/native";
 
-const DataCustomer = ({ errors, setErrors, dataPerson, setDataPerson }) => {
+const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
+  const [errors, setErrors] = useState({});
   const handleChangeData = (event, type) => {
     setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
     // setErrors(validationDataPerson(dataPerson));
   };
-  console.log(dataPerson);
+  //console.log(dataPerson);
+  console.log(errors);
+  useEffect(() => {
+    let resultVal = Object.values(errors);
+    console.log(resultVal);
+    if (resultVal.some((error) => error !== "")) {
+      setValuePerson(false);
+    } else {
+      setValuePerson(true);
+    }
+  }, [errors, errors.length]);
 
   useFocusEffect(
     React.useCallback(() => {

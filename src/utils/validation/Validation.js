@@ -39,7 +39,7 @@ export const validationDataPerson = (dataPerson) =>{
 
     if(dataPerson.correo.match(ExpRegEmail) == null ){
 
-         error = {...error,incompletos:"Datos incompletos"}
+         error = {...error, noEsCorreo:"No es correo"}
     }
     return error
 }
@@ -50,7 +50,7 @@ export const validationDataPrestamo = (dataPrestamo) =>{
     const error = {}
 
       if(dataPrestamo.capital?.trim() === "" || dataPrestamo.nCuotas?.trim() === "" || dataPrestamo.tea.trim() === "" || dataPrestamo.periodo.trim() === "" || dataPrestamo.fechaDesembolso.trim() === "" || dataPrestamo.fechaPrimeraCuota.trim() === "" ) {
-           error.incompletos = "Datos incompletos"
+          error.incompletos = "Datos incompletos"
       }
 
       else {error.incompletos = ""}

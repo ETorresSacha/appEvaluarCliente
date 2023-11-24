@@ -9,7 +9,9 @@ import Prestamo from "../../components/prestamo/Prestamo";
 import Credit from "../credit/Credit";
 
 const NewForm = () => {
-  const [errors, setErrors] = useState({});
+  const [valuePrest, setValuePrest] = useState(false);
+  const [valuePerson, setValuePerson] = useState(false);
+
   const [dataPerson, setDataPerson] = useState({
     nombre: "",
     apellido: "",
@@ -19,29 +21,22 @@ const NewForm = () => {
     celular: "",
   });
 
-  const handleAddPress = () => {
-    setErrors(validationDataPerson(dataPerson));
-  };
-
-  const handleDataKeep = (data) => {
-    console.log(data);
-    if (data.incompletos === "") {
+  const handleDataKeep = () => {
+    if (valuePrest && valuePerson) {
       Alert.alert("Se guardo");
     } else {
       Alert.alert("No se guardo");
     }
   };
-  // console.log(errors);
 
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
-        errors={errors}
-        setErrors={setErrors}
+        setValuePerson={setValuePerson}
         dataPerson={dataPerson}
         setDataPerson={setDataPerson}
       />
-      <Credit errors={errors} setErrors={setErrors} />
+      <Credit setValuePrest={setValuePrest} />
 
       <View style={styles.buttonContainer}>
         <Button
@@ -49,7 +44,7 @@ const NewForm = () => {
           icon={<Icon name="add" color="#FFF" />}
           radius="lg"
           color="#4ecb71"
-          onPress={() => handleDataKeep(errors)}
+          onPress={handleDataKeep}
         />
       </View>
     </ScrollView>

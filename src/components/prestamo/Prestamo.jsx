@@ -33,11 +33,11 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({ setResultCuota, setEnabled, errors, setErrors }) => {
+const Prestamo = ({ setResultCuota, setEnabled, setValuePrest }) => {
+  const { onSaveCronograma } = UseStorage();
   const [value, setValue] = useState(null);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
-  const { onSaveCronograma } = UseStorage();
   const [dataPrestamo, setDataPrestamo] = useState({
     capital: "",
     nCuotas: "",
@@ -62,10 +62,19 @@ const Prestamo = ({ setResultCuota, setEnabled, errors, setErrors }) => {
       </View>
     );
   };
-  console.log(errors);
+
   useEffect(() => {
-    setErrors !== undefined ? setErrors({ ...errors, errorsPrestamo }) : null;
-  }, [errorsPrestamo]);
+    let resultVal = Object.values(errorsPrestamo);
+    if (setValuePrest !== undefined) {
+      if (resultVal.some((error) => error === "")) {
+        setValuePrest(true);
+      } else {
+        setValuePrest(false);
+      }
+    } else {
+      null;
+    }
+  }, [setValuePrest, errorsPrestamo, errorsPrestamo.length]);
 
   useFocusEffect(
     React.useCallback(() => {

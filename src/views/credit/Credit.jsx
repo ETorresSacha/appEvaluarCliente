@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 import Prestamo from "../../components/prestamo/Prestamo";
 import Cuota from "../../components/cuota/Cuota";
 
-const Credit = ({ errors, setErrors }) => {
+const Credit = ({ setValuePrest }) => {
   const [resultCuota, setResultCuota] = useState();
   const [enabled, setEnabled] = useState(false);
 
@@ -12,8 +12,7 @@ const Credit = ({ errors, setErrors }) => {
       <Prestamo
         setResultCuota={setResultCuota}
         setEnabled={setEnabled}
-        errors={errors}
-        setErrors={setErrors}
+        setValuePrest={setValuePrest}
       />
       {enabled ? <Cuota resultCuota={resultCuota} /> : ""}
     </View>
