@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Alert, Text } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
-
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
-
-import { validationDataPerson } from "../../utils/validation/Validation";
-import Prestamo from "../../components/prestamo/Prestamo";
 import Credit from "../credit/Credit";
 
 const NewForm = () => {
@@ -69,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//! VALIDAR LOS DATOS DEL CLIENTE Y EL PRESTAMO
+//! GUARDAR LOS DATOS EN STORAGE
