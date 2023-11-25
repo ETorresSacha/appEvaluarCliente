@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Alert, Text } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
-import Credit from "../credit/Credit";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
 
@@ -83,3 +82,12 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
 });
+//! 1. TENEMOS QUE GUARDAR LOS RESULTADOS EN EL LOCAL STORAGE
+//! 2. MOSTRAR LOS DATOS CORRECTOS EN EL CRONOGRAMA
+//! 3. MOSTRAR LOS CLIENTES EN EL COMPONENTE CLIENTE
+//! 4. TENEMOS QUE AÑADIR LAS OPCIONES DE EDITAR Y ELIMINAR CLIENTE
+
+//! OTRO
+//! 1. EN EL COMPONENTE CALCULADORA TENEMOS QUE AGREGAR LOS BOTONES DE AJUSTES EN DONDE TENEMOS QUE
+//!    PONER UNA OPCION PARA CAMBIAR EL TASA DE DESGRAVAMEN MENSUAL, TAMBIEN EL BOTON DE LIMPIAR.
+//! 2. MOSTRAR UN MEJOR DETALLADO DE LA CUOTA EN LA CALCULADORA
