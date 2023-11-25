@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useFocusEffect } from "@react-navigation/native";
+
 import {
   View,
   StyleSheet,
@@ -12,19 +12,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
-import {
-  Calculos,
-  OJO,
-  calculoParaCambiar,
-  result,
-  resultCuotas,
-  resutCronograma,
-} from "../../utils/calculoCuota/CalculosCuota";
-import UseStorage from "../hooks/UseHookStorage";
-import {
-  validationDataPerson,
-  validationDataPrestamo,
-} from "../../utils/validation/Validation";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -33,19 +20,10 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({ setResultCuota, setEnabled, setValuePrest }) => {
-  const { onSaveCronograma } = UseStorage();
+const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
   const [value, setValue] = useState(null);
-  const [errorsPrestamo, setErrorsPrestamo] = useState({});
+
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
-  const [dataPrestamo, setDataPrestamo] = useState({
-    capital: "",
-    nCuotas: "",
-    tea: "",
-    fechaDesembolso: "",
-    fechaPrimeraCuota: "",
-    periodo: "",
-  });
 
   const renderItem = (item) => {
     return (
@@ -61,60 +39,6 @@ const Prestamo = ({ setResultCuota, setEnabled, setValuePrest }) => {
         )}
       </View>
     );
-  };
-
-  useEffect(() => {
-    let resultVal = Object.values(errorsPrestamo);
-    if (setValuePrest !== undefined) {
-      if (resultVal.some((error) => error === "")) {
-        setValuePrest(true);
-      } else {
-        setValuePrest(false);
-      }
-    } else {
-      null;
-    }
-  }, [setValuePrest, errorsPrestamo, errorsPrestamo.length]);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      setErrorsPrestamo(validationDataPrestamo(dataPrestamo));
-      //return () => unsubscribe();
-    }, [dataPrestamo])
-  );
-
-  // GUARDAR LOS DATOS EN STORAGE
-  // const handleKeepPrest = async()=>{
-  //   try {
-  //     await onSaveFood({
-  //       uuid,
-  //       calories,
-  //       name,
-  //       portion,
-  //     });
-  //     onClose(true);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  const handleCalcular = async (data) => {
-    //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
-    setErrorsPrestamo(validationDataPrestamo(data));
-
-    if (errorsPrestamo.incompletos === "") {
-      const result = resutCronograma(data);
-      setResultCuota(result);
-      setEnabled(true);
-
-      try {
-        await onSaveCronograma(result);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      Alert.alert("Datos incompletos");
-    }
   };
 
   return (
@@ -210,19 +134,6 @@ const Prestamo = ({ setResultCuota, setEnabled, setValuePrest }) => {
         dataPrestamo={dataPrestamo}
         setDataPrestamo={setDataPrestamo}
       />
-
-      {/* ------------------ OPTIONS SURE ------------------*/}
-      {/* <OptionsSure /> */}
-
-      {/* ------------------ CALCULAR ------------------*/}
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.btnCalcular}
-          onPress={() => handleCalcular(dataPrestamo)}
-        >
-          <Text style={styles.text}>Calcular</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -288,28 +199,5 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 2,
-  },
-  buttonContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-  },
-  btnCalcular: {
-    marginTop: 15,
-
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#4ecb71",
-    width: 200,
-    height: 40,
-    borderRadius: 15,
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "white",
-    textAlign: "center",
   },
 });
