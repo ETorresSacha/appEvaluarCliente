@@ -22,7 +22,6 @@ const infoPeriod = [
 
 const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
   const [value, setValue] = useState(null);
-
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
   const renderItem = (item) => {

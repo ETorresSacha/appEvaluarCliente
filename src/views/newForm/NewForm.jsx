@@ -4,13 +4,15 @@ import { Button, Icon, Input } from "@rneui/themed";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import Credit from "../credit/Credit";
 import UseStorage from "../../components/hooks/UseHookStorage";
+import Calculator from "../calculator/Calculator";
 
 const NewForm = () => {
   const { onGetCronograma } = UseStorage();
 
   const [valuePrest, setValuePrest] = useState(false);
   const [valuePerson, setValuePerson] = useState(false);
-  const [dataPrestamo, setDataPrestamo] = useState({});
+  const [resultPrestamo, setResulPrestamo] = useState({});
+
   const [visible, setVisible] = useState(false);
 
   const [dataPerson, setDataPerson] = useState({
@@ -27,20 +29,19 @@ const NewForm = () => {
     // Trae los datos guardados del local storage
     try {
       const resultPrestamo = await onGetCronograma();
-      setDataPrestamo(resultPrestamo);
+      setResulPrestamo(resultPrestamo);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    // if (valuePrest && valuePerson) {
-    //   setVisible(true);
-    // } else {
-    //   setVisible(false);
-    // }
-    loadPrestamo();
+    if (valuePrest && valuePerson) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+    //loadPrestamo();
   }, [valuePrest, valuePerson]);
-  console.log(dataPrestamo);
 
   const handleDataKeep = () => {
     console.log();
@@ -51,6 +52,7 @@ const NewForm = () => {
     }
   };
 
+  console.log(resultPrestamo);
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
@@ -58,7 +60,11 @@ const NewForm = () => {
         dataPerson={dataPerson}
         setDataPerson={setDataPerson}
       />
-      <Credit setValuePrest={setValuePrest} />
+      <Calculator
+        setResulPrestamo={setResulPrestamo}
+        valuePrest={valuePrest}
+        setValuePrest={setValuePrest}
+      />
 
       <View style={styles.buttonContainer}>
         <Button

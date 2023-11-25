@@ -6,8 +6,9 @@ import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
 import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import UseStorage from "../../components/hooks/UseHookStorage";
+import Cuota from "../../components/cuota/Cuota";
 
-const Calculator = ({ setValuePrest }) => {
+const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
   const { onSaveCronograma } = UseStorage();
   const [resultCuota, setResultCuota] = useState();
   const [enabled, setEnabled] = useState(false);
@@ -20,9 +21,7 @@ const Calculator = ({ setValuePrest }) => {
     fechaPrimeraCuota: "",
     periodo: "",
   });
-  //   useEffect(() => {
-  //     console.log(resultCuota);
-  //   }, [resultCuota]);
+
   useEffect(() => {
     let resultVal = Object.values(errorsPrestamo);
     if (setValuePrest !== undefined) {
@@ -34,7 +33,14 @@ const Calculator = ({ setValuePrest }) => {
     } else {
       null;
     }
-  }, [setValuePrest, errorsPrestamo, errorsPrestamo.length]);
+
+    if (valuePrest) {
+      handleCalcular(dataPrestamo);
+      //setResulPrestamo !== undefined ? setResulPrestamo(result) : null;
+      //savePrestamo(result);
+    }
+  }, [setValuePrest, errorsPrestamo, errorsPrestamo.length, valuePrest]);
+
   useFocusEffect(
     React.useCallback(() => {
       setErrorsPrestamo(validationDataPrestamo(dataPrestamo));
@@ -49,12 +55,8 @@ const Calculator = ({ setValuePrest }) => {
       const result = resutCronograma(data);
       setResultCuota(result);
       setEnabled(true);
-
-      try {
-        await onSaveCronograma(result);
-      } catch (error) {
-        console.error(error);
-      }
+      //setResulPrestamo(result);
+      setResulPrestamo !== undefined ? setResulPrestamo(result) : null;
     } else {
       Alert.alert("Datos incompletos");
     }
@@ -69,16 +71,24 @@ const Calculator = ({ setValuePrest }) => {
       />
 
       {/* ------------------ CALCULAR ------------------*/}
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.btnCalcular}
-          onPress={() => handleCalcular(dataPrestamo)}
-        >
-          <Text style={styles.text}>Calcular</Text>
-        </TouchableOpacity>
-      </View>
+      {valuePrest !== undefined ? null : (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.btnCalcular}
+            onPress={() => handleCalcular(dataPrestamo)}
+          >
+            <Text style={styles.text}>Calcular</Text>
+          </TouchableOpacity>
+        </View>
+      )}
       {/* ------------------ RESULTADO ------------------*/}
-      {enabled ? <DetailCalculator resultCuota={resultCuota} /> : ""}
+      {valuePrest ? (
+        enabled ? (
+          <Cuota resultCuota={resultCuota} />
+        ) : null
+      ) : enabled ? (
+        <DetailCalculator resultCuota={resultCuota} />
+      ) : null}
     </View>
   );
 };
@@ -94,8 +104,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   btnCalcular: {
-    marginTop: 15,
-
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#4ecb71",
