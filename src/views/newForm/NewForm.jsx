@@ -7,13 +7,10 @@ import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
 
 const NewForm = () => {
-  const { onGetCronograma } = UseStorage();
-
+  const [visible, setVisible] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
   const [valuePerson, setValuePerson] = useState(false);
   const [resultPrestamo, setResulPrestamo] = useState({});
-
-  const [visible, setVisible] = useState(false);
 
   const [dataPerson, setDataPerson] = useState({
     nombre: "",
@@ -23,28 +20,18 @@ const NewForm = () => {
     direccion: "",
     celular: "",
   });
-  // console.log(Cuota);
-  // TRAER LOS DATOS DEL PRESTAMO
-  const loadPrestamo = async () => {
-    // Trae los datos guardados del local storage
-    try {
-      const resultPrestamo = await onGetCronograma();
-      setResulPrestamo(resultPrestamo);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+  // Valida los errores de todos los datos
   useEffect(() => {
     if (valuePrest && valuePerson) {
       setVisible(true);
     } else {
       setVisible(false);
     }
-    //loadPrestamo();
   }, [valuePrest, valuePerson]);
 
+  // Guarda los datos en local storage
   const handleDataKeep = () => {
-    console.log();
     if (valuePrest && valuePerson) {
       Alert.alert("Se guardo");
     } else {
@@ -52,7 +39,6 @@ const NewForm = () => {
     }
   };
 
-  console.log(resultPrestamo);
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
@@ -97,6 +83,3 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
 });
-
-//! GUARDAR LOS DATOS EN STORAGE generando un id
-//! EN LA VISTA DE LOS CLIENTES TIENE QUE IR EL DNI, NOMBRE, FECHA DE PAGO, CUOTA, BOTON DE EDITAR Y ELIMINAR

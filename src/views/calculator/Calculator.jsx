@@ -5,11 +5,9 @@ import DetailCalculator from "../../components/detailCalculator/DetailCalculator
 import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
 import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
-import UseStorage from "../../components/hooks/UseHookStorage";
 import Cuota from "../../components/cuota/Cuota";
 
 const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
-  const { onSaveCronograma } = UseStorage();
   const [resultCuota, setResultCuota] = useState();
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
@@ -22,31 +20,39 @@ const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
     periodo: "",
   });
 
+  // Valida los errores
+  useFocusEffect(
+    React.useCallback(() => {
+      setErrorsPrestamo(validationDataPrestamo(dataPrestamo));
+
+      //return () => unsubscribe();
+    }, [dataPrestamo])
+  );
+
   useEffect(() => {
+    // Valida los errores
     let resultVal = Object.values(errorsPrestamo);
     if (setValuePrest !== undefined) {
       if (resultVal.some((error) => error === "")) {
         setValuePrest(true);
       } else {
         setValuePrest(false);
+        setEnabled(false);
       }
     } else {
       null;
     }
 
+    // Si es TRUE calcula el préstamo
     if (valuePrest) {
       handleCalcular(dataPrestamo);
-      //setResulPrestamo !== undefined ? setResulPrestamo(result) : null;
-      //savePrestamo(result);
+    }
+
+    // Sirve para que no sea visible el resultado cuando se borra algún dato de la vista de la calculadora
+    if (errorsPrestamo.incompletos !== "") {
+      setEnabled(false);
     }
   }, [setValuePrest, errorsPrestamo, errorsPrestamo.length, valuePrest]);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      setErrorsPrestamo(validationDataPrestamo(dataPrestamo));
-      //return () => unsubscribe();
-    }, [dataPrestamo])
-  );
 
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
@@ -55,7 +61,6 @@ const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
       const result = resutCronograma(data);
       setResultCuota(result);
       setEnabled(true);
-      //setResulPrestamo(result);
       setResulPrestamo !== undefined ? setResulPrestamo(result) : null;
     } else {
       Alert.alert("Datos incompletos");
@@ -82,9 +87,11 @@ const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
         </View>
       )}
       {/* ------------------ RESULTADO ------------------*/}
-      {valuePrest ? (
-        enabled ? (
-          <Cuota resultCuota={resultCuota} />
+      {valuePrest !== undefined ? (
+        valuePrest ? (
+          enabled ? (
+            <Cuota resultCuota={resultCuota} />
+          ) : null
         ) : null
       ) : enabled ? (
         <DetailCalculator resultCuota={resultCuota} />
