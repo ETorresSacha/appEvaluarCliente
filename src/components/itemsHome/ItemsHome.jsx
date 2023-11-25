@@ -13,7 +13,7 @@ const ItemsHome = () => {
   const navigation = useNavigation();
 
   const handlePrestamo = () => {
-    navigation.navigate("Credito");
+    navigation.navigate("Calculadora");
   };
 
   const handleCustomer = () => {

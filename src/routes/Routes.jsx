@@ -8,9 +8,9 @@ import Home from "../views/home/Home";
 import Detail from "../views/detail/Detail";
 import NewForm from "../views/newForm/NewForm";
 
-import Credit from "../views/credit/Credit";
 import VerCronograma from "../views/cronograma/VerCronograma";
 import Customer from "../views/customer/Customer";
+import Calculator from "../views/calculator/Calculator";
 
 //const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -20,7 +20,7 @@ const Routes = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Cliente" component={Customer} />
-        <Stack.Screen name="Credito" component={Credit} />
+        <Stack.Screen name="Calculadora" component={Calculator} />
         <Stack.Screen name="Cronograma de pago" component={VerCronograma} />
         <Stack.Screen name="Nuevo cliente" component={NewForm} />
       </Stack.Navigator>
