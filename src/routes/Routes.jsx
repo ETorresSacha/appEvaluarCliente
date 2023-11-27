@@ -21,7 +21,7 @@ const Routes = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Cliente" component={Customer} />
         <Stack.Screen name="Calculadora" component={Calculator} />
-        <Stack.Screen name="Cronograma de pago" component={VerCronograma} />
+        <Stack.Screen name="Cronograma" component={VerCronograma} />
         <Stack.Screen name="Nuevo cliente" component={NewForm} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -15,7 +15,7 @@ import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Cronograma from "../../components/cronograma/Cronograma";
 
-const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
+const Calculator = ({ uuid, setResulPrestamo, valuePrest, setValuePrest }) => {
   const [resultCuota, setResultCuota] = useState();
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
@@ -105,17 +105,7 @@ const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
       {valuePrest !== undefined ? (
         valuePrest ? (
           enabled ? (
-            <View style={styles.containerResult}>
-              <View style={styles.resultCuota}>
-                <Text style={styles.text}>{resultCuota[0]?.montoCuota}</Text>
-              </View>
-              <Pressable
-                style={styles.resultCuota}
-                onPress={() => handleRouteCronograma()}
-              >
-                <Text style={styles.textCronograma}>Cronograma</Text>
-              </Pressable>
-            </View>
+            <Cuota resultCuota={resultCuota} uuid={uuid} />
           ) : null
         ) : null
       ) : enabled ? (

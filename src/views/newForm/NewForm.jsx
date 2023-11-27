@@ -4,14 +4,18 @@ import { Button, Icon, Input } from "@rneui/themed";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
+import { v4 as uuidv4 } from "uuid";
 
 const NewForm = () => {
+  const uuid = uuidv4();
+
   const [visible, setVisible] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
   const [valuePerson, setValuePerson] = useState(false);
   const [resultPrestamo, setResulPrestamo] = useState({});
 
   const [dataPerson, setDataPerson] = useState({
+    uuid,
     nombre: "",
     apellido: "",
     dni: "",
@@ -19,7 +23,7 @@ const NewForm = () => {
     direccion: "",
     celular: "",
   });
-
+  console.log(dataPerson);
   // Valida los errores de todos los datos
   useEffect(() => {
     if (valuePrest && valuePerson) {
@@ -46,6 +50,7 @@ const NewForm = () => {
         setDataPerson={setDataPerson}
       />
       <Calculator
+        uuid={dataPerson.uuid}
         setResulPrestamo={setResulPrestamo}
         valuePrest={valuePrest}
         setValuePrest={setValuePrest}
