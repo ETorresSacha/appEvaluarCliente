@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const NewForm = () => {
   const uuid = uuidv4();
+  const { onSaveCronograma } = UseStorage();
 
   const [visible, setVisible] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
@@ -34,13 +35,29 @@ const NewForm = () => {
   }, [valuePrest, valuePerson]);
 
   // Guarda los datos en local storage
-  const handleDataKeep = () => {
+  const handleDataKeep = async () => {
     if (valuePrest && valuePerson) {
-      Alert.alert("Se guardo");
+      try {
+        await onSaveCronograma({
+          uuid,
+          nombre: dataPerson.nombre,
+          apellido: dataPerson.apellido,
+          dni: dataPerson.dni,
+          correo: dataPerson.correo,
+          direccion: dataPerson.direccion,
+          celular: dataPerson.celular,
+          resultPrestamo: dataPerson.resultPrestamo,
+        });
+        Alert.alert("Se guaerdó correctamente");
+      } catch (error) {
+        console.log(error);
+        Alert.alert("No se guardo este dato");
+      }
     } else {
       Alert.alert("No se guardo");
     }
   };
+
   return (
     <ScrollView style={styles.container}>
       <DataCustomer

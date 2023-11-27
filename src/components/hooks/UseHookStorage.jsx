@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const MY_CRONOGRAMA_KEY = "@data_cronograma";
+const MY_CRONOGRAMA_KEY = "@data";
+const MY_DATA_KEY = "@data_customer";
 
 const UseStorage = () => {
   // GUARDAR INFORMACION
@@ -32,10 +33,28 @@ const UseStorage = () => {
 
   //TODO--> CRONOGRAMA DE PAGO
   //! POST
-  const handleSaveCronograma = async (data) => {
+  const handleSaveCronograma = async ({
+    uuid,
+    nombre,
+    apellido,
+    dni,
+    correo,
+    direccion,
+    celular,
+    resultPrestamo,
+  }) => {
     //console.log(data);
     try {
-      const result = await saveInfoStorage(MY_CRONOGRAMA_KEY, data);
+      const result = await saveInfoStorage(MY_DATA_KEY, {
+        uuid,
+        nombre,
+        apellido,
+        dni,
+        correo,
+        direccion,
+        celular,
+        resultPrestamo,
+      });
 
       return result;
     } catch (error) {
@@ -44,9 +63,9 @@ const UseStorage = () => {
   };
 
   //! GET
-  const handleGetCronograma = async (data) => {
+  const handleGetCronograma = async () => {
     try {
-      const result = await AsyncStorage.getItem(MY_CRONOGRAMA_KEY);
+      const result = await AsyncStorage.getItem(MY_DATA_KEY);
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
 

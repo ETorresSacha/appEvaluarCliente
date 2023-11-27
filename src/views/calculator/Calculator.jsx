@@ -83,12 +83,6 @@ const Calculator = ({
     }
   };
 
-  //********************************************* */
-
-  const handleRouteCronograma = () => {
-    return <Cronograma />;
-  };
-
   return (
     <View style={styles.container}>
       <Prestamo
