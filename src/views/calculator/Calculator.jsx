@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Alert, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Alert,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import Prestamo from "../../components/prestamo/Prestamo";
 import DetailCalculator from "../../components/detailCalculator/DetailCalculator";
 import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
 import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
+import Cronograma from "../../components/cronograma/Cronograma";
 
 const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
   const [resultCuota, setResultCuota] = useState();
@@ -48,7 +56,8 @@ const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
       handleCalcular(dataPrestamo);
     }
 
-    // Sirve para que no sea visible el resultado cuando se borra algún dato de la vista de la calculadora
+    // Sirve para que no sea visible el resultado cuando se borra algún
+    // dato de la vista de la calculadora
     if (errorsPrestamo.incompletos !== "") {
       setEnabled(false);
     }
@@ -65,6 +74,12 @@ const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
     } else {
       Alert.alert("Datos incompletos");
     }
+  };
+
+  //********************************************* */
+
+  const handleRouteCronograma = () => {
+    return <Cronograma />;
   };
 
   return (
@@ -90,7 +105,17 @@ const Calculator = ({ setResulPrestamo, valuePrest, setValuePrest }) => {
       {valuePrest !== undefined ? (
         valuePrest ? (
           enabled ? (
-            <Cuota resultCuota={resultCuota} />
+            <View style={styles.containerResult}>
+              <View style={styles.resultCuota}>
+                <Text style={styles.text}>{resultCuota[0]?.montoCuota}</Text>
+              </View>
+              <Pressable
+                style={styles.resultCuota}
+                onPress={() => handleRouteCronograma()}
+              >
+                <Text style={styles.textCronograma}>Cronograma</Text>
+              </Pressable>
+            </View>
           ) : null
         ) : null
       ) : enabled ? (
@@ -125,5 +150,20 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "white",
     textAlign: "center",
+  },
+  containerResult: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  resultCuota: {
+    alignItems: "center",
+    height: 40,
+    justifyContent: "center",
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    elevation: 3,
+    backgroundColor: "orange",
   },
 });

@@ -50,7 +50,6 @@ const NewForm = () => {
         valuePrest={valuePrest}
         setValuePrest={setValuePrest}
       />
-
       <View style={styles.buttonContainer}>
         <Button
           title="Guardar"
@@ -82,6 +81,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
 });
+// DESPUES ESTO
 //! 1. TENEMOS QUE GUARDAR LOS RESULTADOS EN EL LOCAL STORAGE
 //! 2. MOSTRAR LOS DATOS CORRECTOS EN EL CRONOGRAMA
 //! 3. MOSTRAR LOS CLIENTES EN EL COMPONENTE CLIENTE
