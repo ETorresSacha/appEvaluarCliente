@@ -12,7 +12,6 @@ const NewForm = () => {
   const [visible, setVisible] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
   const [valuePerson, setValuePerson] = useState(false);
-  const [resultPrestamo, setResulPrestamo] = useState({});
 
   const [dataPerson, setDataPerson] = useState({
     uuid,
@@ -22,8 +21,9 @@ const NewForm = () => {
     correo: "",
     direccion: "",
     celular: "",
+    resultPrestamo: {},
   });
-  console.log(dataPerson);
+
   // Valida los errores de todos los datos
   useEffect(() => {
     if (valuePrest && valuePerson) {
@@ -41,19 +41,18 @@ const NewForm = () => {
       Alert.alert("No se guardo");
     }
   };
-
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
         setValuePerson={setValuePerson}
-        dataPerson={dataPerson}
         setDataPerson={setDataPerson}
+        dataPerson={dataPerson}
       />
       <Calculator
-        uuid={dataPerson.uuid}
-        setResulPrestamo={setResulPrestamo}
-        valuePrest={valuePrest}
+        setDataPerson={setDataPerson}
+        dataPerson={dataPerson}
         setValuePrest={setValuePrest}
+        valuePrest={valuePrest}
       />
       <View style={styles.buttonContainer}>
         <Button

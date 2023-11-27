@@ -15,8 +15,13 @@ import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Cronograma from "../../components/cronograma/Cronograma";
 
-const Calculator = ({ uuid, setResulPrestamo, valuePrest, setValuePrest }) => {
-  const [resultCuota, setResultCuota] = useState();
+const Calculator = ({
+  dataPerson,
+  setDataPerson,
+  valuePrest,
+  setValuePrest,
+}) => {
+  const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
   const [dataPrestamo, setDataPrestamo] = useState({
@@ -70,7 +75,9 @@ const Calculator = ({ uuid, setResulPrestamo, valuePrest, setValuePrest }) => {
       const result = resutCronograma(data);
       setResultCuota(result);
       setEnabled(true);
-      setResulPrestamo !== undefined ? setResulPrestamo(result) : null;
+      setDataPerson !== undefined
+        ? setDataPerson({ ...dataPerson, resultPrestamo: result })
+        : null;
     } else {
       Alert.alert("Datos incompletos");
     }
@@ -105,7 +112,7 @@ const Calculator = ({ uuid, setResulPrestamo, valuePrest, setValuePrest }) => {
       {valuePrest !== undefined ? (
         valuePrest ? (
           enabled ? (
-            <Cuota resultCuota={resultCuota} uuid={uuid} />
+            <Cuota dataPerson={dataPerson} />
           ) : null
         ) : null
       ) : enabled ? (

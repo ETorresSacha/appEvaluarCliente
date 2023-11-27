@@ -4,7 +4,7 @@ import UseStorage from "../hooks/UseHookStorage";
 import { useFocusEffect } from "@react-navigation/native";
 
 const title = [{ item: "CUOTA" }, { item: "FECHA" }, { item: "MONTO CUOTA" }];
-const Cronograma = (props) => {
+const Cronograma = ({ id }) => {
   const [dataCronograma, setDataCronograma] = useState([]);
   const { onGetCronograma } = UseStorage();
 

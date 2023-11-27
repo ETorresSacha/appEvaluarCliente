@@ -1,23 +1,15 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  Text,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, Alert, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import VerCronograma from "../../views/cronograma/VerCronograma";
 
-const Cuota = ({ uuid, resultCuota }) => {
+const Cuota = ({ dataPerson }) => {
   const navigation = useNavigation();
-  const cuota = resultCuota[0]?.montoCuota;
-  //!
+  const cuota = dataPerson.resultPrestamo[0]?.montoCuota;
+
   const handleRouteCronograma = () => {
-    navigation.navigate("Cronograma", { id: uuid });
+    navigation.navigate("Cronograma", { id: dataPerson.uuid });
   };
-  //!
+
   return (
     <View style={styles.container}>
       <View>
@@ -31,9 +23,7 @@ const Cuota = ({ uuid, resultCuota }) => {
       <View>
         <Pressable
           style={styles.buttonCronograma}
-          onPress={
-            handleRouteCronograma //!
-          }
+          onPress={handleRouteCronograma}
         >
           <Text style={styles.textCronograma}>Cronograma</Text>
         </Pressable>
