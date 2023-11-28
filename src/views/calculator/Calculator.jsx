@@ -16,6 +16,8 @@ import Cuota from "../../components/cuota/Cuota";
 import Cronograma from "../../components/cronograma/Cronograma";
 
 const Calculator = ({
+  clean,
+  setClean,
   dataPerson,
   setDataPerson,
   valuePrest,
@@ -41,6 +43,27 @@ const Calculator = ({
       //return () => unsubscribe();
     }, [dataPrestamo])
   );
+
+  useEffect(() => {
+    if (clean !== undefined) {
+      //Limpia el estado
+      if (clean) {
+        setDataPrestamo({
+          capital: "",
+          nCuotas: "",
+          tea: "",
+          fechaDesembolso: "",
+          fechaPrimeraCuota: "",
+          periodo: "",
+        });
+        setClean(false);
+      } else {
+        null;
+      }
+    } else {
+      null;
+    }
+  }, [clean]);
 
   useEffect(() => {
     // Valida los errores
@@ -79,7 +102,7 @@ const Calculator = ({
         ? setDataPerson({ ...dataPerson, resultPrestamo: result })
         : null;
     } else {
-      Alert.alert("Datos incompletos");
+      setDataPerson !== undefined ? null : Alert.alert("Datos incompletos");
     }
   };
 

@@ -7,7 +7,6 @@ import UseStorage from "../../components/hooks/UseHookStorage";
 const Customer = () => {
   const navigation = useNavigation();
   const { onGetCronograma } = UseStorage();
-
   const [data, setData] = useState([]);
 
   const handleAddPress = () => {
@@ -34,7 +33,7 @@ const Customer = () => {
   //   loadCustomer();
   // }, [data]);
   //console.log(data);
-  console.log(data[0]?.resultPrestamo[0]?.fechaPago);
+  console.log(data.length);
   return (
     <View style={styles.container}>
       <Text>clientes</Text>

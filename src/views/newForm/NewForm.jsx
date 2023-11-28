@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Alert, Text } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
+import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { v4 as uuidv4 } from "uuid";
 
 const NewForm = () => {
   const uuid = uuidv4();
+  const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
 
   const [visible, setVisible] = useState(false);
+  const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
   const [valuePerson, setValuePerson] = useState(false);
 
@@ -27,12 +31,24 @@ const NewForm = () => {
 
   // Valida los errores de todos los datos
   useEffect(() => {
+    if (clean) {
+      setDataPerson({
+        uuid,
+        nombre: "",
+        apellido: "",
+        dni: "",
+        correo: "",
+        direccion: "",
+        celular: "",
+        resultPrestamo: {},
+      });
+    }
     if (valuePrest && valuePerson) {
       setVisible(true);
     } else {
       setVisible(false);
     }
-  }, [valuePrest, valuePerson]);
+  }, [clean, valuePrest, valuePerson]);
 
   // Guarda los datos en local storage
   const handleDataKeep = async () => {
@@ -48,7 +64,23 @@ const NewForm = () => {
           celular: dataPerson.celular,
           resultPrestamo: dataPerson.resultPrestamo,
         });
-        Alert.alert("Se guaerdó correctamente");
+        Alert.alert(
+          "Se guardo correctamente",
+          "¿Desea agregar un nuevo cliente?",
+          [
+            {
+              text: "Si",
+              onPress: () => setClean(true),
+              style: "destructive",
+            },
+            {
+              text: "No",
+              onPress: () => navigation.navigate("Cliente"),
+              style: "destructive",
+            },
+          ]
+        );
+        setVisible(false);
       } catch (error) {
         console.log(error);
         Alert.alert("No se guardo este dato");
@@ -57,7 +89,6 @@ const NewForm = () => {
       Alert.alert("No se guardo");
     }
   };
-
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
@@ -66,6 +97,8 @@ const NewForm = () => {
         dataPerson={dataPerson}
       />
       <Calculator
+        clean={clean}
+        setClean={setClean}
         setDataPerson={setDataPerson}
         dataPerson={dataPerson}
         setValuePrest={setValuePrest}
@@ -103,9 +136,7 @@ const styles = StyleSheet.create({
   },
 });
 // DESPUES ESTO
-//! 1. TENEMOS QUE GUARDAR LOS RESULTADOS EN EL LOCAL STORAGE
-//! 2. MOSTRAR LOS DATOS CORRECTOS EN EL CRONOGRAMA
-//! 3. MOSTRAR LOS CLIENTES EN EL COMPONENTE CLIENTE
+
 //! 4. TENEMOS QUE AÑADIR LAS OPCIONES DE EDITAR Y ELIMINAR CLIENTE
 
 //! OTRO
