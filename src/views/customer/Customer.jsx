@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Pressable,
+  Alert,
+} from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
@@ -8,7 +15,10 @@ import NavBar from "../../components/navBar/NavBar";
 const Customer = () => {
   const navigation = useNavigation();
   const { onGetCronograma } = UseStorage();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    dataResult: [],
+    dataResultCopy: [],
+  });
 
   // const handleAddPress = () => {
   //   navigation.navigate("Nuevo cliente");
@@ -18,7 +28,11 @@ const Customer = () => {
     // Trae los datos guardados del local storage
     try {
       const resultCustomer = await onGetCronograma();
-      setData(resultCustomer);
+      setData({
+        ...data,
+        dataResult: resultCustomer,
+        dataResultCopy: resultCustomer,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -30,6 +44,16 @@ const Customer = () => {
       //return () => unsubscribe();
     }, [])
   );
+
+  // const handleSort = (data) => {
+  //   // const filterNameA = state.recipeFilter.sort((a, b) =>
+  //   //   a.title.localeCompare(b.title)
+  //   // );
+  //   const result = data.sort((a, b) => a.dni.localeCompare(b.dni));
+  //   setData(result);
+  //   //Alert.alert("click");
+  // };
+
   return (
     <View style={styles.container}>
       {/* <View style={styles.buttonContainer}>
@@ -41,12 +65,12 @@ const Customer = () => {
           onPress={handleAddPress}
         />
       </View> */}
-      <NavBar />
+      <NavBar data={data} setData={setData} />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
-          <View style={styles.title}>
+          <Pressable style={styles.title}>
             <Text style={{ fontWeight: "bold" }}>DNI</Text>
-          </View>
+          </Pressable>
           <View>
             <Text style={{ fontWeight: "bold" }}>NOMBRE</Text>
           </View>
@@ -57,7 +81,7 @@ const Customer = () => {
             <Text style={{ fontWeight: "bold" }}>CUOTA</Text>
           </View>
         </View>
-        {data?.map((element, index) => {
+        {data?.dataResult?.map((element, index) => {
           return (
             <View
               key={index}
@@ -92,6 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerTitle: {
+    height: 30,
     fontSize: 16,
     display: "flex",
     flexDirection: "row",

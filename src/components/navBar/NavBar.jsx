@@ -7,35 +7,58 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Icon, Input } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const NavBar = () => {
+const NavBar = ({ data, setData }) => {
   const navigation = useNavigation();
-  const [search, setSearch] = useState("");
+  const [textSearch, setText] = useState("");
 
   const handleAddPress = () => {
     navigation.navigate("Nuevo cliente");
   };
-  console.log(search);
+
+  // Busqueda por nombre y dni
+  const handleSearch = (text) => {
+    let busqueda = parseInt(text);
+
+    // DNI
+    if (busqueda / busqueda === 1) {
+      let resulSearch = data.dataResultCopy.filter((element) =>
+        element.dni.includes(text)
+      );
+      setData({ ...data, dataResult: resulSearch });
+    }
+    // NOMBRE
+    else {
+      let resulSearch = data.dataResultCopy.filter((element) =>
+        element.nombre.includes(text)
+      );
+      setData({ ...data, dataResult: resulSearch });
+    }
+  };
+  useEffect(() => {
+    handleSearch(textSearch);
+  }, [textSearch]);
+  //console.log(typeof textSearch);
   return (
     <View style={styles.container}>
       <View style={styles.containerInput}>
         <TextInput
           style={styles.input}
-          value={search}
+          value={textSearch}
           placeholder="Buscar"
           errorMessage="Error"
-          defaultValue={search}
+          defaultValue={textSearch}
           onChangeText={(text) => {
-            setSearch(text);
+            setText(text);
           }}
         />
         <View style={styles.icon}>
           <Ionicons
-            onPress={() => Alert.alert("Cannot press this one")}
+            onPress={() => handleSearch(textSearch)}
             name="search"
             size={25}
             color="black"
