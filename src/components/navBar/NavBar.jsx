@@ -42,7 +42,7 @@ const NavBar = ({ data, setData }) => {
   useEffect(() => {
     handleSearch(textSearch);
   }, [textSearch]);
-  //console.log(typeof textSearch);
+
   return (
     <View style={styles.container}>
       <View style={styles.containerInput}>

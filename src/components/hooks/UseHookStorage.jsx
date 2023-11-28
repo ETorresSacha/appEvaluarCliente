@@ -77,9 +77,26 @@ const UseStorage = () => {
     }
   };
 
+  //! DELETE
+  const handleDeleteCustomer = async (uuid) => {
+    try {
+      const resultGet = await handleGetCronograma();
+
+      const filterItem = resultGet?.filter((element) => {
+        return element.uuid !== uuid;
+      });
+      await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(filterItem));
+
+      return Promise.resolve();
+    } catch (error) {
+      return console.error(error);
+    }
+  };
+
   return {
     onSaveCronograma: handleSaveCronograma,
     onGetCronograma: handleGetCronograma,
+    onDeleteCustomer: handleDeleteCustomer,
   };
 };
 

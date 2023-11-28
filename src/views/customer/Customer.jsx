@@ -11,10 +11,11 @@ import { Button, Icon, Input } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Customer = () => {
   const navigation = useNavigation();
-  const { onGetCronograma } = UseStorage();
+  const { onGetCronograma, onDeleteCustomer } = UseStorage();
   const [data, setData] = useState({
     dataResult: [],
     dataResultCopy: [],
@@ -45,14 +46,37 @@ const Customer = () => {
     }, [])
   );
 
-  // const handleSort = (data) => {
-  //   // const filterNameA = state.recipeFilter.sort((a, b) =>
-  //   //   a.title.localeCompare(b.title)
-  //   // );
-  //   const result = data.sort((a, b) => a.dni.localeCompare(b.dni));
-  //   setData(result);
-  //   //Alert.alert("click");
-  // };
+  const handleSort = () => {
+    console.log(data);
+    // const filterNameA = state.recipeFilter.sort((a, b) =>
+    //   a.title.localeCompare(b.title)
+    // );
+    // const result = data.sort((a, b) => a.dni.localeCompare(b.dni));
+    // setData(result);
+    //Alert.alert("click");
+  };
+
+  const alertDelete = (data) => {
+    Alert.alert("Eliminar", "¿Desea continuar?", [
+      {
+        text: "Si",
+        onPress: () => handleDelete(data),
+        style: "destructive",
+      },
+      {
+        text: "No",
+        style: "destructive",
+      },
+    ]);
+  };
+  const handleDelete = async (data) => {
+    try {
+      const result = await onDeleteCustomer(data);
+      loadCustomer();
+    } catch (error) {
+      console.error();
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -68,7 +92,7 @@ const Customer = () => {
       <NavBar data={data} setData={setData} />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
-          <Pressable style={styles.title}>
+          <Pressable style={styles.title} onPress={() => handleSort()}>
             <Text style={{ fontWeight: "bold" }}>DNI</Text>
           </Pressable>
           <View>
@@ -95,6 +119,15 @@ const Customer = () => {
               <Text style={styles.dataText}>
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
+              <Pressable style={styles.icon}>
+                <Icon name="edit" size={25} color="black" />
+              </Pressable>
+              <Pressable
+                style={styles.icon}
+                onPress={() => alertDelete(data?.dataResult[index].uuid)}
+              >
+                <Icon name="delete" size={25} color="black" />
+              </Pressable>
             </View>
           );
         })}
@@ -159,6 +192,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingHorizontal: 5,
     marginHorizontal: 2,
+  },
+  icon: {
+    height: 30,
+    width: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 //! TENEMOS QUE CREAR UN BOTON PARA REDIRIGIR AL COMPONENTE NEWFORM, Y HACER LA FUNCIONALIDAD PARA
