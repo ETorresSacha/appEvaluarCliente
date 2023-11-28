@@ -29,11 +29,6 @@ const Customer = () => {
       //return () => unsubscribe();
     }, [])
   );
-  // useEffect(() => {
-  //   loadCustomer();
-  // }, [data]);
-  //console.log(data);
-  console.log(data.length);
   return (
     <View style={styles.container}>
       <Text>clientes</Text>
@@ -67,9 +62,6 @@ const Customer = () => {
               key={index}
               style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
             >
-              {/* <Text style={styles.dataText}>
-                {element.cuota.toString().padStart(2, "0")}
-              </Text> */}
               <Text style={styles.dataText}>{element.dni}</Text>
               <Text style={styles.dataText}>{`${element.nombre}`}</Text>
               <Text style={styles.dataText}>

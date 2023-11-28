@@ -1,8 +1,5 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
-import DataCustomer from "../../components/dataCustomer/DataCustomer";
-import Gastos from "../../components/Gastos/Gastos";
-import Ingresos from "../../components/ingresos/Ingresos";
 import CustomerType from "../../components/customerType/CustomerType";
 import Header from "../../components/header/Header";
 import ItemsHome from "../../components/itemsHome/ItemsHome";
@@ -12,8 +9,6 @@ const Home = () => {
     <View style={styles.container}>
       <Header />
       <CustomerType />
-      {/* <Ingresos />
-      <Gastos /> */}
       <ItemsHome />
     </View>
   );

@@ -29,8 +29,8 @@ const NewForm = () => {
     resultPrestamo: {},
   });
 
-  // Valida los errores de todos los datos
   useEffect(() => {
+    // Limpia es estado
     if (clean) {
       setDataPerson({
         uuid,
@@ -43,6 +43,7 @@ const NewForm = () => {
         resultPrestamo: {},
       });
     }
+    // Valida los errores de todos los datos
     if (valuePrest && valuePerson) {
       setVisible(true);
     } else {

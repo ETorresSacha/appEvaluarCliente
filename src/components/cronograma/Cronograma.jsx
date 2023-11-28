@@ -11,7 +11,7 @@ const Cronograma = ({ id }) => {
   const addDaraCronograma = useCallback(async () => {
     try {
       const result = await onGetCronograma();
-      setDataCronograma(result[0]);
+      setDataCronograma(result);
     } catch (error) {
       setDataCronograma([]);
       console.error(error);
@@ -23,7 +23,7 @@ const Cronograma = ({ id }) => {
     }, [addDaraCronograma])
   );
 
-  // console.log(dataCronograma);
+  console.log(dataCronograma);
   return (
     <View style={styles.container}>
       <View>
