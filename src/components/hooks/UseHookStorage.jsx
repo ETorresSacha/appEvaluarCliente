@@ -43,7 +43,6 @@ const UseStorage = () => {
     celular,
     resultPrestamo,
   }) => {
-    //console.log(data);
     try {
       const result = await saveInfoStorage(MY_DATA_KEY, {
         uuid,

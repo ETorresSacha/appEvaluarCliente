@@ -3,15 +3,16 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
+import NavBar from "../../components/navBar/NavBar";
 
 const Customer = () => {
   const navigation = useNavigation();
   const { onGetCronograma } = UseStorage();
   const [data, setData] = useState([]);
 
-  const handleAddPress = () => {
-    navigation.navigate("Nuevo cliente");
-  };
+  // const handleAddPress = () => {
+  //   navigation.navigate("Nuevo cliente");
+  // };
 
   const loadCustomer = async () => {
     // Trae los datos guardados del local storage
@@ -31,8 +32,7 @@ const Customer = () => {
   );
   return (
     <View style={styles.container}>
-      <Text>clientes</Text>
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <Button
           title="Nuevo"
           icon={<Icon name="add" color="#FFF" />}
@@ -40,7 +40,8 @@ const Customer = () => {
           color="#4ecb71"
           onPress={handleAddPress}
         />
-      </View>
+      </View> */}
+      <NavBar />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
           <View style={styles.title}>

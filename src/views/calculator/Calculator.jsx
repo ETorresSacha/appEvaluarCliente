@@ -13,7 +13,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
 import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
-import Cronograma from "../../components/cronograma/Cronograma";
 
 const Calculator = ({
   clean,
