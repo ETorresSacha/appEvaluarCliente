@@ -1,4 +1,5 @@
 import {Alert} from "react-native";
+// ORDENAR
 export const orderData = (type,data,value)=>{
     let result
     switch (type) {
@@ -43,4 +44,10 @@ export const orderData = (type,data,value)=>{
             return result
 }
 
-//! TENGO QUE CORREGIR LA FECHA, NO SE ESTA ORDENANDO DE ACUERDO A LO SUGERIDO
+//CAMBIAR EL FORMATO DE LA FECHA
+export const formatDate = (date)=>{
+  let result
+  let [mes,dia,anio] = date.split('-')
+  result=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${anio}`
+return result
+}

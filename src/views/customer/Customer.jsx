@@ -12,7 +12,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { orderData } from "../../utils/thunks/Thunks";
+import { formatDate, orderData } from "../../utils/thunks/Thunks";
 
 const Customer = () => {
   const navigation = useNavigation();
@@ -39,17 +39,14 @@ const Customer = () => {
       console.error(error);
     }
   };
-  // useEffect(() => {
-  //   loadCustomer();
-  //   //handleSort("fecha", order);
-  // }, []);
+
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
       //return () => unsubscribe();
     }, [])
   );
-  //console.log(data.dataResult[0].resultPrestamo);
+
   // Ordenar
   const handleSort = (type, value) => {
     const result = orderData(type, data.dataResult, value);
@@ -118,7 +115,7 @@ const Customer = () => {
               <Text style={styles.dataText}>{element.dni}</Text>
               <Text style={styles.dataText}>{`${element.nombre}`}</Text>
               <Text style={styles.dataText}>
-                {element?.resultPrestamo[0]?.fechaPago}
+                {formatDate(element?.resultPrestamo[0]?.fechaPago)}
               </Text>
               <Text style={styles.dataText}>
                 {element?.resultPrestamo[0]?.montoCuota}

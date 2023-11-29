@@ -18,6 +18,12 @@ export const sumaUnicode = (string,index)=>{
     return total
 }
 
+const date1 = (new Date("10-02-2023")).getDate();
+console.log((date1));
+console.log(new Date("11-30-2023").getDate().toString().padStart(2, "0"));
+console.log(new Date("10-02-2023").getMonth().toString().padStart(2, "0"));
+console.log(new Date("10-02-2023").getFullYear().toString().padStart(2, "0"));
+
 
 console.log(sumaUnicode("02-10-2023",0));
 console.log(sumaUnicode("23-11-2023",0));
