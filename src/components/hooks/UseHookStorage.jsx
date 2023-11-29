@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { orderData } from "../../utils/thunks/Thunks";
 
 const MY_CRONOGRAMA_KEY = "@data";
 const MY_DATA_KEY = "@data_customer";
@@ -64,7 +65,14 @@ const UseStorage = () => {
   //! GET
   const handleGetCronograma = async () => {
     try {
-      const result = await AsyncStorage.getItem(MY_DATA_KEY);
+      let result = await AsyncStorage.getItem(MY_DATA_KEY);
+      //console.log(result);
+      // resultData = result.sort(
+      //   (a, b) =>
+      //     new Date(b.resultPrestamo[0]?.fechaPago).getTime() -
+      //     new Date(a.resultPrestamo[0]?.fechaPago).getTime()
+      // );
+      //resultData = orderData("fecha", result, true);
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
 

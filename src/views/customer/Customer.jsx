@@ -23,65 +23,41 @@ const Customer = () => {
     dataResultCopy: [],
   });
 
-  // const handleAddPress = () => {
-  //   navigation.navigate("Nuevo cliente");
-  // };
-
   const loadCustomer = async () => {
     // Trae los datos guardados del local storage
     try {
       const resultCustomer = await onGetCronograma();
+      //console.log(resultCustomer);
       setData({
         ...data,
         dataResult: resultCustomer,
         dataResultCopy: resultCustomer,
       });
+      data.dataResult.length != 0 ? handleSort("fecha", order) : null; //! al iniciar siempre debe de ordenarse por la fecha
+      //handleSort("fecha", order);
     } catch (error) {
       console.error(error);
     }
   };
+  // useEffect(() => {
+  //   //handleSort("fecha", order);
+  // }, [data.dataResult, data.dataResult.length]);
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
 
       //return () => unsubscribe();
-    }, [])
+    }, [data.dataResult.length])
   );
 
+  // Ordenar
   const handleSort = (type, value) => {
-    console.log(type);
-    console.log(value);
     const result = orderData(type, data.dataResult, value);
     setData({ ...data, dataResult: result });
     setOrder(!value);
-
-    // if (order) {
-    //   const result = orderData(type, data.dataResult);
-    //   console.log(result);
-    //   setOrder(!order);
-    // } else {
-    //   const result = orderData(type, data.dataResult);
-    //   console.log(result);
-    //   setOrder(!order);
-    // }
-    //console.log(value);
-    //console.log(result);
-    //setData({ ...data, dataResult: result });
-    // setOrder(value);
-
-    // if (value) {
-    //   const result = data.dataResult.sort((a, b) => a.dni - b.dni);
-    //   setData({ ...data, ...data, dataResult: result });
-    //   setOrder(value);
-    // } else {
-    //   const result = data.dataResult.sort((a, b) => b.dni - a.dni);
-    //   setData({ ...data, ...data, dataResult: result });
-    //   setOrder(value);
-    // }
-
-    //Alert.alert("click");
   };
 
+  // Eliminar
   const alertDelete = (data) => {
     Alert.alert("Eliminar", "¿Desea continuar?", [
       {
@@ -103,7 +79,6 @@ const Customer = () => {
       console.error();
     }
   };
-  console.log(data.dataResult[0]);
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />
