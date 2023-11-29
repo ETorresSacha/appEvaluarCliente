@@ -12,10 +12,12 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { orderData } from "../../utils/thunks/Thunks";
 
 const Customer = () => {
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
+  const [order, setOrder] = useState(false);
   const [data, setData] = useState({
     dataResult: [],
     dataResultCopy: [],
@@ -46,13 +48,37 @@ const Customer = () => {
     }, [])
   );
 
-  const handleSort = () => {
-    console.log(data);
-    // const filterNameA = state.recipeFilter.sort((a, b) =>
-    //   a.title.localeCompare(b.title)
-    // );
-    // const result = data.sort((a, b) => a.dni.localeCompare(b.dni));
-    // setData(result);
+  const handleSort = (type, value) => {
+    console.log(type);
+    console.log(value);
+    const result = orderData(type, data.dataResult, value);
+    setData({ ...data, dataResult: result });
+    setOrder(!value);
+
+    // if (order) {
+    //   const result = orderData(type, data.dataResult);
+    //   console.log(result);
+    //   setOrder(!order);
+    // } else {
+    //   const result = orderData(type, data.dataResult);
+    //   console.log(result);
+    //   setOrder(!order);
+    // }
+    //console.log(value);
+    //console.log(result);
+    //setData({ ...data, dataResult: result });
+    // setOrder(value);
+
+    // if (value) {
+    //   const result = data.dataResult.sort((a, b) => a.dni - b.dni);
+    //   setData({ ...data, ...data, dataResult: result });
+    //   setOrder(value);
+    // } else {
+    //   const result = data.dataResult.sort((a, b) => b.dni - a.dni);
+    //   setData({ ...data, ...data, dataResult: result });
+    //   setOrder(value);
+    // }
+
     //Alert.alert("click");
   };
 
@@ -77,27 +103,24 @@ const Customer = () => {
       console.error();
     }
   };
-
+  console.log(data.dataResult[0]);
   return (
     <View style={styles.container}>
-      {/* <View style={styles.buttonContainer}>
-        <Button
-          title="Nuevo"
-          icon={<Icon name="add" color="#FFF" />}
-          radius="lg"
-          color="#4ecb71"
-          onPress={handleAddPress}
-        />
-      </View> */}
       <NavBar data={data} setData={setData} />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
-          <Pressable style={styles.title} onPress={() => handleSort()}>
+          <Pressable
+            style={styles.title}
+            onPress={() => handleSort("dni", order)}
+          >
             <Text style={{ fontWeight: "bold" }}>DNI</Text>
           </Pressable>
-          <View>
+          <Pressable
+            style={styles.title}
+            onPress={() => handleSort("nombre", order)}
+          >
             <Text style={{ fontWeight: "bold" }}>NOMBRE</Text>
-          </View>
+          </Pressable>
           <View>
             <Text style={{ fontWeight: "bold" }}>FECHA DE PAGO</Text>
           </View>
