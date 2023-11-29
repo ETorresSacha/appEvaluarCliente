@@ -121,12 +121,18 @@ const Customer = () => {
           >
             <Text style={{ fontWeight: "bold" }}>NOMBRE</Text>
           </Pressable>
-          <View>
+          <Pressable
+            style={styles.title}
+            onPress={() => handleSort("fecha", order)}
+          >
             <Text style={{ fontWeight: "bold" }}>FECHA DE PAGO</Text>
-          </View>
-          <View>
+          </Pressable>
+          <Pressable
+            style={styles.title}
+            onPress={() => handleSort("cuota", order)}
+          >
             <Text style={{ fontWeight: "bold" }}>CUOTA</Text>
-          </View>
+          </Pressable>
         </View>
         {data?.dataResult?.map((element, index) => {
           return (
