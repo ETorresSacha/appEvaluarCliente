@@ -1,3 +1,4 @@
+import {Alert} from "react-native";
 export const orderData = (type,data,value)=>{
     let result
     switch (type) {
@@ -20,10 +21,9 @@ export const orderData = (type,data,value)=>{
               }
           break;
           case 'fecha':
-
             if (value) {
+
                 result = data.sort((a, b) => new Date(b.resultPrestamo[0]?.fechaPago).getTime() - new Date(a.resultPrestamo[0]?.fechaPago).getTime());
-             
                } else {
                  result = data.sort((a, b) => new Date(a.resultPrestamo[0]?.fechaPago).getTime() - new Date(b.resultPrestamo[0]?.fechaPago).getTime());
                }
@@ -42,3 +42,5 @@ export const orderData = (type,data,value)=>{
             }
             return result
 }
+
+//! TENGO QUE CORREGIR LA FECHA, NO SE ESTA ORDENANDO DE ACUERDO A LO SUGERIDO

@@ -47,6 +47,7 @@ export const calculoFRCA = (data) =>{
             {
             cuota:i, 
             fechaPago:sumarMes(data,i-1),
+            //sfechaPago:data.fechaPago,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
             FRC :solutionFRC(resultTED,data,i,acumFRCA),

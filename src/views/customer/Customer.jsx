@@ -33,23 +33,23 @@ const Customer = () => {
         dataResult: resultCustomer,
         dataResultCopy: resultCustomer,
       });
-      data.dataResult.length != 0 ? handleSort("fecha", order) : null; //! al iniciar siempre debe de ordenarse por la fecha
+      //data.dataResult.length != 0 ? handleSort("fecha", order) : null; //! al iniciar siempre debe de ordenarse por la fecha
       //handleSort("fecha", order);
     } catch (error) {
       console.error(error);
     }
   };
   // useEffect(() => {
+  //   loadCustomer();
   //   //handleSort("fecha", order);
-  // }, [data.dataResult, data.dataResult.length]);
+  // }, []);
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
-
       //return () => unsubscribe();
-    }, [data.dataResult.length])
+    }, [])
   );
-
+  //console.log(data.dataResult[0].resultPrestamo);
   // Ordenar
   const handleSort = (type, value) => {
     const result = orderData(type, data.dataResult, value);

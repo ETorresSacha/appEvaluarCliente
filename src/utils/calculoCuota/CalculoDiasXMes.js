@@ -7,7 +7,7 @@ export const sumarMes = (data,i)=>{
     let nuevoAnio =""
     let parseMes = parseInt(mes)+i
 
-    if(parseMes<=12) fechaPago=`${dia.toString().padStart(2, "0")}-${parseMes.toString().padStart(2, "0")}-${anio}`
+    if(parseMes<=12) fechaPago=`${parseMes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}-${anio}`
 
     else  {
         
@@ -23,7 +23,7 @@ export const sumarMes = (data,i)=>{
 
         mes=(parseInt(mes)+i)-(12*(nuevoMes % 12 ===0 ? (nuevoMes/12)-1 : Math.trunc(nuevoMes/12)))
 
-        fechaPago=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${nuevoAnio}` 
+        fechaPago=`${mes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}-${nuevoAnio}` 
     }
     return fechaPago   
 }
