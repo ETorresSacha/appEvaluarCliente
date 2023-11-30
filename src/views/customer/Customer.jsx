@@ -141,7 +141,8 @@ export default Customer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
+    //paddingHorizontal: 10,
+    backgroundColor: "rgb(31, 36, 36)",
   },
   content: {
     marginVertical: 16,

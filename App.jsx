@@ -7,7 +7,7 @@ export default function App() {
     <View
       style={{
         flex: 1,
-        paddingTop: Platform.OS === "android" && 30,
+        //paddingTop: Platform.OS === "android" && 30,
       }}
     >
       <Routes />
@@ -19,7 +19,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "rgb(31, 36, 36)",
     alignItems: "center",
     justifyContent: "center",
   },

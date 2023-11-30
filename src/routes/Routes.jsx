@@ -16,10 +16,21 @@ import Calculator from "../views/calculator/Calculator";
 const Stack = createNativeStackNavigator();
 const Routes = () => {
   return (
-    <NavigationContainer style={{ backgroundColor: "blue" }}>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Cliente" component={Customer} />
+        <Stack.Screen
+          name="Cliente"
+          component={Customer}
+          options={{
+            statusBarColor: "rgb(31, 36, 36)",
+            title: "Clientes",
+            headerStyle: {
+              backgroundColor: "rgb(31, 36, 36)",
+            },
+            headerTintColor: "white",
+          }}
+        />
         <Stack.Screen name="Calculadora" component={Calculator} />
         <Stack.Screen name="Cronograma" component={VerCronograma} />
         <Stack.Screen name="Nuevo cliente" component={NewForm} />
