@@ -114,7 +114,12 @@ const Customer = () => {
             >
               <Text style={styles.dataText}>{element.dni}</Text>
               <Text
-                style={{ width: 90, paddingHorizontal: 5, fontSize: 17 }}
+                style={{
+                  width: 90,
+                  paddingHorizontal: 5,
+                  fontSize: 17,
+                  color: "silver",
+                }}
               >{`${element.nombre}`}</Text>
               <Text style={styles.dataText}>
                 {formatDate(element?.resultPrestamo[0]?.fechaPago)}
@@ -122,19 +127,19 @@ const Customer = () => {
               <Text
                 style={{
                   fontSize: 17,
-                  color: "bisque",
+                  color: "silver",
                 }}
               >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
               <Pressable style={styles.icon}>
-                <Icon name="edit" size={25} color="black" />
+                <Icon name="edit" size={25} color="silver" />
               </Pressable>
               <Pressable
                 style={styles.icon}
                 onPress={() => alertDelete(data?.dataResult[index].uuid)}
               >
-                <Icon name="delete" size={25} color="black" />
+                <Icon name="delete" size={25} color="silver" />
               </Pressable>
             </View>
           );
@@ -148,14 +153,7 @@ export default Customer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingHorizontal: 10,
     backgroundColor: "rgb(31, 36, 36)",
-  },
-  content: {
-    //marginVertical: 16,
-  },
-  buttonContainer: {
-    flex: 1,
   },
   containerTitle: {
     borderTopStartRadius: 10,
@@ -163,7 +161,6 @@ const styles = StyleSheet.create({
     height: 50,
     display: "flex",
     flexDirection: "row",
-    //paddingVertical: 4,
     justifyContent: "space-around",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
@@ -180,16 +177,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 17,
+    color: "white",
   },
   containerCuotas: {
+    marginVertical: 10,
     borderRadius: 15,
-    borderWidth: 2,
-    borderColor: "gray",
-    //backgroundColor: "white",
+    borderWidth: 1,
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    //paddingVertical: 10,
+    marginHorizontal: 7,
   },
   dataPar: {
     display: "flex",
@@ -205,15 +202,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     paddingVertical: 5,
-
+    tintColor: "blue",
     backgroundColor: "rgba(55, 59, 59, 0.757)",
   },
   dataText: {
     fontSize: 17,
     paddingHorizontal: 5,
-    color: "khaki",
-    //paddingHorizontal: 5,
-    //marginHorizontal: 2,
+    color: "silver",
   },
   icon: {
     height: 30,
@@ -222,7 +217,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-//! TENEMOS QUE CREAR UN BOTON PARA REDIRIGIR AL COMPONENTE NEWFORM, Y HACER LA FUNCIONALIDAD PARA
-//! CREAR CLIENTE Y PROGRAMA, SOLO SI SERA UN NUEVO CLIENTE,
 
-//! EN ESTE COMPONENTE REDERIZAREMOS A LOS CLIENTE Y LA ALERTA DE PAGO
+//! falta  LA ALERTA DE PAGO
