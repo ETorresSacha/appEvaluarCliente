@@ -66,7 +66,7 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
         {/* ------------------- Apellido ------------------ */}
         <View>
           <View>
-            <Text style={styles.subTitle}>Apellido</Text>
+            <Text style={styles.subTitle}>Apellidos</Text>
           </View>
           <View
             style={

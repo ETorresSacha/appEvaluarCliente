@@ -3,34 +3,41 @@
 //! Validación de los datos del cliente
 export const validationDataPerson = (dataPerson) =>{
     let error = {
-     incompletos:"",
-     noEsNumero:"",
-     CanNumeroDni:"",
-     CanNumeroCel:"",
-     noEsCorreo:""
+     nombre:"",
+     apellidos:"",
+     direccion:"",
+     ndi:"",
+     celular:"",
+    correo:""
 
     }
     
     // Datos en blanco
-    if(dataPerson.nombre.trim() === "" || dataPerson.apellido.trim() === "" || dataPerson.dni.trim() === "" || dataPerson.correo.trim() === ""  || dataPerson.direccion.trim() === "" || dataPerson.celular.trim() === "" ) {
-         error = {...error,incompletos:"Datos incompletos"}
+    if(dataPerson.nombre.trim() === "" ) {
+         error = {...error,nombre:"Nombre incompleto"}
     }
+    if(dataPerson.apellido.trim() === ""  ) {
+     error = {...error,apellidos:"Apellidos incompletos"}
+     }
+     if(  dataPerson.direccion.trim() === ""  ) {
+     error = {...error,direccion:"Dirección incompleto"}
+     }
 
     // Datos solo número
     //Expresion Regular Solo Números
-    var ExpRegSoloNumeros="^[0-9]+$";
+//     var ExpRegSoloNumeros="^[0-9]+$";
 
-    if(dataPerson.dni.match(ExpRegSoloNumeros) == null || dataPerson.celular.match(ExpRegSoloNumeros) == null){
+//     if(dataPerson.dni.match(ExpRegSoloNumeros) == null || dataPerson.celular.match(ExpRegSoloNumeros) == null){
 
-         error = {...error,noEsNumero : "Formato incorrecto"}
-    }
+//          error = {...error,noEsNumero : "Formato incorrecto"}
+//     }
     if(dataPerson.dni.trim().length !== 8){
 
-     error = {...error,CanNumeroDni : "Solo debe tener 8 caracteres"}
+     error = {...error,dni : "Solo se acepta 8 caracteres"}
      }
      if(dataPerson.celular.trim().length !== 9){
 
-          error = {...error,CanNumeroCel : "Solo debe tener 9 caracteres"}
+          error = {...error,celular : "Solo se acepta 9 caracteres"}
      }
 
     // Correo
@@ -39,7 +46,7 @@ export const validationDataPerson = (dataPerson) =>{
 
     if(dataPerson.correo.match(ExpRegEmail) == null ){
 
-         error = {...error, noEsCorreo:"No es correo"}
+         error = {...error, correo:"No es un correo"}
     }
     return error
 }

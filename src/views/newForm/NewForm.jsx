@@ -24,14 +24,7 @@ const NewForm = () => {
   const [visible, setVisible] = useState(false);
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
-  const [errores, setErrores] = useState({
-    nombre: "",
-    apellidos: "",
-    dni: "",
-    correo: "",
-    direccion: "",
-    celular: "",
-  });
+  const [errores, setErrores] = useState({});
   const [errorCustomer, setErrorCustomer] = useState({});
   const [resultError, setResultError] = useState({});
   console.log(errores);
@@ -45,11 +38,6 @@ const NewForm = () => {
     celular: "",
     resultPrestamo: {},
   });
-  // useEffect(() => {
-  //   if (dataPerson.dni !== "") {
-  //     setErrorCustomer({ ...errorCustomer, CanNumeroDni: "" });
-  //   }
-  // }, [errorCustomer.CanNumeroDni]);
 
   // useEffect(() => {
   //   // Limpia es estado
@@ -72,33 +60,11 @@ const NewForm = () => {
   //     setVisible(false);
   //   }
   // }, [clean, valuePrest, valuePerson]);
-  useEffect(() => {
-    setErrorCustomer(validationDataPerson(dataPerson));
-  }, [dataPerson]);
 
   // Guarda los datos en local storage
   const handleDataKeep = async () => {
-    //setErrorCustomer(validationDataPerson(dataPerson));
-    if (errorCustomer.incompletos) {
-      setErrores((errores) => ({
-        ...errores,
-        nombre: "Nombre incompleto",
-        apellidos: "Apellidos incompletos",
-        direccion: "Dirección incompleto",
-      }));
-    }
-    if (errorCustomer.CanNumeroCel) {
-      setErrores((errores) => ({
-        ...errores,
-        celular: "Error en el número de celular",
-      }));
-    }
-    if (errorCustomer.noEsCorreo) {
-      setErrores((errores) => ({ ...errores, correo: "Error en el correo" }));
-    }
-    if (errorCustomer.CanNumeroDni) {
-      setErrores((errores) => ({ ...errores, dni: "Error en el DNI" }));
-    }
+    setErrores(validationDataPerson(dataPerson));
+
     // if (valuePrest && valuePerson) {
     //   try {
     //     await onSaveCronograma({
