@@ -29,6 +29,7 @@ const Routes = () => {
               backgroundColor: "rgb(31, 36, 36)",
             },
             headerTintColor: "white",
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen name="Calculadora" component={Calculator} />

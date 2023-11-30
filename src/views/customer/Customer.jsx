@@ -85,25 +85,25 @@ const Customer = () => {
             style={styles.title}
             onPress={() => handleSort("dni", order)}
           >
-            <Text style={{ fontWeight: "bold" }}>DNI</Text>
+            <Text style={styles.texTitle}>DNI</Text>
           </Pressable>
           <Pressable
             style={styles.title}
             onPress={() => handleSort("nombre", order)}
           >
-            <Text style={{ fontWeight: "bold" }}>NOMBRE</Text>
+            <Text style={styles.texTitle}>NOMBRE</Text>
           </Pressable>
           <Pressable
             style={styles.title}
             onPress={() => handleSort("fecha", order)}
           >
-            <Text style={{ fontWeight: "bold" }}>FECHA DE PAGO</Text>
+            <Text style={styles.texTitle}>FECHA DE PAGO</Text>
           </Pressable>
           <Pressable
             style={styles.title}
             onPress={() => handleSort("cuota", order)}
           >
-            <Text style={{ fontWeight: "bold" }}>CUOTA</Text>
+            <Text style={styles.texTitle}>CUOTA</Text>
           </Pressable>
         </View>
         {data?.dataResult?.map((element, index) => {
@@ -113,11 +113,24 @@ const Customer = () => {
               style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
             >
               <Text style={styles.dataText}>{element.dni}</Text>
-              <Text style={styles.dataText}>{`${element.nombre}`}</Text>
+              <Text
+                style={{ width: 90, paddingHorizontal: 5, fontSize: 17 }}
+              >{`${element.nombre}`}</Text>
               <Text style={styles.dataText}>
                 {formatDate(element?.resultPrestamo[0]?.fechaPago)}
               </Text>
-              <Text style={styles.dataText}>
+              <Text
+                style={{
+                  display: "flex",
+                  width: 90,
+                  paddingHorizontal: 5,
+                  fontSize: 17,
+                  backgroundColor: "green",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
               <Pressable style={styles.icon}>
@@ -145,55 +158,67 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(31, 36, 36)",
   },
   content: {
-    marginVertical: 16,
+    //marginVertical: 16,
   },
   buttonContainer: {
     flex: 1,
   },
   containerTitle: {
-    height: 30,
-    fontSize: 16,
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
+    height: 50,
     display: "flex",
     flexDirection: "row",
-    paddingVertical: 4,
-    justifyContent: "space-evenly",
+    //paddingVertical: 4,
+    justifyContent: "space-around",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
   title: {
     fontSize: 16,
-    width: 60,
-    paddingRight: 10,
+    width: 100,
+    justifyContent: "center",
     alignItems: "center",
+    paddingRight: 10,
     fontWeight: "bold",
+    textAlign: "center",
+  },
+  texTitle: {
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 17,
   },
   containerCuotas: {
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: "gray",
+    backgroundColor: "white",
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    paddingVertical: 10,
+    //paddingVertical: 10,
   },
   dataPar: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    alignContent: "center",
     alignItems: "center",
+    paddingVertical: 5,
     backgroundColor: "rgba(189, 238, 247, 0.888)",
-    padding: 5,
   },
   dataImpar: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    alignContent: "center",
     alignItems: "center",
+    paddingVertical: 5,
     backgroundColor: "rgb(123, 220, 231)",
-    padding: 5,
   },
   dataText: {
-    fontSize: 15,
+    fontSize: 17,
+
     paddingHorizontal: 5,
-    marginHorizontal: 2,
+    //paddingHorizontal: 5,
+    //marginHorizontal: 2,
   },
   icon: {
     height: 30,

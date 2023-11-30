@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 15,
     display: "flex",
-
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "beige",
-    paddingHorizontal: 5,
+    paddingHorizontal: 8,
     height: 45,
     width: 240,
     borderTopLeftRadius: 15,
