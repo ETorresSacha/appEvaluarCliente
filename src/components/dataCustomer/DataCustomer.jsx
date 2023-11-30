@@ -4,26 +4,29 @@ import { View, Text, StyleSheet, Alert, TextInput } from "react-native";
 import { validationDataPerson } from "../../utils/validation/Validation";
 import { useFocusEffect } from "@react-navigation/native";
 
-const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
+const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
   const [errors, setErrors] = useState({});
+
+  //Todo--> Esta es otra forma de setear y validar lo s datos
   const handleChangeData = (event, type) => {
     setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
     // setErrors(validationDataPerson(dataPerson));
   };
-  //console.log(dataPerson);
+  //Todo--> ****************************************************
 
-  useEffect(() => {
-    let resultVal = Object.values(errors);
-    if (resultVal.some((error) => error !== "")) {
-      setValuePerson(false);
-    } else {
-      setValuePerson(true);
-    }
-  }, [errors, errors.length]);
-
+  // useEffect(() => {
+  //   let resultVal = Object.values(errors);
+  //   if (resultVal.some((error) => error !== "")) {
+  //     setValuePerson(false);
+  //   } else {
+  //     setValuePerson(true);
+  //   }
+  // }, [errors, errors.length]);
+  //console.log(errors);
   useFocusEffect(
     React.useCallback(() => {
-      setErrors(validationDataPerson(dataPerson));
+      //setErrors(validationDataPerson(dataPerson));
+      //setResultError(validationDataPerson(dataPerson));
       //return () => unsubscribe();
     }, [dataPerson])
   );
@@ -37,19 +40,24 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
           <View>
             <Text style={styles.subTitle}>Nombre</Text>
           </View>
-          <View style={styles.containerInputText}>
+          <View
+            style={
+              !errores.nombre ? styles.containerInputText : styles.alertError
+            }
+          >
             <TextInput
               value={dataPerson.nombre}
               style={styles.input}
               placeholder="Nombre"
-              onChange={(event) => {
-                handleChangeData(event, "nombre");
-              }}
+              placeholderTextColor="gray"
+              // onChange={(event) => {
+              //   handleChangeData(event, "nombre");
+              // }}
               errorMessage="Error"
               defaultValue={dataPerson.nombre}
               onChangeText={(text) => {
                 setDataPerson({ ...dataPerson, nombre: text });
-                setErrors(dataPerson);
+                setErrores((errores) => ({ ...errores, nombre: "" }));
               }}
             />
           </View>
@@ -60,19 +68,22 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
           <View>
             <Text style={styles.subTitle}>Apellido</Text>
           </View>
-          <View style={styles.containerInputText}>
+          <View
+            style={
+              !errores.apellidos ? styles.containerInputText : styles.alertError
+            }
+          >
             <TextInput
               value={dataPerson.apellido}
               style={styles.input}
               placeholder="Apellido"
-              // onChange={(event) => {
-              //   handleChangeData(event, "apellido");
-              // }}
+              placeholderTextColor="gray"
               errorMessage="Error"
               defaultValue={dataPerson.apellido}
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, apellido: text })
-              }
+              onChangeText={(text) => {
+                setDataPerson({ ...dataPerson, apellido: text });
+                setErrores((errores) => ({ ...errores, apellidos: "" }));
+              }}
             />
           </View>
         </View>
@@ -82,19 +93,20 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
           <View>
             <Text style={styles.subTitle}>DNI</Text>
           </View>
-          <View style={styles.containerInputText}>
+          <View
+            style={!errores.dni ? styles.containerInputText : styles.alertError}
+          >
             <TextInput
               value={dataPerson.dni}
               style={styles.input}
               placeholder="DNI"
-              // onChange={(event) => {
-              //   handleChangeData(event, "dni");
-              // }}
+              placeholderTextColor="gray"
               errorMessage="Error"
               defaultValue={dataPerson.dni}
               onChangeText={(text) => {
                 setDataPerson({ ...dataPerson, dni: text });
-                setErrors(dataPerson);
+                //setErrors(dataPerson);
+                setErrores((errores) => ({ ...errores, dni: "" }));
               }}
               keyboardType="numeric"
             />
@@ -106,19 +118,22 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
           <View>
             <Text style={styles.subTitle}>Correo</Text>
           </View>
-          <View style={styles.containerInputText}>
+          <View
+            style={
+              !errores.correo ? styles.containerInputText : styles.alertError
+            }
+          >
             <TextInput
               value={dataPerson.correo}
               style={styles.input}
               placeholder="Correo"
-              // onChange={(event) => {
-              //   handleChangeData(event, "correo");
-              // }}
+              placeholderTextColor="gray"
               errorMessage="Error"
               defaultValue={dataPerson.correo}
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, correo: text })
-              }
+              onChangeText={(text) => {
+                setDataPerson({ ...dataPerson, correo: text });
+                setErrores((errores) => ({ ...errores, correo: "" }));
+              }}
               keyboardType="email-address"
             />
           </View>
@@ -129,19 +144,22 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
           <View>
             <Text style={styles.subTitle}>Dirección</Text>
           </View>
-          <View style={styles.containerInputText}>
+          <View
+            style={
+              !errores.direccion ? styles.containerInputText : styles.alertError
+            }
+          >
             <TextInput
               value={dataPerson.direccion}
               style={styles.input}
               placeholder="Dirección"
-              // onChange={(event) => {
-              //   handleChangeData(event, "direccion");
-              // }}
+              placeholderTextColor="gray"
               errorMessage="Error"
               defaultValue={dataPerson.direccion}
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, direccion: text })
-              }
+              onChangeText={(text) => {
+                setDataPerson({ ...dataPerson, direccion: text });
+                setErrores((errores) => ({ ...errores, direccion: "" }));
+              }}
             />
           </View>
         </View>
@@ -151,19 +169,22 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
           <View>
             <Text style={styles.subTitle}>Celular</Text>
           </View>
-          <View style={styles.containerInputText}>
+          <View
+            style={
+              !errores.celular ? styles.containerInputText : styles.alertError
+            }
+          >
             <TextInput
               value={dataPerson.celular}
               style={styles.input}
               placeholder="Celular"
-              // onChange={(event) => {
-              //   handleChangeData(event, "celular");
-              // }}
+              placeholderTextColor="gray"
               errorMessage="Error"
               defaultValue={dataPerson.celular}
-              onChangeText={(text) =>
-                setDataPerson({ ...dataPerson, celular: text })
-              }
+              onChangeText={(text) => {
+                setDataPerson({ ...dataPerson, celular: text });
+                setErrores((errores) => ({ ...errores, celular: "" }));
+              }}
               keyboardType="numeric"
             />
           </View>
@@ -176,9 +197,7 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
 export default DataCustomer;
 
 const styles = StyleSheet.create({
-  container: {
-    //padding: 10,
-  },
+  container: {},
   title: {
     fontSize: 17,
     color: "white",
@@ -199,6 +218,7 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 15,
     color: "white",
+    fontWeight: "bold",
   },
   containerInputText: {
     marginTop: 3,
@@ -207,7 +227,16 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     alignContent: "center",
-    backgroundColor: "honeydew",
+    //backgroundColor: "honeydew",
+  },
+  alertError: {
+    marginTop: 3,
+    borderColor: "red",
+    borderWidth: 1,
+    borderRadius: 15,
+    alignItems: "center",
+    alignContent: "center",
+    //backgroundColor: "honeydew",
   },
   input: {
     height: 30,
@@ -216,5 +245,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 2,
     paddingLeft: 10,
+    color: "cornsilk",
   },
 });

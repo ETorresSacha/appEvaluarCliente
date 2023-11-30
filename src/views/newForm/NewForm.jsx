@@ -1,12 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView, Alert, Text } from "react-native";
-import { Button, Icon, Input } from "@rneui/themed";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  Text,
+  Pressable,
+} from "react-native";
+import { Button } from "@rneui/themed";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { v4 as uuidv4 } from "uuid";
+import { validationDataPerson } from "../../utils/validation/Validation";
 
 const NewForm = () => {
   const uuid = uuidv4();
@@ -16,8 +24,17 @@ const NewForm = () => {
   const [visible, setVisible] = useState(false);
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
-  const [valuePerson, setValuePerson] = useState(false);
-
+  const [errores, setErrores] = useState({
+    nombre: "",
+    apellidos: "",
+    dni: "",
+    correo: "",
+    direccion: "",
+    celular: "",
+  });
+  const [errorCustomer, setErrorCustomer] = useState({});
+  const [resultError, setResultError] = useState({});
+  console.log(errores);
   const [dataPerson, setDataPerson] = useState({
     uuid,
     nombre: "",
@@ -28,74 +45,105 @@ const NewForm = () => {
     celular: "",
     resultPrestamo: {},
   });
+  // useEffect(() => {
+  //   if (dataPerson.dni !== "") {
+  //     setErrorCustomer({ ...errorCustomer, CanNumeroDni: "" });
+  //   }
+  // }, [errorCustomer.CanNumeroDni]);
 
+  // useEffect(() => {
+  //   // Limpia es estado
+  //   if (clean) {
+  //     setDataPerson({
+  //       uuid,
+  //       nombre: "",
+  //       apellido: "",
+  //       dni: "",
+  //       correo: "",
+  //       direccion: "",
+  //       celular: "",
+  //       resultPrestamo: {},
+  //     });
+  //   }
+  //   // Valida los errores de todos los datos
+  //   if (valuePrest && valuePerson) {
+  //     setVisible(true);
+  //   } else {
+  //     setVisible(false);
+  //   }
+  // }, [clean, valuePrest, valuePerson]);
   useEffect(() => {
-    // Limpia es estado
-    if (clean) {
-      setDataPerson({
-        uuid,
-        nombre: "",
-        apellido: "",
-        dni: "",
-        correo: "",
-        direccion: "",
-        celular: "",
-        resultPrestamo: {},
-      });
-    }
-    // Valida los errores de todos los datos
-    if (valuePrest && valuePerson) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  }, [clean, valuePrest, valuePerson]);
+    setErrorCustomer(validationDataPerson(dataPerson));
+  }, [dataPerson]);
 
   // Guarda los datos en local storage
   const handleDataKeep = async () => {
-    if (valuePrest && valuePerson) {
-      try {
-        await onSaveCronograma({
-          uuid,
-          nombre: dataPerson.nombre,
-          apellido: dataPerson.apellido,
-          dni: dataPerson.dni,
-          correo: dataPerson.correo,
-          direccion: dataPerson.direccion,
-          celular: dataPerson.celular,
-          resultPrestamo: dataPerson.resultPrestamo,
-        });
-        Alert.alert(
-          "Se guardo correctamente",
-          "¿Desea agregar un nuevo cliente?",
-          [
-            {
-              text: "Si",
-              onPress: () => setClean(true),
-              style: "destructive",
-            },
-            {
-              text: "No",
-              onPress: () => navigation.navigate("Cliente"),
-              style: "destructive",
-            },
-          ]
-        );
-        setVisible(false);
-      } catch (error) {
-        console.log(error);
-        Alert.alert("No se guardo este dato");
-      }
-    } else {
-      Alert.alert("No se guardo");
+    //setErrorCustomer(validationDataPerson(dataPerson));
+    if (errorCustomer.incompletos) {
+      setErrores((errores) => ({
+        ...errores,
+        nombre: "Nombre incompleto",
+        apellidos: "Apellidos incompletos",
+        direccion: "Dirección incompleto",
+      }));
     }
+    if (errorCustomer.CanNumeroCel) {
+      setErrores((errores) => ({
+        ...errores,
+        celular: "Error en el número de celular",
+      }));
+    }
+    if (errorCustomer.noEsCorreo) {
+      setErrores((errores) => ({ ...errores, correo: "Error en el correo" }));
+    }
+    if (errorCustomer.CanNumeroDni) {
+      setErrores((errores) => ({ ...errores, dni: "Error en el DNI" }));
+    }
+    // if (valuePrest && valuePerson) {
+    //   try {
+    //     await onSaveCronograma({
+    //       uuid,
+    //       nombre: dataPerson.nombre,
+    //       apellido: dataPerson.apellido,
+    //       dni: dataPerson.dni,
+    //       correo: dataPerson.correo,
+    //       direccion: dataPerson.direccion,
+    //       celular: dataPerson.celular,
+    //       resultPrestamo: dataPerson.resultPrestamo,
+    //     });
+    //     Alert.alert(
+    //       "Se guardo correctamente",
+    //       "¿Desea agregar un nuevo cliente?",
+    //       [
+    //         {
+    //           text: "Si",
+    //           onPress: () => setClean(true),
+    //           style: "destructive",
+    //         },
+    //         {
+    //           text: "No",
+    //           onPress: () => navigation.navigate("Cliente"),
+    //           style: "destructive",
+    //         },
+    //       ]
+    //     );
+    //     setVisible(false);
+    //   } catch (error) {
+    //     console.log(error);
+    //     Alert.alert("No se guardo este dato");
+    //   }
+    // } else {
+    //   Alert.alert("No se guardo");
+    // }
   };
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
-        setValuePerson={setValuePerson}
+        setErrores={setErrores}
+        errores={errores}
         setDataPerson={setDataPerson}
         dataPerson={dataPerson}
+        //setResultError={setResultError}
       />
       <Calculator
         clean={clean}
@@ -105,16 +153,19 @@ const NewForm = () => {
         setValuePrest={setValuePrest}
         valuePrest={valuePrest}
       />
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <Button
           title="Guardar"
-          icon={<Icon name="add" color="#FFF" />}
           radius="lg"
           color="#4ecb71"
           onPress={handleDataKeep}
           disabled={!visible}
         />
-      </View>
+      </View> */}
+
+      <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
+        <Text style={styles.text}>Guardar</Text>
+      </Pressable>
     </ScrollView>
   );
 };
@@ -124,16 +175,25 @@ export default NewForm;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingHorizontal: 10,
     backgroundColor: "rgb(31, 36, 36)",
-  },
-  title: {
-    fontSize: 16,
-    paddingTop: 10,
+    display: "flex",
   },
   buttonContainer: {
-    flex: 1,
-    paddingTop: 15,
+    marginTop: 15,
+    alignItems: "center",
+    width: 250,
+    height: 40,
+    marginLeft: 80,
+    justifyContent: "center",
+    borderRadius: 10,
+    elevation: 3,
+    backgroundColor: "#4ecb71",
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
   },
 });
 // DESPUES ESTO

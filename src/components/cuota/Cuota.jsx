@@ -35,7 +35,6 @@ const Cuota = ({ dataPerson }) => {
 export default Cuota;
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",

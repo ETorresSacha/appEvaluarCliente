@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   },
   input: {
     textAlign: "center",
+    color: "cornsilk",
   },
   inputDateContainer: {
     backgroundColor: "rgb(68, 132, 222)",
