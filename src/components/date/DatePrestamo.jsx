@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   formItem: {
     flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: 5,
   },
 
   inputContainerDate: {
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 16,
     paddingRight: 40,
+    color: "white",
   },
   legendContainer: {
     flex: 1,

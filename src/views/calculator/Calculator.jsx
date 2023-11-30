@@ -5,6 +5,7 @@ import {
   Text,
   Alert,
   TouchableOpacity,
+  ScrollView,
   Pressable,
 } from "react-native";
 import Prestamo from "../../components/prestamo/Prestamo";
@@ -112,28 +113,29 @@ const Calculator = ({
         setDataPrestamo={setDataPrestamo}
         setEnabled={setEnabled}
       />
-
-      {/* ------------------ CALCULAR ------------------*/}
-      {valuePrest !== undefined ? null : (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.btnCalcular}
-            onPress={() => handleCalcular(dataPrestamo)}
-          >
-            <Text style={styles.text}>Calcular</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      {/* ------------------ RESULTADO ------------------*/}
-      {valuePrest !== undefined ? (
-        valuePrest ? (
-          enabled ? (
-            <Cuota dataPerson={dataPerson} />
+      <ScrollView>
+        {/* ------------------ CALCULAR ------------------*/}
+        {valuePrest !== undefined ? null : (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.btnCalcular}
+              onPress={() => handleCalcular(dataPrestamo)}
+            >
+              <Text style={styles.text}>Calcular</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {/* ------------------ RESULTADO ------------------*/}
+        {valuePrest !== undefined ? (
+          valuePrest ? (
+            enabled ? (
+              <Cuota dataPerson={dataPerson} />
+            ) : null
           ) : null
-        ) : null
-      ) : enabled ? (
-        <DetailCalculator resultCuota={resultCuota} />
-      ) : null}
+        ) : enabled ? (
+          <DetailCalculator resultCuota={resultCuota} />
+        ) : null}
+      </ScrollView>
     </View>
   );
 };

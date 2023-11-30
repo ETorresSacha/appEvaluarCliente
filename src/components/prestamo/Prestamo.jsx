@@ -42,7 +42,7 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
 
   return (
     <View style={styles.container}>
-      <Text>PRESTAMO</Text>
+      <Text style={styles.title}>PRESTAMO</Text>
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
@@ -141,10 +141,20 @@ export default Prestamo;
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 20,
     paddingVertical: 12,
+  },
+  title: {
+    fontSize: 17,
+    color: "white",
+    backgroundColor: "rgba(36, 146, 224, 0.625)",
+    paddingLeft: 7,
+    paddingVertical: 5,
+    fontWeight: "bold",
   },
 
   formItem: {
+    paddingHorizontal: 5,
     flexDirection: "row",
     alignItems: "center",
   },
@@ -164,6 +174,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 16,
     paddingRight: 40,
+    color: "white",
   },
   legendContainer: {
     flex: 1,
