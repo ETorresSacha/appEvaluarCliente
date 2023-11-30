@@ -30,14 +30,14 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
 
   return (
     <View style={styles.container}>
-      <Text>DATOS</Text>
+      <Text style={styles.title}>DATOS</Text>
       <View style={styles.containerInput}>
         {/* ------------------- Nombre ------------------ */}
         <View>
           <View>
-            <Text style={styles.title}>Nombre</Text>
+            <Text style={styles.subTitle}>Nombre</Text>
           </View>
-          <View>
+          <View style={styles.containerInputText}>
             <TextInput
               value={dataPerson.nombre}
               style={styles.input}
@@ -58,9 +58,9 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
         {/* ------------------- Apellido ------------------ */}
         <View>
           <View>
-            <Text style={styles.title}>Apellido</Text>
+            <Text style={styles.subTitle}>Apellido</Text>
           </View>
-          <View>
+          <View style={styles.containerInputText}>
             <TextInput
               value={dataPerson.apellido}
               style={styles.input}
@@ -80,9 +80,9 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
         {/* ------------------- DNI ------------------ */}
         <View>
           <View>
-            <Text style={styles.title}>DNI</Text>
+            <Text style={styles.subTitle}>DNI</Text>
           </View>
-          <View>
+          <View style={styles.containerInputText}>
             <TextInput
               value={dataPerson.dni}
               style={styles.input}
@@ -104,9 +104,9 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
         {/* ------------------- Correo ------------------ */}
         <View>
           <View>
-            <Text style={styles.title}>Correo</Text>
+            <Text style={styles.subTitle}>Correo</Text>
           </View>
-          <View>
+          <View style={styles.containerInputText}>
             <TextInput
               value={dataPerson.correo}
               style={styles.input}
@@ -127,9 +127,9 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
         {/* ------------------- Dirección ------------------ */}
         <View>
           <View>
-            <Text style={styles.title}>Dirección</Text>
+            <Text style={styles.subTitle}>Dirección</Text>
           </View>
-          <View>
+          <View style={styles.containerInputText}>
             <TextInput
               value={dataPerson.direccion}
               style={styles.input}
@@ -149,9 +149,9 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
         {/* ------------------- Celular ------------------ */}
         <View>
           <View>
-            <Text style={styles.title}>Celular</Text>
+            <Text style={styles.subTitle}>Celular</Text>
           </View>
-          <View>
+          <View style={styles.containerInputText}>
             <TextInput
               value={dataPerson.celular}
               style={styles.input}
@@ -176,24 +176,45 @@ const DataCustomer = ({ setValuePerson, dataPerson, setDataPerson }) => {
 export default DataCustomer;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    //padding: 10,
+  },
+  title: {
+    fontSize: 17,
+    color: "white",
+    backgroundColor: "rgba(36, 146, 224, 0.625)",
+    paddingLeft: 7,
+    paddingVertical: 5,
+    fontWeight: "bold",
+  },
   containerInput: {
-    gap: 5,
+    paddingTop: 10,
+    gap: 7,
     display: "flex",
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
-  title: {
+  subTitle: {
     fontSize: 15,
+    color: "white",
+  },
+  containerInputText: {
+    marginTop: 3,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 15,
+    alignItems: "center",
+    alignContent: "center",
+    backgroundColor: "honeydew",
   },
   input: {
     height: 30,
-    width: 180,
-    marginTop: 5,
+    width: 185,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 15,
     padding: 2,
+    paddingLeft: 10,
   },
 });

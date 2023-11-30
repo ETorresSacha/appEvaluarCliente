@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: 9,
     backgroundColor: "rgb(31, 36, 36)",
   },
   dataImpar: {
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: 9,
     tintColor: "blue",
     backgroundColor: "rgba(55, 59, 59, 0.757)",
   },

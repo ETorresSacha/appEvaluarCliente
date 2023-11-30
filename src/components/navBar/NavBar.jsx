@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
+    width: 80,
     height: 40,
     justifyContent: "center",
     paddingHorizontal: 10,
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
   },
   text: {
-    fontSize: 16,
+    fontSize: 17,
     lineHeight: 21,
     fontWeight: "bold",
     letterSpacing: 0.25,

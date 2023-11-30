@@ -124,8 +124,8 @@ export default NewForm;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
-    backgroundColor: "pink",
+    //paddingHorizontal: 10,
+    backgroundColor: "rgb(31, 36, 36)",
   },
   title: {
     fontSize: 16,
