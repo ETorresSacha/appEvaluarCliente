@@ -121,14 +121,8 @@ const Customer = () => {
               </Text>
               <Text
                 style={{
-                  display: "flex",
-                  width: 90,
-                  paddingHorizontal: 5,
                   fontSize: 17,
-                  backgroundColor: "green",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  alignItems: "center",
+                  color: "bisque",
                 }}
               >
                 {element?.resultPrestamo[0]?.montoCuota}
@@ -191,7 +185,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "gray",
-    backgroundColor: "white",
+    //backgroundColor: "white",
     display: "flex",
     flex: 1,
     flexDirection: "column",
@@ -203,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     paddingVertical: 5,
-    backgroundColor: "rgba(189, 238, 247, 0.888)",
+    backgroundColor: "rgb(31, 36, 36)",
   },
   dataImpar: {
     display: "flex",
@@ -211,12 +205,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     paddingVertical: 5,
-    backgroundColor: "rgb(123, 220, 231)",
+
+    backgroundColor: "rgba(55, 59, 59, 0.757)",
   },
   dataText: {
     fontSize: 17,
-
     paddingHorizontal: 5,
+    color: "khaki",
     //paddingHorizontal: 5,
     //marginHorizontal: 2,
   },
