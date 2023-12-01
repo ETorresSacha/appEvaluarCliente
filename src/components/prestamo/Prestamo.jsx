@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Button, Icon, Input } from "@rneui/themed";
+import React, { useState } from "react";
+import { Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
 
 const infoPeriod = [
@@ -21,11 +13,10 @@ const infoPeriod = [
 ];
 
 const Prestamo = ({
-  enabled,
   errorsPrestamo,
   setErrorsPrestamo,
-  setErrorsP,
   errorsP,
+  setErrorsP,
   prestamo,
   setPrestamo,
 }) => {
@@ -47,8 +38,8 @@ const Prestamo = ({
       </View>
     );
   };
-  //!!!!!!!!!!!!!!!!!!!!!!!!
 
+  // Setea el estado y los errores
   const handleChangeData = (event, type) => {
     setPrestamo({ ...prestamo, [type]: event.nativeEvent.text });
     setErrorsPrestamo((errorsPrestamo) => ({
@@ -156,12 +147,10 @@ const Prestamo = ({
 
       {/* ------------------ FECHA DE DESEMBOLSO ------------------*/}
       <DatePrestamo
-        setErrorsPrestamo={setErrorsPrestamo}
-        errorsPrestamo={errorsPrestamo}
-        setErrorsP={setErrorsP}
-        errorsP={errorsP}
         prestamo={prestamo}
         setPrestamo={setPrestamo}
+        setErrorsPrestamo={setErrorsPrestamo}
+        errorsPrestamo={errorsPrestamo}
       />
     </View>
   );
@@ -170,10 +159,7 @@ const Prestamo = ({
 export default Prestamo;
 
 const styles = StyleSheet.create({
-  container: {
-    //paddingTop: 20,
-    //paddingVertical: 12,
-  },
+  container: {},
   title: {
     fontSize: 17,
     color: "white",

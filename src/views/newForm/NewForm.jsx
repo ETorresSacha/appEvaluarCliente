@@ -109,14 +109,12 @@ const NewForm = () => {
       />
       <Calculator
         dataPrestamo={dataPrestamo}
-        setDataPrestamo={setDataPrestamo}
         errorsP={errorsP}
         setErrorsP={setErrorsP}
         clean={clean}
         setClean={setClean}
-        setDataPerson={setDataPerson}
         dataPerson={dataPerson}
-        setValuePrest={setValuePrest}
+        setDataPerson={setDataPerson}
         valuePrest={valuePrest}
       />
       <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>

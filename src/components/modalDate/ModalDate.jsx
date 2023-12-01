@@ -1,13 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Calendar } from "react-native-calendars";
-import {
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, Modal, StyleSheet } from "react-native";
 
 const ModalDate = ({
   visible,
@@ -16,10 +9,12 @@ const ModalDate = ({
   prestamo,
   typeDatePrestamo,
 }) => {
+  // Setea los datos del préstamo
   const handleChangeData = (day) => {
     setPrestamo({ ...prestamo, [typeDatePrestamo]: day.dateString });
     setShowModal(false);
   };
+
   return (
     <Modal
       visible={visible}

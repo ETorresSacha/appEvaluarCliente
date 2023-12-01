@@ -113,7 +113,6 @@ const Calculator = ({
         setErrorsP={setErrorsP}
         prestamo={prestamo}
         setPrestamo={setPrestamo}
-        enabled={enabled}
       />
       <ScrollView>
         {/* ------------------ CALCULAR ------------------*/}

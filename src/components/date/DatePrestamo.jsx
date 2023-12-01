@@ -13,6 +13,7 @@ const DatePrestamo = ({
   const [showModal, setShowModal] = useState(false);
   const [typeDatePrestamo, setTypeDatePrestamo] = useState("");
 
+  // setea los errores
   const handleTypeDatePrestamo = (element) => {
     setErrorsPrestamo((errorsPrestamo) => ({
       ...errorsPrestamo,
