@@ -17,7 +17,6 @@ import Cuota from "../../components/cuota/Cuota";
 
 const Calculator = ({
   dataPrestamo,
-  setDataPrestamo,
   errorsP,
   setErrorsP,
   clean,
@@ -25,11 +24,9 @@ const Calculator = ({
   dataPerson,
   setDataPerson,
   valuePrest,
-  setValuePrest,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
-
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
   const [prestamo, setPrestamo] = useState({
     capital: "",
@@ -39,31 +36,23 @@ const Calculator = ({
     fechaPrimeraCuota: "",
     periodo: "",
   });
-  //console.log(prestamo);
-  // Valida los errores
 
-  //console.log(errorsPrestamo);
   useFocusEffect(
     React.useCallback(() => {
-      //setErrorsPrestamo(validationDataPrestamo(prestamo));
-      //setErrorsPrestamo(validationDataPrestamo(prestamo));
-      // setErrorsP !== undefined
-      //   ? setErrorsP(validationDataPrestamo(prestamo))
-      //   : null;
-      //return () => unsubscribe();
-      //
+      // Valida los datos-componente NEWFORM
       if (valuePrest) {
         setErrorsPrestamo(validationDataPrestamo(prestamo));
       }
     }, [valuePrest])
   );
+
   useEffect(() => {
     if (errorsP !== undefined) {
       let resulView = false;
-      //if (valuePrest) {
-      setErrorsP(validationDataPrestamo(prestamo));
-      let resultError = validationDataPrestamo(prestamo);
 
+      setErrorsP(validationDataPrestamo(prestamo));
+
+      let resultError = validationDataPrestamo(prestamo);
       let resultVal = Object.values(resultError);
 
       if (resultVal.some((error) => error !== "")) {
@@ -74,19 +63,6 @@ const Calculator = ({
       if (resulView) {
         handleCalcular(prestamo);
       }
-
-      //! falta mostrar la cuota
-      //else {
-      //       setValuePrest(false);
-      //       setEnabled(false);
-      //     }
-      //   } else {
-      //     null;
-      //   }
-      //setErrorsPrestamo(validationDataPrestamo(prestamo));
-      // }
-      // setErrorsP(errorsPrestamo);
-      // setDataPrestamo(prestamo);
     }
   }, [prestamo]);
 
@@ -106,46 +82,17 @@ const Calculator = ({
         setEnabled(false);
       }
     }
-    //   else {
-    //     null;
-    //   }
-    // } else {
-    //   null;
   }, [clean]);
 
-  // useEffect(() => {
-  //   // Valida los errores
-  //   let resultVal = Object.values(errorsPrestamo);
-  //   if (setValuePrest !== undefined) {
-  //     if (resultVal.some((error) => error === "")) {
-  //       setValuePrest(true);
-  //     } else {
-  //       setValuePrest(false);
-  //       setEnabled(false);
-  //     }
-  //   } else {
-  //     null;
-  //   }
-
-  //   // Si es TRUE calcula el préstamo
-  //   if (valuePrest) {
-  //     handleCalcular(prestamo);
-  //   }
-
-  //   // Sirve para que no sea visible el resultado cuando se borra algún
-  //   // dato de la vista de la calculadora
-  //   if (errorsPrestamo.incompletos !== "") {
-  //     setEnabled(false);
-  //   }
-  // }, [setValuePrest, errorsPrestamo, errorsPrestamo.length, valuePrest]);
-  //console.log(errorsPrestamo);
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
+    // Valida
     setErrorsPrestamo(validationDataPrestamo(data));
     let resultError = validationDataPrestamo(data);
 
-    let valuesText = Object.values(resultError); // verificamos si los valores de los errores si existen y se guarda
-    //console.log(valuesText);
+    // Calcula la cuota
+    let valuesText = Object.values(resultError);
+
     if (valuesText.some((error) => error !== "")) {
       Alert.alert("Datos incompletos");
     } else {
@@ -153,20 +100,8 @@ const Calculator = ({
       dataPerson !== undefined
         ? setDataPerson({ ...dataPerson, resultPrestamo: result })
         : setResultCuota(result);
-
-      setEnabled(true); // esta para ver
+      setEnabled(true);
     }
-
-    // if (errorsPrestamo.incompletos === "") {
-    //   const result = resutCronograma(data);
-    //   setResultCuota(result);
-    //   setEnabled(true);
-    //   setDataPerson !== undefined
-    //     ? setDataPerson({ ...dataPerson, resultPrestamo: result })
-    //     : null;
-    // } else {
-    //   setDataPerson !== undefined ? null : Alert.alert("Datos incompletos");
-    // }
   };
 
   return (
@@ -212,8 +147,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "rgb(31, 36, 36)",
-    //backgroundColor: "red",
-    //marginTop: 10,
   },
   buttonContainer: {
     justifyContent: "center",
@@ -252,5 +185,3 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
   },
 });
-
-//! falta completar la linea roja a todos los demas y tambien validar y calcular la cuota
