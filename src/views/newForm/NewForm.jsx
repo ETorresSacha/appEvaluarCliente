@@ -7,36 +7,23 @@ import {
   Text,
   Pressable,
 } from "react-native";
-import { Button } from "@rneui/themed";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
 import { useNavigation } from "@react-navigation/native";
-import { useFocusEffect } from "@react-navigation/native";
 import { v4 as uuidv4 } from "uuid";
-import {
-  validationDataPerson,
-  validationDataPrestamo,
-} from "../../utils/validation/Validation";
+import { validationDataPerson } from "../../utils/validation/Validation";
 
 const NewForm = () => {
   const uuid = uuidv4();
   const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
 
-  const [visible, setVisible] = useState(false);
-
   const [errorsP, setErrorsP] = useState({});
   const [errores, setErrores] = useState({});
-
   const [dataPrestamo, setDataPrestamo] = useState({});
-
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
-
-  const [errorCustomer, setErrorCustomer] = useState({});
-  const [resultError, setResultError] = useState({});
-
   const [dataPerson, setDataPerson] = useState({
     uuid,
     nombre: "",
@@ -59,33 +46,18 @@ const NewForm = () => {
         correo: "",
         direccion: "",
         celular: "",
-        resultPrestamo: {},
+        resultPrestamo: [],
       });
     }
-    // // Valida los errores de todos los datos
-    // if (valuePrest && valuePerson) {
-    //   setVisible(true);
-    // } else {
-    //   setVisible(false);
-    // }
   }, [clean]);
 
-  // Guarda los datos en local storage
-  // console.log(errorsP);
-  console.log(dataPrestamo);
-  console.log(dataPerson);
-  // console.log(errores);
-  //console.log(errorsP);
   const handleDataKeep = async () => {
+    // Validación
     setValuePrest(true);
     setErrores(validationDataPerson(dataPerson));
 
-    //setErrorsP(validationDataPrestamo(dataPrestamo));
-    //Alert.alert("Datos incorrectos o incompletos");
-
-    //let errorPrestamo = validationDataPrestamo(dataPrestamo);
+    //Guardar datos
     let errorCustomer = validationDataPerson(dataPerson);
-
     let valuesText = Object.values(errorCustomer);
 
     if (
@@ -121,56 +93,11 @@ const NewForm = () => {
             },
           ]
         );
-        setVisible(false);
       } catch (error) {
         console.log(error);
-        Alert.alert("No se guardo este dato");
+        Alert.alert("Ocurrió un error");
       }
-      // const result = resutCronograma(data);
-      // dataPerson !== undefined
-      //   ? setDataPerson({ ...dataPerson, resultPrestamo: result })
-      //   : setResultCuota(result);
-
-      // setEnabled(true); // esta para ver
     }
-
-    //if (valuePrest && valuePerson) {
-
-    //   try {
-    //     await onSaveCronograma({
-    //       uuid,
-    //       nombre: dataPerson.nombre,
-    //       apellido: dataPerson.apellido,
-    //       dni: dataPerson.dni,
-    //       correo: dataPerson.correo,
-    //       direccion: dataPerson.direccion,
-    //       celular: dataPerson.celular,
-    //       resultPrestamo: dataPerson.resultPrestamo,
-    //     });
-    //     Alert.alert(
-    //       "Se guardo correctamente",
-    //       "¿Desea agregar un nuevo cliente?",
-    //       [
-    //         {
-    //           text: "Si",
-    //           onPress: () => setClean(true),
-    //           style: "destructive",
-    //         },
-    //         {
-    //           text: "No",
-    //           onPress: () => navigation.navigate("Cliente"),
-    //           style: "destructive",
-    //         },
-    //       ]
-    //     );
-    //     setVisible(false);
-    //   } catch (error) {
-    //     console.log(error);
-    //     Alert.alert("No se guardo este dato");
-    //   }
-    // } else {
-    //   Alert.alert("No se guardo");
-    // }
   };
   return (
     <ScrollView style={styles.container}>
@@ -179,7 +106,6 @@ const NewForm = () => {
         errores={errores}
         setDataPerson={setDataPerson}
         dataPerson={dataPerson}
-        //setResultError={setResultError}
       />
       <Calculator
         dataPrestamo={dataPrestamo}
@@ -193,16 +119,6 @@ const NewForm = () => {
         setValuePrest={setValuePrest}
         valuePrest={valuePrest}
       />
-      {/* <View style={styles.buttonContainer}>
-        <Button
-          title="Guardar"
-          radius="lg"
-          color="#4ecb71"
-          onPress={handleDataKeep}
-          disabled={!visible}
-        />
-      </View> */}
-
       <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
         <Text style={styles.text}>Guardar</Text>
       </Pressable>
