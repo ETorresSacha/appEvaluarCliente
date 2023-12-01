@@ -4,56 +4,74 @@ import { Input } from "@rneui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const DatePrestamo = ({ dataPrestamo, setDataPrestamo }) => {
-  const dataDate = [
-    {
-      typeDate: "fechaDesembolso",
-      title: "Fecha de desembolso:",
-      fecha: dataPrestamo.fechaDesembolso,
-    },
-    {
-      typeDate: "fechaPrimeraCuota",
-      title: "Fecha de la primera cuota:",
-      fecha: dataPrestamo.fechaPrimeraCuota,
-    },
-  ];
+const DatePrestamo = ({
+  prestamo,
+  setPrestamo,
+  setErrorsPrestamo,
+  errorsPrestamo,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [typeDatePrestamo, setTypeDatePrestamo] = useState("");
 
   const handleTypeDatePrestamo = (element) => {
+    setErrorsPrestamo((errorsPrestamo) => ({
+      ...errorsPrestamo,
+      [element]: "",
+    }));
     setShowModal(true);
     setTypeDatePrestamo(element);
   };
 
   return (
     <View>
-      {dataDate.map((element, index) => {
-        return (
-          <View key={index} style={styles.formItem}>
-            <View style={styles.legendContainer}>
-              <Text style={styles.legend}>{element.title} </Text>
-            </View>
-            <View style={styles.inputContainerDate}>
-              <Input
-                style={styles.input}
-                value={element.fecha}
-                defaultValue={element.fecha}
-              />
-            </View>
-            <TouchableOpacity
-              onPress={() => handleTypeDatePrestamo(element.typeDate)}
-              style={styles.inputDateContainer}
-            >
-              <Ionicons name="calendar" size={32} color="white" />
-            </TouchableOpacity>
-          </View>
-        );
-      })}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Fecha de desembolso: </Text>
+        </View>
+        <View style={styles.inputContainerDate}>
+          <Input
+            style={
+              !errorsPrestamo.fechaDesembolso ? styles.input : styles.alertError
+            }
+            value={prestamo.fechaDesembolso}
+            defaultValue={prestamo.fechaDesembolso}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => handleTypeDatePrestamo("fechaDesembolso")}
+          style={styles.inputDateContainer}
+        >
+          <Ionicons name="calendar" size={32} color="white" />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Fecha de la primera cuota: </Text>
+        </View>
+        <View style={styles.inputContainerDate}>
+          <Input
+            style={
+              !errorsPrestamo.fechaPrimeraCuota
+                ? styles.input
+                : styles.alertError
+            }
+            value={prestamo.fechaPrimeraCuota}
+            defaultValue={prestamo.fechaPrimeraCuota}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => handleTypeDatePrestamo("fechaPrimeraCuota")}
+          style={styles.inputDateContainer}
+        >
+          <Ionicons name="calendar" size={32} color="white" />
+        </TouchableOpacity>
+      </View>
       <ModalDate
         visible={showModal}
         setShowModal={setShowModal}
-        setDataPrestamo={setDataPrestamo}
-        dataPrestamo={dataPrestamo}
+        setPrestamo={setPrestamo}
+        prestamo={prestamo}
         typeDatePrestamo={typeDatePrestamo}
       />
     </View>
@@ -80,6 +98,12 @@ const styles = StyleSheet.create({
   input: {
     textAlign: "center",
     color: "cornsilk",
+  },
+  alertError: {
+    textAlign: "center",
+    color: "cornsilk",
+    borderBottomWidth: 2,
+    borderColor: "red",
   },
   inputDateContainer: {
     backgroundColor: "rgb(68, 132, 222)",

@@ -39,7 +39,7 @@ const Customer = () => {
       console.error(error);
     }
   };
-
+  console.log(data.dataResult);
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
@@ -76,6 +76,7 @@ const Customer = () => {
       console.error();
     }
   };
+  console.log();
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />

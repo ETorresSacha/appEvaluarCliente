@@ -54,13 +54,34 @@ export const validationDataPerson = (dataPerson) =>{
 //! Validación de los datos del préstamo
 export const validationDataPrestamo = (dataPrestamo) =>{
     
-    const error = {}
+    let error = {
+     periodo:"",
+     capital:"",
+     tea:"",
+     cuotas:"",
+     fechaDesembolso:"",
+     fechaPrimeraCuota:""
+    }
 
-      if(dataPrestamo.capital?.trim() === "" || dataPrestamo.nCuotas?.trim() === "" || dataPrestamo.tea.trim() === "" || dataPrestamo.periodo.trim() === "" || dataPrestamo.fechaDesembolso.trim() === "" || dataPrestamo.fechaPrimeraCuota.trim() === "" ) {
-          error.incompletos = "Datos incompletos"
+      if(dataPrestamo.periodo.trim() === ""  ) {
+          error = {...error,periodo:"Periodo incompleto"}
+      }
+      if(dataPrestamo.capital?.trim() === ""  ) {
+          error = {...error,capital:"Capital incompleto"}
+      }
+      if(dataPrestamo.tea.trim() === "" ) {
+          error = {...error,tea:"TEA incompleto"}
+      }
+      if(dataPrestamo.cuotas?.trim() === ""  ) {
+          error = {...error,cuotas:"Cuota incompleto"}
+      }
+      if(dataPrestamo.fechaDesembolso.trim() === "" ) {
+          error = {...error,fechaDesembolso:"Fecha de desembolso incompleto"}
+      }
+      if(dataPrestamo.fechaPrimeraCuota.trim() === "" ) {
+          error = {...error,fechaPrimeraCuota:"Fecha de la primera cuota incompleto"}
       }
 
-      else {error.incompletos = ""}
 
     return error
 

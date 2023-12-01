@@ -20,7 +20,15 @@ const infoPeriod = [
   { label: "Mensual", value: "4" },
 ];
 
-const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
+const Prestamo = ({
+  enabled,
+  errorsPrestamo,
+  setErrorsPrestamo,
+  setErrorsP,
+  errorsP,
+  prestamo,
+  setPrestamo,
+}) => {
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
@@ -39,6 +47,15 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
       </View>
     );
   };
+  //!!!!!!!!!!!!!!!!!!!!!!!!
+
+  const handleChangeData = (event, type) => {
+    setPrestamo({ ...prestamo, [type]: event.nativeEvent.text });
+    setErrorsPrestamo((errorsPrestamo) => ({
+      ...errorsPrestamo,
+      [type]: "",
+    }));
+  };
 
   return (
     <View style={styles.container}>
@@ -50,7 +67,11 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         </View>
         <View style={styles.inputContainer}>
           <Dropdown
-            style={styles.dropdown}
+            style={
+              !errorsPrestamo.periodo
+                ? styles.dropdown
+                : styles.alertErrordropdown
+            }
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -63,8 +84,12 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
             value={value}
             onChange={(item) => {
               setValue(item.value);
-              setDataPrestamo({ ...dataPrestamo, periodo: item.value });
+              setPrestamo({ ...prestamo, periodo: item.value });
               setPlaceholderNumCuotas(item.label);
+              setErrorsPrestamo((errorsPrestamo) => ({
+                ...errorsPrestamo,
+                periodo: "",
+              }));
             }}
             renderItem={renderItem}
           />
@@ -79,12 +104,12 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         <View style={styles.inputContainer}>
           <Input
             placeholder="Soles"
-            style={styles.input}
-            value={dataPrestamo.capital}
-            defaultValue={dataPrestamo.capital}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, capital: text })
-            }
+            style={!errorsPrestamo.capital ? styles.input : styles.alertError}
+            value={prestamo.capital}
+            defaultValue={prestamo.capital}
+            onChange={(event) => {
+              handleChangeData(event, "capital");
+            }}
             keyboardType="numeric"
           />
         </View>
@@ -98,12 +123,12 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         <View style={styles.inputContainer}>
           <Input
             placeholder="%"
-            style={styles.input}
-            value={dataPrestamo.tea}
-            defaultValue={dataPrestamo.tea}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, tea: text })
-            }
+            style={!errorsPrestamo.tea ? styles.input : styles.alertError}
+            value={prestamo.tea}
+            defaultValue={prestamo.tea}
+            onChange={(event) => {
+              handleChangeData(event, "tea");
+            }}
             keyboardType="numeric"
           />
         </View>
@@ -117,12 +142,13 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
         <View style={styles.inputContainer}>
           <Input
             placeholder={placeholderNumCuotas}
-            style={styles.input}
-            value={dataPrestamo.nCuotas}
-            defaultValue={dataPrestamo.nCuotas}
-            onChangeText={(text) =>
-              setDataPrestamo({ ...dataPrestamo, nCuotas: text })
-            }
+            style={!errorsPrestamo.cuotas ? styles.input : styles.alertError}
+            value={prestamo.cuotas}
+            defaultValue={prestamo.cuotas}
+            onChange={(event) => {
+              handleChangeData(event, "cuotas");
+            }}
+            //onChangeText={(text) => setPrestamo({ ...prestamo, nCuotas: text })}
             keyboardType="numeric"
           />
         </View>
@@ -130,8 +156,12 @@ const Prestamo = ({ dataPrestamo, setDataPrestamo }) => {
 
       {/* ------------------ FECHA DE DESEMBOLSO ------------------*/}
       <DatePrestamo
-        dataPrestamo={dataPrestamo}
-        setDataPrestamo={setDataPrestamo}
+        setErrorsPrestamo={setErrorsPrestamo}
+        errorsPrestamo={errorsPrestamo}
+        setErrorsP={setErrorsP}
+        errorsP={errorsP}
+        prestamo={prestamo}
+        setPrestamo={setPrestamo}
       />
     </View>
   );
@@ -141,8 +171,8 @@ export default Prestamo;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
-    paddingVertical: 12,
+    //paddingTop: 20,
+    //paddingVertical: 12,
   },
   title: {
     fontSize: 17,
@@ -168,6 +198,12 @@ const styles = StyleSheet.create({
   input: {
     textAlign: "center",
     color: "cornsilk",
+  },
+  alertError: {
+    textAlign: "center",
+    color: "cornsilk",
+    borderBottomWidth: 2,
+    borderColor: "red",
   },
 
   legend: {
@@ -209,5 +245,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     elevation: 2,
+    borderColor: "red",
+  },
+  alertErrordropdown: {
+    margin: 16,
+    height: 30,
+    width: 170,
+    backgroundColor: "red",
+    borderRadius: 12,
+    padding: 12,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+    borderColor: "red",
   },
 });

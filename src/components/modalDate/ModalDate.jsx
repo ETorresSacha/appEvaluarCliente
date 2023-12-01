@@ -12,10 +12,14 @@ import {
 const ModalDate = ({
   visible,
   setShowModal,
-  setDataPrestamo,
-  dataPrestamo,
+  setPrestamo,
+  prestamo,
   typeDatePrestamo,
 }) => {
+  const handleChangeData = (day) => {
+    setPrestamo({ ...prestamo, [typeDatePrestamo]: day.dateString });
+    setShowModal(false);
+  };
   return (
     <Modal
       visible={visible}
@@ -26,21 +30,7 @@ const ModalDate = ({
       <View style={styles.conteiner}>
         <Calendar
           style={{ borderRadius: 10, elevation: 4, margin: 40 }}
-          onDayPress={(day) => {
-            setDataPrestamo({
-              ...dataPrestamo,
-              [typeDatePrestamo]: day.dateString,
-            });
-
-            setShowModal(false);
-          }}
-          //   markedDates={{
-          //     [selected]: {
-          //       selected: true,
-          //       disableTouchEvent: true,
-          //       selectedDotColor: "orange",
-          //     },
-          //   }}
+          onDayPress={(day) => handleChangeData(day)}
         />
       </View>
     </Modal>

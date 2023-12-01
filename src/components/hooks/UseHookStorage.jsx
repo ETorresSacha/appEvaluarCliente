@@ -2,7 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { orderData } from "../../utils/thunks/Thunks";
 
 const MY_CRONOGRAMA_KEY = "@data";
-const MY_DATA_KEY = "@data_customer";
+const MY_DATA_KEY = "@data_customerr";
+const MY_KEY_DATA = "@data";
 
 const UseStorage = () => {
   // GUARDAR INFORMACION

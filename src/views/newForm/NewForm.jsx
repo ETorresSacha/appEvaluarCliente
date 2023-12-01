@@ -14,7 +14,10 @@ import Calculator from "../calculator/Calculator";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { v4 as uuidv4 } from "uuid";
-import { validationDataPerson } from "../../utils/validation/Validation";
+import {
+  validationDataPerson,
+  validationDataPrestamo,
+} from "../../utils/validation/Validation";
 
 const NewForm = () => {
   const uuid = uuidv4();
@@ -22,12 +25,18 @@ const NewForm = () => {
   const { onSaveCronograma } = UseStorage();
 
   const [visible, setVisible] = useState(false);
+
+  const [errorsP, setErrorsP] = useState({});
+  const [errores, setErrores] = useState({});
+
+  const [dataPrestamo, setDataPrestamo] = useState({});
+
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
-  const [errores, setErrores] = useState({});
+
   const [errorCustomer, setErrorCustomer] = useState({});
   const [resultError, setResultError] = useState({});
-  console.log(errores);
+
   const [dataPerson, setDataPerson] = useState({
     uuid,
     nombre: "",
@@ -36,36 +45,97 @@ const NewForm = () => {
     correo: "",
     direccion: "",
     celular: "",
-    resultPrestamo: {},
+    resultPrestamo: [],
   });
 
-  // useEffect(() => {
-  //   // Limpia es estado
-  //   if (clean) {
-  //     setDataPerson({
-  //       uuid,
-  //       nombre: "",
-  //       apellido: "",
-  //       dni: "",
-  //       correo: "",
-  //       direccion: "",
-  //       celular: "",
-  //       resultPrestamo: {},
-  //     });
-  //   }
-  //   // Valida los errores de todos los datos
-  //   if (valuePrest && valuePerson) {
-  //     setVisible(true);
-  //   } else {
-  //     setVisible(false);
-  //   }
-  // }, [clean, valuePrest, valuePerson]);
+  useEffect(() => {
+    // Limpia es estado
+    if (clean) {
+      setDataPerson({
+        uuid,
+        nombre: "",
+        apellido: "",
+        dni: "",
+        correo: "",
+        direccion: "",
+        celular: "",
+        resultPrestamo: {},
+      });
+    }
+    // // Valida los errores de todos los datos
+    // if (valuePrest && valuePerson) {
+    //   setVisible(true);
+    // } else {
+    //   setVisible(false);
+    // }
+  }, [clean]);
 
   // Guarda los datos en local storage
+  // console.log(errorsP);
+  console.log(dataPrestamo);
+  console.log(dataPerson);
+  // console.log(errores);
+  //console.log(errorsP);
   const handleDataKeep = async () => {
+    setValuePrest(true);
     setErrores(validationDataPerson(dataPerson));
 
-    // if (valuePrest && valuePerson) {
+    //setErrorsP(validationDataPrestamo(dataPrestamo));
+    //Alert.alert("Datos incorrectos o incompletos");
+
+    //let errorPrestamo = validationDataPrestamo(dataPrestamo);
+    let errorCustomer = validationDataPerson(dataPerson);
+
+    let valuesText = Object.values(errorCustomer);
+
+    if (
+      valuesText.some((error) => error !== "") ||
+      dataPerson.resultPrestamo.length == 0
+    ) {
+      Alert.alert("Datos incompletos");
+    } else {
+      try {
+        await onSaveCronograma({
+          uuid,
+          nombre: dataPerson.nombre,
+          apellido: dataPerson.apellido,
+          dni: dataPerson.dni,
+          correo: dataPerson.correo,
+          direccion: dataPerson.direccion,
+          celular: dataPerson.celular,
+          resultPrestamo: dataPerson.resultPrestamo,
+        });
+        Alert.alert(
+          "Se guardo correctamente",
+          "¿Desea agregar un nuevo cliente?",
+          [
+            {
+              text: "Si",
+              onPress: () => setClean(true),
+              style: "destructive",
+            },
+            {
+              text: "No",
+              onPress: () => navigation.navigate("Cliente"),
+              style: "destructive",
+            },
+          ]
+        );
+        setVisible(false);
+      } catch (error) {
+        console.log(error);
+        Alert.alert("No se guardo este dato");
+      }
+      // const result = resutCronograma(data);
+      // dataPerson !== undefined
+      //   ? setDataPerson({ ...dataPerson, resultPrestamo: result })
+      //   : setResultCuota(result);
+
+      // setEnabled(true); // esta para ver
+    }
+
+    //if (valuePrest && valuePerson) {
+
     //   try {
     //     await onSaveCronograma({
     //       uuid,
@@ -112,6 +182,10 @@ const NewForm = () => {
         //setResultError={setResultError}
       />
       <Calculator
+        dataPrestamo={dataPrestamo}
+        setDataPrestamo={setDataPrestamo}
+        errorsP={errorsP}
+        setErrorsP={setErrorsP}
         clean={clean}
         setClean={setClean}
         setDataPerson={setDataPerson}

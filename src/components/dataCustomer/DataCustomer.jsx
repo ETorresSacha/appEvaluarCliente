@@ -197,7 +197,9 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
 export default DataCustomer;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginBottom: 20,
+  },
   title: {
     fontSize: 17,
     color: "white",

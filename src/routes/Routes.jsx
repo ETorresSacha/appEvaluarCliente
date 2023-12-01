@@ -32,7 +32,18 @@ const Routes = () => {
             headerTitleAlign: "center",
           }}
         />
-        <Stack.Screen name="Calculadora" component={Calculator} />
+        <Stack.Screen
+          name="Calculadora"
+          component={Calculator}
+          options={{
+            statusBarColor: "rgb(31, 36, 36)",
+            headerStyle: {
+              backgroundColor: "rgb(31, 36, 36)",
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+          }}
+        />
         <Stack.Screen name="Cronograma" component={VerCronograma} />
         <Stack.Screen
           name="Nuevo cliente"

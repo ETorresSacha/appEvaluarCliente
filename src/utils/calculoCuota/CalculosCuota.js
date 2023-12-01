@@ -21,7 +21,7 @@ export const calculoFRCA = (data) =>{
     const resultTED = Calculos(data).ted
     let acumFRCA = []
 
-    for (let i = 1;i<=data.nCuotas;i++){
+    for (let i = 1;i<=data.cuotas;i++){
         solutionFRC(resultTED,data,i,acumFRCA)
     }
       
@@ -41,7 +41,7 @@ export const calculoFRCA = (data) =>{
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
 
-    for (let i = 1;i<=data.nCuotas;i++){
+    for (let i = 1;i<=data.cuotas;i++){
         
         cronograma.push(
             {
@@ -74,13 +74,13 @@ export const calculoFRCA = (data) =>{
     // Cuota promedio
     result.map((element) => cuotas.push(element.CuoConITF))
     let resultPromCuo = cuotas.reduce((accum, currentValue) => accum + currentValue,0);
-    promCuota = resultPromCuo/data.nCuotas
+    promCuota = resultPromCuo/data.cuotas
 
         //! Cuota promedio 
         let cuotass = []
         result.map((element) => cuotass.push(element.cuotaCapital))
         let resultSumaCapi = cuotass.reduce((accum, currentValue) => accum + currentValue,0);
-        //promCuota = resultPromCuo/data.nCuotas
+        //promCuota = resultPromCuo/data.cuotas
         console.log(resultSumaCapi.toFixed(2));
 
     // ITF
