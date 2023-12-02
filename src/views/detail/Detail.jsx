@@ -88,12 +88,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   itemTitle: {
-    width: 80,
-    color: "white",
-    fontSize: 16,
+    width: 90,
+    color: "cornsilk",
+    fontSize: 17,
+    fontWeight: "bold",
   },
   itemText: {
-    color: "rgb(161, 226, 234)",
-    fontSize: 15,
+    color: "white",
+    fontSize: 17,
   },
 });
