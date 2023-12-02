@@ -21,9 +21,10 @@ const NewForm = () => {
 
   const [errorsP, setErrorsP] = useState({});
   const [errores, setErrores] = useState({});
-  const [dataPrestamo, setDataPrestamo] = useState({});
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
+  const [dataPrestamo, setDataPrestamo] = useState({});
+  const [valueError, setValueError] = useState(false);
   const [dataPerson, setDataPerson] = useState({
     uuid,
     nombre: "",
@@ -60,45 +61,59 @@ const NewForm = () => {
     let errorCustomer = validationDataPerson(dataPerson);
     let valuesText = Object.values(errorCustomer);
 
-    if (
-      valuesText.some((error) => error !== "") ||
-      dataPerson.resultPrestamo.length == 0
-    ) {
+    if (valuesText.some((error) => error !== "") || !valueError) {
       Alert.alert("Datos incompletos");
     } else {
       try {
-        await onSaveCronograma({
-          uuid,
-          nombre: dataPerson.nombre,
-          apellido: dataPerson.apellido,
-          dni: dataPerson.dni,
-          correo: dataPerson.correo,
-          direccion: dataPerson.direccion,
-          celular: dataPerson.celular,
-          resultPrestamo: dataPerson.resultPrestamo,
-        });
-        Alert.alert(
-          "Se guardo correctamente",
-          "¿Desea agregar un nuevo cliente?",
-          [
-            {
-              text: "Si",
-              onPress: () => setClean(true),
-              style: "destructive",
+        Alert.alert("GUARDAR", "¿Desea continuar?", [
+          {
+            text: "Si",
+            onPress: async () => {
+              await onSaveCronograma({
+                uuid,
+                nombre: dataPerson.nombre,
+                apellido: dataPerson.apellido,
+                dni: dataPerson.dni,
+                correo: dataPerson.correo,
+                direccion: dataPerson.direccion,
+                celular: dataPerson.celular,
+                resultPrestamo: dataPerson.resultPrestamo,
+              });
+
+              Alert.alert(
+                "Se guardo correctamente",
+                "¿Desea agregar un nuevo cliente?",
+                [
+                  {
+                    text: "Si",
+                    onPress: () => {
+                      setClean(true);
+                      setValuePrest(false);
+                    },
+                    style: "destructive",
+                  },
+                  {
+                    text: "No",
+                    onPress: () => navigation.navigate("Cliente"),
+                    style: "destructive",
+                  },
+                ]
+              );
             },
-            {
-              text: "No",
-              onPress: () => navigation.navigate("Cliente"),
-              style: "destructive",
-            },
-          ]
-        );
+            style: "destructive",
+          },
+          {
+            text: "No",
+            style: "destructive",
+          },
+        ]);
       } catch (error) {
         console.log(error);
         Alert.alert("Ocurrió un error");
       }
     }
   };
+
   return (
     <ScrollView style={styles.container}>
       <DataCustomer
@@ -116,6 +131,8 @@ const NewForm = () => {
         dataPerson={dataPerson}
         setDataPerson={setDataPerson}
         valuePrest={valuePrest}
+        setValueError={setValueError}
+        setValuePrest={setValuePrest}
       />
       <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
         <Text style={styles.text}>Guardar</Text>

@@ -24,6 +24,8 @@ const Calculator = ({
   dataPerson,
   setDataPerson,
   valuePrest,
+  setValueError,
+  setValuePrest,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
@@ -43,7 +45,7 @@ const Calculator = ({
       if (valuePrest) {
         setErrorsPrestamo(validationDataPrestamo(prestamo));
       }
-    }, [valuePrest])
+    }, [valuePrest, setValueError])
   );
 
   useEffect(() => {
@@ -57,8 +59,13 @@ const Calculator = ({
 
       if (resultVal.some((error) => error !== "")) {
         resulView = false;
+        setEnabled(false);
+        setValueError(false);
+        setValuePrest(false);
       } else {
         resulView = true;
+        setEnabled(true);
+        setValueError(true);
       }
       if (resulView) {
         handleCalcular(prestamo);
@@ -72,7 +79,7 @@ const Calculator = ({
       if (clean) {
         setPrestamo({
           capital: "",
-          nCuotas: "",
+          cuotas: "",
           tea: "",
           fechaDesembolso: "",
           fechaPrimeraCuota: "",

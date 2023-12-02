@@ -15,8 +15,6 @@ const infoPeriod = [
 const Prestamo = ({
   errorsPrestamo,
   setErrorsPrestamo,
-  errorsP,
-  setErrorsP,
   prestamo,
   setPrestamo,
 }) => {
