@@ -1,26 +1,28 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import UseStorage from "../../components/hooks/UseHookStorage";
 
 const Detail = (props) => {
   const id = props.route.params.id;
-  console.log(id);
+  const { onGetCronograma } = UseStorage();
+  const [user, setUser] = useState({});
+
+  const loadCustomerId = async (id) => {
+    // Trae los datos guardados del local storage
+    try {
+      const resultCustomer = await onGetCronograma();
+      const result = resultCustomer.filter((element) => element.uuid == id);
+      setUser(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const loadCustomer = async () => {
-      // Trae los datos guardados del local storage
-      try {
-        const resultCustomer = await onGetCronograma();
-
-        setData({
-          ...data,
-          dataResult: resultCustomer,
-          dataResultCopy: resultCustomer,
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    loadCustomerId(id);
   }, []);
+  console.log(id);
+  console.log(user);
   return (
     <View style={styles.container}>
       <Text>Detail</Text>
