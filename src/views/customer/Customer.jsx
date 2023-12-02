@@ -52,28 +52,28 @@ const Customer = () => {
   };
 
   // Eliminar
-  const alertDelete = (data) => {
-    Alert.alert("Eliminar", "¿Desea continuar?", [
-      {
-        text: "Si",
-        onPress: () => handleDelete(data),
-        style: "destructive",
-      },
-      {
-        text: "No",
-        style: "destructive",
-      },
-    ]);
-  };
+  // const alertDelete = (data) => {
+  //   Alert.alert("Eliminar", "¿Desea continuar?", [
+  //     {
+  //       text: "Si",
+  //       onPress: () => handleDelete(data),
+  //       style: "destructive",
+  //     },
+  //     {
+  //       text: "No",
+  //       style: "destructive",
+  //     },
+  //   ]);
+  // };
 
-  const handleDelete = async (data) => {
-    try {
-      const result = await onDeleteCustomer(data);
-      loadCustomer();
-    } catch (error) {
-      console.error();
-    }
-  };
+  // const handleDelete = async (data) => {
+  //   try {
+  //     const result = await onDeleteCustomer(data);
+  //     loadCustomer();
+  //   } catch (error) {
+  //     console.error();
+  //   }
+  // };
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />
@@ -135,7 +135,7 @@ const Customer = () => {
               >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
-              <Pressable style={styles.icon}>
+              {/* <Pressable style={styles.icon}>
                 <Icon name="edit" size={25} color="silver" />
               </Pressable>
               <Pressable
@@ -143,7 +143,7 @@ const Customer = () => {
                 onPress={() => alertDelete(data?.dataResult[index].uuid)}
               >
                 <Icon name="delete" size={25} color="silver" />
-              </Pressable>
+              </Pressable> */}
             </Pressable>
           );
         })}
@@ -213,12 +213,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     color: "silver",
   },
-  icon: {
-    height: 30,
-    width: 30,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // icon: {
+  //   height: 30,
+  //   width: 30,
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
 });
 
 //! falta  LA ALERTA DE PAGO

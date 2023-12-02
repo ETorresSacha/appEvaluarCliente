@@ -1,11 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
+import { Icon } from "@rneui/themed";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Cronograma from "../../components/cronograma/Cronograma";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 const Detail = (props) => {
   const id = props.route.params.id;
-  const { onGetCronograma } = UseStorage();
+  console.log(id);
+  const navigation = useNavigation();
+  const { onGetCronograma, onDeleteCustomer } = UseStorage();
   const [user, setUser] = useState({});
 
   const loadCustomerId = async (id) => {
@@ -23,11 +27,42 @@ const Detail = (props) => {
     loadCustomerId(id);
   }, []);
 
+  // Eliminar
+  const alertDelete = (data) => {
+    Alert.alert("Eliminar", "¿Desea continuar?", [
+      {
+        text: "Si",
+        onPress: () => handleDelete(data),
+        style: "destructive",
+      },
+      {
+        text: "No",
+        style: "destructive",
+      },
+    ]);
+  };
+  const handleDelete = async (data) => {
+    try {
+      const result = await onDeleteCustomer(data);
+      navigation.navigate("Cliente");
+    } catch (error) {
+      console.error();
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.containerData}>
         <View style={styles.containerTitle}>
           <Text style={styles.title}>DATOS DEL CLIENTE</Text>
+          <View style={styles.iconos}>
+            <Pressable style={styles.icon}>
+              <Icon name="edit" size={25} color="cornsilk" />
+            </Pressable>
+            <Pressable style={styles.icon} onPress={() => alertDelete(id)}>
+              <Icon name="delete" size={25} color="cornsilk" />
+            </Pressable>
+          </View>
         </View>
         <View style={styles.Data}>
           <View style={styles.item}>
@@ -65,14 +100,16 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(31, 36, 36)",
   },
   containerData: {
-    // backgroundColor: "beige",
     borderBottomColor: "white",
-
-    //borderRadius: 15,
   },
-  containerTitle: {},
-  title: {
+  containerTitle: {
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  title: {
     paddingVertical: 10,
     color: "cornsilk",
     paddingLeft: 10,
@@ -96,5 +133,15 @@ const styles = StyleSheet.create({
   itemText: {
     color: "white",
     fontSize: 17,
+  },
+  iconos: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  icon: {
+    height: 30,
+    width: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
