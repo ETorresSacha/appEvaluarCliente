@@ -4,29 +4,29 @@ import UseStorage from "../hooks/UseHookStorage";
 import { useFocusEffect } from "@react-navigation/native";
 
 const title = [{ item: "CUOTA" }, { item: "FECHA" }, { item: "MONTO CUOTA" }];
-const Cronograma = ({ id }) => {
-  const [dataCronograma, setDataCronograma] = useState([]);
-  const { onGetCronograma } = UseStorage();
+const Cronograma = ({ dataPrestamo }) => {
+  //const [dataCronograma, setDataCronograma] = useState([]);
+  //const { onGetCronograma } = UseStorage();
 
-  const addDaraCronograma = useCallback(async () => {
-    try {
-      const result = await onGetCronograma();
-      setDataCronograma(result);
-    } catch (error) {
-      setDataCronograma([]);
-      console.error(error);
-    }
-  }, []);
-  useFocusEffect(
-    useCallback(() => {
-      addDaraCronograma().catch(null);
-    }, [addDaraCronograma])
-  );
-
+  // const addDaraCronograma = useCallback(async () => {
+  //   try {
+  //     const result = await onGetCronograma();
+  //     setDataCronograma(result);
+  //   } catch (error) {
+  //     setDataCronograma([]);
+  //     console.error(error);
+  //   }
+  // }, []);
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     addDaraCronograma().catch(null);
+  //   }, [addDaraCronograma])
+  // );
+  console.log(dataPrestamo);
   return (
     <View style={styles.container}>
       <View>
-        <Text>DATOS DEL CLIENTE</Text>
+        <Text>CRONOGRAMA</Text>
       </View>
 
       <ScrollView style={styles.containerCuotas}>
@@ -41,7 +41,7 @@ const Cronograma = ({ id }) => {
             <Text style={{ fontWeight: "bold" }}>MONTO CUOTA</Text>
           </View>
         </View>
-        {dataCronograma?.map((element, index) => {
+        {dataPrestamo?.map((element, index) => {
           return (
             <View
               key={index}
@@ -65,7 +65,7 @@ export default Cronograma;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 12,
+    paddingTop: 10,
   },
   containerTitle: {
     fontSize: 16,
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    paddingVertical: 10,
   },
   dataPar: {
     display: "flex",
