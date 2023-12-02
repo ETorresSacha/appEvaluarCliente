@@ -7,7 +7,6 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import { Icon } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
@@ -15,7 +14,7 @@ import { formatDate, orderData } from "../../utils/thunks/Thunks";
 
 const Customer = () => {
   const navigation = useNavigation();
-  const { onGetCronograma, onDeleteCustomer } = UseStorage();
+  const { onGetCronograma } = UseStorage();
   const [order, setOrder] = useState(false);
   const [data, setData] = useState({
     dataResult: [],
@@ -51,29 +50,6 @@ const Customer = () => {
     setOrder(!value);
   };
 
-  // Eliminar
-  // const alertDelete = (data) => {
-  //   Alert.alert("Eliminar", "¿Desea continuar?", [
-  //     {
-  //       text: "Si",
-  //       onPress: () => handleDelete(data),
-  //       style: "destructive",
-  //     },
-  //     {
-  //       text: "No",
-  //       style: "destructive",
-  //     },
-  //   ]);
-  // };
-
-  // const handleDelete = async (data) => {
-  //   try {
-  //     const result = await onDeleteCustomer(data);
-  //     loadCustomer();
-  //   } catch (error) {
-  //     console.error();
-  //   }
-  // };
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />
@@ -135,15 +111,6 @@ const Customer = () => {
               >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
-              {/* <Pressable style={styles.icon}>
-                <Icon name="edit" size={25} color="silver" />
-              </Pressable>
-              <Pressable
-                style={styles.icon}
-                onPress={() => alertDelete(data?.dataResult[index].uuid)}
-              >
-                <Icon name="delete" size={25} color="silver" />
-              </Pressable> */}
             </Pressable>
           );
         })}
@@ -213,12 +180,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     color: "silver",
   },
-  // icon: {
-  //   height: 30,
-  //   width: 30,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
 });
 
 //! falta  LA ALERTA DE PAGO

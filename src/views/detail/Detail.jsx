@@ -3,17 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@rneui/themed";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Cronograma from "../../components/cronograma/Cronograma";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const Detail = (props) => {
   const id = props.route.params.id;
-  console.log(id);
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
+
   const [user, setUser] = useState({});
 
+  // Trae los datos guardados del local storage
   const loadCustomerId = async (id) => {
-    // Trae los datos guardados del local storage
     try {
       const resultCustomer = await onGetCronograma();
       const result = resultCustomer.filter((element) => element.uuid == id);
@@ -145,3 +145,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+//!falta la funcion de editar
