@@ -27,24 +27,26 @@ const Detail = (props) => {
     <View style={styles.container}>
       <View style={styles.containerData}>
         <View style={styles.containerTitle}>
-          <Text>DATOS DEL CLIENTE</Text>
+          <Text style={styles.title}>DATOS DEL CLIENTE</Text>
         </View>
         <View style={styles.Data}>
           <View style={styles.item}>
-            <Text>Nombres y apellidos: </Text>
-            <Text>{`${user[0]?.nombre} ${user[0]?.apellido}`}</Text>
+            <Text style={styles.itemTitle}>Nombres y apellidos: </Text>
+            <Text
+              style={styles.itemTesxt}
+            >{`${user[0]?.nombre} ${user[0]?.apellido}`}</Text>
           </View>
           <View style={styles.item}>
-            <Text>DNI: </Text>
-            <Text>{user[0]?.dni}</Text>
+            <Text style={styles.itemTitle}>DNI: </Text>
+            <Text style={styles.itemTesxt}>{user[0]?.dni}</Text>
           </View>
           <View style={styles.item}>
-            <Text>Celular: </Text>
-            <Text>{user[0]?.celular}</Text>
+            <Text style={styles.itemTitle}>Celular: </Text>
+            <Text style={styles.itemTesxt}>{user[0]?.celular}</Text>
           </View>
           <View style={styles.item}>
-            <Text>Correo: </Text>
-            <Text>{user[0]?.correo}</Text>
+            <Text style={styles.itemTitle}>Correo: </Text>
+            <Text style={styles.itemTesxt}>{user[0]?.correo}</Text>
           </View>
         </View>
       </View>
@@ -58,14 +60,33 @@ export default Detail;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
-    padding: 10,
+    backgroundColor: "rgb(31, 36, 36)",
   },
-  containerData: {},
+  containerData: {
+    // backgroundColor: "beige",
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+    //borderRadius: 15,
+  },
   containerTitle: {},
-  Data: {},
+  title: {
+    color: "cornsilk",
+    backgroundColor: "limegreen",
+    paddingVertical: 10,
+    paddingLeft: 10,
+  },
+  Data: {
+    padding: 10,
+    gap: 5,
+  },
   item: {
     display: "flex",
     flexDirection: "row",
+  },
+  itemTitle: {
+    color: "white",
+  },
+  itemTesxt: {
+    color: "rgb(161, 226, 234)",
   },
 });
