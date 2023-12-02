@@ -4,40 +4,44 @@ import UseStorage from "../hooks/UseHookStorage";
 import { useFocusEffect } from "@react-navigation/native";
 
 const Cronograma = ({ dataPrestamo }) => {
-  console.log(dataPrestamo);
+  //console.log(dataPrestamo);
   return (
     <View style={styles.container}>
-      <View>
-        <Text>CRONOGRAMA</Text>
+      <View style={styles.resumen}>
+        <Text style={styles.resumTitle}>RESUMEN</Text>
+        <View style={styles.resumDetalle}></View>
       </View>
+      <View style={styles.cronograma}>
+        {/* <Text style={styles.titleCrono}>Cronograma</Text> */}
 
-      <ScrollView style={styles.containerCuotas}>
-        <View style={styles.containerTitle}>
-          <View style={styles.title}>
-            <Text style={{ fontWeight: "bold" }}>CUOTA</Text>
-          </View>
-          <View>
-            <Text style={{ fontWeight: "bold" }}>FECHA</Text>
-          </View>
-          <View>
-            <Text style={{ fontWeight: "bold" }}>MONTO CUOTA</Text>
-          </View>
-        </View>
-        {dataPrestamo?.map((element, index) => {
-          return (
-            <View
-              key={index}
-              style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
-            >
-              <Text style={styles.dataText}>
-                {element.cuota.toString().padStart(2, "0")}
-              </Text>
-              <Text style={styles.dataText}>{element.fechaPago}</Text>
-              <Text style={styles.dataText}>{element.montoCuota}</Text>
+        <ScrollView style={styles.containerCuotas}>
+          <View style={styles.containerTitle}>
+            <View style={styles.title}>
+              <Text style={{ fontWeight: "bold" }}>CUOTA</Text>
             </View>
-          );
-        })}
-      </ScrollView>
+            <View>
+              <Text style={{ fontWeight: "bold" }}>FECHA</Text>
+            </View>
+            <View>
+              <Text style={{ fontWeight: "bold" }}>MONTO CUOTA</Text>
+            </View>
+          </View>
+          {dataPrestamo?.map((element, index) => {
+            return (
+              <View
+                key={index}
+                style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
+              >
+                <Text style={styles.dataText}>
+                  {element.cuota.toString().padStart(2, "0")}
+                </Text>
+                <Text style={styles.dataText}>{element.fechaPago}</Text>
+                <Text style={styles.dataText}>{element.montoCuota}</Text>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     display: "flex",
     flexDirection: "row",
-    paddingVertical: 4,
+    paddingVertical: 8,
     justifyContent: "space-evenly",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
@@ -65,9 +69,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   containerCuotas: {
-    display: "flex",
-    flex: 1,
+    //display: "flex",
+    //flex: 1,
     flexDirection: "column",
+    //borderColor: "white",
+    borderWidth: 2,
+
+    margin: 10,
   },
   dataPar: {
     display: "flex",
@@ -91,5 +99,23 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingHorizontal: 5,
     marginHorizontal: 2,
+  },
+  resumen: {},
+  resumTitle: {
+    color: "cornsilk",
+    backgroundColor: "limegreen",
+    paddingVertical: 10,
+    paddingLeft: 10,
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+  resumDetalle: {
+    height: 120,
+    backgroundColor: "gray",
+  },
+
+  titleCrono: {
+    color: "white",
+    fontSize: 17,
   },
 });

@@ -31,22 +31,24 @@ const Detail = (props) => {
         </View>
         <View style={styles.Data}>
           <View style={styles.item}>
-            <Text style={styles.itemTitle}>Nombres y apellidos: </Text>
-            <Text
-              style={styles.itemTesxt}
-            >{`${user[0]?.nombre} ${user[0]?.apellido}`}</Text>
+            <Text style={styles.itemTitle}>Nombres: </Text>
+            <Text style={styles.itemText}>{user[0]?.nombre}</Text>
+          </View>
+          <View style={styles.item}>
+            <Text style={styles.itemTitle}>Apellidos: </Text>
+            <Text style={styles.itemText}>{user[0]?.apellido}</Text>
           </View>
           <View style={styles.item}>
             <Text style={styles.itemTitle}>DNI: </Text>
-            <Text style={styles.itemTesxt}>{user[0]?.dni}</Text>
+            <Text style={styles.itemText}>{user[0]?.dni}</Text>
           </View>
           <View style={styles.item}>
             <Text style={styles.itemTitle}>Celular: </Text>
-            <Text style={styles.itemTesxt}>{user[0]?.celular}</Text>
+            <Text style={styles.itemText}>{user[0]?.celular}</Text>
           </View>
           <View style={styles.item}>
             <Text style={styles.itemTitle}>Correo: </Text>
-            <Text style={styles.itemTesxt}>{user[0]?.correo}</Text>
+            <Text style={styles.itemText}>{user[0]?.correo}</Text>
           </View>
         </View>
       </View>
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
   containerData: {
     // backgroundColor: "beige",
     borderBottomColor: "white",
-    borderBottomWidth: 1,
+
     //borderRadius: 15,
   },
   containerTitle: {},
@@ -74,9 +76,11 @@ const styles = StyleSheet.create({
     backgroundColor: "limegreen",
     paddingVertical: 10,
     paddingLeft: 10,
+    fontSize: 17,
+    fontWeight: "bold",
   },
   Data: {
-    padding: 10,
+    padding: 15,
     gap: 5,
   },
   item: {
@@ -84,9 +88,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   itemTitle: {
+    width: 80,
     color: "white",
+    fontSize: 16,
   },
-  itemTesxt: {
+  itemText: {
     color: "rgb(161, 226, 234)",
+    fontSize: 15,
   },
 });
