@@ -72,9 +72,9 @@ const styles = StyleSheet.create({
   },
   containerTitle: {},
   title: {
-    color: "cornsilk",
-    backgroundColor: "limegreen",
+    backgroundColor: "rgba(36, 146, 224, 0.625)",
     paddingVertical: 10,
+    color: "cornsilk",
     paddingLeft: 10,
     fontSize: 17,
     fontWeight: "bold",

@@ -17,13 +17,13 @@ const Cronograma = ({ dataPrestamo }) => {
         <ScrollView style={styles.containerCuotas}>
           <View style={styles.containerTitle}>
             <View style={styles.title}>
-              <Text style={{ fontWeight: "bold" }}>CUOTA</Text>
+              <Text style={styles.tilteText}>CUOTA</Text>
             </View>
-            <View>
-              <Text style={{ fontWeight: "bold" }}>FECHA</Text>
+            <View style={styles.title}>
+              <Text style={styles.tilteText}>FECHA</Text>
             </View>
-            <View>
-              <Text style={{ fontWeight: "bold" }}>MONTO CUOTA</Text>
+            <View style={styles.title}>
+              <Text style={styles.tilteText}>MONTO CUOTA</Text>
             </View>
           </View>
           {dataPrestamo?.map((element, index) => {
@@ -54,18 +54,23 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   containerTitle: {
-    fontSize: 16,
     display: "flex",
     flexDirection: "row",
     paddingVertical: 8,
     justifyContent: "space-evenly",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
+    paddingVertical: 10,
   },
   title: {
     fontSize: 16,
-    width: 60,
     paddingRight: 10,
     alignItems: "center",
+    fontWeight: "bold",
+  },
+  tilteText: {
+    color: "cornsilk",
+    paddingLeft: 10,
+    fontSize: 17,
     fontWeight: "bold",
   },
   containerCuotas: {
@@ -73,9 +78,8 @@ const styles = StyleSheet.create({
     //flex: 1,
     flexDirection: "column",
     //borderColor: "white",
-    borderWidth: 2,
 
-    margin: 10,
+    //margin: 10,
   },
   dataPar: {
     display: "flex",
@@ -102,11 +106,11 @@ const styles = StyleSheet.create({
   },
   resumen: {},
   resumTitle: {
-    color: "cornsilk",
-    backgroundColor: "limegreen",
-    paddingVertical: 10,
+    backgroundColor: "rgba(36, 146, 224, 0.625)",
     paddingLeft: 10,
+    paddingVertical: 10,
     fontSize: 17,
+    color: "cornsilk",
     fontWeight: "bold",
   },
   resumDetalle: {
