@@ -21,6 +21,7 @@ const ModalDate = ({
       onRequestClose={() => onClose()}
       transparent
       animationType="slide"
+      // onBackdropP={() => setShowModal(false)}
     >
       <View style={styles.conteiner}>
         <Calendar
@@ -56,3 +57,5 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 });
+
+//! AVERIGUA OVERLAY DE react-native-elements

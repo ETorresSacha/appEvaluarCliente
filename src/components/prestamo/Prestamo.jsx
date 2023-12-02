@@ -182,6 +182,8 @@ const styles = StyleSheet.create({
   input: {
     textAlign: "center",
     color: "cornsilk",
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
   },
   alertError: {
     textAlign: "center",
