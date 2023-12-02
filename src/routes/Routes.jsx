@@ -13,6 +13,16 @@ import Customer from "../views/customer/Customer";
 import Calculator from "../views/calculator/Calculator";
 
 //const Tab = createBottomTabNavigator();
+const optionsStack = {
+  statusBarColor: "rgb(31, 36, 36)",
+  //title: "Clientes",
+  headerStyle: {
+    backgroundColor: "rgb(31, 36, 36)",
+  },
+  headerTintColor: "white",
+  headerTitleAlign: "center",
+};
+
 const Stack = createNativeStackNavigator();
 const Routes = () => {
   return (
@@ -22,40 +32,23 @@ const Routes = () => {
         <Stack.Screen
           name="Cliente"
           component={Customer}
-          options={{
-            statusBarColor: "rgb(31, 36, 36)",
-            title: "Clientes",
-            headerStyle: {
-              backgroundColor: "rgb(31, 36, 36)",
-            },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-          }}
+          options={optionsStack}
         />
         <Stack.Screen
           name="Calculadora"
           component={Calculator}
-          options={{
-            statusBarColor: "rgb(31, 36, 36)",
-            headerStyle: {
-              backgroundColor: "rgb(31, 36, 36)",
-            },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-          }}
+          options={optionsStack}
         />
         <Stack.Screen name="Cronograma" component={VerCronograma} />
         <Stack.Screen
           name="Nuevo cliente"
           component={NewForm}
-          options={{
-            statusBarColor: "rgb(31, 36, 36)",
-            headerStyle: {
-              backgroundColor: "rgb(31, 36, 36)",
-            },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-          }}
+          options={optionsStack}
+        />
+        <Stack.Screen
+          name="Detalle"
+          component={Detail}
+          options={optionsStack}
         />
       </Stack.Navigator>
     </NavigationContainer>

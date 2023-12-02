@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,11 +7,10 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import { Button, Icon, Input } from "@rneui/themed";
+import { Icon } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { formatDate, orderData } from "../../utils/thunks/Thunks";
 
 const Customer = () => {
@@ -27,19 +26,17 @@ const Customer = () => {
     // Trae los datos guardados del local storage
     try {
       const resultCustomer = await onGetCronograma();
-      //console.log(resultCustomer);
+
       setData({
         ...data,
         dataResult: resultCustomer,
         dataResultCopy: resultCustomer,
       });
-      //data.dataResult.length != 0 ? handleSort("fecha", order) : null; //! al iniciar siempre debe de ordenarse por la fecha
-      //handleSort("fecha", order);
     } catch (error) {
       console.error(error);
     }
   };
-  console.log(data.dataResult);
+
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
@@ -68,6 +65,7 @@ const Customer = () => {
       },
     ]);
   };
+
   const handleDelete = async (data) => {
     try {
       const result = await onDeleteCustomer(data);
@@ -76,7 +74,6 @@ const Customer = () => {
       console.error();
     }
   };
-  console.log();
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />
@@ -109,9 +106,14 @@ const Customer = () => {
         </View>
         {data?.dataResult?.map((element, index) => {
           return (
-            <View
+            <Pressable
               key={index}
               style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
+              onPress={() =>
+                navigation.navigate("Detalle", {
+                  id: element.uuid,
+                })
+              }
             >
               <Text style={styles.dataText}>{element.dni}</Text>
               <Text
@@ -142,7 +144,7 @@ const Customer = () => {
               >
                 <Icon name="delete" size={25} color="silver" />
               </Pressable>
-            </View>
+            </Pressable>
           );
         })}
       </ScrollView>
@@ -220,3 +222,4 @@ const styles = StyleSheet.create({
 });
 
 //! falta  LA ALERTA DE PAGO
+//! al iniciar siempre debe de ordenarse por la fecha

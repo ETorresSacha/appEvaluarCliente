@@ -41,13 +41,14 @@ const Calculator = ({
 
   useFocusEffect(
     React.useCallback(() => {
-      // Valida los datos-componente NEWFORM
+      // Valida los datos al inicio-componente NEWFORM
       if (valuePrest) {
         setErrorsPrestamo(validationDataPrestamo(prestamo));
       }
     }, [valuePrest, setValueError])
   );
 
+  // Valida los datos y calcula la cuota del componente NEWFORM
   useEffect(() => {
     if (errorsP !== undefined) {
       let resulView = false;

@@ -23,7 +23,6 @@ const Cronograma = ({ id }) => {
     }, [addDaraCronograma])
   );
 
-  console.log(dataCronograma);
   return (
     <View style={styles.container}>
       <View>
