@@ -7,10 +7,12 @@ import {
   Pressable,
   Alert,
 } from "react-native";
+import { Icon } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
 import { formatDate, orderData } from "../../utils/thunks/Thunks";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Customer = () => {
   const navigation = useNavigation();
@@ -120,6 +122,18 @@ const Customer = () => {
               >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
+              <Pressable
+                style={styles.icon}
+                //onPress={() => alertDelete(id)}
+              >
+                <Icon name="NotificacionesActivo" size={25} color="cornsilk" />
+              </Pressable>
+              {/* <Ionicons
+                //onPress={() => handleSearch(textSearch)}
+                name="sound"
+                size={25}
+                color="white"
+              /> */}
             </Pressable>
           );
         })}
@@ -156,6 +170,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 14,
+    backgroundColor: "orange",
     color: "white",
   },
   containerCuotas: {
@@ -191,6 +206,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     //paddingHorizontal: 5,
     color: "silver",
+  },
+  icon: {
+    height: 30,
+    width: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
