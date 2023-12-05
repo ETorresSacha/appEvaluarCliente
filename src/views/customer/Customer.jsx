@@ -110,16 +110,16 @@ const Customer = () => {
                   style={{
                     width: 80,
                     fontSize: 17,
-                    color: "silver",
+                    color: "cornsilk",
                   }}
-                >{`${element.nombre}`}</Text>
+                >{`${element.nombre.split(" ")[0]}`}</Text>
                 <Text style={styles.dataText}>
                   {formatDate(element?.resultPrestamo[0]?.fechaPago)}
                 </Text>
                 <Text
                   style={{
                     fontSize: 17,
-                    color: "silver",
+                    color: "cornsilk",
                     width: 80,
                     paddingLeft: 10,
                   }}
@@ -137,7 +137,7 @@ const Customer = () => {
                 <MaterialIcons
                   name="notifications"
                   style={{
-                    color: "white",
+                    color: "cornsilk",
                     fontSize: 30,
                   }}
                 />
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     width: 90,
     justifyContent: "flex-start",
-    color: "silver",
+    color: "cornsilk",
   },
   icon: {
     height: 30,
