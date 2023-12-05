@@ -74,12 +74,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   containerCuotas: {
-    //display: "flex",
-    //flex: 1,
     flexDirection: "column",
-    //borderColor: "white",
-
-    //margin: 10,
   },
   dataPar: {
     display: "flex",
