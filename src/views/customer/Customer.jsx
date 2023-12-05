@@ -220,3 +220,4 @@ const styles = StyleSheet.create({
 //! falta  LA ALERTA DE PAGO
 //! tenemos que estilizar el icono de alerta(posicion center)
 //! al iniciar siempre debe de ordenarse por la fecha
+//! far la funcionalidad
