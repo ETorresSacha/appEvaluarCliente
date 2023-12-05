@@ -57,32 +57,35 @@ const Customer = () => {
       <NavBar data={data} setData={setData} />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
-          <Pressable
-            style={styles.title}
-            onPress={() => handleSort("dni", order)}
-          >
-            <Text style={styles.texTitle}>DNI</Text>
-          </Pressable>
-          <Pressable
-            style={styles.title}
-            onPress={() => handleSort("nombre", order)}
-          >
-            <Text style={styles.texTitle}>NOMBRE</Text>
-          </Pressable>
-          <Pressable
-            style={styles.title}
-            onPress={() => handleSort("fecha", order)}
-          >
-            <Text style={styles.texTitle}>FECHA DE PAGO</Text>
-          </Pressable>
-          <Pressable
-            style={styles.title}
-            onPress={() => handleSort("cuota", order)}
-          >
-            <Text style={styles.texTitle}>CUOTA</Text>
-          </Pressable>
+          <View style={styles.titleText}>
+            <Pressable
+              style={styles.title}
+              onPress={() => handleSort("dni", order)}
+            >
+              <Text style={styles.texTitle}>DNI</Text>
+            </Pressable>
+            <Pressable
+              style={styles.title}
+              onPress={() => handleSort("nombre", order)}
+            >
+              <Text style={styles.texTitle}>NOMBRE</Text>
+            </Pressable>
+            <Pressable
+              style={styles.title}
+              onPress={() => handleSort("fecha", order)}
+            >
+              <Text style={styles.texTitle}>FECHA DE PAGO</Text>
+            </Pressable>
+            <Pressable
+              style={styles.title}
+              onPress={() => handleSort("cuota", order)}
+            >
+              <Text style={styles.texTitle}>CUOTA</Text>
+            </Pressable>
+          </View>
+
           <View
-            style={styles.title}
+            style={styles.titleAlert}
             //onPress={() => handleSort("cuota", order)}
           >
             <Text style={styles.texTitle}>ALERTA</Text>
@@ -105,11 +108,9 @@ const Customer = () => {
                 <Text style={styles.dataText}>{element.dni}</Text>
                 <Text
                   style={{
-                    width: 90,
-                    //paddingHorizontal: 5,
+                    width: 80,
                     fontSize: 17,
                     color: "silver",
-                    backgroundColor: "red",
                   }}
                 >{`${element.nombre}`}</Text>
                 <Text style={styles.dataText}>
@@ -119,23 +120,28 @@ const Customer = () => {
                   style={{
                     fontSize: 17,
                     color: "silver",
-                    width: 70,
-                    backgroundColor: "blue",
+                    width: 80,
+                    paddingLeft: 10,
                   }}
                 >
                   {element?.resultPrestamo[0]?.montoCuota}
                 </Text>
-                {/* <Pressable
-                style={styles.icon}
-                //onPress={() => alertDelete(id)}
-              >
-                <Icon name="hipchat" size={25} color="cornsilk" />
-              </Pressable> */}
               </Pressable>
-              <MaterialIcons
-                name="notifications"
-                style={{ color: "white", fontSize: 30 }}
-              />
+              <Pressable
+                style={{
+                  width: 40,
+                  color: "white",
+                  fontSize: 30,
+                }}
+              >
+                <MaterialIcons
+                  name="notifications"
+                  style={{
+                    color: "white",
+                    fontSize: 30,
+                  }}
+                />
+              </Pressable>
             </View>
           );
         })}
@@ -153,26 +159,33 @@ const styles = StyleSheet.create({
   containerTitle: {
     borderTopStartRadius: 10,
     borderTopEndRadius: 10,
-    height: 50,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
+  },
+  titleText: {
+    width: 320,
+    display: "flex",
+    flexDirection: "row",
+    height: 50,
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 16,
-    width: 100,
+    width: 60,
     justifyContent: "center",
     alignItems: "center",
-    //paddingRight: 10,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  titleAlert: {
+    justifyContent: "center",
   },
   texTitle: {
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 14,
-    backgroundColor: "orange",
     color: "white",
   },
   containerCuotas: {
@@ -187,26 +200,26 @@ const styles = StyleSheet.create({
   dataPar: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+    paddingHorizontal: 5,
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: 7,
     backgroundColor: "rgb(31, 36, 36)",
   },
   dataImpar: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+    paddingHorizontal: 5,
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: 7,
     tintColor: "blue",
     backgroundColor: "rgba(55, 59, 59, 0.757)",
   },
   dataText: {
     fontSize: 17,
     width: 90,
-    backgroundColor: "green",
     justifyContent: "flex-start",
-    //paddingHorizontal: 5,
     color: "silver",
   },
   icon: {
