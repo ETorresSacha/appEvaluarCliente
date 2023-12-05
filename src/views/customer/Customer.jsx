@@ -79,6 +79,12 @@ const Customer = () => {
           >
             <Text style={styles.texTitle}>CUOTA</Text>
           </Pressable>
+          <View
+            style={styles.title}
+            //onPress={() => handleSort("cuota", order)}
+          >
+            <Text style={styles.texTitle}>ALERTA</Text>
+          </View>
         </View>
         {data?.dataResult?.map((element, index) => {
           return (
@@ -95,9 +101,10 @@ const Customer = () => {
               <Text
                 style={{
                   width: 90,
-                  paddingHorizontal: 5,
+                  //paddingHorizontal: 5,
                   fontSize: 17,
                   color: "silver",
+                  backgroundColor: "red",
                 }}
               >{`${element.nombre}`}</Text>
               <Text style={styles.dataText}>
@@ -107,6 +114,8 @@ const Customer = () => {
                 style={{
                   fontSize: 17,
                   color: "silver",
+                  width: 70,
+                  backgroundColor: "blue",
                 }}
               >
                 {element?.resultPrestamo[0]?.montoCuota}
@@ -139,14 +148,14 @@ const styles = StyleSheet.create({
     width: 100,
     justifyContent: "center",
     alignItems: "center",
-    paddingRight: 10,
+    //paddingRight: 10,
     fontWeight: "bold",
     textAlign: "center",
   },
   texTitle: {
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 17,
+    fontSize: 14,
     color: "white",
   },
   containerCuotas: {
@@ -177,7 +186,10 @@ const styles = StyleSheet.create({
   },
   dataText: {
     fontSize: 17,
-    paddingHorizontal: 5,
+    width: 90,
+    backgroundColor: "green",
+    justifyContent: "flex-start",
+    //paddingHorizontal: 5,
     color: "silver",
   },
 });
