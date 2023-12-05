@@ -13,7 +13,7 @@ import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
 import { formatDate, orderData } from "../../utils/thunks/Thunks";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const Customer = () => {
   const navigation = useNavigation();
   const { onGetCronograma } = UseStorage();
@@ -90,51 +90,53 @@ const Customer = () => {
         </View>
         {data?.dataResult?.map((element, index) => {
           return (
-            <Pressable
+            <View
               key={index}
               style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
-              onPress={() =>
-                navigation.navigate("Detalle", {
-                  id: element.uuid,
-                })
-              }
             >
-              <Text style={styles.dataText}>{element.dni}</Text>
-              <Text
-                style={{
-                  width: 90,
-                  //paddingHorizontal: 5,
-                  fontSize: 17,
-                  color: "silver",
-                  backgroundColor: "red",
-                }}
-              >{`${element.nombre}`}</Text>
-              <Text style={styles.dataText}>
-                {formatDate(element?.resultPrestamo[0]?.fechaPago)}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 17,
-                  color: "silver",
-                  width: 70,
-                  backgroundColor: "blue",
-                }}
-              >
-                {element?.resultPrestamo[0]?.montoCuota}
-              </Text>
               <Pressable
+                style={{ display: "flex", flexDirection: "row" }}
+                onPress={() =>
+                  navigation.navigate("Detalle", {
+                    id: element.uuid,
+                  })
+                }
+              >
+                <Text style={styles.dataText}>{element.dni}</Text>
+                <Text
+                  style={{
+                    width: 90,
+                    //paddingHorizontal: 5,
+                    fontSize: 17,
+                    color: "silver",
+                    backgroundColor: "red",
+                  }}
+                >{`${element.nombre}`}</Text>
+                <Text style={styles.dataText}>
+                  {formatDate(element?.resultPrestamo[0]?.fechaPago)}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 17,
+                    color: "silver",
+                    width: 70,
+                    backgroundColor: "blue",
+                  }}
+                >
+                  {element?.resultPrestamo[0]?.montoCuota}
+                </Text>
+                {/* <Pressable
                 style={styles.icon}
                 //onPress={() => alertDelete(id)}
               >
-                <Icon name="NotificacionesActivo" size={25} color="cornsilk" />
+                <Icon name="hipchat" size={25} color="cornsilk" />
+              </Pressable> */}
               </Pressable>
-              {/* <Ionicons
-                //onPress={() => handleSearch(textSearch)}
-                name="sound"
-                size={25}
-                color="white"
-              /> */}
-            </Pressable>
+              <MaterialIcons
+                name="notifications"
+                style={{ color: "white", fontSize: 30 }}
+              />
+            </View>
           );
         })}
       </ScrollView>
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    paddingVertical: 9,
+    paddingVertical: 5,
     backgroundColor: "rgb(31, 36, 36)",
   },
   dataImpar: {
@@ -195,7 +197,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    paddingVertical: 9,
+    paddingVertical: 5,
     tintColor: "blue",
     backgroundColor: "rgba(55, 59, 59, 0.757)",
   },
@@ -216,4 +218,5 @@ const styles = StyleSheet.create({
 });
 
 //! falta  LA ALERTA DE PAGO
+//! tenemos que estilizar el icono de alerta(posicion center)
 //! al iniciar siempre debe de ordenarse por la fecha
