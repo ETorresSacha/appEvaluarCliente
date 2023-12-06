@@ -53,8 +53,13 @@ const Customer = () => {
   };
 
   //! LA FECHA CONECTADO A LA ALARMA
-  const fechaPagoDinamico = (value) => {};
-  console.log(data.dataResult[0]);
+  const [fechaDte, setFechaDte] = useState({});
+  const fechaPagoDinamico = (value) => {
+    setData(value);
+  };
+  //fechaPagoDinamico(data?.dataResult);
+  console.log(data?.dataResult[6]);
+
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />

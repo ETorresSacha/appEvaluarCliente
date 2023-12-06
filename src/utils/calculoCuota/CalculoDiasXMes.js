@@ -43,8 +43,8 @@ export const diasXmes = (data,i)=>{
         const resultDateIni = sumarMes(data,i-1)
         const resultDateFin = sumarMes(data,i)
 
-        let [diaI,mesI, anioI ] = resultDateIni.split('-')
-        let [diaF,mesF, anioF ] = resultDateFin.split('-')
+        let [mesI,diaI, anioI ] = resultDateIni.split('-')
+        let [mesF,diaF, anioF ] = resultDateFin.split('-')
 
         let fechaInicio   = new Date(`${anioI}-${mesI}-${diaI}`).getTime();
         let fechaFin   = new Date(`${anioF}-${mesF}-${diaF}`).getTime();

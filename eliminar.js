@@ -50,4 +50,5 @@ var result2 = add(new Date(2014, 8-1, 1), {
   })
   console.log(format(new Date(result2), 'dd-MM-yyyy'));
 
-  const result2= formatDistance(new Date(2023,12,29))
+  const result3= formatDistance(new Date(2023,12,29), new Date(2023,12,30))
+  console.log(result3);
