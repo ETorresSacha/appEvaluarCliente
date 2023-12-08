@@ -1,4 +1,4 @@
-import { compareAsc, format,add,formatDistance, getDate,isFuture} from 'date-fns'
+import { compareAsc, format,add,formatDistance, getDate,isFuture,isEqual} from 'date-fns'
 // ORDENAR
 export const orderData = (type,data,value)=>{
     let result
@@ -53,6 +53,7 @@ return result
 }
 
 // CUOTA DE PAGO AUTOMÁTICO
+
 let data =[
 {apellido: "Torres", celular: "965231452", correo: "Bshs@jeheh.com", direccion: "Jdjdhd", dni: "85632145", nombre: "Maritza", resultPrestamo:  [{ITF: "0.02", SegDesg: "0.05", capital: "337.53", cuota: 1, "dias": 4, fechaPago: "12-07-2023", interes: "1.71", montoCuota: "339.31"}, {ITF: "0.02", SegDesg: "1.54", capital: "280.13", cuota: 2, "dias": 354, fechaPago: "01-29-2024", interes: "57.62", montoCuota: "339.31"}], uuid: "49dcfc98-4338-4952-b62b-92d63e92a181"}, 
 {apellido: "Torres", celular: "698563254", correo: "Bdhdh@hdhdh.com", direccion: "Jdhdhd", dni: "12346578", nombre: "Yerson", resultPrestamo: [{ITF: "0.03", SegDesg: "0.05", capital: "563.09", cuota: 1, "dias": 2, fechaPago: "12-08-2023", interes: "2.10", montoCuota: "565.28"}, {ITF: "0.03", SegDesg: "4.16", capital: "362.53", cuota: 2, "dias": 355, fechaPago: "01-08-2024", interes: "198.56", montoCuota: "565.28"}], uuid: "f32ccc62-7b93-40c5-a34e-4192d741a8a9"}, 
@@ -61,6 +62,7 @@ let data =[
 {apellido: "Jdhdh", celular: "985623452", correo: "Hdhdg@jdjf.com", direccion: "Jshdvd", dni: "25487963", nombre: "Eeik", resultPrestamo: [{ITF: "0.06", SegDesg: "0.11", capital: "1269.82", cuota: 1, "dias": 2, fechaPago: "12-30-2023", interes: "2.48", montoCuota: "1272.46"}, {ITF: "0.06", SegDesg: "6.93", capital: "1085.48", cuota: 2, "dias": 354, fechaPago: "01-30-2024", interes: "179.99", montoCuota: "1272.46"}], uuid: "1b526522-a4bd-4e63-88e0-9eb4539d0b83"}, 
 {apellido: "Torres sacha", celular: "964523325", correo: "eriktorressacha@gmail.com", direccion: "Jdhdhd", dni: "72161371", nombre: "Erik edson", resultPrestamo: [{ITF: "0.02", SegDesg: "0.43", capital: "419.28", cuota: 1, "dias": 16, fechaPago: "12-21-2023", interes: "9.97", montoCuota: "429.69"}, {ITF: "0.02", SegDesg: "5.50", capital: "281.31", cuota: 2, "dias": 354, fechaPago: "01-21-2024", interes: "142.87", montoCuota: "429.69"}, {ITF: "0.02", SegDesg: "0.01", capital: "429.48", cuota: 3, "dias": 1, fechaPago: "02-21-2024", interes: "0.18", montoCuota: "429.69"}], uuid: "b0cdbb44-3a9c-4afb-95bc-104f838d9894"}, 
 {apellido: "Lazaro", celular: "985632453", correo: "Hdhfh@jdhdh.com", direccion: "Hhhhf", dni: "78546321", nombre: "Carlos", resultPrestamo: [{ITF: "0.02", SegDesg: "0.19", capital: "390.26", cuota: 1, "dias": 7, fechaPago: "12-14-2023", interes: "4.35", montoCuota: "394.81"}, {ITF: "0.02", SegDesg: "0.50", capital: "382.45", cuota: 2, "dias": 31, fechaPago: "01-14-2024", interes: "11.83", montoCuota: "394.81"}, {ITF: "0.02", SegDesg: "0.19", capital: "390.19", cuota: 3, "dias": 31, fechaPago: "02-14-2024", interes: "4.41", montoCuota: "394.81"}], uuid: "16fc4582-1fda-433c-b045-d683aa336ea5"}]
+
 export const fechaPagoAtomatico=(data)=>{
   console.log(data);
   let datesFilter=[]
@@ -72,22 +74,29 @@ if(n==0){
 })
 n=1
 }
-console.log(n);
+
 if(n==1){
-  resultDia = datesFilter.find(element=>{
+
+let toDay = format(new Date(), 'MM-dd-yyyy')
+
+ let result=datesFilter.find(element=>toDay===element)
+ console.log(result);
+ if(result !==undefined){
+  resultDia=result
+ }
+ else{
+  result = datesFilter.find(element=>{
     let [mes,dia,anio] =element.split("-")
+ 
     return isFuture(new Date(anio, mes-1, dia))
   })
+  resultDia=result
+ }
 
-}
-console.log((datesFilter));
-console.log(resultDia);
+  
 
+  }
 return formatDate(resultDia)
 
 }
-// data.map(element=>{
-//   console.log(element.resultPrestamo);
-// })
-
 console.log(fechaPagoAtomatico(data[0].resultPrestamo));
