@@ -71,7 +71,7 @@ const Customer = () => {
   };
   //fechaPagoDinamico(data?.dataResult);
   //console.log(data?.dataResult);
-  console.log(data?.dataResult[6].resultPrestamo);
+  console.log(data?.dataResult);
 
   return (
     <View style={styles.container}>
@@ -135,8 +135,8 @@ const Customer = () => {
                   }}
                 >{`${element.nombre.split(" ")[0]}`}</Text>
                 <Text style={styles.dataText}>
-                  {/* {formatDate(element?.resultPrestamo[0]?.fechaPago)} */}
-                  {fechaPagoAtomatico(element?.resultPrestamo)}
+                  {formatDate(element?.resultPrestamo[0]?.fechaPago)}
+                  {/* {fechaPagoAtomatico(element?.resultPrestamo)} */}
                 </Text>
                 <Text
                   style={{
