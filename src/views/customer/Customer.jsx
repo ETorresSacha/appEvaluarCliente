@@ -11,9 +11,21 @@ import { Icon } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
-import { formatDate, orderData } from "../../utils/thunks/Thunks";
+import {
+  fechaPagoAtomatico,
+  formatDate,
+  orderData,
+} from "../../utils/thunks/Thunks";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {
+  compareAsc,
+  format,
+  add,
+  formatDistance,
+  getDate,
+  isFuture,
+} from "date-fns";
 const Customer = () => {
   const navigation = useNavigation();
   const { onGetCronograma } = UseStorage();
@@ -58,7 +70,8 @@ const Customer = () => {
     setData(value);
   };
   //fechaPagoDinamico(data?.dataResult);
-  console.log(data?.dataResult[6]);
+  //console.log(data?.dataResult);
+  console.log(data?.dataResult[6].resultPrestamo);
 
   return (
     <View style={styles.container}>
@@ -122,7 +135,8 @@ const Customer = () => {
                   }}
                 >{`${element.nombre.split(" ")[0]}`}</Text>
                 <Text style={styles.dataText}>
-                  {formatDate(element?.resultPrestamo[0]?.fechaPago)}
+                  {/* {formatDate(element?.resultPrestamo[0]?.fechaPago)} */}
+                  {fechaPagoAtomatico(element?.resultPrestamo)}
                 </Text>
                 <Text
                   style={{
