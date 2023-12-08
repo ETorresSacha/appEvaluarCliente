@@ -64,7 +64,6 @@ let data =[
 {apellido: "Lazaro", celular: "985632453", correo: "Hdhfh@jdhdh.com", direccion: "Hhhhf", dni: "78546321", nombre: "Carlos", resultPrestamo: [{ITF: "0.02", SegDesg: "0.19", capital: "390.26", cuota: 1, "dias": 7, fechaPago: "12-14-2023", interes: "4.35", montoCuota: "394.81"}, {ITF: "0.02", SegDesg: "0.50", capital: "382.45", cuota: 2, "dias": 31, fechaPago: "01-14-2024", interes: "11.83", montoCuota: "394.81"}, {ITF: "0.02", SegDesg: "0.19", capital: "390.19", cuota: 3, "dias": 31, fechaPago: "02-14-2024", interes: "4.41", montoCuota: "394.81"}], uuid: "16fc4582-1fda-433c-b045-d683aa336ea5"}]
 
 export const fechaPagoAtomatico=(data)=>{
-  console.log(data);
   let datesFilter=[]
   let resultDia
   let n=0
@@ -80,7 +79,7 @@ if(n==1){
 let toDay = format(new Date(), 'MM-dd-yyyy')
 
  let result=datesFilter.find(element=>toDay===element)
- console.log(result);
+
  if(result !==undefined){
   resultDia=result
  }
@@ -99,4 +98,4 @@ let toDay = format(new Date(), 'MM-dd-yyyy')
 return formatDate(resultDia)
 
 }
-console.log(fechaPagoAtomatico(data[0].resultPrestamo));
+//console.log(fechaPagoAtomatico(data[0].resultPrestamo));
