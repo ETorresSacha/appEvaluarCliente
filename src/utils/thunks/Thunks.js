@@ -55,7 +55,7 @@ return result
 // CUOTA DE PAGO AUTOMÁTICO
 
 let data =[
-{apellido: "Torres", celular: "965231452", correo: "Bshs@jeheh.com", direccion: "Jdjdhd", dni: "85632145", nombre: "Maritza", resultPrestamo:  [{ITF: "0.02", SegDesg: "0.05", capital: "337.53", cuota: 1, "dias": 4, fechaPago: "12-07-2023", interes: "1.71", montoCuota: "339.31"}, {ITF: "0.02", SegDesg: "1.54", capital: "280.13", cuota: 2, "dias": 354, fechaPago: "01-29-2024", interes: "57.62", montoCuota: "339.31"}], uuid: "49dcfc98-4338-4952-b62b-92d63e92a181"}, 
+{apellido: "Torres", celular: "965231452", correo: "Bshs@jeheh.com", direccion: "Jdjdhd", dni: "85632145", nombre: "Maritza", resultPrestamo:  [{ITF: "0.02", SegDesg: "0.05", capital: "337.53", cuota: 1, "dias": 4, fechaPago: "12-29-2023", interes: "1.71", montoCuota: "339.31"}, {ITF: "0.02", SegDesg: "1.54", capital: "280.13", cuota: 2, "dias": 354, fechaPago: "01-29-2024", interes: "57.62", montoCuota: "339.31"}], uuid: "49dcfc98-4338-4952-b62b-92d63e92a181"}, 
 {apellido: "Torres", celular: "698563254", correo: "Bdhdh@hdhdh.com", direccion: "Jdhdhd", dni: "12346578", nombre: "Yerson", resultPrestamo: [{ITF: "0.03", SegDesg: "0.05", capital: "563.09", cuota: 1, "dias": 2, fechaPago: "12-08-2023", interes: "2.10", montoCuota: "565.28"}, {ITF: "0.03", SegDesg: "4.16", capital: "362.53", cuota: 2, "dias": 355, fechaPago: "01-08-2024", interes: "198.56", montoCuota: "565.28"}], uuid: "f32ccc62-7b93-40c5-a34e-4192d741a8a9"}, 
 {apellido: "Torres",celular: "985632541", correo: "Hdh@hdhd.com", direccion: "Hdhdhd", dni: "98754236", nombre: "Adrian", resultPrestamo: [{ITF: "0.01", SegDesg: "0.12", capital: "189.84", cuota: 1, "dias": 17, fechaPago: "12-28-2023", interes: "5.63", montoCuota: "195.60"}, {ITF: "0.01", SegDesg: "0.65", capital: "156.07", cuota: 2, "dias": 354, fechaPago: "01-28-2024", interes: "38.87", montoCuota: "195.60"}], uuid: "4d2cafc9-5142-41b8-829c-dffc2d42ae32"}, 
 {apellido: "Torres", celular: "968574262", correo: "eriktorressacha@gmail.com", direccion: "Dhhdhd", dni: "72161371", nombre: "Erik", resultPrestamo: [{ITF: "0.06", SegDesg: "1.39", capital: "1258.23", cuota: 1, "dias": 26, fechaPago: "12-30-2023", interes: "32.49", montoCuota: "1292.17"}, {ITF: "0.06", SegDesg: "7.03", capital: "1102.39", cuota: 2, "dias": 354, fechaPago: "01-30-2024", interes: "182.69", montoCuota: "1292.17"}], uuid: "6f1958b7-86ec-4d9b-9cfa-483352b480fc"}, 
@@ -99,3 +99,21 @@ return formatDate(resultDia)
 
 }
 //console.log(fechaPagoAtomatico(data[0].resultPrestamo));
+
+
+// ALERTA DE LA FECHA DE PAGO
+let toDay = format(new Date(), 'MM-dd-yyyy')
+export const alertDatePay =(data,toDay)=>{
+  let datesToDay=[]
+  console.log(toDay);
+  
+
+data.map((element)=>{
+  element.resultPrestamo.filter(elem=>{
+    if(toDay===elem.fechaPago) datesToDay.push(element)
+  })
+})
+return datesToDay
+
+}
+console.log(alertDatePay(data,toDay));
