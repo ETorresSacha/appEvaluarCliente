@@ -58,35 +58,25 @@ const Customer = () => {
   };
 
   //! LA FECHA CONECTADO A LA ALARMA
-  const [fechaDte, setFechaDte] = useState({});
-  const [customerToDayPay, setCustomerToDayPay] = useState([]);
-  //const [idCustomerPay, setIdCustomerPay] = useState([]);
+
   const [day, setDay] = useState("");
-  const [visible, setVisible] = useState(false);
+  const [red, setRed] = useState(false);
+  const [green, setGreen] = useState(false);
 
-  const [debtorsCustomer, setDebtorsCustomer] = useState([]);
-  const [onDateCustomer, setonDateCustomer] = useState([]);
-  const [okCustomer, setOkCustomer] = useState([]);
-
-  const fechaPagoDinamico = (value) => {
-    setData(value);
-  };
-  let alertaIcon;
-
-  let idCustomerPay = [];
-  let datesToDay = [];
-  let toDay;
   const [result, setResult] = useState({});
 
-  const llamar = () => {
+  const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
     let result = alertDatePay(data.dataResult, day);
+    if (result.resultMorosos) setRed(true);
+    if (result.resultCustomerOk) setGreen(true);
     setResult(result);
   };
+
   useEffect(() => {
-    llamar();
+    resultCustomer();
   }, [data]);
-  console.log(debtorsCustomer);
+
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />
@@ -128,65 +118,8 @@ const Customer = () => {
         </View>
         {/* <Users data={okCustomer} /> */}
         {/* <Users data={debtorsCustomer} /> */}
-        <Users data={result.resultMorosos} />
-        <Users data={result.resultCustomerOk} />
-        {/* {data?.dataResult?.map((element, index) => {
-          // useEffect(() => {
-          //   let result = idCustomerPay.find((ele) => ele == element.uuid);
-          //   if (result !== undefined) alertaIcon = true;
-          //   else alertaIcon = false;
-          // }, []);
-
-          return (
-            <View
-              key={element.uuid}
-              style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
-            >
-              <Pressable
-                style={{ display: "flex", flexDirection: "row" }}
-                onPress={() =>
-                  navigation.navigate("Detalle", {
-                    id: element.uuid,
-                  })
-                }
-              >
-                <Text style={styles.dataText}>{element.dni}</Text>
-                <Text
-                  style={{
-                    width: 80,
-                    fontSize: 17,
-                    color: "cornsilk",
-                  }}
-                >{`${element.nombre.split(" ")[0]}`}</Text>
-                <Text style={styles.dataText}>
-                  {fechaPagoAtomatico(element?.resultPrestamo)}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 17,
-                    color: "cornsilk",
-                    width: 80,
-                    paddingLeft: 10,
-                  }}
-                >
-                  {element?.resultPrestamo[0]?.montoCuota}
-                </Text>
-              </Pressable>
-              <Pressable
-                style={{
-                  width: 40,
-                  color: "white",
-                  fontSize: 30,
-                }}
-              >
-                <MaterialIcons
-                  name="notifications"
-                  style={alertaIcon ? styles.iconAlertOn : styles.iconAlertOff}
-                />
-              </Pressable>
-            </View>
-          );
-        })} */}
+        <Users data={result.resultMorosos} setRed={setRed} red={red} />
+        <Users data={result.resultCustomerOk} setGreen={setRed} green={green} />
       </ScrollView>
     </View>
   );

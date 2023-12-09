@@ -5,7 +5,7 @@ import { fechaPagoAtomatico } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
-const Users = ({ data }) => {
+const Users = ({ data, red, setRed, green, setGreen }) => {
   const navigation = useNavigation();
   const [day, setDay] = useState("");
 
@@ -68,7 +68,10 @@ const Users = ({ data }) => {
                 fontSize: 30,
               }}
             >
-              <MaterialIcons name="notifications" style={styles.iconAlertOff} />
+              <MaterialIcons
+                name="notifications"
+                style={red ? styles.iconAlertOn : styles.iconAlertOff}
+              />
             </Pressable>
           </View>
         );
@@ -151,7 +154,8 @@ const styles = StyleSheet.create({
     color: "cornsilk",
   },
   iconAlertOff: {
-    color: "cornsilk",
+    //color: "cornsilk",
+    color: "#4ecb71",
     fontSize: 30,
   },
   iconAlertOn: {
