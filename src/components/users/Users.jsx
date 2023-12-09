@@ -8,15 +8,15 @@ import { format } from "date-fns";
 const Users = ({ data, red, setRed, green, setGreen }) => {
   const navigation = useNavigation();
   const [day, setDay] = useState("");
+  const [enable, setEnable] = useState(true);
 
+  const handleAlert = () => {
+    navigation.navigate("Alerta");
+  };
   useEffect(() => {
-    setDay(format(new Date(), "MM-dd-yyyy"));
-    // let result = alertDatePay(data.dataResult, day);
-    // result?.map((element) => {
-    //   idCustomerPay.push(element.uuid);
-    //   //setIdCustomerPay([...idCustomerPay, element.uuid]);
-    // });
-  }, [day, data]);
+    if (red) setEnable(true);
+  }, []);
+
   return (
     <View>
       {data?.map((element, index) => {
@@ -65,12 +65,13 @@ const Users = ({ data, red, setRed, green, setGreen }) => {
               style={{
                 width: 40,
                 color: "white",
-                fontSize: 30,
+                fontSize: 40,
               }}
+              onPress={enable ? handleAlert : null}
             >
               <MaterialIcons
                 name="notifications"
-                style={red ? styles.iconAlertOn : styles.iconAlertOff}
+                style={red ? styles.iconAlertOnYelow : styles.iconAlertOff}
               />
             </Pressable>
           </View>
@@ -155,11 +156,13 @@ const styles = StyleSheet.create({
   },
   iconAlertOff: {
     //color: "cornsilk",
-    color: "#4ecb71",
-    fontSize: 30,
+    // color: "#4ecb71",
+    color: "rgb(66, 242, 46)",
+    fontSize: 40,
   },
-  iconAlertOn: {
-    color: "red",
-    fontSize: 30,
+  iconAlertOnYelow: {
+    //color: "red",
+    color: "rgb(242, 238, 46)",
+    fontSize: 40,
   },
 });

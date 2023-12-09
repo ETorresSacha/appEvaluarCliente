@@ -7,20 +7,14 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
-import {
-  alertDatePay,
-  fechaPagoAtomatico,
-  orderData,
-} from "../../utils/thunks/Thunks";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { alertDatePay, orderData } from "../../utils/thunks/Thunks";
 import { format } from "date-fns";
 import Users from "../../components/users/Users";
 
 const Customer = () => {
-  const navigation = useNavigation();
   const { onGetCronograma } = UseStorage();
   const [order, setOrder] = useState(false);
   const [data, setData] = useState({
@@ -57,19 +51,19 @@ const Customer = () => {
     setOrder(!value);
   };
 
-  //! LA FECHA CONECTADO A LA ALARMA
+  //! ACTIVAR ALARMA
 
   const [day, setDay] = useState("");
   const [red, setRed] = useState(false);
   const [green, setGreen] = useState(false);
-
   const [result, setResult] = useState({});
 
+  // Verifica en que condición se encuentra cada cliente
   const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
     let result = alertDatePay(data.dataResult, day);
-    if (result.resultMorosos) setRed(true);
-    if (result.resultCustomerOk) setGreen(true);
+    if (result.resultMorosos) setRed(true); // al límite
+    if (result.resultCustomerOk) setGreen(true); // ok
     setResult(result);
   };
 
@@ -116,9 +110,9 @@ const Customer = () => {
             <Text style={styles.texTitle}>ALERTA</Text>
           </View>
         </View>
-        {/* <Users data={okCustomer} /> */}
-        {/* <Users data={debtorsCustomer} /> */}
+
         <Users data={result.resultMorosos} setRed={setRed} red={red} />
+        {/* <Users data={debtorsCustomer} /> */}
         <Users data={result.resultCustomerOk} setGreen={setRed} green={green} />
       </ScrollView>
     </View>
