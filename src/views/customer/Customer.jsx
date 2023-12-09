@@ -60,25 +60,33 @@ const Customer = () => {
   //! LA FECHA CONECTADO A LA ALARMA
   const [fechaDte, setFechaDte] = useState({});
   const [customerToDayPay, setCustomerToDayPay] = useState([]);
-  const [idCustomerPay, setIdCustomerPay] = useState([]);
+  //const [idCustomerPay, setIdCustomerPay] = useState([]);
   const [day, setDay] = useState("");
   const [visible, setVisible] = useState(false);
+
+  const [debtorsCustomer, setDebtorsCustomer] = useState([]);
+  const [onDateCustomer, setonDateCustomer] = useState([]);
+  const [okCustomer, setOkCustomer] = useState([]);
+
   const fechaPagoDinamico = (value) => {
     setData(value);
   };
   let alertaIcon;
-  useEffect(() => {
-    alertaIcon = false;
+
+  let idCustomerPay = [];
+  let datesToDay = [];
+  let toDay;
+  const [result, setResult] = useState({});
+
+  const llamar = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
     let result = alertDatePay(data.dataResult, day);
-    result?.map((element) => {
-      idCustomerPay.push(element.uuid);
-      //setIdCustomerPay([...idCustomerPay, element.uuid]);
-    });
-  }, [day, data, alertaIcon]);
-
-  console.log(idCustomerPay);
-  console.log(visible);
+    setResult(result);
+  };
+  useEffect(() => {
+    llamar();
+  }, [data]);
+  console.log(debtorsCustomer);
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />
@@ -118,7 +126,10 @@ const Customer = () => {
             <Text style={styles.texTitle}>ALERTA</Text>
           </View>
         </View>
-        <Users data={data?.dataResult} />
+        {/* <Users data={okCustomer} /> */}
+        {/* <Users data={debtorsCustomer} /> */}
+        <Users data={result.resultMorosos} />
+        <Users data={result.resultCustomerOk} />
         {/* {data?.dataResult?.map((element, index) => {
           // useEffect(() => {
           //   let result = idCustomerPay.find((ele) => ele == element.uuid);
