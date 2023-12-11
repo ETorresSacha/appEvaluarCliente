@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { fechaPagoAtomatico } from "../../utils/thunks/Thunks";
+import { fechaPagoAtomatico, formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
@@ -48,7 +48,7 @@ const Users = ({ data, red, setRed, green, setGreen }) => {
                 }}
               >{`${element.nombre.split(" ")[0]}`}</Text>
               <Text style={styles.dataText}>
-                {fechaPagoAtomatico(element?.resultPrestamo)}
+                {formatDate(fechaPagoAtomatico(element?.resultPrestamo))}
               </Text>
               <Text
                 style={{

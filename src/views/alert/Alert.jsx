@@ -12,3 +12,5 @@ const Alert = () => {
 export default Alert;
 
 const styles = StyleSheet.create({});
+
+//! TRABAJAR EN ESTE COMPONENTE

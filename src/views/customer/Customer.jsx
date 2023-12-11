@@ -71,6 +71,7 @@ const Customer = () => {
     resultCustomer();
   }, [data]);
 
+  //console.log(result.resultCustomerOk[0]);
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />

@@ -31,6 +31,7 @@ export const orderData = (type,data,value)=>{
           break;
           case 'cuota':
             if (value) {
+      
                 result = data.sort((a, b) => a.resultPrestamo[0].montoCuota - b.resultPrestamo[0].montoCuota);
              
                } else {
@@ -99,7 +100,7 @@ let toDay = format(new Date(), 'MM-dd-yyyy')
   
 
   }
-return formatDate(resultDia)
+return resultDia
 
 }
 

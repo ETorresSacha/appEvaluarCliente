@@ -86,3 +86,5 @@ let result = format(new Date(2014, 11, 11), 'dd-MM-yyyy')
     return isFuture(new Date(anio, mes-1, dia))
   })
   console.log(resultDia);
+
+  console.log(new Date("12-15-2023").getTime())
