@@ -11,7 +11,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
 import { alertDatePay, orderData } from "../../utils/thunks/Thunks";
-import { format } from "date-fns";
+import { format, add } from "date-fns";
+
 import Users from "../../components/users/Users";
 
 const Customer = () => {
@@ -71,7 +72,19 @@ const Customer = () => {
     resultCustomer();
   }, [data]);
 
-  //console.log(result.resultCustomerOk[0]);
+  //! pruba de alerta
+
+  var resultAgregardia = add(new Date(2014, 8, 1, 10, 19, 50), {
+    years: 2,
+    months: 9,
+    weeks: 1,
+    days: 7,
+    hours: 5,
+    minutes: 9,
+    seconds: 30,
+  });
+  console.log(resultAgregardia);
+
   return (
     <View style={styles.container}>
       <NavBar data={data} setData={setData} />

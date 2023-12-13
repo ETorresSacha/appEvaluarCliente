@@ -11,7 +11,7 @@ import NewForm from "../views/newForm/NewForm";
 import VerCronograma from "../views/cronograma/VerCronograma";
 import Customer from "../views/customer/Customer";
 import Calculator from "../views/calculator/Calculator";
-import Alert from "../views/alert/Alert";
+import Alerta from "../views/alert/Alerta";
 
 //const Tab = createBottomTabNavigator();
 const optionsStack = {
@@ -51,7 +51,7 @@ const Routes = () => {
           component={Detail}
           options={optionsStack}
         />
-        <Stack.Screen name="Alerta" component={Alert} options={optionsStack} />
+        <Stack.Screen name="Alerta" component={Alerta} options={optionsStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

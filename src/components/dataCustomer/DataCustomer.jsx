@@ -7,7 +7,7 @@ import { useFocusEffect } from "@react-navigation/native";
 const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
   const [errors, setErrors] = useState({});
 
-  //Todo--> Esta es otra forma de setear y validar lo s datos
+  //Todo--> Esta es otra forma de setear y validar los datos
   const handleChangeData = (event, type) => {
     setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
     // setErrors(validationDataPerson(dataPerson));
