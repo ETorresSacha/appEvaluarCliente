@@ -18,14 +18,7 @@ const Cronograma = ({ dataPrestamo }) => {
               paddingBottom: 15,
             }}
           >
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 15,
-              }}
-            >
+            <View style={[styles.containerSubTitle, { gap: 15 }]}>
               <Text
                 style={{ color: "cornsilk", fontSize: 18, fontWeight: "bold" }}
               >
@@ -37,14 +30,7 @@ const Cronograma = ({ dataPrestamo }) => {
                 12-20-2023
               </Text>
             </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 15,
-              }}
-            >
+            <View style={[styles.containerSubTitle, { gap: 15 }]}>
               <Text
                 style={{ color: "cornsilk", fontSize: 18, fontWeight: "bold" }}
               >
@@ -57,73 +43,32 @@ const Cronograma = ({ dataPrestamo }) => {
               </Text>
             </View>
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignContent: "center",
-              paddingHorizontal: 15,
-            }}
-          >
+          <View style={{ paddingHorizontal: 15, gap: 2 }}>
             <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
+              style={[
+                styles.containerSubTitle,
+                { justifyContent: "space-between" },
+              ]}
             >
-              <Text
-                style={{
-                  width: 180,
-                  color: "white",
-                  fontSize: 17,
-                  fontWeight: "bold",
-                }}
-              >
-                Fecha de desembolso
-              </Text>
+              <Text style={styles.subTitle}>Fecha de desembolso</Text>
               <Text style={{ color: "white", fontSize: 17 }}>12-20-2023</Text>
             </View>
             <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
+              style={[
+                styles.containerSubTitle,
+                { justifyContent: "space-between" },
+              ]}
             >
-              <Text
-                style={{
-                  width: 180,
-                  color: "white",
-                  fontSize: 17,
-                  fontWeight: "bold",
-                }}
-              >
-                Pago pendiente
-              </Text>
+              <Text style={styles.subTitle}>Pago pendiente</Text>
               <Text style={{ color: "white", fontSize: 17 }}>517.5</Text>
             </View>
             <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
+              style={[
+                styles.containerSubTitle,
+                { justifyContent: "space-between" },
+              ]}
             >
-              <Text
-                style={{
-                  width: 180,
-                  color: "white",
-                  fontSize: 17,
-                  fontWeight: "bold",
-                }}
-              >
-                Cuota pendiente
-              </Text>
+              <Text style={styles.subTitle}>Cuota pendiente</Text>
               <Text style={{ color: "white", fontSize: 17 }}>2</Text>
             </View>
           </View>
@@ -230,8 +175,15 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 
-  titleCrono: {
-    color: "white",
+  subTitle: {
+    width: 180,
     fontSize: 17,
+    color: "white",
+    fontWeight: "bold",
+  },
+  containerSubTitle: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
