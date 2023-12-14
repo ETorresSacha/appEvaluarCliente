@@ -1,7 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import UseStorage from "../hooks/UseHookStorage";
 import { useFocusEffect } from "@react-navigation/native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const Cronograma = ({ dataPrestamo }) => {
   //console.log(dataPrestamo);
@@ -73,6 +76,13 @@ const Cronograma = ({ dataPrestamo }) => {
             </View>
           </View>
         </View>
+        <Pressable style={styles.buttonContainer}>
+          <FontAwesome
+            name="money"
+            style={{ color: "cornsilk", fontSize: 40 }}
+          />
+          <Text style={styles.subTitle}>Pagar</Text>
+        </Pressable>
       </View>
       <View style={styles.cronograma}>
         {/* <Text style={styles.titleCrono}>Cronograma</Text> */}
@@ -176,7 +186,7 @@ const styles = StyleSheet.create({
   },
 
   subTitle: {
-    width: 180,
+    //width: 180,
     fontSize: 17,
     color: "white",
     fontWeight: "bold",
@@ -185,5 +195,23 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    //marginTop: 15,
+    alignItems: "center",
+    alignContent: "center",
+    width: 250,
+    height: 40,
+    marginLeft: 80,
+    justifyContent: "center",
+    borderRadius: 10,
+    gap: 10,
+    elevation: 5,
+    borderWidth: 1,
+    //borderColor: "white",
+    marginBottom: 15,
+    backgroundColor: "orange",
   },
 });

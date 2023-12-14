@@ -113,7 +113,6 @@ const Customer = () => {
     minutes: 9,
     seconds: 30,
   });
-  console.log(customer.customerYellow[0].resultPrestamo);
 
   return (
     <View style={styles.container}>
