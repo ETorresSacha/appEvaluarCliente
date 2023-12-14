@@ -132,32 +132,33 @@ if(customerYellow.length==0){
   data.map((element)=>{
 
     // Un día antes de la fecha de vencimiento
-    let resultGreen = element.resultPrestamo.find(elem=>{
-      let [mes,dia,anio] = elem.fechaPago.split('-')
-       return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1
-      })
+    // let resultGreen = element.resultPrestamo.find(elem=>{
+    //   let [mes,dia,anio] = elem.fechaPago.split('-')
+    //    return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1
+    //   })
 
     // La misma fecha de vencimiento
     let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago)
 
     // Pasado la fecha de vencimiento
-    let resultRed = element.resultPrestamo.find(elem=>{
-        let [mes,dia,anio] = elem.fechaPago.split('-')
-         return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0
-        })
+    // let resultRed = element.resultPrestamo.find(elem=>{
+    //     let [mes,dia,anio] = elem.fechaPago.split('-')
+    //      return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0
+    //     })
 
-    if(resultGreen!==undefined){
-      customerGreen.push(element)
-      }
-    if(resultYellow!==undefined){
-      customerYellow.push(element)
-    }
-    if(resultRed!==undefined){
-      customerRed.push(element)
-    }
-    else{
-      customerOk.push(element)
-    }
+    // if(resultGreen!==undefined){
+    //   customerGreen.push(element)
+    //   }
+     if(resultYellow!==undefined){
+       customerYellow.push(element)
+     }
+    // if(resultRed!==undefined){
+    //   customerRed.push(element)
+    // }
+     else{
+       customerOk.push(element)
+     }
+    
   })
 
 }

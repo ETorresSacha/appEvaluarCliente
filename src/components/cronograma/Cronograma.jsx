@@ -9,7 +9,125 @@ const Cronograma = ({ dataPrestamo }) => {
     <View style={styles.container}>
       <View style={styles.resumen}>
         <Text style={styles.resumTitle}>RESUMEN</Text>
-        <View style={styles.resumDetalle}></View>
+        <View style={styles.resumDetalle}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              paddingBottom: 15,
+            }}
+          >
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 15,
+              }}
+            >
+              <Text
+                style={{ color: "cornsilk", fontSize: 18, fontWeight: "bold" }}
+              >
+                Fecha de pago:
+              </Text>
+              <Text
+                style={{ color: "orange", fontSize: 17, fontWeight: "bold" }}
+              >
+                12-20-2023
+              </Text>
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 15,
+              }}
+            >
+              <Text
+                style={{ color: "cornsilk", fontSize: 18, fontWeight: "bold" }}
+              >
+                Cuota:
+              </Text>
+              <Text
+                style={{ color: "orange", fontSize: 17, fontWeight: "bold" }}
+              >
+                517.5
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignContent: "center",
+              paddingHorizontal: 15,
+            }}
+          >
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  width: 180,
+                  color: "white",
+                  fontSize: 17,
+                  fontWeight: "bold",
+                }}
+              >
+                Fecha de desembolso
+              </Text>
+              <Text style={{ color: "white", fontSize: 17 }}>12-20-2023</Text>
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  width: 180,
+                  color: "white",
+                  fontSize: 17,
+                  fontWeight: "bold",
+                }}
+              >
+                Pago pendiente
+              </Text>
+              <Text style={{ color: "white", fontSize: 17 }}>517.5</Text>
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  width: 180,
+                  color: "white",
+                  fontSize: 17,
+                  fontWeight: "bold",
+                }}
+              >
+                Cuota pendiente
+              </Text>
+              <Text style={{ color: "white", fontSize: 17 }}>2</Text>
+            </View>
+          </View>
+        </View>
       </View>
       <View style={styles.cronograma}>
         {/* <Text style={styles.titleCrono}>Cronograma</Text> */}
@@ -69,9 +187,9 @@ const styles = StyleSheet.create({
   },
   tilteText: {
     color: "cornsilk",
-    paddingLeft: 10,
     fontSize: 17,
     fontWeight: "bold",
+    paddingLeft: 10,
   },
   containerCuotas: {
     flexDirection: "column",
@@ -109,8 +227,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   resumDetalle: {
-    height: 120,
-    backgroundColor: "gray",
+    marginVertical: 15,
   },
 
   titleCrono: {
