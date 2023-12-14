@@ -88,3 +88,14 @@ let result = format(new Date(2014, 11, 11), 'dd-MM-yyyy')
   console.log(resultDia);
 
   console.log(new Date("12-15-2023").getTime())
+let date =new Date()
+const trigger = add(new Date(date), {
+  //years: 2,
+  //months: 9,
+  // weeks: 1,
+  //days: 7,
+  //hours: 5,
+  minutes: 2,
+  //seconds: 30,
+});
+console.log(trigger);

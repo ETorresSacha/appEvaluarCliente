@@ -55,22 +55,52 @@ const Customer = () => {
   //! ACTIVAR ALARMA
 
   const [day, setDay] = useState("");
+  const [green, setGreen] = useState("");
+  const [yellow, setYelow] = useState("");
   const [red, setRed] = useState(false);
-  const [green, setGreen] = useState(false);
   const [result, setResult] = useState({});
+  const [typeColor, setTypeColor] = useState({
+    green: "",
+    yellow: "",
+    red: "",
+  });
+  const [customer, SetCustomer] = useState({
+    customerGreen: [],
+    customerYellow: [],
+    customerRed: [],
+    customerOk: [],
+  });
 
   // Verifica en que condición se encuentra cada cliente
   const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
     let result = alertDatePay(data.dataResult, day);
-    if (result.resultMorosos) setRed(true); // al límite
-    if (result.resultCustomerOk) setGreen(true); // ok
-    setResult(result);
+    //if (result.resultMorosos) setRed(true); // al límite
+    //if (result.resultCustomerRed) setTypeColor({ ...typeColor, red: "red" }); // al límite
+    if (result.resultCustomerOk) {
+      SetCustomer({
+        ...customer,
+        customerGreen: result.resultCustumerGreen,
+        customerYellow: result.resultCustomerYellow,
+        customerRed: result.resultCustomerRed,
+        customerOk: result.resultCustomerOk,
+      });
+    }
   };
 
   useEffect(() => {
     resultCustomer();
+    // if (customer.customerGreen.length != 0) {
+    //   setTypeColor({ ...typeColor, green: "green" });
+    // }
+    // if (customer.customerYellow.length != 0) {
+    //   setTypeColor({ ...typeColor, yellow: "yellow" });
+    // }
+    // if (customer.customerRed.length != 0) {
+    //   setTypeColor({ ...typeColor, red: "red" });
+    // }
   }, [data]);
+  console.log(typeColor);
 
   //! pruba de alerta
 
@@ -83,7 +113,7 @@ const Customer = () => {
     minutes: 9,
     seconds: 30,
   });
-  console.log(resultAgregardia);
+  console.log(customer.customerGreen.length);
 
   return (
     <View style={styles.container}>
@@ -125,9 +155,11 @@ const Customer = () => {
           </View>
         </View>
 
-        <Users data={result.resultMorosos} setRed={setRed} red={red} />
+        {/* <Users data={result.resultCustomerRed} color={typeColor.red} /> */}
+        {/* <Users data={customer.customerYellow} color={typeColor.yellow} /> */}
+        {/* <Users data={customer.customerGreen} color={typeColor.green} /> */}
         {/* <Users data={debtorsCustomer} /> */}
-        <Users data={result.resultCustomerOk} setGreen={setRed} green={green} />
+        <Users data={customer.customerOk} />
       </ScrollView>
     </View>
   );

@@ -1,4 +1,4 @@
-import { compareAsc, format,add,formatDistance, getDate,isFuture,isEqual} from 'date-fns'
+import { compareAsc, format,add,formatDistance, getDate,isFuture,isEqual,differenceInDays} from 'date-fns'
 // ORDENAR
 export const orderData = (type,data,value)=>{
     let result
@@ -107,18 +107,53 @@ return resultDia
 
 // ALERTA DE LA FECHA DE PAGO
 let toDay = format(new Date(), 'MM-dd-yyyy')
+// let toDay2 = format(new Date(), 'yyyy-MM-dd')
+// console.log(toDay2);
+// console.log();
 
+// var resultu = differenceInDays(
+//   (new Date(2023,12,10)),
+//   new Date()
+// )
+
+// console.log(resultu);
+// let [mesToDay,diaToDay,anioToDay] = "12-13-2023".split('-')
+// console.log(differenceInDays(new Date(2023,12,14),new Date(anioToDay,mesToDay,diaToDay)))
 export const alertDatePay =(data,toDay)=>{
-  let morosos=[]
+  let customerGreen=[]
+  let customerYellow=[]
+  let customerRed=[]
   let customerOk =[]
+
+  let [mesToDay,diaToDay,anioToDay] = toDay.split('-')
+ // console.log(differenceInDays(new Date(anio,mes,dia), new Date(2023,12,14)))
   
-if(morosos.length==0){
+if(customerYellow.length==0){
   data.map((element)=>{
 
-    let result = element.resultPrestamo.find(elem=>toDay==elem.fechaPago)
+    // Un día antes de la fecha de vencimiento
+    let resultGreen = element.resultPrestamo.find(elem=>{
+      let [mes,dia,anio] = elem.fechaPago.split('-')
+       return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1
+      })
 
-    if(result!==undefined){
-      morosos.push(element)
+    // La misma fecha de vencimiento
+    let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago)
+
+    // Pasado la fecha de vencimiento
+    let resultRed = element.resultPrestamo.find(elem=>{
+        let [mes,dia,anio] = elem.fechaPago.split('-')
+         return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0
+        })
+
+    if(resultGreen!==undefined){
+      customerGreen.push(element)
+      }
+    if(resultYellow!==undefined){
+      customerYellow.push(element)
+    }
+    if(resultRed!==undefined){
+      customerRed.push(element)
     }
     else{
       customerOk.push(element)
@@ -128,10 +163,15 @@ if(morosos.length==0){
 }
 
 return {
-  resultMorosos:morosos,
+  resultCustumerGreen:customerGreen,
+  resultCustomerYellow:customerYellow,
+  resultCustomerRed:customerRed,
   resultCustomerOk:customerOk
 }
 
 }
 let result = alertDatePay(data,toDay)
 console.log(result);
+
+//! faltaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//! corregir los datos que salen del resultado, estan saliendo mal, no se selecciona como debe sers

@@ -4,15 +4,34 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { fechaPagoAtomatico, formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
+//import { green } from "@mui/material/colors";
 
-const Users = ({ data, red, setRed, green, setGreen }) => {
+const Users = ({ data, red, setRed, color, typeColor, setGreen }) => {
   const navigation = useNavigation();
   const [day, setDay] = useState("");
   const [enable, setEnable] = useState(true);
 
+  // estilos
+
+  const [estilos, setEstilos] = useState({
+    fontSize: 40,
+    //color: "red"
+  });
+
+  const cambiarColor = (color) => {
+    const estilosCopia = { ...estilos };
+    estilosCopia.color = color;
+    setEstilos(estilosCopia);
+  };
+  //console.log(typeColor);
+  useEffect(() => {
+    if (color) cambiarColor(color);
+  }, [color]);
+
   const handleAlert = () => {
     navigation.navigate("Alerta");
   };
+
   useEffect(() => {
     if (red) setEnable(true);
   }, []);
@@ -71,7 +90,7 @@ const Users = ({ data, red, setRed, green, setGreen }) => {
             >
               <MaterialIcons
                 name="notifications"
-                style={red ? styles.iconAlertOnYelow : styles.iconAlertOff}
+                style={color ? estilos : styles.iconAlertOff}
               />
             </Pressable>
           </View>
@@ -155,14 +174,24 @@ const styles = StyleSheet.create({
     color: "cornsilk",
   },
   iconAlertOff: {
-    //color: "cornsilk",
-    // color: "#4ecb71",
-    color: "rgb(66, 242, 46)",
+    color: "cornsilk",
+    //color: "green",
+    //color: "rgb(66, 242, 46)",
     fontSize: 40,
   },
   iconAlertOnYelow: {
     //color: "red",
     color: "rgb(242, 238, 46)",
+    fontSize: 40,
+  },
+  Green: {
+    //color: "red",
+    color: "rgb(66, 242, 46)",
+    fontSize: 40,
+  },
+  iconAlertOnRed: {
+    color: "red",
+    //color: "rgb(242, 238, 46)",
     fontSize: 40,
   },
 });
