@@ -7,18 +7,65 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { formatDate } from "../../utils/thunks/Thunks";
 
-const Cronograma = ({ dataPrestamo }) => {
+const Cronograma = ({ dataPrestamo, data }) => {
   const [indice, setIndice] = useState(0);
 
+  // ****** EDITAR EL STATUS DE PAGO
+  const [modific, setModific] = useState({});
+
+  useEffect(() => {
+    setModific(data);
+    setUpdatePrestamo(data[0]?.resultPrestamo);
+  }, [data]);
+
+  //!!!!
+  const [updatePrestamo, setUpdatePrestamo] = useState([]);
+
+  const calcular = (indice) => {
+    data[0]?.resultPrestamo.map((element) => {
+      if (element.cuota == parseInt(indice) + 1) {
+        let objeto = {
+          ITF: element.ITF,
+          SegDesg: element.SegDesg,
+          capital: element.capital,
+          cuota: element.cuota,
+          dias: element.dias,
+          fechaDesembolso: element.fechaDesembolso,
+          fechaPago: element.fechaPago,
+          interes: element.interes,
+          montoCuota: element.montoCuota,
+          statusPay: true,
+        };
+        updatePrestamo.splice(indice, 1, objeto);
+      }
+    });
+  };
+  //console.log(updatePrestamo);
+
   const handlePayShare = () => {
+    calcular(indice); // Modifica el resultado de "resultPrestamo"
+
+    setModific({
+      ...modific[0],
+      uuid: data[0].uuid,
+      apellido: data[0].apellido,
+      celular: data[0].celular,
+      correo: data[0].correo,
+      direccion: data[0].direccion,
+      dni: data[0].dni,
+      nombre: data[0].nombre,
+      resultPrestamo: updatePrestamo,
+    });
     if (indice < (dataPrestamo == undefined ? null : dataPrestamo.length - 1)) {
       setIndice(indice + 1);
     } else {
       console.log("pago completado");
+      //! una vez pagado la cuenta debemos de ver que se hace con los datos del cliente
     }
   };
 
-  //console.log(dataPrestamo.length);
+  console.log(modific);
+
   return (
     <View style={styles.containerContainer}>
       {dataPrestamo == undefined ? (

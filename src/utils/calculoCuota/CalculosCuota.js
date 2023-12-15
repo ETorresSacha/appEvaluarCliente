@@ -103,7 +103,8 @@ export const calculoFRCA = (data) =>{
             SegDesg:element.SegDesgrvamen.toFixed(2),
             ITF:itf.toFixed(2),
             montoCuota:promCuota.toFixed(2),
-            dias:element.Dias
+            dias:element.Dias,
+            statusPay:false
         }
         
     })
