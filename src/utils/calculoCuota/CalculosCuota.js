@@ -47,7 +47,7 @@ export const calculoFRCA = (data) =>{
             {
             cuota:i, 
             fechaPago:sumarMes(data,i-1),
-            //sfechaPago:data.fechaPago,
+            fechaDesembolso:data.fechaDesembolso,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
             FRC :solutionFRC(resultTED,data,i,acumFRCA),
@@ -81,7 +81,6 @@ export const calculoFRCA = (data) =>{
         result.map((element) => cuotass.push(element.cuotaCapital))
         let resultSumaCapi = cuotass.reduce((accum, currentValue) => accum + currentValue,0);
         //promCuota = resultPromCuo/data.cuotas
-        console.log(resultSumaCapi.toFixed(2));
 
     // ITF
     let itf = (promCuota * 0.00005)
@@ -90,10 +89,14 @@ export const calculoFRCA = (data) =>{
 
     // result
     let cronogramaAjustado = result.map((element,index) =>{
+        let result
+        let [anio,mes,dia,] = element.fechaDesembolso.split('-')
+        result=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${anio}`
 
         return {
    
             cuota:element.cuota,
+            fechaDesembolso:result,
             fechaPago: element.fechaPago,
             capital: (promCuota-(element.cuotaInteres+element.SegDesgrvamen+itf)).toFixed(2),
             interes: element.cuotaInteres.toFixed(2),

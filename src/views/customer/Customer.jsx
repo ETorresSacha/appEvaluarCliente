@@ -100,7 +100,7 @@ const Customer = () => {
     //   setTypeColor({ ...typeColor, red: "red" });
     // }
   }, [data]);
-  console.log(typeColor);
+  //console.log(customer.customerYellow[0]);
 
   //! pruba de alerta
 

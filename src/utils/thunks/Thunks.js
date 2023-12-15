@@ -149,15 +149,16 @@ if(customerYellow.length==0){
     // if(resultGreen!==undefined){
     //   customerGreen.push(element)
     //   }
-     if(resultYellow!==undefined){
-       customerYellow.push(element)
-     }
-    // if(resultRed!==undefined){
-    //   customerRed.push(element)
-    // }
-     else{
-       customerOk.push(element)
-     }
+    //  if(resultYellow!==undefined){
+    //    customerYellow.push(element)
+    //  }
+    // // if(resultRed!==undefined){
+    // //   customerRed.push(element)
+    // // }
+    //  else{
+    //    customerOk.push(element)
+    //  }
+     customerOk.push(element)
     
   })
 

@@ -1,120 +1,135 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import UseStorage from "../hooks/UseHookStorage";
 import { useFocusEffect } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { formatDate } from "../../utils/thunks/Thunks";
 
 const Cronograma = ({ dataPrestamo }) => {
-  //console.log(dataPrestamo);
+  const [indice, setIndice] = useState(0);
+
+  const handlePayShare = () => {
+    if (indice < (dataPrestamo == undefined ? null : dataPrestamo.length - 1)) {
+      setIndice(indice + 1);
+    } else {
+      console.log("pago completado");
+    }
+  };
+
+  //console.log(dataPrestamo.length);
   return (
-    <View style={styles.container}>
-      <View style={styles.resumen}>
-        <Text style={styles.resumTitle}>RESUMEN</Text>
-        <View style={styles.resumDetalle}>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              paddingBottom: 15,
-            }}
-          >
-            <View style={[styles.containerSubTitle, { gap: 15 }]}>
-              <Text
-                style={{ color: "cornsilk", fontSize: 18, fontWeight: "bold" }}
+    <View style={styles.containerContainer}>
+      {dataPrestamo == undefined ? (
+        <Text>cargando</Text>
+      ) : (
+        <View style={styles.container}>
+          <View style={styles.resumen}>
+            <Text style={styles.resumTitle}>RESUMEN</Text>
+            <View style={styles.resumDetalle}>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  paddingBottom: 15,
+                }}
               >
-                Fecha de pago:
-              </Text>
-              <Text
-                style={{ color: "orange", fontSize: 17, fontWeight: "bold" }}
-              >
-                12-20-2023
-              </Text>
+                <View style={[styles.containerSubTitle, { gap: 15 }]}>
+                  <Text style={[styles.subTitle, { color: "cornsilk" }]}>
+                    Fecha de pago:
+                  </Text>
+                  <Text style={[styles.subTitle, { color: "orange" }]}>
+                    {formatDate(dataPrestamo[indice]?.fechaPago)}
+                  </Text>
+                </View>
+                <View style={[styles.containerSubTitle, { gap: 15 }]}>
+                  <Text style={[styles.subTitle, { color: "cornsilk" }]}>
+                    Cuota:
+                  </Text>
+                  <Text style={[styles.subTitle, { color: "orange" }]}>
+                    {dataPrestamo[indice]?.montoCuota}
+                  </Text>
+                </View>
+              </View>
+              <View style={{ paddingHorizontal: 15, gap: 2 }}>
+                <View
+                  style={[
+                    styles.containerSubTitle,
+                    { justifyContent: "space-between" },
+                  ]}
+                >
+                  <Text style={styles.subTitle}>Fecha de desembolso</Text>
+                  <Text style={{ color: "white", fontSize: 17 }}>
+                    {dataPrestamo[indice]?.fechaDesembolso}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.containerSubTitle,
+                    { justifyContent: "space-between" },
+                  ]}
+                >
+                  <Text style={styles.subTitle}>Pago pendiente</Text>
+                  <Text style={{ color: "white", fontSize: 17 }}>
+                    {dataPrestamo[indice]?.montoCuota}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.containerSubTitle,
+                    { justifyContent: "space-between" },
+                  ]}
+                >
+                  <Text style={styles.subTitle}>Cuota pendiente</Text>
+                  <Text style={{ color: "white", fontSize: 17 }}>
+                    {dataPrestamo.length - (dataPrestamo[indice]?.cuota - 1)}
+                  </Text>
+                </View>
+              </View>
             </View>
-            <View style={[styles.containerSubTitle, { gap: 15 }]}>
-              <Text
-                style={{ color: "cornsilk", fontSize: 18, fontWeight: "bold" }}
-              >
-                Cuota:
-              </Text>
-              <Text
-                style={{ color: "orange", fontSize: 17, fontWeight: "bold" }}
-              >
-                517.5
-              </Text>
-            </View>
+            <Pressable style={styles.buttonContainer} onPress={handlePayShare}>
+              <FontAwesome
+                name="money"
+                style={{ color: "cornsilk", fontSize: 40 }}
+              />
+              <Text style={styles.subTitle}>Pagar</Text>
+            </Pressable>
           </View>
-          <View style={{ paddingHorizontal: 15, gap: 2 }}>
-            <View
-              style={[
-                styles.containerSubTitle,
-                { justifyContent: "space-between" },
-              ]}
-            >
-              <Text style={styles.subTitle}>Fecha de desembolso</Text>
-              <Text style={{ color: "white", fontSize: 17 }}>12-20-2023</Text>
-            </View>
-            <View
-              style={[
-                styles.containerSubTitle,
-                { justifyContent: "space-between" },
-              ]}
-            >
-              <Text style={styles.subTitle}>Pago pendiente</Text>
-              <Text style={{ color: "white", fontSize: 17 }}>517.5</Text>
-            </View>
-            <View
-              style={[
-                styles.containerSubTitle,
-                { justifyContent: "space-between" },
-              ]}
-            >
-              <Text style={styles.subTitle}>Cuota pendiente</Text>
-              <Text style={{ color: "white", fontSize: 17 }}>2</Text>
-            </View>
+          <View style={styles.cronograma}>
+            {/* <Text style={styles.titleCrono}>Cronograma</Text> */}
+
+            <ScrollView style={styles.containerCuotas}>
+              <View style={styles.containerTitle}>
+                <View style={styles.title}>
+                  <Text style={styles.tilteText}>CUOTA</Text>
+                </View>
+                <View style={styles.title}>
+                  <Text style={styles.tilteText}>FECHA</Text>
+                </View>
+                <View style={styles.title}>
+                  <Text style={styles.tilteText}>MONTO CUOTA</Text>
+                </View>
+              </View>
+              {dataPrestamo?.map((element, index) => {
+                return (
+                  <View
+                    key={index}
+                    style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
+                  >
+                    <Text style={styles.dataText}>
+                      {element.cuota.toString().padStart(2, "0")}
+                    </Text>
+                    <Text style={styles.dataText}>{element.fechaPago}</Text>
+                    <Text style={styles.dataText}>{element.montoCuota}</Text>
+                  </View>
+                );
+              })}
+            </ScrollView>
           </View>
         </View>
-        <Pressable style={styles.buttonContainer}>
-          <FontAwesome
-            name="money"
-            style={{ color: "cornsilk", fontSize: 40 }}
-          />
-          <Text style={styles.subTitle}>Pagar</Text>
-        </Pressable>
-      </View>
-      <View style={styles.cronograma}>
-        {/* <Text style={styles.titleCrono}>Cronograma</Text> */}
-
-        <ScrollView style={styles.containerCuotas}>
-          <View style={styles.containerTitle}>
-            <View style={styles.title}>
-              <Text style={styles.tilteText}>CUOTA</Text>
-            </View>
-            <View style={styles.title}>
-              <Text style={styles.tilteText}>FECHA</Text>
-            </View>
-            <View style={styles.title}>
-              <Text style={styles.tilteText}>MONTO CUOTA</Text>
-            </View>
-          </View>
-          {dataPrestamo?.map((element, index) => {
-            return (
-              <View
-                key={index}
-                style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
-              >
-                <Text style={styles.dataText}>
-                  {element.cuota.toString().padStart(2, "0")}
-                </Text>
-                <Text style={styles.dataText}>{element.fechaPago}</Text>
-                <Text style={styles.dataText}>{element.montoCuota}</Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
+      )}
     </View>
   );
 };
@@ -122,6 +137,9 @@ const Cronograma = ({ dataPrestamo }) => {
 export default Cronograma;
 
 const styles = StyleSheet.create({
+  containerContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     paddingTop: 10,
@@ -186,10 +204,9 @@ const styles = StyleSheet.create({
   },
 
   subTitle: {
-    //width: 180,
     fontSize: 17,
-    color: "white",
     fontWeight: "bold",
+    color: "white",
   },
   containerSubTitle: {
     display: "flex",
@@ -199,7 +216,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
-    //marginTop: 15,
     alignItems: "center",
     alignContent: "center",
     width: 250,
