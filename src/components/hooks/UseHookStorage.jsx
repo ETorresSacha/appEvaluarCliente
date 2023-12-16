@@ -7,7 +7,7 @@ const MY_KEY_DATA = "@data";
 
 const UseStorage = () => {
   // GUARDAR INFORMACION
-  const saveInfoStorage = async (storageKey, meal) => {
+  const saveInfoStorage = async (storageKey, meal, indice) => {
     try {
       const currentSave = await AsyncStorage.getItem(storageKey); // Trae los datos guardados
 
@@ -23,6 +23,9 @@ const UseStorage = () => {
 
         return Promise.resolve();
       }
+
+      // Editar
+      // Editar el status
 
       // Si la lista esta vacia
       await AsyncStorage.setItem(storageKey, JSON.stringify([meal]));
@@ -102,10 +105,32 @@ const UseStorage = () => {
     }
   };
 
+  //! UPDATE
+  const handleUpdateStatusPay = async (data) => {
+    try {
+      const resultGet = await handleGetCronograma();
+      let indice;
+      resultGet?.find((element, index) => {
+        if (
+          element.uuid == (data?.uuid == undefined ? data[0].uuid : data?.uuid)
+        ) {
+          indice = index;
+        }
+      });
+      let newObjeto = data?.uuid == undefined ? data[0] : data;
+      resultGet.splice(indice, 1, newObjeto);
+      await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
+      return Promise.resolve();
+    } catch (error) {
+      return console.error(error);
+    }
+  };
+
   return {
     onSaveCronograma: handleSaveCronograma,
     onGetCronograma: handleGetCronograma,
     onDeleteCustomer: handleDeleteCustomer,
+    onUpdateStatusPay: handleUpdateStatusPay,
   };
 };
 

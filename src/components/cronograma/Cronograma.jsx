@@ -8,10 +8,11 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { formatDate } from "../../utils/thunks/Thunks";
 
 const Cronograma = ({ dataPrestamo, data }) => {
+  const { onUpdateStatusPay } = UseStorage();
   const [indice, setIndice] = useState(0);
 
   // ****** EDITAR EL STATUS DE PAGO
-  const [modific, setModific] = useState({});
+  const [modific, setModific] = useState([]);
 
   useEffect(() => {
     setModific(data);
@@ -21,7 +22,7 @@ const Cronograma = ({ dataPrestamo, data }) => {
   //!!!!
   const [updatePrestamo, setUpdatePrestamo] = useState([]);
 
-  const calcular = (indice) => {
+  const modificResulPrestamo = (indice) => {
     data[0]?.resultPrestamo.map((element) => {
       if (element.cuota == parseInt(indice) + 1) {
         let objeto = {
@@ -40,10 +41,9 @@ const Cronograma = ({ dataPrestamo, data }) => {
       }
     });
   };
-  //console.log(updatePrestamo);
 
-  const handlePayShare = () => {
-    calcular(indice); // Modifica el resultado de "resultPrestamo"
+  const handlePayShare = async () => {
+    modificResulPrestamo(indice); // Modifica el resultado de "resultPrestamo"
 
     setModific({
       ...modific[0],
@@ -58,13 +58,15 @@ const Cronograma = ({ dataPrestamo, data }) => {
     });
     if (indice < (dataPrestamo == undefined ? null : dataPrestamo.length - 1)) {
       setIndice(indice + 1);
+      await onUpdateStatusPay(modific);
     } else {
+      await onUpdateStatusPay(modific);
       console.log("pago completado");
       //! una vez pagado la cuenta debemos de ver que se hace con los datos del cliente
     }
   };
 
-  console.log(modific);
+  //console.log(modific);
 
   return (
     <View style={styles.containerContainer}>

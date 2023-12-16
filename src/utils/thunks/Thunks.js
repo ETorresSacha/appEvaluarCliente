@@ -173,7 +173,7 @@ return {
 
 }
 let result = alertDatePay(data,toDay)
-console.log(result);
+//console.log(result);
 
 //! faltaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 //! corregir los datos que salen del resultado, estan saliendo mal, no se selecciona como debe sers
