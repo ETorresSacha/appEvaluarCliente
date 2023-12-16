@@ -65,7 +65,7 @@ const Users = ({ data, red, setRed, color, typeColor, setGreen }) => {
                   fontSize: 17,
                   color: "cornsilk",
                 }}
-              >{`${element.nombre.split(" ")[0]}`}</Text>
+              >{`${element?.nombre?.split(" ")[0]}`}</Text>
               <Text style={styles.dataText}>
                 {formatDate(fechaPagoAtomatico(element?.resultPrestamo))}
               </Text>

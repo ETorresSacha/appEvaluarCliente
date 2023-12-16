@@ -12,62 +12,48 @@ const Cronograma = ({ dataPrestamo, data }) => {
   const [indice, setIndice] = useState(0);
 
   // ****** EDITAR EL STATUS DE PAGO
-  const [modific, setModific] = useState([]);
+  const [modify, setModify] = useState([]);
+
+  const [updatePrestamo, setUpdatePrestamo] = useState([]);
+  const [dataSee, setDataSee] = useState([]);
 
   useEffect(() => {
-    setModific(data);
+    setModify(data);
     setUpdatePrestamo(data[0]?.resultPrestamo);
-  }, [data]);
+    let result = data[0]?.resultPrestamo.find(
+      (element) => element.statusPay == false
+    );
+    setDataSee(result);
+    setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
 
-  //!!!!
-  const [updatePrestamo, setUpdatePrestamo] = useState([]);
-
-  const modificResulPrestamo = (indice) => {
-    data[0]?.resultPrestamo.map((element) => {
-      if (element.cuota == parseInt(indice) + 1) {
-        let objeto = {
-          ITF: element.ITF,
-          SegDesg: element.SegDesg,
-          capital: element.capital,
-          cuota: element.cuota,
-          dias: element.dias,
-          fechaDesembolso: element.fechaDesembolso,
-          fechaPago: element.fechaPago,
-          interes: element.interes,
-          montoCuota: element.montoCuota,
-          statusPay: true,
-        };
-        updatePrestamo.splice(indice, 1, objeto);
-      }
-    });
-  };
+    console.log(result);
+  }, [data, indice]);
 
   const handlePayShare = async () => {
-    modificResulPrestamo(indice); // Modifica el resultado de "resultPrestamo"
+    let objeto = { ...dataSee, statusPay: true };
+    updatePrestamo.splice(indice, 1, objeto);
 
-    setModific({
-      ...modific[0],
+    setModify({
+      ...modify[0],
       uuid: data[0].uuid,
-      apellido: data[0].apellido,
-      celular: data[0].celular,
-      correo: data[0].correo,
-      direccion: data[0].direccion,
-      dni: data[0].dni,
-      nombre: data[0].nombre,
       resultPrestamo: updatePrestamo,
     });
     if (indice < (dataPrestamo == undefined ? null : dataPrestamo.length - 1)) {
+      setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
-      await onUpdateStatusPay(modific);
+      console.log("estas aqui");
+      await onUpdateStatusPay(modify);
     } else {
-      await onUpdateStatusPay(modific);
+      await onUpdateStatusPay(modify);
       console.log("pago completado");
       //! una vez pagado la cuenta debemos de ver que se hace con los datos del cliente
     }
   };
-
-  //console.log(modific);
-
+  //console.log("resul: ", dataSee);
+  //console.log(updatePrestamo);
+  console.log(modify[0]);
+  //console.log(data[0]?.resultPrestamo);
+  //console.log(prueba?.fechaPago);
   return (
     <View style={styles.containerContainer}>
       {dataPrestamo == undefined ? (
@@ -90,7 +76,9 @@ const Cronograma = ({ dataPrestamo, data }) => {
                     Fecha de pago:
                   </Text>
                   <Text style={[styles.subTitle, { color: "orange" }]}>
-                    {formatDate(dataPrestamo[indice]?.fechaPago)}
+                    {dataSee?.fechaPago == undefined
+                      ? null
+                      : formatDate(dataSee?.fechaPago)}
                   </Text>
                 </View>
                 <View style={[styles.containerSubTitle, { gap: 15 }]}>
@@ -98,7 +86,7 @@ const Cronograma = ({ dataPrestamo, data }) => {
                     Cuota:
                   </Text>
                   <Text style={[styles.subTitle, { color: "orange" }]}>
-                    {dataPrestamo[indice]?.montoCuota}
+                    {dataSee?.montoCuota}
                   </Text>
                 </View>
               </View>
@@ -111,7 +99,7 @@ const Cronograma = ({ dataPrestamo, data }) => {
                 >
                   <Text style={styles.subTitle}>Fecha de desembolso</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
-                    {dataPrestamo[indice]?.fechaDesembolso}
+                    {dataSee?.fechaDesembolso}
                   </Text>
                 </View>
                 <View
@@ -122,7 +110,7 @@ const Cronograma = ({ dataPrestamo, data }) => {
                 >
                   <Text style={styles.subTitle}>Pago pendiente</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
-                    {dataPrestamo[indice]?.montoCuota}
+                    {dataSee?.montoCuota}
                   </Text>
                 </View>
                 <View
@@ -133,7 +121,8 @@ const Cronograma = ({ dataPrestamo, data }) => {
                 >
                   <Text style={styles.subTitle}>Cuota pendiente</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
-                    {dataPrestamo.length - (dataPrestamo[indice]?.cuota - 1)}
+                    {/* {dataPrestamo.length - (dataSee?.cuota - 1)} */}
+                    {dataSee?.cuota}
                   </Text>
                 </View>
               </View>
