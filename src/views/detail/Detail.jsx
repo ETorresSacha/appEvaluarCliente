@@ -87,7 +87,7 @@ const Detail = (props) => {
           </View>
         </View>
       </View>
-      <Cronograma dataPrestamo={user[0]?.resultPrestamo} data={user} />
+      <Cronograma data={user} />
     </View>
   );
 };

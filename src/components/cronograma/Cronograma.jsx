@@ -1,21 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import UseStorage from "../hooks/UseHookStorage";
-import { useFocusEffect } from "@react-navigation/native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { formatDate } from "../../utils/thunks/Thunks";
 
-const Cronograma = ({ dataPrestamo, data }) => {
+const Cronograma = ({ data }) => {
   const { onUpdateStatusPay } = UseStorage();
+
   const [indice, setIndice] = useState(0);
-
-  // ****** EDITAR EL STATUS DE PAGO
-  const [modify, setModify] = useState([]);
-
-  const [updatePrestamo, setUpdatePrestamo] = useState([]);
-  const [dataSee, setDataSee] = useState([]);
+  const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
+  const [modify, setModify] = useState([]); // Editar el status del pago
+  const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
 
   useEffect(() => {
     setModify(data);
@@ -25,8 +20,6 @@ const Cronograma = ({ dataPrestamo, data }) => {
     );
     setDataSee(result);
     setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
-
-    console.log(result);
   }, [data, indice]);
 
   const handlePayShare = async () => {
@@ -38,10 +31,11 @@ const Cronograma = ({ dataPrestamo, data }) => {
       uuid: data[0].uuid,
       resultPrestamo: updatePrestamo,
     });
-    if (indice < (dataPrestamo == undefined ? null : dataPrestamo.length - 1)) {
+    if (
+      indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
+    ) {
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
-      console.log("estas aqui");
       await onUpdateStatusPay(modify);
     } else {
       await onUpdateStatusPay(modify);
@@ -49,14 +43,9 @@ const Cronograma = ({ dataPrestamo, data }) => {
       //! una vez pagado la cuenta debemos de ver que se hace con los datos del cliente
     }
   };
-  //console.log("resul: ", dataSee);
-  //console.log(updatePrestamo);
-  console.log(modify[0]);
-  //console.log(data[0]?.resultPrestamo);
-  //console.log(prueba?.fechaPago);
   return (
     <View style={styles.containerContainer}>
-      {dataPrestamo == undefined ? (
+      {updatePrestamo == undefined ? (
         <Text>cargando</Text>
       ) : (
         <View style={styles.container}>
@@ -121,8 +110,8 @@ const Cronograma = ({ dataPrestamo, data }) => {
                 >
                   <Text style={styles.subTitle}>Cuota pendiente</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
-                    {/* {dataPrestamo.length - (dataSee?.cuota - 1)} */}
-                    {dataSee?.cuota}
+                    {/* {updatePrestamo.length - (dataSee?.cuota - 1)} */}
+                    {/* {dataSee?.cuota} */}
                   </Text>
                 </View>
               </View>
@@ -150,7 +139,7 @@ const Cronograma = ({ dataPrestamo, data }) => {
                   <Text style={styles.tilteText}>MONTO CUOTA</Text>
                 </View>
               </View>
-              {dataPrestamo?.map((element, index) => {
+              {updatePrestamo?.map((element, index) => {
                 return (
                   <View
                     key={index}
