@@ -19,31 +19,16 @@ const Cronograma = ({ data }) => {
     let result = data[0]?.resultPrestamo.find(
       (element) => element.statusPay == false
     );
-    //console.log(result);
-    if (cancelledShare) {
-      console.log("cuenta cancellado es true");
-      setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
-    } else {
-      setDataSee(result);
-      setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
-    }
     if (result != undefined) {
       setDataSee(result);
       setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
       setCancelledShare(false);
     }
     if (result == undefined) {
-      console.log("result indefinido");
+      setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
       setCancelledShare(true);
-      //console.log("pass");
-      //let indices = data[0]?.resultPrestamo.length;
-      //console.log(indices);
-      //setIndice(data[0]?.resultPrestamo.length);
-      //setDataSee(data[0]?.resultPrestamo[indice - 1]);
     }
   }, [data, indice, cancelledShare]);
-  let indices = data[0]?.resultPrestamo.length;
-  //console.log(dataSee);
 
   const handlePayShare = async () => {
     let objeto = { ...dataSee, statusPay: true };
@@ -54,7 +39,6 @@ const Cronograma = ({ data }) => {
       uuid: data[0].uuid,
       resultPrestamo: updatePrestamo,
     });
-    console.log(indice);
     if (
       indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
     ) {
@@ -65,22 +49,9 @@ const Cronograma = ({ data }) => {
     } else {
       await onUpdateStatusPay(modify);
       setCancelledShare(true);
-      // setDataSee({...dataSee,
-      // })
-      // let indices = data[0]?.resultPrestamo.length;
-      // setIndice(indices - 1);
-      //console.log(indices);
-      //setIndice(data[0]?.resultPrestamo.length);
-      //setDataSee(data[0]?.resultPrestamo[indice - 1]);
-      console.log("pago completado");
-      //! una vez pagado la cuenta debemos de ver que se hace con los datos del cliente
     }
   };
-  console.log(data[0]?.resultPrestamo.length);
-  // console.log(data[0]?.resultPrestamo[indice]);
-  //console.log(indice);
-  //console.log(dataSee);
-  console.log(indice);
+
   return (
     <View style={styles.containerContainer}>
       {updatePrestamo == undefined ? (
