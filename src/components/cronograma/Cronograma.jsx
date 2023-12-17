@@ -11,6 +11,7 @@ const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
   const [modify, setModify] = useState([]); // Editar el status del pago
   const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
+  const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
 
   useEffect(() => {
     setModify(data);
@@ -18,9 +19,31 @@ const Cronograma = ({ data }) => {
     let result = data[0]?.resultPrestamo.find(
       (element) => element.statusPay == false
     );
-    setDataSee(result);
-    setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
-  }, [data, indice]);
+    //console.log(result);
+    if (cancelledShare) {
+      console.log("cuenta cancellado es true");
+      setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
+    } else {
+      setDataSee(result);
+      setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
+    }
+    if (result != undefined) {
+      setDataSee(result);
+      setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
+      setCancelledShare(false);
+    }
+    if (result == undefined) {
+      console.log("result indefinido");
+      setCancelledShare(true);
+      //console.log("pass");
+      //let indices = data[0]?.resultPrestamo.length;
+      //console.log(indices);
+      //setIndice(data[0]?.resultPrestamo.length);
+      //setDataSee(data[0]?.resultPrestamo[indice - 1]);
+    }
+  }, [data, indice, cancelledShare]);
+  let indices = data[0]?.resultPrestamo.length;
+  //console.log(dataSee);
 
   const handlePayShare = async () => {
     let objeto = { ...dataSee, statusPay: true };
@@ -31,18 +54,33 @@ const Cronograma = ({ data }) => {
       uuid: data[0].uuid,
       resultPrestamo: updatePrestamo,
     });
+    console.log(indice);
     if (
       indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
     ) {
+      console.log("estoy aqui");
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
       await onUpdateStatusPay(modify);
     } else {
       await onUpdateStatusPay(modify);
+      setCancelledShare(true);
+      // setDataSee({...dataSee,
+      // })
+      // let indices = data[0]?.resultPrestamo.length;
+      // setIndice(indices - 1);
+      //console.log(indices);
+      //setIndice(data[0]?.resultPrestamo.length);
+      //setDataSee(data[0]?.resultPrestamo[indice - 1]);
       console.log("pago completado");
       //! una vez pagado la cuenta debemos de ver que se hace con los datos del cliente
     }
   };
+  console.log(data[0]?.resultPrestamo.length);
+  // console.log(data[0]?.resultPrestamo[indice]);
+  //console.log(indice);
+  //console.log(dataSee);
+  console.log(indice);
   return (
     <View style={styles.containerContainer}>
       {updatePrestamo == undefined ? (
@@ -110,7 +148,9 @@ const Cronograma = ({ data }) => {
                 >
                   <Text style={styles.subTitle}>Cuota pendiente</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
-                    {/* {updatePrestamo.length - (dataSee?.cuota - 1)} */}
+                    {!cancelledShare
+                      ? updatePrestamo.length - (dataSee?.cuota - 1)
+                      : "0"}
                     {/* {dataSee?.cuota} */}
                   </Text>
                 </View>
@@ -258,3 +298,6 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
   },
 });
+
+//! TENEMOS QUE CORREGIR CUANDO SE REALIZA EL ULTIMO PAGO, DEBE SALIR LA CUOTA EN CERO Y CAMBIAR EL BOTON DE PAGAR POR UN AVISO QUE DIGA " DEUDA CANCELADO"
+//! CUANDO YA ESTA CANCELADO Y SE SALE Y SE VUELVE A ENTRAR SE TIENE QUE VISUALIZAR COMO EL PUNTO 1
