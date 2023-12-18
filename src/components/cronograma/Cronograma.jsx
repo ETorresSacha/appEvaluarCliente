@@ -42,7 +42,6 @@ const Cronograma = ({ data }) => {
     if (
       indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
     ) {
-      console.log("estoy aqui");
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
       await onUpdateStatusPay(modify);
@@ -84,7 +83,7 @@ const Cronograma = ({ data }) => {
                     Cuota:
                   </Text>
                   <Text style={[styles.subTitle, { color: "orange" }]}>
-                    {dataSee?.montoCuota}
+                    {!cancelledShare ? dataSee?.montoCuota : "0"}
                   </Text>
                 </View>
               </View>
@@ -108,7 +107,7 @@ const Cronograma = ({ data }) => {
                 >
                   <Text style={styles.subTitle}>Pago pendiente</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
-                    {dataSee?.montoCuota}
+                    {!cancelledShare ? dataSee?.montoCuota : "0"}
                   </Text>
                 </View>
                 <View
@@ -117,22 +116,32 @@ const Cronograma = ({ data }) => {
                     { justifyContent: "space-between" },
                   ]}
                 >
-                  <Text style={styles.subTitle}>Cuota pendiente</Text>
+                  <Text style={styles.subTitle}>Cuotas pendientes</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
                     {!cancelledShare
                       ? updatePrestamo.length - (dataSee?.cuota - 1)
                       : "0"}
-                    {/* {dataSee?.cuota} */}
                   </Text>
                 </View>
               </View>
             </View>
-            <Pressable style={styles.buttonContainer} onPress={handlePayShare}>
-              <FontAwesome
-                name="money"
-                style={{ color: "cornsilk", fontSize: 40 }}
-              />
-              <Text style={styles.subTitle}>Pagar</Text>
+            <Pressable
+              style={
+                !cancelledShare
+                  ? [styles.buttonContainer, { backgroundColor: "orange" }]
+                  : [styles.buttonContainer, { borderColor: "white" }]
+              }
+              onPress={!cancelledShare ? handlePayShare : null}
+            >
+              {!cancelledShare ? (
+                <FontAwesome
+                  name="money"
+                  style={{ color: "cornsilk", fontSize: 40 }}
+                />
+              ) : null}
+              <Text style={styles.subTitle}>
+                {!cancelledShare ? "Pagar" : "Deuda Cancelado"}
+              </Text>
             </Pressable>
           </View>
           <View style={styles.cronograma}>
@@ -264,9 +273,7 @@ const styles = StyleSheet.create({
     gap: 10,
     elevation: 5,
     borderWidth: 1,
-    //borderColor: "white",
     marginBottom: 15,
-    backgroundColor: "orange",
   },
 });
 
