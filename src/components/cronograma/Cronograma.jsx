@@ -42,11 +42,19 @@ const Cronograma = ({ data }) => {
     if (
       indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
     ) {
+      // Pago de la cuenta
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
       await onUpdateStatusPay(modify);
     } else {
-      await onUpdateStatusPay(modify);
+      // Cancelación la cuenta
+      let objeto = {
+        ...modify[0],
+        uuid: data[0].uuid,
+        cancelled: true,
+        resultPrestamo: updatePrestamo,
+      };
+      await onUpdateStatusPay(objeto);
       setCancelledShare(true);
     }
   };
@@ -276,6 +284,5 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 });
-
-//! TENEMOS QUE CORREGIR CUANDO SE REALIZA EL ULTIMO PAGO, DEBE SALIR LA CUOTA EN CERO Y CAMBIAR EL BOTON DE PAGAR POR UN AVISO QUE DIGA " DEUDA CANCELADO"
-//! CUANDO YA ESTA CANCELADO Y SE SALE Y SE VUELVE A ENTRAR SE TIENE QUE VISUALIZAR COMO EL PUNTO 1
+//! EN ESTA PARTE FALTA, CUANDO SE CANCELA TODA LA DEUDA SE TIENE QUE MODIFICAR
+//! EL VALOR DE CANCELLED A TRUE, PAR FILTAR LOS DATOS MAS FACIL

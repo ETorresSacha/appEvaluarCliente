@@ -119,11 +119,12 @@ let toDay = format(new Date(), 'MM-dd-yyyy')
 // console.log(resultu);
 // let [mesToDay,diaToDay,anioToDay] = "12-13-2023".split('-')
 // console.log(differenceInDays(new Date(2023,12,14),new Date(anioToDay,mesToDay,diaToDay)))
-export const alertDatePay =(data,toDay)=>{
+export const customerData =(data,toDay)=>{
   let customerGreen=[]
   let customerYellow=[]
   let customerRed=[]
   let customerOk =[]
+  let customerCancelled =[]
 
   let [mesToDay,diaToDay,anioToDay] = toDay.split('-')
  // console.log(differenceInDays(new Date(anio,mes,dia), new Date(2023,12,14)))
@@ -172,7 +173,7 @@ return {
 }
 
 }
-let result = alertDatePay(data,toDay)
+let result = customerData(data,toDay)
 //console.log(result);
 
 //! faltaaaaaaaaaaaaaaaaaaaaaaaaaaaa

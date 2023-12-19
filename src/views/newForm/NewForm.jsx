@@ -33,6 +33,7 @@ const NewForm = () => {
     correo: "",
     direccion: "",
     celular: "",
+    cancelled: false,
     resultPrestamo: [],
   });
 
@@ -77,6 +78,7 @@ const NewForm = () => {
                 correo: dataPerson.correo,
                 direccion: dataPerson.direccion,
                 celular: dataPerson.celular,
+                cancelled: dataPerson.cancelled,
                 resultPrestamo: dataPerson.resultPrestamo,
               });
 

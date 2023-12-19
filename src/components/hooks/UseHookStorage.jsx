@@ -46,6 +46,7 @@ const UseStorage = () => {
     correo,
     direccion,
     celular,
+    cancelled,
     resultPrestamo,
   }) => {
     try {
@@ -57,6 +58,7 @@ const UseStorage = () => {
         correo,
         direccion,
         celular,
+        cancelled,
         resultPrestamo,
       });
 

@@ -10,7 +10,7 @@ import {
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
-import { alertDatePay, orderData } from "../../utils/thunks/Thunks";
+import { customerData, orderData } from "../../utils/thunks/Thunks";
 import { format, add } from "date-fns";
 
 import Users from "../../components/users/Users";
@@ -22,7 +22,7 @@ const Customer = () => {
     dataResult: [],
     dataResultCopy: [],
   });
-
+  console.log(data.dataResult);
   const loadCustomer = async () => {
     // Trae los datos guardados del local storage
     try {
@@ -74,7 +74,7 @@ const Customer = () => {
   // Verifica en que condición se encuentra cada cliente
   const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
-    let result = alertDatePay(data.dataResult, day);
+    let result = customerData(data.dataResult, day);
     //if (result.resultMorosos) setRed(true); // al límite
     //if (result.resultCustomerRed) setTypeColor({ ...typeColor, red: "red" }); // al límite
     if (result.resultCustomerOk) {
