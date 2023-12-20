@@ -161,10 +161,9 @@ const Customer = () => {
           </View>
         </View>
 
-        {/* <Users data={result.resultCustomerRed} color={typeColor.red} /> */}
-        {/* <Users data={customer.customerYellow} color={typeColor.yellow} /> */}
-        {/* <Users data={customer.customerGreen} color={typeColor.green} /> */}
-        {/* <Users data={debtorsCustomer} /> */}
+        <Users data={customer.customerRed} color={typeColor.red} />
+        <Users data={customer.customerYellow} color={typeColor.yellow} />
+        <Users data={customer.customerGreen} color={typeColor.green} />
         <Users data={customer.customer} />
       </ScrollView>
     </View>
