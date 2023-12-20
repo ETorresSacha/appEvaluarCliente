@@ -30,7 +30,7 @@
 // console.log(sumaUnicode("30-11-2023",0));
 // console.log(sumaUnicode("21-12-2023",0));
 
-import { compareAsc, format,add,formatDistance, getDate,isFuture} from 'date-fns'
+import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 
 let result = format(new Date(2014, 11, 11), 'dd-MM-yyyy')
 //=> '2014-02-11'
@@ -99,3 +99,5 @@ const trigger = add(new Date(date), {
   //seconds: 30,
 });
 console.log(trigger);
+
+console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))

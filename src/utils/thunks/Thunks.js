@@ -119,6 +119,7 @@ let toDay = format(new Date(), 'MM-dd-yyyy')
 // console.log(resultu);
 // let [mesToDay,diaToDay,anioToDay] = "12-13-2023".split('-')
 // console.log(differenceInDays(new Date(2023,12,14),new Date(anioToDay,mesToDay,diaToDay)))
+
 export const customerData =(data,toDay)=>{
   let customerGreen=[]
   let customerYellow=[]
@@ -127,49 +128,57 @@ export const customerData =(data,toDay)=>{
   let customerCancelled =[]
 
   let [mesToDay,diaToDay,anioToDay] = toDay.split('-')
- // console.log(differenceInDays(new Date(anio,mes,dia), new Date(2023,12,14)))
-  
-if(customerYellow.length==0){
-  data.map((element)=>{
 
+ data.map(element=>{
+
+  // FALTA CANCELAR LA DEUDA
+   if(element.cancelled == false){
     // Un día antes de la fecha de vencimiento
-    // let resultGreen = element.resultPrestamo.find(elem=>{
-    //   let [mes,dia,anio] = elem.fechaPago.split('-')
-    //    return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1
-    //   })
+    let resultGreen = element.resultPrestamo.find(elem=>{
+      let [mes,dia,anio] = elem.fechaPago.split('-')
+       return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1
+      })
 
-    // La misma fecha de vencimiento
+    //La misma fecha de vencimiento
     let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago)
 
     // Pasado la fecha de vencimiento
-    // let resultRed = element.resultPrestamo.find(elem=>{
-    //     let [mes,dia,anio] = elem.fechaPago.split('-')
-    //      return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0
-    //     })
+    let resultRed = element.resultPrestamo.find(elem=>{
+        let [mes,dia,anio] = elem.fechaPago.split('-')
+         return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0
+        })
 
-    // if(resultGreen!==undefined){
-    //   customerGreen.push(element)
-    //   }
-    //  if(resultYellow!==undefined){
-    //    customerYellow.push(element)
-    //  }
-    // // if(resultRed!==undefined){
-    // //   customerRed.push(element)
-    // // }
-    //  else{
-    //    customerOk.push(element)
-    //  }
-     customerOk.push(element)
-    
-  })
+    if(resultGreen!==undefined){
+      customerGreen.push(element)
+      }
+     if(resultYellow!==undefined){
+       customerYellow.push(element)
+     }
+    if(resultRed!==undefined){
+      customerRed.push(element)
+    }
+     if (resultGreen == undefined && resultYellow == undefined && resultRed == undefined){
+       customerOk.push(element)
+     }
 
-}
+
+  }
+  
+  // DEUDA CANCELADA
+  else{
+    customerCancelled.push(element)
+  }
+
+ }
+ )
+
 
 return {
   resultCustumerGreen:customerGreen,
   resultCustomerYellow:customerYellow,
   resultCustomerRed:customerRed,
-  resultCustomerOk:customerOk
+  resultCustomerOk:customerOk,
+  resultCustomerCancelled:customerCancelled
 }
 
 }

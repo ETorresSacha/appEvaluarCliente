@@ -22,7 +22,7 @@ const Customer = () => {
     dataResult: [],
     dataResultCopy: [],
   });
-  console.log(data.dataResult);
+  //console.log(data.dataResult[0]);
   const loadCustomer = async () => {
     // Trae los datos guardados del local storage
     try {
@@ -69,9 +69,11 @@ const Customer = () => {
     customerYellow: [],
     customerRed: [],
     customerOk: [],
+    customerCancelled: [],
   });
 
   // Verifica en que condición se encuentra cada cliente
+
   const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
     let result = customerData(data.dataResult, day);
@@ -84,10 +86,15 @@ const Customer = () => {
         customerYellow: result.resultCustomerYellow,
         customerRed: result.resultCustomerRed,
         customerOk: result.resultCustomerOk,
+        customerCancelled: result.resultCustomerCancelled,
       });
     }
   };
-
+  console.log("green: ", customer.customerGreen[0].resultPrestamo);
+  console.log("yellow: ", customer.customerYellow[0].resultPrestamo);
+  console.log("red: ", customer.customerRed);
+  console.log("ok: ", customer.customerOk);
+  console.log("cancelled: ", customer.customerCancelled);
   useEffect(() => {
     resultCustomer();
     // if (customer.customerGreen.length != 0) {
