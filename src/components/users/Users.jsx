@@ -20,6 +20,19 @@ const Users = ({ data, color }) => {
     setEstilos(estilosCopia);
   };
 
+  // Fecha de pago
+  const datePay = (data) => {
+    let result;
+    if (data != undefined) {
+      result = data.resultPrestamo.find(
+        (element) => element.statusPay == false
+      );
+    }
+    return result == undefined ? null : result.fechaPago;
+  };
+  console.log(datePay(data[0]));
+  //console.log(data[0] == undefined ? null : data[0].resultPrestamo);
+
   const handleAlert = () => {
     navigation.navigate("Alerta");
   };
@@ -54,7 +67,7 @@ const Users = ({ data, color }) => {
               >{`${element?.nombre?.split(" ")[0]}`}</Text>
               <Text style={styles.dataText}>
                 {/* {formatDate(fechaPagoAtomatico(element?.resultPrestamo))} */}
-                {formatDate(element?.resultPrestamo[0]?.fechaPago)}
+                {formatDate(datePay(element))}
               </Text>
               <Text
                 style={{

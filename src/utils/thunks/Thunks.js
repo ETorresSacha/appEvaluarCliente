@@ -1,5 +1,5 @@
 import { compareAsc, format,add,formatDistance, getDate,isFuture,isEqual,differenceInDays} from 'date-fns'
-// ORDENAR
+//TODO--> ORDENAR
 export const orderData = (type,data,value)=>{
     let result
     switch (type) {
@@ -45,7 +45,7 @@ export const orderData = (type,data,value)=>{
             return result
 }
 
-//CAMBIAR EL FORMATO DE LA FECHA
+//TODO--> CAMBIAR EL FORMATO DE LA FECHA
 export const formatDate = (date)=>{
   let result
   let [mes,dia,anio] = date.split('-')
@@ -53,7 +53,7 @@ export const formatDate = (date)=>{
 return result
 }
 
-// CUOTA DE PAGO AUTOMÁTICO
+//TODO--> CUOTA DE PAGO AUTOMÁTICO
 
 let data =[
 {apellido: "Torres", celular: "965231452", correo: "Bshs@jeheh.com", direccion: "Jdjdhd", dni: "85632145", nombre: "Maritza", resultPrestamo:  [{ITF: "0.02", SegDesg: "0.05", capital: "337.53", cuota: 1, dias: 4, fechaPago: "12-29-2023", interes: "1.71", montoCuota: "339.31"}, {ITF: "0.02", SegDesg: "1.54", capital: "280.13", cuota: 2, dias: 354, fechaPago: "01-29-2024", interes: "57.62", montoCuota: "339.31"}], uuid: "49dcfc98-4338-4952-b62b-92d63e92a181"}, 
@@ -105,20 +105,7 @@ return resultDia
 }
 
 
-// ALERTA DE LA FECHA DE PAGO
-let toDay = format(new Date(), 'MM-dd-yyyy')
-// let toDay2 = format(new Date(), 'yyyy-MM-dd')
-// console.log(toDay2);
-// console.log();
-
-// var resultu = differenceInDays(
-//   (new Date(2023,12,10)),
-//   new Date()
-// )
-
-// console.log(resultu);
-// let [mesToDay,diaToDay,anioToDay] = "12-13-2023".split('-')
-// console.log(differenceInDays(new Date(2023,12,14),new Date(anioToDay,mesToDay,diaToDay)))
+//TODO--> CLASIFICACIÓN DE LOS CLIENTES POR SU ESTADO DE PAGO
 
 export const customerData =(data,toDay)=>{
   let customerGreen=[]
@@ -131,21 +118,21 @@ export const customerData =(data,toDay)=>{
 
  data.map(element=>{
 
-  // FALTA CANCELAR LA DEUDA
+  // Deuda sin cancelar
    if(element.cancelled == false){
     // Un día antes de la fecha de vencimiento
     let resultGreen = element.resultPrestamo.find(elem=>{
       let [mes,dia,anio] = elem.fechaPago.split('-')
-       return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1
+       return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1 && elem.statusPay == false
       })
 
     //La misma fecha de vencimiento
-    let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago)
+    let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago && elem.statusPay == false)
 
     // Pasado la fecha de vencimiento
     let resultRed = element.resultPrestamo.find(elem=>{
         let [mes,dia,anio] = elem.fechaPago.split('-')
-         return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0
+         return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0 && elem.statusPay == false
         })
 
     if(resultGreen!==undefined){
@@ -164,7 +151,7 @@ export const customerData =(data,toDay)=>{
 
   }
   
-  // DEUDA CANCELADA
+  // Deuda cancelado
   else{
     customerCancelled.push(element)
   }
@@ -182,8 +169,3 @@ return {
 }
 
 }
-let result = customerData(data,toDay)
-//console.log(result);
-
-//! faltaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-//! corregir los datos que salen del resultado, estan saliendo mal, no se selecciona como debe sers
