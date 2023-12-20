@@ -68,7 +68,7 @@ const Customer = () => {
     customerGreen: [],
     customerYellow: [],
     customerRed: [],
-    customerOk: [],
+    customer: [],
     customerCancelled: [],
   });
 
@@ -79,22 +79,22 @@ const Customer = () => {
     let result = customerData(data.dataResult, day);
     //if (result.resultMorosos) setRed(true); // al límite
     //if (result.resultCustomerRed) setTypeColor({ ...typeColor, red: "red" }); // al límite
-    if (result.resultCustomerOk) {
+    if (result.resultCustomer) {
       SetCustomer({
         ...customer,
         customerGreen: result.resultCustumerGreen,
         customerYellow: result.resultCustomerYellow,
         customerRed: result.resultCustomerRed,
-        customerOk: result.resultCustomerOk,
+        customer: result.resultCustomer,
         customerCancelled: result.resultCustomerCancelled,
       });
     }
   };
-  console.log("green: ", customer.customerGreen[0].resultPrestamo);
-  console.log("yellow: ", customer.customerYellow[0].resultPrestamo);
-  console.log("red: ", customer.customerRed);
-  console.log("ok: ", customer.customerOk);
-  console.log("cancelled: ", customer.customerCancelled);
+  // console.log("green: ", customer.customerGreen[0].resultPrestamo);
+  // console.log("yellow: ", customer.customerYellow[0].resultPrestamo);
+  // console.log("red: ", customer.customerRed);
+  // console.log("ok: ", customer.customer);
+  // console.log("cancelled: ", customer.customerCancelled);
   useEffect(() => {
     resultCustomer();
     // if (customer.customerGreen.length != 0) {
@@ -107,7 +107,7 @@ const Customer = () => {
     //   setTypeColor({ ...typeColor, red: "red" });
     // }
   }, [data]);
-  //console.log(customer.customerOk[0]);
+  //console.log(customer.customer[0]);
 
   //! pruba de alerta
 
@@ -165,7 +165,7 @@ const Customer = () => {
         {/* <Users data={customer.customerYellow} color={typeColor.yellow} /> */}
         {/* <Users data={customer.customerGreen} color={typeColor.green} /> */}
         {/* <Users data={debtorsCustomer} /> */}
-        <Users data={customer.customerOk} />
+        <Users data={customer.customer} />
       </ScrollView>
     </View>
   );

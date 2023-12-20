@@ -124,7 +124,7 @@ export const customerData =(data,toDay)=>{
   let customerGreen=[]
   let customerYellow=[]
   let customerRed=[]
-  let customerOk =[]
+  let customer =[]
   let customerCancelled =[]
 
   let [mesToDay,diaToDay,anioToDay] = toDay.split('-')
@@ -158,7 +158,7 @@ export const customerData =(data,toDay)=>{
       customerRed.push(element)
     }
      if (resultGreen == undefined && resultYellow == undefined && resultRed == undefined){
-       customerOk.push(element)
+       customer.push(element)
      }
 
 
@@ -177,7 +177,7 @@ return {
   resultCustumerGreen:customerGreen,
   resultCustomerYellow:customerYellow,
   resultCustomerRed:customerRed,
-  resultCustomerOk:customerOk,
+  resultCustomer:customer,
   resultCustomerCancelled:customerCancelled
 }
 
