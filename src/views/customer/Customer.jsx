@@ -18,13 +18,21 @@ import Users from "../../components/users/Users";
 const Customer = () => {
   const { onGetCronograma } = UseStorage();
   const [order, setOrder] = useState(false);
+  const [day, setDay] = useState("");
   const [data, setData] = useState({
     dataResult: [],
     dataResultCopy: [],
   });
-  //console.log(data.dataResult[0]);
+  const [customer, SetCustomer] = useState({
+    customerGreen: [],
+    customerYellow: [],
+    customerRed: [],
+    customer: [],
+    customerCancelled: [],
+  });
+
+  // Trae los datos guardados del local storage
   const loadCustomer = async () => {
-    // Trae los datos guardados del local storage
     try {
       const resultCustomer = await onGetCronograma();
 
@@ -52,33 +60,12 @@ const Customer = () => {
     setOrder(!value);
   };
 
-  //! ACTIVAR ALARMA
-
-  const [day, setDay] = useState("");
-  const [green, setGreen] = useState("");
-  const [yellow, setYelow] = useState("");
-  const [red, setRed] = useState(false);
-  const [result, setResult] = useState({});
-  const [typeColor, setTypeColor] = useState({
-    green: "",
-    yellow: "",
-    red: "",
-  });
-  const [customer, SetCustomer] = useState({
-    customerGreen: [],
-    customerYellow: [],
-    customerRed: [],
-    customer: [],
-    customerCancelled: [],
-  });
-
   // Verifica en que condición se encuentra cada cliente
 
   const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
     let result = customerData(data.dataResult, day);
-    //if (result.resultMorosos) setRed(true); // al límite
-    //if (result.resultCustomerRed) setTypeColor({ ...typeColor, red: "red" }); // al límite
+
     if (result.resultCustomer) {
       SetCustomer({
         ...customer,
@@ -97,29 +84,7 @@ const Customer = () => {
   // console.log("cancelled: ", customer.customerCancelled);
   useEffect(() => {
     resultCustomer();
-    // if (customer.customerGreen.length != 0) {
-    //   setTypeColor({ ...typeColor, green: "green" });
-    // }
-    // if (customer.customerYellow.length != 0) {
-    //   setTypeColor({ ...typeColor, yellow: "yellow" });
-    // }
-    // if (customer.customerRed.length != 0) {
-    //   setTypeColor({ ...typeColor, red: "red" });
-    // }
   }, [data]);
-  //console.log(customer.customer[0]);
-
-  //! pruba de alerta
-
-  var resultAgregardia = add(new Date(2014, 8, 1, 10, 19, 50), {
-    years: 2,
-    months: 9,
-    weeks: 1,
-    days: 7,
-    hours: 5,
-    minutes: 9,
-    seconds: 30,
-  });
 
   return (
     <View style={styles.container}>
@@ -161,9 +126,9 @@ const Customer = () => {
           </View>
         </View>
 
-        <Users data={customer.customerRed} color={typeColor.red} />
-        <Users data={customer.customerYellow} color={typeColor.yellow} />
-        <Users data={customer.customerGreen} color={typeColor.green} />
+        <Users data={customer.customerRed} color={"red"} />
+        <Users data={customer.customerYellow} color={"yellow"} />
+        <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
         <Users data={customer.customer} />
       </ScrollView>
     </View>
@@ -253,6 +218,4 @@ const styles = StyleSheet.create({
 });
 
 //! falta  LA ALERTA DE PAGO
-//! tenemos que estilizar el icono de alerta(posicion center)
-//! al iniciar siempre debe de ordenarse por la fecha
-//! far la funcionalidad
+//! puede dar la posibilidad de que se resuma el codigo uniendo es SetCustomer y setData

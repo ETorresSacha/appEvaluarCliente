@@ -27,7 +27,7 @@ const Users = ({ data, red, setRed, color, typeColor, setGreen }) => {
   useEffect(() => {
     if (color) cambiarColor(color);
   }, [color]);
-
+  console.log(color);
   const handleAlert = () => {
     navigation.navigate("Alerta");
   };
@@ -35,16 +35,10 @@ const Users = ({ data, red, setRed, color, typeColor, setGreen }) => {
   useEffect(() => {
     if (red) setEnable(true);
   }, []);
-
+  //
   return (
     <View>
       {data?.map((element, index) => {
-        // useEffect(() => {
-        //   let result = idCustomerPay.find((ele) => ele == element.uuid);
-        //   if (result !== undefined) alertaIcon = true;
-        //   else alertaIcon = false;
-        // }, []);
-
         return (
           <View
             key={element.uuid}
