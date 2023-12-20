@@ -4,18 +4,14 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { fechaPagoAtomatico, formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
-//import { green } from "@mui/material/colors";
 
-const Users = ({ data, red, setRed, color, typeColor, setGreen }) => {
+const Users = ({ data, color }) => {
   const navigation = useNavigation();
-  const [day, setDay] = useState("");
   const [enable, setEnable] = useState(true);
 
-  // estilos
-
+  // estilos dinamico del ícono de alerta
   const [estilos, setEstilos] = useState({
     fontSize: 40,
-    //color: "red"
   });
 
   const cambiarColor = (color) => {
@@ -23,19 +19,15 @@ const Users = ({ data, red, setRed, color, typeColor, setGreen }) => {
     estilosCopia.color = color;
     setEstilos(estilosCopia);
   };
-  //console.log(typeColor);
-  useEffect(() => {
-    if (color) cambiarColor(color);
-  }, [color]);
-  console.log(color);
+
   const handleAlert = () => {
     navigation.navigate("Alerta");
   };
 
   useEffect(() => {
-    if (red) setEnable(true);
-  }, []);
-  //
+    if (color) cambiarColor(color);
+  }, [color]);
+
   return (
     <View>
       {data?.map((element, index) => {

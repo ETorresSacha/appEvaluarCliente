@@ -31,7 +31,7 @@ const Customer = () => {
     customerCancelled: [],
   });
 
-  // Trae los datos guardados del local storage
+  // Trae los datos del local storage
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
@@ -45,13 +45,6 @@ const Customer = () => {
       console.error(error);
     }
   };
-
-  useFocusEffect(
-    React.useCallback(() => {
-      loadCustomer();
-      //return () => unsubscribe();
-    }, [])
-  );
 
   // Ordenar
   const handleSort = (type, value) => {
@@ -82,6 +75,12 @@ const Customer = () => {
   // console.log("red: ", customer.customerRed);
   // console.log("ok: ", customer.customer);
   // console.log("cancelled: ", customer.customerCancelled);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadCustomer();
+      //return () => unsubscribe();
+    }, [])
+  );
   useEffect(() => {
     resultCustomer();
   }, [data]);
