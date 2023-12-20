@@ -54,7 +54,6 @@ const Customer = () => {
   };
 
   // Verifica en que condición se encuentra cada cliente
-
   const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
     let result = customerData(data.dataResult, day);
@@ -70,11 +69,7 @@ const Customer = () => {
       });
     }
   };
-  // console.log("green: ", customer.customerGreen[0].resultPrestamo);
-  // console.log("yellow: ", customer.customerYellow[0].resultPrestamo);
-  // console.log("red: ", customer.customerRed);
-  // console.log("ok: ", customer.customer);
-  // console.log("cancelled: ", customer.customerCancelled);
+
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();

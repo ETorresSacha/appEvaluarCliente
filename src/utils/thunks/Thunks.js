@@ -161,11 +161,22 @@ export const customerData =(data,toDay)=>{
 
 
 return {
-  resultCustumerGreen:customerGreen,
-  resultCustomerYellow:customerYellow,
-  resultCustomerRed:customerRed,
-  resultCustomer:customer,
-  resultCustomerCancelled:customerCancelled
+  resultCustumerGreen:orderData("fecha",customerGreen,false),
+  resultCustomerYellow:orderData("fecha",customerYellow,false),
+  resultCustomerRed:orderData("fecha",customerRed,false),
+  resultCustomer:orderData("fecha",customer,false),
+  resultCustomerCancelled:orderData("fecha",customerCancelled,false)
 }
 
+}
+
+//TODO--> FECHA DE PAGO
+export const datePay = (data)=>{
+  let result;
+    if (data != undefined) {
+      result = data.resultPrestamo.find(
+        (element) => element.statusPay == false
+      );
+    }
+    return result == undefined ? null : result.fechaPago;
 }

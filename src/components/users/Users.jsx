@@ -1,7 +1,11 @@
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { fechaPagoAtomatico, formatDate } from "../../utils/thunks/Thunks";
+import {
+  datePay,
+  fechaPagoAtomatico,
+  formatDate,
+} from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
@@ -20,19 +24,7 @@ const Users = ({ data, color }) => {
     setEstilos(estilosCopia);
   };
 
-  // Fecha de pago
-  const datePay = (data) => {
-    let result;
-    if (data != undefined) {
-      result = data.resultPrestamo.find(
-        (element) => element.statusPay == false
-      );
-    }
-    return result == undefined ? null : result.fechaPago;
-  };
-  console.log(datePay(data[0]));
-  //console.log(data[0] == undefined ? null : data[0].resultPrestamo);
-
+  // Alerta
   const handleAlert = () => {
     navigation.navigate("Alerta");
   };
@@ -66,7 +58,6 @@ const Users = ({ data, color }) => {
                 }}
               >{`${element?.nombre?.split(" ")[0]}`}</Text>
               <Text style={styles.dataText}>
-                {/* {formatDate(fechaPagoAtomatico(element?.resultPrestamo))} */}
                 {formatDate(datePay(element))}
               </Text>
               <Text
