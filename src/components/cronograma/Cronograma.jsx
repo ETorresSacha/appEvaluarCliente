@@ -107,7 +107,9 @@ const Cronograma = ({ data }) => {
                 >
                   <Text style={styles.subTitle}>Fecha de desembolso</Text>
                   <Text style={{ color: "white", fontSize: 17 }}>
-                    {dataSee?.fechaDesembolso}
+                    {dataSee?.fechaPago == undefined
+                      ? null
+                      : formatDate(dataSee?.fechaDesembolso)}
                   </Text>
                 </View>
                 <View

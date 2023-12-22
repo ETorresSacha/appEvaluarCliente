@@ -29,7 +29,7 @@ const Customer = () => {
     customerRed: [],
     customer: [],
     customerCancelled: [],
-    //dataResult: [],
+    dataResult: [],
   });
 
   // Trae los datos del local storage
@@ -48,7 +48,7 @@ const Customer = () => {
   };
 
   const handleSort = (type, value) => {
-    let result = orderData(type, data.dataResult, value);
+    let result = orderData(type, customer.dataResult, value);
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
@@ -65,7 +65,7 @@ const Customer = () => {
         customerRed: result.resultCustomerRed,
         customer: result.resultCustomer,
         customerCancelled: result.resultCustomerCancelled,
-        //dataResult: result.resultResultCustomer,
+        dataResult: result.resultDataResult,
       });
     }
   };
@@ -120,11 +120,11 @@ const Customer = () => {
           </View>
         </View>
 
-        {/* <Users data={customer.customerRed} color={"red"} /> */}
-        {/* <Users data={customer.customerYellow} color={"yellow"} /> */}
-        {/* <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} /> */}
-        {/* <Users data={customer.customer} /> */}
-        <Users data={data.dataResult} />
+        <Users data={customer.customerRed} color={"red"} />
+        <Users data={customer.customerYellow} color={"yellow"} />
+        <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
+        <Users data={customer.customer} />
+        {/* <Users data={data.dataResult} /> */}
       </ScrollView>
     </View>
   );

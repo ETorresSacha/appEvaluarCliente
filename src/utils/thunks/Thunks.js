@@ -43,7 +43,6 @@ export const orderData = (type,data,value)=>{
         default:
           result
             }
-            //console.log(result);
             return result
 }
 
@@ -115,13 +114,19 @@ export const customerData =(data,toDay)=>{
   let customerRed=[]
   let customer =[]
   let customerCancelled =[]
+  let dataResult = []
 
   let [anioToDay,mesToDay,diaToDay] = toDay.split('-')
 
  data.map(element=>{
 
+
   // Deuda sin cancelar
    if(element.cancelled == false){
+
+    // Resultado de todos los datos sin cancelar
+      dataResult.push(element)
+
     // Un día antes de la fecha de vencimiento
     let resultGreen = element.resultPrestamo.find(elem=>{
       let [anio,mes,dia] = elem.fechaPago.split('-')
@@ -163,16 +168,12 @@ export const customerData =(data,toDay)=>{
 
 
 return {
-  // resultCustumerGreen:orderData("fecha",customerGreen,false),
-  // resultCustomerYellow:orderData("fecha",customerYellow,false),
-  // resultCustomerRed:orderData("fecha",customerRed,false),
-  // resultCustomer:orderData("fecha",customer,false),
-  // resultCustomerCancelled:orderData("fecha",customerCancelled,false)
   resultCustumerGreen:customerGreen,
   resultCustomerYellow:customerYellow,
   resultCustomerRed:customerRed,
   resultCustomer:customer,
-  resultCustomerCancelled:customerCancelled
+  resultCustomerCancelled:customerCancelled,
+  resultDataResult : dataResult
 }
 
 }
