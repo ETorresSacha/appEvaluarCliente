@@ -94,10 +94,6 @@ const Users = ({ data, color }) => {
 export default Users;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "rgb(31, 36, 36)",
-  },
   containerTitle: {
     borderTopStartRadius: 10,
     borderTopEndRadius: 10,

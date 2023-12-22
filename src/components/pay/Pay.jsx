@@ -66,9 +66,9 @@ const Pay = ({ data }) => {
       {updatePrestamo == undefined ? (
         <Text>cargando</Text>
       ) : (
-        <View style={styles.resumen}>
-          <Text style={styles.resumTitle}>PAGOS</Text>
-          <View style={styles.resumDetalle}>
+        <View>
+          <Text style={styles.pagosTitle}>PAGOS</Text>
+          <View style={styles.pagosDetalle}>
             <View
               style={{
                 display: "flex",
@@ -163,61 +163,11 @@ const Pay = ({ data }) => {
 export default Pay;
 
 const styles = StyleSheet.create({
-  containerContainer: {
-    flex: 1,
-  },
   container: {
-    flex: 1,
-    paddingTop: 10,
+    paddingBottom: 20,
   },
-  containerTitle: {
-    display: "flex",
-    flexDirection: "row",
-    paddingVertical: 8,
-    justifyContent: "space-evenly",
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
-    paddingVertical: 10,
-  },
-  title: {
-    fontSize: 16,
-    paddingRight: 10,
-    alignItems: "center",
-    fontWeight: "bold",
-  },
-  tilteText: {
-    color: "cornsilk",
-    fontSize: 17,
-    fontWeight: "bold",
-    paddingLeft: 10,
-  },
-  containerCuotas: {
-    flexDirection: "column",
-  },
-  dataPar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(189, 238, 247, 0.888)",
-    padding: 5,
-  },
-  dataImpar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgb(123, 220, 231)",
-    padding: 5,
-  },
-  dataText: {
-    fontSize: 15,
-    paddingHorizontal: 5,
-    marginHorizontal: 2,
-  },
-  resumen: {},
-  resumTitle: {
+
+  pagosTitle: {
     backgroundColor: "rgba(36, 146, 224, 0.625)",
     paddingLeft: 10,
     paddingVertical: 10,
@@ -225,7 +175,7 @@ const styles = StyleSheet.create({
     color: "cornsilk",
     fontWeight: "bold",
   },
-  resumDetalle: {
+  pagosDetalle: {
     marginVertical: 15,
   },
 
@@ -252,6 +202,5 @@ const styles = StyleSheet.create({
     gap: 10,
     elevation: 5,
     borderWidth: 1,
-    marginBottom: 15,
   },
 });

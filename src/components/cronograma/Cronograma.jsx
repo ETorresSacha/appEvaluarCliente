@@ -14,7 +14,7 @@ const Cronograma = ({ data }) => {
         <Text>cargando</Text>
       ) : (
         <View style={styles.container}>
-          <View style={styles.cronograma}>
+          <View>
             {/* <Text style={styles.titleCrono}>Cronograma</Text> */}
 
             <ScrollView style={styles.containerCuotas}>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 10,
+    //paddingTop: 10,
   },
   containerTitle: {
     display: "flex",
@@ -106,44 +106,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingHorizontal: 5,
     marginHorizontal: 2,
-  },
-  resumen: {},
-  resumTitle: {
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
-    paddingLeft: 10,
-    paddingVertical: 10,
-    fontSize: 17,
-    color: "cornsilk",
-    fontWeight: "bold",
-  },
-  resumDetalle: {
-    marginVertical: 15,
-  },
-
-  subTitle: {
-    fontSize: 17,
-    fontWeight: "bold",
-    color: "white",
-  },
-  containerSubTitle: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  buttonContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    alignContent: "center",
-    width: 250,
-    height: 40,
-    marginLeft: 80,
-    justifyContent: "center",
-    borderRadius: 10,
-    gap: 10,
-    elevation: 5,
-    borderWidth: 1,
-    marginBottom: 15,
   },
 });
 //! EN ESTA PARTE FALTA, CUANDO SE CANCELA TODA LA DEUDA SE TIENE QUE MODIFICAR
