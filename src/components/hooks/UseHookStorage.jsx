@@ -62,7 +62,7 @@ const UseStorage = () => {
         resultPrestamo,
       });
 
-      return result;
+      return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);
     }
@@ -107,9 +107,10 @@ const UseStorage = () => {
     }
   };
 
-  //! UPDATE
+  //! UPDATE//
   // UPDATE STATUS DEL PRESTAMO
   const handleUpdateStatusPay = async (data) => {
+    //console.log(data);
     try {
       const resultGet = await handleGetCronograma();
       let indice;
@@ -123,7 +124,9 @@ const UseStorage = () => {
       let newObjeto = data?.uuid == undefined ? data[0] : data;
       resultGet.splice(indice, 1, newObjeto);
       await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
+
       return Promise.resolve();
+      // return resultGet;
     } catch (error) {
       return console.error(error);
     }

@@ -89,14 +89,14 @@ export const calculoFRCA = (data) =>{
 
     // result
     let cronogramaAjustado = result.map((element,index) =>{
-        let result
-        let [anio,mes,dia,] = element.fechaDesembolso.split('-')
-        result=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${anio}`
+        // let result
+        // let [anio,mes,dia,] = element.fechaDesembolso.split('-')
+        // result=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${anio}`
 
         return {
    
             cuota:element.cuota,
-            fechaDesembolso:result,
+            fechaDesembolso:element.fechaDesembolso,
             fechaPago: element.fechaPago,
             capital: (promCuota-(element.cuotaInteres+element.SegDesgrvamen+itf)).toFixed(2),
             interes: element.cuotaInteres.toFixed(2),

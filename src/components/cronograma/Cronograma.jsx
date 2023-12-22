@@ -16,9 +16,11 @@ const Cronograma = ({ data }) => {
   useEffect(() => {
     setModify(data);
     setUpdatePrestamo(data[0]?.resultPrestamo);
+
     let result = data[0]?.resultPrestamo.find(
       (element) => element.statusPay == false
     );
+
     if (result != undefined) {
       setDataSee(result);
       setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
@@ -45,7 +47,8 @@ const Cronograma = ({ data }) => {
       // Pago de la cuenta
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
-      await onUpdateStatusPay(modify);
+      let result = await onUpdateStatusPay(modify);
+      //console.log(result);
     } else {
       // Cancelación la cuenta
       let objeto = {

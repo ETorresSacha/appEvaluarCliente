@@ -7,7 +7,7 @@ export const sumarMes = (data,i)=>{
     let nuevoAnio =""
     let parseMes = parseInt(mes)+i
 
-    if(parseMes<=12) fechaPago=`${parseMes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}-${anio}`
+    if(parseMes<=12) fechaPago=`${anio}-${parseMes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}`
 
     else  {
         
@@ -23,7 +23,7 @@ export const sumarMes = (data,i)=>{
 
         mes=(parseInt(mes)+i)-(12*(nuevoMes % 12 ===0 ? (nuevoMes/12)-1 : Math.trunc(nuevoMes/12)))
 
-        fechaPago=`${mes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}-${nuevoAnio}` 
+        fechaPago=`${nuevoAnio}-${mes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}` 
     }
     return fechaPago   
 }
@@ -43,8 +43,8 @@ export const diasXmes = (data,i)=>{
         const resultDateIni = sumarMes(data,i-1)
         const resultDateFin = sumarMes(data,i)
 
-        let [mesI,diaI, anioI ] = resultDateIni.split('-')
-        let [mesF,diaF, anioF ] = resultDateFin.split('-')
+        let [anioI,mesI,diaI] = resultDateIni.split('-')
+        let [anioF,mesF,diaF ] = resultDateFin.split('-')
 
         let fechaInicio   = new Date(`${anioI}-${mesI}-${diaI}`).getTime();
         let fechaFin   = new Date(`${anioF}-${mesF}-${diaF}`).getTime();
@@ -69,7 +69,7 @@ export const diasAcum = (data,i)=>{
     else{
 
         const resultDateFin = sumarMes(data,i)
-        let [diaF,mesF, anioF ] = resultDateFin.split('-')
+        let [ anioF,diaF,mesF ] = resultDateFin.split('-')
 
         let fechaFin   = new Date(`${anioF}-${mesF}-${diaF}`).getTime();
         let result = (fechaFin-fechaInicio)/(1000*60*60*24)

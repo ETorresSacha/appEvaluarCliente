@@ -10,7 +10,7 @@ import {
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
-import { customerData, orderData } from "../../utils/thunks/Thunks";
+import { customerData, date, orderData } from "../../utils/thunks/Thunks";
 import { format, add } from "date-fns";
 
 import Users from "../../components/users/Users";
@@ -29,13 +29,15 @@ const Customer = () => {
     customerRed: [],
     customer: [],
     customerCancelled: [],
+    //dataResult: [],
   });
-
+  //console.log(data.dataResult[0]);
+  //console.log(customer.customer[0]);
   // Trae los datos del local storage
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-
+      //console.log(resultCustomer[0]);
       setData({
         ...data,
         dataResult: resultCustomer,
@@ -45,14 +47,28 @@ const Customer = () => {
       console.error(error);
     }
   };
-
+  // const birthday = new Date("1992-05-23");
+  // const birthday2 = new Date("1992-05-24");
+  // const copy = new Date();
+  // copy.setTime(birthday.getTime());
+  // console.log(birthday.getTime());
+  // console.log(birthday2.getTime());
   // Ordenar
   const handleSort = (type, value) => {
-    const result = orderData(type, data.dataResult, value);
+    let result;
+    //console.log(type);
+    // if (type == "fecha") {
+    //   //result = date(data.dataResult, value);
+    //   date("11-02-2023");
+    //   console.log(new Date("10-05-2021"));
+    // } else {
+    result = orderData(type, data.dataResult, value);
+    //}
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
-
+  //console.log(data.dataResult[2]);
+  //console.log(data.dataResult);
   // Verifica en que condición se encuentra cada cliente
   const resultCustomer = () => {
     setDay(format(new Date(), "MM-dd-yyyy"));
@@ -66,6 +82,7 @@ const Customer = () => {
         customerRed: result.resultCustomerRed,
         customer: result.resultCustomer,
         customerCancelled: result.resultCustomerCancelled,
+        //dataResult: result.resultResultCustomer,
       });
     }
   };
@@ -120,10 +137,11 @@ const Customer = () => {
           </View>
         </View>
 
-        <Users data={customer.customerRed} color={"red"} />
-        <Users data={customer.customerYellow} color={"yellow"} />
-        <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-        <Users data={customer.customer} />
+        {/* <Users data={customer.customerRed} color={"red"} /> */}
+        {/* <Users data={customer.customerYellow} color={"yellow"} /> */}
+        {/* <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} /> */}
+        {/* <Users data={customer.customer} /> */}
+        <Users data={data.dataResult} />
       </ScrollView>
     </View>
   );
@@ -213,3 +231,4 @@ const styles = StyleSheet.create({
 
 //! falta  LA ALERTA DE PAGO
 //! puede dar la posibilidad de que se resuma el codigo uniendo es SetCustomer y setData
+// CUANDO ENTRA A ESTE COMPONENTE LA FECHA SALE ERROR, TENEMOS QUE CORREGIR ESO

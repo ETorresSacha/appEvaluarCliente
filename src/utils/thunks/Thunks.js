@@ -1,5 +1,22 @@
 import { compareAsc, format,add,formatDistance, getDate,isFuture,isEqual,differenceInDays} from 'date-fns'
 //TODO--> ORDENAR
+
+export const date = (date)=>{
+ // console.log(new Date(data).getTime());
+ let result
+ console.log(new Date(date));
+ console.log(new Date("2012-12-23"));
+  // if (value) {
+  //   console.log("estoy aqui");
+  //   console.log(new Date(data[0].resultPrestamo[0].fechaPago));
+
+  //     result = data.sort((a, b) => new Date(b.resultPrestamo[0]?.fechaPago).getTime() - new Date(a.resultPrestamo[0]?.fechaPago).getTime());
+  //    } else {
+  //      result = data.sort((a, b) => new Date(a.resultPrestamo[0]?.fechaPago).getTime() - new Date(b.resultPrestamo[0]?.fechaPago).getTime());
+  //    }
+     return result
+}
+
 export const orderData = (type,data,value)=>{
     let result
     switch (type) {
@@ -22,16 +39,23 @@ export const orderData = (type,data,value)=>{
               }
           break;
           case 'fecha':
+            console.log("estoy aqui");
             if (value) {
-
-                result = data.sort((a, b) => new Date(b.resultPrestamo[0]?.fechaPago).getTime() - new Date(a.resultPrestamo[0]?.fechaPago).getTime());
+             console.log(data[0].resultPrestamo[0].fechaPago);
+              //console.log(new Date(data[0].resultPrestamo[0].fechaPago).getTime());
+              //console.log(new Date(1992,5,25).getTime());
+              //console.log(new Date(1992,5,24).getTime());
+              console.log(new Date((data[0].resultPrestamo.find(element=>element.statusPay== false)?.fechaPago)).getTime());
+              result = data.sort((a, b) => new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
+               //result = data.sort((a, b) => new Date(b.resultPrestamo[0]?.fechaPago).getTime() - new Date(a.resultPrestamo[0]?.fechaPago).getTime());
                } else {
-                 result = data.sort((a, b) => new Date(a.resultPrestamo[0]?.fechaPago).getTime() - new Date(b.resultPrestamo[0]?.fechaPago).getTime());
+                 //result = data.sort((a, b) => new Date(a.resultPrestamo[0]?.fechaPago).getTime() - new Date(b.resultPrestamo[0]?.fechaPago).getTime());
+                 result = data.sort((a, b) => new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                }
           break;
           case 'cuota':
             if (value) {
-      
+
                 result = data.sort((a, b) => a.resultPrestamo[0].montoCuota - b.resultPrestamo[0].montoCuota);
              
                } else {
@@ -42,13 +66,14 @@ export const orderData = (type,data,value)=>{
         default:
           result
             }
+            //console.log(result);
             return result
 }
 
 //TODO--> CAMBIAR EL FORMATO DE LA FECHA
 export const formatDate = (date)=>{
   let result
-  let [mes,dia,anio] = date.split('-')
+  let [anio,mes,dia] = date.split('-')
   result=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${anio}`
 return result
 }
@@ -161,11 +186,16 @@ export const customerData =(data,toDay)=>{
 
 
 return {
-  resultCustumerGreen:orderData("fecha",customerGreen,false),
-  resultCustomerYellow:orderData("fecha",customerYellow,false),
-  resultCustomerRed:orderData("fecha",customerRed,false),
-  resultCustomer:orderData("fecha",customer,false),
-  resultCustomerCancelled:orderData("fecha",customerCancelled,false)
+  // resultCustumerGreen:orderData("fecha",customerGreen,false),
+  // resultCustomerYellow:orderData("fecha",customerYellow,false),
+  // resultCustomerRed:orderData("fecha",customerRed,false),
+  // resultCustomer:orderData("fecha",customer,false),
+  // resultCustomerCancelled:orderData("fecha",customerCancelled,false)
+  resultCustumerGreen:customerGreen,
+  resultCustomerYellow:customerYellow,
+  resultCustomerRed:customerRed,
+  resultCustomer:customer,
+  resultCustomerCancelled:customerCancelled
 }
 
 }

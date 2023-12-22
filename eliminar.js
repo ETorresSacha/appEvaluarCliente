@@ -101,3 +101,8 @@ const trigger = add(new Date(date), {
 console.log(trigger);
 
 console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))
+
+console.log(new Date("12-18-2023").getTime())
+console.log(new Date("12-17-2023").getTime())
+console.log((new Date('01-08-2024').getTime())*(-1))
+console.log(new Date('01-09-2024'))
