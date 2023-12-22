@@ -73,12 +73,17 @@ const Customer = () => {
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
+
       //return () => unsubscribe();
     }, [])
   );
   useEffect(() => {
     resultCustomer();
   }, [data]);
+
+  // useEffect(() => {
+  //   handleSort("fecha", true);
+  // }, [customer]);
 
   return (
     <View style={styles.container}>
