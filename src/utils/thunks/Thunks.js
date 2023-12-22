@@ -1,22 +1,6 @@
 import { compareAsc, format,add,formatDistance, getDate,isFuture,isEqual,differenceInDays} from 'date-fns'
 //TODO--> ORDENAR
 
-export const date = (date)=>{
- // console.log(new Date(data).getTime());
- let result
- console.log(new Date(date));
- console.log(new Date("2012-12-23"));
-  // if (value) {
-  //   console.log("estoy aqui");
-  //   console.log(new Date(data[0].resultPrestamo[0].fechaPago));
-
-  //     result = data.sort((a, b) => new Date(b.resultPrestamo[0]?.fechaPago).getTime() - new Date(a.resultPrestamo[0]?.fechaPago).getTime());
-  //    } else {
-  //      result = data.sort((a, b) => new Date(a.resultPrestamo[0]?.fechaPago).getTime() - new Date(b.resultPrestamo[0]?.fechaPago).getTime());
-  //    }
-     return result
-}
-
 export const orderData = (type,data,value)=>{
     let result
     switch (type) {
@@ -41,16 +25,9 @@ export const orderData = (type,data,value)=>{
           case 'fecha':
             console.log("estoy aqui");
             if (value) {
-             console.log(data[0].resultPrestamo[0].fechaPago);
-              //console.log(new Date(data[0].resultPrestamo[0].fechaPago).getTime());
-              //console.log(new Date(1992,5,25).getTime());
-              //console.log(new Date(1992,5,24).getTime());
-              console.log(new Date((data[0].resultPrestamo.find(element=>element.statusPay== false)?.fechaPago)).getTime());
               result = data.sort((a, b) => new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
-               //result = data.sort((a, b) => new Date(b.resultPrestamo[0]?.fechaPago).getTime() - new Date(a.resultPrestamo[0]?.fechaPago).getTime());
                } else {
-                 //result = data.sort((a, b) => new Date(a.resultPrestamo[0]?.fechaPago).getTime() - new Date(b.resultPrestamo[0]?.fechaPago).getTime());
-                 result = data.sort((a, b) => new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
+                result = data.sort((a, b) => new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                }
           break;
           case 'cuota':
@@ -139,7 +116,7 @@ export const customerData =(data,toDay)=>{
   let customer =[]
   let customerCancelled =[]
 
-  let [mesToDay,diaToDay,anioToDay] = toDay.split('-')
+  let [anioToDay,mesToDay,diaToDay] = toDay.split('-')
 
  data.map(element=>{
 
@@ -147,7 +124,7 @@ export const customerData =(data,toDay)=>{
    if(element.cancelled == false){
     // Un día antes de la fecha de vencimiento
     let resultGreen = element.resultPrestamo.find(elem=>{
-      let [mes,dia,anio] = elem.fechaPago.split('-')
+      let [anio,mes,dia] = elem.fechaPago.split('-')
        return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1 && elem.statusPay == false
       })
 
@@ -156,7 +133,7 @@ export const customerData =(data,toDay)=>{
 
     // Pasado la fecha de vencimiento
     let resultRed = element.resultPrestamo.find(elem=>{
-        let [mes,dia,anio] = elem.fechaPago.split('-')
+      let [anio,mes,dia] = elem.fechaPago.split('-')
          return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0 && elem.statusPay == false
         })
 

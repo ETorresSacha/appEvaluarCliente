@@ -31,8 +31,7 @@ const Customer = () => {
     customerCancelled: [],
     //dataResult: [],
   });
-  //console.log(data.dataResult[0]);
-  //console.log(customer.customer[0]);
+
   // Trae los datos del local storage
   const loadCustomer = async () => {
     try {
@@ -47,31 +46,15 @@ const Customer = () => {
       console.error(error);
     }
   };
-  // const birthday = new Date("1992-05-23");
-  // const birthday2 = new Date("1992-05-24");
-  // const copy = new Date();
-  // copy.setTime(birthday.getTime());
-  // console.log(birthday.getTime());
-  // console.log(birthday2.getTime());
-  // Ordenar
+
   const handleSort = (type, value) => {
-    let result;
-    //console.log(type);
-    // if (type == "fecha") {
-    //   //result = date(data.dataResult, value);
-    //   date("11-02-2023");
-    //   console.log(new Date("10-05-2021"));
-    // } else {
-    result = orderData(type, data.dataResult, value);
-    //}
+    let result = orderData(type, data.dataResult, value);
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
-  //console.log(data.dataResult[2]);
-  //console.log(data.dataResult);
-  // Verifica en que condición se encuentra cada cliente
+
   const resultCustomer = () => {
-    setDay(format(new Date(), "MM-dd-yyyy"));
+    setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
 
     if (result.resultCustomer) {
