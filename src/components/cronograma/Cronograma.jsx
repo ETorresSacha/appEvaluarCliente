@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
+import { formatDate } from "../../utils/thunks/Thunks";
 
 const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
@@ -38,7 +39,9 @@ const Cronograma = ({ data }) => {
                     <Text style={styles.dataText}>
                       {element.cuota.toString().padStart(2, "0")}
                     </Text>
-                    <Text style={styles.dataText}>{element.fechaPago}</Text>
+                    <Text style={styles.dataText}>
+                      {formatDate(element.fechaPago)}
+                    </Text>
                     <Text style={styles.dataText}>{element.montoCuota}</Text>
                   </View>
                 );
@@ -59,7 +62,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    //paddingTop: 10,
   },
   containerTitle: {
     display: "flex",

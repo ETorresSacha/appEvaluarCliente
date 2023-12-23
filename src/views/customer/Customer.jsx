@@ -36,7 +36,7 @@ const Customer = () => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-      //console.log(resultCustomer[0]);
+
       setData({
         ...data,
         dataResult: resultCustomer,
@@ -47,12 +47,14 @@ const Customer = () => {
     }
   };
 
+  // Ordenar
   const handleSort = (type, value) => {
     let result = orderData(type, customer.dataResult, value);
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
 
+  // clasificación de los clientes de acuerdo a la fecha de pago
   const resultCustomer = () => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
@@ -80,10 +82,6 @@ const Customer = () => {
   useEffect(() => {
     resultCustomer();
   }, [data]);
-
-  // useEffect(() => {
-  //   handleSort("fecha", true);
-  // }, [customer]);
 
   return (
     <View style={styles.container}>
