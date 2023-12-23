@@ -5,6 +5,7 @@ import UseStorage from "../../components/hooks/UseHookStorage";
 import Cronograma from "../../components/cronograma/Cronograma";
 import { useNavigation } from "@react-navigation/native";
 import Pay from "../../components/pay/Pay";
+import Notification from "../../components/notification/Notification";
 
 const Detail = (props) => {
   const id = props.route.params.id;
@@ -93,6 +94,7 @@ const Detail = (props) => {
             </View>
           </View>
           <Pay data={user} />
+          <Notification />
           <Cronograma data={user} />
         </View>
       )}
