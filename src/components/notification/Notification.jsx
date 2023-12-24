@@ -20,7 +20,7 @@ const Notification = ({ data }) => {
     data[0]?.nombre?.split(" ")[0]
   }, tienes una deuda de ${
     data[0]?.resultPrestamo[0]?.montoCuota
-  } y vence el día   ${formatDate(
+  } soles y vence el día   ${formatDate(
     datePay?.fechaPago
   )}, evita la mora y paga hoy. ¡Gracias! 😉`;
 
