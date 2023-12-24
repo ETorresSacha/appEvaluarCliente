@@ -10,13 +10,21 @@ import React, { useEffect, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { formatDate } from "../../utils/thunks/Thunks";
 
 const Notification = ({ data }) => {
   const [message, setMessage] = useState("");
+  const [datePay, setDayPay] = useState([]);
 
-  // useEffect(()=>{
-  //   setMessage()
-  // },[])
+  const messagePredetermined = `Hola ${
+    data[0]?.nombre?.split(" ")[0]
+  }, tienes una deuda de ${
+    data[0]?.resultPrestamo[0]?.montoCuota
+  } y vence el día   ${formatDate(
+    datePay?.fechaPago
+  )}, evita la mora y paga hoy. ¡Gracias! 😉`;
+
+  // Iconos de notificacion
   const handleIconNotification = (value) => {
     let aplication;
     switch (value) {
@@ -29,11 +37,30 @@ const Notification = ({ data }) => {
         break;
 
       case "email-fast-outline":
-        aplication = `mailto:${data[0]?.correo}`;
+        aplication = `mailto:${data[0]?.correo}?subject=Pago de cuota N° ${datePay?.cuota}&body=${message}`;
         break;
     }
     Linking.openURL(aplication);
   };
+
+  // Fecha de pago actualizado
+  useEffect(() => {
+    let result = data[0]?.resultPrestamo.find(
+      (element) => element.statusPay == false
+    );
+
+    if (result != undefined) {
+      setDayPay(result);
+    }
+    if (result == undefined) {
+      setDayPay(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
+    }
+  }, [data]);
+
+  // Actualiza message
+  useEffect(() => {
+    setMessage(messagePredetermined);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -43,18 +70,15 @@ const Notification = ({ data }) => {
       <View style={styles.containerMessage}>
         <Text style={styles.subTitle}>Mensaje: </Text>
         <TextInput
+          multiline
           value={message}
           style={styles.input}
           placeholder="Mensaje"
           placeholderTextColor="gray"
-          // onChange={(event) => {
-          //   handleChangeData(event, "nombre");
-          // }}
           onChangeText={(text) => {
             setMessage(text);
           }}
           errorMessage="Error"
-          //defaultValue="Mensaje"
         />
       </View>
       <View style={styles.containerIcons}>
@@ -100,9 +124,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    // backgroundColor: "red",
     marginVertical: 20,
-    //paddingVertical: 20,
   },
   subTitle: {
     fontSize: 15,
@@ -111,17 +133,18 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 80,
+    height: 70,
     borderWidth: 1,
     borderRadius: 15,
-    padding: 2,
-    paddingLeft: 10,
+    marginVertical: 10,
+    paddingHorizontal: 10,
     color: "cornsilk",
+    borderColor: "white",
+    fontSize: 13,
   },
   containerMessage: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "red",
     paddingHorizontal: 25,
     gap: 5,
     justifyContent: "center",
