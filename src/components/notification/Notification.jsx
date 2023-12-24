@@ -18,9 +18,9 @@ const Notification = ({ data }) => {
 
   const messagePredetermined = `Hola ${
     data[0]?.nombre?.split(" ")[0]
-  }, tienes una deuda de ${
+  }, tienes una deuda pendiente de ${
     data[0]?.resultPrestamo[0]?.montoCuota
-  } soles y vence el día   ${formatDate(
+  } soles y vence el día ${formatDate(
     datePay?.fechaPago
   )}, evita la mora y paga hoy. ¡Gracias! 😉`;
 
@@ -37,7 +37,7 @@ const Notification = ({ data }) => {
         break;
 
       case "email-fast-outline":
-        aplication = `mailto:${data[0]?.correo}?subject=Pago de cuota N° ${datePay?.cuota}&body=${message}`;
+        aplication = `mailto:${data[0]?.correo}?subject=Pago de la cuota N° ${datePay?.cuota}&body=${message}`;
         break;
     }
     Linking.openURL(aplication);
