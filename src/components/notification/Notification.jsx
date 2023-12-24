@@ -1,24 +1,27 @@
 import { StyleSheet, Text, View, Linking, Button } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-const Notification = () => {
-  const numeroTelefono = "tel:+123456789";
-  const realizarLlamada = () => {
-    Linking.openURL(numeroTelefono);
-  };
 
-  const correoElectronico = "mailto:destinatario@example.com"; // Reemplaza esto con la dirección de correo deseada
+const Notification = ({ data }) => {
+  const handleIconNotification = (value) => {
+    let aplication;
+    switch (value) {
+      case "whatsapp":
+        let mensaje = "hola erik";
+        aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${mensaje}`;
+        break;
 
-  const abrirCorreo = () => {
-    Linking.openURL(correoElectronico);
-  };
-  const numeroWhatsapp =
-    "whatsapp://send?phone=+123456789&text=Hola,%20¿cómo%20estás?"; // Reemplaza esto con el número y mensaje deseados
+      case "phone-call":
+        aplication = `tel:${data[0]?.celular}`;
+        break;
 
-  const abrirWhatsapp = () => {
-    Linking.openURL(numeroWhatsapp);
+      case "email-fast-outline":
+        aplication = `mailto:${data[0]?.correo}`;
+        break;
+    }
+    Linking.openURL(aplication);
   };
 
   return (
@@ -31,19 +34,19 @@ const Notification = () => {
           name="whatsapp"
           size={50}
           style={{ color: "rgb(66, 242, 46)" }}
-          onPress={abrirWhatsapp}
+          onPress={() => handleIconNotification("whatsapp")}
         />
         <Feather
           name="phone-call"
           size={50}
           style={{ color: "rgb(46, 164, 242)" }}
-          onPress={realizarLlamada}
+          onPress={() => handleIconNotification("phone-call")}
         />
         <MaterialCommunityIcons
           name="email-fast-outline"
           size={50}
           style={{ color: "rgb(224, 240, 242)" }}
-          onPress={abrirCorreo}
+          onPress={() => handleIconNotification("email-fast-outline")}
         />
       </View>
     </View>

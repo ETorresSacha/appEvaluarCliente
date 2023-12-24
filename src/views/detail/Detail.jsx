@@ -94,7 +94,7 @@ const Detail = (props) => {
             </View>
           </View>
           <Pay data={user} />
-          <Notification />
+          <Notification data={user} />
           <Cronograma data={user} />
         </View>
       )}
