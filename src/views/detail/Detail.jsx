@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Pressable, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Alert,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Icon } from "@rneui/themed";
 import UseStorage from "../../components/hooks/UseHookStorage";
@@ -53,7 +60,7 @@ const Detail = (props) => {
   };
   console.log(user);
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {user == undefined ? (
         <Text>cargando</Text>
       ) : (
@@ -98,7 +105,7 @@ const Detail = (props) => {
           <Cronograma data={user} />
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 

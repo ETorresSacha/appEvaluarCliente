@@ -1,16 +1,27 @@
-import { StyleSheet, Text, View, Linking, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Linking,
+  Button,
+  TextInput,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Notification = ({ data }) => {
+  const [message, setMessage] = useState("");
+
+  // useEffect(()=>{
+  //   setMessage()
+  // },[])
   const handleIconNotification = (value) => {
     let aplication;
     switch (value) {
       case "whatsapp":
-        let mensaje = "hola erik";
-        aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${mensaje}`;
+        aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${message}`;
         break;
 
       case "phone-call":
@@ -28,6 +39,23 @@ const Notification = ({ data }) => {
     <View style={styles.container}>
       <View>
         <Text style={styles.notificationTitle}>NOTIFICACIÓN</Text>
+      </View>
+      <View style={styles.containerMessage}>
+        <Text style={styles.subTitle}>Mensaje: </Text>
+        <TextInput
+          value={message}
+          style={styles.input}
+          placeholder="Mensaje"
+          placeholderTextColor="gray"
+          // onChange={(event) => {
+          //   handleChangeData(event, "nombre");
+          // }}
+          onChangeText={(text) => {
+            setMessage(text);
+          }}
+          errorMessage="Error"
+          //defaultValue="Mensaje"
+        />
       </View>
       <View style={styles.containerIcons}>
         <FontAwesome
@@ -75,5 +103,28 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
     marginVertical: 20,
     //paddingVertical: 20,
+  },
+  subTitle: {
+    fontSize: 15,
+    color: "white",
+    fontWeight: "bold",
+  },
+  input: {
+    flex: 1,
+    height: 80,
+    borderWidth: 1,
+    borderRadius: 15,
+    padding: 2,
+    paddingLeft: 10,
+    color: "cornsilk",
+  },
+  containerMessage: {
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: "red",
+    paddingHorizontal: 25,
+    gap: 5,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
