@@ -58,7 +58,7 @@ const Detail = (props) => {
       console.error();
     }
   };
-  console.log(user);
+
   return (
     <ScrollView style={styles.container}>
       {user == undefined ? (

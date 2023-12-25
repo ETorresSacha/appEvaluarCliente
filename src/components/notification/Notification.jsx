@@ -14,15 +14,7 @@ import { formatDate } from "../../utils/thunks/Thunks";
 
 const Notification = ({ data }) => {
   const [message, setMessage] = useState("");
-  const [datePay, setDayPay] = useState([]);
-
-  const messagePredetermined = `Hola ${
-    data[0]?.nombre?.split(" ")[0]
-  }, tienes una deuda pendiente de ${
-    data[0]?.resultPrestamo[0]?.montoCuota
-  } soles y vence el día ${formatDate(
-    datePay?.fechaPago
-  )}, evita la mora y paga hoy. ¡Gracias! 😉`;
+  const [datePay, setDayPay] = useState();
 
   // Iconos de notificacion
   const handleIconNotification = (value) => {
@@ -58,9 +50,20 @@ const Notification = ({ data }) => {
   }, [data]);
 
   // Actualiza message
+
   useEffect(() => {
-    setMessage(messagePredetermined);
-  }, []);
+    if (datePay != undefined) {
+      const messagePredetermined = `Hola ${
+        data[0]?.nombre?.split(" ")[0]
+      }, tienes una deuda pendiente de ${
+        data[0]?.resultPrestamo[0]?.montoCuota
+      } soles y vence el día ${formatDate(
+        datePay?.fechaPago
+      )}, evita la mora y paga hoy. ¡Gracias! 😉`;
+
+      setMessage(messagePredetermined);
+    }
+  }, [datePay]);
 
   return (
     <View style={styles.container}>
