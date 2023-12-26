@@ -3,8 +3,9 @@ import Cronograma from "../../components/cronograma/Cronograma";
 import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 
 const VerCronograma = (props) => {
-  const id = props.route.params.id;
-  return <Cronograma id={id} />;
+  //console.log(props.route.params.data);
+  const user = props.route.params.data;
+  return <Cronograma data={user} />;
 };
 
 export default VerCronograma;

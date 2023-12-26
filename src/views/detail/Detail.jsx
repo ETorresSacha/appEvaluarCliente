@@ -9,7 +9,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { Icon } from "@rneui/themed";
 import UseStorage from "../../components/hooks/UseHookStorage";
-import Cronograma from "../../components/cronograma/Cronograma";
 import { useNavigation } from "@react-navigation/native";
 import Pay from "../../components/pay/Pay";
 import Notification from "../../components/notification/Notification";
@@ -102,7 +101,12 @@ const Detail = (props) => {
           </View>
           <Pay data={user} />
           <Notification data={user} />
-          <Cronograma data={user} />
+          <Pressable
+            style={styles.verCronograma}
+            onPress={() => navigation.navigate("Cronograma", { data: user })}
+          >
+            <Text style={styles.subTitle}> Ver conograma</Text>
+          </Pressable>
         </View>
       )}
     </ScrollView>
@@ -161,5 +165,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  verCronograma: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    width: 250,
+    height: 40,
+    marginLeft: 80,
+    justifyContent: "center",
+    borderRadius: 10,
+    gap: 10,
+    elevation: 5,
+    borderWidth: 1,
+    backgroundColor: "orange",
+  },
+  subTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  },
 });
 //!falta la funcion de editar
+//! CAMBIAR EL BOTON VER CRONOGRAMA

@@ -71,7 +71,7 @@ const Notification = ({ data }) => {
         <Text style={styles.notificationTitle}>NOTIFICACIÓN</Text>
       </View>
       <View style={styles.containerMessage}>
-        <Text style={styles.subTitle}>Mensaje: </Text>
+        <Text style={styles.subTitle}>Mensaje predeterminado </Text>
         <TextInput
           multiline
           value={message}
@@ -147,9 +147,8 @@ const styles = StyleSheet.create({
   },
   containerMessage: {
     display: "flex",
-    flexDirection: "row",
+    //flexDirection: "row",
     paddingHorizontal: 25,
-    gap: 5,
     justifyContent: "center",
     alignItems: "center",
   },
