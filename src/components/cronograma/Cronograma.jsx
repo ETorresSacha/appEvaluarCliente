@@ -6,7 +6,7 @@ const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
 
   useEffect(() => {
-    setUpdatePrestamo(data[0]?.resultPrestamo);
+    setUpdatePrestamo(data);
   }, [data]);
 
   return (
@@ -16,8 +16,6 @@ const Cronograma = ({ data }) => {
       ) : (
         <View style={styles.container}>
           <View>
-            {/* <Text style={styles.titleCrono}>Cronograma</Text> */}
-
             <ScrollView style={styles.containerCuotas}>
               <View style={styles.containerTitle}>
                 <View style={styles.title}>

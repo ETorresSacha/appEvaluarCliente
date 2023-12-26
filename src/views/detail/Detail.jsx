@@ -103,7 +103,11 @@ const Detail = (props) => {
           <Notification data={user} />
           <Pressable
             style={styles.verCronograma}
-            onPress={() => navigation.navigate("Cronograma", { data: user })}
+            onPress={() =>
+              navigation.navigate("Cronograma", {
+                data: user[0].resultPrestamo,
+              })
+            }
           >
             <Text style={styles.subTitle}> Ver conograma</Text>
           </Pressable>

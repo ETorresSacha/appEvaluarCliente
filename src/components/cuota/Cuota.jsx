@@ -3,11 +3,12 @@ import { View, StyleSheet, Alert, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const Cuota = ({ dataPerson }) => {
+  console.log(dataPerson);
   const navigation = useNavigation();
   const cuota = dataPerson.resultPrestamo[0]?.montoCuota;
 
   const handleRouteCronograma = () => {
-    navigation.navigate("Cronograma", { id: dataPerson.uuid });
+    navigation.navigate("Cronograma", { data: dataPerson.resultPrestamo });
   };
 
   return (
