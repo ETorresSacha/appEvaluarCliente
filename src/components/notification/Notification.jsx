@@ -5,6 +5,7 @@ import {
   Linking,
   Button,
   TextInput,
+  Switch,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -16,6 +17,7 @@ const Notification = ({ data, color }) => {
   console.log(color);
   const [message, setMessage] = useState("");
   const [datePay, setDayPay] = useState();
+  const [withAlert, setWithAlert] = useState(false);
 
   // Iconos de notificacion
   const handleIconNotification = (value) => {
@@ -88,6 +90,29 @@ const Notification = ({ data, color }) => {
           errorMessage="Error"
         />
       </View> */}
+      <View style={styles.containerSwitch}>
+        <Text style={styles.subTitle}>Alerta</Text>
+        {/* <Switch
+          activeText={"On"}
+          inActiveText={"Off"}
+          onValueChange={(value) => {
+            setWithAlert(value);
+          }}
+          value={withAlert}
+        /> */}
+        <Switch
+          value={withAlert}
+          //onValueChange={(val) => console.log(val)}
+          onValueChange={(value) => {
+            setWithAlert(value);
+          }}
+          activeText={"On"}
+          inActiveText={"Off"}
+          trackColor={{ false: "grey", true: "rgb(63, 252, 236)" }}
+          thumbColor={withAlert ? "rgb(63, 252, 236)" : "#f4f3f4"}
+          // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+        />
+      </View>
       <View style={styles.containerIcons}>
         <FontAwesome
           name="whatsapp"
@@ -137,6 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "white",
     fontWeight: "bold",
+    backgroundColor: "green",
   },
   input: {
     flex: 1,
@@ -155,5 +181,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     justifyContent: "center",
     alignItems: "center",
+  },
+  containerSwitch: {
+    //flex: 1,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    //ackgroundColor: "red",
   },
 });
