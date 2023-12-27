@@ -73,8 +73,14 @@ const Notification = ({ data, color }) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.notificationTitle}>NOTIFICACIÓN</Text>
+      <View style={styles.notificationTitle}>
+        <Text style={styles.title}>NOTIFICACIÓN</Text>
+        <FontAwesome
+          name="gear"
+          size={30}
+          style={{ color: "cornsilk" }}
+          //onPress={() => handleIconNotification("whatsapp")}
+        />
       </View>
       {/* <View style={styles.containerMessage}>
         <Text style={styles.subTitle}>Mensaje predeterminado </Text>
@@ -91,18 +97,21 @@ const Notification = ({ data, color }) => {
         />
       </View> */}
       <View style={styles.containerSwitch}>
-        <Text style={styles.subTitle}>Alerta</Text>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Text style={styles.subTitle}>Institución: </Text>
+          <Text style={styles.subTitle}>Anónimo</Text>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <MaterialCommunityIcons
+            name="lightbulb-on"
+            style={{ color: "yellow", fontSize: 30 }}
+          />
+          <Text style={styles.subTitle}>activo</Text>
+        </View>
+
+        {/* <Text style={styles.subTitle}>Alerta</Text> */}
         {/* <Switch
-          activeText={"On"}
-          inActiveText={"Off"}
-          onValueChange={(value) => {
-            setWithAlert(value);
-          }}
           value={withAlert}
-        /> */}
-        <Switch
-          value={withAlert}
-          //onValueChange={(val) => console.log(val)}
           onValueChange={(value) => {
             setWithAlert(value);
           }}
@@ -110,8 +119,7 @@ const Notification = ({ data, color }) => {
           inActiveText={"Off"}
           trackColor={{ false: "grey", true: "rgb(63, 252, 236)" }}
           thumbColor={withAlert ? "rgb(63, 252, 236)" : "#f4f3f4"}
-          // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
-        />
+        /> */}
       </View>
       <View style={styles.containerIcons}>
         <FontAwesome
@@ -145,11 +153,17 @@ const styles = StyleSheet.create({
   },
 
   notificationTitle: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
-    paddingLeft: 10,
+    paddingHorizontal: 15,
+  },
+  title: {
     paddingVertical: 10,
-    fontSize: 17,
     color: "cornsilk",
+    fontSize: 17,
     fontWeight: "bold",
   },
   containerIcons: {
@@ -162,7 +176,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "white",
     fontWeight: "bold",
-    backgroundColor: "green",
+    //backgroundColor: "green",
   },
   input: {
     flex: 1,
@@ -185,9 +199,10 @@ const styles = StyleSheet.create({
   containerSwitch: {
     //flex: 1,
     display: "flex",
+    paddingTop: 10,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    //ackgroundColor: "red",
+    justifyContent: "space-around",
+    //backgroundColor: "red",
   },
 });

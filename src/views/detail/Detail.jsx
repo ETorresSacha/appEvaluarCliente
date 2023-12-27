@@ -70,10 +70,10 @@ const Detail = (props) => {
               <Text style={styles.title}>DATOS DEL CLIENTE</Text>
               <View style={styles.iconos}>
                 <Pressable style={styles.icon}>
-                  <Icon name="edit" size={25} color="cornsilk" />
+                  <Icon name="edit" size={30} color="cornsilk" />
                 </Pressable>
                 <Pressable style={styles.icon} onPress={() => alertDelete(id)}>
-                  <Icon name="delete" size={25} color="cornsilk" />
+                  <Icon name="delete" size={30} color="cornsilk" />
                 </Pressable>
               </View>
             </View>
@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(36, 146, 224, 0.625)",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingHorizontal: 15,
   },
   title: {
     paddingVertical: 10,
     color: "cornsilk",
-    paddingLeft: 10,
     fontSize: 17,
     fontWeight: "bold",
   },
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   iconos: {
+    gap: 5,
     display: "flex",
     flexDirection: "row",
   },
