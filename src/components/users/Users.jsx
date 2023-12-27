@@ -46,6 +46,7 @@ const Users = ({ data, color }) => {
               onPress={() =>
                 navigation.navigate("Detalle", {
                   id: element.uuid,
+                  typeColor: color ? color : null,
                 })
               }
             >

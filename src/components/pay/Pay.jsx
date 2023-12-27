@@ -48,7 +48,6 @@ const Pay = ({ data }) => {
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
       let result = await onUpdateStatusPay(modify);
-      //console.log(result);
     } else {
       // Cancelación de la cuenta
       let objeto = {

@@ -14,6 +14,7 @@ import Pay from "../../components/pay/Pay";
 import Notification from "../../components/notification/Notification";
 
 const Detail = (props) => {
+  const color = props.route.params.typeColor;
   const id = props.route.params.id;
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
@@ -100,7 +101,7 @@ const Detail = (props) => {
             </View>
           </View>
           <Pay data={user} />
-          <Notification data={user} />
+          <Notification data={user} color={color} />
           <Pressable
             style={styles.verCronograma}
             onPress={() =>

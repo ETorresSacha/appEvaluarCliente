@@ -12,7 +12,8 @@ import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 
-const Notification = ({ data }) => {
+const Notification = ({ data, color }) => {
+  console.log(color);
   const [message, setMessage] = useState("");
   const [datePay, setDayPay] = useState();
 
@@ -22,6 +23,7 @@ const Notification = ({ data }) => {
     switch (value) {
       case "whatsapp":
         aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${message}`;
+        console.log(message);
         break;
 
       case "phone-call":
@@ -57,20 +59,22 @@ const Notification = ({ data }) => {
         data[0]?.nombre?.split(" ")[0]
       }, tienes una deuda pendiente de ${
         data[0]?.resultPrestamo[0]?.montoCuota
-      } soles y vence el día ${formatDate(
+      } soles y ${color == "red" ? "venció" : "vence"} el día ${formatDate(
         datePay?.fechaPago
-      )}, evita la mora y paga hoy. ¡Gracias! 😉`;
+      )}, ${
+        color == "red" ? "evita que suba tu mora" : "evita la mora"
+      } y paga hoy. ¡Gracias! 😉`;
 
-      setMessage(messagePredetermined);
+      color !== null ? setMessage(messagePredetermined) : setMessage(``);
     }
-  }, [datePay]);
+  }, [datePay, color]);
 
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.notificationTitle}>NOTIFICACIÓN</Text>
       </View>
-      <View style={styles.containerMessage}>
+      {/* <View style={styles.containerMessage}>
         <Text style={styles.subTitle}>Mensaje predeterminado </Text>
         <TextInput
           multiline
@@ -83,7 +87,7 @@ const Notification = ({ data }) => {
           }}
           errorMessage="Error"
         />
-      </View>
+      </View> */}
       <View style={styles.containerIcons}>
         <FontAwesome
           name="whatsapp"
