@@ -24,6 +24,9 @@ const ModalConfigNotification = ({ onClose, visible }) => {
       <View style={styles.conteiner}>
         <View style={styles.content}>
           <View style={styles.closeContainer}>
+            <Text style={{ fontSize: 17, fontWeight: "bold" }}>
+              NOTIFICACIÓN
+            </Text>
             <Button
               icon={<Icon name="close" size={28} />}
               onPress={() => onClose()}
@@ -113,7 +116,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   closeContainer: {
+    display: "flex",
+    flexDirection: "row",
     alignItems: "flex-end",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   input: {
     height: 30,
