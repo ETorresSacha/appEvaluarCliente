@@ -6,15 +6,18 @@ import {
   Button,
   TextInput,
   Switch,
+  Pressable,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
+import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
 
 const Notification = ({ data, color }) => {
-  console.log(color);
+  const [isVisible, setIsVisible] = useState(false);
   const [message, setMessage] = useState("");
   const [datePay, setDayPay] = useState();
   const [withAlert, setWithAlert] = useState(false);
@@ -71,16 +74,25 @@ const Notification = ({ data, color }) => {
     }
   }, [datePay, color]);
 
+  // Cerrar el modal
+  const handleModalClose = async (shouldUpdate) => {
+    if (shouldUpdate) {
+      Alert.alert("Se guardó correctamente");
+      //loadFoods();
+    }
+    setIsVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.notificationTitle}>
         <Text style={styles.title}>NOTIFICACIÓN</Text>
-        <FontAwesome
-          name="gear"
-          size={30}
-          style={{ color: "cornsilk" }}
-          //onPress={() => handleIconNotification("whatsapp")}
-        />
+        <Pressable
+          //onPress={() => Alert.alert("hola")}
+          onPress={() => setIsVisible(true)}
+        >
+          <FontAwesome name="gear" size={30} style={{ color: "cornsilk" }} />
+        </Pressable>
       </View>
       {/* <View style={styles.containerMessage}>
         <Text style={styles.subTitle}>Mensaje predeterminado </Text>
@@ -141,6 +153,7 @@ const Notification = ({ data, color }) => {
           onPress={() => handleIconNotification("email-fast-outline")}
         />
       </View>
+      <ModalConfigNotification visible={isVisible} onClose={handleModalClose} />
     </View>
   );
 };
