@@ -14,13 +14,10 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
-import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
 
 const Notification = ({ data, color }) => {
-  const [isVisible, setIsVisible] = useState(false);
   const [message, setMessage] = useState("");
   const [datePay, setDayPay] = useState();
-  const [withAlert, setWithAlert] = useState(false);
 
   // Iconos de notificacion
   const handleIconNotification = (value) => {
@@ -87,27 +84,10 @@ const Notification = ({ data, color }) => {
     <View style={styles.container}>
       <View style={styles.notificationTitle}>
         <Text style={styles.title}>NOTIFICACIÓN</Text>
-        <Pressable
-          //onPress={() => Alert.alert("hola")}
-          onPress={() => setIsVisible(true)}
-        >
+        <Pressable onPress={() => setIsVisible(true)}>
           <FontAwesome name="gear" size={30} style={{ color: "cornsilk" }} />
         </Pressable>
       </View>
-      {/* <View style={styles.containerMessage}>
-        <Text style={styles.subTitle}>Mensaje predeterminado </Text>
-        <TextInput
-          multiline
-          value={message}
-          style={styles.input}
-          placeholder="Mensaje"
-          placeholderTextColor="gray"
-          onChangeText={(text) => {
-            setMessage(text);
-          }}
-          errorMessage="Error"
-        />
-      </View> */}
       <View style={styles.containerSwitch}>
         <View style={{ display: "flex", flexDirection: "row" }}>
           <Text style={styles.subTitle}>Institución: </Text>
@@ -120,18 +100,6 @@ const Notification = ({ data, color }) => {
           />
           <Text style={styles.subTitle}>activo</Text>
         </View>
-
-        {/* <Text style={styles.subTitle}>Alerta</Text> */}
-        {/* <Switch
-          value={withAlert}
-          onValueChange={(value) => {
-            setWithAlert(value);
-          }}
-          activeText={"On"}
-          inActiveText={"Off"}
-          trackColor={{ false: "grey", true: "rgb(63, 252, 236)" }}
-          thumbColor={withAlert ? "rgb(63, 252, 236)" : "#f4f3f4"}
-        /> */}
       </View>
       <View style={styles.containerIcons}>
         <FontAwesome
@@ -153,7 +121,6 @@ const Notification = ({ data, color }) => {
           onPress={() => handleIconNotification("email-fast-outline")}
         />
       </View>
-      <ModalConfigNotification visible={isVisible} onClose={handleModalClose} />
     </View>
   );
 };
