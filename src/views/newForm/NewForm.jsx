@@ -13,6 +13,7 @@ import Calculator from "../calculator/Calculator";
 import { useNavigation } from "@react-navigation/native";
 import { v4 as uuidv4 } from "uuid";
 import { validationDataPerson } from "../../utils/validation/Validation";
+import Header from "../../components/header/Header";
 
 const NewForm = () => {
   const uuid = uuidv4();
@@ -97,7 +98,7 @@ const NewForm = () => {
                   },
                   {
                     text: "No",
-                    onPress: () => navigation.navigate("Cliente"),
+                    onPress: () => navigation.navigate("Clientes"),
                     style: "destructive",
                   },
                 ]
@@ -119,6 +120,7 @@ const NewForm = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <Header title={"Nuevo cliente"} back={"Clientes"} />
       <DataCustomer
         setErrores={setErrores}
         errores={errores}

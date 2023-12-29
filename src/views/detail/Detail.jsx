@@ -12,6 +12,7 @@ import UseStorage from "../../components/hooks/UseHookStorage";
 import { useNavigation } from "@react-navigation/native";
 import Pay from "../../components/pay/Pay";
 import Notification from "../../components/notification/Notification";
+import Header from "../../components/header/Header";
 
 const Detail = (props) => {
   const color = props.route.params.typeColor;
@@ -65,6 +66,7 @@ const Detail = (props) => {
         <Text>cargando</Text>
       ) : (
         <View style={styles.container}>
+          <Header title={"Detalle"} back={"Clientes"} />
           <View style={styles.containerData}>
             <View style={styles.containerTitle}>
               <Text style={styles.title}>DATOS DEL CLIENTE</Text>

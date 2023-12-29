@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Pressable,
+  Image,
+} from "react-native";
 import CustomerType from "../../components/customerType/CustomerType";
 import Header from "../../components/header/Header";
 import ItemsHome from "../../components/itemsHome/ItemsHome";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
+import Ionicons from "react-native-vector-icons/Ionicons";
+const user = {
+  name: "Erik Torres Sacha",
+  uri: "https://media.licdn.com/dms/image/D4E03AQH-M4FFjGHveA/profile-displayphoto-shrink_400_400/0/1693329901508?e=1704931200&v=beta&t=07dlpl6eAU2K3xnJx0oL0-v76Br4jWK0Acj9BXkgCfc",
+};
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,7 +32,20 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <View style={styles.conteinerHeader}>
+        <View style={styles.rightConteiner}>
+          <Image source={{ uri: user.uri }} style={styles.profileImage}></Image>
+        </View>
+        <Pressable
+          style={styles.leftConteiner}
+          onPress={() => console.log("hola")}
+        >
+          <Ionicons
+            name="options"
+            style={{ color: "cornsilk", fontSize: 40 }}
+          />
+        </Pressable>
+      </View>
 
       <View>
         <View style={styles.institutionTitle}>
@@ -56,6 +81,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
     backgroundColor: "rgb(31, 36, 36)",
+  },
+  conteinerHeader: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 24,
   },
   title: {
     paddingVertical: 10,

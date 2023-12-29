@@ -1,18 +1,24 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-const user = {
-  name: "Erik Torres Sacha",
-  uri: "https://media.licdn.com/dms/image/D4E03AQH-M4FFjGHveA/profile-displayphoto-shrink_400_400/0/1693329901508?e=1704931200&v=beta&t=07dlpl6eAU2K3xnJx0oL0-v76Br4jWK0Acj9BXkgCfc",
-};
-const Header = () => {
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
+
+const Header = ({ title, back }) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.conteiner}>
-      <View style={styles.leftConteiner}>
-        <Text style={styles.name}>{user.name}</Text>
-        <Text style={styles.subtitle}>Bienvenido</Text>
-      </View>
+      <TouchableOpacity
+        style={styles.leftConteiner}
+        onPress={() => navigation.navigate(!back ? "Home" : back)}
+      >
+        <AntDesign
+          name="arrowleft"
+          style={{ color: "cornsilk", fontSize: 40 }}
+        />
+      </TouchableOpacity>
       <View style={styles.rightConteiner}>
-        <Image source={{ uri: user.uri }} style={styles.profileImage}></Image>
+        <Text style={styles.subtitle}>{title}</Text>
       </View>
     </View>
   );
@@ -23,21 +29,22 @@ const styles = StyleSheet.create({
   conteiner: {
     flexDirection: "row",
   },
-  leftConteiner: {
-    flex: 1,
-    justifyContent: "center",
-  },
   rightConteiner: {
     flex: 1,
-    alignItems: "flex-end",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 15,
   },
-  name: {
-    fontSize: 14,
-    fontWeight: "bold",
+  leftConteiner: {
+    justifyContent: "center",
+    marginLeft: 10,
   },
   subtitle: {
-    fontSize: 12,
-    color: "#808080",
+    fontSize: 20,
+    color: "cornsilk",
+    fontWeight: "bold",
   },
   profileImage: {
     width: 40,

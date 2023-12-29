@@ -14,6 +14,7 @@ import { customerData, date, orderData } from "../../utils/thunks/Thunks";
 import { format, add } from "date-fns";
 
 import Users from "../../components/users/Users";
+import Header from "../../components/header/Header";
 
 const Customer = () => {
   const { onGetCronograma } = UseStorage();
@@ -85,6 +86,7 @@ const Customer = () => {
 
   return (
     <View style={styles.container}>
+      <Header title={"Clientes"} />
       <NavBar data={data} setData={setData} />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>

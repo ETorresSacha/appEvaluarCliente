@@ -17,7 +17,7 @@ const ItemsHome = () => {
   };
 
   const handleCustomer = () => {
-    navigation.navigate("Cliente");
+    navigation.navigate("Clientes");
   };
 
   return (
