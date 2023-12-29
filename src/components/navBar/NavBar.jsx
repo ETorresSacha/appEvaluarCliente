@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingHorizontal: 1,
-    paddingVertical: 10,
+    //paddingVertical: 10,
     justifyContent: "space-evenly",
     alignItems: "center",
   },

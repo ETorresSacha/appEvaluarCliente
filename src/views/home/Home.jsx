@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -13,7 +13,11 @@ import ItemsHome from "../../components/itemsHome/ItemsHome";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
+import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
+import Eliminar from "../../modals/modalConfigPersonal/Eliminar";
+import Eliminar2 from "../../modals/modalConfigPersonal/Eliminar2";
+
 const user = {
   name: "Erik Torres Sacha",
   uri: "https://media.licdn.com/dms/image/D4E03AQH-M4FFjGHveA/profile-displayphoto-shrink_400_400/0/1693329901508?e=1704931200&v=beta&t=07dlpl6eAU2K3xnJx0oL0-v76Br4jWK0Acj9BXkgCfc",
@@ -30,6 +34,8 @@ const Home = () => {
     setIsVisible(false);
   };
 
+  //!!!!!!!!!!!!!!!!!!!
+
   return (
     <View style={styles.container}>
       <View style={styles.conteinerHeader}>
@@ -38,15 +44,17 @@ const Home = () => {
         </View>
         <Pressable
           style={styles.leftConteiner}
-          onPress={() => console.log("hola")}
+          onPress={() => setIsVisible(true)}
+          //onPress={() => console.log("hol")}
         >
-          <Ionicons
-            name="options"
-            style={{ color: "cornsilk", fontSize: 40 }}
+          <SimpleLineIcons
+            name="options-vertical"
+            style={{ color: "cornsilk", fontSize: 25 }}
           />
         </Pressable>
       </View>
-
+      <ModalConfigPersonal visible={isVisible} onClose={handleModalClose} />
+      {/* <Eliminar2 /> */}
       <View>
         <View style={styles.institutionTitle}>
           <Text style={styles.title}>INSTITUCIÓN</Text>
@@ -68,7 +76,8 @@ const Home = () => {
           </View>
         </View>
       </View>
-      <ModalConfigNotification visible={isVisible} onClose={handleModalClose} />
+
+      {/* <ModalConfigNotification visible={isVisible} onClose={handleModalClose} /> */}
       <ItemsHome />
     </View>
   );

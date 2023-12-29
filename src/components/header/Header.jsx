@@ -28,6 +28,7 @@ export default Header;
 const styles = StyleSheet.create({
   conteiner: {
     flexDirection: "row",
+    paddingVertical: 10,
   },
   rightConteiner: {
     flex: 1,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 15,
+    marginRight: 30,
   },
   leftConteiner: {
     justifyContent: "center",
