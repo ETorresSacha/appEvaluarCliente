@@ -11,37 +11,45 @@ import {
 import { Button, Icon, Input } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import InfNegocio from "../../components/optionsPersonal/InfNegocio";
 
 const optionsData = ["Información Negocio", "Recomendar App", "Configuración"];
 
 const ModalConfigPersonal = ({ visible, onClose }) => {
   const navigation = useNavigation();
-
+  const [enable, setEnable] = useState(false);
+  console.log(enable);
   const options = () => {
-    navigation.navigate("opciones");
+    setEnable(true);
     onClose();
+    // if (isVisible) {
+    //   navigation.navigate("opciones", { enable: isVisible, close: onclose });
+    // }
   };
 
   return (
-    <Modal
-      transparent={true}
-      visible={visible}
-      onRequestClose={() => onClose()}
-    >
-      <TouchableWithoutFeedback onPress={() => onClose()}>
-        <View style={styles.modalOverlay} />
-      </TouchableWithoutFeedback>
+    <View>
+      <Modal
+        transparent={true}
+        visible={visible}
+        onRequestClose={() => onClose()}
+      >
+        <TouchableWithoutFeedback onPress={() => onClose()}>
+          <View style={styles.modalOverlay} />
+        </TouchableWithoutFeedback>
 
-      <View style={styles.modalContent}>
-        {optionsData.map((element) => {
-          return (
-            <Pressable onPress={options}>
-              <Text style={styles.text}>{element}</Text>
-            </Pressable>
-          );
-        })}
-      </View>
-    </Modal>
+        <View style={styles.modalContent}>
+          {optionsData.map((element, index) => {
+            return (
+              <Pressable onPress={options} key={index}>
+                <Text style={styles.text}>{element}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      </Modal>
+      <InfNegocio enable={enable} setEnable={setEnable} />
+    </View>
   );
 };
 

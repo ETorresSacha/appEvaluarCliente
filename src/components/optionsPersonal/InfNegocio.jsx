@@ -5,97 +5,119 @@ import {
   TextInput,
   ScrollView,
   Pressable,
+  Modal,
+  Switch,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
-import Header from "../header/Header";
-import { Permissions, ImagePicker } from "expo";
-const nameData = ["negocio", "Moneda", "Dirección", "Celular"];
 
-const InfNegocio = () => {
+const InfNegocio = ({ enable, setEnable }) => {
+  const [alert, setAlert] = useState(true);
   const [data, setData] = useState({
     negocio: "",
     moneda: "",
     direccion: "",
     celular: "",
   });
-  console.log(data);
+
   const handleDataKeep = () => {};
-  const handleTakePhoto = () => {
-    console.log("tomar foto");
-  };
+
   return (
     <ScrollView style={styles.container}>
-      <Header title={"Configuración del negocio"} back={"Home"} />
-      <Pressable style={styles.containerLogo} onPress={handleTakePhoto}>
-        <Text
-          // value={dataPerson.nombre}
-          style={styles.logo}
-          placeholder="foto"
-          placeholderTextColor="gray"
-          // onChange={(event) => {
-          //   handleChangeData(event, "nombre");
-          // }}
-          errorMessage="Error"
-          //defaultValue={dataPerson.nombre}
-          // onChangeText={(text) => {
-          //   setDataPerson({ ...dataPerson, nombre: text });
-          //   setErrores((errores) => ({ ...errores, nombre: "" }));
-          // }}
-        />
-      </Pressable>
-      <View>
-        <View style={styles.containerText}>
-          <Text style={styles.titleText}>Nombre del negocio</Text>
-          <TextInput
-            value={data.negocio}
-            style={styles.text}
-            placeholder={"Nombre del negocio"}
-            placeholderTextColor="gray"
-            onChangeText={(text) => {
-              setData({ ...data, negocio: text });
+      <Modal
+        // style={styles.container}
+        transparent={true}
+        visible={enable}
+        onRequestClose={() => setEnable(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setEnable(false)}>
+          <View style={styles.modalOverlay} />
+        </TouchableWithoutFeedback>
+        <View style={styles.modalContent}>
+          <Text
+            style={{
+              color: "black",
+              textAlign: "center",
+              fontSize: 20,
+              fontWeight: "bold",
             }}
-          />
+          >
+            INFORMACIÓN DEL NEGOCIO
+          </Text>
+          <View style={styles.containerText}>
+            <Text style={styles.titleText}>Nombre</Text>
+            <TextInput
+              value={data.negocio}
+              style={styles.text}
+              placeholder={"Nombre"}
+              placeholderTextColor="gray"
+              onChangeText={(text) => {
+                setData({ ...data, negocio: text });
+              }}
+            />
+          </View>
+          <View style={styles.containerText}>
+            <Text style={styles.titleText}>Dirección</Text>
+            <TextInput
+              value={data.direccion}
+              style={styles.text}
+              placeholder={"Dirección"}
+              placeholderTextColor="gray"
+              onChangeText={(text) => {
+                setData({ ...data, direccion: text });
+              }}
+            />
+          </View>
+          <View style={styles.containerText}>
+            <Text style={styles.titleText}>Celular</Text>
+            <TextInput
+              value={data.celular}
+              style={styles.text}
+              placeholder={"Celular"}
+              placeholderTextColor="gray"
+              onChangeText={(text) => {
+                setData({ ...data, celular: text });
+              }}
+            />
+          </View>
+          <View style={styles.containerConfiguration}>
+            <View
+              style={{
+                height: 65,
+                justifyContent: "center",
+                gap: 10,
+              }}
+            >
+              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
+                Recibir Notificaciones
+              </Text>
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <Switch
+                value={alert}
+                onValueChange={(value) => {
+                  setAlert(value);
+                }}
+                trackColor={{ false: "grey", true: "rgb(63, 252, 236)" }}
+                thumbColor={alert ? "rgb(63, 252, 236)" : "#f4f3f4"}
+              />
+              <Text
+                style={{
+                  color: "black",
+                  paddingBottom: 10,
+                  fontSize: 17,
+                  fontWeight: "bold",
+                }}
+              >
+                {alert ? "ON" : "OFF"}
+              </Text>
+            </View>
+          </View>
+          <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
+            <Text style={styles.textGuardar}>Guardar</Text>
+          </Pressable>
         </View>
-        <View style={styles.containerText}>
-          <Text style={styles.titleText}>Moneda</Text>
-          <TextInput
-            value={data.moneda}
-            style={styles.text}
-            placeholder={"Moneda"}
-            placeholderTextColor="gray"
-            onChangeText={(text) => {
-              setData({ ...data, moneda: text });
-            }}
-          />
-        </View>
-        <View style={styles.containerText}>
-          <Text style={styles.titleText}>Dirección</Text>
-          <TextInput
-            value={data.direccion}
-            style={styles.text}
-            placeholder={"Dirección"}
-            placeholderTextColor="gray"
-            onChangeText={(text) => {
-              setData({ ...data, direccion: text });
-            }}
-          />
-        </View>
-        <View style={styles.containerText}>
-          <Text style={styles.titleText}>Celular</Text>
-          <TextInput
-            value={data.celular}
-            style={styles.text}
-            placeholder={"Celular"}
-            placeholderTextColor="gray"
-            onChangeText={(text) => {
-              setData({ ...data, celular: text });
-            }}
-          />
-        </View>
-      </View>
-      <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
-        <Text style={styles.textGuardar}>Guardar</Text>
-      </Pressable>
+      </Modal>
     </ScrollView>
   );
 };
@@ -107,48 +129,49 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgb(31, 36, 36)",
   },
-  containerLogo: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 10,
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
-  logo: {
-    height: 185,
-    width: 185,
-    borderWidth: 1,
+  modalContent: {
+    backgroundColor: "beige",
+    borderRadius: 2,
+    position: "absolute",
+    top: "15%",
+    left: "10%",
+    right: "10%",
     borderRadius: 15,
-    borderColor: "white",
-    padding: 2,
-    paddingLeft: 10,
-    color: "cornsilk",
+    borderWidth: 1,
+    paddingVertical: 10,
   },
+
   containerText: {
-    marginTop: 20,
-    gap: 5,
+    marginTop: 10,
+    //gap: 5,
   },
   titleText: {
     paddingLeft: 20,
-    fontSize: 20,
-    color: "cornsilk",
+    fontSize: 18,
+    color: "black",
   },
   text: {
     height: 40,
     borderWidth: 1,
     borderRadius: 15,
-    borderColor: "white",
+    borderColor: "grey",
     padding: 2,
     marginVertical: 5,
     marginHorizontal: 25,
     paddingLeft: 10,
-    fontSize: 18,
-    color: "cornsilk",
+    fontSize: 16,
+    color: "black",
   },
   buttonContainer: {
-    marginTop: 30,
+    marginVertical: 30,
     alignItems: "center",
     width: 250,
     height: 40,
-    marginLeft: 80,
+    marginLeft: 40,
     justifyContent: "center",
     borderRadius: 10,
     elevation: 3,
@@ -159,5 +182,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
+  },
+  containerConfiguration: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 });
