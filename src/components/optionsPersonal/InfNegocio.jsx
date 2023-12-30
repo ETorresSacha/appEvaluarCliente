@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import Header from "../header/Header";
+import { Permissions, ImagePicker } from "expo";
 const nameData = ["negocio", "Moneda", "Dirección", "Celular"];
 
 const InfNegocio = () => {
@@ -19,11 +20,14 @@ const InfNegocio = () => {
   });
   console.log(data);
   const handleDataKeep = () => {};
+  const handleTakePhoto = () => {
+    console.log("tomar foto");
+  };
   return (
     <ScrollView style={styles.container}>
       <Header title={"Configuración del negocio"} back={"Home"} />
-      <View style={styles.containerLogo}>
-        <TextInput
+      <Pressable style={styles.containerLogo} onPress={handleTakePhoto}>
+        <Text
           // value={dataPerson.nombre}
           style={styles.logo}
           placeholder="foto"
@@ -38,7 +42,7 @@ const InfNegocio = () => {
           //   setErrores((errores) => ({ ...errores, nombre: "" }));
           // }}
         />
-      </View>
+      </Pressable>
       <View>
         <View style={styles.containerText}>
           <Text style={styles.titleText}>Nombre del negocio</Text>
