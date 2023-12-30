@@ -65,6 +65,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           >
             INFORMACIÓN DEL NEGOCIO
           </Text>
+          {/* ------------------ NOMBRE ------------------*/}
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Nombre</Text>
             <TextInput
@@ -77,6 +78,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
               }}
             />
           </View>
+          {/* ------------------ DIRECCIÓN ------------------*/}
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Dirección</Text>
             <TextInput
@@ -89,6 +91,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
               }}
             />
           </View>
+          {/* ------------------ CELULAR ------------------*/}
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Celular</Text>
             <TextInput
@@ -99,8 +102,10 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
               onChangeText={(text) => {
                 setData({ ...data, celular: text });
               }}
+              keyboardType="numeric"
             />
           </View>
+          {/* ------------------ RECIBIR NOTIFICACIONE ------------------*/}
           <View style={styles.containerConfiguration}>
             <View
               style={{
