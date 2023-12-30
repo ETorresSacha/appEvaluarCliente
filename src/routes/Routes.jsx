@@ -12,7 +12,7 @@ import VerCronograma from "../views/cronograma/VerCronograma";
 import Customer from "../views/customer/Customer";
 import Calculator from "../views/calculator/Calculator";
 import Alerta from "../views/alert/Alerta";
-import OptionsPersonal from "../components/optionsPersonal/OptionsPersonal";
+import OptionsPersonal from "../components/optionsPersonal/InfNegocio";
 
 //const Tab = createBottomTabNavigator();
 const optionsStack = {
@@ -58,7 +58,7 @@ const Routes = () => {
         <Stack.Screen
           name="opciones"
           component={OptionsPersonal}
-          //options={optionsStack}
+          options={optionsStack}
         />
         <Stack.Screen name="Alerta" component={Alerta} options={optionsStack} />
       </Stack.Navigator>

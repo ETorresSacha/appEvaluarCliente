@@ -15,8 +15,6 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
-import Eliminar from "../../modals/modalConfigPersonal/Eliminar";
-import Eliminar2 from "../../modals/modalConfigPersonal/Eliminar2";
 
 const user = {
   name: "Erik Torres Sacha",
@@ -54,7 +52,6 @@ const Home = () => {
         </Pressable>
       </View>
       <ModalConfigPersonal visible={isVisible} onClose={handleModalClose} />
-      {/* <Eliminar2 /> */}
       <View>
         <View style={styles.institutionTitle}>
           <Text style={styles.title}>INSTITUCIÓN</Text>
