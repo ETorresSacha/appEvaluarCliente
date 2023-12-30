@@ -7,6 +7,7 @@ import {
   Pressable,
   Modal,
   Switch,
+  Alert,
   TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
@@ -22,6 +23,26 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
 
   const handleDataKeep = () => {};
 
+  const handleCloseModal = () => {
+    Alert.alert("GUARDAR", "¿Desea guardar los cambios?", [
+      {
+        text: "Si",
+        onPress: async () => {
+          setEnableNeg(false);
+          Alert.alert("Se guardo correctamente");
+        },
+        style: "destructive",
+      },
+      {
+        text: "No",
+        onPress: async () => {
+          setEnableNeg(false);
+        },
+        style: "destructive",
+      },
+    ]);
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Modal
@@ -30,7 +51,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
         visible={enablerNeg}
         onRequestClose={() => setEnableNeg(false)}
       >
-        <TouchableWithoutFeedback onPress={() => setEnableNeg(false)}>
+        <TouchableWithoutFeedback onPress={handleCloseModal}>
           <View style={styles.modalOverlay} />
         </TouchableWithoutFeedback>
         <View style={styles.modalContent}>
