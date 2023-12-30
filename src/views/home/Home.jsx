@@ -12,7 +12,7 @@ import Header from "../../components/header/Header";
 import ItemsHome from "../../components/itemsHome/ItemsHome";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
+//import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
 

@@ -11,20 +11,31 @@ import {
 import { Button, Icon, Input } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import InfNegocio from "../../components/optionsPersonal/InfNegocio";
+import InfNegocio from "./modalOptions/InfNegocio";
+import RecommendApp from "./modalOptions/RecommendApp";
+import Configuration from "./modalOptions/Configuration";
 
 const optionsData = ["Información Negocio", "Recomendar App", "Configuración"];
 
 const ModalConfigPersonal = ({ visible, onClose }) => {
   const navigation = useNavigation();
-  const [enable, setEnable] = useState(false);
-  console.log(enable);
-  const options = () => {
-    setEnable(true);
+  const [enablerNeg, setEnableNeg] = useState(false);
+  const [enablerRec, setEnableRec] = useState(false);
+  const [enablerConf, setEnableConf] = useState(false);
+
+  const options = (value) => {
+    //console.log(value);
+    switch (value) {
+      case "Información Negocio":
+        setEnableNeg(true);
+        break;
+      case "Recomendar App":
+        setEnableRec(true);
+        break;
+      case "Configuración":
+        setEnableConf(true);
+    }
     onClose();
-    // if (isVisible) {
-    //   navigation.navigate("opciones", { enable: isVisible, close: onclose });
-    // }
   };
 
   return (
@@ -41,14 +52,18 @@ const ModalConfigPersonal = ({ visible, onClose }) => {
         <View style={styles.modalContent}>
           {optionsData.map((element, index) => {
             return (
-              <Pressable onPress={options} key={index}>
+              <Pressable onPress={() => options(element)} key={index}>
                 <Text style={styles.text}>{element}</Text>
               </Pressable>
             );
           })}
         </View>
       </Modal>
-      <InfNegocio enable={enable} setEnable={setEnable} />
+
+      {/* MODALES DE LAS OPCIONES */}
+      <InfNegocio enablerNeg={enablerNeg} setEnableNeg={setEnableNeg} />
+      <RecommendApp enablerRec={enablerRec} setEnableRec={setEnableRec} />
+      <Configuration enablerConf={enablerConf} setEnableConf={setEnableConf} />
     </View>
   );
 };

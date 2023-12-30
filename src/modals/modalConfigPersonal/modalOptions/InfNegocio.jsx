@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 
-const InfNegocio = ({ enable, setEnable }) => {
+const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   const [alert, setAlert] = useState(true);
   const [data, setData] = useState({
     negocio: "",
@@ -27,10 +27,10 @@ const InfNegocio = ({ enable, setEnable }) => {
       <Modal
         // style={styles.container}
         transparent={true}
-        visible={enable}
-        onRequestClose={() => setEnable(false)}
+        visible={enablerNeg}
+        onRequestClose={() => setEnableNeg(false)}
       >
-        <TouchableWithoutFeedback onPress={() => setEnable(false)}>
+        <TouchableWithoutFeedback onPress={() => setEnableNeg(false)}>
           <View style={styles.modalOverlay} />
         </TouchableWithoutFeedback>
         <View style={styles.modalContent}>
