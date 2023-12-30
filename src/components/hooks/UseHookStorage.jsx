@@ -7,7 +7,7 @@ const MY_KEY_DATA = "@data";
 
 const UseStorage = () => {
   // GUARDAR INFORMACION
-  const saveInfoStorage = async (storageKey, meal, indice) => {
+  const saveInfoStorage = async (storageKey, meal) => {
     try {
       const currentSave = await AsyncStorage.getItem(storageKey); // Trae los datos guardados
 

@@ -11,18 +11,29 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
+import UseStorageBusiness from "../../../components/hooks/UseHookDataNeg";
 
 const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
-  const [alert, setAlert] = useState(true);
+  const { onSaveDataBusiness } = UseStorageBusiness();
   const [data, setData] = useState({
     negocio: "",
-    moneda: "",
     direccion: "",
     celular: "",
+    notification: true,
   });
 
-  const handleDataKeep = () => {};
+  // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
+  const handleDataKeep = async () => {
+    //! tenemos que validar primero
+    // await onSaveDataBusiness({
+    //   negocio: data.negocio,
+    //   direccion: data.direccion,
+    //   celular: data.celular,
+    //   notification: data.notification,
+    // });
+  };
 
+  // CERRAR EL MODAL
   const handleCloseModal = () => {
     Alert.alert("GUARDAR", "¿Desea guardar los cambios?", [
       {
@@ -120,9 +131,10 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
             </View>
             <View style={{ alignItems: "center" }}>
               <Switch
-                value={alert}
+                value={data.notification}
                 onValueChange={(value) => {
-                  setAlert(value);
+                  // setAlert(value);
+                  setData({ ...data, notification: value });
                 }}
                 trackColor={{ false: "grey", true: "rgb(63, 252, 236)" }}
                 thumbColor={alert ? "rgb(63, 252, 236)" : "#f4f3f4"}
