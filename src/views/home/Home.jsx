@@ -43,7 +43,6 @@ const Home = () => {
         <Pressable
           style={styles.leftConteiner}
           onPress={() => setIsVisible(true)}
-          //onPress={() => console.log("hol")}
         >
           <SimpleLineIcons
             name="options-vertical"
@@ -116,18 +115,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   containerSwitch: {
-    //flex: 1,
     display: "flex",
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    //backgroundColor: "red",
   },
   subTitle: {
     fontSize: 15,
     color: "white",
     fontWeight: "bold",
-    //backgroundColor: "green",
+  },
+  leftConteiner: {
+    justifyContent: "center",
+    marginLeft: 10,
+  },
+  rightConteiner: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

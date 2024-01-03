@@ -115,7 +115,10 @@ const Calculator = ({
 
   return (
     <View style={styles.container}>
-      <Header title={"Calculadora"} back={"Home"} />
+      {errorsP == undefined ? (
+        <Header title={"Calculadora"} back={"Home"} />
+      ) : null}
+
       <Prestamo
         errorsPrestamo={errorsPrestamo}
         setErrorsPrestamo={setErrorsPrestamo}
