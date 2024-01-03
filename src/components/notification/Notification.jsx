@@ -1,23 +1,16 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Linking,
-  Button,
-  TextInput,
-  Switch,
-  Pressable,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, View, Linking } from "react-native";
 import React, { useEffect, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
+import UseStorageBusiness from "../hooks/UseHookDataNeg";
 
 const Notification = ({ data, color }) => {
+  const { onGetBusiness } = UseStorageBusiness();
   const [message, setMessage] = useState("");
   const [datePay, setDayPay] = useState();
+  const [dataNegocio, setDataNegocio] = useState({});
 
   // Iconos de notificacion
   const handleIconNotification = (value) => {
@@ -54,16 +47,15 @@ const Notification = ({ data, color }) => {
   }, [data]);
 
   // Actualiza message
-
   useEffect(() => {
     if (datePay != undefined) {
       const messagePredetermined = `Hola ${
         data[0]?.nombre?.split(" ")[0]
-      }, tienes una deuda pendiente de ${
-        data[0]?.resultPrestamo[0]?.montoCuota
-      } soles y ${color == "red" ? "venció" : "vence"} el día ${formatDate(
-        datePay?.fechaPago
-      )}, ${
+      }, tienes una deuda pendiente en la entidad ${
+        dataNegocio[0]?.negocio ? dataNegocio[0]?.negocio : "Financiera"
+      } de ${data[0]?.resultPrestamo[0]?.montoCuota} soles y ${
+        color == "red" ? "venció" : "vence"
+      } el día ${formatDate(datePay?.fechaPago)}, ${
         color == "red" ? "evita que suba tu mora" : "evita la mora"
       } y paga hoy. ¡Gracias! 😉`;
 
@@ -71,14 +63,19 @@ const Notification = ({ data, color }) => {
     }
   }, [datePay, color]);
 
-  // Cerrar el modal
-  const handleModalClose = async (shouldUpdate) => {
-    if (shouldUpdate) {
-      Alert.alert("Se guardó correctamente");
-      //loadFoods();
+  // Cargar los datos del negocio
+  const loadNegocio = async () => {
+    try {
+      const result = await onGetBusiness();
+      setDataNegocio(result);
+    } catch (error) {
+      console.error(error);
     }
-    setIsVisible(false);
   };
+
+  useEffect(() => {
+    loadNegocio();
+  }, []);
 
   return (
     <View style={styles.container}>
