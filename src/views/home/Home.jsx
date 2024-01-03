@@ -91,6 +91,10 @@ const Home = () => {
         </View>
       </View>
 
+      {/* <View style={styles.containerLogo}>
+        <Image source={{ uri: user.uri }} style={styles.logo}></Image>
+      </View> */}
+
       {/* ITEMS DE LAS OPCIONES */}
       <ItemsHome />
     </View>
@@ -160,5 +164,15 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "cover",
+  },
+  containerLogo: {
+    marginVertical: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
   },
 });

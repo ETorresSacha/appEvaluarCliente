@@ -9,6 +9,8 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const ItemsHome = () => {
   const navigation = useNavigation();
@@ -23,17 +25,21 @@ const ItemsHome = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleCustomer}>
-        <Ionicons name="users" size={100} color="rgb(36, 224, 58)" />
-        <Text style={styles.text}> Clientes</Text>
+      <TouchableOpacity onPress={handleCustomer} style={styles.item}>
+        <FontAwesome name="users" size={100} color="rgb(36, 224, 58)" />
+        <Text style={styles.text}> Clientes Pendientes</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
-        <Ionicons name="cash" size={100} color="rgb(36, 224, 221)" />
-        <Text style={styles.text}> Cancelado</Text>
+      <TouchableOpacity style={styles.item}>
+        <MaterialCommunityIcons
+          name="account-cancel"
+          size={100}
+          color="rgb(36, 224, 221)"
+        />
+        <Text style={styles.text}> Clientes Cancelados</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={handlePrestamo}>
+      <TouchableOpacity onPress={handlePrestamo} style={styles.item}>
         <Ionicons name="calculator" size={100} color="rgb(224, 205, 36)" />
         <Text style={styles.text}> Calculadora</Text>
       </TouchableOpacity>
@@ -48,23 +54,30 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    padding: 20,
-    paddingTop: 50,
-    gap: 25,
+    width: 330,
     justifyContent: "center",
     alignContent: "center",
+    padding: 20,
+    marginTop: 120,
+    marginLeft: 30,
+    borderRadius: 20,
+    gap: 30,
   },
-  btn: {
-    width: 120,
-    height: 120,
-    borderRadius: 150,
-    //backgroundColor: "rgb(64, 67, 72)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   text: {
     fontWeight: "bold",
     color: "cornsilk",
     textAlign: "center",
+    width: "90%",
+  },
+  item: {
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+  },
+  blur: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
