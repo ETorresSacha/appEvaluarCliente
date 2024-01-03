@@ -6,25 +6,8 @@ const UseStorageBusiness = () => {
   // GUARDAR INFORMACION
   const saveInfoStorage = async (storageKey, meal) => {
     try {
-      const currentSave = await AsyncStorage.getItem(storageKey); // Trae los datos guardados
+      await AsyncStorage.clear();
 
-      // Si hay datos guardados
-      if (currentSave !== null) {
-        const currentSaveParsed = JSON.parse(currentSave);
-        currentSaveParsed.push(meal);
-
-        await AsyncStorage.setItem(
-          storageKey,
-          JSON.stringify(currentSaveParsed)
-        );
-
-        return Promise.resolve();
-      }
-
-      // Editar
-      // Editar el status
-
-      // Si la lista esta vacia
       await AsyncStorage.setItem(storageKey, JSON.stringify([meal]));
 
       return Promise.resolve();
@@ -36,18 +19,12 @@ const UseStorageBusiness = () => {
   //TODO--> CRONOGRAMA DE PAGO
 
   //! POST
-  const handleSaveBusiness = async ({
-    nombre,
-    direccion,
-    celular,
-    notification,
-  }) => {
+  const handleSaveBusiness = async ({ negocio, direccion, celular }) => {
     try {
       const result = await saveInfoStorage(MY_BUSINESS_KEY, {
-        nombre,
+        negocio,
         direccion,
         celular,
-        notification,
       });
 
       return Promise.resolve();

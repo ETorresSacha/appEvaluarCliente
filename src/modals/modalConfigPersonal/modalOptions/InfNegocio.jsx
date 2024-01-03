@@ -10,26 +10,37 @@ import {
   Alert,
   TouchableWithoutFeedback,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UseStorageBusiness from "../../../components/hooks/UseHookDataNeg";
 import { validationInfNegocios } from "../../../utils/validation/Validation";
 
 const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   const { onSaveDataBusiness, onGetBusiness } = UseStorageBusiness();
+
+  const [business, setBusiness] = useState({});
   const [data, setData] = useState({
-    negocio: "",
-    direccion: "",
-    celular: "",
-    //notification: true,
+    negocio: business[0]?.negocio ? business[0]?.negocio : "",
+    direccion: business[0]?.direccion ? business[0]?.direccion : "",
+    celular: business[0]?.celular ? business[0]?.celular : "",
   });
-  //console.log(data);
-  const [errores, setErrores] = useState({});
-  const result = onGetBusiness();
-  console.log(result);
+
+  // Cargar los datos del negocio
+  const loadNegocio = async () => {
+    try {
+      const result = await onGetBusiness();
+      setBusiness(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadNegocio;
+  }, []);
+
   // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
   const handleDataKeep = async () => {
     // Validación
-    //setErrores(validationInfNegocios(data));
     let errorData = validationInfNegocios(data);
 
     let valuesText = Object.values(errorData);
@@ -57,15 +68,10 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
             style: "destructive",
           },
         ]);
-      } catch (error) {}
+      } catch (error) {
+        console.error(error);
+      }
     }
-    //console.log(errores);
-    // await onSaveDataBusiness({
-    //   negocio: data.negocio,
-    //   direccion: data.direccion,
-    //   celular: data.celular,
-    //   notification: data.notification,
-    // });
   };
 
   // CERRAR EL MODAL
@@ -73,18 +79,12 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
     Alert.alert("GUARDAR", "¿Desea guardar los cambios?", [
       {
         text: "Si",
-        onPress: async () => {
-          handleDataKeep();
-          setEnableNeg(false);
-          Alert.alert("Se guardo correctamente");
-        },
+        onPress: async () => handleDataKeep(),
         style: "destructive",
       },
       {
         text: "No",
-        onPress: async () => {
-          setEnableNeg(false);
-        },
+        onPress: async () => setEnableNeg(false),
         style: "destructive",
       },
     ]);
