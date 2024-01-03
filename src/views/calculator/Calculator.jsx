@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
+    paddingTop: 30,
   },
   btnCalcular: {
     justifyContent: "center",
