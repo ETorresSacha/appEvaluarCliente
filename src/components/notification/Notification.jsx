@@ -84,22 +84,6 @@ const Notification = ({ data, color }) => {
     <View style={styles.container}>
       <View style={styles.notificationTitle}>
         <Text style={styles.title}>NOTIFICACIÓN</Text>
-        <Pressable onPress={() => setIsVisible(true)}>
-          <FontAwesome name="gear" size={30} style={{ color: "cornsilk" }} />
-        </Pressable>
-      </View>
-      <View style={styles.containerSwitch}>
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text style={styles.subTitle}>Institución: </Text>
-          <Text style={styles.subTitle}>Anónimo</Text>
-        </View>
-        <View style={{ alignItems: "center" }}>
-          <MaterialCommunityIcons
-            name="lightbulb-on"
-            style={{ color: "yellow", fontSize: 30 }}
-          />
-          <Text style={styles.subTitle}>activo</Text>
-        </View>
       </View>
       <View style={styles.containerIcons}>
         <FontAwesome
@@ -129,7 +113,7 @@ export default Notification;
 
 const styles = StyleSheet.create({
   container: {
-    //paddingBottom: 20,
+    paddingVertical: 20,
   },
 
   notificationTitle: {
@@ -150,39 +134,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginVertical: 20,
-  },
-  subTitle: {
-    fontSize: 15,
-    color: "white",
-    fontWeight: "bold",
-    //backgroundColor: "green",
-  },
-  input: {
-    flex: 1,
-    height: 70,
-    borderWidth: 1,
-    borderRadius: 15,
-    marginVertical: 10,
-    paddingHorizontal: 10,
-    color: "cornsilk",
-    borderColor: "white",
-    fontSize: 13,
-  },
-  containerMessage: {
-    display: "flex",
-    //flexDirection: "row",
-    paddingHorizontal: 25,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  containerSwitch: {
-    //flex: 1,
-    display: "flex",
-    paddingTop: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    //backgroundColor: "red",
+    paddingVertical: 50,
   },
 });

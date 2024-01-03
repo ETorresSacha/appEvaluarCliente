@@ -163,7 +163,7 @@ export default Pay;
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 20,
+    paddingVertical: 20,
   },
 
   pagosTitle: {
@@ -193,9 +193,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     alignContent: "center",
-    width: 250,
     height: 40,
-    marginLeft: 80,
+    width: 300,
+    marginLeft: 55,
     justifyContent: "center",
     borderRadius: 10,
     gap: 10,

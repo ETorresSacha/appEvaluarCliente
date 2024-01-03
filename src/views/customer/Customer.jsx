@@ -19,7 +19,7 @@ import Header from "../../components/header/Header";
 
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
-// https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8scp2386uMr3le7y4DgtHh1TgwRtOznk8jmYngF7vrPtfxP9gWDJjTOIDnsh-RCLHRV8&usqp=CAU
+
 const Customer = () => {
   const { onGetCronograma } = UseStorage();
   const [order, setOrder] = useState(false);
@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(31, 36, 36)",
   },
   containerTitle: {
-    borderTopStartRadius: 10,
-    borderTopEndRadius: 10,
+    borderTopStartRadius: 13,
+    borderTopEndRadius: 13,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 15,
     borderWidth: 1,
+    borderColor: "rgb(198, 198, 198)",
     display: "flex",
     flex: 1,
     flexDirection: "column",
