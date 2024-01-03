@@ -12,19 +12,54 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import UseStorageBusiness from "../../../components/hooks/UseHookDataNeg";
+import { validationInfNegocios } from "../../../utils/validation/Validation";
 
 const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
-  const { onSaveDataBusiness } = UseStorageBusiness();
+  const { onSaveDataBusiness, onGetBusiness } = UseStorageBusiness();
   const [data, setData] = useState({
     negocio: "",
     direccion: "",
     celular: "",
-    notification: true,
+    //notification: true,
   });
-
+  //console.log(data);
+  const [errores, setErrores] = useState({});
+  const result = onGetBusiness();
+  console.log(result);
   // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
   const handleDataKeep = async () => {
-    //! tenemos que validar primero
+    // Validación
+    //setErrores(validationInfNegocios(data));
+    let errorData = validationInfNegocios(data);
+
+    let valuesText = Object.values(errorData);
+    if (valuesText.some((error) => error != "")) {
+      Alert.alert("El número de celular debe tener 9 caracteres");
+    } else {
+      try {
+        Alert.alert("GUARDAR", "¿Desea continuar?", [
+          {
+            text: "Si",
+            onPress: async () => {
+              await onSaveDataBusiness({
+                negocio: data.negocio,
+                direccion: data.direccion,
+                celular: data.celular,
+              });
+
+              Alert.alert("Se guardo correctamente");
+              setEnableNeg(false);
+            },
+            style: "destructive",
+          },
+          {
+            text: "No",
+            style: "destructive",
+          },
+        ]);
+      } catch (error) {}
+    }
+    //console.log(errores);
     // await onSaveDataBusiness({
     //   negocio: data.negocio,
     //   direccion: data.direccion,
@@ -39,6 +74,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
       {
         text: "Si",
         onPress: async () => {
+          handleDataKeep();
           setEnableNeg(false);
           Alert.alert("Se guardo correctamente");
         },
@@ -116,8 +152,8 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
               keyboardType="numeric"
             />
           </View>
-          {/* ------------------ RECIBIR NOTIFICACIONE ------------------*/}
-          <View style={styles.containerConfiguration}>
+          {/* ------------------ RECIBIR NOTIFICACIONES ------------------*/}
+          {/* <View style={styles.containerConfiguration}>
             <View
               style={{
                 height: 65,
@@ -150,7 +186,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
                 {alert ? "ON" : "OFF"}
               </Text>
             </View>
-          </View>
+          </View> */}
           <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
             <Text style={styles.textGuardar}>Guardar</Text>
           </Pressable>

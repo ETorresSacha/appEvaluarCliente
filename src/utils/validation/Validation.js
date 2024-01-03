@@ -87,3 +87,17 @@ export const validationDataPrestamo = (dataPrestamo) =>{
 
 }
 
+//! Validación de los datos del préstamo
+
+export const validationInfNegocios = (data) =>{
+    let error = {
+     celular:""
+    }
+    // Datos en blanco
+    if (data.celular) {      
+        if (data.celular?.trim().length != 9){
+            error = {...error,celular : "Solo se acepta 9 caracteres"}
+        }  
+    }
+    return error
+}
