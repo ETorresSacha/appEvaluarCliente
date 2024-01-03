@@ -1,9 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { orderData } from "../../utils/thunks/Thunks";
 
-const MY_CRONOGRAMA_KEY = "@data";
 const MY_DATA_KEY = "@data_customerr";
-const MY_KEY_DATA = "@data";
 
 const UseStorage = () => {
   // GUARDAR INFORMACION
@@ -72,21 +69,11 @@ const UseStorage = () => {
   const handleGetCronograma = async () => {
     try {
       let result = await AsyncStorage.getItem(MY_DATA_KEY);
-      console.log(result);
-      //console.log(result);
-      // resultData = result.sort(
-      //   (a, b) =>
-      //     new Date(b.resultPrestamo[0]?.fechaPago).getTime() -
-      //     new Date(a.resultPrestamo[0]?.fechaPago).getTime()
-      // );
-      //resultData = orderData("fecha", result, true);
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
 
         return Promise.resolve(parseCronograma);
       }
-
-      //! QUE PASA SI SE HACE UN PEDIDO GET Y NO SALE NADA, VERIFICAR ESO
     } catch (error) {
       return Promise.reject(error);
     }
@@ -108,10 +95,9 @@ const UseStorage = () => {
     }
   };
 
-  //! UPDATE//
+  //! UPDATE
   // UPDATE STATUS DEL PRESTAMO
   const handleUpdateStatusPay = async (data) => {
-    //console.log(data);
     try {
       const resultGet = await handleGetCronograma();
       let indice;
@@ -127,7 +113,6 @@ const UseStorage = () => {
       await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
 
       return Promise.resolve();
-      // return resultGet;
     } catch (error) {
       return console.error(error);
     }

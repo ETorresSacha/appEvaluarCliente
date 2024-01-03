@@ -37,7 +37,6 @@ const Customer = () => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-      console.log(resultCustomer);
 
       setData({
         ...data,
