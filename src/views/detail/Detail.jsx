@@ -54,7 +54,7 @@ const Detail = (props) => {
   const handleDelete = async (data) => {
     try {
       const result = await onDeleteCustomer(data);
-      navigation.navigate("Cliente");
+      navigation.navigate("Clientes");
     } catch (error) {
       console.error();
     }

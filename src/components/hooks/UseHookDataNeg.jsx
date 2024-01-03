@@ -6,7 +6,7 @@ const UseStorageBusiness = () => {
   // GUARDAR INFORMACION
   const saveInfoStorage = async (storageKey, meal) => {
     try {
-      await AsyncStorage.clear();
+      //await AsyncStorage.clear(MY_BUSINESS_KEY);
 
       await AsyncStorage.setItem(storageKey, JSON.stringify([meal]));
 
@@ -41,8 +41,6 @@ const UseStorageBusiness = () => {
 
         return Promise.resolve(parseCronograma);
       }
-
-      //! QUE PASA SI SE HACE UN PEDIDO GET Y NO SALE NADA, VERIFICAR ESO
     } catch (error) {
       return Promise.reject(error);
     }

@@ -37,6 +37,7 @@ const Customer = () => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
+      console.log(resultCustomer);
 
       setData({
         ...data,
@@ -76,7 +77,6 @@ const Customer = () => {
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
-
       //return () => unsubscribe();
     }, [])
   );
@@ -134,7 +134,7 @@ const Customer = () => {
     </View>
   );
 };
-
+//
 export default Customer;
 const styles = StyleSheet.create({
   container: {

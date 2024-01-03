@@ -50,7 +50,7 @@ const Users = ({ data, color }) => {
                 })
               }
             >
-              <Text style={styles.dataText}>{element.dni}</Text>
+              <Text style={styles.dataText}>{element?.dni}</Text>
               <Text
                 style={{
                   width: 80,

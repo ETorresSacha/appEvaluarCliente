@@ -19,24 +19,30 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
 
   const [business, setBusiness] = useState({});
   const [data, setData] = useState({
-    negocio: business[0]?.negocio ? business[0]?.negocio : "",
-    direccion: business[0]?.direccion ? business[0]?.direccion : "",
-    celular: business[0]?.celular ? business[0]?.celular : "",
+    negocio: "",
+    direccion: "",
+    celular: "",
   });
 
   // Cargar los datos del negocio
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
-      setBusiness(result);
+      console.log(result);
+      //setBusiness(result);
+      setData({
+        negocio: result[0]?.negocio,
+        direccion: result[0]?.direccion,
+        celular: result[0]?.celular,
+      });
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    loadNegocio;
-  }, []);
+    loadNegocio();
+  }, [business.length]);
 
   // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
   const handleDataKeep = async () => {
@@ -58,7 +64,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
                 celular: data.celular,
               });
 
-              Alert.alert("Se guardo correctamente");
+              Alert.alert("Se guardó correctamente");
               setEnableNeg(false);
             },
             style: "destructive",

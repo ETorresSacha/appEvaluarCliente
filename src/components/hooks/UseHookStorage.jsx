@@ -72,6 +72,7 @@ const UseStorage = () => {
   const handleGetCronograma = async () => {
     try {
       let result = await AsyncStorage.getItem(MY_DATA_KEY);
+      console.log(result);
       //console.log(result);
       // resultData = result.sort(
       //   (a, b) =>
