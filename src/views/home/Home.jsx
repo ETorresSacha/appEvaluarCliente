@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -15,14 +15,35 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 //import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
+import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
+import { fondoImagen } from "../../../assets/fondos.avif";
 
 const user = {
   name: "Erik Torres Sacha",
   uri: "https://media.licdn.com/dms/image/D4E03AQH-M4FFjGHveA/profile-displayphoto-shrink_400_400/0/1693329901508?e=1704931200&v=beta&t=07dlpl6eAU2K3xnJx0oL0-v76Br4jWK0Acj9BXkgCfc",
 };
 
+const img =
+  "https://img2.wallspic.com/crops/6/2/5/5/7/175526/175526-luz-smartphone-agua-morado-liquido-1242x2688.jpg";
+
 const Home = () => {
+  const { onGetBusiness } = UseStorageBusiness();
   const [isVisible, setIsVisible] = useState(false);
+  const [data, setData] = useState({});
+
+  // Cargar los datos de la financiera
+  const loadNegocio = async () => {
+    try {
+      const result = await onGetBusiness();
+      setData(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadNegocio();
+  }, []);
 
   // Cerrar el modal
   const handleModalClose = async (shouldUpdate) => {
@@ -36,6 +57,8 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
+      <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
+      {/* HEADER */}
       <View style={styles.conteinerHeader}>
         <View style={styles.rightConteiner}>
           <Image source={{ uri: user.uri }} style={styles.profileImage}></Image>
@@ -50,30 +73,25 @@ const Home = () => {
           />
         </Pressable>
       </View>
+
+      {/* MODAL OPCIONES */}
       <ModalConfigPersonal visible={isVisible} onClose={handleModalClose} />
-      <View>
+
+      {/* BIENVENIDO */}
+      <View style={{ paddingTop: 20 }}>
         <View style={styles.institutionTitle}>
-          <Text style={styles.title}>INSTITUCIÓN</Text>
-          <Pressable onPress={() => setIsVisible(true)}>
-            <FontAwesome name="gear" size={30} style={{ color: "cornsilk" }} />
-          </Pressable>
+          <Text style={styles.title}>BIENVENIDO</Text>
         </View>
         <View style={styles.containerSwitch}>
           <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text style={styles.subTitle}>Institución: </Text>
-            <Text style={styles.subTitle}>Anónimo</Text>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <MaterialCommunityIcons
-              name="lightbulb-on"
-              style={{ color: "yellow", fontSize: 30 }}
-            />
-            <Text style={styles.subTitle}>activo</Text>
+            <Text style={styles.subTitle}>
+              {!data[0]?.negocio ? "Tu Financiera" : data[0]?.negocio}
+            </Text>
           </View>
         </View>
       </View>
 
-      {/* <ModalConfigNotification visible={isVisible} onClose={handleModalClose} /> */}
+      {/* ITEMS DE LAS OPCIONES */}
       <ItemsHome />
     </View>
   );
@@ -86,6 +104,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
     backgroundColor: "rgb(31, 36, 36)",
+    //alignItems: "center",
+    //justifyContent: "center",
   },
   conteinerHeader: {
     display: "flex",
@@ -109,9 +129,9 @@ const styles = StyleSheet.create({
   institutionTitle: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
+    //backgroundColor: "rgba(36, 146, 224, 0.625)",
     paddingHorizontal: 15,
   },
   containerSwitch: {
@@ -122,7 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   subTitle: {
-    fontSize: 15,
+    fontSize: 35,
     color: "white",
     fontWeight: "bold",
   },
@@ -135,5 +155,10 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+  },
+  fondo: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
 });

@@ -105,19 +105,29 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           <View style={styles.modalOverlay} />
         </TouchableWithoutFeedback>
         <View style={styles.modalContent}>
-          <Text
+          <View
             style={{
-              color: "black",
-              textAlign: "center",
-              fontSize: 20,
-              fontWeight: "bold",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
           >
-            INFORMACIÓN DEL NEGOCIO
-          </Text>
+            <Text
+              style={{
+                color: "black",
+                textAlign: "center",
+                fontSize: 20,
+                fontWeight: "bold",
+                width: "70%",
+              }}
+            >
+              INFORMACIÓN DE LA FINANCIERA
+            </Text>
+          </View>
+
           {/* ------------------ NOMBRE ------------------*/}
           <View style={styles.containerText}>
-            <Text style={styles.titleText}>Nombre</Text>
+            <Text style={styles.titleText}>Financiera</Text>
             <TextInput
               value={data.negocio}
               style={styles.text}

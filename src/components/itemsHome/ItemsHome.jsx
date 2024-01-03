@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { BlurView } from "expo-blur";
 
 const ItemsHome = () => {
   const navigation = useNavigation();
@@ -22,17 +23,19 @@ const ItemsHome = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.btn} onPress={handleCustomer}>
-        <Ionicons name="person" size={100} color="rgb(36, 224, 58)" />
+      <TouchableOpacity onPress={handleCustomer}>
+        <Ionicons name="users" size={100} color="rgb(36, 224, 58)" />
+        <Text style={styles.text}> Clientes</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btn}>
+
+      <TouchableOpacity>
         <Ionicons name="cash" size={100} color="rgb(36, 224, 221)" />
+        <Text style={styles.text}> Cancelado</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={handlePrestamo}>
+
+      <TouchableOpacity onPress={handlePrestamo}>
         <Ionicons name="calculator" size={100} color="rgb(224, 205, 36)" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.btn}>
-        <Ionicons name="calendar" size={100} color="rgb(224, 36, 186)" />
+        <Text style={styles.text}> Calculadora</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     padding: 20,
-    paddingTop: 12,
+    paddingTop: 50,
     gap: 25,
     justifyContent: "center",
     alignContent: "center",
@@ -54,9 +57,14 @@ const styles = StyleSheet.create({
   btn: {
     width: 120,
     height: 120,
-    borderRadius: 10,
-    backgroundColor: "rgb(64, 67, 72)",
+    borderRadius: 150,
+    //backgroundColor: "rgb(64, 67, 72)",
     justifyContent: "center",
     alignItems: "center",
+  },
+  text: {
+    fontWeight: "bold",
+    color: "cornsilk",
+    textAlign: "center",
   },
 });

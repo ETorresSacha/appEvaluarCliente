@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Pressable,
+  Image,
 } from "react-native";
 import Prestamo from "../../components/prestamo/Prestamo";
 import DetailCalculator from "../../components/detailCalculator/DetailCalculator";
@@ -16,6 +17,8 @@ import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 
+const img =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8scp2386uMr3le7y4DgtHh1TgwRtOznk8jmYngF7vrPtfxP9gWDJjTOIDnsh-RCLHRV8&usqp=CAU";
 const Calculator = ({
   dataPrestamo,
   errorsP,
@@ -115,6 +118,9 @@ const Calculator = ({
 
   return (
     <View style={styles.container}>
+      {errorsP == undefined ? (
+        <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
+      ) : null}
       {errorsP == undefined ? (
         <Header title={"Calculadora"} back={"Home"} />
       ) : null}

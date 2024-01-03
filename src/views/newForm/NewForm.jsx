@@ -6,6 +6,7 @@ import {
   Alert,
   Text,
   Pressable,
+  Image,
 } from "react-native";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
@@ -15,6 +16,8 @@ import { v4 as uuidv4 } from "uuid";
 import { validationDataPerson } from "../../utils/validation/Validation";
 import Header from "../../components/header/Header";
 
+const img =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8scp2386uMr3le7y4DgtHh1TgwRtOznk8jmYngF7vrPtfxP9gWDJjTOIDnsh-RCLHRV8&usqp=CAU";
 const NewForm = () => {
   const uuid = uuidv4();
   const navigation = useNavigation();
