@@ -18,7 +18,7 @@ import Users from "../../components/users/Users";
 import Header from "../../components/header/Header";
 
 const img =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8scp2386uMr3le7y4DgtHh1TgwRtOznk8jmYngF7vrPtfxP9gWDJjTOIDnsh-RCLHRV8&usqp=CAU";
+  "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
 // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8scp2386uMr3le7y4DgtHh1TgwRtOznk8jmYngF7vrPtfxP9gWDJjTOIDnsh-RCLHRV8&usqp=CAU
 const Customer = () => {
   const { onGetCronograma } = UseStorage();
