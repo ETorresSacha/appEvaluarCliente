@@ -23,24 +23,6 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
     celular: "",
   });
 
-  // Cargar los datos del negocio
-  const loadNegocio = async () => {
-    try {
-      const result = await onGetBusiness();
-      setData({
-        negocio: result[0]?.negocio,
-        direccion: result[0]?.direccion,
-        celular: result[0]?.celular,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    loadNegocio();
-  }, []);
-
   // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
   const handleDataKeep = async () => {
     // Validación

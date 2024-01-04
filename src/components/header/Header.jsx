@@ -3,14 +3,18 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 
-const Header = ({ title, back }) => {
+const Header = ({ title, back, id }) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.conteiner}>
       <TouchableOpacity
         style={styles.leftConteiner}
-        onPress={() => navigation.navigate(!back ? "Home" : back)}
+        onPress={() =>
+          id
+            ? navigation.navigate("Detalle", { id: id, typeColor: null })
+            : navigation.navigate(back ? back : "Home")
+        }
       >
         <AntDesign
           name="arrowleft"

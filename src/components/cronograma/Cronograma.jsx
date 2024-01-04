@@ -15,37 +15,38 @@ const Cronograma = ({ data }) => {
         <Text>cargando</Text>
       ) : (
         <View style={styles.container}>
-          <View>
-            <ScrollView style={styles.containerCuotas}>
-              <View style={styles.containerTitle}>
-                <View style={styles.title}>
-                  <Text style={styles.tilteText}>CUOTA</Text>
-                </View>
-                <View style={styles.title}>
-                  <Text style={styles.tilteText}>FECHA</Text>
-                </View>
-                <View style={styles.title}>
-                  <Text style={styles.tilteText}>MONTO CUOTA</Text>
-                </View>
+          <ScrollView style={styles.containerCuotas}>
+            <View style={styles.containerTitle}>
+              <View style={styles.title}>
+                <Text style={styles.tilteText}>CUOTA</Text>
               </View>
-              {updatePrestamo?.map((element, index) => {
-                return (
-                  <View
-                    key={index}
-                    style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
-                  >
-                    <Text style={styles.dataText}>
-                      {element.cuota.toString().padStart(2, "0")}
-                    </Text>
-                    <Text style={styles.dataText}>
-                      {formatDate(element.fechaPago)}
-                    </Text>
-                    <Text style={styles.dataText}>{element.montoCuota}</Text>
-                  </View>
-                );
-              })}
-            </ScrollView>
-          </View>
+              <View style={styles.title}>
+                <Text style={styles.tilteText}>FECHA</Text>
+              </View>
+              <View style={styles.title}>
+                <Text style={styles.tilteText}>MONTO CUOTA</Text>
+              </View>
+              <View style={styles.title}>
+                <Text style={styles.tilteText}>PAGOS</Text>
+              </View>
+            </View>
+            {updatePrestamo?.map((element, index) => {
+              return (
+                <View
+                  key={index}
+                  style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
+                >
+                  <Text style={styles.dataText}>
+                    {element.cuota.toString().padStart(2, "0")}
+                  </Text>
+                  <Text style={styles.dataText}>
+                    {formatDate(element.fechaPago)}
+                  </Text>
+                  <Text style={styles.dataText}>{element.montoCuota}</Text>
+                </View>
+              );
+            })}
+          </ScrollView>
         </View>
       )}
     </View>

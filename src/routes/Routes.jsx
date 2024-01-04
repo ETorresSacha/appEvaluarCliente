@@ -42,7 +42,7 @@ const Routes = () => {
           component={Calculator}
           options={{ optionsStack, statusBarColor: "black" }}
         />
-        <Stack.Screen name="Cronograma" component={VerCronograma} />
+
         <Stack.Screen
           name="Nuevo cliente"
           component={NewForm}
@@ -51,6 +51,11 @@ const Routes = () => {
         <Stack.Screen
           name="Detalle"
           component={Detail}
+          options={{ optionsStack, statusBarColor: "rgb(31, 36, 36)" }}
+        />
+        <Stack.Screen
+          name="Cronograma"
+          component={VerCronograma}
           options={{ optionsStack, statusBarColor: "rgb(31, 36, 36)" }}
         />
         <Stack.Screen name="Alerta" component={Alerta} options={optionsStack} />

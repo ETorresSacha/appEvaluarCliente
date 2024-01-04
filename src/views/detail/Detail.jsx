@@ -109,6 +109,7 @@ const Detail = (props) => {
             onPress={() =>
               navigation.navigate("Cronograma", {
                 data: user[0].resultPrestamo,
+                id: id,
               })
             }
           >
