@@ -110,7 +110,7 @@ export default Notification;
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
 
   notificationTitle: {

@@ -65,7 +65,7 @@ const Detail = (props) => {
       {user == undefined ? (
         <Text>cargando</Text>
       ) : (
-        <View style={styles.container}>
+        <View>
           <Header title={"Detalle"} back={"Clientes"} />
           <View style={styles.containerData}>
             <View style={styles.containerTitle}>

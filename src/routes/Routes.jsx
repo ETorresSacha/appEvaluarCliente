@@ -11,8 +11,7 @@ import Alerta from "../views/alert/Alerta";
 
 //const Tab = createBottomTabNavigator();
 const optionsStack = {
-  statusBarColor: "rgb(31, 36, 36)",
-  //title: "Clientes",
+  //statusBarColor: "rgb(31, 36, 36)",
   headerStyle: {
     backgroundColor: "rgb(31, 36, 36)",
   },
@@ -28,27 +27,31 @@ const Routes = () => {
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
       >
-        <Stack.Screen name="Home" component={Home} options={optionsStack} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ optionsStack, statusBarColor: "black" }}
+        />
         <Stack.Screen
           name="Clientes"
           component={Customer}
-          options={optionsStack}
+          options={{ optionsStack, statusBarColor: "black" }}
         />
         <Stack.Screen
           name="Calculadora"
           component={Calculator}
-          options={optionsStack}
+          options={{ optionsStack, statusBarColor: "black" }}
         />
         <Stack.Screen name="Cronograma" component={VerCronograma} />
         <Stack.Screen
           name="Nuevo cliente"
           component={NewForm}
-          options={optionsStack}
+          options={{ optionsStack, statusBarColor: "rgb(31, 36, 36)" }}
         />
         <Stack.Screen
           name="Detalle"
           component={Detail}
-          options={optionsStack}
+          options={{ optionsStack, statusBarColor: "rgb(31, 36, 36)" }}
         />
         <Stack.Screen name="Alerta" component={Alerta} options={optionsStack} />
       </Stack.Navigator>
