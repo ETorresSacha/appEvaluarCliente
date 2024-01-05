@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import UseStorage from "../hooks/UseHookStorage";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 
 const Pay = ({ data }) => {
@@ -12,6 +13,8 @@ const Pay = ({ data }) => {
   const [modify, setModify] = useState([]); // Editar el status del pago
   const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
+
+  console.log(dataSee);
 
   useEffect(() => {
     setModify(data);
@@ -66,7 +69,25 @@ const Pay = ({ data }) => {
         <Text>cargando</Text>
       ) : (
         <View>
-          <Text style={styles.pagosTitle}>PAGOS</Text>
+          <View style={styles.pagosTitle}>
+            <Text style={styles.titleText}>PAGOS</Text>
+            <Pressable style={styles.cancelPago}>
+              <MaterialIcons
+                name="settings-backup-restore"
+                size={27}
+                color="cornsilk"
+              />
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: "cornsilk",
+                }}
+              >
+                Cancelar Pago
+              </Text>
+            </Pressable>
+          </View>
+
           <View style={styles.pagosDetalle}>
             <View
               style={{
@@ -138,8 +159,11 @@ const Pay = ({ data }) => {
           <Pressable
             style={
               !cancelledShare
-                ? [styles.buttonContainer, { backgroundColor: "orange" }]
-                : [styles.buttonContainer, { borderColor: "white" }]
+                ? [
+                    styles.buttonContainer,
+                    { backgroundColor: "orange", width: 300 },
+                  ]
+                : [styles.buttonContainer, { borderColor: "white", width: 300 }]
             }
             onPress={!cancelledShare ? handlePayShare : null}
           >
@@ -153,6 +177,22 @@ const Pay = ({ data }) => {
               {!cancelledShare ? "Pagar" : "Deuda Cancelado"}
             </Text>
           </Pressable>
+
+          {/* <Pressable
+            style={
+              !cancelledShare
+                ? [
+                    styles.buttonContainer,
+                    { backgroundColor: "orange", width: 200 },
+                  ]
+                : [styles.buttonContainer, { borderColor: "white" }]
+            }
+            onPress={!cancelledShare ? handlePayShare : null}
+          >
+            <Text style={styles.subTitle}>
+              {!cancelledShare ? "Cancelar pago" : "Deuda Cancelado"}
+            </Text>
+          </Pressable> */}
         </View>
       )}
     </View>
@@ -167,12 +207,22 @@ const styles = StyleSheet.create({
   },
 
   pagosTitle: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
-    paddingLeft: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignItems: "center",
+  },
+  titleText: {
     fontSize: 17,
     color: "cornsilk",
     fontWeight: "bold",
+  },
+  cancelPago: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 2,
   },
   pagosDetalle: {
     marginVertical: 15,
@@ -194,7 +244,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     height: 40,
-    width: 300,
+    //width: 300,
     marginLeft: 55,
     justifyContent: "center",
     borderRadius: 10,
