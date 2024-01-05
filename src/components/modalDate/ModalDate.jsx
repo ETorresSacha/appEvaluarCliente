@@ -1,6 +1,6 @@
 import React from "react";
 import { Calendar } from "react-native-calendars";
-import { View, Modal, StyleSheet } from "react-native";
+import { View, Modal, StyleSheet, TouchableOpacity } from "react-native";
 
 const ModalDate = ({
   visible,
@@ -23,12 +23,12 @@ const ModalDate = ({
       animationType="slide"
       // onBackdropP={() => setShowModal(false)}
     >
-      <View style={styles.conteiner}>
+      <TouchableOpacity style={styles.conteiner}>
         <Calendar
           style={{ borderRadius: 10, elevation: 4, margin: 40 }}
           onDayPress={(day) => handleChangeData(day)}
         />
-      </View>
+      </TouchableOpacity>
     </Modal>
   );
 };

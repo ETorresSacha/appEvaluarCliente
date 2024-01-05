@@ -4,7 +4,6 @@ import {
   View,
   Alert,
   TextInput,
-  Pressable,
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -66,9 +65,9 @@ const NavBar = ({ data, setData }) => {
         </View>
       </View>
 
-      <Pressable style={styles.button} onPress={handleAddPress}>
+      <TouchableOpacity style={styles.button} onPress={handleAddPress}>
         <Text style={styles.text}>Nuevo</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };

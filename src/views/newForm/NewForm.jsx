@@ -5,7 +5,7 @@ import {
   ScrollView,
   Alert,
   Text,
-  Pressable,
+  TouchableOpacity,
 } from "react-native";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
@@ -139,9 +139,9 @@ const NewForm = () => {
         setValueError={setValueError}
         setValuePrest={setValuePrest}
       />
-      <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={handleDataKeep}>
         <Text style={styles.text}>Guardar</Text>
-      </Pressable>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

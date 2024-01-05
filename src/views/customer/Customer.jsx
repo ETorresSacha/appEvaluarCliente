@@ -4,9 +4,9 @@ import {
   StyleSheet,
   ScrollView,
   Text,
-  Pressable,
   Alert,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
@@ -95,30 +95,30 @@ const Customer = () => {
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
           <View style={styles.titleText}>
-            <Pressable
+            <TouchableOpacity
               style={styles.title}
               onPress={() => handleSort("dni", order)}
             >
               <Text style={styles.texTitle}>DNI</Text>
-            </Pressable>
-            <Pressable
+            </TouchableOpacity>
+            <TouchableOpacity
               style={styles.title}
               onPress={() => handleSort("nombre", order)}
             >
               <Text style={styles.texTitle}>NOMBRE</Text>
-            </Pressable>
-            <Pressable
+            </TouchableOpacity>
+            <TouchableOpacity
               style={styles.title}
               onPress={() => handleSort("fecha", order)}
             >
               <Text style={styles.texTitle}>FECHA DE PAGO</Text>
-            </Pressable>
-            <Pressable
+            </TouchableOpacity>
+            <TouchableOpacity
               style={styles.title}
               onPress={() => handleSort("cuota", order)}
             >
               <Text style={styles.texTitle}>CUOTA</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
 
           <View

@@ -2,7 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Pressable,
+  TouchableOpacity,
   Alert,
   ScrollView,
 } from "react-native";
@@ -71,12 +71,15 @@ const Detail = (props) => {
             <View style={styles.containerTitle}>
               <Text style={styles.title}>DATOS DEL CLIENTE</Text>
               <View style={styles.iconos}>
-                <Pressable style={styles.icon}>
+                <TouchableOpacity style={styles.icon}>
                   <Icon name="edit" size={30} color="cornsilk" />
-                </Pressable>
-                <Pressable style={styles.icon} onPress={() => alertDelete(id)}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.icon}
+                  onPress={() => alertDelete(id)}
+                >
                   <Icon name="delete" size={30} color="cornsilk" />
-                </Pressable>
+                </TouchableOpacity>
               </View>
             </View>
             <View style={styles.Data}>
@@ -104,7 +107,7 @@ const Detail = (props) => {
           </View>
           <Pay data={user} />
           <Notification data={user} color={color} />
-          <Pressable
+          <TouchableOpacity
             style={styles.verCronograma}
             onPress={() =>
               navigation.navigate("Cronograma", {
@@ -114,7 +117,7 @@ const Detail = (props) => {
             }
           >
             <Text style={styles.subTitle}> Ver conograma</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       )}
     </ScrollView>

@@ -1,4 +1,10 @@
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import {
@@ -41,7 +47,7 @@ const Users = ({ data, color }) => {
             key={element.uuid}
             style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
           >
-            <Pressable
+            <TouchableOpacity
               style={{ display: "flex", flexDirection: "row" }}
               onPress={() =>
                 navigation.navigate("Detalle", {
@@ -71,7 +77,7 @@ const Users = ({ data, color }) => {
               >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
-            </Pressable>
+            </TouchableOpacity>
             <Pressable
               style={{
                 width: 40,
