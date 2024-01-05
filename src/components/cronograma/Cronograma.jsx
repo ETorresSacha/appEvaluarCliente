@@ -10,6 +10,7 @@ const Cronograma = ({ data }) => {
   useEffect(() => {
     setUpdatePrestamo(data);
   }, [data]);
+  console.log(updatePrestamo);
 
   return (
     <View style={styles.containerContainer}>
@@ -47,8 +48,8 @@ const Cronograma = ({ data }) => {
                   <Text style={styles.dataText}>{element.montoCuota}</Text>
                   <Checkbox
                     style={styles.checkbox}
-                    value={isChecked}
-                    onValueChange={setChecked}
+                    value={element.statusPay}
+                    color={element.statusPay ? "rgb(35, 164, 20)" : undefined}
                   />
                 </View>
               );
@@ -66,9 +67,6 @@ const styles = StyleSheet.create({
   containerContainer: {
     flex: 1,
   },
-  container: {
-    flex: 1,
-  },
   containerTitle: {
     display: "flex",
     flexDirection: "row",
@@ -77,15 +75,12 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
   title: {
-    // paddingRight: 10,
-    // alignItems: "center",
     fontWeight: "bold",
   },
   tilteText: {
     color: "cornsilk",
     fontSize: 15,
     fontWeight: "bold",
-    //paddingLeft: 10,
   },
   containerCuotas: {
     flexDirection: "column",
@@ -97,7 +92,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(189, 238, 247, 0.888)",
-    // paddingHorizontal: 40,
     paddingVertical: 10,
   },
   dataImpar: {
@@ -111,13 +105,10 @@ const styles = StyleSheet.create({
   },
   dataText: {
     fontSize: 17,
-    //paddingHorizontal: 5,
-    // marginHorizontal: 2,
   },
   checkbox: {
     padding: 5,
     marginLeft: 15,
+    borderWidth: 2,
   },
 });
-//! EN ESTA PARTE FALTA, CUANDO SE CANCELA TODA LA DEUDA SE TIENE QUE MODIFICAR
-//! EL VALOR DE CANCELLED A TRUE, PAR FILTAR LOS DATOS MAS FACIL
