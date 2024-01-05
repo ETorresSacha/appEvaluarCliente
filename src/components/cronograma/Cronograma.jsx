@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import { formatDate } from "../../utils/thunks/Thunks";
+import Checkbox from "expo-checkbox";
 
 const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
+  const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
     setUpdatePrestamo(data);
@@ -14,17 +16,17 @@ const Cronograma = ({ data }) => {
       {updatePrestamo == undefined ? (
         <Text>cargando</Text>
       ) : (
-        <View style={styles.container}>
+        <View>
           <ScrollView style={styles.containerCuotas}>
             <View style={styles.containerTitle}>
               <View style={styles.title}>
-                <Text style={styles.tilteText}>CUOTA</Text>
+                <Text style={styles.tilteText}> N° CUOTA</Text>
               </View>
               <View style={styles.title}>
                 <Text style={styles.tilteText}>FECHA</Text>
               </View>
               <View style={styles.title}>
-                <Text style={styles.tilteText}>MONTO CUOTA</Text>
+                <Text style={styles.tilteText}> MON. CUOTA</Text>
               </View>
               <View style={styles.title}>
                 <Text style={styles.tilteText}>PAGOS</Text>
@@ -43,6 +45,11 @@ const Cronograma = ({ data }) => {
                     {formatDate(element.fechaPago)}
                   </Text>
                   <Text style={styles.dataText}>{element.montoCuota}</Text>
+                  <Checkbox
+                    style={styles.checkbox}
+                    value={isChecked}
+                    onValueChange={setChecked}
+                  />
                 </View>
               );
             })}
@@ -68,19 +75,17 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     justifyContent: "space-evenly",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
-    paddingVertical: 10,
   },
   title: {
-    fontSize: 16,
-    paddingRight: 10,
-    alignItems: "center",
+    // paddingRight: 10,
+    // alignItems: "center",
     fontWeight: "bold",
   },
   tilteText: {
     color: "cornsilk",
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: "bold",
-    paddingLeft: 10,
+    //paddingLeft: 10,
   },
   containerCuotas: {
     flexDirection: "column",
@@ -92,7 +97,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(189, 238, 247, 0.888)",
-    padding: 5,
+    // paddingHorizontal: 40,
+    paddingVertical: 10,
   },
   dataImpar: {
     display: "flex",
@@ -101,12 +107,16 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     backgroundColor: "rgb(123, 220, 231)",
-    padding: 5,
+    paddingVertical: 10,
   },
   dataText: {
-    fontSize: 15,
-    paddingHorizontal: 5,
-    marginHorizontal: 2,
+    fontSize: 17,
+    //paddingHorizontal: 5,
+    // marginHorizontal: 2,
+  },
+  checkbox: {
+    padding: 5,
+    marginLeft: 15,
   },
 });
 //! EN ESTA PARTE FALTA, CUANDO SE CANCELA TODA LA DEUDA SE TIENE QUE MODIFICAR
