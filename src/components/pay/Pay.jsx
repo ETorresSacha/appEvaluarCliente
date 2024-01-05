@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import UseStorage from "../hooks/UseHookStorage";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -71,7 +78,7 @@ const Pay = ({ data }) => {
         <View>
           <View style={styles.pagosTitle}>
             <Text style={styles.titleText}>PAGOS</Text>
-            <Pressable style={styles.cancelPago}>
+            <TouchableOpacity style={styles.cancelPago}>
               <MaterialIcons
                 name="settings-backup-restore"
                 size={27}
@@ -85,7 +92,7 @@ const Pay = ({ data }) => {
               >
                 Cancelar Pago
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.pagosDetalle}>
@@ -156,7 +163,7 @@ const Pay = ({ data }) => {
               </View>
             </View>
           </View>
-          <Pressable
+          <TouchableOpacity
             style={
               !cancelledShare
                 ? [
@@ -176,7 +183,7 @@ const Pay = ({ data }) => {
             <Text style={styles.subTitle}>
               {!cancelledShare ? "Pagar" : "Deuda Cancelado"}
             </Text>
-          </Pressable>
+          </TouchableOpacity>
 
           {/* <Pressable
             style={
