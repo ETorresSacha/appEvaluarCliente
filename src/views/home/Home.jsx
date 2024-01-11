@@ -43,7 +43,7 @@ const Home = () => {
 
   useEffect(() => {
     loadNegocio();
-  }, []);
+  }, [data]);
 
   // Cerrar el modal
   const handleModalClose = async (shouldUpdate) => {
