@@ -16,21 +16,12 @@ import { validationInfNegocios } from "../../../utils/validation/Validation";
 
 const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   const { onSaveDataBusiness, onGetBusiness } = UseStorageBusiness();
-  const [dataNegocio, setDataNegocio] = useState([]); //!
 
   const [data, setData] = useState({
     negocio: "",
     direccion: "",
     celular: "",
   });
-  //!eliminar
-  // useEffect(() => {
-  //   let result = onGetBusiness();
-  //   console.log(result);
-  //   setNegocio(result);
-  // }, []);
-
-  //
 
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
@@ -51,7 +42,6 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   useEffect(() => {
     loadNegocio();
   }, []);
-  //!
 
   // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
   const handleDataKeep = async () => {
