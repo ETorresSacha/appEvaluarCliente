@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import UseStorageBusiness from "../../../components/hooks/UseHookDataNeg";
 import { validationInfNegocios } from "../../../utils/validation/Validation";
 
-const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
+const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome }) => {
   const { onSaveDataBusiness, onGetBusiness } = UseStorageBusiness();
 
   const [data, setData] = useState({
@@ -27,7 +27,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
-      //setDataNegocio(result);
+      setDataHome(result);
       setData({
         ...data,
         negocio: result[0]?.negocio,

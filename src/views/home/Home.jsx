@@ -75,7 +75,11 @@ const Home = () => {
       </View>
 
       {/* MODAL OPCIONES */}
-      <ModalConfigPersonal visible={isVisible} onClose={handleModalClose} />
+      <ModalConfigPersonal
+        visible={isVisible}
+        onClose={handleModalClose}
+        setDataHome={setData}
+      />
 
       {/* BIENVENIDO */}
       <View style={{ paddingTop: 20 }}>

@@ -17,7 +17,7 @@ import Configuration from "./modalOptions/Configuration";
 
 const optionsData = ["Información Negocio", "Recomendar App", "Configuración"];
 
-const ModalConfigPersonal = ({ visible, onClose }) => {
+const ModalConfigPersonal = ({ visible, onClose, setDataHome }) => {
   const navigation = useNavigation();
   const [enablerNeg, setEnableNeg] = useState(false);
   const [enablerRec, setEnableRec] = useState(false);
@@ -61,7 +61,11 @@ const ModalConfigPersonal = ({ visible, onClose }) => {
       </Modal>
 
       {/* MODALES DE LAS OPCIONES */}
-      <InfNegocio enablerNeg={enablerNeg} setEnableNeg={setEnableNeg} />
+      <InfNegocio
+        enablerNeg={enablerNeg}
+        setEnableNeg={setEnableNeg}
+        setDataHome={setDataHome}
+      />
       <RecommendApp enablerRec={enablerRec} setEnableRec={setEnableRec} />
       <Configuration enablerConf={enablerConf} setEnableConf={setEnableConf} />
     </View>
