@@ -36,7 +36,13 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
-      setDataNegocio(result);
+      //setDataNegocio(result);
+      setData({
+        ...data,
+        negocio: result[0]?.negocio,
+        direccion: result[0]?.direccion,
+        celular: result[0]?.celular,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -135,7 +141,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Financiera</Text>
             <TextInput
-              value={dataNegocio[0]?.negocio}
+              value={data.negocio}
               style={styles.text}
               placeholder={"Nombre"}
               placeholderTextColor="gray"
@@ -148,7 +154,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Dirección</Text>
             <TextInput
-              value={dataNegocio[0]?.direccion}
+              value={data.direccion}
               style={styles.text}
               placeholder={"Dirección"}
               placeholderTextColor="gray"
@@ -161,7 +167,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Celular</Text>
             <TextInput
-              value={dataNegocio[0]?.celular}
+              value={data.celular}
               style={styles.text}
               placeholder={"Celular"}
               placeholderTextColor="gray"
