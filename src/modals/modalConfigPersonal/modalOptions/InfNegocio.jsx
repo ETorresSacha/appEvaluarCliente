@@ -16,13 +16,22 @@ import { validationInfNegocios } from "../../../utils/validation/Validation";
 
 const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   const { onSaveDataBusiness, onGetBusiness } = UseStorageBusiness();
+  const [negocio, setNegocio] = useState([]); //!
 
   const [data, setData] = useState({
     negocio: "",
     direccion: "",
     celular: "",
   });
+  //!eliminar
+  // useEffect(() => {
+  //   let result = onGetBusiness();
+  //   console.log(result);
+  //   setNegocio(result);
+  // }, []);
 
+  // console.log(negocio);
+  //!
   // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
   const handleDataKeep = async () => {
     // Validación
@@ -259,3 +268,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+//! cuando inicias los datos no se visualiza los datos guardados en el modal, y tampoco se actualiza cuando se guarda
