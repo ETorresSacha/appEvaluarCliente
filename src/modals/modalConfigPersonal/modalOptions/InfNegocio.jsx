@@ -16,7 +16,7 @@ import { validationInfNegocios } from "../../../utils/validation/Validation";
 
 const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   const { onSaveDataBusiness, onGetBusiness } = UseStorageBusiness();
-  const [negocio, setNegocio] = useState([]); //!
+  const [dataNegocio, setDataNegocio] = useState([]); //!
 
   const [data, setData] = useState({
     negocio: "",
@@ -30,8 +30,23 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
   //   setNegocio(result);
   // }, []);
 
-  // console.log(negocio);
+  //
+
+  // Cargar los datos de la financiera
+  const loadNegocio = async () => {
+    try {
+      const result = await onGetBusiness();
+      setDataNegocio(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadNegocio();
+  }, []);
   //!
+
   // GUARDAR LOS DATOS DE LA CONFIGURACIÓN DEL NEGOCIO
   const handleDataKeep = async () => {
     // Validación
@@ -120,7 +135,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Financiera</Text>
             <TextInput
-              value={data.negocio}
+              value={dataNegocio[0]?.negocio}
               style={styles.text}
               placeholder={"Nombre"}
               placeholderTextColor="gray"
@@ -133,7 +148,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Dirección</Text>
             <TextInput
-              value={data.direccion}
+              value={dataNegocio[0]?.direccion}
               style={styles.text}
               placeholder={"Dirección"}
               placeholderTextColor="gray"
@@ -146,7 +161,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg }) => {
           <View style={styles.containerText}>
             <Text style={styles.titleText}>Celular</Text>
             <TextInput
-              value={data.celular}
+              value={dataNegocio[0]?.celular}
               style={styles.text}
               placeholder={"Celular"}
               placeholderTextColor="gray"
