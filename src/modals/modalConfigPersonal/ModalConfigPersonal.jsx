@@ -24,7 +24,6 @@ const ModalConfigPersonal = ({ visible, onClose, setDataHome }) => {
   const [enablerConf, setEnableConf] = useState(false);
 
   const options = (value) => {
-    //console.log(value);
     switch (value) {
       case "Información Negocio":
         setEnableNeg(true);

@@ -27,7 +27,8 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome }) => {
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
-      setDataHome(result);
+      setDataHome(result); // Actualiza los datos del negocio y es visible en el "home" cuando se modifica en el modal
+
       setData({
         ...data,
         negocio: result[0]?.negocio,
