@@ -260,6 +260,3 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
 });
-
-//! es prueba par eliminar despues
-//!!!!!!!!!!!!!!!!!!!!!!
