@@ -24,6 +24,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome }) => {
   });
 
   // Cargar los datos de la financiera
+  //! ELIMINAR
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
