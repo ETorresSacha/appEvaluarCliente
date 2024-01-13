@@ -43,6 +43,7 @@ const Calculator = ({
     periodo: "",
   });
 
+  // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
     React.useCallback(() => {
       // Valida los datos al inicio-componente NEWFORM
@@ -96,21 +97,18 @@ const Calculator = ({
     }
   }, [clean]);
 
-  const [errorCalculator, setErrorCalculator] = useState({});
+  // Todo--> COMPONENTE CALCULATOR
   useEffect(() => {
     if (dataPrestamo == undefined) {
       let resultError = validationDataPrestamo(prestamo);
-
-      // Calcula la cuota
       let valuesText = Object.values(resultError);
-      setErrorCalculator(validationDataPrestamo(prestamo));
       if (enabled == true && valuesText.some((error) => error !== "")) {
         setEnabled(false);
       }
     }
   }, [prestamo]);
-  console.log(enabled);
-  console.log(errorCalculator);
+
+  // Todo--> PARA AMBOS COMPONENTES
 
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
