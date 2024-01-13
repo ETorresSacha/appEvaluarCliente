@@ -96,6 +96,22 @@ const Calculator = ({
     }
   }, [clean]);
 
+  const [errorCalculator, setErrorCalculator] = useState({});
+  useEffect(() => {
+    if (dataPrestamo == undefined) {
+      let resultError = validationDataPrestamo(prestamo);
+
+      // Calcula la cuota
+      let valuesText = Object.values(resultError);
+      setErrorCalculator(validationDataPrestamo(prestamo));
+      if (enabled == true && valuesText.some((error) => error !== "")) {
+        setEnabled(false);
+      }
+    }
+  }, []);
+  console.log(enabled);
+  console.log(errorCalculator);
+
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
     // Valida
@@ -106,6 +122,7 @@ const Calculator = ({
     let valuesText = Object.values(resultError);
 
     if (valuesText.some((error) => error !== "")) {
+      setEnabled(false);
       Alert.alert("Datos incompletos");
     } else {
       const result = resutCronograma(data);
@@ -124,37 +141,38 @@ const Calculator = ({
       {errorsP == undefined ? (
         <Header title={"Calculadora"} back={"Home"} />
       ) : null}
-
-      <Prestamo
-        errorsPrestamo={errorsPrestamo}
-        setErrorsPrestamo={setErrorsPrestamo}
-        errorsP={errorsP}
-        setErrorsP={setErrorsP}
-        prestamo={prestamo}
-        setPrestamo={setPrestamo}
-      />
       <ScrollView>
-        {/* ------------------ CALCULAR ------------------*/}
-        {dataPrestamo !== undefined ? null : (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.btnCalcular}
-              onPress={() => handleCalcular(prestamo)}
-            >
-              <Text style={styles.text}>Calcular</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        {/* ------------------ RESULTADO ------------------*/}
-        {dataPrestamo !== undefined ? (
-          dataPrestamo ? (
-            enabled ? (
-              <Cuota dataPerson={dataPerson} />
+        <Prestamo
+          errorsPrestamo={errorsPrestamo}
+          setErrorsPrestamo={setErrorsPrestamo}
+          errorsP={errorsP}
+          setErrorsP={setErrorsP}
+          prestamo={prestamo}
+          setPrestamo={setPrestamo}
+        />
+        <View>
+          {/* ------------------ CALCULAR ------------------*/}
+          {dataPrestamo !== undefined ? null : (
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.btnCalcular}
+                onPress={() => handleCalcular(prestamo)}
+              >
+                <Text style={styles.text}>Calcular</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {/* ------------------ RESULTADO ------------------*/}
+          {dataPrestamo !== undefined ? (
+            dataPrestamo ? (
+              enabled ? (
+                <Cuota dataPerson={dataPerson} />
+              ) : null
             ) : null
-          ) : null
-        ) : enabled ? (
-          <DetailCalculator resultCuota={resultCuota} />
-        ) : null}
+          ) : enabled ? (
+            <DetailCalculator resultCuota={resultCuota} />
+          ) : null}
+        </View>
       </ScrollView>
     </View>
   );
