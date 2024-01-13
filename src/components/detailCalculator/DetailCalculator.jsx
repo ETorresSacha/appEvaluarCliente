@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+    paddingTop: 50,
   },
 
   button: {
@@ -49,10 +50,10 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
   },
   text: {
-    fontSize: 25,
+    fontSize: 50,
     fontWeight: "bold",
     letterSpacing: 0.25,
-    color: "white",
+    color: "cornsilk",
     textAlign: "center",
   },
 
