@@ -109,7 +109,6 @@ const Calculator = ({
   }, [prestamo]);
 
   // Todo--> PARA AMBOS COMPONENTES
-
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
     // Valida
@@ -220,3 +219,5 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
   },
 });
+
+//! falta el modal para configurar el tipo de prestamo( mensual, trimestral,etc), el ITF "lo mas importante"

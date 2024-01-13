@@ -53,8 +53,6 @@ const Home = () => {
     setIsVisible(false);
   };
 
-  //!!!!!!!!!!!!!!!!!!!
-
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
