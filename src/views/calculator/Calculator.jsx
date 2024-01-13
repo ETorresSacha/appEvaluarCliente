@@ -108,7 +108,7 @@ const Calculator = ({
         setEnabled(false);
       }
     }
-  }, []);
+  }, [prestamo]);
   console.log(enabled);
   console.log(errorCalculator);
 
