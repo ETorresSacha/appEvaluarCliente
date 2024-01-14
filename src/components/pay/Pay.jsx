@@ -22,6 +22,7 @@ const Pay = ({ data }) => {
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
 
   console.log(dataSee);
+  console.log(indice);
 
   useEffect(() => {
     setModify(data);
@@ -42,6 +43,7 @@ const Pay = ({ data }) => {
     }
   }, [data, indice, cancelledShare]);
 
+  // Pagar cuota
   const handlePayShare = async () => {
     let objeto = { ...dataSee, statusPay: true };
     updatePrestamo.splice(indice, 1, objeto);
