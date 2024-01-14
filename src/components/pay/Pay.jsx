@@ -13,6 +13,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 
 const Pay = ({ data }) => {
+  console.log(data);
   const { onUpdateStatusPay } = UseStorage();
 
   const [indice, setIndice] = useState(0);
@@ -21,8 +22,8 @@ const Pay = ({ data }) => {
   const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
 
-  console.log(dataSee);
-  console.log(indice);
+  //console.log(dataSee);
+  //console.log(indice);
 
   useEffect(() => {
     setModify(data);
@@ -72,6 +73,11 @@ const Pay = ({ data }) => {
       setCancelledShare(true);
     }
   };
+
+  console.log(data[0]?.resultPrestamo[indice - 1]); //todo_>usaremos esto para cancelar el pago
+  // splice para reemplazar como el pago
+  // Cancelar el pago
+  const HandleCancelPay = {};
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
