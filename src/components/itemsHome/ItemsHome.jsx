@@ -41,7 +41,7 @@ const ItemsHome = () => {
 
       <TouchableOpacity onPress={handlePrestamo} style={styles.item}>
         <Ionicons name="calculator" size={100} color="rgb(224, 205, 36)" />
-        <Text style={styles.text}> Calculadora</Text>
+        <Text style={styles.text}> Evaluar</Text>
       </TouchableOpacity>
     </View>
   );

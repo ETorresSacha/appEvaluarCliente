@@ -135,9 +135,7 @@ const Calculator = ({
       {errorsP == undefined ? (
         <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
       ) : null}
-      {errorsP == undefined ? (
-        <Header title={"Calculadora"} back={"Home"} />
-      ) : null}
+      {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <ScrollView>
         <Prestamo
           errorsPrestamo={errorsPrestamo}
