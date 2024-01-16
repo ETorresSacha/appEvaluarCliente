@@ -23,8 +23,8 @@ const Pay = ({ data }) => {
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
   const [payShare, setPayShere] = useState([]);
 
-  //console.log(dataSee);
-  //console.log(indice);
+  console.log(dataSee);
+  console.log(indice);
 
   useEffect(() => {
     setModify(data);
@@ -36,20 +36,20 @@ const Pay = ({ data }) => {
 
     if (result != undefined) {
       setDataSee(result);
-      setIndice(result?.cuota == undefined ? null : result?.cuota - 1);
+      setIndice(dataSee?.cuota == undefined ? null : dataSee?.cuota - 1);
       setCancelledShare(false);
     }
     if (result == undefined) {
       setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
       setCancelledShare(true);
     }
-  }, [data, indice, cancelledShare]);
+  }, [data, indice, cancelledShare, payShare, dataSee]);
 
   useEffect(() => {
     let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
     setPayShere(cuotaCancelada);
   }, [indice]);
-  console.log(payShare);
+  //console.log(payShare);
 
   // Pagar cuota
   const handlePayShare = async () => {
@@ -84,7 +84,7 @@ const Pay = ({ data }) => {
   // splice para reemplazar como el pago
   // Cancelar el pago
   const [cancellPay, setCancelPay] = useState([]);
-  console.log(updatePrestamo);
+  //console.log(updatePrestamo);
   const HandleCancelPay = async () => {
     //console.log(data[0]?.resultPrestamo[indice - 1]); //todo_>usaremos esto para cancelar el pago
     let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
@@ -96,13 +96,14 @@ const Pay = ({ data }) => {
     let objeto = { ...payShare, statusPay: false };
     //console.log(objeto);
     updatePrestamo.splice(indice - 1, 1, objeto);
-    console.log(updatePrestamo);
+    //console.log(updatePrestamo);
     setModify({
       ...modify[0],
       uuid: data[0].uuid,
       resultPrestamo: updatePrestamo,
     });
     await onUpdateStatusPay(modify);
+    setIndice(indice - 1);
     // updatePrestamo.splice(indice, 1, objeto);
     //console.log(objeto);
     //return objeto;
