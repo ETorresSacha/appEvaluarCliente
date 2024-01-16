@@ -81,22 +81,12 @@ const Pay = ({ data }) => {
     }
   };
 
-  // splice para reemplazar como el pago
   // Cancelar el pago
-  const [cancellPay, setCancelPay] = useState([]);
-  //console.log(updatePrestamo);
   const HandleCancelPay = async () => {
-    //console.log(data[0]?.resultPrestamo[indice - 1]); //todo_>usaremos esto para cancelar el pago
-    let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
-    setCancelPay(cuotaCancelada);
-    //setCancelPay(cuotaCancelada);
-    //console.log(indice);
-    //console.log(dataSee);
-    //console.log(cuotaCancelada);
     let objeto = { ...payShare, statusPay: false };
-    //console.log(objeto);
+
     updatePrestamo.splice(indice - 1, 1, objeto);
-    //console.log(updatePrestamo);
+
     setModify({
       ...modify[0],
       uuid: data[0].uuid,
@@ -104,9 +94,6 @@ const Pay = ({ data }) => {
     });
     await onUpdateStatusPay(modify);
     setIndice(indice - 1);
-    // updatePrestamo.splice(indice, 1, objeto);
-    //console.log(objeto);
-    //return objeto;
   };
   return (
     <View style={styles.container}>
