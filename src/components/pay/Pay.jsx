@@ -13,7 +13,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 
 const Pay = ({ data }) => {
-  console.log(data);
+  //console.log(data);
   const { onUpdateStatusPay } = UseStorage();
 
   const [indice, setIndice] = useState(0);
@@ -21,6 +21,7 @@ const Pay = ({ data }) => {
   const [modify, setModify] = useState([]); // Editar el status del pago
   const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
+  const [payShare, setPayShere] = useState([]);
 
   //console.log(dataSee);
   //console.log(indice);
@@ -43,6 +44,12 @@ const Pay = ({ data }) => {
       setCancelledShare(true);
     }
   }, [data, indice, cancelledShare]);
+
+  useEffect(() => {
+    let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
+    setPayShere(cuotaCancelada);
+  }, [indice]);
+  console.log(payShare);
 
   // Pagar cuota
   const handlePayShare = async () => {
@@ -74,10 +81,32 @@ const Pay = ({ data }) => {
     }
   };
 
-  console.log(data[0]?.resultPrestamo[indice - 1]); //todo_>usaremos esto para cancelar el pago
   // splice para reemplazar como el pago
   // Cancelar el pago
-  const HandleCancelPay = {};
+  const [cancellPay, setCancelPay] = useState([]);
+  console.log(updatePrestamo);
+  const HandleCancelPay = async () => {
+    //console.log(data[0]?.resultPrestamo[indice - 1]); //todo_>usaremos esto para cancelar el pago
+    let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
+    setCancelPay(cuotaCancelada);
+    //setCancelPay(cuotaCancelada);
+    //console.log(indice);
+    //console.log(dataSee);
+    //console.log(cuotaCancelada);
+    let objeto = { ...payShare, statusPay: false };
+    //console.log(objeto);
+    updatePrestamo.splice(indice - 1, 1, objeto);
+    console.log(updatePrestamo);
+    setModify({
+      ...modify[0],
+      uuid: data[0].uuid,
+      resultPrestamo: updatePrestamo,
+    });
+    await onUpdateStatusPay(modify);
+    // updatePrestamo.splice(indice, 1, objeto);
+    //console.log(objeto);
+    //return objeto;
+  };
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
@@ -86,7 +115,10 @@ const Pay = ({ data }) => {
         <View>
           <View style={styles.pagosTitle}>
             <Text style={styles.titleText}>PAGOS</Text>
-            <TouchableOpacity style={styles.cancelPago}>
+            <TouchableOpacity
+              style={styles.cancelPago}
+              onPress={HandleCancelPay}
+            >
               <MaterialIcons
                 name="settings-backup-restore"
                 size={27}
