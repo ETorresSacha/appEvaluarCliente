@@ -30,7 +30,7 @@ const img =
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
   const [isVisible, setIsVisible] = useState(false);
-  const [enable, setEnable] = useState(false);
+  const [enable, setEnable] = useState(false); // Para visualizar los cambios en el home
   const [data, setData] = useState([]);
 
   // Cargar los datos de la financiera
@@ -43,19 +43,10 @@ const Home = () => {
       console.error(error);
     }
   };
-  //console.log(data);
-  //console.log(isVisible);
+
   useEffect(() => {
     loadNegocio();
   }, [enable]);
-  console.log(enable);
-
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     loadNegocio();
-  //     //return () => unsubscribe();
-  //   }, [data[0]?.negocio])
-  // );
 
   // Cerrar el modal
   const handleModalClose = async (shouldUpdate) => {

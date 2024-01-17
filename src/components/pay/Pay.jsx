@@ -68,7 +68,7 @@ const Pay = ({ data }) => {
       setIndice(indice + 1);
       let result = await onUpdateStatusPay(modify);
     } else {
-      // Cancelación de la cuenta
+      // Cancelación de la deuda
       let objeto = {
         ...modify[0],
         uuid: data[0].uuid,
@@ -79,20 +79,25 @@ const Pay = ({ data }) => {
       setCancelledShare(true);
     }
   };
-
-  // Cancelar el pago
+  console.log(indice);
+  // Cancelar el pago de la cuota
   const HandleCancelPay = async () => {
-    let objeto = { ...payShare, statusPay: false };
+    if (indice == 0) {
+      console.log("no hay cuota para cancelar");
+    }
+    if (indice > 0) {
+      let objeto = { ...payShare, statusPay: false };
 
-    updatePrestamo.splice(indice - 1, 1, objeto);
+      updatePrestamo.splice(indice - 1, 1, objeto);
 
-    setModify({
-      ...modify[0],
-      uuid: data[0].uuid,
-      resultPrestamo: updatePrestamo,
-    });
-    await onUpdateStatusPay(modify);
-    setIndice(indice - 1);
+      setModify({
+        ...modify[0],
+        uuid: data[0].uuid,
+        resultPrestamo: updatePrestamo,
+      });
+      await onUpdateStatusPay(modify);
+      setIndice(indice - 1);
+    }
   };
   return (
     <View style={styles.container}>

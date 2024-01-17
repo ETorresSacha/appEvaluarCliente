@@ -68,7 +68,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
 
               Alert.alert("Se guardó correctamente");
               setEnable(true); // Es simplemente para actualizar los datos en el home despues de guardar los cambios
-              setEnableNeg(false);
+              setEnableNeg(false); // Cerrar el modal
             },
             style: "destructive",
           },
