@@ -6,7 +6,7 @@ const UseStorageBusiness = () => {
   // GUARDAR INFORMACION
   const saveInfoStorage = async (storageKey, meal) => {
     try {
-      //await AsyncStorage.clear(MY_BUSINESS_KEY);
+      // await AsyncStorage.clear(MY_BUSINESS_KEY);
 
       await AsyncStorage.setItem(storageKey, JSON.stringify([meal]));
 
@@ -36,7 +36,7 @@ const UseStorageBusiness = () => {
   const handleGetBusiness = async () => {
     try {
       let result = await AsyncStorage.getItem(MY_BUSINESS_KEY);
-      if (result !== null) {
+      if (result != null) {
         const parseCronograma = JSON.parse(result);
 
         return Promise.resolve(parseCronograma);

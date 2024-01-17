@@ -41,7 +41,9 @@ const Customer = () => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-
+      // console.log(resultCustomer);
+      // //! LOS COMPONENTE QUE SALE ERROR ES POR QUE SE GUARDO DATOS INVALIDOS, CORRIGE  HOOKSTORAGE, COMP.CUSTOMER Y HOME.
+      // //!PRIMERO RESULVE EL ERROR Y VOLVER A RENDERIZAR CON NORMALIDAD
       setData({
         ...data,
         dataResult: resultCustomer,
@@ -60,6 +62,7 @@ const Customer = () => {
   };
 
   // clasificación de los clientes de acuerdo a la fecha de pago
+
   const resultCustomer = () => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
@@ -129,10 +132,10 @@ const Customer = () => {
           </View>
         </View>
 
-        <Users data={customer.customerRed} color={"red"} />
+        {/* <Users data={customer.customerRed} color={"red"} />
         <Users data={customer.customerYellow} color={"yellow"} />
         <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-        <Users data={customer.customer} />
+        <Users data={customer.customer} /> */}
         {/* <Users data={data.dataResult} /> */}
       </ScrollView>
     </View>

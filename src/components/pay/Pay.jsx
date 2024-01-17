@@ -13,7 +13,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 
 const Pay = ({ data }) => {
-  //console.log(data);
+  console.log(data);
   const { onUpdateStatusPay } = UseStorage();
 
   const [indice, setIndice] = useState(0);
@@ -24,7 +24,7 @@ const Pay = ({ data }) => {
   const [payShare, setPayShere] = useState([]);
 
   console.log(dataSee);
-  console.log(indice);
+  //console.log(indice);
 
   useEffect(() => {
     setModify(data);
@@ -49,7 +49,6 @@ const Pay = ({ data }) => {
     let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
     setPayShere(cuotaCancelada);
   }, [indice]);
-  //console.log(payShare);
 
   // Pagar cuota
   const handlePayShare = async () => {

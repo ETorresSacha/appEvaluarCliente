@@ -29,18 +29,18 @@ const img =
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
   const [isVisible, setIsVisible] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
-      setData(result);
+      setData(result == undefined ? data : result);
     } catch (error) {
       console.error(error);
     }
   };
-
+  console.log(data);
   useEffect(() => {
     loadNegocio();
   }, [data]);
@@ -56,6 +56,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
+
       {/* HEADER */}
       <View style={styles.conteinerHeader}>
         <View style={styles.rightConteiner}>
@@ -73,11 +74,11 @@ const Home = () => {
       </View>
 
       {/* MODAL OPCIONES */}
-      <ModalConfigPersonal
+      {/* <ModalConfigPersonal
         visible={isVisible}
         onClose={handleModalClose}
         setDataHome={setData}
-      />
+      /> */}
 
       {/* BIENVENIDO */}
       <View style={{ paddingTop: 20 }}>

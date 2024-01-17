@@ -6,37 +6,37 @@ export const orderData = (type,data,value)=>{
     switch (type) {
         case 'dni':
             if (value) {
-               result = data.sort((a, b) => a.dni - b.dni);
+               result = data?.sort((a, b) => a.dni - b.dni);
             
               } else {
-                result = data.sort((a, b) => b.dni - a.dni);
+                result = data?.sort((a, b) => b.dni - a.dni);
               }
           break;
 
           case 'nombre':
             if (value) {
                 
-               result = data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+               result = data?.sort((a, b) => a.nombre.localeCompare(b.nombre));
             
               } else {
-                result = data.sort((a, b) => b.nombre.localeCompare(a.nombre));
+                result = data?.sort((a, b) => b.nombre.localeCompare(a.nombre));
               }
           break;
           case 'fecha':
             console.log("estoy aqui");
             if (value) {
-              result = data.sort((a, b) => new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
+              result = data?.sort((a, b) => new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                } else {
-                result = data.sort((a, b) => new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
+                result = data?.sort((a, b) => new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                }
           break;
           case 'cuota':
             if (value) {
 
-                result = data.sort((a, b) => a.resultPrestamo[0].montoCuota - b.resultPrestamo[0].montoCuota);
+                result = data?.sort((a, b) => a.resultPrestamo[0].montoCuota - b.resultPrestamo[0].montoCuota);
              
                } else {
-                 result = data.sort((a, b) => b.resultPrestamo[0].montoCuota - a.resultPrestamo[0].montoCuota);
+                 result = data?.sort((a, b) => b.resultPrestamo[0].montoCuota - a.resultPrestamo[0].montoCuota);
                }
           break;
         
@@ -118,7 +118,7 @@ export const customerData =(data,toDay)=>{
 
   let [anioToDay,mesToDay,diaToDay] = toDay.split('-')
 
- data.map(element=>{
+ data?.map(element=>{
 
 
   // Deuda sin cancelar
