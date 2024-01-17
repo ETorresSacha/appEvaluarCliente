@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import UseStorageBusiness from "../../../components/hooks/UseHookDataNeg";
 import { validationInfNegocios } from "../../../utils/validation/Validation";
 
-const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome }) => {
+const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
   const { onSaveDataBusiness, onGetBusiness } = UseStorageBusiness();
 
   const [data, setData] = useState({
@@ -27,7 +27,8 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome }) => {
 
   const loadNegocio = async () => {
     try {
-      const result = (await onGetBusiness()) ? await onGetBusiness() : data;
+      let result = await onGetBusiness();
+      result = undefined ? data : result;
       setDataHome(result); // Actualiza los datos del negocio y es visible en el "home" cuando se modifica en el modal
 
       setData({
@@ -60,12 +61,13 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome }) => {
             text: "Si",
             onPress: async () => {
               await onSaveDataBusiness({
-                negocio: data.negocio,
-                direccion: data.direccion,
-                celular: data.celular,
+                negocio: data?.negocio,
+                direccion: data?.direccion,
+                celular: data?.celular,
               });
 
               Alert.alert("Se guardó correctamente");
+              setEnable(true); // Es simplemente para actualizar los datos en el home despues de guardar los cambios
               setEnableNeg(false);
             },
             style: "destructive",

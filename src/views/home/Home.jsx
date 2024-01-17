@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import CustomerType from "../../components/customerType/CustomerType";
+import { useFocusEffect } from "@react-navigation/native";
 import Header from "../../components/header/Header";
 import ItemsHome from "../../components/itemsHome/ItemsHome";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -29,6 +30,7 @@ const img =
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
   const [isVisible, setIsVisible] = useState(false);
+  const [enable, setEnable] = useState(false);
   const [data, setData] = useState([]);
 
   // Cargar los datos de la financiera
@@ -36,14 +38,24 @@ const Home = () => {
     try {
       const result = await onGetBusiness();
       setData(result == undefined ? data : result);
+      setEnable(false);
     } catch (error) {
       console.error(error);
     }
   };
-  console.log(data);
+  //console.log(data);
+  //console.log(isVisible);
   useEffect(() => {
     loadNegocio();
-  }, [data]);
+  }, [enable]);
+  console.log(enable);
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     loadNegocio();
+  //     //return () => unsubscribe();
+  //   }, [data[0]?.negocio])
+  // );
 
   // Cerrar el modal
   const handleModalClose = async (shouldUpdate) => {
@@ -78,6 +90,7 @@ const Home = () => {
         visible={isVisible}
         onClose={handleModalClose}
         setDataHome={setData}
+        setEnable={setEnable}
       />
 
       {/* BIENVENIDO */}
