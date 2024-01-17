@@ -22,6 +22,7 @@ const Pay = ({ data }) => {
   const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
   const [payShare, setPayShere] = useState([]);
+  const [enable, setEnable] = useState(true);
 
   console.log(dataSee);
   //console.log(indice);
@@ -48,6 +49,11 @@ const Pay = ({ data }) => {
   useEffect(() => {
     let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
     setPayShere(cuotaCancelada);
+
+    // Deshabilitar el botonde cancelar pago
+    if (indice == 0) {
+      setEnable(true);
+    }
   }, [indice]);
 
   // Pagar cuota
@@ -67,6 +73,8 @@ const Pay = ({ data }) => {
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
       let result = await onUpdateStatusPay(modify);
+
+      setEnable(false); // Habilita el boton de cancelat el pagp
     } else {
       // Cancelación de la deuda
       let objeto = {
@@ -110,6 +118,7 @@ const Pay = ({ data }) => {
             <TouchableOpacity
               style={styles.cancelPago}
               onPress={HandleCancelPay}
+              disabled={enable}
             >
               <MaterialIcons
                 name="settings-backup-restore"
