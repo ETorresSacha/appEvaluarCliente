@@ -22,9 +22,9 @@ const Pay = ({ data }) => {
   const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
   const [payShare, setPayShere] = useState([]);
-  const [enable, setEnable] = useState(true);
+  const [enable, setEnable] = useState(false); // Boton de cancelar pago (ON OFF)
 
-  console.log(dataSee);
+  // console.log(dataSee);
   //console.log(indice);
 
   useEffect(() => {
@@ -50,9 +50,11 @@ const Pay = ({ data }) => {
     let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
     setPayShere(cuotaCancelada);
 
-    // Deshabilitar el botonde cancelar pago
+    // Deshabilitar y habilitar el botonde cancelar pago
     if (indice == 0) {
       setEnable(true);
+    } else {
+      setEnable(false);
     }
   }, [indice]);
 
@@ -74,7 +76,7 @@ const Pay = ({ data }) => {
       setIndice(indice + 1);
       let result = await onUpdateStatusPay(modify);
 
-      setEnable(false); // Habilita el boton de cancelat el pagp
+      setEnable(false); // Habilita el boton de cancelar el pagp
     } else {
       // Cancelación de la deuda
       let objeto = {
@@ -90,6 +92,7 @@ const Pay = ({ data }) => {
   console.log(indice);
   // Cancelar el pago de la cuota
   const HandleCancelPay = async () => {
+    //! TENEMOS QUE ADICIONAR, QUE PASA CUANDO SE PAGA TODA LA DEUDA
     if (indice == 0) {
       console.log("no hay cuota para cancelar");
     }
