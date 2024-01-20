@@ -11,7 +11,7 @@ import { Button, Icon, Input } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const NavBar = ({ data, setData }) => {
+const NavBar = ({ data, setData, enable }) => {
   const navigation = useNavigation();
   const [textSearch, setText] = useState("");
 
@@ -64,10 +64,11 @@ const NavBar = ({ data, setData }) => {
           />
         </View>
       </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleAddPress}>
-        <Text style={styles.text}>Nuevo</Text>
-      </TouchableOpacity>
+      {!enable ? (
+        <TouchableOpacity style={styles.button} onPress={handleAddPress}>
+          <Text style={styles.text}>Nuevo</Text>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };

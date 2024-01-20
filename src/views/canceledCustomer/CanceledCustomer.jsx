@@ -15,10 +15,12 @@ import { format } from "date-fns";
 import { useFocusEffect } from "@react-navigation/native";
 import Users from "../../components/users/Users";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
+import Customer from "../customer/Customer";
 
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
 const CanceledCustomer = () => {
+  const [enable, setEnable] = useState(true);
   const { onGetCronograma } = UseStorage();
   const [customer, SetCustomer] = useState([]);
   const [day, setDay] = useState("");
@@ -60,9 +62,10 @@ const CanceledCustomer = () => {
   console.log(customer);
   return (
     <View style={styles.container}>
-      <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
-      <Header title={"Clientes Cancelados"} />
-      <ScrollView style={styles.containerCuotas}>
+      <Customer enable={enable} />
+      {/* <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image> */}
+      {/* <Header title={"Clientes Cancelados"} /> */}
+      {/* <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
           <View style={styles.titleText}>
             <TouchableOpacity
@@ -92,9 +95,9 @@ const CanceledCustomer = () => {
           </View>
         </View>
 
-        {/* <Users data={customer} /> */}
-        {/* <Users data={data.dataResult} /> */}
-      </ScrollView>
+        <Users data={customer} />
+        
+      </ScrollView> */}
     </View>
   );
 };

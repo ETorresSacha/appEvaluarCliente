@@ -20,7 +20,8 @@ import Header from "../../components/header/Header";
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
 
-const Customer = () => {
+const Customer = ({ enable }) => {
+  console.log(enable);
   const { onGetCronograma } = UseStorage();
   const [order, setOrder] = useState(false);
   const [day, setDay] = useState("");
@@ -90,8 +91,8 @@ const Customer = () => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
-      <Header title={"Clientes"} />
-      <NavBar data={data} setData={setData} />
+      <Header title={!enable ? "Clientes" : "Clientes cancelados"} />
+      <NavBar data={data} setData={setData} enable={enable} />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
           <View style={styles.titleText}>
@@ -111,29 +112,41 @@ const Customer = () => {
               style={styles.title}
               onPress={() => handleSort("fecha", order)}
             >
-              <Text style={styles.texTitle}>FECHA DE PAGO</Text>
+              <Text style={styles.texTitle}>
+                {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.title}
               onPress={() => handleSort("cuota", order)}
             >
-              <Text style={styles.texTitle}>CUOTA</Text>
+              <Text style={styles.texTitle}>{!enable ? "CUOTA" : "MONTO"}</Text>
             </TouchableOpacity>
           </View>
-
-          <View
-            style={styles.titleAlert}
-            //onPress={() => handleSort("cuota", order)}
-          >
-            <Text style={styles.texTitle}>ALERTA</Text>
-          </View>
+          {!enable ? (
+            <View
+              style={styles.titleAlert}
+              //onPress={() => handleSort("cuota", order)}
+            >
+              <Text style={styles.texTitle}>ALERTA</Text>
+            </View>
+          ) : null}
         </View>
 
-        <Users data={customer.customerRed} color={"red"} />
+        {!enable ? <Users data={customer.customerRed} color={"red"} /> : null}
+        {!enable ? (
+          <Users data={customer.customerYellow} color={"yellow"} />
+        ) : null}
+        {!enable ? (
+          <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
+        ) : null}
+        {!enable ? <Users data={customer.customer} /> : null}
+        {/* <Users data={customer.customerRed} color={"red"} />
         <Users data={customer.customerYellow} color={"yellow"} />
         <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-        <Users data={customer.customer} />
-        {/* <Users data={data.dataResult} /> */}
+        <Users data={customer.customer} /> */}
+
+        {enable ? <Users data={customer.customerCancelled} /> : null}
       </ScrollView>
     </View>
   );
