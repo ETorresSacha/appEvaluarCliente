@@ -29,7 +29,7 @@ const ItemsHome = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => handleOnPress("Clientes")}
+        onPress={() => handleOnPress("Clientes cancelados")}
         style={styles.item}
       >
         <MaterialCommunityIcons

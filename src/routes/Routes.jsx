@@ -8,6 +8,7 @@ import VerCronograma from "../views/cronograma/VerCronograma";
 import Customer from "../views/customer/Customer";
 import Calculator from "../views/calculator/Calculator";
 import Alerta from "../views/alert/Alerta";
+import CanceledCustomer from "../views/canceledCustomer/CanceledCustomer";
 
 //const Tab = createBottomTabNavigator();
 const optionsStack = {
@@ -35,6 +36,11 @@ const Routes = () => {
         <Stack.Screen
           name="Clientes"
           component={Customer}
+          options={{ optionsStack, statusBarColor: "black" }}
+        />
+        <Stack.Screen
+          name="Clientes cancelados"
+          component={CanceledCustomer}
           options={{ optionsStack, statusBarColor: "black" }}
         />
         <Stack.Screen
