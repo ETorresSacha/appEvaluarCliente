@@ -132,21 +132,16 @@ const Customer = ({ enable }) => {
             </View>
           ) : null}
         </View>
-
-        {!enable ? <Users data={customer.customerRed} color={"red"} /> : null}
         {!enable ? (
-          <Users data={customer.customerYellow} color={"yellow"} />
-        ) : null}
-        {!enable ? (
-          <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-        ) : null}
-        {!enable ? <Users data={customer.customer} /> : null}
-        {/* <Users data={customer.customerRed} color={"red"} />
-        <Users data={customer.customerYellow} color={"yellow"} />
-        <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-        <Users data={customer.customer} /> */}
-
-        {enable ? <Users data={customer.customerCancelled} /> : null}
+          <View>
+            <Users data={customer.customerRed} color={"red"} />
+            <Users data={customer.customerYellow} color={"yellow"} />
+            <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
+            <Users data={customer.customer} />
+          </View>
+        ) : (
+          <Users data={customer.customerCancelled} />
+        )}
       </ScrollView>
     </View>
   );
