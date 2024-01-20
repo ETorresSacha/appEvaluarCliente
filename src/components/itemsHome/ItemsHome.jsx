@@ -15,22 +15,23 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const ItemsHome = () => {
   const navigation = useNavigation();
 
-  const handlePrestamo = () => {
-    navigation.navigate("Calculadora");
+  const handleOnPress = (value) => {
+    navigation.navigate(value);
   };
-
-  const handleCustomer = () => {
-    navigation.navigate("Clientes");
-  };
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleCustomer} style={styles.item}>
+      <TouchableOpacity
+        onPress={() => handleOnPress("Clientes")}
+        style={styles.item}
+      >
         <FontAwesome name="users" size={100} color="rgb(36, 224, 58)" />
         <Text style={styles.text}> Clientes Pendientes</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.item}>
+      <TouchableOpacity
+        onPress={() => handleOnPress("Clientes")}
+        style={styles.item}
+      >
         <MaterialCommunityIcons
           name="account-cancel"
           size={100}
@@ -39,7 +40,10 @@ const ItemsHome = () => {
         <Text style={styles.text}> Clientes Cancelados</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={handlePrestamo} style={styles.item}>
+      <TouchableOpacity
+        onPress={() => handleOnPress("Calculadora")}
+        style={styles.item}
+      >
         <Ionicons name="calculator" size={100} color="rgb(224, 205, 36)" />
         <Text style={styles.text}> Evaluar</Text>
       </TouchableOpacity>
