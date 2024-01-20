@@ -14,6 +14,8 @@ import { formatDate } from "../../utils/thunks/Thunks";
 
 const Pay = ({ data }) => {
   console.log(data);
+  //console.log(data[0]?.resultPrestamo.length);
+  //console.log(updatePrestamo);
   const { onUpdateStatusPay } = UseStorage();
 
   const [indice, setIndice] = useState(0);
@@ -24,8 +26,9 @@ const Pay = ({ data }) => {
   const [payShare, setPayShere] = useState([]);
   const [enable, setEnable] = useState(false); // Boton de cancelar pago (ON OFF)
 
-  // console.log(dataSee);
-  //console.log(indice);
+  //console.log(dataSee);
+  //console.log(updatePrestamo);
+  //console.log(modify[0]?.cancelled);
 
   useEffect(() => {
     setModify(data);
@@ -89,14 +92,23 @@ const Pay = ({ data }) => {
       setCancelledShare(true);
     }
   };
-  console.log(indice);
+  //console.log(indice);
   // Cancelar el pago de la cuota
   const HandleCancelPay = async () => {
     //! TENEMOS QUE ADICIONAR, QUE PASA CUANDO SE PAGA TODA LA DEUDA
     if (indice == 0) {
       console.log("no hay cuota para cancelar");
     }
-    if (indice > 0) {
+
+    //todo--->esto es lo que se modifico pero es para cambiar
+    if (modify[0]?.cancelled) {
+      let objeto = { ...payShare, statusPay: false };
+
+      setIndice(updatePrestamo?.length - 1);
+    }
+    //todo------------------------------------------------
+
+    if (indice > 0 && indice < updatePrestamo?.length) {
       let objeto = { ...payShare, statusPay: false };
 
       updatePrestamo.splice(indice - 1, 1, objeto);
