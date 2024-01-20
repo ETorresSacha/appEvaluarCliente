@@ -119,11 +119,12 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     height: 50,
+
     justifyContent: "space-between",
   },
   title: {
     fontSize: 16,
-    width: 60,
+    //width: 60,
     justifyContent: "center",
     alignItems: "center",
     fontWeight: "bold",
