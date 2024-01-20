@@ -86,7 +86,7 @@ const Customer = () => {
   useEffect(() => {
     resultCustomer();
   }, [data]);
-
+  console.log(customer.customerRed[0]?.resultPrestamo);
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
