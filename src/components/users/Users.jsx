@@ -54,7 +54,10 @@ const Users = ({ data, color, enable }) => {
                 })
               }
             >
+              {/* DNI */}
               <Text style={styles.dataText}>{element?.dni}</Text>
+
+              {/* Nombre */}
               <Text
                 style={{
                   width: 80,
@@ -64,9 +67,13 @@ const Users = ({ data, color, enable }) => {
               >
                 {`${element?.nombre?.split(" ")[0]}`}
               </Text>
+
+              {/* Fecha */}
               <Text style={styles.dataText}>
                 {enable ? "20/01/2024" : formatDate(datePay(element))}
               </Text>
+
+              {/* Monto */}
               <Text
                 style={{
                   fontSize: 17,
@@ -77,10 +84,14 @@ const Users = ({ data, color, enable }) => {
               >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
-              <MaterialIcons
-                name="notifications"
-                style={color ? estilos : styles.iconAlertOff}
-              />
+
+              {/* Icono de la alerta */}
+              {enable ? null : (
+                <MaterialIcons
+                  name="notifications"
+                  style={color ? estilos : styles.iconAlertOff}
+                />
+              )}
             </TouchableOpacity>
           </View>
         );

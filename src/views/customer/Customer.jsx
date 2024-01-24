@@ -21,7 +21,6 @@ const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
 
 const Customer = ({ enable }) => {
-  console.log(enable);
   const { onGetCronograma } = UseStorage();
   const [order, setOrder] = useState(false);
   const [day, setDay] = useState("");
@@ -64,7 +63,6 @@ const Customer = ({ enable }) => {
   const resultCustomer = () => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
-    console.log(result);
 
     if (result?.resultCustomer) {
       SetCustomer({
