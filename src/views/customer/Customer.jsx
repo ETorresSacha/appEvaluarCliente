@@ -65,7 +65,7 @@ const Customer = ({ enable }) => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
 
-    if (result.resultCustomer) {
+    if (result?.resultCustomer) {
       SetCustomer({
         ...customer,
         customerGreen: result.resultCustumerGreen,

@@ -22,13 +22,13 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
     direccion: "",
     celular: "",
   });
-
+  console.log(data);
   // Cargar los datos de la financiera
 
   const loadNegocio = async () => {
     try {
       let result = await onGetBusiness();
-      result = undefined ? data : result;
+      result = result == undefined ? data : result;
       setDataHome(result); // Actualiza los datos del negocio y es visible en el "home" cuando se modifica en el modal
 
       setData({

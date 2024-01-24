@@ -60,9 +60,11 @@ const CanceledCustomer = () => {
     resultCanceledCustomer();
   }, [data]);
   console.log(customer);
+  //! TENEMOS QUE SENTRAR EL TITULO
   return (
     <View style={styles.container}>
       <Customer enable={enable} />
+
       {/* <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image> */}
       {/* <Header title={"Clientes Cancelados"} /> */}
       {/* <ScrollView style={styles.containerCuotas}>
