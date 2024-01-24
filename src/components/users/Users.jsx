@@ -40,7 +40,14 @@ const Users = ({ data, color, enable }) => {
         return (
           <View
             key={element.uuid}
-            style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
+            style={
+              index % 2 == 0
+                ? [styles.dataItem, { backgroundColor: "rgb(31, 36, 36)" }]
+                : [
+                    styles.dataItem,
+                    { backgroundColor: "rgba(55, 59, 59, 0.757)" },
+                  ]
+            }
           >
             <TouchableOpacity
               style={{
@@ -149,24 +156,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginHorizontal: 7,
   },
-  dataPar: {
+  dataItem: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 5,
     alignItems: "center",
     paddingVertical: 7,
-    backgroundColor: "rgb(31, 36, 36)",
-  },
-  dataImpar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 5,
-    alignItems: "center",
-    paddingVertical: 7,
-    tintColor: "blue",
-    backgroundColor: "rgba(55, 59, 59, 0.757)",
   },
   dataText: {
     fontSize: 17,
