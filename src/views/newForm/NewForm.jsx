@@ -35,6 +35,13 @@ const NewForm = () => {
     direccion: "",
     celular: "",
     cancelled: false,
+    // Datos del préstamo
+    capital: "",
+    cuotas: "",
+    tea: "",
+    fechaDesembolso: "",
+    fechaPrimeraCuota: "",
+    periodo: "",
     resultPrestamo: [],
   });
 
@@ -54,7 +61,6 @@ const NewForm = () => {
       });
     }
   }, [clean]);
-
   const handleDataKeep = async () => {
     // Validación
     setValuePrest(true);
@@ -74,13 +80,19 @@ const NewForm = () => {
             onPress: async () => {
               await onSaveCronograma({
                 uuid,
-                nombre: dataPerson.nombre,
-                apellido: dataPerson.apellido,
-                dni: dataPerson.dni,
-                correo: dataPerson.correo,
-                direccion: dataPerson.direccion,
-                celular: dataPerson.celular,
-                cancelled: dataPerson.cancelled,
+                nombre: dataPerson?.nombre,
+                apellido: dataPerson?.apellido,
+                dni: dataPerson?.dni,
+                correo: dataPerson?.correo,
+                direccion: dataPerson?.direccion,
+                celular: dataPerson?.celular,
+                cancelled: dataPerson?.cancelled,
+                capital: dataPerson?.capital,
+                cuotas: dataPerson?.cuotas,
+                tea: dataPerson?.tea,
+                fechaDesembolso: dataPerson?.fechaDesembolso,
+                fechaPrimeraCuota: dataPerson?.fechaPrimeraCuota,
+                periodo: dataPerson?.periodo,
                 resultPrestamo: dataPerson.resultPrestamo,
               });
 

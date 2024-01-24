@@ -44,6 +44,12 @@ const UseStorage = () => {
     direccion,
     celular,
     cancelled,
+    capital,
+    cuotas,
+    tea,
+    fechaDesembolso,
+    fechaPrimeraCuota,
+    periodo,
     resultPrestamo,
   }) => {
     try {
@@ -56,6 +62,12 @@ const UseStorage = () => {
         direccion,
         celular,
         cancelled,
+        capital,
+        cuotas,
+        tea,
+        fechaDesembolso,
+        fechaPrimeraCuota,
+        periodo,
         resultPrestamo,
       });
 

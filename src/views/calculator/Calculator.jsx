@@ -124,7 +124,16 @@ const Calculator = ({
     } else {
       const result = resutCronograma(data);
       dataPerson !== undefined
-        ? setDataPerson({ ...dataPerson, resultPrestamo: result })
+        ? setDataPerson({
+            ...dataPerson,
+            capital: prestamo?.capital,
+            cuotas: prestamo?.cuotas,
+            tea: prestamo?.tea,
+            fechaDesembolso: prestamo?.fechaDesembolso,
+            fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
+            periodo: prestamo?.periodo,
+            resultPrestamo: result,
+          })
         : setResultCuota(result);
       setEnabled(true);
     }

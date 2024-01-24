@@ -86,7 +86,7 @@ const Customer = ({ enable }) => {
   useEffect(() => {
     resultCustomer();
   }, [data]);
-  console.log(customer.customerCancelled);
+  //console.log(customer.customerRed);
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>

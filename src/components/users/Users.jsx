@@ -16,6 +16,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
 const Users = ({ data, color, enable }) => {
+  console.log(data);
   const navigation = useNavigation();
 
   // estilos dinamico del ícono de alerta
@@ -70,7 +71,9 @@ const Users = ({ data, color, enable }) => {
 
               {/* Fecha */}
               <Text style={styles.dataText}>
-                {enable ? "20/01/2024" : formatDate(datePay(element))}
+                {enable
+                  ? formatDate(element?.fechaDesembolso)
+                  : formatDate(datePay(element))}
               </Text>
 
               {/* Monto */}
@@ -82,7 +85,9 @@ const Users = ({ data, color, enable }) => {
                   paddingLeft: 10,
                 }}
               >
-                {element?.resultPrestamo[0]?.montoCuota}
+                {enable
+                  ? element?.capital
+                  : element?.resultPrestamo[0]?.montoCuota}
               </Text>
 
               {/* Icono de la alerta */}
