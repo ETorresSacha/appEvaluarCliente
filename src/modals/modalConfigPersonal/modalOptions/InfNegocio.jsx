@@ -22,7 +22,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
     direccion: "",
     celular: "",
   });
-  console.log(data);
+
   // Cargar los datos de la financiera
 
   const loadNegocio = async () => {

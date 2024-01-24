@@ -64,6 +64,7 @@ const Customer = ({ enable }) => {
   const resultCustomer = () => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
+    console.log(result);
 
     if (result?.resultCustomer) {
       SetCustomer({
@@ -72,7 +73,7 @@ const Customer = ({ enable }) => {
         customerYellow: result.resultCustomerYellow,
         customerRed: result.resultCustomerRed,
         customer: result.resultCustomer,
-        customerCancelled: result.resultCustomerCancelled,
+        customerCancelled: result?.resultCustomerCancelled,
         dataResult: result.resultDataResult,
       });
     }
@@ -87,7 +88,7 @@ const Customer = ({ enable }) => {
   useEffect(() => {
     resultCustomer();
   }, [data]);
-  console.log(customer.customerRed[0]?.resultPrestamo);
+  console.log(customer.customerCancelled);
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
@@ -140,7 +141,7 @@ const Customer = ({ enable }) => {
             <Users data={customer.customer} />
           </View>
         ) : (
-          <Users data={customer.customerCancelled} />
+          <Users data={customer?.customerCancelled} enable={enable} />
         )}
       </ScrollView>
     </View>
