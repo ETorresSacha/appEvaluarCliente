@@ -29,11 +29,6 @@ const Users = ({ data, color, enable }) => {
     setEstilos(estilosCopia);
   };
 
-  // Alerta
-  const handleAlert = () => {
-    navigation.navigate("Alerta");
-  };
-
   useEffect(() => {
     if (color) cambiarColor(color);
   }, [color]);
@@ -47,7 +42,11 @@ const Users = ({ data, color, enable }) => {
             style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
           >
             <TouchableOpacity
-              style={{ display: "flex", flexDirection: "row" }}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
               onPress={() =>
                 navigation.navigate("Detalle", {
                   id: element.uuid,
@@ -78,20 +77,11 @@ const Users = ({ data, color, enable }) => {
               >
                 {element?.resultPrestamo[0]?.montoCuota}
               </Text>
-            </TouchableOpacity>
-            <Pressable
-              style={{
-                width: 40,
-                color: "white",
-                fontSize: 40,
-              }}
-              onPress={enable ? handleAlert : null}
-            >
               <MaterialIcons
                 name="notifications"
                 style={color ? estilos : styles.iconAlertOff}
               />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         );
       })}
