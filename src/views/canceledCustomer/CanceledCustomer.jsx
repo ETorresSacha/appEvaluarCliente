@@ -59,7 +59,7 @@ const CanceledCustomer = () => {
   useEffect(() => {
     resultCanceledCustomer();
   }, [data]);
-  console.log(customer);
+  //console.log(customer);
   //! TENEMOS QUE SENTRAR EL TITULO
   return (
     <View style={styles.container}>

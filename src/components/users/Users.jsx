@@ -16,7 +16,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
 const Users = ({ data, color, enable }) => {
-  console.log(data);
+  //console.log(data);
   const navigation = useNavigation();
 
   // estilos dinamico del ícono de alerta
@@ -52,7 +52,9 @@ const Users = ({ data, color, enable }) => {
             <TouchableOpacity
               style={{
                 display: "flex",
+                flex: 1,
                 flexDirection: "row",
+                justifyContent: "space-evenly",
                 alignItems: "center",
               }}
               onPress={() =>
@@ -67,11 +69,9 @@ const Users = ({ data, color, enable }) => {
 
               {/* Nombre */}
               <Text
-                style={{
-                  width: 80,
-                  fontSize: 17,
-                  color: "cornsilk",
-                }}
+                style={
+                  enable ? styles.textMonto : [styles.textMonto, { width: 80 }]
+                }
               >
                 {`${element?.nombre?.split(" ")[0]}`}
               </Text>
@@ -85,12 +85,11 @@ const Users = ({ data, color, enable }) => {
 
               {/* Monto */}
               <Text
-                style={{
-                  fontSize: 17,
-                  color: "cornsilk",
-                  width: 80,
-                  paddingLeft: 10,
-                }}
+                style={
+                  enable
+                    ? styles.textMonto
+                    : [styles.textMonto, { width: 80, paddingLeft: 10 }]
+                }
               >
                 {enable
                   ? element?.capital
@@ -115,51 +114,11 @@ const Users = ({ data, color, enable }) => {
 export default Users;
 
 const styles = StyleSheet.create({
-  containerTitle: {
-    borderTopStartRadius: 10,
-    borderTopEndRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
-  },
-  titleText: {
-    width: 320,
-    display: "flex",
-    flexDirection: "row",
-    height: 50,
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 16,
-    width: 60,
-    justifyContent: "center",
-    alignItems: "center",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  titleAlert: {
-    justifyContent: "center",
-  },
-  texTitle: {
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 14,
-    color: "white",
-  },
-  containerCuotas: {
-    marginVertical: 10,
-    borderRadius: 15,
-    borderWidth: 1,
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    marginHorizontal: 7,
-  },
   dataItem: {
     display: "flex",
+    height: 55,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     paddingHorizontal: 5,
     alignItems: "center",
     paddingVertical: 7,
@@ -190,5 +149,11 @@ const styles = StyleSheet.create({
     color: "red",
     //color: "rgb(242, 238, 46)",
     fontSize: 40,
+  },
+  textMonto: {
+    fontSize: 17,
+    color: "cornsilk",
+    //paddingLeft: 10,
+    //backgroundColor: "red",
   },
 });

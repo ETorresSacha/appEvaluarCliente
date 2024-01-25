@@ -96,19 +96,23 @@ const Customer = ({ enable }) => {
         <View style={styles.containerTitle}>
           <View style={styles.titleText}>
             <TouchableOpacity
-              style={styles.title}
+              style={[styles.title, { width: 60 }]}
               onPress={() => handleSort("dni", order)}
             >
               <Text style={styles.texTitle}>DNI</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.title}
+              style={[styles.title, { width: 60 }]}
               onPress={() => handleSort("nombre", order)}
             >
               <Text style={styles.texTitle}>NOMBRE</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.title}
+              style={
+                !enable
+                  ? [styles.title, { width: 60 }]
+                  : [styles.title, { width: 100 }]
+              }
               onPress={() => handleSort("fecha", order)}
             >
               <Text style={styles.texTitle}>
@@ -116,7 +120,7 @@ const Customer = ({ enable }) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.title}
+              style={[styles.title, { width: 60 }]}
               onPress={() => handleSort("cuota", order)}
             >
               <Text style={styles.texTitle}>{!enable ? "CUOTA" : "MONTO"}</Text>
@@ -124,7 +128,7 @@ const Customer = ({ enable }) => {
           </View>
           {!enable ? (
             <View
-              style={styles.titleAlert}
+              style={[styles.title, { width: 60 }]}
               //onPress={() => handleSort("cuota", order)}
             >
               <Text style={styles.texTitle}>ALERTA</Text>
@@ -161,19 +165,20 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
   titleText: {
-    width: 320,
+    //width: 320,
     display: "flex",
+    flex: 1,
     flexDirection: "row",
     height: 50,
     justifyContent: "space-between",
   },
   title: {
     fontSize: 16,
-    width: 60,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
     fontWeight: "bold",
     textAlign: "center",
+    backgroundColor: "red",
   },
   titleAlert: {
     justifyContent: "center",
