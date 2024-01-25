@@ -16,8 +16,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
 const Users = ({ data, color, enable }) => {
-  console.log(enable);
-  //console.log(data);
   const navigation = useNavigation();
 
   // estilos dinamico del ícono de alerta
@@ -132,7 +130,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    //paddingHorizontal: 5,
   },
   dataText: {
     fontSize: 17,
