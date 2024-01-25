@@ -94,15 +94,29 @@ const Customer = ({ enable }) => {
       <NavBar data={data} setData={setData} enable={enable} />
       <ScrollView style={styles.containerCuotas}>
         <View style={styles.containerTitle}>
-          <View style={styles.titleText}>
+          <View
+            style={
+              !enable
+                ? [styles.titleText, { gap: 20 }]
+                : [styles.titleText, { justifyContent: "space-around" }]
+            }
+          >
             <TouchableOpacity
-              style={[styles.title, { width: 60 }]}
+              style={
+                !enable
+                  ? [styles.title, { marginLeft: 26 }]
+                  : [styles.title, { width: 90 }]
+              }
               onPress={() => handleSort("dni", order)}
             >
               <Text style={styles.texTitle}>DNI</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.title, { width: 60 }]}
+              style={
+                !enable
+                  ? [styles.title, { width: 60, marginLeft: 18 }]
+                  : [styles.title, { width: 60 }]
+              }
               onPress={() => handleSort("nombre", order)}
             >
               <Text style={styles.texTitle}>NOMBRE</Text>
@@ -110,7 +124,7 @@ const Customer = ({ enable }) => {
             <TouchableOpacity
               style={
                 !enable
-                  ? [styles.title, { width: 60 }]
+                  ? [styles.title, { width: 60, marginLeft: 25 }]
                   : [styles.title, { width: 100 }]
               }
               onPress={() => handleSort("fecha", order)}
@@ -120,20 +134,21 @@ const Customer = ({ enable }) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.title, { width: 60 }]}
+              style={[styles.title]}
               onPress={() => handleSort("cuota", order)}
             >
               <Text style={styles.texTitle}>{!enable ? "CUOTA" : "MONTO"}</Text>
             </TouchableOpacity>
+
+            {!enable ? (
+              <View
+                style={[styles.title, { marginRight: 50 }]}
+                //onPress={() => handleSort("cuota", order)}
+              >
+                <Text style={styles.texTitle}>ALERTA</Text>
+              </View>
+            ) : null}
           </View>
-          {!enable ? (
-            <View
-              style={[styles.title, { width: 60 }]}
-              //onPress={() => handleSort("cuota", order)}
-            >
-              <Text style={styles.texTitle}>ALERTA</Text>
-            </View>
-          ) : null}
         </View>
         {!enable ? (
           <View>
@@ -170,15 +185,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     height: 50,
-    justifyContent: "space-between",
+
+    //paddingLeft: 10,
   },
   title: {
     fontSize: 16,
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
     fontWeight: "bold",
     textAlign: "center",
-    backgroundColor: "red",
   },
   titleAlert: {
     justifyContent: "center",

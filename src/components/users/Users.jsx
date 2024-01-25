@@ -16,6 +16,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
 const Users = ({ data, color, enable }) => {
+  console.log(enable);
   //console.log(data);
   const navigation = useNavigation();
 
@@ -50,13 +51,7 @@ const Users = ({ data, color, enable }) => {
             }
           >
             <TouchableOpacity
-              style={{
-                display: "flex",
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-              }}
+              style={styles.touchItem}
               onPress={() =>
                 navigation.navigate("Detalle", {
                   id: element.uuid,
@@ -70,14 +65,22 @@ const Users = ({ data, color, enable }) => {
               {/* Nombre */}
               <Text
                 style={
-                  enable ? styles.textMonto : [styles.textMonto, { width: 80 }]
+                  enable
+                    ? [styles.textMonto, { marginRight: 20 }]
+                    : [styles.textMonto, { width: 80 }]
                 }
               >
                 {`${element?.nombre?.split(" ")[0]}`}
               </Text>
 
               {/* Fecha */}
-              <Text style={styles.dataText}>
+              <Text
+                style={
+                  enable
+                    ? [styles.dataText, { marginRight: 10 }]
+                    : [styles.dataText]
+                }
+              >
                 {enable
                   ? formatDate(element?.fechaDesembolso)
                   : formatDate(datePay(element))}
@@ -87,7 +90,7 @@ const Users = ({ data, color, enable }) => {
               <Text
                 style={
                   enable
-                    ? styles.textMonto
+                    ? [styles.textMonto, { marginRight: 10 }]
                     : [styles.textMonto, { width: 80, paddingLeft: 10 }]
                 }
               >
@@ -123,6 +126,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 7,
   },
+  touchItem: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    //paddingHorizontal: 5,
+  },
   dataText: {
     fontSize: 17,
     width: 90,
@@ -141,19 +152,15 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   Green: {
-    //color: "red",
     color: "rgb(66, 242, 46)",
     fontSize: 40,
   },
   iconAlertOnRed: {
     color: "red",
-    //color: "rgb(242, 238, 46)",
     fontSize: 40,
   },
   textMonto: {
     fontSize: 17,
     color: "cornsilk",
-    //paddingLeft: 10,
-    //backgroundColor: "red",
   },
 });
