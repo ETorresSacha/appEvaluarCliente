@@ -17,6 +17,7 @@ import Header from "../../components/header/Header";
 const Detail = (props) => {
   const color = props.route.params.typeColor;
   const id = props.route.params.id;
+  const enable = props.route.params.enable;
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
 
@@ -66,7 +67,10 @@ const Detail = (props) => {
         <Text>cargando</Text>
       ) : (
         <View>
-          <Header title={"Detalle"} back={"Clientes"} />
+          <Header
+            title={"Detalle"}
+            back={!enable ? "Clientes" : "Clientes cancelados"}
+          />
           <View style={styles.containerData}>
             <View style={styles.containerTitle}>
               <Text style={styles.title}>DATOS DEL CLIENTE</Text>
