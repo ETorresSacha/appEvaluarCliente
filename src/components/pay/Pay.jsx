@@ -13,7 +13,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 
 const Pay = ({ data }) => {
-  console.log(data);
+  //console.log(data);
   //console.log(data[0]?.resultPrestamo.length);
   //console.log(updatePrestamo);
   const { onUpdateStatusPay } = UseStorage();
@@ -165,9 +165,15 @@ const Pay = ({ data }) => {
                   Fecha de pago:
                 </Text>
                 <Text style={[styles.subTitle, { color: "orange" }]}>
-                  {dataSee?.fechaPago == undefined
+                  {/* {dataSee?.fechaPago == undefined
                     ? null
-                    : formatDate(dataSee?.fechaPago)}
+                    : formatDate(dataSee?.fechaPago)} */}
+
+                  {!cancelledShare
+                    ? dataSee?.fechaPago == undefined
+                      ? null
+                      : formatDate(dataSee?.fechaPago)
+                    : "-  -  -"}
                 </Text>
               </View>
               <View style={[styles.containerSubTitle, { gap: 15 }]}>
