@@ -13,9 +13,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 
 const Pay = ({ data }) => {
-  //console.log(data);
-  //console.log(data[0]?.resultPrestamo.length);
-  //console.log(updatePrestamo);
   const { onUpdateStatusPay } = UseStorage();
 
   const [indice, setIndice] = useState(0);
@@ -25,10 +22,6 @@ const Pay = ({ data }) => {
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
   const [payShare, setPayShere] = useState([]);
   const [enable, setEnable] = useState(false); // Boton de cancelar pago (ON OFF)
-
-  //console.log(dataSee);
-  //console.log(updatePrestamo);
-  //console.log(modify[0]?.cancelled);
 
   useEffect(() => {
     setModify(data);
@@ -63,6 +56,7 @@ const Pay = ({ data }) => {
 
   // Pagar cuota
   const handlePayShare = async () => {
+    console.log("pagar");
     let objeto = { ...dataSee, statusPay: true };
     updatePrestamo.splice(indice, 1, objeto);
 
@@ -77,7 +71,7 @@ const Pay = ({ data }) => {
       // Pago de la cuenta
       setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
-      let result = await onUpdateStatusPay(modify);
+      //let result = await onUpdateStatusPay(modify);
 
       setEnable(false); // Habilita el boton de cancelar el pagp
     } else {
@@ -101,11 +95,11 @@ const Pay = ({ data }) => {
     }
 
     //todo--->esto es lo que se modifico pero es para cambiar
-    if (modify[0]?.cancelled) {
-      let objeto = { ...payShare, statusPay: false };
+    // if (modify[0]?.cancelled) {
+    //   let objeto = { ...payShare, statusPay: false };
 
-      setIndice(updatePrestamo?.length - 1);
-    }
+    //   setIndice(updatePrestamo?.length - 1);
+    // }
     //todo------------------------------------------------
 
     if (indice > 0 && indice < updatePrestamo?.length) {

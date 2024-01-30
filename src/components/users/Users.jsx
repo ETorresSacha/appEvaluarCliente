@@ -16,6 +16,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { format } from "date-fns";
 
 const Users = ({ data, color, enable }) => {
+  // console.log(data[0].fechaDesembolso);
   const navigation = useNavigation();
 
   // estilos dinamico del ícono de alerta

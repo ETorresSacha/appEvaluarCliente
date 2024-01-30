@@ -112,6 +112,7 @@ const UseStorage = () => {
   //! UPDATE
   // UPDATE STATUS DEL PRESTAMO
   const handleUpdateStatusPay = async (data) => {
+    //console.log(data);
     try {
       const resultGet = await handleGetCronograma();
       let indice;
