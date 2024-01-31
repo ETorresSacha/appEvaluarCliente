@@ -13,17 +13,14 @@ import { Button, Icon, Input } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import InfNegocio from "./modalOptions/InfNegocio";
-import RecommendApp from "./modalOptions/RecommendApp";
 import Configuration from "./modalOptions/Configuration";
 
 const optionsData = ["Información Negocio", "Recomendar App", "Configuración"];
-const url =
-  "https://www.youtube.com/watch?v=FzxZtbpJ6P0&list=RDFzxZtbpJ6P0&index=1";
 
 const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
-  const navigation = useNavigation();
+  const url = "https://play.google.com/store/apps/details?id=com.pedidosya"; //! este link esta para cambiar, se cambiará cuando se suba a play store
+
   const [enablerNeg, setEnableNeg] = useState(false);
-  const [enablerRec, setEnableRec] = useState(false);
   const [enablerConf, setEnableConf] = useState(false);
 
   const options = (value) => {
@@ -45,7 +42,7 @@ const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
     try {
       const result = await Share.share({
         message:
-          "Hola! Te recomiendo esta app para administrar tus clientes, cobranza, notificaciones y mas" +
+          "Hola! Te recomiendo esta app para administrar tus clientes, cobranza, notificaciones y mas." +
           "\n" +
           "\n" +
           url,
@@ -93,7 +90,6 @@ const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
         setDataHome={setDataHome}
         setEnable={setEnable}
       />
-      <RecommendApp enablerRec={enablerRec} setEnableRec={setEnableRec} />
       <Configuration enablerConf={enablerConf} setEnableConf={setEnableConf} />
     </View>
   );
