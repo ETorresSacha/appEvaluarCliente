@@ -4,10 +4,35 @@ import {
   View,
   Modal,
   TouchableWithoutFeedback,
+  TouchableOpacity,
+  Share,
+  Button,
 } from "react-native";
 import React from "react";
 
 const RecommendApp = ({ enablerRec, setEnableRec }) => {
+  const url =
+    "https://www.youtube.com/watch?v=FzxZtbpJ6P0&list=RDFzxZtbpJ6P0&index=1";
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: "link como prueba para compartir: " + url,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log("share with activity type of: ", result.activityType);
+        } else {
+          console.log("share");
+        }
+      } else if (result.action == Share.dismissedAction) {
+        console.log("dismissed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Modal
       // style={styles.container}
@@ -18,7 +43,7 @@ const RecommendApp = ({ enablerRec, setEnableRec }) => {
       <TouchableWithoutFeedback onPress={() => setEnableRec(false)}>
         <View style={styles.modalOverlay} />
       </TouchableWithoutFeedback>
-      <View style={styles.modalContent}>
+      <TouchableOpacity style={styles.modalContent} onPress={onShare}>
         <Text
           style={{
             color: "black",
@@ -29,7 +54,9 @@ const RecommendApp = ({ enablerRec, setEnableRec }) => {
         >
           Recomendar app
         </Text>
-      </View>
+      </TouchableOpacity>
+
+      <Button title="share" onPress={onShare} />
     </Modal>
   );
 };

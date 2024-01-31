@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   Switch,
+  Share,
   Pressable,
   TouchableWithoutFeedback,
 } from "react-native";
@@ -16,6 +17,8 @@ import RecommendApp from "./modalOptions/RecommendApp";
 import Configuration from "./modalOptions/Configuration";
 
 const optionsData = ["Información Negocio", "Recomendar App", "Configuración"];
+const url =
+  "https://www.youtube.com/watch?v=FzxZtbpJ6P0&list=RDFzxZtbpJ6P0&index=1";
 
 const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
   const navigation = useNavigation();
@@ -29,12 +32,36 @@ const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
         setEnableNeg(true);
         break;
       case "Recomendar App":
-        setEnableRec(true);
+        onShare();
         break;
       case "Configuración":
         setEnableConf(true);
     }
     onClose();
+  };
+
+  // Recomendar app
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          "Hola! Te recomiendo esta app para administrar tus clientes, cobranza, notificaciones y mas" +
+          "\n" +
+          "\n" +
+          url,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log("shared with activity type of: ", result.activityType);
+        } else {
+        }
+      } else if (result.action == Share.dismissedAction) {
+        console.log("dismissed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
