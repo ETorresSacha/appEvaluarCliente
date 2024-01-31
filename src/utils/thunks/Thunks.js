@@ -22,33 +22,29 @@ export const orderData = (type,data,value,enable)=>{
                 result = data?.sort((a, b) => b.nombre.localeCompare(a.nombre));
               }
           break;
+          
           case 'fecha':
-            console.log("estoy aqui");
-            console.log(enable);
-            console.log(data);
-            // Ordena por fecha de desembolso, cuando es llamado desde el componente de "clientes cancelados"
 
+            // Ordena por fecha de desembolso, cuando es llamado desde el componente de "clientes cancelados"
             if (enable){
               if (value) {
                 result = data?.sort((a, b) => new Date(b.fechaDesembolso).getTime() - new Date(a.fechaDesembolso).getTime());
                  } else {
                   result = data?.sort((a, b) => new Date(a.fechaDesembolso).getTime() - new Date(b.fechaDesembolso).getTime());
                  }
-              console.log("estoy en ordenar clientes cancelados");
 
             }
-            else{
-              console.log("estoy en el componente de clientes");
 
+            // Ordenar por fecha de pago, cuando es llamado del componente de "clientes"
+            else{
               if (value) {
                 result = data?.sort((a, b) => new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                } else {
                 result = data?.sort((a, b) => new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                }
             }
-          
-
           break;
+
           case 'cuota':
             if (value) {
 
