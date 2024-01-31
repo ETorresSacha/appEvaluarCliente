@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import { formatDate } from "../../utils/thunks/Thunks";
 import Checkbox from "expo-checkbox";
+import Loading from "../loading/Loading";
 
 const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
@@ -15,7 +16,7 @@ const Cronograma = ({ data }) => {
   return (
     <View style={styles.containerContainer}>
       {updatePrestamo == undefined ? (
-        <Text>cargando</Text>
+        <Loading />
       ) : (
         <View>
           <ScrollView style={styles.containerCuotas}>

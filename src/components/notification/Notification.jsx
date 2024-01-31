@@ -46,7 +46,7 @@ const Notification = ({ data, color }) => {
     }
   }, [data]);
 
-  // Actualiza message
+  // Actualiza mensaje
   useEffect(() => {
     if (datePay != undefined) {
       const messagePredetermined = `Hola ${
@@ -110,6 +110,7 @@ export default Notification;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingVertical: 10,
   },
 
