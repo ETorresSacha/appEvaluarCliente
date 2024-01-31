@@ -23,6 +23,7 @@ const Pay = ({ data }) => {
   const [payShare, setPayShere] = useState([]);
   const [enable, setEnable] = useState(false); // Boton de cancelar pago (ON OFF)
 
+  console.log(modify);
   useEffect(() => {
     setModify(data);
     setUpdatePrestamo(data[0]?.resultPrestamo);
@@ -37,11 +38,11 @@ const Pay = ({ data }) => {
       setCancelledShare(false);
     }
     if (result == undefined) {
-      // setIndice(dataSee?.cuota == undefined ? null : dataSee?.cuota - 1);
+      setIndice(data[0]?.resultPrestamo.length);
       setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
       setCancelledShare(true);
     }
-  }, [data, indice, cancelledShare, dataSee]);
+  }, [data, indice, modify, cancelledShare, dataSee]);
 
   //console.log(updatePrestamo);
 
@@ -59,10 +60,10 @@ const Pay = ({ data }) => {
   }, [indice]);
   //console.log(modify);
   console.log(indice);
-  console.log(payShare);
+  //console.log(payShare);
   // // Pagar cuota
   const handlePayShare = async () => {
-    console.log("pagar");
+    //console.log("pagar");
     let objeto = { ...dataSee, statusPay: true };
     updatePrestamo.splice(indice, 1, objeto);
 
@@ -71,6 +72,7 @@ const Pay = ({ data }) => {
     //   uuid: data[0].uuid,
     //   resultPrestamo: updatePrestamo,
     // });
+
     if (
       indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
     ) {
@@ -87,6 +89,17 @@ const Pay = ({ data }) => {
         cancelled: true,
         resultPrestamo: updatePrestamo,
       };
+      // let newResult = {
+      //   ...modify[0],
+      //   uuid: data[0].uuid,
+      //   resultPrestamo: updatePrestamo,
+      // };
+      // setModify({
+      //   ...modify[0],
+      //   uuid: data[0].uuid,
+      //   resultPrestamo: updatePrestamo,
+      // });
+      modify.splice(0, 1, objeto);
 
       // setModify({
       //   ...modify[0],
@@ -109,11 +122,44 @@ const Pay = ({ data }) => {
     }
 
     //todo--->esto es lo que se modifico pero es para cambiar
-    // if (modify[0]?.cancelled) {
-    //   let objeto = { ...payShare, statusPay: false };
+    if (indice == data[0]?.resultPrestamo.length) {
+      console.log("deuda cancelada");
 
-    //   setIndice(updatePrestamo?.length - 1);
-    // }
+      let indiceCambiar = data[0]?.resultPrestamo.length - 1; //  seleccionamos el ultimo indice
+      console.log(indiceCambiar);
+      let result = data[0]?.resultPrestamo[indiceCambiar]; // buscamos el el resultado del prestamo, el ultimo indice
+      let objeto = { ...result, statusPay: false }; // modificamos el resultado con es statusPay a false
+      updatePrestamo.splice(indiceCambiar, 1, objeto); // modificamos el array del prestamo
+
+      let newResult = {
+        ...modify[0],
+        uuid: data[0].uuid,
+        cancelled: false,
+        resultPrestamo: updatePrestamo,
+      };
+
+      modify.splice(0, 1, newResult);
+
+      await onUpdateStatusPay(newResult);
+      setCancelledShare(false);
+
+      //console.log(modify);
+      // // en esta parte modificamos el "modify" con otros valores, con esto se debe de cancelar el pago
+      // setModify({
+      //   ...modify[0],
+      //   uuid: data[0].uuid,
+      //   cancelled: false,
+      //   resultPrestamo: updatePrestamo,
+      // });
+      // await onUpdateStatusPay(modify);
+      // setCancelledShare(true);
+      // let objeto = { ...dataSee, statusPay: false };
+
+      // setIndice(updatePrestamo?.length - 1);
+      // let objeto = { ...payShare, statusPay: false };
+
+      // setIndice(updatePrestamo?.length - 1);
+    }
     //todo------------------------------------------------
 
     if (indice > 0 && indice < updatePrestamo?.length) {
