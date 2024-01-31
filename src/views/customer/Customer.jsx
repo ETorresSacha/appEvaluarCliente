@@ -56,6 +56,7 @@ const Customer = ({ enable }) => {
     let dataFilter = !enable
       ? customer?.dataResult
       : customer?.customerCancelled;
+
     let result = orderData(type, dataFilter, value);
     setData({ ...data, dataResult: result });
     setOrder(!value);
