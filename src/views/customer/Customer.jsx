@@ -185,13 +185,10 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
   titleText: {
-    //width: 320,
     display: "flex",
     flex: 1,
     flexDirection: "row",
     height: 50,
-
-    //paddingLeft: 10,
   },
   title: {
     fontSize: 16,
@@ -254,6 +251,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//! falta  LA ALERTA DE PAGO
 //! puede dar la posibilidad de que se resuma el codigo uniendo es SetCustomer y setData
-// CUANDO ENTRA A ESTE COMPONENTE LA FECHA SALE ERROR, TENEMOS QUE CORREGIR ESO

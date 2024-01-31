@@ -1,22 +1,10 @@
-import {
-  View,
-  StyleSheet,
-  Text,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import {
-  datePay,
-  fechaPagoAtomatico,
-  formatDate,
-} from "../../utils/thunks/Thunks";
+import { useNavigation } from "@react-navigation/native";
+import { datePay, formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { format } from "date-fns";
 
 const Users = ({ data, color, enable }) => {
-  // console.log(data[0].fechaDesembolso);
   const navigation = useNavigation();
 
   // estilos dinamico del ícono de alerta
