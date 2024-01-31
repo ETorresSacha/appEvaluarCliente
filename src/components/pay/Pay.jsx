@@ -58,26 +58,17 @@ const Pay = ({ data }) => {
       setEnable(false);
     }
   }, [indice]);
-  //console.log(modify);
-  console.log(indice);
-  //console.log(payShare);
-  // // Pagar cuota
+
+  //  Pagar cuota
   const handlePayShare = async () => {
-    //console.log("pagar");
     let objeto = { ...dataSee, statusPay: true };
     updatePrestamo.splice(indice, 1, objeto);
-
-    // setModify({
-    //   ...modify[0],
-    //   uuid: data[0].uuid,
-    //   resultPrestamo: updatePrestamo,
-    // });
 
     if (
       indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
     ) {
       // Pago de la cuenta
-      //setDataSee({ ...dataSee, statusPay: true });
+
       setIndice(indice + 1);
       await onUpdateStatusPay(modify);
       setEnable(false); // Habilita el boton de cancelar el pago
@@ -89,32 +80,13 @@ const Pay = ({ data }) => {
         cancelled: true,
         resultPrestamo: updatePrestamo,
       };
-      // let newResult = {
-      //   ...modify[0],
-      //   uuid: data[0].uuid,
-      //   resultPrestamo: updatePrestamo,
-      // };
-      // setModify({
-      //   ...modify[0],
-      //   uuid: data[0].uuid,
-      //   resultPrestamo: updatePrestamo,
-      // });
       modify.splice(0, 1, objeto);
 
-      // setModify({
-      //   ...modify[0],
-      //   uuid: data[0].uuid,
-      //   cancelled: true,
-      //   resultPrestamo: updatePrestamo,
-      // });
       await onUpdateStatusPay(objeto);
       setCancelledShare(true);
     }
   };
-  // //console.log(modify);
-  // console.log(dataSee);
-  // //console.log(indice);
-  // // Cancelar el pago de la cuota
+
   const HandleCancelPay = async () => {
     //! TENEMOS QUE ADICIONAR, QUE PASA CUANDO SE PAGA TODA LA DEUDA
     if (indice == 0) {
@@ -123,10 +95,8 @@ const Pay = ({ data }) => {
 
     //todo--->esto es lo que se modifico pero es para cambiar
     if (indice == data[0]?.resultPrestamo.length) {
-      console.log("deuda cancelada");
-
       let indiceCambiar = data[0]?.resultPrestamo.length - 1; //  seleccionamos el ultimo indice
-      console.log(indiceCambiar);
+
       let result = data[0]?.resultPrestamo[indiceCambiar]; // buscamos el el resultado del prestamo, el ultimo indice
       let objeto = { ...result, statusPay: false }; // modificamos el resultado con es statusPay a false
       updatePrestamo.splice(indiceCambiar, 1, objeto); // modificamos el array del prestamo
@@ -142,23 +112,6 @@ const Pay = ({ data }) => {
 
       await onUpdateStatusPay(newResult);
       setCancelledShare(false);
-
-      //console.log(modify);
-      // // en esta parte modificamos el "modify" con otros valores, con esto se debe de cancelar el pago
-      // setModify({
-      //   ...modify[0],
-      //   uuid: data[0].uuid,
-      //   cancelled: false,
-      //   resultPrestamo: updatePrestamo,
-      // });
-      // await onUpdateStatusPay(modify);
-      // setCancelledShare(true);
-      // let objeto = { ...dataSee, statusPay: false };
-
-      // setIndice(updatePrestamo?.length - 1);
-      // let objeto = { ...payShare, statusPay: false };
-
-      // setIndice(updatePrestamo?.length - 1);
     }
     //todo------------------------------------------------
 
@@ -166,12 +119,6 @@ const Pay = ({ data }) => {
       let objeto = { ...payShare, statusPay: false };
 
       updatePrestamo.splice(indice - 1, 1, objeto);
-
-      // setModify({
-      //   ...modify[0],
-      //   uuid: data[0].uuid,
-      //   resultPrestamo: updatePrestamo,
-      // });
       await onUpdateStatusPay(modify);
       setIndice(indice - 1);
     }
@@ -187,7 +134,7 @@ const Pay = ({ data }) => {
             <TouchableOpacity
               style={styles.cancelPago}
               onPress={HandleCancelPay}
-              //disabled={enable}
+              disabled={enable}
             >
               <MaterialIcons
                 name="settings-backup-restore"
@@ -289,6 +236,7 @@ const Pay = ({ data }) => {
                 : [styles.buttonContainer, { borderColor: "white", width: 300 }]
             }
             onPress={!cancelledShare ? handlePayShare : null}
+            disabled={cancelledShare}
           >
             {!cancelledShare ? (
               <FontAwesome
@@ -300,8 +248,8 @@ const Pay = ({ data }) => {
               {!cancelledShare ? "Pagar" : "Deuda Cancelado"}
             </Text>
           </TouchableOpacity>
-
-          {/* <Pressable
+          {/* 
+          <Pressable
             style={
               !cancelledShare
                 ? [
