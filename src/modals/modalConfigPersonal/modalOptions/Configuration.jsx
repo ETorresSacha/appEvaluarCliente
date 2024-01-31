@@ -8,6 +8,7 @@ import {
 import React from "react";
 
 const Configuration = ({ enablerConf, setEnableConf }) => {
+  //! FALTA DARLE ESTILOS Y MEJORAR ESTE MODAL (CAMBIAR DE NOMBRE DEL MODAL, "ACERCA DE")
   return (
     <Modal
       // style={styles.container}
@@ -27,8 +28,17 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
             fontWeight: "bold",
           }}
         >
-          Configuracion
+          ACERCA DE LA APP
         </Text>
+        <Text>
+          Esta app te ayuda a llevar una buena administración de tus clientes,
+          los cobros, las moras entre otros.
+        </Text>
+
+        <Text>Nombre: App Evaluar</Text>
+        <Text>Versión: 1.0.0</Text>
+        <Text>Creador: TorreDev</Text>
+        <Text>contacto: +51-964626322</Text>
       </View>
     </Modal>
   );
