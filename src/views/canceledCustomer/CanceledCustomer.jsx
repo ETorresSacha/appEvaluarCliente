@@ -59,8 +59,8 @@ const CanceledCustomer = () => {
   useEffect(() => {
     resultCanceledCustomer();
   }, [data]);
-  //console.log(customer);
-  //! TENEMOS QUE SENTRAR EL TITULO
+
+  //! CORREGIR LOS FILTROS DEL COMPONENTE CLIENTES CANCELADOS
   return (
     <View style={styles.container}>
       <Customer enable={enable} />

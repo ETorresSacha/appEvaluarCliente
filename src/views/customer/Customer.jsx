@@ -37,7 +37,7 @@ const Customer = ({ enable }) => {
     dataResult: [],
   });
 
-  // Trae los datos del local storage
+  // Traer los datos del local storage
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
@@ -53,7 +53,10 @@ const Customer = ({ enable }) => {
 
   // Ordenar
   const handleSort = (type, value) => {
-    let result = orderData(type, customer.dataResult, value);
+    let dataFilter = !enable
+      ? customer?.dataResult
+      : customer?.customerCancelled;
+    let result = orderData(type, dataFilter, value);
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
@@ -86,7 +89,7 @@ const Customer = ({ enable }) => {
   useEffect(() => {
     resultCustomer();
   }, [data]);
-  //console.log(customer.customerRed);
+
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
