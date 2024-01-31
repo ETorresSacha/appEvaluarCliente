@@ -37,12 +37,16 @@ const Pay = ({ data }) => {
       setCancelledShare(false);
     }
     if (result == undefined) {
+      // setIndice(dataSee?.cuota == undefined ? null : dataSee?.cuota - 1);
       setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
       setCancelledShare(true);
     }
-  }, [data, indice, cancelledShare, payShare, dataSee]);
+  }, [data, indice, cancelledShare, dataSee]);
+
+  //console.log(updatePrestamo);
 
   useEffect(() => {
+    // Buscamos la última cuota pagado
     let cuotaCancelada = data[0]?.resultPrestamo[indice - 1];
     setPayShere(cuotaCancelada);
 
@@ -53,27 +57,28 @@ const Pay = ({ data }) => {
       setEnable(false);
     }
   }, [indice]);
-
-  // Pagar cuota
+  //console.log(modify);
+  console.log(indice);
+  console.log(payShare);
+  // // Pagar cuota
   const handlePayShare = async () => {
     console.log("pagar");
     let objeto = { ...dataSee, statusPay: true };
     updatePrestamo.splice(indice, 1, objeto);
 
-    setModify({
-      ...modify[0],
-      uuid: data[0].uuid,
-      resultPrestamo: updatePrestamo,
-    });
+    // setModify({
+    //   ...modify[0],
+    //   uuid: data[0].uuid,
+    //   resultPrestamo: updatePrestamo,
+    // });
     if (
       indice < (updatePrestamo == undefined ? null : updatePrestamo.length - 1)
     ) {
       // Pago de la cuenta
-      setDataSee({ ...dataSee, statusPay: true });
+      //setDataSee({ ...dataSee, statusPay: true });
       setIndice(indice + 1);
-      //let result = await onUpdateStatusPay(modify);
-
-      setEnable(false); // Habilita el boton de cancelar el pagp
+      await onUpdateStatusPay(modify);
+      setEnable(false); // Habilita el boton de cancelar el pago
     } else {
       // Cancelación de la deuda
       let objeto = {
@@ -82,12 +87,21 @@ const Pay = ({ data }) => {
         cancelled: true,
         resultPrestamo: updatePrestamo,
       };
+
+      // setModify({
+      //   ...modify[0],
+      //   uuid: data[0].uuid,
+      //   cancelled: true,
+      //   resultPrestamo: updatePrestamo,
+      // });
       await onUpdateStatusPay(objeto);
       setCancelledShare(true);
     }
   };
-  //console.log(indice);
-  // Cancelar el pago de la cuota
+  // //console.log(modify);
+  // console.log(dataSee);
+  // //console.log(indice);
+  // // Cancelar el pago de la cuota
   const HandleCancelPay = async () => {
     //! TENEMOS QUE ADICIONAR, QUE PASA CUANDO SE PAGA TODA LA DEUDA
     if (indice == 0) {
@@ -107,11 +121,11 @@ const Pay = ({ data }) => {
 
       updatePrestamo.splice(indice - 1, 1, objeto);
 
-      setModify({
-        ...modify[0],
-        uuid: data[0].uuid,
-        resultPrestamo: updatePrestamo,
-      });
+      // setModify({
+      //   ...modify[0],
+      //   uuid: data[0].uuid,
+      //   resultPrestamo: updatePrestamo,
+      // });
       await onUpdateStatusPay(modify);
       setIndice(indice - 1);
     }
@@ -127,7 +141,7 @@ const Pay = ({ data }) => {
             <TouchableOpacity
               style={styles.cancelPago}
               onPress={HandleCancelPay}
-              disabled={enable}
+              //disabled={enable}
             >
               <MaterialIcons
                 name="settings-backup-restore"
