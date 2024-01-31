@@ -1,7 +1,7 @@
 import { compareAsc, format,add,formatDistance, getDate,isFuture,isEqual,differenceInDays} from 'date-fns'
 //TODO--> ORDENAR
 
-export const orderData = (type,data,value)=>{
+export const orderData = (type,data,value,enable)=>{
     let result
     switch (type) {
         case 'dni':
@@ -24,11 +24,30 @@ export const orderData = (type,data,value)=>{
           break;
           case 'fecha':
             console.log("estoy aqui");
-            if (value) {
-              result = data?.sort((a, b) => new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
+            console.log(enable);
+            console.log(data);
+            // Ordena por fecha de desembolso, cuando es llamado desde el componente de "clientes cancelados"
+
+            if (enable){
+              if (value) {
+                result = data?.sort((a, b) => new Date(b.fechaDesembolso).getTime() - new Date(a.fechaDesembolso).getTime());
+                 } else {
+                  result = data?.sort((a, b) => new Date(a.fechaDesembolso).getTime() - new Date(b.fechaDesembolso).getTime());
+                 }
+              console.log("estoy en ordenar clientes cancelados");
+
+            }
+            else{
+              console.log("estoy en el componente de clientes");
+
+              if (value) {
+                result = data?.sort((a, b) => new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                } else {
                 result = data?.sort((a, b) => new Date(a.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime() - new Date(b.resultPrestamo.find(element=>element.statusPay== false)?.fechaPago).getTime());
                }
+            }
+          
+
           break;
           case 'cuota':
             if (value) {

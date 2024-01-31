@@ -51,13 +51,14 @@ const Customer = ({ enable }) => {
     }
   };
 
+  //console.log(enable);
   // Ordenar
   const handleSort = (type, value) => {
     let dataFilter = !enable
       ? customer?.dataResult
       : customer?.customerCancelled;
 
-    let result = orderData(type, dataFilter, value);
+    let result = orderData(type, dataFilter, value, enable);
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
@@ -111,7 +112,7 @@ const Customer = ({ enable }) => {
                   ? [styles.title, { marginLeft: 26 }]
                   : [styles.title, { width: 90 }]
               }
-              onPress={() => handleSort("dni", order)}
+              onPress={() => handleSort("dni", order, enable)}
             >
               <Text style={styles.texTitle}>DNI</Text>
             </TouchableOpacity>
