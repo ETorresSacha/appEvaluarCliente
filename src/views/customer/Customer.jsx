@@ -51,9 +51,9 @@ const Customer = ({ enable }) => {
     }
   };
 
-  //console.log(enable);
   // Ordenar
   const handleSort = (type, value) => {
+    // dataFilter toma los valores dependiendo de que componente es llamado la función, "clientes" o "clientes cancelados"
     let dataFilter = !enable
       ? customer?.dataResult
       : customer?.customerCancelled;
