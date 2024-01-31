@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import Pay from "../../components/pay/Pay";
 import Notification from "../../components/notification/Notification";
 import Header from "../../components/header/Header";
+import Loading from "../../components/loading/Loading";
 
 const Detail = (props) => {
   const color = props.route.params.typeColor;
@@ -62,69 +63,132 @@ const Detail = (props) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      {user == undefined ? (
-        <Text>cargando</Text>
+    <View style={styles.container}>
+      {user.length == 0 ? (
+        <Loading />
       ) : (
-        <View>
-          <Header
-            title={"Detalle"}
-            back={!enable ? "Clientes" : "Clientes cancelados"}
-          />
-          <View style={styles.containerData}>
-            <View style={styles.containerTitle}>
-              <Text style={styles.title}>DATOS DEL CLIENTE</Text>
-              <View style={styles.iconos}>
-                <TouchableOpacity style={styles.icon}>
-                  <Icon name="edit" size={30} color="cornsilk" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.icon}
-                  onPress={() => alertDelete(id)}
-                >
-                  <Icon name="delete" size={30} color="cornsilk" />
-                </TouchableOpacity>
+        <ScrollView style={styles.container}>
+          <View>
+            <Header
+              title={"Detalle"}
+              back={!enable ? "Clientes" : "Clientes cancelados"}
+            />
+            <View style={styles.containerData}>
+              <View style={styles.containerTitle}>
+                <Text style={styles.title}>DATOS DEL CLIENTE</Text>
+                <View style={styles.iconos}>
+                  <TouchableOpacity style={styles.icon}>
+                    <Icon name="edit" size={30} color="cornsilk" />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.icon}
+                    onPress={() => alertDelete(id)}
+                  >
+                    <Icon name="delete" size={30} color="cornsilk" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.Data}>
+                <View style={styles.item}>
+                  <Text style={styles.itemTitle}>Nombres: </Text>
+                  <Text style={styles.itemText}>{user[0]?.nombre}</Text>
+                </View>
+                <View style={styles.item}>
+                  <Text style={styles.itemTitle}>Apellidos: </Text>
+                  <Text style={styles.itemText}>{user[0]?.apellido}</Text>
+                </View>
+                <View style={styles.item}>
+                  <Text style={styles.itemTitle}>DNI: </Text>
+                  <Text style={styles.itemText}>{user[0]?.dni}</Text>
+                </View>
+                <View style={styles.item}>
+                  <Text style={styles.itemTitle}>Celular: </Text>
+                  <Text style={styles.itemText}>{user[0]?.celular}</Text>
+                </View>
+                <View style={styles.item}>
+                  <Text style={styles.itemTitle}>Correo: </Text>
+                  <Text style={styles.itemText}>{user[0]?.correo}</Text>
+                </View>
               </View>
             </View>
-            <View style={styles.Data}>
-              <View style={styles.item}>
-                <Text style={styles.itemTitle}>Nombres: </Text>
-                <Text style={styles.itemText}>{user[0]?.nombre}</Text>
-              </View>
-              <View style={styles.item}>
-                <Text style={styles.itemTitle}>Apellidos: </Text>
-                <Text style={styles.itemText}>{user[0]?.apellido}</Text>
-              </View>
-              <View style={styles.item}>
-                <Text style={styles.itemTitle}>DNI: </Text>
-                <Text style={styles.itemText}>{user[0]?.dni}</Text>
-              </View>
-              <View style={styles.item}>
-                <Text style={styles.itemTitle}>Celular: </Text>
-                <Text style={styles.itemText}>{user[0]?.celular}</Text>
-              </View>
-              <View style={styles.item}>
-                <Text style={styles.itemTitle}>Correo: </Text>
-                <Text style={styles.itemText}>{user[0]?.correo}</Text>
-              </View>
-            </View>
+            <Pay data={user} />
+
+            <Notification data={user} color={color} />
+            <TouchableOpacity
+              style={styles.verCronograma}
+              onPress={() =>
+                navigation.navigate("Cronograma", {
+                  data: user[0].resultPrestamo,
+                  id: id,
+                })
+              }
+            >
+              <Text style={styles.subTitle}> Ver conograma</Text>
+            </TouchableOpacity>
           </View>
-          <Pay data={user} />
-          <Notification data={user} color={color} />
-          <TouchableOpacity
-            style={styles.verCronograma}
-            onPress={() =>
-              navigation.navigate("Cronograma", {
-                data: user[0].resultPrestamo,
-                id: id,
-              })
-            }
-          >
-            <Text style={styles.subTitle}> Ver conograma</Text>
-          </TouchableOpacity>
-        </View>
+        </ScrollView>
       )}
-    </ScrollView>
+    </View>
+    // <ScrollView style={styles.container}>
+    //   <View>
+    //     <Header
+    //       title={"Detalle"}
+    //       back={!enable ? "Clientes" : "Clientes cancelados"}
+    //     />
+    //     <View style={styles.containerData}>
+    //       <View style={styles.containerTitle}>
+    //         <Text style={styles.title}>DATOS DEL CLIENTE</Text>
+    //         <View style={styles.iconos}>
+    //           <TouchableOpacity style={styles.icon}>
+    //             <Icon name="edit" size={30} color="cornsilk" />
+    //           </TouchableOpacity>
+    //           <TouchableOpacity
+    //             style={styles.icon}
+    //             onPress={() => alertDelete(id)}
+    //           >
+    //             <Icon name="delete" size={30} color="cornsilk" />
+    //           </TouchableOpacity>
+    //         </View>
+    //       </View>
+    //       <View style={styles.Data}>
+    //         <View style={styles.item}>
+    //           <Text style={styles.itemTitle}>Nombres: </Text>
+    //           <Text style={styles.itemText}>{user[0]?.nombre}</Text>
+    //         </View>
+    //         <View style={styles.item}>
+    //           <Text style={styles.itemTitle}>Apellidos: </Text>
+    //           <Text style={styles.itemText}>{user[0]?.apellido}</Text>
+    //         </View>
+    //         <View style={styles.item}>
+    //           <Text style={styles.itemTitle}>DNI: </Text>
+    //           <Text style={styles.itemText}>{user[0]?.dni}</Text>
+    //         </View>
+    //         <View style={styles.item}>
+    //           <Text style={styles.itemTitle}>Celular: </Text>
+    //           <Text style={styles.itemText}>{user[0]?.celular}</Text>
+    //         </View>
+    //         <View style={styles.item}>
+    //           <Text style={styles.itemTitle}>Correo: </Text>
+    //           <Text style={styles.itemText}>{user[0]?.correo}</Text>
+    //         </View>
+    //       </View>
+    //     </View>
+    //     <Pay data={user} setCompleteLoading={setCompleteLoading} />
+
+    //     <Notification data={user} color={color} />
+    //     <TouchableOpacity
+    //       style={styles.verCronograma}
+    //       onPress={() =>
+    //         navigation.navigate("Cronograma", {
+    //           data: user[0].resultPrestamo,
+    //           id: id,
+    //         })
+    //       }
+    //     >
+    //       <Text style={styles.subTitle}> Ver conograma</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    // </ScrollView>
   );
 };
 

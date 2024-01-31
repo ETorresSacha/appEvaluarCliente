@@ -16,6 +16,7 @@ import { format, add } from "date-fns";
 
 import Users from "../../components/users/Users";
 import Header from "../../components/header/Header";
+import Loading from "../../components/loading/Loading";
 
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
@@ -97,75 +98,81 @@ const Customer = ({ enable }) => {
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
       <Header title={!enable ? "Clientes" : "Clientes cancelados"} />
       <NavBar data={data} setData={setData} enable={enable} />
-      <ScrollView style={styles.containerCuotas}>
-        <View style={styles.containerTitle}>
-          <View
-            style={
-              !enable
-                ? [styles.titleText, { gap: 20 }]
-                : [styles.titleText, { justifyContent: "space-around" }]
-            }
-          >
-            <TouchableOpacity
+      {data.dataResult.length == 0 ? (
+        <Loading />
+      ) : (
+        <ScrollView style={styles.containerCuotas}>
+          <View style={styles.containerTitle}>
+            <View
               style={
                 !enable
-                  ? [styles.title, { marginLeft: 26 }]
-                  : [styles.title, { width: 90 }]
+                  ? [styles.titleText, { gap: 20 }]
+                  : [styles.titleText, { justifyContent: "space-around" }]
               }
-              onPress={() => handleSort("dni", order, enable)}
             >
-              <Text style={styles.texTitle}>DNI</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={
-                !enable
-                  ? [styles.title, { width: 60, marginLeft: 18 }]
-                  : [styles.title, { width: 60 }]
-              }
-              onPress={() => handleSort("nombre", order)}
-            >
-              <Text style={styles.texTitle}>NOMBRE</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={
-                !enable
-                  ? [styles.title, { width: 60, marginLeft: 25 }]
-                  : [styles.title, { width: 100 }]
-              }
-              onPress={() => handleSort("fecha", order)}
-            >
-              <Text style={styles.texTitle}>
-                {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.title]}
-              onPress={() => handleSort("cuota", order)}
-            >
-              <Text style={styles.texTitle}>{!enable ? "CUOTA" : "MONTO"}</Text>
-            </TouchableOpacity>
-
-            {!enable ? (
-              <View
-                style={[styles.title, { marginRight: 50 }]}
-                //onPress={() => handleSort("cuota", order)}
+              <TouchableOpacity
+                style={
+                  !enable
+                    ? [styles.title, { marginLeft: 26 }]
+                    : [styles.title, { width: 90 }]
+                }
+                onPress={() => handleSort("dni", order, enable)}
               >
-                <Text style={styles.texTitle}>ALERTA</Text>
-              </View>
-            ) : null}
+                <Text style={styles.texTitle}>DNI</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={
+                  !enable
+                    ? [styles.title, { width: 60, marginLeft: 18 }]
+                    : [styles.title, { width: 60 }]
+                }
+                onPress={() => handleSort("nombre", order)}
+              >
+                <Text style={styles.texTitle}>NOMBRE</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={
+                  !enable
+                    ? [styles.title, { width: 60, marginLeft: 25 }]
+                    : [styles.title, { width: 100 }]
+                }
+                onPress={() => handleSort("fecha", order)}
+              >
+                <Text style={styles.texTitle}>
+                  {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.title]}
+                onPress={() => handleSort("cuota", order)}
+              >
+                <Text style={styles.texTitle}>
+                  {!enable ? "CUOTA" : "MONTO"}
+                </Text>
+              </TouchableOpacity>
+
+              {!enable ? (
+                <View
+                  style={[styles.title, { marginRight: 50 }]}
+                  //onPress={() => handleSort("cuota", order)}
+                >
+                  <Text style={styles.texTitle}>ALERTA</Text>
+                </View>
+              ) : null}
+            </View>
           </View>
-        </View>
-        {!enable ? (
-          <View>
-            <Users data={customer.customerRed} color={"red"} />
-            <Users data={customer.customerYellow} color={"yellow"} />
-            <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-            <Users data={customer.customer} />
-          </View>
-        ) : (
-          <Users data={customer?.customerCancelled} enable={enable} />
-        )}
-      </ScrollView>
+          {!enable ? (
+            <View>
+              <Users data={customer.customerRed} color={"red"} />
+              <Users data={customer.customerYellow} color={"yellow"} />
+              <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
+              <Users data={customer.customer} />
+            </View>
+          ) : (
+            <Users data={customer?.customerCancelled} enable={enable} />
+          )}
+        </ScrollView>
+      )}
     </View>
   );
 };

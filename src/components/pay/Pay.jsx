@@ -4,6 +4,7 @@ import UseStorage from "../hooks/UseHookStorage";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
+import Loading from "../loading/Loading";
 
 const Pay = ({ data }) => {
   const { onUpdateStatusPay } = UseStorage();
@@ -113,7 +114,7 @@ const Pay = ({ data }) => {
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
-        <Text>cargando</Text>
+        <Loading />
       ) : (
         <View>
           <View style={styles.pagosTitle}>
@@ -144,7 +145,7 @@ const Pay = ({ data }) => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-around",
+                justifyContent: "space-evenly",
                 paddingBottom: 15,
               }}
             >
@@ -152,7 +153,9 @@ const Pay = ({ data }) => {
                 <Text style={[styles.subTitle, { color: "cornsilk" }]}>
                   Fecha de pago:
                 </Text>
-                <Text style={[styles.subTitle, { color: "orange" }]}>
+                <Text
+                  style={[styles.subTitle, { width: 100, color: "orange" }]}
+                >
                   {!cancelledShare
                     ? dataSee?.fechaPago == undefined
                       ? null
@@ -160,7 +163,12 @@ const Pay = ({ data }) => {
                     : "-  -  -"}
                 </Text>
               </View>
-              <View style={[styles.containerSubTitle, { gap: 15 }]}>
+              <View
+                style={[
+                  styles.containerSubTitle,
+                  { gap: 15, justifyContent: "space-around", width: 130 },
+                ]}
+              >
                 <Text style={[styles.subTitle, { color: "cornsilk" }]}>
                   Cuota:
                 </Text>
@@ -264,6 +272,7 @@ const styles = StyleSheet.create({
   },
   pagosDetalle: {
     marginVertical: 15,
+    justifyContent: "space-around",
   },
 
   subTitle: {
@@ -282,7 +291,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     height: 40,
-    //width: 300,
     marginLeft: 55,
     justifyContent: "center",
     borderRadius: 10,
