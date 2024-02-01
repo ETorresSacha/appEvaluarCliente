@@ -8,10 +8,9 @@ import {
 import React from "react";
 
 const Configuration = ({ enablerConf, setEnableConf }) => {
-  //! FALTA DARLE ESTILOS Y MEJORAR ESTE MODAL (CAMBIAR DE NOMBRE DEL MODAL, "ACERCA DE")
   return (
     <Modal
-      // style={styles.container}
+      style={styles.container}
       transparent={true}
       visible={enablerConf}
       onRequestClose={() => setEnableConf(false)}
@@ -30,15 +29,15 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
         >
           ACERCA DE LA APP
         </Text>
-        <Text>
+        <Text style={{ paddingBottom: 10 }}>
           Esta app te ayuda a llevar una buena administración de tus clientes,
-          los cobros, las moras entre otros.
+          los cobros entre otros.
         </Text>
 
         <Text>Nombre: App Evaluar</Text>
         <Text>Versión: 1.0.0</Text>
         <Text>Creador: TorreDev</Text>
-        <Text>contacto: +51-964626322</Text>
+        <Text>Contacto: +51 - 964626322</Text>
       </View>
     </Modal>
   );
@@ -64,51 +63,6 @@ const styles = StyleSheet.create({
     right: "10%",
     borderRadius: 15,
     borderWidth: 1,
-    paddingVertical: 10,
-  },
-
-  containerText: {
-    marginTop: 10,
-    //gap: 5,
-  },
-  titleText: {
-    paddingLeft: 20,
-    fontSize: 18,
-    color: "black",
-  },
-  text: {
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 15,
-    borderColor: "grey",
-    padding: 2,
-    marginVertical: 5,
-    marginHorizontal: 25,
-    paddingLeft: 10,
-    fontSize: 16,
-    color: "black",
-  },
-  buttonContainer: {
-    marginVertical: 30,
-    alignItems: "center",
-    width: 250,
-    height: 40,
-    marginLeft: 40,
-    justifyContent: "center",
-    borderRadius: 10,
-    elevation: 3,
-    backgroundColor: "#4ecb71",
-  },
-  textGuardar: {
-    fontSize: 20,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "white",
-  },
-  containerConfiguration: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+    padding: 10,
   },
 });
