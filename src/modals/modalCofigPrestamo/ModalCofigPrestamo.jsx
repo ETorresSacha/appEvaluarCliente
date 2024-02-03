@@ -1,78 +1,48 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TextInput,
+  Switch,
+  Pressable,
+  TouchableWithoutFeedback,
+} from "react-native";
+import { Button, Icon, Input } from "@rneui/themed";
 import React from "react";
 
-const ModalCofigPrestamo = (onClose, visible) => {
+const ModalCofigPrestamo = ({ setIsVisible, isVisible }) => {
+  console.log(isVisible);
   return (
     <Modal
-      visible={visible}
-      onRequestClose={() => onClose()}
-      transparent
-      animationType="slide"
+      style={styles.container}
+      transparent={true}
+      visible={isVisible}
+      onRequestClose={() => setIsVisible(false)}
     >
-      <View style={styles.conteiner}>
-        <View style={styles.content}>
-          <View style={styles.closeContainer}>
-            <Text style={{ fontSize: 17, fontWeight: "bold" }}>
-              CONFIGURACIÓN
-            </Text>
-            <Button
-              icon={<Icon name="close" size={28} />}
-              onPress={() => onClose()}
-              type="clear"
-            />
-          </View>
-          <View style={styles.containerConfiguration}>
-            <View
-              style={{
-                height: 65,
-                justifyContent: "center",
-                gap: 10,
-              }}
-            >
-              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
-                Institución:{" "}
-              </Text>
-              <TextInput
-                value={nameInstitution}
-                style={styles.input}
-                placeholder="Nombre de la institución"
-                placeholderTextColor="gray"
-                errorMessage="Error"
-                onChangeText={(text) => {
-                  setNameInstitution(text);
-                }}
-              />
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Switch
-                value={alert}
-                onValueChange={(value) => {
-                  setAlert(value);
-                }}
-                trackColor={{ false: "grey", true: "rgb(63, 252, 236)" }}
-                thumbColor={alert ? "rgb(63, 252, 236)" : "#f4f3f4"}
-              />
-              <Text
-                style={{
-                  color: "black",
-                  paddingBottom: 10,
-                  fontSize: 17,
-                  fontWeight: "bold",
-                }}
-              >
-                {alert ? "ON" : "OFF"}
-              </Text>
-            </View>
-          </View>
-          {/* <Pressable style={styles.saveContainer}>
-            <Button
-              icon={<Icon name="save" size={28} />}
-              //onPress={() => onClose()}
-              type="clear"
-            />
-            <Text style={{ fontSize: 17, fontWeight: "bold" }}>Guardar</Text>
-          </Pressable> */}
-        </View>
+      <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
+        <View style={styles.modalOverlay} />
+      </TouchableWithoutFeedback>
+      <View style={styles.modalContent}>
+        <Text
+          style={{
+            color: "black",
+            textAlign: "center",
+            fontSize: 20,
+            fontWeight: "bold",
+          }}
+        >
+          ACERCA DE LA APP
+        </Text>
+        <Text style={{ paddingBottom: 10 }}>
+          Esta app te ayuda a llevar una buena administración de tus clientes,
+          los cobros entre otros.
+        </Text>
+
+        <Text>Nombre: App Evaluar</Text>
+        <Text>Versión: 1.0.0</Text>
+        <Text>Creador: TorreDev</Text>
+        <Text>Contacto: +51 - 964626322</Text>
       </View>
     </Modal>
   );
@@ -81,60 +51,23 @@ const ModalCofigPrestamo = (onClose, visible) => {
 export default ModalCofigPrestamo;
 
 const styles = StyleSheet.create({
-  conteiner: {
+  container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgb(31, 36, 36)",
   },
-  content: {
-    width: "75%",
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
     backgroundColor: "beige",
-    padding: 18,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: "white",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  closeContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  input: {
-    height: 30,
-    width: 205,
+    borderRadius: 2,
+    position: "absolute",
+    top: "15%",
+    left: "10%",
+    right: "10%",
+    borderRadius: 15,
     borderWidth: 1,
-    borderRadius: 15,
-    padding: 2,
-    paddingLeft: 10,
-    color: "black",
-  },
-  containerConfiguration: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  saveContainer: {
-    marginHorizontal: 13,
-    marginTop: 15,
-    width: 250,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "orange",
-    borderColor: "black",
-    borderRadius: 15,
+    padding: 10,
   },
 });

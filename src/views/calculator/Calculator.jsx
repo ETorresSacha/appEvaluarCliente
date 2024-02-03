@@ -17,6 +17,7 @@ import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import ModalCofigPrestamo from "../../modals/modalCofigPrestamo/ModalCofigPrestamo";
 
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
@@ -32,6 +33,7 @@ const Calculator = ({
   setValueError,
   setValuePrest,
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
@@ -140,6 +142,15 @@ const Calculator = ({
     }
   };
 
+  // Cerrar el modal
+  const handleModalClose = async (shouldUpdate) => {
+    if (shouldUpdate) {
+      Alert.alert("Se guardó correctamente");
+    }
+    setIsVisible(false);
+  };
+  //console.log(isVisible);
+
   return (
     <View style={styles.container}>
       {errorsP == undefined ? (
@@ -148,10 +159,14 @@ const Calculator = ({
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <View style={styles.titleEvaluar}>
         <Text style={styles.title}>PRESTAMO</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsVisible(true)}>
           <FontAwesome name="cog" size={32} style={{ color: "cornsilk" }} />
         </TouchableOpacity>
       </View>
+
+      {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
+      <ModalCofigPrestamo setIsVisible={setIsVisible} isVisible={isVisible} />
+
       <ScrollView>
         <Prestamo
           errorsPrestamo={errorsPrestamo}
