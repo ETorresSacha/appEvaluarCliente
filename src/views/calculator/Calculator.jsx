@@ -143,13 +143,13 @@ const Calculator = ({
   };
 
   // Cerrar el modal
+  //! este handle tenemos que verificar que cierre correctamente mandando una alerta para decidir
   const handleModalClose = async (shouldUpdate) => {
     if (shouldUpdate) {
       Alert.alert("Se guardó correctamente");
     }
     setIsVisible(false);
   };
-  //console.log(isVisible);
 
   return (
     <View style={styles.container}>
