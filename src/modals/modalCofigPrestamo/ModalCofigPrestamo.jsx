@@ -32,17 +32,12 @@ const ModalCofigPrestamo = ({ setIsVisible, isVisible }) => {
             fontWeight: "bold",
           }}
         >
-          ACERCA DE LA APP
+          CONFIGURACIÓN
         </Text>
-        <Text style={{ paddingBottom: 10 }}>
-          Esta app te ayuda a llevar una buena administración de tus clientes,
-          los cobros entre otros.
-        </Text>
-
-        <Text>Nombre: App Evaluar</Text>
-        <Text>Versión: 1.0.0</Text>
-        <Text>Creador: TorreDev</Text>
-        <Text>Contacto: +51 - 964626322</Text>
+        <View style={styles.containerTPM}>
+          <Text style={styles.text}>Tasa Prima Mensual: </Text>
+          <TextInput style={styles.input}></TextInput>
+        </View>
       </View>
     </Modal>
   );
@@ -69,5 +64,31 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderWidth: 1,
     padding: 10,
+  },
+  containerTPM: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  Input: {
+    textAlign: "center",
+    color: "cornsilk",
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+  },
+  input: {
+    height: 30,
+    width: 120,
+    //borderWidth: 1,
+    borderBottomWidth: 1,
+    //borderRadius: 15,
+    padding: 2,
+    paddingLeft: 10,
+    color: "cornsilk",
+  },
+  text: {
+    //fontWeight: "bold",
+    fontSize: 15,
   },
 });
