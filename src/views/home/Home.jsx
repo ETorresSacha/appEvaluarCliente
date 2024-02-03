@@ -43,7 +43,7 @@ const Home = () => {
       console.error(error);
     }
   };
-  //console.log(data);
+
   useEffect(() => {
     loadNegocio();
   }, [enable]);

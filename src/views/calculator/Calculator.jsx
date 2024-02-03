@@ -16,6 +16,7 @@ import { validationDataPrestamo } from "../../utils/validation/Validation";
 import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
@@ -145,6 +146,12 @@ const Calculator = ({
         <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
       ) : null}
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
+      <View style={styles.titleEvaluar}>
+        <Text style={styles.title}>PRESTAMO</Text>
+        <TouchableOpacity>
+          <FontAwesome name="cog" size={32} style={{ color: "cornsilk" }} />
+        </TouchableOpacity>
+      </View>
       <ScrollView>
         <Prestamo
           errorsPrestamo={errorsPrestamo}
@@ -224,6 +231,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 3,
     backgroundColor: "orange",
+  },
+  titleEvaluar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 7,
+    backgroundColor: "rgba(36, 146, 224, 0.625)",
+  },
+  title: {
+    fontSize: 17,
+    color: "white",
+    paddingVertical: 5,
+    fontWeight: "bold",
   },
 });
 

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -49,13 +48,6 @@ const Prestamo = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleEvaluar}>
-        <Text style={styles.title}>PRESTAMO</Text>
-        <TouchableOpacity>
-          <FontAwesome name="cog" size={40} style={{ color: "cornsilk" }} />
-        </TouchableOpacity>
-      </View>
-
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
