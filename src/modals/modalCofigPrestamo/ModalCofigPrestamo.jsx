@@ -4,36 +4,23 @@ import {
   View,
   Modal,
   TextInput,
-  Switch,
-  Pressable,
   TouchableWithoutFeedback,
 } from "react-native";
-import { Button, Icon, Input } from "@rneui/themed";
 import React from "react";
 
-const ModalCofigPrestamo = ({ setIsVisible, isVisible }) => {
-  console.log(isVisible);
+const ModalCofigPrestamo = ({ handleModalClose, isVisible }) => {
   return (
     <Modal
       style={styles.container}
       transparent={true}
       visible={isVisible}
-      onRequestClose={() => setIsVisible(false)}
+      onRequestClose={() => handleModalClose()}
     >
-      <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
+      <TouchableWithoutFeedback onPress={() => handleModalClose()}>
         <View style={styles.modalOverlay} />
       </TouchableWithoutFeedback>
       <View style={styles.modalContent}>
-        <Text
-          style={{
-            color: "black",
-            textAlign: "center",
-            fontSize: 20,
-            fontWeight: "bold",
-          }}
-        >
-          CONFIGURACIÓN
-        </Text>
+        <Text style={styles.titleModal}>CONFIGURACIÓN</Text>
         <View style={styles.containerTPM}>
           <Text style={styles.text}>Tasa Prima Mensual: </Text>
           <TextInput style={styles.input}></TextInput>
@@ -65,30 +52,27 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  titleModal: {
+    color: "black",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   containerTPM: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
   },
-  Input: {
-    textAlign: "center",
-    color: "cornsilk",
-    borderBottomColor: "white",
-    borderBottomWidth: 1,
-  },
   input: {
     height: 30,
     width: 120,
-    //borderWidth: 1,
     borderBottomWidth: 1,
-    //borderRadius: 15,
     padding: 2,
     paddingLeft: 10,
     color: "cornsilk",
   },
   text: {
-    //fontWeight: "bold",
     fontSize: 15,
   },
 });

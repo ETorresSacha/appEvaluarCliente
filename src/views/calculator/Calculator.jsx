@@ -165,7 +165,10 @@ const Calculator = ({
       </View>
 
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      <ModalCofigPrestamo setIsVisible={setIsVisible} isVisible={isVisible} />
+      <ModalCofigPrestamo
+        handleModalClose={handleModalClose}
+        isVisible={isVisible}
+      />
 
       <ScrollView>
         <Prestamo
