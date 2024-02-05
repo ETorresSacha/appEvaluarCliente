@@ -5,6 +5,7 @@ import {
   Modal,
   TextInput,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 
@@ -24,6 +25,14 @@ const ModalCofigPrestamo = ({ handleModalClose, isVisible }) => {
         <View style={styles.containerTPM}>
           <Text style={styles.text}>Tasa Prima Mensual: </Text>
           <TextInput style={styles.input}></TextInput>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.btnCalcular}
+            //onPress={() => handleCalcular(prestamo)}
+          >
+            <Text style={styles.textBtn}>Guardar</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    paddingTop: 20,
   },
   input: {
     height: 30,
@@ -74,5 +84,27 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+  },
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+    paddingTop: 30,
+  },
+  btnCalcular: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#4ecb71",
+    width: 300,
+    height: 40,
+    borderRadius: 15,
+  },
+  textBtn: {
+    fontSize: 22,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
+    textAlign: "center",
   },
 });
