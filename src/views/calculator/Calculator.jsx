@@ -45,6 +45,7 @@ const Calculator = ({
     fechaDesembolso: "",
     fechaPrimeraCuota: "",
     periodo: "",
+    tasaPrimaMensual: 0.08,
   });
 
   // Todo--> COMPONENTE NEWFORM

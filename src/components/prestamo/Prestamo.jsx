@@ -4,6 +4,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
+import ModalCofigPrestamo from "../../modals/modalCofigPrestamo/ModalCofigPrestamo";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -18,6 +19,7 @@ const Prestamo = ({
   prestamo,
   setPrestamo,
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
@@ -46,6 +48,16 @@ const Prestamo = ({
     }));
   };
 
+  // Cerrar el modal
+  //! este handle tenemos que verificar que cierre correctamente mandando una alerta para decidir
+  const handleModalClose = async (shouldUpdate) => {
+    if (shouldUpdate) {
+      Alert.alert("Se guardó correctamente");
+    }
+    setIsVisible(false);
+  };
+  console.log(prestamo);
+
   return (
     <View style={styles.container}>
       {/* ------------------ TASA PRIMA MENSUAL ------------------*/}
@@ -53,21 +65,53 @@ const Prestamo = ({
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Tasa Prima Mensual: </Text>
         </View>
-        <View
-          style={[
-            {
-              display: "flex",
-              flexDirection: "row",
-              marginRight: 10,
-            },
-          ]}
-        >
-          <Text style={[styles.legend, { fontSize: 20 }]}>0.08 % </Text>
-        </View>
-        <TouchableOpacity>
-          <AntDesign style={styles.icon} color="#FFF" name="edit" size={30} />
-        </TouchableOpacity>
+
+        {!isVisible ? (
+          <View
+            style={[
+              {
+                display: "flex",
+                flexDirection: "row",
+                marginRight: 10,
+              },
+            ]}
+          >
+            <View>
+              <Text style={[styles.legend, { fontSize: 20 }]}>
+                {prestamo?.tasaPrimaMensual} {" %"}
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => setIsVisible(true)}>
+              <AntDesign
+                style={styles.icon}
+                color="#FFF"
+                name="edit"
+                size={30}
+              />
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.inputContainer}>
+            <Input
+              placeholder="%"
+              style={!errorsPrestamo.tea ? styles.input : styles.alertError}
+              value={prestamo?.tasaPrimaMensual}
+              defaultValue={prestamo?.tasaPrimaMensual}
+              onChange={(event) => {
+                handleChangeData(event, "tea");
+              }}
+              keyboardType="numeric"
+            />
+          </View>
+        )}
       </View>
+
+      {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
+      {/* <ModalCofigPrestamo
+        handleModalClose={handleModalClose}
+        isVisible={isVisible}
+      /> */}
+
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
