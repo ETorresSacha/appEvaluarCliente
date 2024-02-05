@@ -63,10 +63,17 @@ export const orderData = (type,data,value,enable)=>{
 
 //TODO--> CAMBIAR EL FORMATO DE LA FECHA
 export const formatDate = (date)=>{
+
   let result
-  let [anio,mes,dia] = date.split('-')
-  result=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${anio}`
-return result
+  try {
+      let [anio,mes,dia] = date.split('-')
+      result=`${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}-${anio}`
+    
+      return result
+    
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //TODO--> CUOTA DE PAGO AUTOMÁTICO

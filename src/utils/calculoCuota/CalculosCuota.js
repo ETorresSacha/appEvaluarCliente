@@ -33,7 +33,7 @@ export const calculoFRCA = (data) =>{
 
  export const cronPagos = (data)=>{
 
-    const TSegM = 0.08 // %  //!este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
+    const TSegM = 0.08 // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []
@@ -65,9 +65,9 @@ export const calculoFRCA = (data) =>{
  }
 
  // AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
- export const resutCronograma = (data)=>{
+ export const resultCronograma = (data)=>{
 
-    const result = cronPagos(data)
+    const result = cronPagos(data) //! despues sigue aqui
     let cuotas = []
     let promCuota
     
@@ -117,7 +117,7 @@ export const calculoFRCA = (data) =>{
  export const OJO =(data)=>{
     let cuotas = []
     let promCuota
-    const result = resutCronograma(data)
+    const result = resultCronograma(data)
     
     // Cuota promedio
     result.map((element) => cuotas.push(parseFloat(element.capital)))

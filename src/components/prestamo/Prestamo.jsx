@@ -122,7 +122,7 @@ const Prestamo = ({
         </View>
       </View>
 
-      {/* ------------------ NUMERO DE CUOTAS ------------------*/}
+      {/* ------------------ NÚMERO DE CUOTAS ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>N° Cuotas: </Text>

@@ -13,7 +13,7 @@ import Prestamo from "../../components/prestamo/Prestamo";
 import DetailCalculator from "../../components/detailCalculator/DetailCalculator";
 import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
-import { resutCronograma } from "../../utils/calculoCuota/CalculosCuota";
+import { resultCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -37,6 +37,7 @@ const Calculator = ({
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
+  //! en el presramo tengo que agregar las opciones de las modificaciones
   const [prestamo, setPrestamo] = useState({
     capital: "",
     cuotas: "",
@@ -125,7 +126,7 @@ const Calculator = ({
       setEnabled(false);
       Alert.alert("Datos incompletos");
     } else {
-      const result = resutCronograma(data);
+      const result = resultCronograma(data); //! inicia aqui
       dataPerson !== undefined
         ? setDataPerson({
             ...dataPerson,

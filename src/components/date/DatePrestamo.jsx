@@ -3,6 +3,7 @@ import ModalDate from "../modalDate/ModalDate";
 import { Input } from "@rneui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { formatDate } from "../../utils/thunks/Thunks";
 
 const DatePrestamo = ({
   prestamo,
@@ -12,7 +13,7 @@ const DatePrestamo = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [typeDatePrestamo, setTypeDatePrestamo] = useState("");
-
+  console.log(prestamo);
   // setea los errores
   const handleTypeDatePrestamo = (element) => {
     setErrorsPrestamo((errorsPrestamo) => ({
@@ -34,8 +35,12 @@ const DatePrestamo = ({
             style={
               !errorsPrestamo.fechaDesembolso ? styles.input : styles.alertError
             }
-            value={prestamo.fechaDesembolso}
-            defaultValue={prestamo.fechaDesembolso}
+            value={
+              !prestamo.fechaDesembolso
+                ? null
+                : formatDate(prestamo?.fechaDesembolso)
+            }
+            defaultValue={prestamo?.fechaDesembolso}
           />
         </View>
         <TouchableOpacity
@@ -57,7 +62,11 @@ const DatePrestamo = ({
                 ? styles.input
                 : styles.alertError
             }
-            value={prestamo.fechaPrimeraCuota}
+            value={
+              !prestamo?.fechaPrimeraCuota
+                ? null
+                : formatDate(prestamo?.fechaPrimeraCuota)
+            }
             defaultValue={prestamo.fechaPrimeraCuota}
           />
         </View>
