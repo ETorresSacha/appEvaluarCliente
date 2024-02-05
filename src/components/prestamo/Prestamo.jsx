@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
 
 const infoPeriod = [
@@ -48,6 +48,32 @@ const Prestamo = ({
 
   return (
     <View style={styles.container}>
+      {/* ------------------ TASA PRIMA MENSUAL ------------------*/}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Tasa Prima Mensual: </Text>
+        </View>
+        <View
+          style={[
+            {
+              backgroundColor: "red",
+              display: "flex",
+              flexDirection: "row",
+              marginRight: 30,
+            },
+          ]}
+        >
+          <Text style={[styles.legend, { fontSize: 20 }]}>0.08 </Text>
+        </View>
+        <TouchableOpacity style={{ backgroundColor: "green" }}>
+          <AntDesign
+            style={styles.icon}
+            color="rgb(68, 132, 222)"
+            name="edit"
+            size={30}
+          />
+        </TouchableOpacity>
+      </View>
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
@@ -156,7 +182,7 @@ const Prestamo = ({
 export default Prestamo;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { flex: 1, paddingTop: 15 },
   title: {
     fontSize: 17,
     color: "white",

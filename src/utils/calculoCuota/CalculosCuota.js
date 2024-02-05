@@ -33,7 +33,7 @@ export const calculoFRCA = (data) =>{
 
  export const cronPagos = (data)=>{
 
-    const TSegM = 0.08 // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
+    const TSegM = 0.03 // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []
@@ -59,7 +59,7 @@ export const calculoFRCA = (data) =>{
             CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoConITF,
         })
     }
-       
+       console.log(cronograma);
     return cronograma
  
  }

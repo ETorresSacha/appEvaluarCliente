@@ -13,7 +13,7 @@ const DatePrestamo = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [typeDatePrestamo, setTypeDatePrestamo] = useState("");
-  console.log(prestamo);
+
   // setea los errores
   const handleTypeDatePrestamo = (element) => {
     setErrorsPrestamo((errorsPrestamo) => ({
@@ -67,7 +67,7 @@ const DatePrestamo = ({
                 ? null
                 : formatDate(prestamo?.fechaPrimeraCuota)
             }
-            defaultValue={prestamo.fechaPrimeraCuota}
+            defaultValue={prestamo?.fechaPrimeraCuota}
           />
         </View>
         <TouchableOpacity
