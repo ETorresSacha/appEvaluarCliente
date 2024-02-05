@@ -56,22 +56,16 @@ const Prestamo = ({
         <View
           style={[
             {
-              backgroundColor: "red",
               display: "flex",
               flexDirection: "row",
-              marginRight: 30,
+              marginRight: 10,
             },
           ]}
         >
-          <Text style={[styles.legend, { fontSize: 20 }]}>0.08 </Text>
+          <Text style={[styles.legend, { fontSize: 20 }]}>0.08 % </Text>
         </View>
-        <TouchableOpacity style={{ backgroundColor: "green" }}>
-          <AntDesign
-            style={styles.icon}
-            color="rgb(68, 132, 222)"
-            name="edit"
-            size={30}
-          />
+        <TouchableOpacity>
+          <AntDesign style={styles.icon} color="#FFF" name="edit" size={30} />
         </TouchableOpacity>
       </View>
       {/* ------------------ PERIODO ------------------*/}
