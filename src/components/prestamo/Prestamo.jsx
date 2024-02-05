@@ -65,52 +65,31 @@ const Prestamo = ({
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Tasa Prima Mensual: </Text>
         </View>
-
-        {!isVisible ? (
-          <View
-            style={[
-              {
-                display: "flex",
-                flexDirection: "row",
-                marginRight: 10,
-              },
-            ]}
-          >
-            <View>
-              <Text style={[styles.legend, { fontSize: 20 }]}>
-                {prestamo?.tasaPrimaMensual} {" %"}
-              </Text>
-            </View>
-            <TouchableOpacity onPress={() => setIsVisible(true)}>
-              <AntDesign
-                style={styles.icon}
-                color="#FFF"
-                name="edit"
-                size={30}
-              />
-            </TouchableOpacity>
+        <View
+          style={[
+            {
+              display: "flex",
+              flexDirection: "row",
+              marginRight: 10,
+            },
+          ]}
+        >
+          <View>
+            <Text style={[styles.legend, { fontSize: 20 }]}>
+              {prestamo?.tasaPrimaMensual} {" %"}
+            </Text>
           </View>
-        ) : (
-          <View style={styles.inputContainer}>
-            <Input
-              placeholder="%"
-              style={!errorsPrestamo.tea ? styles.input : styles.alertError}
-              value={prestamo?.tasaPrimaMensual}
-              defaultValue={prestamo?.tasaPrimaMensual}
-              onChange={(event) => {
-                handleChangeData(event, "tea");
-              }}
-              keyboardType="numeric"
-            />
-          </View>
-        )}
+          <TouchableOpacity onPress={() => setIsVisible(true)}>
+            <AntDesign style={styles.icon} color="#FFF" name="edit" size={30} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      {/* <ModalCofigPrestamo
+      <ModalCofigPrestamo
         handleModalClose={handleModalClose}
         isVisible={isVisible}
-      /> */}
+      />
 
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
