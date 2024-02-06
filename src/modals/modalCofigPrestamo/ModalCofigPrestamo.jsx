@@ -7,9 +7,13 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 const ModalCofigPrestamo = ({ handleModalClose, isVisible }) => {
+  const [tasaPrimaMedia, setTasaPrimaMedia] = useState("");
+  console.log(tasaPrimaMedia);
+
+  const handleKeepTPM = () => {};
   return (
     <Modal
       style={styles.container}
@@ -24,7 +28,16 @@ const ModalCofigPrestamo = ({ handleModalClose, isVisible }) => {
         <Text style={styles.titleModal}>CONFIGURACIÓN</Text>
         <View style={styles.containerTPM}>
           <Text style={styles.text}>Tasa Prima Mensual: </Text>
-          <TextInput style={styles.input}></TextInput>
+          <TextInput
+            style={styles.input}
+            value={tasaPrimaMedia}
+            placeholder={"%"}
+            placeholderTextColor="gray"
+            onChangeText={(text) => {
+              setTasaPrimaMedia(text);
+            }}
+            keyboardType="numeric"
+          ></TextInput>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -80,7 +93,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 2,
     paddingLeft: 10,
-    color: "cornsilk",
+    textAlign: "center",
+    alignItems: "center",
   },
   text: {
     fontSize: 15,
@@ -100,7 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   textBtn: {
-    fontSize: 22,
+    fontSize: 19,
     lineHeight: 21,
     fontWeight: "bold",
     letterSpacing: 0.25,
