@@ -33,7 +33,6 @@ const Calculator = ({
   setValueError,
   setValuePrest,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState({});
@@ -145,17 +144,6 @@ const Calculator = ({
     }
   };
 
-  // Cerrar el modal
-  //! este handle tenemos que verificar que cierre correctamente mandando una alerta para decidir
-  const handleModalClose = async (shouldUpdate) => {
-    if (shouldUpdate) {
-      Alert.alert("Se guardó correctamente");
-    }
-    setIsVisible(false);
-  };
-
-  //console.log(prestamo);
-
   return (
     <View style={styles.container}>
       {errorsP == undefined ? (
@@ -164,16 +152,7 @@ const Calculator = ({
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <View style={styles.titleEvaluar}>
         <Text style={styles.title}>PRESTAMO</Text>
-        <TouchableOpacity onPress={() => setIsVisible(true)}>
-          <FontAwesome name="cog" size={32} style={{ color: "cornsilk" }} />
-        </TouchableOpacity>
       </View>
-
-      {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      <ModalCofigPrestamo
-        handleModalClose={handleModalClose}
-        isVisible={isVisible}
-      />
 
       <ScrollView>
         <Prestamo
