@@ -6,9 +6,11 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
+import { validationTPM } from "../../utils/validation/Validation";
 
 const ModalCofigPrestamo = ({ isVisible, setIsVisible }) => {
   const { onSaveDataTPM } = UseStorageTPM();
@@ -16,8 +18,15 @@ const ModalCofigPrestamo = ({ isVisible, setIsVisible }) => {
 
   const handleKeepTPM = async (value) => {
     //! falta validar
-    await onSaveDataTPM(value);
-    setIsVisible(false);
+    // Validando
+    let error = validationTPM(value);
+    let valuesError = Object.values(error);
+    // if (valuesError.some((error) => error != "")) {
+    //   Alert.alert("Dato incorrecto");
+    // } else {
+    //   await onSaveDataTPM(value);
+    //   setIsVisible(false);
+    // }
   };
   return (
     <Modal
