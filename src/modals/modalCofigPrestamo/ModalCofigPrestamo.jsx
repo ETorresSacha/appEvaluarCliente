@@ -10,28 +10,23 @@ import {
 import React, { useEffect, useState } from "react";
 import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
 
-const ModalCofigPrestamo = ({
-  handleModalClose,
-  isVisible,
-  tasaPrimaMedia,
-  setTasaPrimaMedia,
-}) => {
-  const { onSaveDataTPM, onGetTPM } = UseStorageTPM();
+const ModalCofigPrestamo = ({ isVisible, setIsVisible }) => {
+  const { onSaveDataTPM } = UseStorageTPM();
   const [tpm, setTPM] = useState("");
-  // console.log(setTasaPrimaMedia);
 
-  //console.log(tasaPrimaMedia);
   const handleKeepTPM = async (value) => {
+    //! falta validar
     await onSaveDataTPM(value);
+    setIsVisible(false);
   };
   return (
     <Modal
       style={styles.container}
       transparent={true}
       visible={isVisible}
-      onRequestClose={() => handleModalClose()}
+      onRequestClose={() => setIsVisible(false)}
     >
-      <TouchableWithoutFeedback onPress={() => handleModalClose()}>
+      <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
         <View style={styles.modalOverlay} />
       </TouchableWithoutFeedback>
       <View style={styles.modalContent}>

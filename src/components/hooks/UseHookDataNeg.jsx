@@ -20,6 +20,7 @@ const UseStorageBusiness = () => {
 
   //! POST
   const handleSaveBusiness = async ({ negocio, direccion, celular }) => {
+    console.log(negocio);
     try {
       const result = await saveInfoStorage(MY_BUSINESS_KEY, {
         negocio,

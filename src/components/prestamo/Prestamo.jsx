@@ -20,13 +20,13 @@ const Prestamo = ({
   prestamo,
   setPrestamo,
 }) => {
-  const { onSaveDataTPM, onGetTPM } = UseStorageTPM();
+  const { onGetTPM } = UseStorageTPM();
 
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
   const [tasaPrimaMedia, setTasaPrimaMedia] = useState(""); // Tasa Prima Mensual
-  console.log(tasaPrimaMedia);
+
   const renderItem = (item) => {
     return (
       <View style={styles.item}>
@@ -52,29 +52,19 @@ const Prestamo = ({
     }));
   };
 
-  // Cerrar el modal
-  //! este handle tenemos que verificar que cierre correctamente mandando una alerta para decidir
-  const handleModalClose = async (shouldUpdate) => {
-    if (shouldUpdate) {
-      Alert.alert("Se guardó correctamente");
-    }
-    setIsVisible(false);
-  };
-
   // Carga el valor de la Tasa Prima Mensual
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
-      result = result == undefined ? "0.08" : result;
-      console.log(result);
+      result = result == "" ? "0.08" : result;
       setTasaPrimaMedia(result);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    //loadTPM();
-  }, []);
+    loadTPM();
+  }, [isVisible]);
 
   return (
     <View style={styles.container}>
@@ -104,12 +94,7 @@ const Prestamo = ({
       </View>
 
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      <ModalCofigPrestamo
-        handleModalClose={handleModalClose}
-        isVisible={isVisible}
-        tasaPrimaMedia={tasaPrimaMedia}
-        setTasaPrimaMedia={setTasaPrimaMedia}
-      />
+      <ModalCofigPrestamo isVisible={isVisible} setIsVisible={setIsVisible} />
 
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>

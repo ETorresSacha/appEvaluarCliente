@@ -42,7 +42,6 @@ const Customer = ({ enable }) => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-      //console.log(resultCustomer);
       setData({
         ...data,
         dataResult: resultCustomer, // == undefined ? data.dataResult : resultCustomer,
@@ -94,7 +93,6 @@ const Customer = ({ enable }) => {
     resultCustomer();
   }, [data]);
 
-  console.log(data.dataResult);
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>

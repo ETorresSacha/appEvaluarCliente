@@ -19,9 +19,9 @@ const UseStorageTPM = () => {
   //TODO--> CRONOGRAMA DE PAGO
 
   //! POST
-  const handleSaveTPM = async ({ tasaPrimaMedia }) => {
+  const handleSaveTPM = async (tasaPrimaMedia) => {
     try {
-      const result = await saveInfoStorage(TASA_PRIMA_KEY, { tasaPrimaMedia });
+      const result = await saveInfoStorage(TASA_PRIMA_KEY, tasaPrimaMedia);
 
       return Promise.resolve();
     } catch (error) {
@@ -32,6 +32,7 @@ const UseStorageTPM = () => {
   const handleGetTPM = async () => {
     try {
       let result = await AsyncStorage.getItem(TASA_PRIMA_KEY);
+
       if (result != null) {
         const parseCronograma = JSON.parse(result);
 
