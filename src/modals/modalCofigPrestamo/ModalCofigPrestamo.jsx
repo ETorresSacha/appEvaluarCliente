@@ -17,16 +17,15 @@ const ModalCofigPrestamo = ({ isVisible, setIsVisible }) => {
   const [tpm, setTPM] = useState("");
 
   const handleKeepTPM = async (value) => {
-    //! falta validar
     // Validando
     let error = validationTPM(value);
     let valuesError = Object.values(error);
-    // if (valuesError.some((error) => error != "")) {
-    //   Alert.alert("Dato incorrecto");
-    // } else {
-    //   await onSaveDataTPM(value);
-    //   setIsVisible(false);
-    // }
+    if (valuesError.some((error) => error != "")) {
+      Alert.alert("Dato incorrecto");
+    } else {
+      await onSaveDataTPM(value);
+      setIsVisible(false);
+    }
   };
   return (
     <Modal

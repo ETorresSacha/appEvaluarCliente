@@ -102,19 +102,6 @@ export const validationInfNegocios = (data) =>{
     return error
 }
 
-//Expresión Regular Número Decimal
-// var ExpRegNumDec=/^\d*\.\d+$/;
- 
-// var NumDecValido="10.2225";//Cadena de Número Decimal
-// var NumDecinvalido="10";//Cadena de Número Decimal
- 
-// //Evaluación de Cadena Valida de Número Decimal
-// if(NumDecValido.match(ExpRegNumDec)!=null)
-//     console.log("Número Decimal Válido");
- 
-// //Evaluación de Cadena Invalida de Número Decimal  
-// if(NumDecinvalido.match(ExpRegNumDec)==null)
-//     console.log("Número Decimal Invalido");
 
 //! Validación de la tasa prima media
 export const validationTPM = (data)=>{
@@ -129,10 +116,6 @@ export const validationTPM = (data)=>{
        if(data.match(ExpRegNumDec)==null){
         error={...error, errorTPM:"Dato inválido"}
        }
-    
-    // if (data<0 ){
-    //     error={...errorTPM, errorTPM:"Dato inválido"}
-    // }
     
     return error
 }
