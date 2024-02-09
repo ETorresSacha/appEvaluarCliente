@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
 import ModalCofigPrestamo from "../../modals/modalCofigPrestamo/ModalCofigPrestamo";
+import UseStorageTPM from "../hooks/UseHookTasaPrimaMensual";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -19,10 +20,13 @@ const Prestamo = ({
   prestamo,
   setPrestamo,
 }) => {
+  const { onSaveDataTPM, onGetTPM } = UseStorageTPM();
+
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
-
+  const [tasaPrimaMedia, setTasaPrimaMedia] = useState(""); // Tasa Prima Mensual
+  console.log(tasaPrimaMedia);
   const renderItem = (item) => {
     return (
       <View style={styles.item}>
@@ -56,7 +60,21 @@ const Prestamo = ({
     }
     setIsVisible(false);
   };
-  console.log(prestamo);
+
+  // Carga el valor de la Tasa Prima Mensual
+  const loadTPM = async () => {
+    try {
+      let result = await onGetTPM();
+      result = result == undefined ? "0.08" : result;
+      console.log(result);
+      setTasaPrimaMedia(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    //loadTPM();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -76,7 +94,7 @@ const Prestamo = ({
         >
           <View>
             <Text style={[styles.legend, { fontSize: 20 }]}>
-              {prestamo?.tasaPrimaMensual} {" %"}
+              {tasaPrimaMedia} {" %"}
             </Text>
           </View>
           <TouchableOpacity onPress={() => setIsVisible(true)}>
@@ -89,6 +107,8 @@ const Prestamo = ({
       <ModalCofigPrestamo
         handleModalClose={handleModalClose}
         isVisible={isVisible}
+        tasaPrimaMedia={tasaPrimaMedia}
+        setTasaPrimaMedia={setTasaPrimaMedia}
       />
 
       {/* ------------------ PERIODO ------------------*/}

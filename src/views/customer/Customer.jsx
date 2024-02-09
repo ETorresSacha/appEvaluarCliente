@@ -42,10 +42,11 @@ const Customer = ({ enable }) => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
+      //console.log(resultCustomer);
       setData({
         ...data,
-        dataResult: resultCustomer,
-        dataResultCopy: resultCustomer,
+        dataResult: resultCustomer, // == undefined ? data.dataResult : resultCustomer,
+        dataResultCopy: resultCustomer, //== undefined ? data.dataResult : resultCustomer,
       });
     } catch (error) {
       console.error(error);
@@ -93,86 +94,101 @@ const Customer = ({ enable }) => {
     resultCustomer();
   }, [data]);
 
+  console.log(data.dataResult);
   return (
     <View style={styles.container}>
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
       <Header title={!enable ? "Clientes" : "Clientes cancelados"} />
       <NavBar data={data} setData={setData} enable={enable} />
-      {data.dataResult.length == 0 ? (
-        <Loading />
-      ) : (
-        <ScrollView style={styles.containerCuotas}>
-          <View style={styles.containerTitle}>
-            <View
-              style={
-                !enable
-                  ? [styles.titleText, { gap: 20 }]
-                  : [styles.titleText, { justifyContent: "space-around" }]
-              }
-            >
-              <TouchableOpacity
-                style={
-                  !enable
-                    ? [styles.title, { marginLeft: 26 }]
-                    : [styles.title, { width: 90 }]
-                }
-                onPress={() => handleSort("dni", order, enable)}
-              >
-                <Text style={styles.texTitle}>DNI</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={
-                  !enable
-                    ? [styles.title, { width: 60, marginLeft: 18 }]
-                    : [styles.title, { width: 60 }]
-                }
-                onPress={() => handleSort("nombre", order)}
-              >
-                <Text style={styles.texTitle}>NOMBRE</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={
-                  !enable
-                    ? [styles.title, { width: 60, marginLeft: 25 }]
-                    : [styles.title, { width: 100 }]
-                }
-                onPress={() => handleSort("fecha", order)}
-              >
-                <Text style={styles.texTitle}>
-                  {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.title]}
-                onPress={() => handleSort("cuota", order)}
-              >
-                <Text style={styles.texTitle}>
-                  {!enable ? "CUOTA" : "MONTO"}
-                </Text>
-              </TouchableOpacity>
-
-              {!enable ? (
-                <View
-                  style={[styles.title, { marginRight: 50 }]}
-                  //onPress={() => handleSort("cuota", order)}
-                >
-                  <Text style={styles.texTitle}>ALERTA</Text>
-                </View>
-              ) : null}
-            </View>
+      {
+        // Cuando no existe ningun cliente guardado
+        data.dataResult == undefined ? (
+          <View style={styles.containerNoCustomers}>
+            <Text style={{ color: "cornsilk" }}>
+              {" "}
+              No hay clientes guardados
+            </Text>
           </View>
-          {!enable ? (
-            <View>
-              <Users data={customer.customerRed} color={"red"} />
-              <Users data={customer.customerYellow} color={"yellow"} />
-              <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-              <Users data={customer.customer} />
+        ) : // Cuando existe algún tipo de cliente guardado
+        data.dataResult.length == 0 ? (
+          <Loading />
+        ) : (
+          <ScrollView style={styles.containerCuotas}>
+            <View style={styles.containerTitle}>
+              <View
+                style={
+                  !enable
+                    ? [styles.titleText, { gap: 20 }]
+                    : [styles.titleText, { justifyContent: "space-around" }]
+                }
+              >
+                <TouchableOpacity
+                  style={
+                    !enable
+                      ? [styles.title, { marginLeft: 26 }]
+                      : [styles.title, { width: 90 }]
+                  }
+                  onPress={() => handleSort("dni", order, enable)}
+                >
+                  <Text style={styles.texTitle}>DNI</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={
+                    !enable
+                      ? [styles.title, { width: 60, marginLeft: 18 }]
+                      : [styles.title, { width: 60 }]
+                  }
+                  onPress={() => handleSort("nombre", order)}
+                >
+                  <Text style={styles.texTitle}>NOMBRE</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={
+                    !enable
+                      ? [styles.title, { width: 60, marginLeft: 25 }]
+                      : [styles.title, { width: 100 }]
+                  }
+                  onPress={() => handleSort("fecha", order)}
+                >
+                  <Text style={styles.texTitle}>
+                    {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.title]}
+                  onPress={() => handleSort("cuota", order)}
+                >
+                  <Text style={styles.texTitle}>
+                    {!enable ? "CUOTA" : "MONTO"}
+                  </Text>
+                </TouchableOpacity>
+
+                {!enable ? (
+                  <View
+                    style={[styles.title, { marginRight: 50 }]}
+                    //onPress={() => handleSort("cuota", order)}
+                  >
+                    <Text style={styles.texTitle}>ALERTA</Text>
+                  </View>
+                ) : null}
+              </View>
             </View>
-          ) : (
-            <Users data={customer?.customerCancelled} enable={enable} />
-          )}
-        </ScrollView>
-      )}
+            {!enable ? (
+              <View>
+                <Users data={customer.customerRed} color={"red"} />
+                <Users data={customer.customerYellow} color={"yellow"} />
+                <Users
+                  data={customer.customerGreen}
+                  color={"rgb(66, 242, 46)"}
+                />
+                <Users data={customer.customer} />
+              </View>
+            ) : (
+              <Users data={customer?.customerCancelled} enable={enable} />
+            )}
+          </ScrollView>
+        )
+      }
     </View>
   );
 };
@@ -255,6 +271,12 @@ const styles = StyleSheet.create({
   iconAlertOn: {
     color: "red",
     fontSize: 30,
+  },
+  containerNoCustomers: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

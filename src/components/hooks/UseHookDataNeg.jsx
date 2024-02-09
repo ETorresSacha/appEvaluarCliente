@@ -6,7 +6,7 @@ const UseStorageBusiness = () => {
   // GUARDAR INFORMACION
   const saveInfoStorage = async (storageKey, meal) => {
     try {
-      // await AsyncStorage.clear(MY_BUSINESS_KEY);
+      //await AsyncStorage.clear(MY_BUSINESS_KEY);
 
       await AsyncStorage.setItem(storageKey, JSON.stringify([meal]));
 

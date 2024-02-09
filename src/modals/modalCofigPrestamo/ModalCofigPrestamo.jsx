@@ -7,13 +7,23 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
 
-const ModalCofigPrestamo = ({ handleModalClose, isVisible }) => {
-  const [tasaPrimaMedia, setTasaPrimaMedia] = useState("");
-  console.log(tasaPrimaMedia);
+const ModalCofigPrestamo = ({
+  handleModalClose,
+  isVisible,
+  tasaPrimaMedia,
+  setTasaPrimaMedia,
+}) => {
+  const { onSaveDataTPM, onGetTPM } = UseStorageTPM();
+  const [tpm, setTPM] = useState("");
+  // console.log(setTasaPrimaMedia);
 
-  const handleKeepTPM = () => {};
+  //console.log(tasaPrimaMedia);
+  const handleKeepTPM = async (value) => {
+    await onSaveDataTPM(value);
+  };
   return (
     <Modal
       style={styles.container}
@@ -30,11 +40,11 @@ const ModalCofigPrestamo = ({ handleModalClose, isVisible }) => {
           <Text style={styles.text}>Tasa Prima Mensual: </Text>
           <TextInput
             style={styles.input}
-            value={tasaPrimaMedia}
+            value={tpm}
             placeholder={"%"}
             placeholderTextColor="gray"
             onChangeText={(text) => {
-              setTasaPrimaMedia(text);
+              setTPM(text);
             }}
             keyboardType="numeric"
           ></TextInput>
@@ -42,7 +52,7 @@ const ModalCofigPrestamo = ({ handleModalClose, isVisible }) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.btnCalcular}
-            //onPress={() => handleCalcular(prestamo)}
+            onPress={() => handleKeepTPM(tpm)}
           >
             <Text style={styles.textBtn}>Guardar</Text>
           </TouchableOpacity>
