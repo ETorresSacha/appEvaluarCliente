@@ -58,6 +58,7 @@ const Prestamo = ({
       let result = await onGetTPM();
       result = result == "" ? "0.08" : result;
       setTasaPrimaMedia(result);
+      setPrestamo({ ...prestamo, tasaPrimaMensual: result });
     } catch (error) {
       console.error(error);
     }

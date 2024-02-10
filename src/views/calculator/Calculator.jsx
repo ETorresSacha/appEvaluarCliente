@@ -44,9 +44,9 @@ const Calculator = ({
     fechaDesembolso: "",
     fechaPrimeraCuota: "",
     periodo: "",
-    // tasaPrimaMensual: 0.08,
+    tasaPrimaMensual: "",
   });
-
+  console.log(prestamo);
   // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
     React.useCallback(() => {
