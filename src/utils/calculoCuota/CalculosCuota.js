@@ -26,18 +26,16 @@ export const calculoFRCA = (data) =>{
       
     // FRCA
     const resultFRCA = acumFRCA.reduce((accum, currentValue) => accum + currentValue,0);
-console.log(acumFRCA);
     return resultFRCA
 }
 
  export const cronPagos = (data)=>{
-     //console.log(data);
+    
     const TSegM = parseFloat(data.tasaPrimaMensual[0]) // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []
     let resultFRCA = calculoFRCA(data)
-    console.log("result"+resultFRCA);
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
 
