@@ -69,7 +69,7 @@ export const diasAcum = (data,i)=>{
     else{
 
         const resultDateFin = sumarMes(data,i)
-        let [ anioF,diaF,mesF ] = resultDateFin.split('-')
+        let [ anioF,mesF,diaF ] = resultDateFin.split('-')
 
         let fechaFin   = new Date(`${anioF}-${mesF}-${diaF}`).getTime();
         let result = (fechaFin-fechaInicio)/(1000*60*60*24)
@@ -78,15 +78,17 @@ export const diasAcum = (data,i)=>{
     return acum
 
 }
-
+//! empezar a verificar desde FRC, ver en los dias acumulados
 // FRC
 export const solutionFRC = (ted,data,i,acumFRCA)=>{
-
+//console.log(ted);
     let resultDiasAcum = diasAcum(data,i-1)
-     let resul = FRC(ted,resultDiasAcum)
-     acumFRCA.push(parseFloat(resul))
+    console.log("ACUMULADOS" +resultDiasAcum);
+     let result = FRC(ted,resultDiasAcum)
+    //console.log(result);
+     acumFRCA.push(parseFloat(result))
     
-     return resul
+     return result
 
 }
 

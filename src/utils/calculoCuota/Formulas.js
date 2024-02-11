@@ -1,6 +1,6 @@
 
 // Cálculo de la tasa efectiva mensual
-export const TEM = (TEA)=>{
+export const TEM = (TEA)=>{ //! tenemos que pasarle tambien el dato del periodo
     const periodo = 30
     const result =  ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100
     return Number.parseFloat(result).toFixed(14)
@@ -39,6 +39,9 @@ export const IntCuo = (TEM,dias,capital)=>{
 
 // Cálculo del capital de la cuota
 export const CapitalCuo =(capital,FRCA,IntCuo)=>{
+    // console.log("cpital" +capital);
+    // console.log("FRC" +FRCA);
+    // console.log("INTCUOTA" +IntCuo);
     const result = (capital/FRCA) - IntCuo 
     return result
 }

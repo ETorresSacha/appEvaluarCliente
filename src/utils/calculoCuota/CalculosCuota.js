@@ -20,25 +20,24 @@ export const calculoFRCA = (data) =>{
    
     const resultTED = Calculos(data).ted
     let acumFRCA = []
-
     for (let i = 1;i<=data.cuotas;i++){
         solutionFRC(resultTED,data,i,acumFRCA)
     }
       
     // FRCA
     const resultFRCA = acumFRCA.reduce((accum, currentValue) => accum + currentValue,0);
-
+console.log(acumFRCA);
     return resultFRCA
 }
 
  export const cronPagos = (data)=>{
-     
-     const TSegM = data.tasaPrimaMensual[0] // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
-     console.log(TSegM);
+     //console.log(data);
+    const TSegM = parseFloat(data.tasaPrimaMensual[0]) // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []
     let resultFRCA = calculoFRCA(data)
+    console.log("result"+resultFRCA);
     const resultTED = Calculos(data).ted
     const resultTEM = Calculos(data).tem
 
@@ -60,7 +59,7 @@ export const calculoFRCA = (data) =>{
             CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoConITF,
         })
     }
-       console.log(cronograma);
+       //console.log(cronograma);
     return cronograma
  
  }
@@ -69,6 +68,7 @@ export const calculoFRCA = (data) =>{
  export const resultCronograma = (data)=>{
 
     const result = cronPagos(data) //! despues sigue aqui
+  
     let cuotas = []
     let promCuota
     
