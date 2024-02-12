@@ -78,14 +78,11 @@ export const diasAcum = (data,i)=>{
     return acum
 
 }
-//! empezar a verificar desde FRC, ver en los dias acumulados
+
 // FRC
 export const solutionFRC = (ted,data,i,acumFRCA)=>{
-//console.log(ted);
     let resultDiasAcum = diasAcum(data,i-1)
-    console.log("ACUMULADOS" +resultDiasAcum);
      let result = FRC(ted,resultDiasAcum)
-    //console.log(result);
      acumFRCA.push(parseFloat(result))
     
      return result
