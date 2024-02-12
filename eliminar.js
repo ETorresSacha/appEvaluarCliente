@@ -117,7 +117,7 @@ return trigger
 }
 
 
-console.log(payDate("months",2));
+console.log(format(payDate("days",2),'dd-MM-yyyy'));
 console.log(format(trigger,'dd-MM-yyyy'));
 console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))
 

@@ -28,6 +28,7 @@ export const sumarMes = (data,i)=>{
     return fechaPago   
 }
 
+//! tenemos que ver como inplementar esto para que se visualice la fecha de pago de acuerdo al periodo
 
 export const paymentDate = (periodo, value)=>{
     const date = add(new Date(date), {
