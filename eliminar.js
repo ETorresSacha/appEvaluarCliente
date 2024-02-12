@@ -33,6 +33,7 @@
 import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 
 let result = format(new Date(2014, 11, 11), 'dd-MM-yyyy')
+console.log(result);
 //=> '2014-02-11'
 
 // var result2 = add(new Date(2014, 8, 1, 10, 19, 50), {
@@ -93,13 +94,31 @@ const trigger = add(new Date(date), {
   //years: 2,
   //months: 9,
   // weeks: 1,
-  //days: 7,
+  days: 7,
   //hours: 5,
-  minutes: 2,
+ // minutes: 2,
   //seconds: 30,
 });
 console.log(trigger);
 
+
+export const payDate = (periodo, value)=>{
+  const trigger = add(new Date(date), {
+      //years: 2,
+      //months: 9,
+      // weeks: 1,
+      [periodo]: [value],
+      //hours: 5,
+     // minutes: 2,
+      //seconds: 30,
+    });
+    console.log(trigger);
+return trigger 
+}
+
+
+console.log(payDate("months",2));
+console.log(format(trigger,'dd-MM-yyyy'));
 console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))
 
 console.log(new Date("12-18-2023").getTime())

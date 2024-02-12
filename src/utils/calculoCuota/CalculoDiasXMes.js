@@ -1,5 +1,5 @@
 import { CapitalCuo, FRC, IntCuo, MonSegDM, TSegDD } from "./Formulas"
-
+import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 // CRONOGRAMA DE LA FECHA
 export const sumarMes = (data,i)=>{
     let fechaPago =""
@@ -26,6 +26,22 @@ export const sumarMes = (data,i)=>{
         fechaPago=`${nuevoAnio}-${mes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}` 
     }
     return fechaPago   
+}
+
+
+export const paymentDate = (periodo, value)=>{
+    const date = add(new Date(date), {
+        [periodo]: [value],
+        //years: 2,
+        //months: 9,
+        // weeks: 1,
+        //days:2
+        //hours: 5,
+       // minutes: 2,
+        //seconds: 30,
+      });
+      return date
+      // OJO: "la fecha por ahora se dejara en el formato que salga para no afectar a las otrs formulas, despues se cambiara"
 }
 
 // DIAS POR MES
