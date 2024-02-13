@@ -103,6 +103,7 @@ console.log(trigger);
 
 
 export const payDate = (periodo, value)=>{
+  console.log(value);
   const trigger = add(new Date(date), {
       //years: 2,
       //months: 9,
@@ -112,12 +113,17 @@ export const payDate = (periodo, value)=>{
      // minutes: 2,
       //seconds: 30,
     });
-    console.log(trigger);
+    console.log(format(trigger,'dd-MM-yyyy'));
 return trigger 
+}
+let fecha = new Date()
+for (let i=0; i<=5;i++){
+  console.log(format(payDate("days",2),'dd-MM-yyyy'));
 }
 
 
-console.log(format(payDate("days",2),'dd-MM-yyyy'));
+
+
 console.log(format(trigger,'dd-MM-yyyy'));
 console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))
 

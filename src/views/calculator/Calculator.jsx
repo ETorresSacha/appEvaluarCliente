@@ -127,7 +127,6 @@ const Calculator = ({
       Alert.alert("Datos incompletos");
     } else {
       const result = resultCronograma(data); //! inicia aqui
-      //console.log(result);
       dataPerson !== undefined
         ? setDataPerson({
             ...dataPerson,

@@ -2,6 +2,7 @@ import { CapitalCuo, FRC, IntCuo, MonSegDM, TSegDD } from "./Formulas"
 import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 // CRONOGRAMA DE LA FECHA
 export const sumarMes = (data,i)=>{
+    //console.log(data);
     let fechaPago =""
     let [anio, mes, dia] = data.fechaPrimeraCuota.split('-')
     let nuevoAnio =""
@@ -30,17 +31,32 @@ export const sumarMes = (data,i)=>{
 
 //! tenemos que ver como inplementar esto para que se visualice la fecha de pago de acuerdo al periodo
 
-export const paymentDate = (periodo, value)=>{
-    const date = add(new Date(date), {
+export const paymentDate = (periodo,data, value)=>{
+    let constante =1
+    switch (periodo){
+        case 'mensual':
+            constante=1
+            break
+        case 'quincenal':
+            constante=15
+            break
+
+    }
+    console.log("value "+ value);
+    console.log(periodo);
+    console.log("fecha "+new Date(data.fechaPrimeraCuota));
+    //console.log(format(new Date(data.fechaPrimeraCuota),'dd-MM-yyyy'));
+    const date = add(new Date(data.fechaPrimeraCuota), {
         [periodo]: [value],
         //years: 2,
         //months: 9,
         // weeks: 1,
-        //days:2
+        days:1
         //hours: 5,
        // minutes: 2,
         //seconds: 30,
       });
+      console.log(format(new Date(date),'dd-MM-yyyy'));
       return date
       // OJO: "la fecha por ahora se dejara en el formato que salga para no afectar a las otrs formulas, despues se cambiara"
 }

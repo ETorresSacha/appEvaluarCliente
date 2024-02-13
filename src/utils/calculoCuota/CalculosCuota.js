@@ -1,6 +1,6 @@
  import {TED, TEM } from "./Formulas"
 
-import {  CuotInt, diasAcum, diasXmes, solutionFRC, sumarMes } from "./CalculoDiasXMes";
+import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC, sumarMes } from "./CalculoDiasXMes";
 
 export const Calculos = (data)=>{
 
@@ -45,7 +45,8 @@ export const calculoFRCA = (data) =>{
         cronograma.push(
             {
             cuota:i, 
-            fechaPago:sumarMes(data,i-1),
+            //fechaPago:sumarMes(data,i-1),
+            fechaPago:paymentDate("months",data,i-1),
             fechaDesembolso:data.fechaDesembolso,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
