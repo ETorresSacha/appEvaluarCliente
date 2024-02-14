@@ -33,12 +33,14 @@ export const sumarMes = (data,i)=>{
 //! no esta entrando al switch
 export const paymentDate = (data, value)=>{
 
-    let constante =1
-    let time=''
-
+    // Agregamos un dia a la decha de la primera cuota, porque por defecto del metododo "new Date" sale con un dia anterior a la fecha seleccionado
     const date = add(new Date(data.fechaPrimeraCuota), {
         days:1
       });
+
+    let constante =1
+    let time=''
+
     switch (data?.periodo){
         case 'Mensual':
             time='months'
@@ -55,20 +57,14 @@ export const paymentDate = (data, value)=>{
             break
         default:
             constante
-
     }
-    console.log("time: "+time);
-    console.log("constante: "+constante);
-    //console.log("value "+ value);
-    //console.log(periodo);
-    //console.log("fecha "+new Date(data.fechaPrimeraCuota));
-    console.log("hoy: "+format(new Date(date),'dd-MM-yyyy'));
+
+    // Forma la fecha de pago al tipo de periodo
     const newDate = add(new Date(date), {
         [time]: [constante*value]
       });
-      console.log(format(new Date(newDate),'dd-MM-yyyy'));
-      return date
-      // OJO: "la fecha por ahora se dejara en el formato que salga para no afectar a las otrs formulas, despues se cambiara"
+      
+      return format(newDate,'yyyy-MM-dd')
 }
 
 // DIAS POR MES
@@ -83,8 +79,8 @@ export const diasXmes = (data,i)=>{
         NDias = resultDA
     }
     else{
-        const resultDateIni = sumarMes(data,i-1)
-        const resultDateFin = sumarMes(data,i)
+        const resultDateIni = paymentDate(data,i-1)
+        const resultDateFin = paymentDate(data,i)
 
         let [anioI,mesI,diaI] = resultDateIni.split('-')
         let [anioF,mesF,diaF ] = resultDateFin.split('-')
@@ -111,7 +107,7 @@ export const diasAcum = (data,i)=>{
     }
     else{
 
-        const resultDateFin = sumarMes(data,i)
+        const resultDateFin = paymentDate(data,i)
         let [ anioF,mesF,diaF ] = resultDateFin.split('-')
 
         let fechaFin   = new Date(`${anioF}-${mesF}-${diaF}`).getTime();
