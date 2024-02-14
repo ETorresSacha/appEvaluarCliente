@@ -121,7 +121,7 @@ const Prestamo = ({
             value={value}
             onChange={(item) => {
               setValue(item.value);
-              setPrestamo({ ...prestamo, periodo: item.value });
+              setPrestamo({ ...prestamo, periodo: item.label });
               setPlaceholderNumCuotas(item.label);
               setErrorsPrestamo((errorsPrestamo) => ({
                 ...errorsPrestamo,

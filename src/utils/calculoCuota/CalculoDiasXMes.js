@@ -31,30 +31,26 @@ export const sumarMes = (data,i)=>{
 
 //! tenemos que ver como inplementar esto para que se visualice la fecha de pago de acuerdo al periodo
 //! no esta entrando al switch
-export const paymentDate = (periodo,data, value)=>{
-    console.log("value: "+value);
-    console.log("periodo: "+periodo);
+export const paymentDate = (data, value)=>{
+
     let constante =1
     let time=''
 
     const date = add(new Date(data.fechaPrimeraCuota), {
         days:1
       });
-    switch (periodo){
-        case 'mensual':
-            constante=1
+    switch (data?.periodo){
+        case 'Mensual':
             time='months'
             break
-        case 'quincenal':
+        case 'Quincenal':
             constante=15
             time='days'
             break
-        case 'semanal':
-            //constante=7
+        case 'Semanal':
             time='weeks'
             break
-        case 'diario':
-            constante=1
+        case 'Diario':
             time='days'
             break
         default:
@@ -68,14 +64,7 @@ export const paymentDate = (periodo,data, value)=>{
     //console.log("fecha "+new Date(data.fechaPrimeraCuota));
     console.log("hoy: "+format(new Date(date),'dd-MM-yyyy'));
     const newDate = add(new Date(date), {
-        [time]: [constante*value],
-        //years: 2,
-        //months: 9,
-        // weeks: 1,
-        //days:1
-        //hours: 5,
-       // minutes: 2,
-        //seconds: 30,
+        [time]: [constante*value]
       });
       console.log(format(new Date(newDate),'dd-MM-yyyy'));
       return date

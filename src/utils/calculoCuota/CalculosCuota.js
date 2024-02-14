@@ -31,6 +31,7 @@ export const calculoFRCA = (data) =>{
 //! lo qu3 se tiene agregar el que el prestamo tambien saque el calculo por el tipo de periodo( EMPEZAR POR ESO)
 
  export const cronPagos = (data)=>{
+    console.log(data);
 
     const TSegM = parseFloat(data.tasaPrimaMensual[0]) // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
     let cronograma=[]
@@ -46,7 +47,7 @@ export const calculoFRCA = (data) =>{
             {
             cuota:i, 
             //fechaPago:sumarMes(data,i-1),
-            fechaPago:paymentDate("quincenal",data,i-1),
+            fechaPago:paymentDate(data,i-1),
             fechaDesembolso:data.fechaDesembolso,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
