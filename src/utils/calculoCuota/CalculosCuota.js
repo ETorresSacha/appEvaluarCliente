@@ -46,7 +46,7 @@ export const calculoFRCA = (data) =>{
             {
             cuota:i, 
             //fechaPago:sumarMes(data,i-1),
-            fechaPago:paymentDate("months",data,i-1),
+            fechaPago:paymentDate("quincenal",data,i-1),
             fechaDesembolso:data.fechaDesembolso,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
