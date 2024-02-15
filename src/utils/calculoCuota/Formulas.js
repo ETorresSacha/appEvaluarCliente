@@ -1,8 +1,25 @@
 
 // Cálculo de la tasa efectiva mensual
-export const TEM = (TEA)=>{ //! tenemos que pasarle tambien el dato del periodo
-    const periodo = 30
-    const result =  ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100
+export const TEM = (data)=>{ //! tenemos que pasarle tambien el dato del periodo
+    let periodo
+    switch (data?.periodo) {
+        case 'Mensual':
+            periodo = 30
+            break
+
+        case 'Quincenal':
+            periodo = 15
+            break
+
+        case 'Semanal':
+            periodo = 7
+            break
+
+        case 'Diario':
+            periodo = 1
+            break
+    }
+    const result =  ((Math.pow((1+(data?.tea/100)),(periodo/360)))-1)*100
     return Number.parseFloat(result).toFixed(14)
 }
 

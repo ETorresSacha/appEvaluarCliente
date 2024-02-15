@@ -5,7 +5,7 @@ import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC, sumarMes } from
 export const Calculos = (data)=>{
 
     // Cálculo de TEM
-    const resultTEM = TEM(data.tea)
+    const resultTEM = TEM(data)
 
     // Cálculo de TED
     const resultTED = TED(resultTEM)
@@ -39,6 +39,7 @@ export const calculoFRCA = (data) =>{
     let newCapital = []
     let resultFRCA = calculoFRCA(data)
     const resultTED = Calculos(data).ted
+    console.log(resultTED);
     const resultTEM = Calculos(data).tem
 
     for (let i = 1;i<=data.cuotas;i++){
