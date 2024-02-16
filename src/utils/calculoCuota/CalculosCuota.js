@@ -2,23 +2,24 @@
 
 import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC, sumarMes } from "./CalculoDiasXMes";
 
-export const Calculos = (data)=>{
+export const tasaEfectiva = (data)=>{
 
     // Cálculo de TEM
-    const resultTEM = TEM(data)
+    const {tasaEfectivaPeriodico, periodo} = TEM(data)
 
     // Cálculo de TED
-    const resultTED = TED(resultTEM)
+    const resultTED = TED(tasaEfectivaPeriodico,periodo)
 
     return {
-        tem:resultTEM,
+        tem:tasaEfectivaPeriodico,
         ted:resultTED, 
+        periodo:periodo
     }
 }
 
 export const calculoFRCA = (data) =>{
    
-    const resultTED = Calculos(data).ted
+    const resultTED = tasaEfectiva(data).ted
     let acumFRCA = []
     for (let i = 1;i<=data.cuotas;i++){
         solutionFRC(resultTED,data,i,acumFRCA)
@@ -31,19 +32,18 @@ export const calculoFRCA = (data) =>{
 //! lo qu3 se tiene agregar el que el prestamo tambien saque el calculo por el tipo de periodo( EMPEZAR POR ESO)
 
  export const cronPagos = (data)=>{
-    console.log(data);
 
     const TSegM = parseFloat(data.tasaPrimaMensual[0]) // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []
     let resultFRCA = calculoFRCA(data)
-    const resultTED = Calculos(data).ted
-    console.log(resultTED);
-    const resultTEM = Calculos(data).tem
-
+    const {tem, ted, periodo} = tasaEfectiva(data)
     for (let i = 1;i<=data.cuotas;i++){
-        
+        ///! OJO: el interes mensual al finals e convierte en interes diario, por lo que cuando hacemos un prestamo
+        //! por periodo tenemos que hacerlo al final con un tasa efectivo diario, modificar eso para todo, 
+        //! TAMBIEN TEM ESTA EN LA CUOTINT ver ese tema para no alterar los resultados
+        //! comienxa en FRC, Y SIGUE LA SECUENCIA
         cronograma.push(
             {
             cuota:i, 
@@ -52,13 +52,13 @@ export const calculoFRCA = (data) =>{
             fechaDesembolso:data.fechaDesembolso,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
-            FRC :solutionFRC(resultTED,data,i,acumFRCA),
-            cuotaInteres:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultInt,
-            cuotaCapital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCuo,
-            capital:CuotInt(data,i-1,resultTEM,resultFRCA,newCapital).resultCap,
-            SegDesgrvamen: CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultSeg,
-            CuoSinITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoSinITF,
-            CuoConITF : CuotInt(data,i-1,resultTEM,resultFRCA,newCapital,TSegM).resultCuoConITF,
+            FRC :solutionFRC(ted,data,i,acumFRCA),
+            cuotaInteres:CuotInt(data,i-1,tem,periodo,resultFRCA,newCapital).resultInt,
+            cuotaCapital:CuotInt(data,i-1,tem,periodo,resultFRCA,newCapital).resultCuo,
+            capital:CuotInt(data,i-1,tem,periodo,resultFRCA,newCapital).resultCap,
+            SegDesgrvamen: CuotInt(data,i-1,tem,periodo,resultFRCA,newCapital,TSegM).resultSeg,
+            CuoSinITF : CuotInt(data,i-1,tem,periodo,resultFRCA,newCapital,TSegM).resultCuoSinITF,
+            CuoConITF : CuotInt(data,i-1,tem,periodo,resultFRCA,newCapital,TSegM).resultCuoConITF,
         })
     }
        //console.log(cronograma);
@@ -70,6 +70,7 @@ export const calculoFRCA = (data) =>{
  export const resultCronograma = (data)=>{
 
     const result = cronPagos(data) //! despues sigue aqui
+    console.log(result);
   
     let cuotas = []
     let promCuota

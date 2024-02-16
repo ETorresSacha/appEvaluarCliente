@@ -121,6 +121,7 @@ export const diasAcum = (data,i)=>{
 // FRC
 export const solutionFRC = (ted,data,i,acumFRCA)=>{
     let resultDiasAcum = diasAcum(data,i-1)
+    console.log(resultDiasAcum);
      let result = FRC(ted,resultDiasAcum)
      acumFRCA.push(parseFloat(result))
     
@@ -130,7 +131,7 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 
 
 // CUOTA INTERES, CAPITAL Y CAPITAL RESTANTE
-export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
+export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
     let resultDiasMes = diasXmes(data,i)
     let CAPITAL = parseFloat(data.capital)
@@ -146,7 +147,7 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
     if(i === 0){
 
          // Cuota interes
-         resultCuoInt = IntCuo(tem,resultDiasMes,CAPITAL)
+         resultCuoInt = IntCuo(tem,periodo,resultDiasMes,CAPITAL)
          
          // Cuota capital
          resultCuoCap =  CapitalCuo(CAPITAL,resultFRCA,resultCuoInt)
@@ -177,7 +178,7 @@ export const CuotInt = (data,i,tem,resultFRCA,newCapital,TSegM)=>{
         resultMonSegDesg = MonSegDM(resultTSegDD,newCapital[0],resultDiasMes)
 
         // Cuota interes
-        resultCuoInt = IntCuo(tem,resultDiasMes,newCapital[0])
+        resultCuoInt = IntCuo(tem,periodo,resultDiasMes,newCapital[0])
         
         // Cuota capital
         resultCuoCap =  CapitalCuo(CAPITAL,resultFRCA,resultCuoInt)

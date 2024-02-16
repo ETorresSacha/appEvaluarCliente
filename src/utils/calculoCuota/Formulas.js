@@ -20,13 +20,16 @@ export const TEM = (data)=>{ //! tenemos que pasarle tambien el dato del periodo
             break
     }
     const result =  ((Math.pow((1+(data?.tea/100)),(periodo/360)))-1)*100
-    return Number.parseFloat(result).toFixed(14)
+    // return Number.parseFloat(result).toFixed(14)
+    return {
+        tasaEfectivaPeriodico:Number.parseFloat(result).toFixed(14),
+        periodo:periodo}
 }
 
 // Cálculo de la tasa efectiva diaria
-export const TED = (TEM)=>{
+export const TED = (TEM, periodo)=>{
  
-    const result =  ((Math.pow((1+(TEM/100)),(1/30)))-1)*100
+    const result =  ((Math.pow((1+(TEM/100)),(1/periodo)))-1)*100
     return result
 }
 
@@ -49,8 +52,8 @@ export const MonSegDM = (TSegDD,capital,dias)=>{
 }
 
 // Cálculo del interés de la cuota
-export const IntCuo = (TEM,dias,capital)=>{
-    const result = ((Math.pow((1+(TEM/100)),(dias/30)))-1)*capital
+export const IntCuo = (TEM,periodo,dias,capital)=>{
+    const result = ((Math.pow((1+(TEM/100)),(dias/periodo)))-1)*capital
     return result
 }
 
