@@ -5,13 +5,15 @@ import { useNavigation } from "@react-navigation/native";
 
 const Header = ({ title, back, id }) => {
   const navigation = useNavigation();
+  console.log("id: " + id);
+  console.log("back: " + back);
 
   return (
     <View style={styles.conteiner}>
       <TouchableOpacity
         style={styles.leftConteiner}
         onPress={() =>
-          id
+          id != undefined
             ? navigation.navigate("Detalle", { id: id, typeColor: null })
             : navigation.navigate(back ? back : "Home")
         }

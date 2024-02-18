@@ -20,12 +20,14 @@ export const tasaEfectiva = (data)=>{
 export const calculoFRCA = (data) =>{
    
     const resultTED = tasaEfectiva(data).ted
+    console.log("result: "+resultTED);
     let acumFRCA = []
     for (let i = 1;i<=data.cuotas;i++){
         solutionFRC(resultTED,data,i,acumFRCA)
     }
-      
+    
     // FRCA
+    console.log("acumuFRCA: "+acumFRCA);
     const resultFRCA = acumFRCA.reduce((accum, currentValue) => accum + currentValue,0);
     return resultFRCA
 }
@@ -71,7 +73,7 @@ export const calculoFRCA = (data) =>{
  export const resultCronograma = (data)=>{
 
     const result = cronPagos(data) //! despues sigue aqui
-    //console.log(result);
+    console.log(result);
   
     let cuotas = []
     let promCuota

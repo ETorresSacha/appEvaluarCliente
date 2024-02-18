@@ -9,7 +9,11 @@ const VerCronograma = (props) => {
 
   return (
     <View style={styles.container}>
-      <Header title={"Cronograma"} back={"Detalle"} id={id} />
+      <Header
+        title={"Cronograma"}
+        back={id ? "Detalle" : "Nuevo cliente"}
+        id={id}
+      />
       <Cronograma data={user} />
     </View>
   );
