@@ -13,7 +13,7 @@ const Header = ({ title, back, id }) => {
       <TouchableOpacity
         style={styles.leftConteiner}
         onPress={() =>
-          id != undefined
+          id
             ? navigation.navigate("Detalle", { id: id, typeColor: null })
             : navigation.navigate(back ? back : "Home")
         }
