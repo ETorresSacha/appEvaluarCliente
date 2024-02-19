@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
 import ModalCofigPrestamo from "../../modals/modalCofigPrestamo/ModalCofigPrestamo";
 import UseStorageTPM from "../hooks/UseHookTasaPrimaMensual";
@@ -106,8 +112,8 @@ const Prestamo = ({
           <Dropdown
             style={
               !errorsPrestamo.periodo
-                ? styles.dropdown
-                : styles.alertErrordropdown
+                ? [styles.dropdown, { backgroundColor: "white" }]
+                : [styles.dropdown, { backgroundColor: "red" }]
             }
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
@@ -139,9 +145,14 @@ const Prestamo = ({
           <Text style={styles.legend}>Capital: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input
+          <TextInput
             placeholder="Soles"
-            style={!errorsPrestamo.capital ? styles.input : styles.alertError}
+            placeholderTextColor="gray"
+            style={
+              !errorsPrestamo.capital
+                ? [styles.input, { borderBottomColor: "white" }]
+                : [styles.input, { borderBottomColor: "red" }]
+            }
             value={prestamo.capital}
             defaultValue={prestamo.capital}
             onChange={(event) => {
@@ -158,9 +169,14 @@ const Prestamo = ({
           <Text style={styles.legend}>TEA: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input
+          <TextInput
             placeholder="%"
-            style={!errorsPrestamo.tea ? styles.input : styles.alertError}
+            placeholderTextColor="gray"
+            style={
+              !errorsPrestamo.tea
+                ? [styles.input, { borderBottomColor: "white" }]
+                : [styles.input, { borderBottomColor: "red" }]
+            }
             value={prestamo.tea}
             defaultValue={prestamo.tea}
             onChange={(event) => {
@@ -177,9 +193,14 @@ const Prestamo = ({
           <Text style={styles.legend}>N° Cuotas: </Text>
         </View>
         <View style={styles.inputContainer}>
-          <Input
+          <TextInput
             placeholder={placeholderNumCuotas}
-            style={!errorsPrestamo.cuotas ? styles.input : styles.alertError}
+            placeholderTextColor="gray"
+            style={
+              !errorsPrestamo.cuotas
+                ? [styles.input, { borderBottomColor: "white" }]
+                : [styles.input, { borderBottomColor: "red" }]
+            }
             value={prestamo.cuotas}
             defaultValue={prestamo.cuotas}
             onChange={(event) => {
@@ -205,7 +226,7 @@ const Prestamo = ({
 export default Prestamo;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingTop: 15 },
+  container: { flex: 1, paddingTop: 15, gap: 25 },
   title: {
     fontSize: 17,
     color: "white",
@@ -238,6 +259,7 @@ const styles = StyleSheet.create({
     color: "cornsilk",
     borderBottomColor: "white",
     borderBottomWidth: 1,
+    width: 160,
   },
   alertError: {
     textAlign: "center",
@@ -271,7 +293,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   dropdown: {
-    margin: 16,
     height: 30,
     width: 170,
     backgroundColor: "white",
@@ -288,7 +309,6 @@ const styles = StyleSheet.create({
     borderColor: "red",
   },
   alertErrordropdown: {
-    margin: 16,
     height: 30,
     width: 170,
     backgroundColor: "red",

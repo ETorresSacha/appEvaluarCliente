@@ -26,7 +26,7 @@ const DatePrestamo = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.formItem}>
+      <View style={[styles.formItem, { paddingBottom: 25 }]}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Fecha de desembolso: </Text>
         </View>
@@ -34,14 +34,9 @@ const DatePrestamo = ({
           <Text
             style={
               !errorsPrestamo.fechaDesembolso
-                ? styles.textDate
-                : styles.alertError
+                ? [styles.textDate, { borderColor: "white" }]
+                : [styles.textDate, { borderColor: "red" }]
             }
-            // value={
-            //   !prestamo.fechaDesembolso
-            //     ? null
-            //     : formatDate(prestamo?.fechaDesembolso)
-            // }
             defaultValue={prestamo?.fechaDesembolso}
           >
             {!prestamo.fechaDesembolso
@@ -65,14 +60,9 @@ const DatePrestamo = ({
           <Text
             style={
               !errorsPrestamo.fechaPrimeraCuota
-                ? styles.input
-                : styles.alertError
+                ? [styles.textDate, { borderColor: "white" }]
+                : [styles.textDate, { borderColor: "red" }]
             }
-            // value={
-            //   !prestamo?.fechaPrimeraCuota
-            //     ? null
-            //     : formatDate(prestamo?.fechaPrimeraCuota)
-            // }
             defaultValue={prestamo?.fechaPrimeraCuota}
           >
             {!prestamo?.fechaPrimeraCuota
@@ -112,13 +102,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 5,
-    backgroundColor: "red",
   },
 
   inputContainerDate: {
     width: 160,
-
-    backgroundColor: "black",
   },
   input: {
     textAlign: "center",
@@ -132,15 +119,14 @@ const styles = StyleSheet.create({
     borderBottomColor: "white",
     borderBottomWidth: 1,
     height: 30,
-
-    // backgroundColor: "yellow",
+    fontSize: 17,
   },
 
   alertError: {
     textAlign: "center",
     color: "cornsilk",
-    borderBottomWidth: 2,
     borderColor: "red",
+    borderBottomWidth: 1,
   },
   inputDateContainer: {
     backgroundColor: "rgb(68, 132, 222)",
