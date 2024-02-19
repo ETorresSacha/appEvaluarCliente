@@ -25,23 +25,29 @@ const DatePrestamo = ({
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Fecha de desembolso: </Text>
         </View>
         <View style={styles.inputContainerDate}>
-          <Input
+          <Text
             style={
-              !errorsPrestamo.fechaDesembolso ? styles.input : styles.alertError
+              !errorsPrestamo.fechaDesembolso
+                ? styles.textDate
+                : styles.alertError
             }
-            value={
-              !prestamo.fechaDesembolso
-                ? null
-                : formatDate(prestamo?.fechaDesembolso)
-            }
+            // value={
+            //   !prestamo.fechaDesembolso
+            //     ? null
+            //     : formatDate(prestamo?.fechaDesembolso)
+            // }
             defaultValue={prestamo?.fechaDesembolso}
-          />
+          >
+            {!prestamo.fechaDesembolso
+              ? null
+              : formatDate(prestamo?.fechaDesembolso)}
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() => handleTypeDatePrestamo("fechaDesembolso")}
@@ -56,19 +62,23 @@ const DatePrestamo = ({
           <Text style={styles.legend}>Fecha de la primera cuota: </Text>
         </View>
         <View style={styles.inputContainerDate}>
-          <Input
+          <Text
             style={
               !errorsPrestamo.fechaPrimeraCuota
                 ? styles.input
                 : styles.alertError
             }
-            value={
-              !prestamo?.fechaPrimeraCuota
-                ? null
-                : formatDate(prestamo?.fechaPrimeraCuota)
-            }
+            // value={
+            //   !prestamo?.fechaPrimeraCuota
+            //     ? null
+            //     : formatDate(prestamo?.fechaPrimeraCuota)
+            // }
             defaultValue={prestamo?.fechaPrimeraCuota}
-          />
+          >
+            {!prestamo?.fechaPrimeraCuota
+              ? null
+              : formatDate(prestamo?.fechaPrimeraCuota)}
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() => handleTypeDatePrestamo("fechaPrimeraCuota")}
@@ -93,17 +103,22 @@ export default DatePrestamo;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 12,
+    display: "flex",
+    //paddingTop: 12,
   },
 
   formItem: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 5,
+    backgroundColor: "red",
   },
 
   inputContainerDate: {
-    flex: 1,
+    width: 160,
+
+    backgroundColor: "black",
   },
   input: {
     textAlign: "center",
@@ -111,6 +126,16 @@ const styles = StyleSheet.create({
     borderBottomColor: "white",
     borderBottomWidth: 1,
   },
+  textDate: {
+    textAlign: "center",
+    color: "cornsilk",
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+    height: 30,
+
+    // backgroundColor: "yellow",
+  },
+
   alertError: {
     textAlign: "center",
     color: "cornsilk",
@@ -131,6 +156,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   legendContainer: {
-    flex: 1,
+    //flex: 1,
+    width: 180,
   },
 });
