@@ -63,7 +63,9 @@ export const validationDataPrestamo = (dataPrestamo) =>{
      periodo:"",
      capital:"",
      tea:"",
+     teaInvalido:"",
      cuotas:"",
+     cuotaInvalido:"",
      fechaDesembolso:"",
      fechaPrimeraCuota:""
     }
@@ -78,19 +80,19 @@ export const validationDataPrestamo = (dataPrestamo) =>{
           error = {...error,tea:"TEA incompleto"}
       }
       if(dataPrestamo.tea.match(ExpRegNumDec)==null){
-        error={...error, tea:"Dato inválido"}
+        error={...error, teaInvalido:"El valor de la TEA es inválido"}
        }
       if(dataPrestamo.cuotas?.trim() === ""  ) {
           error = {...error,cuotas:"Cuota incompleto"}
       }
       if(dataPrestamo.cuotas.match(ExpRegNumEnt)==null){
-        error={...error, cuotas:"Debe ser sólo un número entero"}
+        error={...error, cuotaInvalido:"El número de las cuotas debe ser un número entero"}
        }
       if(dataPrestamo.fechaDesembolso.trim() === "" ) {
-          error = {...error,fechaDesembolso:"Fecha de desembolso incompleto"}
+          error = {...error,fechaDesembolso:"La fecha del desembolso incompleto"}
       }
       if(dataPrestamo.fechaPrimeraCuota.trim() === "" ) {
-          error = {...error,fechaPrimeraCuota:"Fecha de la primera cuota incompleto"}
+          error = {...error,fechaPrimeraCuota:"La fecha de la primera cuota incompleto"}
       }
 
 

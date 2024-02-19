@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Input } from "@rneui/themed";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import {
@@ -261,12 +260,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: 160,
   },
-  alertError: {
-    textAlign: "center",
-    color: "cornsilk",
-    borderBottomWidth: 2,
-    borderColor: "red",
-  },
 
   legend: {
     fontWeight: "500",
@@ -296,22 +289,6 @@ const styles = StyleSheet.create({
     height: 30,
     width: 170,
     backgroundColor: "white",
-    borderRadius: 12,
-    padding: 12,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
-    borderColor: "red",
-  },
-  alertErrordropdown: {
-    height: 30,
-    width: 170,
-    backgroundColor: "red",
     borderRadius: 12,
     padding: 12,
     shadowColor: "#000",

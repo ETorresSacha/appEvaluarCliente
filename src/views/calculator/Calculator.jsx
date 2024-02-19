@@ -35,7 +35,7 @@ const Calculator = ({
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
-  const [errorsPrestamo, setErrorsPrestamo] = useState({});
+  const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   //! en el presramo tengo que agregar las opciones de las modificaciones
   const [prestamo, setPrestamo] = useState({
     capital: "",
@@ -118,13 +118,17 @@ const Calculator = ({
     // Valida
     setErrorsPrestamo(validationDataPrestamo(data));
     let resultError = validationDataPrestamo(data);
+    console.log("errore: " + errorsPrestamo);
 
     // Calcula la cuota
     let valuesText = Object.values(resultError);
+    console.log("errore: " + valuesText);
 
     if (valuesText.some((error) => error !== "")) {
+      let typeError = valuesText.find((element) => element != "");
+      console.log(typeError);
       setEnabled(false);
-      Alert.alert("Datos incompletos");
+      Alert.alert(typeError);
     } else {
       const result = resultCronograma(data); //! inicia aqui
       //console.log(result);
