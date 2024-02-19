@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+    paddingTop: 20,
   },
 
   button: {

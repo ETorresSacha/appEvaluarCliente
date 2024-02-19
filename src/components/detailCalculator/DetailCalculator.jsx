@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  Text,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 const DetailCalculator = ({ resultCuota }) => {
   const cuota = resultCuota[0]?.montoCuota;
@@ -26,42 +19,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-    paddingTop: 50,
-  },
-
-  button: {
-    alignItems: "center",
-    width: 120,
-    height: 40,
-    justifyContent: "center",
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    elevation: 3,
-    backgroundColor: "orange",
-  },
-  buttonCronograma: {
-    alignItems: "center",
-    width: 150,
-    height: 40,
-    justifyContent: "center",
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    elevation: 3,
-    backgroundColor: "orange",
+    paddingTop: 70,
   },
   text: {
     fontSize: 50,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "cornsilk",
-    textAlign: "center",
-  },
-
-  textCronograma: {
-    fontSize: 20,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "white",
     textAlign: "center",
   },
 });

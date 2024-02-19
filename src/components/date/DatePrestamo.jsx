@@ -26,7 +26,7 @@ const DatePrestamo = ({
 
   return (
     <View style={styles.container}>
-      <View style={[styles.formItem, { paddingBottom: 25 }]}>
+      <View style={[styles.formItem, { paddingBottom: 20 }]}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Fecha de desembolso: </Text>
         </View>

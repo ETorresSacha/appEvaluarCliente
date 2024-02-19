@@ -53,11 +53,10 @@ export const validationDataPerson = (dataPerson) =>{
 
 //! Validación de los datos del préstamo
 export const validationDataPrestamo = (dataPrestamo) =>{
-    
-    //let ExpRegNumDec=/^\d*\.\d+$/;
+
     let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
     let ExpRegNumEnt=/^[0-9]+$/;
-    console.log("dataPrestamo: "+dataPrestamo);
+
     let fechaInicio = new Date(dataPrestamo.fechaDesembolso).getTime()
     let fechaFinal = new Date(dataPrestamo.fechaPrimeraCuota).getTime()
 

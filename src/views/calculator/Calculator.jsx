@@ -118,16 +118,15 @@ const Calculator = ({
     // Valida
     setErrorsPrestamo(validationDataPrestamo(data));
     let resultError = validationDataPrestamo(data);
-    console.log("errore: " + errorsPrestamo);
 
     // Calcula la cuota
     let valuesText = Object.values(resultError);
-    console.log("errore: " + valuesText);
 
     if (valuesText.some((error) => error !== "")) {
-      let typeError = valuesText.find((element) => element != "");
-      console.log(typeError);
+      let typeError = valuesText.find((element) => element != ""); // Busca el tipo de error que existe
+
       setEnabled(false);
+
       Alert.alert(typeError);
     } else {
       const result = resultCronograma(data); //! inicia aqui
