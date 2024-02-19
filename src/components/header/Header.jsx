@@ -5,8 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 
 const Header = ({ title, back, id }) => {
   const navigation = useNavigation();
-  console.log("id: " + id);
-  console.log("back: " + back);
 
   return (
     <View style={styles.conteiner}>

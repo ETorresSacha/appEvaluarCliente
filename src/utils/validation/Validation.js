@@ -54,6 +54,11 @@ export const validationDataPerson = (dataPerson) =>{
 //! Validación de los datos del préstamo
 export const validationDataPrestamo = (dataPrestamo) =>{
     
+    //let ExpRegNumDec=/^\d*\.\d+$/;
+    let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
+    let ExpRegNumEnt=/^[0-9]+$/;
+    console.log("dataPrestamo: "+dataPrestamo);
+
     let error = {
      periodo:"",
      capital:"",
@@ -72,9 +77,15 @@ export const validationDataPrestamo = (dataPrestamo) =>{
       if(dataPrestamo.tea.trim() === "" ) {
           error = {...error,tea:"TEA incompleto"}
       }
+      if(dataPrestamo.tea.match(ExpRegNumDec)==null){
+        error={...error, tea:"Dato inválido"}
+       }
       if(dataPrestamo.cuotas?.trim() === ""  ) {
           error = {...error,cuotas:"Cuota incompleto"}
       }
+      if(dataPrestamo.cuotas.match(ExpRegNumEnt)==null){
+        error={...error, cuotas:"Debe ser sólo un número entero"}
+       }
       if(dataPrestamo.fechaDesembolso.trim() === "" ) {
           error = {...error,fechaDesembolso:"Fecha de desembolso incompleto"}
       }
@@ -105,8 +116,9 @@ export const validationInfNegocios = (data) =>{
 
 //! Validación de la tasa prima media
 export const validationTPM = (data)=>{
+    console.log("data: "+data);
 
-    let ExpRegNumDec=/^\d*\.\d+$/;
+    let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
     let error = {
         errorTPM:""
        }
