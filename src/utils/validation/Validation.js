@@ -58,6 +58,8 @@ export const validationDataPrestamo = (dataPrestamo) =>{
     let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
     let ExpRegNumEnt=/^[0-9]+$/;
     console.log("dataPrestamo: "+dataPrestamo);
+    let fechaInicio = new Date(dataPrestamo.fechaDesembolso).getTime()
+    let fechaFinal = new Date(dataPrestamo.fechaPrimeraCuota).getTime()
 
     let error = {
      periodo:"",
@@ -68,7 +70,8 @@ export const validationDataPrestamo = (dataPrestamo) =>{
      cuotaCero:"",
      cuotaInvalido:"",
      fechaDesembolso:"",
-     fechaPrimeraCuota:""
+     fechaPrimeraCuota:"",
+     fechaIncorrecta:""
     }
 
       if(dataPrestamo.periodo.trim() === ""  ) {
@@ -88,10 +91,10 @@ export const validationDataPrestamo = (dataPrestamo) =>{
       }
       if(dataPrestamo.cuotas?.trim() <= 0  ) {
         if(dataPrestamo.cuotas?.trim() < 0){
-            error = {...error,cuotas:"No existe una cuota negativa"}
+            error = {...error,cuotaCero:"No existe una cuota negativa"}
         }
         else
-        error = {...error,cuotas:"Debe existir por lo menos una cuota"}
+        error = {...error,cuotaCero:"Debe existir por lo menos una cuota"}
     }
       if(dataPrestamo.cuotas.match(ExpRegNumEnt)==null){
         error={...error, cuotaInvalido:"El número de las cuotas debe ser un número entero"}
@@ -101,6 +104,10 @@ export const validationDataPrestamo = (dataPrestamo) =>{
       }
       if(dataPrestamo.fechaPrimeraCuota.trim() === "" ) {
           error = {...error,fechaPrimeraCuota:"La fecha de la primera cuota incompleto"}
+      }
+      if(fechaFinal - fechaInicio <= 0){
+        error = {...error,fechaIncorrecta:"La fecha de la primera cuota debe ser posterior a la fecha de desembolso"}
+
       }
 
 
