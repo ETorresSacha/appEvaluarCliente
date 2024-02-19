@@ -65,6 +65,7 @@ export const validationDataPrestamo = (dataPrestamo) =>{
      tea:"",
      teaInvalido:"",
      cuotas:"",
+     cuotaCero:"",
      cuotaInvalido:"",
      fechaDesembolso:"",
      fechaPrimeraCuota:""
@@ -85,6 +86,13 @@ export const validationDataPrestamo = (dataPrestamo) =>{
       if(dataPrestamo.cuotas?.trim() === ""  ) {
           error = {...error,cuotas:"Cuota incompleto"}
       }
+      if(dataPrestamo.cuotas?.trim() <= 0  ) {
+        if(dataPrestamo.cuotas?.trim() < 0){
+            error = {...error,cuotas:"No existe una cuota negativa"}
+        }
+        else
+        error = {...error,cuotas:"Debe existir por lo menos una cuota"}
+    }
       if(dataPrestamo.cuotas.match(ExpRegNumEnt)==null){
         error={...error, cuotaInvalido:"El número de las cuotas debe ser un número entero"}
        }

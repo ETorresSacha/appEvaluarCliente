@@ -254,11 +254,13 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    alignItems: "center",
     textAlign: "center",
     color: "cornsilk",
     borderBottomColor: "white",
     borderBottomWidth: 1,
     width: 160,
+    fontSize: 17,
   },
 
   legend: {
