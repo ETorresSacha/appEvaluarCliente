@@ -132,7 +132,6 @@ export const validationInfNegocios = (data) =>{
 
 //! Validación de la tasa prima media
 export const validationTPM = (data)=>{
-    console.log("data: "+data);
 
     let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
     let error = {

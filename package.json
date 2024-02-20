@@ -40,7 +40,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^10.0.2",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.13.8",
+    "@react-native-community/datetimepicker": "7.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
