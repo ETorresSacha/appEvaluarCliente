@@ -27,16 +27,9 @@ const ModalDate = ({
   prestamo,
   typeDatePrestamo,
 }) => {
-  // // Setea los datos del préstamo
-  // const handleChangeData = (day) => {
-  //   console.log(day);
-  //   //setPrestamo({ ...prestamo, [typeDatePrestamo]: day.dateString });
-  //   setShowModal(false);
-  //   console.log(day);
-  // };
+  // Setea los datos del préstamo
+
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     setShowModal(false);
@@ -46,22 +39,7 @@ const ModalDate = ({
       ...prestamo,
       [typeDatePrestamo]: format(currentDate, "yyyy-MM-dd"),
     });
-    //setShow(false);
   };
-
-  // const showMode = (currentMode) => {
-  //   setShow(true);
-  //   setMode(currentMode);
-  // };
-
-  // const showDatepicker = () => {
-  //   setShow(true);
-  //   showMode("date");
-  // };
-
-  // const showTimepicker = () => {
-  //   showMode("time");
-  // };
 
   return (
     <Modal
@@ -69,23 +47,15 @@ const ModalDate = ({
       onRequestClose={() => onClose()}
       transparent
       animationType="slide"
-      // onBackdropP={() => setShowModal(false)}
+      onBackdropP={() => setShowModal(false)}
     >
-      {/* <TouchableOpacity style={styles.conteiner}>
-        <Calendar
-          style={{ borderRadius: 10, elevation: 4, margin: 40 }}
-          onDayPress={(day) => handleChangeData(day)}
-        />
-      </TouchableOpacity> */}
-
       {visible && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
-          mode={mode}
+          mode="date"
           is24Hour={true}
           onChange={onChange}
-          //onDayPress={(day) => handleChangeData(day)}
         />
       )}
     </Modal>
@@ -116,5 +86,5 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 });
-
+//! primero ver si el modal ya no se usaria, optimizar el codigo
 //! AVERIGUA OVERLAY DE react-native-elements
