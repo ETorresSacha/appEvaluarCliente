@@ -1,6 +1,6 @@
  import {TED, TEM } from "./Formulas"
 
-import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC, sumarMes } from "./CalculoDiasXMes";
+import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC, sumarMes } from "./CalculosFuncionesCrediticios";
 
 //TODO --> TASA EFECTIVA
 export const tasaEfectiva = (data)=>{
