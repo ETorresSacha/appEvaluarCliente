@@ -1,8 +1,10 @@
 import { CapitalCuo, FRC, IntCuo, MonSegDM, TSegDD } from "./Formulas"
 import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
-// CRONOGRAMA DE LA FECHA
+
+//TODO --> CRONOGRAMA DE LA FECHA
+// Esta función solo calcula la fecha mensual, no se utilizará pero se dejará para analizar su lógica
 export const sumarMes = (data,i)=>{
-    //console.log(data);
+
     let fechaPago =""
     let [anio, mes, dia] = data.fechaPrimeraCuota.split('-')
     let nuevoAnio =""
@@ -28,9 +30,7 @@ export const sumarMes = (data,i)=>{
     }
     return fechaPago   
 }
-
-//! tenemos que ver como inplementar esto para que se visualice la fecha de pago de acuerdo al periodo
-//! no esta entrando al switch
+ // Esta función es la que se utilizará para el cálculo de las fechas de acuerdo al tipo de periodo
 export const paymentDate = (data, value)=>{
 
     // Agregamos un dia a la decha de la primera cuota, porque por defecto del metododo "new Date" sale con un dia anterior a la fecha seleccionado
@@ -59,7 +59,7 @@ export const paymentDate = (data, value)=>{
             constante
     }
 
-    // Forma la fecha de pago al tipo de periodo
+    // Cronograma de las fechas de acuerdo al periodo
     const newDate = add(new Date(date), {
         [time]: [constante*value]
       });
@@ -67,7 +67,7 @@ export const paymentDate = (data, value)=>{
       return format(newDate,'yyyy-MM-dd')
 }
 
-// DIAS POR MES
+//TODO --> DIAS POR MES
 export const diasXmes = (data,i)=>{
     let NDias = ""
 
@@ -95,7 +95,7 @@ export const diasXmes = (data,i)=>{
     return NDias
 }
 
-// DIAS ACUMULADOS
+//TODO --> DIAS ACUMULADOS
 export const diasAcum = (data,i)=>{
     let acum = 0
     let fechaInicio = new Date(data.fechaDesembolso).getTime();
@@ -118,10 +118,9 @@ export const diasAcum = (data,i)=>{
 
 }
 
-// FRC
+//TODO --> FRC 
 export const solutionFRC = (ted,data,i,acumFRCA)=>{
     let resultDiasAcum = diasAcum(data,i-1)
-    console.log(resultDiasAcum);
      let result = FRC(ted,resultDiasAcum)
      acumFRCA.push(parseFloat(result))
     
@@ -130,7 +129,7 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 }
 
 
-// CUOTA INTERES, CAPITAL Y CAPITAL RESTANTE
+//TODO --> CUOTA INTERES Y CAPITAL
 export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
     let resultDiasMes = diasXmes(data,i)

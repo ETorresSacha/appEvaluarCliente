@@ -1,5 +1,5 @@
-
-// Cálculo de la tasa efectiva mensual
+//TODO --> FÓRMULAS
+// Cálculo de la tasa efectiva mensual, semanal, quincenal, diario
 export const TEM = (data)=>{ //! tenemos que pasarle tambien el dato del periodo
     let periodo
     switch (data?.periodo) {
@@ -20,7 +20,6 @@ export const TEM = (data)=>{ //! tenemos que pasarle tambien el dato del periodo
             break
     }
     const result =  ((Math.pow((1+(data?.tea/100)),(periodo/360)))-1)*100
-    // return Number.parseFloat(result).toFixed(14)
     return {
         tasaEfectivaPeriodico:Number.parseFloat(result).toFixed(14),
         periodo:periodo}
@@ -59,9 +58,6 @@ export const IntCuo = (TEM,periodo,dias,capital)=>{
 
 // Cálculo del capital de la cuota
 export const CapitalCuo =(capital,FRCA,IntCuo)=>{
-    // console.log("cpital" +capital);
-    // console.log("FRC" +FRCA);
-    // console.log("INTCUOTA" +IntCuo);
     const result = (capital/FRCA) - IntCuo 
     return result
 }
