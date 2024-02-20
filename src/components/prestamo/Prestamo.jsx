@@ -9,8 +9,9 @@ import {
   TextInput,
 } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
-import ModalCofigPrestamo from "../../modals/modalCofigPrestamo/ModalCofigPrestamo";
+
 import UseStorageTPM from "../hooks/UseHookTasaPrimaMensual";
+import ModalCofigTPM from "../../modals/modalCofigTPM/ModalCofigTPM";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -100,7 +101,7 @@ const Prestamo = ({
       </View>
 
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      <ModalCofigPrestamo isVisible={isVisible} setIsVisible={setIsVisible} />
+      <ModalCofigTPM isVisible={isVisible} setIsVisible={setIsVisible} />
 
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>

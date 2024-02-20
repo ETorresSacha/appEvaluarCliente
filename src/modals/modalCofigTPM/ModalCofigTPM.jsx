@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
 import { validationTPM } from "../../utils/validation/Validation";
 
-const ModalCofigPrestamo = ({ isVisible, setIsVisible }) => {
+const ModalCofigTPM = ({ isVisible, setIsVisible }) => {
   const { onSaveDataTPM } = UseStorageTPM();
   const [tpm, setTPM] = useState("");
 
@@ -65,7 +65,7 @@ const ModalCofigPrestamo = ({ isVisible, setIsVisible }) => {
   );
 };
 
-export default ModalCofigPrestamo;
+export default ModalCofigTPM;
 
 const styles = StyleSheet.create({
   container: {
