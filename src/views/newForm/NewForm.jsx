@@ -61,6 +61,7 @@ const NewForm = () => {
       });
     }
   }, [clean]);
+  console.log("errores prestamo: " + valueError);
   const handleDataKeep = async () => {
     // Validación
     setValuePrest(true);
@@ -68,11 +69,13 @@ const NewForm = () => {
 
     //Guardar datos
     let errorCustomer = validationDataPerson(dataPerson);
-    let valuesText = Object.values(errorCustomer);
+    let valuesErrorDataCustomer = Object.values(errorCustomer); // Errores del componente DataCuatomer
+    let valuesErrorPrestamos = Object.values(errorsP); // Errores del componente Prestamo
 
-    if (valuesText.some((error) => error !== "") || !valueError) {
-      let typeError = valuesText.find((element) => element != ""); // Busca el tipo de error que existe
-      Alert.alert(typeError);
+    if (valuesErrorDataCustomer.some((error) => error !== "") || !valueError) {
+      let typeError = valuesErrorDataCustomer.find((element) => element != ""); // Busca el tipo de error que existe
+      let typeError2 = valuesErrorPrestamos.find((element) => element != "");
+      Alert.alert(typeError ? typeError : typeError2);
     } else {
       try {
         Alert.alert("GUARDAR", "¿Desea continuar?", [
