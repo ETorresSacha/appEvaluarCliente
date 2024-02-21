@@ -38,4 +38,4 @@ export default ModalDate;
 
 const styles = StyleSheet.create({});
 
-//! AVERIGUA OVERLAY DE react-native-elements
+//  OVERLAY DE react-native-elements --> es similar que un modal

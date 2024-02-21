@@ -5,23 +5,60 @@ export const validationDataPerson = (dataPerson) =>{
     let error = {
      nombre:"",
      apellidos:"",
+     dni:"",
+     dniError:"",
+     correo:"",
+     correoError:"",
      direccion:"",
-     ndi:"",
      celular:"",
-    correo:""
+     celularError:""
 
     }
-    
+        //Expresión Regular Email
+    let ExpRegEmail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+    let ExpRegNumEnt=/^[0-9]+$/;
     // Datos en blanco
     if(dataPerson.nombre.trim() === "" ) {
-         error = {...error,nombre:"Nombre incompleto"}
+        error = {...error,nombre:"Nombre incompleto."}
+   }
+   if(dataPerson.apellido.trim() === ""  ) {
+    error = {...error,apellidos:"Apellidos incompletos."}
     }
-    if(dataPerson.apellido.trim() === ""  ) {
-     error = {...error,apellidos:"Apellidos incompletos"}
-     }
-     if(  dataPerson.direccion.trim() === ""  ) {
-     error = {...error,direccion:"Dirección incompleto"}
-     }
+    if(  dataPerson.dni.trim() === ""  ) {
+       error = {...error,dni:"DNI incompleto."}
+   }
+   if(dataPerson.dni.trim().length !== 8){
+    if(dataPerson.dni.match(ExpRegNumEnt)==null){
+        error={...error, dniError:"El número de DNI debe tener valores enteros"}
+       }
+    else{
+        error = {...error,dniError : "Se aceptan únicamente ocho caracteres para el número de DNI."}
+       }
+       
+   }
+   if(  dataPerson.correo.trim() === ""  ) {
+       error = {...error,correo:"Correo incompleto."}
+   }
+
+   if(dataPerson.correo.match(ExpRegEmail) == null ){
+       error = {...error, correoError:"No es una dirección de correo electrónico válido."}
+   }
+   if(  dataPerson.direccion.trim() === ""  ) {
+       error = {...error,direccion:"Dirección incompleto."}
+   }
+   if(  dataPerson.celular.trim() === ""  ) {
+       error = {...error,celular:"Celular incompleto"}
+       }
+
+   if(dataPerson.celular.trim().length !== 9){
+    if(dataPerson.celular.match(ExpRegNumEnt)==null){
+        error={...error, celularError:"El número de celular debe tener valores enteros"}
+       }
+    else{
+        error = {...error,celularError : "Se aceptan únicamente nueve caracteres para el número de celular."}
+       }
+       
+   }
 
     // Datos solo número
     //Expresion Regular Solo Números
@@ -31,23 +68,9 @@ export const validationDataPerson = (dataPerson) =>{
 
 //          error = {...error,noEsNumero : "Formato incorrecto"}
 //     }
-    if(dataPerson.dni.trim().length !== 8){
 
-     error = {...error,dni : "Solo se acepta 8 caracteres"}
-     }
-     if(dataPerson.celular.trim().length !== 9){
 
-          error = {...error,celular : "Solo se acepta 9 caracteres"}
-     }
 
-    // Correo
-    //Expresión Regular Email
-    let ExpRegEmail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
-
-    if(dataPerson.correo.match(ExpRegEmail) == null ){
-
-         error = {...error, correo:"No es un correo"}
-    }
     return error
 }
 

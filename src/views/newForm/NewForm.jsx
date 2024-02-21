@@ -71,7 +71,8 @@ const NewForm = () => {
     let valuesText = Object.values(errorCustomer);
 
     if (valuesText.some((error) => error !== "") || !valueError) {
-      Alert.alert("Datos incompletos");
+      let typeError = valuesText.find((element) => element != ""); // Busca el tipo de error que existe
+      Alert.alert(typeError);
     } else {
       try {
         Alert.alert("GUARDAR", "¿Desea continuar?", [

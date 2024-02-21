@@ -46,7 +46,6 @@ const Calculator = ({
     periodo: "",
     tasaPrimaMensual: "",
   });
-  console.log(prestamo);
 
   // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
