@@ -27,15 +27,16 @@ export const validationDataPerson = (dataPerson) =>{
     if(  dataPerson.dni.trim() === ""  ) {
        error = {...error,dni:"DNI incompleto."}
    }
-   if(dataPerson.dni.trim().length !== 8){
-    if(dataPerson.dni.match(ExpRegNumEnt)==null){
+
+   if(dataPerson.dni.trim().length == 8){
+    if(dataPerson.dni.match(ExpRegNumEnt)==null ){
         error={...error, dniError:"El número de DNI debe tener valores enteros"}
-       }
-    else{
-        error = {...error,dniError : "Se aceptan únicamente ocho caracteres para el número de DNI."}
-       }
-       
+       } 
    }
+   if(dataPerson.dni.trim().length !== 8){
+        error = {...error,dniError : "Se aceptan únicamente ocho caracteres para el número de DNI."}
+    }
+       
    if(  dataPerson.correo.trim() === ""  ) {
        error = {...error,correo:"Correo incompleto."}
    }
@@ -50,26 +51,14 @@ export const validationDataPerson = (dataPerson) =>{
        error = {...error,celular:"Celular incompleto"}
        }
 
-   if(dataPerson.celular.trim().length !== 9){
+   if(dataPerson.celular.trim().length == 9){
     if(dataPerson.celular.match(ExpRegNumEnt)==null){
         error={...error, celularError:"El número de celular debe tener valores enteros"}
        }
-    else{
-        error = {...error,celularError : "Se aceptan únicamente nueve caracteres para el número de celular."}
-       }
-       
    }
-
-    // Datos solo número
-    //Expresion Regular Solo Números
-//     var ExpRegSoloNumeros="^[0-9]+$";
-
-//     if(dataPerson.dni.match(ExpRegSoloNumeros) == null || dataPerson.celular.match(ExpRegSoloNumeros) == null){
-
-//          error = {...error,noEsNumero : "Formato incorrecto"}
-//     }
-
-
+   if(dataPerson.celular.trim().length !== 9){
+    error = {...error,celularError : "Se aceptan únicamente nueve caracteres para el número de celular."}
+   }
 
     return error
 }
@@ -78,7 +67,7 @@ export const validationDataPerson = (dataPerson) =>{
 export const validationDataPrestamo = (dataPrestamo) =>{
 
     let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
-    let ExpRegNumEnt=/^[0-9]+$/;
+    let ExpRegNumEnt=/^[0-9]?$/;
 
     let fechaInicio = new Date(dataPrestamo.fechaDesembolso).getTime()
     let fechaFinal = new Date(dataPrestamo.fechaPrimeraCuota).getTime()

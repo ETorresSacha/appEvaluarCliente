@@ -61,7 +61,7 @@ const NewForm = () => {
       });
     }
   }, [clean]);
-  console.log("errores prestamo: " + valueError);
+
   const handleDataKeep = async () => {
     // Validación
     setValuePrest(true);
@@ -73,8 +73,9 @@ const NewForm = () => {
     let valuesErrorPrestamos = Object.values(errorsP); // Errores del componente Prestamo
 
     if (valuesErrorDataCustomer.some((error) => error !== "") || !valueError) {
-      let typeError = valuesErrorDataCustomer.find((element) => element != ""); // Busca el tipo de error que existe
-      let typeError2 = valuesErrorPrestamos.find((element) => element != "");
+      let typeError = valuesErrorDataCustomer.find((element) => element != ""); // Busca el tipo de error que existe en dataCustomer
+      let typeError2 = valuesErrorPrestamos.find((element) => element != ""); // Busca el tipo de error que existe en Prestamo
+
       Alert.alert(typeError ? typeError : typeError2);
     } else {
       try {
@@ -188,11 +189,5 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-// DESPUES ESTO
 
 //! 4. TENEMOS QUE AÑADIR LAS OPCIONES DE EDITAR Y ELIMINAR CLIENTE
-
-//! OTRO
-//! 1. EN EL COMPONENTE CALCULADORA TENEMOS QUE AGREGAR LOS BOTONES DE AJUSTES EN DONDE TENEMOS QUE
-//!    PONER UNA OPCION PARA CAMBIAR EL TASA DE DESGRAVAMEN MENSUAL, TAMBIEN EL BOTON DE LIMPIAR.
-//! 2. MOSTRAR UN MEJOR DETALLADO DE LA CUOTA EN LA CALCULADORA
