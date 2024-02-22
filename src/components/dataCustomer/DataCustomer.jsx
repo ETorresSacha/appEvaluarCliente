@@ -5,13 +5,14 @@ import { validationDataPerson } from "../../utils/validation/Validation";
 import { useFocusEffect } from "@react-navigation/native";
 
 const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
-  const [errors, setErrors] = useState({});
+  //const [errors, setErrors] = useState({});
+  console.log(errores);
 
   //Todo--> Esta es otra forma de setear y validar los datos
-  const handleChangeData = (event, type) => {
-    setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
-    // setErrors(validationDataPerson(dataPerson));
-  };
+  // const handleChangeData = (event, type) => {
+  //   setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
+  //   // setErrors(validationDataPerson(dataPerson));
+  // };
   //Todo--> ****************************************************
 
   // useEffect(() => {
@@ -23,14 +24,15 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
   //   }
   // }, [errors, errors.length]);
   //console.log(errors);
-  useFocusEffect(
-    React.useCallback(() => {
-      //setErrors(validationDataPerson(dataPerson));
-      //setResultError(validationDataPerson(dataPerson));
-      //return () => unsubscribe();
-    }, [dataPerson])
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     //setErrors(validationDataPerson(dataPerson));
+  //     //setResultError(validationDataPerson(dataPerson));
+  //     //return () => unsubscribe();
+  //   }, [dataPerson])
+  //);
 
+  //! falta corregir que cundo sale error se marque de rojo
   return (
     <View style={styles.container}>
       <Text style={styles.title}>DATOS</Text>
@@ -94,7 +96,11 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
             <Text style={styles.subTitle}>DNI</Text>
           </View>
           <View
-            style={!errores.dni ? styles.containerInputText : styles.alertError}
+            style={
+              !errores.dni && !errores.dniError
+                ? styles.containerInputText
+                : styles.alertError
+            }
           >
             <TextInput
               value={dataPerson.dni}
@@ -120,7 +126,9 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
           </View>
           <View
             style={
-              !errores.correo ? styles.containerInputText : styles.alertError
+              !errores.correo && !errores.correoError
+                ? styles.containerInputText
+                : styles.alertError
             }
           >
             <TextInput
@@ -171,7 +179,9 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
           </View>
           <View
             style={
-              !errores.celular ? styles.containerInputText : styles.alertError
+              !errores.celular && !errores.celularError
+                ? styles.containerInputText
+                : styles.alertError
             }
           >
             <TextInput
