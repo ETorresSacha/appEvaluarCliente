@@ -1,38 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Button, Icon, Input } from "@rneui/themed";
-import { View, Text, StyleSheet, Alert, TextInput } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 import { validationDataPerson } from "../../utils/validation/Validation";
-import { useFocusEffect } from "@react-navigation/native";
 
 const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
-  //const [errors, setErrors] = useState({});
-  console.log(errores);
-
-  //Todo--> Esta es otra forma de setear y validar los datos
-  // const handleChangeData = (event, type) => {
-  //   setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
-  //   // setErrors(validationDataPerson(dataPerson));
-  // };
+  //Todo--> Esta es otra forma de setear y validar los datos (SOLO COMO RECORDATORIO)
+  const handleChangeData = (event, type) => {
+    setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
+    setErrores(validationDataPerson(dataPerson));
+  };
   //Todo--> ****************************************************
 
-  // useEffect(() => {
-  //   let resultVal = Object.values(errors);
-  //   if (resultVal.some((error) => error !== "")) {
-  //     setValuePerson(false);
-  //   } else {
-  //     setValuePerson(true);
-  //   }
-  // }, [errors, errors.length]);
-  //console.log(errors);
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     //setErrors(validationDataPerson(dataPerson));
-  //     //setResultError(validationDataPerson(dataPerson));
-  //     //return () => unsubscribe();
-  //   }, [dataPerson])
-  //);
-
-  //! falta corregir que cundo sale error se marque de rojo
   return (
     <View style={styles.container}>
       <Text style={styles.title}>DATOS</Text>
@@ -111,8 +88,11 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
               defaultValue={dataPerson.dni}
               onChangeText={(text) => {
                 setDataPerson({ ...dataPerson, dni: text });
-                //setErrors(dataPerson);
-                setErrores((errores) => ({ ...errores, dni: "" }));
+                setErrores((errores) => ({
+                  ...errores,
+                  dni: "",
+                  dniError: "",
+                }));
               }}
               keyboardType="numeric"
             />
@@ -140,7 +120,11 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
               defaultValue={dataPerson.correo}
               onChangeText={(text) => {
                 setDataPerson({ ...dataPerson, correo: text });
-                setErrores((errores) => ({ ...errores, correo: "" }));
+                setErrores((errores) => ({
+                  ...errores,
+                  correo: "",
+                  correoError: "",
+                }));
               }}
               keyboardType="email-address"
             />
@@ -193,7 +177,11 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
               defaultValue={dataPerson.celular}
               onChangeText={(text) => {
                 setDataPerson({ ...dataPerson, celular: text });
-                setErrores((errores) => ({ ...errores, celular: "" }));
+                setErrores((errores) => ({
+                  ...errores,
+                  celular: "",
+                  celularError: "",
+                }));
               }}
               keyboardType="numeric"
             />
