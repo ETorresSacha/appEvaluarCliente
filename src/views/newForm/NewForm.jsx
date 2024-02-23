@@ -46,6 +46,7 @@ const NewForm = (props) => {
     fechaDesembolso: !user ? "" : user[0].fechaDesembolso,
     fechaPrimeraCuota: !user ? "" : user[0].fechaPrimeraCuota,
     periodo: !user ? "" : user[0].periodo,
+    tasaPrimaMensual: !user ? "" : user[0].tasaPrimaMensual,
     resultPrestamo: [],
   });
 
@@ -61,6 +62,7 @@ const NewForm = (props) => {
         direccion: "",
         celular: "",
         cancelled: false,
+        tasaPrimaMensual: "",
         resultPrestamo: [],
       });
     }
@@ -103,6 +105,7 @@ const NewForm = (props) => {
                 fechaDesembolso: dataPerson?.fechaDesembolso,
                 fechaPrimeraCuota: dataPerson?.fechaPrimeraCuota,
                 periodo: dataPerson?.periodo,
+                tasaPrimaMensual: dataPerson.tasaPrimaMensual,
                 resultPrestamo: dataPerson.resultPrestamo,
               });
 

@@ -37,7 +37,7 @@ const Calculator = ({
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   //! en el presramo tengo que agregar las opciones de las modificaciones
-  console.log(dataPerson);
+  // console.log(dataPerson);
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
@@ -45,7 +45,7 @@ const Calculator = ({
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
     periodo: !dataPerson ? "" : dataPerson.periodo,
-    tasaPrimaMensual: "",
+    tasaPrimaMensual: !dataPerson ? "" : dataPerson.tasaPrimaMensual,
   });
 
   // Todo--> COMPONENTE NEWFORM
@@ -94,6 +94,7 @@ const Calculator = ({
           tea: "",
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
+          tasaPrimaMensual: "",
           periodo: "",
         });
         setClean(false);
@@ -132,6 +133,7 @@ const Calculator = ({
     } else {
       const result = resultCronograma(data); //! inicia aqui
       //console.log(result);
+
       dataPerson !== undefined
         ? setDataPerson({
             ...dataPerson,
@@ -141,6 +143,7 @@ const Calculator = ({
             fechaDesembolso: prestamo?.fechaDesembolso,
             fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
             periodo: prestamo?.periodo,
+            tasaPrimaMensual: prestamo.tasaPrimaMensual[0],
             resultPrestamo: result,
           })
         : setResultCuota(result);

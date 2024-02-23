@@ -50,6 +50,7 @@ const UseStorage = () => {
     fechaDesembolso,
     fechaPrimeraCuota,
     periodo,
+    tasaPrimaMensual,
     resultPrestamo,
   }) => {
     try {
@@ -68,6 +69,7 @@ const UseStorage = () => {
         fechaDesembolso,
         fechaPrimeraCuota,
         periodo,
+        tasaPrimaMensual,
         resultPrestamo,
       });
 
