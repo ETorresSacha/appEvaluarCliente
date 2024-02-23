@@ -123,7 +123,7 @@ const Prestamo = ({
             maxHeight={200}
             labelField="label"
             valueField="value"
-            placeholder="Seleccione"
+            placeholder={!prestamo.periodo ? "Seleccione" : prestamo.periodo}
             value={value}
             onChange={(item) => {
               setValue(item.value);
