@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 import { validationDataPerson } from "../../utils/validation/Validation";
 import Header from "../../components/header/Header";
 
-const NewForm = () => {
+const NewForm = (props) => {
   const uuid = uuidv4();
   const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
@@ -62,6 +62,7 @@ const NewForm = () => {
     }
   }, [clean]);
 
+  // TODO ---> Guardar los datos
   const handleDataKeep = async () => {
     // Validación
     setValuePrest(true);
@@ -134,6 +135,11 @@ const NewForm = () => {
       }
     }
   };
+
+  // TODO --> Editar los datos
+  //console.log(props);
+  const id = props.route.params ? props.route.params.id : null;
+  console.log(id);
 
   return (
     <ScrollView style={styles.container}>

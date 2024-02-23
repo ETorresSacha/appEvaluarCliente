@@ -39,6 +39,10 @@ const Detail = (props) => {
     loadCustomerId(id);
   }, []);
 
+  // Editar
+  const edit = (value) => {
+    navigation.navigate("Nuevo cliente", { id: value });
+  };
   // Eliminar
   const alertDelete = (data) => {
     Alert.alert("Eliminar", "¿Desea continuar?", [
@@ -77,7 +81,10 @@ const Detail = (props) => {
               <View style={styles.containerTitle}>
                 <Text style={styles.title}>DATOS DEL CLIENTE</Text>
                 <View style={styles.iconos}>
-                  <TouchableOpacity style={styles.icon}>
+                  <TouchableOpacity
+                    style={styles.icon}
+                    onPress={() => edit(id)}
+                  >
                     <Icon name="edit" size={30} color="cornsilk" />
                   </TouchableOpacity>
                   <TouchableOpacity
