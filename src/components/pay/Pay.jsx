@@ -197,9 +197,11 @@ const Pay = ({ data }) => {
                   { justifyContent: "space-between" },
                 ]}
               >
-                <Text style={styles.subTitle}>Pago pendiente</Text>
+                <Text style={styles.subTitle}>Cuotas canceladas:</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
-                  {!cancelledShare ? dataSee?.montoCuota : "0"}
+                  {!cancelledShare
+                    ? `${dataSee?.cuota - 1}/${updatePrestamo?.length}`
+                    : "0"}
                 </Text>
               </View>
               <View
