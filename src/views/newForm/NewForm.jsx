@@ -26,15 +26,19 @@ const NewForm = (props) => {
   const [valuePrest, setValuePrest] = useState(false);
   const [dataPrestamo, setDataPrestamo] = useState({});
   const [valueError, setValueError] = useState(false);
+
+  const user = props.route.params ? props.route.params.user : null;
+  console.log(user);
+
   const [dataPerson, setDataPerson] = useState({
-    uuid,
-    nombre: "",
-    apellido: "",
-    dni: "",
-    correo: "",
-    direccion: "",
-    celular: "",
-    cancelled: false,
+    uuid: !user ? uuid : user[0].uuid,
+    nombre: !user ? "" : user[0].nombre,
+    apellido: !user ? "" : user[0].apellido,
+    dni: !user ? "" : user[0].dni,
+    correo: !user ? "" : user[0].correo,
+    direccion: !user ? "" : user[0].direccion,
+    celular: !user ? "" : user[0].celular,
+    cancelled: !user ? false : user[0].celular,
     // Datos del préstamo
     capital: "",
     cuotas: "",
@@ -138,8 +142,6 @@ const NewForm = (props) => {
 
   // TODO --> Editar los datos
   //console.log(props);
-  const id = props.route.params ? props.route.params.id : null;
-  console.log(id);
 
   return (
     <ScrollView style={styles.container}>

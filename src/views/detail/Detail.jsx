@@ -41,7 +41,7 @@ const Detail = (props) => {
 
   // Editar
   const edit = (value) => {
-    navigation.navigate("Nuevo cliente", { id: value });
+    navigation.navigate("Nuevo cliente", { user: value });
   };
   // Eliminar
   const alertDelete = (data) => {
@@ -83,7 +83,7 @@ const Detail = (props) => {
                 <View style={styles.iconos}>
                   <TouchableOpacity
                     style={styles.icon}
-                    onPress={() => edit(id)}
+                    onPress={() => edit(user)}
                   >
                     <Icon name="edit" size={30} color="cornsilk" />
                   </TouchableOpacity>
