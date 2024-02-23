@@ -143,7 +143,7 @@ const Calculator = ({
             fechaDesembolso: prestamo?.fechaDesembolso,
             fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
             periodo: prestamo?.periodo,
-            tasaPrimaMensual: prestamo.tasaPrimaMensual[0],
+            tasaPrimaMensual: prestamo.tasaPrimaMensual,
             resultPrestamo: result,
           })
         : setResultCuota(result);
