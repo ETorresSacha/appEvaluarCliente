@@ -62,7 +62,8 @@ const Prestamo = ({
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
-      result = !prestamo.tasaPrimaMensual ? result : prestamo.tasaPrimaMensual;
+      console.log(result);
+      result = !prestamo.capital ? result : prestamo.tasaPrimaMensual;
 
       setTasaPrimaMedia(result);
       setPrestamo({ ...prestamo, tasaPrimaMensual: result });

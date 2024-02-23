@@ -50,6 +50,7 @@ const NewForm = (props) => {
     resultPrestamo: [],
   });
 
+  console.log(dataPerson);
   useEffect(() => {
     // Limpia es estado
     if (clean) {
