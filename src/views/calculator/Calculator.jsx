@@ -37,13 +37,14 @@ const Calculator = ({
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   //! en el presramo tengo que agregar las opciones de las modificaciones
+  console.log(dataPerson);
   const [prestamo, setPrestamo] = useState({
-    capital: "",
-    cuotas: "",
-    tea: "",
-    fechaDesembolso: "",
-    fechaPrimeraCuota: "",
-    periodo: "",
+    capital: !dataPerson ? "" : dataPerson.capital,
+    cuotas: !dataPerson ? "" : dataPerson.cuotas,
+    tea: !dataPerson ? "" : dataPerson.tea,
+    fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
+    fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
+    periodo: !dataPerson ? "" : dataPerson.periodo,
     tasaPrimaMensual: "",
   });
 

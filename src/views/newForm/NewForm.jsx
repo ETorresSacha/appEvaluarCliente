@@ -28,7 +28,7 @@ const NewForm = (props) => {
   const [valueError, setValueError] = useState(false);
 
   const user = props.route.params ? props.route.params.user : null;
-  console.log(user);
+  //console.log(user);
 
   const [dataPerson, setDataPerson] = useState({
     uuid: !user ? uuid : user[0].uuid,
@@ -40,12 +40,12 @@ const NewForm = (props) => {
     celular: !user ? "" : user[0].celular,
     cancelled: !user ? false : user[0].celular,
     // Datos del préstamo
-    capital: "",
-    cuotas: "",
-    tea: "",
-    fechaDesembolso: "",
-    fechaPrimeraCuota: "",
-    periodo: "",
+    capital: !user ? "" : user[0].capital,
+    cuotas: !user ? "" : user[0].cuotas,
+    tea: !user ? "" : user[0].tea,
+    fechaDesembolso: !user ? "" : user[0].fechaDesembolso,
+    fechaPrimeraCuota: !user ? "" : user[0].fechaPrimeraCuota,
+    periodo: !user ? "" : user[0].periodo,
     resultPrestamo: [],
   });
 
