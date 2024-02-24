@@ -25,6 +25,7 @@ const Prestamo = ({
   setErrorsPrestamo,
   prestamo,
   setPrestamo,
+  edit,
 }) => {
   const { onGetTPM } = UseStorageTPM();
 
@@ -48,7 +49,7 @@ const Prestamo = ({
       </View>
     );
   };
-
+  console.log(prestamo);
   // Setea el estado y los errores
   const handleChangeData = (event, type) => {
     setPrestamo({ ...prestamo, [type]: event.nativeEvent.text });
@@ -59,24 +60,31 @@ const Prestamo = ({
   };
 
   // Carga el valor de la Tasa Prima Mensual
+  console.log(!edit ? "nuevo" : edit);
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
-      result = !prestamo.capital
-        ? !result
-          ? "0.08"
-          : result
-        : prestamo.tasaPrimaMensual;
-
+      if (!edit) {
+        result = !result ? "0.08" : result;
+      }
+      if (edit) {
+        result = prestamo.tasaPrimaMensual;
+        console.log(result);
+      }
       setTasaPrimaMedia(result);
       setPrestamo({ ...prestamo, tasaPrimaMensual: result });
+      // result = !prestamo.capital
+      //   ? !result
+      //     ? "0.08"
+      //     : result
+      //   : prestamo.tasaPrimaMensual;
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
     loadTPM();
-  }, [isVisible]);
+  }, [isVisible, edit]);
 
   return (
     <View style={styles.container}>
@@ -106,7 +114,14 @@ const Prestamo = ({
       </View>
 
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      <ModalCofigTPM isVisible={isVisible} setIsVisible={setIsVisible} />
+      <ModalCofigTPM
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        edit={edit}
+        setPrestamo={setPrestamo}
+        prestamo={prestamo}
+        setTasaPrimaMedia={setTasaPrimaMedia}
+      />
 
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>

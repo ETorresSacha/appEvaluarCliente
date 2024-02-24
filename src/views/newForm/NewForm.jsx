@@ -26,9 +26,15 @@ const NewForm = (props) => {
   const [valuePrest, setValuePrest] = useState(false);
   const [dataPrestamo, setDataPrestamo] = useState({});
   const [valueError, setValueError] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const user = props.route.params ? props.route.params.user : null;
   //console.log(user);
+  useEffect(() => {
+    if (user) {
+      setEdit(true);
+    }
+  }, []);
 
   const [dataPerson, setDataPerson] = useState({
     uuid: !user ? uuid : user[0].uuid,
@@ -50,7 +56,7 @@ const NewForm = (props) => {
     resultPrestamo: [],
   });
 
-  console.log(dataPerson);
+  ///console.log(dataPerson);
   useEffect(() => {
     // Limpia es estado
     if (clean) {
@@ -167,6 +173,8 @@ const NewForm = (props) => {
         valuePrest={valuePrest}
         setValueError={setValueError}
         setValuePrest={setValuePrest}
+        edit={edit}
+        setEdit={setEdit}
       />
       <TouchableOpacity style={styles.buttonContainer} onPress={handleDataKeep}>
         <Text style={styles.text}>Guardar</Text>

@@ -12,7 +12,14 @@ import React, { useEffect, useState } from "react";
 import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
 import { validationTPM } from "../../utils/validation/Validation";
 
-const ModalCofigTPM = ({ isVisible, setIsVisible }) => {
+const ModalCofigTPM = ({
+  isVisible,
+  setIsVisible,
+  edit,
+  prestamo,
+  setPrestamo,
+  setTasaPrimaMedia,
+}) => {
   const { onSaveDataTPM } = UseStorageTPM();
   const [tpm, setTPM] = useState("");
 
@@ -23,7 +30,13 @@ const ModalCofigTPM = ({ isVisible, setIsVisible }) => {
     if (valuesError.some((error) => error != "")) {
       Alert.alert("Dato incorrecto");
     } else {
-      await onSaveDataTPM(value);
+      if (edit) {
+        console.log("estamoasss");
+        setPrestamo({ ...prestamo, tasaPrimaMensual: value });
+        setTasaPrimaMedia(value);
+      } else {
+        await onSaveDataTPM(value);
+      }
       setIsVisible(false);
     }
   };
