@@ -25,6 +25,7 @@ const Customer = ({ enable }) => {
   const { onGetCronograma } = UseStorage();
   const [order, setOrder] = useState(false);
   const [day, setDay] = useState("");
+  const [on, setOn] = useState(false);
   const [data, setData] = useState({
     dataResult: [],
     dataResultCopy: [],
@@ -42,6 +43,9 @@ const Customer = ({ enable }) => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
+      console.log("length: " + resultCustomer.length);
+
+      setOn(true);
       setData({
         ...data,
         dataResult: resultCustomer, // == undefined ? data.dataResult : resultCustomer,
@@ -51,6 +55,7 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
+  console.log("on: " + on);
 
   // Ordenar
   const handleSort = (type, value) => {
@@ -85,7 +90,7 @@ const Customer = ({ enable }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      loadCustomer();
+      setTimeout(loadCustomer, 1000);
       //return () => unsubscribe();
     }, [])
   );
@@ -98,80 +103,85 @@ const Customer = ({ enable }) => {
       <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
       <Header title={!enable ? "Clientes" : "Clientes cancelados"} />
       <NavBar data={data} setData={setData} enable={enable} />
-      {
-        // Cuando no existe ningun cliente guardado
-        data.dataResult == undefined ? (
-          <View style={styles.containerNoCustomers}>
-            <Text style={{ color: "cornsilk" }}>
-              {" "}
-              No hay clientes guardados
-            </Text>
-          </View>
-        ) : // Cuando existe algún tipo de cliente guardado
-        data.dataResult.length == 0 ? (
-          <Loading />
-        ) : (
-          <ScrollView style={styles.containerCuotas}>
-            <View style={styles.containerTitle}>
-              <View
+      {on == false ? (
+        <Loading />
+      ) : (
+        <ScrollView style={styles.containerCuotas}>
+          <View style={styles.containerTitle}>
+            <View
+              style={
+                !enable
+                  ? [styles.titleText, { gap: 20 }]
+                  : [styles.titleText, { justifyContent: "space-around" }]
+              }
+            >
+              <TouchableOpacity
                 style={
                   !enable
-                    ? [styles.titleText, { gap: 20 }]
-                    : [styles.titleText, { justifyContent: "space-around" }]
+                    ? [styles.title, { marginLeft: 26 }]
+                    : [styles.title, { width: 90 }]
                 }
+                onPress={() => handleSort("dni", order, enable)}
               >
-                <TouchableOpacity
-                  style={
-                    !enable
-                      ? [styles.title, { marginLeft: 26 }]
-                      : [styles.title, { width: 90 }]
-                  }
-                  onPress={() => handleSort("dni", order, enable)}
-                >
-                  <Text style={styles.texTitle}>DNI</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={
-                    !enable
-                      ? [styles.title, { width: 60, marginLeft: 18 }]
-                      : [styles.title, { width: 60 }]
-                  }
-                  onPress={() => handleSort("nombre", order)}
-                >
-                  <Text style={styles.texTitle}>NOMBRE</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={
-                    !enable
-                      ? [styles.title, { width: 60, marginLeft: 25 }]
-                      : [styles.title, { width: 100 }]
-                  }
-                  onPress={() => handleSort("fecha", order)}
-                >
-                  <Text style={styles.texTitle}>
-                    {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.title]}
-                  onPress={() => handleSort("cuota", order)}
-                >
-                  <Text style={styles.texTitle}>
-                    {!enable ? "CUOTA" : "MONTO"}
-                  </Text>
-                </TouchableOpacity>
+                <Text style={styles.texTitle}>DNI</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={
+                  !enable
+                    ? [styles.title, { width: 60, marginLeft: 18 }]
+                    : [styles.title, { width: 60 }]
+                }
+                onPress={() => handleSort("nombre", order)}
+              >
+                <Text style={styles.texTitle}>NOMBRE</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={
+                  !enable
+                    ? [styles.title, { width: 60, marginLeft: 25 }]
+                    : [styles.title, { width: 100 }]
+                }
+                onPress={() => handleSort("fecha", order)}
+              >
+                <Text style={styles.texTitle}>
+                  {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.title]}
+                onPress={() => handleSort("cuota", order)}
+              >
+                <Text style={styles.texTitle}>
+                  {!enable ? "CUOTA" : "MONTO"}
+                </Text>
+              </TouchableOpacity>
 
-                {!enable ? (
-                  <View
-                    style={[styles.title, { marginRight: 50 }]}
-                    //onPress={() => handleSort("cuota", order)}
-                  >
-                    <Text style={styles.texTitle}>ALERTA</Text>
-                  </View>
-                ) : null}
-              </View>
+              {!enable ? (
+                <View
+                  style={[styles.title, { marginRight: 50 }]}
+                  //onPress={() => handleSort("cuota", order)}
+                >
+                  <Text style={styles.texTitle}>ALERTA</Text>
+                </View>
+              ) : null}
             </View>
-            {!enable ? (
+          </View>
+          {/* Renderza los datos */}
+          {
+            // Cuando no existe ningun cliente guardado
+            data.dataResult == undefined ||
+            (enable
+              ? customer.customerCancelled.length == 0
+              : data.dataResult.length == 0) ? (
+              <View style={styles.containerNoCustomers}>
+                <Text style={{ color: "cornsilk" }}>
+                  {enable
+                    ? "No hay clientes cancelados"
+                    : "No hay clientes guardados"}
+                </Text>
+              </View>
+            ) : !enable ? (
+              //  clienteS guardadoS
               <View>
                 <Users data={customer.customerRed} color={"red"} />
                 <Users data={customer.customerYellow} color={"yellow"} />
@@ -183,10 +193,10 @@ const Customer = ({ enable }) => {
               </View>
             ) : (
               <Users data={customer?.customerCancelled} enable={enable} />
-            )}
-          </ScrollView>
-        )
-      }
+            )
+          }
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -275,6 +285,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: 200,
   },
 });
 

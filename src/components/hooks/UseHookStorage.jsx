@@ -37,9 +37,23 @@ const UseStorage = () => {
   //! POST
   const handleSaveCronograma = async (dataPerson) => {
     console.log(dataPerson);
+    //console.log("length: " + dataPerson[0].length);
+    let indice;
     try {
-      const result = await saveInfoStorage(MY_DATA_KEY, dataPerson);
+      // Edit
+      // let resultGet = await AsyncStorage.getItem(MY_DATA_KEY);
+      // console.log(resultGet);
 
+      // resultGet?.find((element, index) => {
+      //   if (element.uuid == dataPerson?.uuid) {
+      //     indice = index;
+      //   }
+      //});
+      // resultGet.splice(indice, 1, dataPerson);
+      // await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
+
+      const result = await saveInfoStorage(MY_DATA_KEY, dataPerson);
+      //console.log("index: " + index);
       return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);
@@ -51,6 +65,7 @@ const UseStorage = () => {
     //await AsyncStorage.clear(MY_DATA_KEY);
     try {
       let result = await AsyncStorage.getItem(MY_DATA_KEY);
+      //console.log(result.length);
 
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
