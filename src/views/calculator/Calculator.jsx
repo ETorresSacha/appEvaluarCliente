@@ -32,15 +32,12 @@ const Calculator = ({
   valuePrest,
   setValueError,
   setValuePrest,
-  //edit,
-  //setEdit,
   editValue,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
-  //! en el presramo tengo que agregar las opciones de las modificaciones
-  // console.log(dataPerson);
+
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
@@ -135,7 +132,6 @@ const Calculator = ({
       Alert.alert(typeError);
     } else {
       const result = resultCronograma(data); //! inicia aqui
-      //console.log(result);
 
       dataPerson !== undefined
         ? setDataPerson({
@@ -172,7 +168,6 @@ const Calculator = ({
           setErrorsP={setErrorsP}
           prestamo={prestamo}
           setPrestamo={setPrestamo}
-          //edit={edit}
           editValue={editValue}
         />
         <View>

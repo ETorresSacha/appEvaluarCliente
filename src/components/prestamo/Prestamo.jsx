@@ -25,7 +25,6 @@ const Prestamo = ({
   setErrorsPrestamo,
   prestamo,
   setPrestamo,
-  //edit,
   editValue,
 }) => {
   const { onGetTPM } = UseStorageTPM();
@@ -33,7 +32,6 @@ const Prestamo = ({
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
-  //const [tasaPrimaMedia, setTasaPrimaMedia] = useState(""); // Tasa Prima Mensual
 
   const renderItem = (item) => {
     return (
@@ -50,7 +48,6 @@ const Prestamo = ({
       </View>
     );
   };
-  console.log(prestamo);
   // Setea el estado y los errores
   const handleChangeData = (event, type) => {
     setPrestamo({ ...prestamo, [type]: event.nativeEvent.text });
@@ -66,19 +63,11 @@ const Prestamo = ({
       let result = await onGetTPM();
       if (!editValue) {
         result = !result ? "0.08" : result;
-        console.log("no editValue: " + result);
       }
       if (editValue) {
         result = prestamo.tasaPrimaMensual;
-        console.log(result);
       }
-      // setTasaPrimaMedia(result);
       setPrestamo({ ...prestamo, tasaPrimaMensual: result });
-      // result = !prestamo.capital
-      //   ? !result
-      //     ? "0.08"
-      //     : result
-      //   : prestamo.tasaPrimaMensual;
     } catch (error) {
       console.error(error);
     }
@@ -122,7 +111,6 @@ const Prestamo = ({
         editValue={editValue}
         setPrestamo={setPrestamo}
         prestamo={prestamo}
-        //setTasaPrimaMedia={setTasaPrimaMedia}
       />
 
       {/* ------------------ PERIODO ------------------*/}

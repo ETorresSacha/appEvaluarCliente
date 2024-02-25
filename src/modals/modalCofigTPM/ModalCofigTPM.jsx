@@ -18,7 +18,6 @@ const ModalCofigTPM = ({
   editValue,
   prestamo,
   setPrestamo,
-  //setTasaPrimaMedia,
 }) => {
   const { onSaveDataTPM } = UseStorageTPM();
   const [tpm, setTPM] = useState("");
@@ -31,9 +30,7 @@ const ModalCofigTPM = ({
       Alert.alert("Dato incorrecto");
     } else {
       if (editValue) {
-        console.log("estamoasss");
         setPrestamo({ ...prestamo, tasaPrimaMensual: value });
-        //setTasaPrimaMedia(value);
       } else {
         await onSaveDataTPM(value);
       }

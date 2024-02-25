@@ -17,7 +17,6 @@ import Header from "../../components/header/Header";
 
 const NewForm = (props) => {
   const uuid = uuidv4();
-  console.log(props);
   const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
 
@@ -27,16 +26,12 @@ const NewForm = (props) => {
   const [valuePrest, setValuePrest] = useState(false);
   const [dataPrestamo, setDataPrestamo] = useState({});
   const [valueError, setValueError] = useState(false);
-  //const [edit, setEdit] = useState(false);
 
+  // TODO --> Editar los datos
+  // *** Propiedades que se usan para editar ***
   const user = props.route.params ? props.route.params.user : null;
   const editValue = props.route.params ? props.route.params.editValue : null;
-  //console.log(user);
-  // useEffect(() => {
-  //   if (user) {
-  //     setEdit(true);
-  //   }
-  // }, []);
+  // ****/
 
   const [dataPerson, setDataPerson] = useState({
     uuid: !user ? uuid : user[0].uuid,
@@ -58,7 +53,6 @@ const NewForm = (props) => {
     resultPrestamo: [],
   });
 
-  ///console.log(dataPerson);
   useEffect(() => {
     // Limpia es estado
     if (clean) {
@@ -151,9 +145,6 @@ const NewForm = (props) => {
       }
     }
   };
-
-  // TODO --> Editar los datos
-  //console.log(props);
 
   return (
     <ScrollView style={styles.container}>
