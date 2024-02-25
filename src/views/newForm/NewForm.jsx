@@ -17,6 +17,7 @@ import Header from "../../components/header/Header";
 
 const NewForm = (props) => {
   const uuid = uuidv4();
+  console.log(props);
   const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
 
@@ -29,6 +30,7 @@ const NewForm = (props) => {
   const [edit, setEdit] = useState(false);
 
   const user = props.route.params ? props.route.params.user : null;
+  const editValue = props.route.params ? props.route.params.editValue : null;
   //console.log(user);
   useEffect(() => {
     if (user) {
@@ -175,6 +177,7 @@ const NewForm = (props) => {
         setValuePrest={setValuePrest}
         edit={edit}
         setEdit={setEdit}
+        editValue={editValue}
       />
       <TouchableOpacity style={styles.buttonContainer} onPress={handleDataKeep}>
         <Text style={styles.text}>Guardar</Text>
@@ -210,4 +213,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//! 4. TENEMOS QUE AÑADIR LAS OPCIONES DE EDITAR Y ELIMINAR CLIENTE
+//! 4. carga pero se demora en visaulaixar, eso tenemos que corregir

@@ -23,6 +23,7 @@ const Detail = (props) => {
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
 
   const [user, setUser] = useState([]);
+  const [editValue, setEditValue] = useState(false);
 
   // Trae los datos guardados del local storage
   const loadCustomerId = async (id) => {
@@ -41,7 +42,11 @@ const Detail = (props) => {
 
   // Editar
   const edit = (value) => {
-    navigation.navigate("Nuevo cliente", { user: value });
+    navigation.navigate("Nuevo cliente", {
+      user: value,
+      editValue: true,
+      //setEditValue: setEditValue,
+    });
   };
   // Eliminar
   const alertDelete = (data) => {

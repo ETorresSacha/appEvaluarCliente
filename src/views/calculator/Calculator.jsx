@@ -34,6 +34,7 @@ const Calculator = ({
   setValuePrest,
   edit,
   setEdit,
+  editValue,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
@@ -172,6 +173,7 @@ const Calculator = ({
           prestamo={prestamo}
           setPrestamo={setPrestamo}
           edit={edit}
+          editValue={editValue}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}

@@ -26,6 +26,7 @@ const Prestamo = ({
   prestamo,
   setPrestamo,
   edit,
+  editValue,
 }) => {
   const { onGetTPM } = UseStorageTPM();
 
@@ -64,10 +65,11 @@ const Prestamo = ({
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
-      if (!edit) {
+      if (!editValue) {
         result = !result ? "0.08" : result;
+        console.log("no editValue: " + result);
       }
-      if (edit) {
+      if (editValue) {
         result = prestamo.tasaPrimaMensual;
         console.log(result);
       }
@@ -82,9 +84,10 @@ const Prestamo = ({
       console.error(error);
     }
   };
+  console.log(typeof prestamo.tasaPrimaMensual);
   useEffect(() => {
     loadTPM();
-  }, [isVisible, edit]);
+  }, [isVisible]);
 
   return (
     <View style={styles.container}>
@@ -104,7 +107,7 @@ const Prestamo = ({
         >
           <View>
             <Text style={[styles.legend, { fontSize: 20 }]}>
-              {tasaPrimaMedia} {" %"}
+              {prestamo.tasaPrimaMensual} {" %"}
             </Text>
           </View>
           <TouchableOpacity onPress={() => setIsVisible(true)}>
