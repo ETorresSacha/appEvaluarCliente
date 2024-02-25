@@ -32,8 +32,8 @@ const Calculator = ({
   valuePrest,
   setValueError,
   setValuePrest,
-  edit,
-  setEdit,
+  //edit,
+  //setEdit,
   editValue,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
@@ -172,7 +172,7 @@ const Calculator = ({
           setErrorsP={setErrorsP}
           prestamo={prestamo}
           setPrestamo={setPrestamo}
-          edit={edit}
+          //edit={edit}
           editValue={editValue}
         />
         <View>

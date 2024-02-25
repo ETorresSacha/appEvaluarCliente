@@ -25,7 +25,7 @@ const Prestamo = ({
   setErrorsPrestamo,
   prestamo,
   setPrestamo,
-  edit,
+  //edit,
   editValue,
 }) => {
   const { onGetTPM } = UseStorageTPM();
@@ -33,7 +33,7 @@ const Prestamo = ({
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState(null);
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
-  const [tasaPrimaMedia, setTasaPrimaMedia] = useState(""); // Tasa Prima Mensual
+  //const [tasaPrimaMedia, setTasaPrimaMedia] = useState(""); // Tasa Prima Mensual
 
   const renderItem = (item) => {
     return (
@@ -61,7 +61,6 @@ const Prestamo = ({
   };
 
   // Carga el valor de la Tasa Prima Mensual
-  console.log(!edit ? "nuevo" : edit);
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
@@ -73,7 +72,7 @@ const Prestamo = ({
         result = prestamo.tasaPrimaMensual;
         console.log(result);
       }
-      setTasaPrimaMedia(result);
+      // setTasaPrimaMedia(result);
       setPrestamo({ ...prestamo, tasaPrimaMensual: result });
       // result = !prestamo.capital
       //   ? !result
@@ -120,10 +119,10 @@ const Prestamo = ({
       <ModalCofigTPM
         isVisible={isVisible}
         setIsVisible={setIsVisible}
-        edit={edit}
+        editValue={editValue}
         setPrestamo={setPrestamo}
         prestamo={prestamo}
-        setTasaPrimaMedia={setTasaPrimaMedia}
+        //setTasaPrimaMedia={setTasaPrimaMedia}
       />
 
       {/* ------------------ PERIODO ------------------*/}

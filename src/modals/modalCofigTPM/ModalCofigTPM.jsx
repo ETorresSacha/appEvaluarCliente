@@ -15,10 +15,10 @@ import { validationTPM } from "../../utils/validation/Validation";
 const ModalCofigTPM = ({
   isVisible,
   setIsVisible,
-  edit,
+  editValue,
   prestamo,
   setPrestamo,
-  setTasaPrimaMedia,
+  //setTasaPrimaMedia,
 }) => {
   const { onSaveDataTPM } = UseStorageTPM();
   const [tpm, setTPM] = useState("");
@@ -30,10 +30,10 @@ const ModalCofigTPM = ({
     if (valuesError.some((error) => error != "")) {
       Alert.alert("Dato incorrecto");
     } else {
-      if (edit) {
+      if (editValue) {
         console.log("estamoasss");
         setPrestamo({ ...prestamo, tasaPrimaMensual: value });
-        setTasaPrimaMedia(value);
+        //setTasaPrimaMedia(value);
       } else {
         await onSaveDataTPM(value);
       }
