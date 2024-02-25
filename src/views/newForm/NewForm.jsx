@@ -92,25 +92,27 @@ const NewForm = (props) => {
         Alert.alert("GUARDAR", "¿Desea continuar?", [
           {
             text: "Si",
+            // onPress: async () => {
+            //   await onSaveCronograma({
+            //     uuid,
+            //     nombre: dataPerson?.nombre,
+            //     apellido: dataPerson?.apellido,
+            //     dni: dataPerson?.dni,
+            //     correo: dataPerson?.correo,
+            //     direccion: dataPerson?.direccion,
+            //     celular: dataPerson?.celular,
+            //     cancelled: dataPerson?.cancelled,
+            //     capital: dataPerson?.capital,
+            //     cuotas: dataPerson?.cuotas,
+            //     tea: dataPerson?.tea,
+            //     fechaDesembolso: dataPerson?.fechaDesembolso,
+            //     fechaPrimeraCuota: dataPerson?.fechaPrimeraCuota,
+            //     periodo: dataPerson?.periodo,
+            //     tasaPrimaMensual: dataPerson.tasaPrimaMensual,
+            //     resultPrestamo: dataPerson.resultPrestamo,
+            //   });
             onPress: async () => {
-              await onSaveCronograma({
-                uuid,
-                nombre: dataPerson?.nombre,
-                apellido: dataPerson?.apellido,
-                dni: dataPerson?.dni,
-                correo: dataPerson?.correo,
-                direccion: dataPerson?.direccion,
-                celular: dataPerson?.celular,
-                cancelled: dataPerson?.cancelled,
-                capital: dataPerson?.capital,
-                cuotas: dataPerson?.cuotas,
-                tea: dataPerson?.tea,
-                fechaDesembolso: dataPerson?.fechaDesembolso,
-                fechaPrimeraCuota: dataPerson?.fechaPrimeraCuota,
-                periodo: dataPerson?.periodo,
-                tasaPrimaMensual: dataPerson.tasaPrimaMensual,
-                resultPrestamo: dataPerson.resultPrestamo,
-              });
+              await onSaveCronograma(dataPerson);
 
               Alert.alert(
                 "Se guardo correctamente",

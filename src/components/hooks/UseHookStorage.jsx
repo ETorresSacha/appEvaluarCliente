@@ -35,43 +35,10 @@ const UseStorage = () => {
 
   //TODO--> CRONOGRAMA DE PAGO
   //! POST
-  const handleSaveCronograma = async ({
-    uuid,
-    nombre,
-    apellido,
-    dni,
-    correo,
-    direccion,
-    celular,
-    cancelled,
-    capital,
-    cuotas,
-    tea,
-    fechaDesembolso,
-    fechaPrimeraCuota,
-    periodo,
-    tasaPrimaMensual,
-    resultPrestamo,
-  }) => {
+  const handleSaveCronograma = async (dataPerson) => {
+    console.log(dataPerson);
     try {
-      const result = await saveInfoStorage(MY_DATA_KEY, {
-        uuid,
-        nombre,
-        apellido,
-        dni,
-        correo,
-        direccion,
-        celular,
-        cancelled,
-        capital,
-        cuotas,
-        tea,
-        fechaDesembolso,
-        fechaPrimeraCuota,
-        periodo,
-        tasaPrimaMensual,
-        resultPrestamo,
-      });
+      const result = await saveInfoStorage(MY_DATA_KEY, dataPerson);
 
       return Promise.resolve();
     } catch (error) {
