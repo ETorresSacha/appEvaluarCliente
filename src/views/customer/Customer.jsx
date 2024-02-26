@@ -45,7 +45,6 @@ const Customer = ({ enable }) => {
       const resultCustomer = await onGetCronograma();
       console.log("length: " + resultCustomer.length);
 
-      setOn(true);
       setData({
         ...data,
         dataResult: resultCustomer, // == undefined ? data.dataResult : resultCustomer,
@@ -55,7 +54,6 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
-  console.log("on: " + on);
 
   // Ordenar
   const handleSort = (type, value) => {
@@ -90,7 +88,9 @@ const Customer = ({ enable }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      setTimeout(loadCustomer, 1000);
+      loadCustomer();
+      setTimeout(setOn, 1000, true);
+
       //return () => unsubscribe();
     }, [])
   );
@@ -172,7 +172,7 @@ const Customer = ({ enable }) => {
             data.dataResult == undefined ||
             (enable
               ? customer.customerCancelled.length == 0
-              : data.dataResult.length == 0) ? (
+              : customer.customer.length == 0) ? (
               <View style={styles.containerNoCustomers}>
                 <Text style={{ color: "cornsilk" }}>
                   {enable

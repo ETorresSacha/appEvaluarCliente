@@ -36,19 +36,21 @@ const UseStorage = () => {
   //TODO--> CRONOGRAMA DE PAGO
   //! POST
   const handleSaveCronograma = async (dataPerson) => {
-    console.log(dataPerson);
+    //console.log(dataPerson);
     //console.log("length: " + dataPerson[0].length);
     let indice;
     try {
       // Edit
-      // let resultGet = await AsyncStorage.getItem(MY_DATA_KEY);
-      // console.log(resultGet);
 
-      // resultGet?.find((element, index) => {
+      // let resultGet = await handleGetCronograma();
+      // //console.log(resultGet.length);
+
+      // let resultRESULT = resultGet?.find((element, index) => {
       //   if (element.uuid == dataPerson?.uuid) {
       //     indice = index;
       //   }
-      //});
+      // });
+      // console.log("RESIL: " + resultRESULT.length); //! AUI SALE ERROR, ESTAMOS EN EDITAR, COMPARAR CUANDO SE HACE UN GET, SI NO SE RESUELVE DE AQUI REALIZARLO DESDE EL MISMO COMPONENTE
       // resultGet.splice(indice, 1, dataPerson);
       // await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
 
@@ -66,6 +68,7 @@ const UseStorage = () => {
     try {
       let result = await AsyncStorage.getItem(MY_DATA_KEY);
       //console.log(result.length);
+      //console.log(result);
 
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
