@@ -6,6 +6,7 @@ import Header from "../../components/header/Header";
 const VerCronograma = (props) => {
   const user = props.route.params.data;
   const id = props.route.params.id;
+  const enable = props.route.params.enable;
 
   return (
     <View style={styles.container}>
@@ -13,6 +14,7 @@ const VerCronograma = (props) => {
         title={"Cronograma"}
         back={id ? "Detalle" : "Nuevo cliente"}
         id={id}
+        enable={enable}
       />
       <Cronograma data={user} />
     </View>

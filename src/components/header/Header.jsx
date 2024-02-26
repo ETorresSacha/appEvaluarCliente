@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 
-const Header = ({ title, back, id }) => {
+const Header = ({ title, back, id, enable }) => {
   const navigation = useNavigation();
 
   return (
@@ -12,7 +12,11 @@ const Header = ({ title, back, id }) => {
         style={styles.leftConteiner}
         onPress={() =>
           id
-            ? navigation.navigate("Detalle", { id: id, typeColor: null })
+            ? navigation.navigate("Detalle", {
+                id: id,
+                typeColor: null,
+                enable: enable ? enable : null,
+              })
             : navigation.navigate(back ? back : "Home")
         }
       >

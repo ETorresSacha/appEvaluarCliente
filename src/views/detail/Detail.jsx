@@ -16,9 +16,11 @@ import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
 
 const Detail = (props) => {
+  //console.log(props);
   const color = props.route.params.typeColor;
   const id = props.route.params.id;
   const enable = props.route.params.enable;
+  //const cancelado = props.route.params.cancelado;
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
 
@@ -81,12 +83,14 @@ const Detail = (props) => {
               <View style={styles.containerTitle}>
                 <Text style={styles.title}>DATOS DEL CLIENTE</Text>
                 <View style={styles.iconos}>
-                  <TouchableOpacity
-                    style={styles.icon}
-                    onPress={() => edit(user)}
-                  >
-                    <Icon name="edit" size={30} color="cornsilk" />
-                  </TouchableOpacity>
+                  {enable ? null : (
+                    <TouchableOpacity
+                      style={styles.icon}
+                      onPress={() => edit(user)}
+                    >
+                      <Icon name="edit" size={30} color="cornsilk" />
+                    </TouchableOpacity>
+                  )}
                   <TouchableOpacity
                     style={styles.icon}
                     onPress={() => alertDelete(id)}
@@ -126,6 +130,7 @@ const Detail = (props) => {
                 navigation.navigate("Cronograma", {
                   data: user[0].resultPrestamo,
                   id: id,
+                  enable: enable,
                 })
               }
             >

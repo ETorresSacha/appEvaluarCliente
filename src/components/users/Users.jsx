@@ -5,6 +5,7 @@ import { datePay, formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Users = ({ data, color, enable }) => {
+  console.log("jo: " + enable);
   const navigation = useNavigation();
 
   // estilos dinamico del ícono de alerta
