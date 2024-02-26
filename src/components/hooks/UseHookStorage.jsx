@@ -34,28 +34,26 @@ const UseStorage = () => {
   };
 
   //TODO--> CRONOGRAMA DE PAGO
-  //! POST
-  const handleSaveCronograma = async (dataPerson) => {
-    //console.log(dataPerson);
-    //console.log("length: " + dataPerson[0].length);
+  //! POST AND UPDATE CUSTOMER
+  const handleSaveCronograma = async (dataPerson, editValue) => {
     let indice;
     try {
-      // Edit
+      // Editar
+      if (editValue) {
+        let resultGet = await handleGetCronograma();
 
-      // let resultGet = await handleGetCronograma();
-      // //console.log(resultGet.length);
+        resultGet?.find((element, index) => {
+          if (element.uuid == dataPerson?.uuid) {
+            indice = index;
+          }
+        });
+        resultGet.splice(indice, 1, dataPerson);
+        await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
+        return Promise.resolve();
+      }
 
-      // let resultRESULT = resultGet?.find((element, index) => {
-      //   if (element.uuid == dataPerson?.uuid) {
-      //     indice = index;
-      //   }
-      // });
-      // console.log("RESIL: " + resultRESULT.length); //! AUI SALE ERROR, ESTAMOS EN EDITAR, COMPARAR CUANDO SE HACE UN GET, SI NO SE RESUELVE DE AQUI REALIZARLO DESDE EL MISMO COMPONENTE
-      // resultGet.splice(indice, 1, dataPerson);
-      // await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
-
-      const result = await saveInfoStorage(MY_DATA_KEY, dataPerson);
-      //console.log("index: " + index);
+      // Nuevo cliente
+      await saveInfoStorage(MY_DATA_KEY, dataPerson);
       return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);
