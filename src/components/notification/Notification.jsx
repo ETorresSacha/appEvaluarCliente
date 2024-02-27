@@ -67,7 +67,7 @@ const Notification = ({ data, color }) => {
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
-      setDataNegocio(result);
+      setDataNegocio(result ? result : []);
     } catch (error) {
       console.error(error);
     }

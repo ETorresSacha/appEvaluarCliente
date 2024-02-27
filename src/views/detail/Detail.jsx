@@ -7,6 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { Icon } from "@rneui/themed";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import { useNavigation } from "@react-navigation/native";
@@ -37,9 +38,15 @@ const Detail = (props) => {
     }
   };
 
-  useEffect(() => {
-    loadCustomerId(id);
-  }, [id]);
+  // useEffect(() => {
+  //   loadCustomerId(id);
+  // }, [setUser]);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadCustomerId(id);
+      //return () => unsubscribe();
+    }, [])
+  );
 
   // Editar
   const edit = (value) => {

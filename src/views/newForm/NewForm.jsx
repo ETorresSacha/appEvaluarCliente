@@ -30,7 +30,6 @@ const NewForm = (props) => {
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
   const user = props.route.params ? props.route.params.user : null;
-  //console.log(user[0].resultPrestamo);
   const editValue = props.route.params ? props.route.params.editValue : null;
   const color = props.route.params.typeColor;
   const id = props.route.params.id;
