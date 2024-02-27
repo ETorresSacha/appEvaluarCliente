@@ -39,11 +39,17 @@ const Detail = (props) => {
 
   useEffect(() => {
     loadCustomerId(id);
-  }, []);
+  }, [id]);
 
   // Editar
   const edit = (value) => {
-    navigation.navigate("Nuevo cliente", { user: value, editValue: true });
+    navigation.navigate("Nuevo cliente", {
+      user: value,
+      editValue: true,
+      color,
+      id,
+      enable,
+    });
   };
   // Eliminar
   const alertDelete = (data) => {

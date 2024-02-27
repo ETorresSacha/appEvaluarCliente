@@ -32,6 +32,9 @@ const NewForm = (props) => {
   const user = props.route.params ? props.route.params.user : null;
   //console.log(user[0].resultPrestamo);
   const editValue = props.route.params ? props.route.params.editValue : null;
+  const color = props.route.params.typeColor;
+  const id = props.route.params.id;
+  const enable = props.route.params.enable;
   // ****/
 
   const [dataPerson, setDataPerson] = useState({
@@ -113,7 +116,14 @@ const NewForm = (props) => {
                   },
                   {
                     text: "No",
-                    onPress: () => navigation.navigate("Clientes"),
+                    onPress: () =>
+                      editValue
+                        ? navigation.navigate("Detalle", {
+                            id: id,
+                            typeColor: null,
+                            enable: enable ? enable : null,
+                          })
+                        : navigation.navigate("Clientes"),
                     style: "destructive",
                   },
                 ]
@@ -139,6 +149,9 @@ const NewForm = (props) => {
       <Header
         title={editValue ? " Editar cliente" : "Nuevo cliente"}
         back={"Clientes"}
+        id={id}
+        color={color}
+        enable={enable}
       />
       <DataCustomer
         setErrores={setErrores}
