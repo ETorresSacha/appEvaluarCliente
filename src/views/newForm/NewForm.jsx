@@ -31,9 +31,9 @@ const NewForm = (props) => {
   // *** Propiedades que se usan para editar ***
   const user = props.route.params ? props.route.params.user : null;
   const editValue = props.route.params ? props.route.params.editValue : null;
-  const color = props.route.params.typeColor;
-  const id = props.route.params.id;
-  const enable = props.route.params.enable;
+  const color = props.route.params ? props.route.params.typeColor : null;
+  const id = props.route.params ? props.route.params.id : null;
+  const enable = props.route.params ? props.route.params.enable : null;
   // ****/
 
   const [dataPerson, setDataPerson] = useState({
