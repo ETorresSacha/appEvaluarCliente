@@ -136,7 +136,10 @@ const NewForm = (props) => {
   console.log(dataPerson.resultPrestamo);
   return (
     <ScrollView style={styles.container}>
-      <Header title={"Nuevo cliente"} back={"Clientes"} />
+      <Header
+        title={editValue ? " Editar cliente" : "Nuevo cliente"}
+        back={"Clientes"}
+      />
       <DataCustomer
         setErrores={setErrores}
         errores={errores}
