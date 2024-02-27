@@ -151,8 +151,8 @@ const Customer = ({ enable }) => {
                 style={[styles.title]}
                 onPress={() => handleSort("cuota", order)}
               >
-                <Text style={styles.texTitle}>
-                  {!enable ? "CUOTA" : "MONTO"}
+                <Text style={[styles.texTitle, { width: enable ? 100 : null }]}>
+                  {!enable ? "CUOTA" : "MONTO PRESTAMO"}
                 </Text>
               </TouchableOpacity>
 

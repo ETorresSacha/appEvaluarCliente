@@ -30,6 +30,7 @@ const NewForm = (props) => {
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
   const user = props.route.params ? props.route.params.user : null;
+  //console.log(user[0].resultPrestamo);
   const editValue = props.route.params ? props.route.params.editValue : null;
   // ****/
 
@@ -50,9 +51,12 @@ const NewForm = (props) => {
     fechaPrimeraCuota: !user ? "" : user[0].fechaPrimeraCuota,
     periodo: !user ? "" : user[0].periodo,
     tasaPrimaMensual: !user ? "" : user[0].tasaPrimaMensual,
-    resultPrestamo: [],
+    resultPrestamo: !user ? [] : user[0].resultPrestamo,
+    //resultPrestamo: [],
   });
-
+  //console.log(dataPerson);
+  //! 1.  ESTA VOLVIENDO A OPERAR RESULTPRESTAMOS DENUEVO, CUANDO SOLO SE EDITA LOS DATOS DEL CLIENTE NO DEBE DE AFECTAR A LOS RESULTADOS DEL PRESTAMO
+  //! 2. CUANDO SE MODIFICA LOS DATOS DEL PRESTAMO, ES AHI CUANDO PUEDE MODIFICAR LOS DATOS DEL PRESTAMO
   useEffect(() => {
     // Limpia es estado
     if (clean) {
@@ -129,6 +133,7 @@ const NewForm = (props) => {
     }
   };
 
+  console.log(dataPerson.resultPrestamo);
   return (
     <ScrollView style={styles.container}>
       <Header title={"Nuevo cliente"} back={"Clientes"} />

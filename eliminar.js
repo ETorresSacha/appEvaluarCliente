@@ -131,3 +131,14 @@ console.log(new Date("12-18-2023").getTime())
 console.log(new Date("12-17-2023").getTime())
 console.log((new Date('01-08-2024').getTime())*(-1))
 console.log(new Date('01-09-2024'))
+
+var assert = require('assert');
+var equal = require('deep-equal');
+var x = { a : { n: 0 } };
+var y = { a : { n: 0 } };
+var z = { a : { n: 1 } };
+console.log(equal(x, y));
+let a = { age: 29, name: "Dionysia" };
+let b = { name: "Dionysia", age: 29 };
+
+console.log(equal(a, b));
