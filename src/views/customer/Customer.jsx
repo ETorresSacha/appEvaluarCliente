@@ -172,7 +172,7 @@ const Customer = ({ enable }) => {
             data.dataResult == undefined ||
             (enable
               ? customer.customerCancelled.length == 0
-              : customer.customer.length == 0) ? (
+              : customer.dataResult.length == 0) ? (
               <View style={styles.containerNoCustomers}>
                 <Text style={{ color: "cornsilk" }}>
                   {enable

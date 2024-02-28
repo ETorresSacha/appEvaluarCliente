@@ -142,7 +142,7 @@ const NewForm = (props) => {
     }
   };
 
-  console.log(dataPerson.resultPrestamo);
+  //console.log(dataPerson.resultPrestamo);
   return (
     <ScrollView style={styles.container}>
       <Header
@@ -172,6 +172,7 @@ const NewForm = (props) => {
         //edit={edit}
         //setEdit={setEdit}
         editValue={editValue}
+        user={user}
       />
       <TouchableOpacity style={styles.buttonContainer} onPress={handleDataKeep}>
         <Text style={styles.text}>Guardar</Text>

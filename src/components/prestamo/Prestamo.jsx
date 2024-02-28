@@ -72,7 +72,7 @@ const Prestamo = ({
       console.error(error);
     }
   };
-  console.log(typeof prestamo.tasaPrimaMensual);
+
   useEffect(() => {
     loadTPM();
   }, [isVisible]);
