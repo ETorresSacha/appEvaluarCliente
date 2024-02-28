@@ -38,11 +38,8 @@ const Calculator = ({
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false);
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
-  //const [copyDataPrestamo, setCopyDataPrestamo] = useState([]);
-  const [copyDataPrestamo, setCopyDataPrestamo] = useState([]);
-  const [changeValue, setChangeValue] = useState(false);
-  let copyDataPersonResult;
-  //let copyDataPrestamo;
+  const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
+  const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
 
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
@@ -55,33 +52,16 @@ const Calculator = ({
   });
 
   // Todo--> COMPONENTE NEWFORM
-  useEffect(() => {
-    //copyDataPersonResult = dataPerson.resultPrestamo;
-  }, []);
-  console.log(user[0].resultPrestamo);
+
   useFocusEffect(
     React.useCallback(() => {
-      //console.log(dataPerson.resultPrestamo);
-      //copyDataPersonResult = dataPerson.resultPrestamo;
-      // console.log(copyDataPersonResult);
-      //copyDataPrestamo =
-      //setcopyDataPersonResult(dataPerson.resultPrestamo);
-      //console.log(copyDataPersonResult);
-      //
-      // Valida los datos al inicio-componente NEWFORM
+      setCopyDataPrestamo(prestamo);
       if (valuePrest) {
         setErrorsPrestamo(validationDataPrestamo(prestamo));
       }
     }, [valuePrest, setValueError])
   );
-  //console.log("*****");
-  //console.log(dataPerson.resultPrestamo);
-  useEffect(() => {
-    setCopyDataPrestamo(prestamo);
-  }, []);
-  // console.log("es igual: " + equal(prestamo, copyDataPrestamo));
-  // Valida los datos y calcula la cuota del componente NEWFORM
-  //console.log("valor del edit: " + editValue);
+
   useEffect(() => {
     if (errorsP !== undefined) {
       let resulView = false;
@@ -100,17 +80,9 @@ const Calculator = ({
         if (editValue) {
           if (equal(prestamo, copyDataPrestamo)) {
             setChangeValue(true);
-            console.log("valores  son iguales ");
           } else {
             setChangeValue(false);
           }
-          // else {
-          //   resulView = true;
-          // }
-          resulView = true;
-          setEnabled(true);
-          setValueError(true);
-          //console.log(equal(a, b));
         }
         resulView = true;
         setEnabled(true);
@@ -121,7 +93,6 @@ const Calculator = ({
       }
     }
   }, [prestamo, changeValue]);
-  console.log("change: " + changeValue);
 
   useEffect(() => {
     if (clean !== undefined) {
@@ -152,10 +123,7 @@ const Calculator = ({
       }
     }
   }, [prestamo]);
-  //console.log(dataPerson.resultPrestamo);
-  // changeValue
-  //       ? copyDataPersonResult
-  //       :
+
   // Todo--> PARA AMBOS COMPONENTES
   const handleCalcular = async (data) => {
     //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
@@ -173,11 +141,11 @@ const Calculator = ({
 
       Alert.alert(typeError);
     } else {
+      // El resultado dependerá si los valores del prestamo cambian o no
       const result = changeValue
         ? user[0].resultPrestamo
         : resultCronograma(data); //! inicia aqui
 
-      //const result = resultCronograma(data); //! inicia aqui
       dataPerson !== undefined
         ? setDataPerson({
             ...dataPerson,
