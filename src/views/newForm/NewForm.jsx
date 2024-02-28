@@ -100,33 +100,16 @@ const NewForm = (props) => {
             text: "Si",
             onPress: async () => {
               await onSaveCronograma(dataPerson, editValue);
-
-              Alert.alert(
-                "Se guardo correctamente",
-                "¿Desea agregar un nuevo cliente?",
-                [
-                  {
-                    text: "Si",
-                    onPress: () => {
-                      setClean(true);
-                      setValuePrest(false);
-                    },
-                    style: "destructive",
-                  },
-                  {
-                    text: "No",
-                    onPress: () =>
-                      editValue
-                        ? navigation.navigate("Detalle", {
-                            id: id,
-                            typeColor: null,
-                            enable: enable ? enable : null,
-                          })
-                        : navigation.navigate("Clientes"),
-                    style: "destructive",
-                  },
-                ]
-              );
+              if (editValue) {
+                navigation.navigate("Detalle", {
+                  id: id,
+                  typeColor: null,
+                  enable: enable ? enable : null,
+                });
+              } else {
+                setClean(true);
+                setValuePrest(false);
+              }
             },
             style: "destructive",
           },
@@ -142,7 +125,6 @@ const NewForm = (props) => {
     }
   };
 
-  //console.log(dataPerson.resultPrestamo);
   return (
     <ScrollView style={styles.container}>
       <Header
@@ -169,8 +151,6 @@ const NewForm = (props) => {
         valuePrest={valuePrest}
         setValueError={setValueError}
         setValuePrest={setValuePrest}
-        //edit={edit}
-        //setEdit={setEdit}
         editValue={editValue}
         user={user}
       />

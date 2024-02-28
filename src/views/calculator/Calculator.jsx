@@ -6,7 +6,6 @@ import {
   Alert,
   TouchableOpacity,
   ScrollView,
-  Pressable,
   Image,
 } from "react-native";
 import Prestamo from "../../components/prestamo/Prestamo";
@@ -16,8 +15,6 @@ import { validationDataPrestamo } from "../../utils/validation/Validation";
 import { resultCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import ModalCofigPrestamo from "../../modals/modalCofigTPM/ModalCofigTPM";
 import equal from "deep-equal";
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
