@@ -47,7 +47,7 @@ const Calculator = ({
     periodo: !dataPerson ? "" : dataPerson.periodo,
     tasaPrimaMensual: !dataPerson ? "" : dataPerson.tasaPrimaMensual,
   });
-
+  console.log(prestamo);
   // Todo--> COMPONENTE NEWFORM
 
   useFocusEffect(
@@ -101,7 +101,7 @@ const Calculator = ({
           tea: "",
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
-          tasaPrimaMensual: "",
+          //tasaPrimaMensual,
           periodo: "",
         });
         setClean(false);
@@ -179,6 +179,7 @@ const Calculator = ({
           prestamo={prestamo}
           setPrestamo={setPrestamo}
           editValue={editValue}
+          valuePrest={valuePrest}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}

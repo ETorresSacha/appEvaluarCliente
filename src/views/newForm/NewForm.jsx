@@ -71,7 +71,7 @@ const NewForm = (props) => {
         direccion: "",
         celular: "",
         cancelled: false,
-        tasaPrimaMensual: "",
+        //tasaPrimaMensual: "",
         resultPrestamo: [],
       });
     }
@@ -124,7 +124,7 @@ const NewForm = (props) => {
       }
     }
   };
-
+  //! cuando gusrdamos los datos la tasa prima mensual debe de volver a aparecer, eso coregir
   return (
     <ScrollView style={styles.container}>
       <Header

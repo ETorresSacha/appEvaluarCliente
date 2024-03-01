@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
+import { useFocusEffect } from "@react-navigation/native";
 
 import UseStorageTPM from "../hooks/UseHookTasaPrimaMensual";
 import ModalCofigTPM from "../../modals/modalCofigTPM/ModalCofigTPM";
@@ -26,6 +27,7 @@ const Prestamo = ({
   prestamo,
   setPrestamo,
   editValue,
+  valuePrest,
 }) => {
   const { onGetTPM } = UseStorageTPM();
 
@@ -61,6 +63,7 @@ const Prestamo = ({
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
+      console.log("result: " + result);
       if (!editValue) {
         result = !result ? "0.08" : result;
       }
@@ -73,9 +76,14 @@ const Prestamo = ({
     }
   };
 
-  useEffect(() => {
-    loadTPM();
-  }, [isVisible]);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadTPM();
+    }, [isVisible, valuePrest])
+  );
+  // useEffect(() => {
+  //   loadTPM();
+  // }, [isVisible]);
 
   return (
     <View style={styles.container}>
