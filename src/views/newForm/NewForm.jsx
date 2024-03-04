@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  View,
   StyleSheet,
   ScrollView,
   Alert,
@@ -54,11 +53,8 @@ const NewForm = (props) => {
     periodo: !user ? "" : user[0].periodo,
     tasaPrimaMensual: !user ? "" : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
-    //resultPrestamo: [],
   });
   //console.log(dataPerson);
-  //! 1.  ESTA VOLVIENDO A OPERAR RESULTPRESTAMOS DENUEVO, CUANDO SOLO SE EDITA LOS DATOS DEL CLIENTE NO DEBE DE AFECTAR A LOS RESULTADOS DEL PRESTAMO
-  //! 2. CUANDO SE MODIFICA LOS DATOS DEL PRESTAMO, ES AHI CUANDO PUEDE MODIFICAR LOS DATOS DEL PRESTAMO
   useEffect(() => {
     // Limpia es estado
     if (clean) {
@@ -71,7 +67,13 @@ const NewForm = (props) => {
         direccion: "",
         celular: "",
         cancelled: false,
-        //tasaPrimaMensual: "",
+        capital: "",
+        cuotas: "",
+        tea: "",
+        fechaDesembolso: "",
+        fechaPrimeraCuota: "",
+        periodo: "",
+        tasaPrimaMensual: "",
         resultPrestamo: [],
       });
     }
@@ -109,6 +111,7 @@ const NewForm = (props) => {
               } else {
                 setClean(true);
                 setValuePrest(false);
+                //navigation.navigate("Nuevo cliente");
               }
             },
             style: "destructive",
@@ -124,7 +127,7 @@ const NewForm = (props) => {
       }
     }
   };
-  //! cuando gusrdamos los datos la tasa prima mensual debe de volver a aparecer, eso coregir
+
   return (
     <ScrollView style={styles.container}>
       <Header

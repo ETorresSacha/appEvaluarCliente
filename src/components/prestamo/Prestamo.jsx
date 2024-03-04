@@ -32,7 +32,7 @@ const Prestamo = ({
   const { onGetTPM } = UseStorageTPM();
 
   const [isVisible, setIsVisible] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
   const renderItem = (item) => {
@@ -63,7 +63,6 @@ const Prestamo = ({
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
-      console.log("result: " + result);
       if (!editValue) {
         result = !result ? "0.08" : result;
       }
@@ -78,13 +77,10 @@ const Prestamo = ({
 
   useFocusEffect(
     React.useCallback(() => {
+      setValue(""); // Para setear el periodo a un estado de inicio
       loadTPM();
     }, [isVisible, valuePrest])
   );
-  // useEffect(() => {
-  //   loadTPM();
-  // }, [isVisible]);
-
   return (
     <View style={styles.container}>
       {/* ------------------ TASA PRIMA MENSUAL ------------------*/}
@@ -212,7 +208,7 @@ const Prestamo = ({
         </View>
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder={placeholderNumCuotas}
+            placeholder={!value ? "" : placeholderNumCuotas}
             placeholderTextColor="gray"
             style={
               !errorsPrestamo.cuotas

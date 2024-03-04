@@ -47,9 +47,8 @@ const Calculator = ({
     periodo: !dataPerson ? "" : dataPerson.periodo,
     tasaPrimaMensual: !dataPerson ? "" : dataPerson.tasaPrimaMensual,
   });
-  console.log(prestamo);
-  // Todo--> COMPONENTE NEWFORM
 
+  // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
     React.useCallback(() => {
       setCopyDataPrestamo(prestamo);
@@ -59,6 +58,7 @@ const Calculator = ({
     }, [valuePrest, setValueError])
   );
 
+  // Valida los datos de forma continua, útil en el componente NEWFORM
   useEffect(() => {
     if (errorsP !== undefined) {
       let resulView = false;
@@ -91,9 +91,9 @@ const Calculator = ({
     }
   }, [prestamo, changeValue]);
 
+  //Limpia el estado
   useEffect(() => {
     if (clean !== undefined) {
-      //Limpia el estado
       if (clean) {
         setPrestamo({
           capital: "",
@@ -101,7 +101,6 @@ const Calculator = ({
           tea: "",
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
-          //tasaPrimaMensual,
           periodo: "",
         });
         setClean(false);
@@ -141,7 +140,7 @@ const Calculator = ({
       // El resultado dependerá si los valores del prestamo cambian o no
       const result = changeValue
         ? user[0].resultPrestamo
-        : resultCronograma(data); //! inicia aqui
+        : resultCronograma(data);
 
       dataPerson !== undefined
         ? setDataPerson({
