@@ -166,8 +166,8 @@ const DataCustomer = ({ data, setData, customer, enable }) => {
         }
       </ScrollView>
       <View style={[styles.piePagina]}>
-        <Text>
-          Total de clientes:{" "}
+        <Text style={styles.piePaginaText}>
+          {!enable ? "Total de clientes: " : "Total de clientes cancelados: "}
           {!enable
             ? customer.dataResult.length
             : customer.customerCancelled.length}
@@ -275,8 +275,13 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 13,
     flexDirection: "row",
     justifyContent: "space-evenly",
+    alignItems: "center",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
     //flex: 1,
     height: 30,
+  },
+  piePaginaText: {
+    fontSize: 13,
+    color: "white",
   },
 });
