@@ -30,7 +30,6 @@ const Customer = ({ enable }) => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-      //console.log("length: " + resultCustomer.length);
 
       setData({
         ...data,
@@ -63,7 +62,7 @@ const Customer = ({ enable }) => {
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
-      setTimeout(setOn, 0, true); //! Esta observado, parece que no afecta en nada si se elimina
+      setTimeout(setOn, 1, true); //! Esta observado, parece que no afecta en nada si se elimina
 
       //return () => unsubscribe();
     }, [])

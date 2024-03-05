@@ -64,7 +64,7 @@ const DataCustomer = ({ data, setData, customer, enable }) => {
           onPress={() => handleSort("cuota", order)}
         >
           <Text style={[styles.texTitle, { width: enable ? 100 : null }]}>
-            {!enable ? "CUOTA" : "MONTO PRESTAMO"}
+            {!enable ? "CUOTA" : "MONTO DEL PRÉSTAMO"}
           </Text>
         </TouchableOpacity>
 

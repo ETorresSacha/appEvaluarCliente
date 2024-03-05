@@ -1,13 +1,13 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { datePay, formatDate } from "../../utils/thunks/Thunks";
+import { formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Users = ({ data, color, enable }) => {
   const navigation = useNavigation();
 
-  // estilos dinamico del ícono de alerta
+  // estilos dinámico del ícono de alerta
   const [estilos, setEstilos] = useState({
     fontSize: 40,
   });
@@ -48,14 +48,12 @@ const Users = ({ data, color, enable }) => {
               }
             >
               {/* DNI */}
-              <View style={styles.containerItem}>
+              <View>
                 <Text style={styles.text}>{element?.dni}</Text>
               </View>
 
               {/* Nombre */}
-              <View
-                style={[styles.containerItem, { width: 100, paddingLeft: 5 }]}
-              >
+              <View style={{ width: 100, paddingLeft: 5 }}>
                 <Text style={styles.text}>{`${
                   element?.nombre?.split(" ")[0]
                 }`}</Text>
@@ -63,7 +61,7 @@ const Users = ({ data, color, enable }) => {
 
               {/* Fecha */}
               {!enable ? (
-                <View style={[styles.containerItem]}>
+                <View>
                   <Text style={styles.text}>
                     {formatDate(element?.fechaDesembolso)}
                   </Text>
@@ -71,9 +69,7 @@ const Users = ({ data, color, enable }) => {
               ) : null}
 
               {/* Monto */}
-              <View
-                style={[styles.containerItem, { width: 80, paddingRight: 20 }]}
-              >
+              <View style={{ width: 80, paddingRight: 20 }}>
                 <Text style={[styles.text, { textAlign: "right" }]}>
                   {enable
                     ? element?.capital
@@ -109,9 +105,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 7,
   },
-  containerItem: {
-    //backgroundColor: "green",
-  },
   touchItem: {
     display: "flex",
     flex: 1,
@@ -121,33 +114,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-
     color: "cornsilk",
   },
   iconAlertOff: {
     color: "cornsilk",
-    //color: "green",
-    //color: "rgb(66, 242, 46)",
     fontSize: 40,
-  },
-  iconAlertOnYelow: {
-    //color: "red",
-    color: "rgb(242, 238, 46)",
-    fontSize: 40,
-  },
-  Green: {
-    color: "rgb(66, 242, 46)",
-    fontSize: 40,
-  },
-  iconAlertOnRed: {
-    color: "red",
-    fontSize: 40,
-  },
-  textMonto: {
-    //maxWidth: "20%",
-    width: 70,
-    fontSize: 15,
-    color: "cornsilk",
-    backgroundColor: "green",
   },
 });

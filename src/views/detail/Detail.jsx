@@ -17,11 +17,9 @@ import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
 
 const Detail = (props) => {
-  //console.log(props);
   const color = props.route.params.typeColor;
   const id = props.route.params.id;
   const enable = props.route.params.enable;
-  //const cancelado = props.route.params.cancelado;
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
 
@@ -38,9 +36,6 @@ const Detail = (props) => {
     }
   };
 
-  // useEffect(() => {
-  //   loadCustomerId(id);
-  // }, [setUser]);
   useFocusEffect(
     React.useCallback(() => {
       loadCustomerId(id);
@@ -59,6 +54,16 @@ const Detail = (props) => {
     });
   };
   // Eliminar
+
+  const handleDelete = async (data) => {
+    try {
+      const result = await onDeleteCustomer(data);
+      navigation.navigate(!enable ? "Clientes" : "Clientes cancelados");
+    } catch (error) {
+      console.error();
+    }
+  };
+
   const alertDelete = (data) => {
     Alert.alert("Eliminar", "¿Desea continuar?", [
       {
@@ -71,14 +76,6 @@ const Detail = (props) => {
         style: "destructive",
       },
     ]);
-  };
-  const handleDelete = async (data) => {
-    try {
-      const result = await onDeleteCustomer(data);
-      navigation.navigate("Clientes");
-    } catch (error) {
-      console.error();
-    }
   };
 
   return (
