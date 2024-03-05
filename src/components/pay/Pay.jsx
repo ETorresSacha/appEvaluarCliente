@@ -111,6 +111,7 @@ const Pay = ({ data }) => {
       setCancelledShare(false);
     }
   };
+  console.log(data[0].capital.toString().padStart(3, "0"));
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
@@ -150,7 +151,7 @@ const Pay = ({ data }) => {
               }}
             >
               <View style={[styles.containerSubTitle, { gap: 15 }]}>
-                <Text style={[styles.subTitle, { color: "cornsilk" }]}>
+                <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
                   Fecha de pago:
                 </Text>
                 <Text
@@ -169,15 +170,16 @@ const Pay = ({ data }) => {
                   { gap: 15, justifyContent: "space-around", width: 130 },
                 ]}
               >
-                <Text style={[styles.subTitle, { color: "cornsilk" }]}>
+                <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
                   Cuota:
                 </Text>
                 <Text style={[styles.subTitle, { color: "orange" }]}>
-                  {!cancelledShare ? dataSee?.montoCuota : "0"}
+                  S/. {!cancelledShare ? dataSee?.montoCuota : "0"}
                 </Text>
               </View>
             </View>
             <View style={{ paddingHorizontal: 15, gap: 2 }}>
+              {/* Fecha de desemboldo */}
               <View
                 style={[
                   styles.containerSubTitle,
@@ -191,19 +193,36 @@ const Pay = ({ data }) => {
                     : formatDate(dataSee?.fechaDesembolso)}
                 </Text>
               </View>
+
+              {/* Total del préstamo */}
               <View
                 style={[
                   styles.containerSubTitle,
                   { justifyContent: "space-between" },
                 ]}
               >
-                <Text style={styles.subTitle}>Cuotas canceladas:</Text>
+                <Text style={styles.subTitle}>Total del préstamo</Text>
+                <Text style={{ color: "white", fontSize: 17 }}>
+                  S/. {data[0].capital}
+                </Text>
+              </View>
+
+              {/* Cuotas canceladas */}
+              <View
+                style={[
+                  styles.containerSubTitle,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                <Text style={styles.subTitle}>Cuotas canceladas</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
                   {!cancelledShare
                     ? `${dataSee?.cuota - 1}/${updatePrestamo?.length}`
                     : "0"}
                 </Text>
               </View>
+
+              {/* Cuotas pendientes */}
               <View
                 style={[
                   styles.containerSubTitle,
@@ -215,6 +234,19 @@ const Pay = ({ data }) => {
                   {!cancelledShare
                     ? updatePrestamo.length - (dataSee?.cuota - 1)
                     : "0"}
+                </Text>
+              </View>
+
+              {/* Tipo de préstamo */}
+              <View
+                style={[
+                  styles.containerSubTitle,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                <Text style={styles.subTitle}>Tipo de préstamo</Text>
+                <Text style={{ color: "white", fontSize: 17 }}>
+                  {data[0].periodo}
                 </Text>
               </View>
             </View>
@@ -279,8 +311,8 @@ const styles = StyleSheet.create({
 
   subTitle: {
     fontSize: 17,
-    fontWeight: "bold",
-    color: "white",
+    //fontWeight: "bold",
+    color: "cornsilk",
   },
   containerSubTitle: {
     display: "flex",

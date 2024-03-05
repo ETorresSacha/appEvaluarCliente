@@ -6,6 +6,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Users = ({ data, color, enable }) => {
   const navigation = useNavigation();
+  //console.log(data);
 
   // estilos dinámico del ícono de alerta
   const [estilos, setEstilos] = useState({
@@ -53,7 +54,7 @@ const Users = ({ data, color, enable }) => {
               </View>
 
               {/* Nombre */}
-              <View style={{ width: 100, paddingLeft: 5 }}>
+              <View style={{ width: 100, paddingLeft: !enable ? 5 : 15 }}>
                 <Text style={styles.text}>{`${
                   element?.nombre?.split(" ")[0]
                 }`}</Text>

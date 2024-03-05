@@ -1,17 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { formatDate } from "../../utils/thunks/Thunks";
 import Checkbox from "expo-checkbox";
 import Loading from "../loading/Loading";
 
 const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
-  const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
     setUpdatePrestamo(data);
   }, [data]);
-  console.log(updatePrestamo);
 
   return (
     <View style={styles.containerContainer}>
@@ -38,7 +36,17 @@ const Cronograma = ({ data }) => {
               return (
                 <View
                   key={index}
-                  style={index % 2 == 0 ? styles.dataPar : styles.dataImpar}
+                  style={
+                    index % 2 == 0
+                      ? [
+                          styles.dataContainer,
+                          { backgroundColor: "rgba(189, 238, 247, 0.888)" },
+                        ]
+                      : [
+                          styles.dataContainer,
+                          { backgroundColor: "rgb(123, 220, 231)" },
+                        ]
+                  }
                 >
                   <Text style={styles.dataText}>
                     {element.cuota.toString().padStart(2, "0")}
@@ -68,6 +76,9 @@ const styles = StyleSheet.create({
   containerContainer: {
     flex: 1,
   },
+  containerCuotas: {
+    flexDirection: "column",
+  },
   containerTitle: {
     display: "flex",
     flexDirection: "row",
@@ -83,10 +94,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
-  containerCuotas: {
-    flexDirection: "column",
-  },
-  dataPar: {
+
+  dataContainer: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -95,15 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(189, 238, 247, 0.888)",
     paddingVertical: 10,
   },
-  dataImpar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgb(123, 220, 231)",
-    paddingVertical: 10,
-  },
+
   dataText: {
     fontSize: 17,
   },
