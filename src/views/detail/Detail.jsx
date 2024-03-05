@@ -227,5 +227,3 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-//!falta la funcion de editar
-//! CAMBIAR EL BOTON VER CRONOGRAMA

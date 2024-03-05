@@ -132,6 +132,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    paddingVertical: 50,
+    paddingVertical: 30,
   },
 });
