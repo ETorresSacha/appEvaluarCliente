@@ -111,7 +111,7 @@ const Pay = ({ data }) => {
       setCancelledShare(false);
     }
   };
-  console.log(data[0].capital.toString().padStart(3, "0"));
+
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (

@@ -62,7 +62,7 @@ const Customer = ({ enable }) => {
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
-      setTimeout(setOn, 1, true); //! Esta observado, parece que no afecta en nada si se elimina
+      setTimeout(setOn, 1, true);
 
       //return () => unsubscribe();
     }, [])

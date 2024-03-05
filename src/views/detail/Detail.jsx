@@ -77,7 +77,6 @@ const Detail = (props) => {
       },
     ]);
   };
-
   return (
     <View style={styles.container}>
       {user.length == 0 ? (

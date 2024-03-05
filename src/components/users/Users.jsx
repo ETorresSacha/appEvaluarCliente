@@ -1,12 +1,11 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { formatDate } from "../../utils/thunks/Thunks";
+import { datePay, formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Users = ({ data, color, enable }) => {
   const navigation = useNavigation();
-  console.log(data);
 
   // estilos dinámico del ícono de alerta
   const [estilos, setEstilos] = useState({
@@ -64,7 +63,7 @@ const Users = ({ data, color, enable }) => {
               {enable ? null : (
                 <View>
                   <Text style={styles.text}>
-                    {formatDate(element?.fechaPrimeraCuota)}
+                    {formatDate(datePay(element))}
                   </Text>
                 </View>
               )}
