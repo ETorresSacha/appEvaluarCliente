@@ -1,12 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-const DetailCalculator = ({ resultCuota }) => {
+const DetailCalculator = ({ resultCuota, periodo }) => {
+  console.log(resultCuota);
   const cuota = resultCuota[0]?.montoCuota;
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.text}>{cuota}</Text>
+        <Text style={styles.text}>S/. {cuota}</Text>
+        <Text style={[styles.text, { fontSize: 30 }]}> {periodo}</Text>
       </View>
     </View>
   );

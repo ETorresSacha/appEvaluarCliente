@@ -32,6 +32,20 @@ const Notification = ({ data, color }) => {
     Linking.openURL(aplication);
   };
 
+  // Cargar los datos del negocio
+  const loadNegocio = async () => {
+    try {
+      const result = await onGetBusiness();
+      setDataNegocio(result ? result : []);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadNegocio();
+  }, []);
+
   // Fecha de pago actualizado
   useEffect(() => {
     let result = data[0]?.resultPrestamo.find(
@@ -57,25 +71,11 @@ const Notification = ({ data, color }) => {
         color == "red" ? "venció" : "vence"
       } el día ${formatDate(datePay?.fechaPago)}, ${
         color == "red" ? "evita que suba tu mora" : "evita la mora"
-      } y paga hoy. ¡Gracias! 😉`;
+      } y paga hoy. ¡Gracias!`;
 
       color !== null ? setMessage(messagePredetermined) : setMessage(``);
     }
   }, [datePay, color]);
-
-  // Cargar los datos del negocio
-  const loadNegocio = async () => {
-    try {
-      const result = await onGetBusiness();
-      setDataNegocio(result ? result : []);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    loadNegocio();
-  }, []);
 
   return (
     <View style={styles.container}>

@@ -200,7 +200,10 @@ const Calculator = ({
               ) : null
             ) : null
           ) : enabled ? (
-            <DetailCalculator resultCuota={resultCuota} />
+            <DetailCalculator
+              resultCuota={resultCuota}
+              periodo={prestamo.periodo}
+            />
           ) : null}
         </View>
       </ScrollView>

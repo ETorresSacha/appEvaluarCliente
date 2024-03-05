@@ -19,13 +19,12 @@ const DataCustomer = ({ data, setData, customer, enable }) => {
     let dataFilter = !enable
       ? customer?.dataResult
       : customer?.customerCancelled;
-    // console.log(customer?.dataResult);
 
     let result = orderData(type, dataFilter, value, enable);
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
-  //console.log(customer.customerRed);
+
   return (
     <View style={styles.container}>
       <View
