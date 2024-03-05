@@ -53,30 +53,28 @@ const Users = ({ data, color, enable }) => {
               </View>
 
               {/* Nombre */}
-              <View style={[styles.containerItem, { width: 90 }]}>
+              <View
+                style={[styles.containerItem, { width: 100, paddingLeft: 5 }]}
+              >
                 <Text style={styles.text}>{`${
                   element?.nombre?.split(" ")[0]
                 }`}</Text>
               </View>
 
               {/* Fecha */}
-              <View style={enable ? [styles.text, {}] : [styles.text]}>
-                <Text style={styles.text}>
-                  {enable
-                    ? formatDate(element?.fechaDesembolso)
-                    : formatDate(datePay(element))}
-                </Text>
-              </View>
+              {!enable ? (
+                <View style={[styles.containerItem]}>
+                  <Text style={styles.text}>
+                    {formatDate(element?.fechaDesembolso)}
+                  </Text>
+                </View>
+              ) : null}
 
               {/* Monto */}
               <View
-                style={
-                  enable
-                    ? [styles.text, {}]
-                    : [styles.text, { width: 70, paddingLeft: 10 }]
-                }
+                style={[styles.containerItem, { width: 80, paddingRight: 20 }]}
               >
-                <Text style={styles.text}>
+                <Text style={[styles.text, { textAlign: "right" }]}>
                   {enable
                     ? element?.capital
                     : element?.resultPrestamo[0]?.montoCuota}
@@ -112,7 +110,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   containerItem: {
-    backgroundColor: "green",
+    //backgroundColor: "green",
   },
   touchItem: {
     display: "flex",
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    justifyContent: "flex-start",
+
     color: "cornsilk",
   },
   iconAlertOff: {

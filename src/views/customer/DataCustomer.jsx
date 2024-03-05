@@ -34,25 +34,31 @@ const DataCustomer = ({ data, setData, customer, enable }) => {
         }
       >
         <TouchableOpacity
-          style={!enable ? [styles.title, {}] : [styles.title, {}]}
+          style={
+            !enable
+              ? [styles.title, { width: 50 }]
+              : [styles.title, { width: 80 }]
+          }
           onPress={() => handleSort("dni", order, enable)}
         >
           <Text style={styles.texTitle}>DNI</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
-          style={!enable ? [styles.title, {}] : [styles.title, {}]}
+          style={[styles.title, { paddingLeft: 10, width: 90 }]}
           onPress={() => handleSort("nombre", order)}
         >
           <Text style={styles.texTitle}>NOMBRE</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={!enable ? [styles.title, {}] : [styles.title, {}]}
-          onPress={() => handleSort("fecha", order)}
-        >
-          <Text style={styles.texTitle}>
-            {!enable ? "FECHA DE PAGO" : "FECHA DESEMBOLSO"}
-          </Text>
-        </TouchableOpacity>
+        {!enable ? (
+          <TouchableOpacity
+            style={[styles.title, { width: 80, paddingLeft: 20 }]}
+            onPress={() => handleSort("fecha", order)}
+          >
+            <Text style={styles.texTitle}>FECHA DE PAGO</Text>
+          </TouchableOpacity>
+        ) : null}
+
         <TouchableOpacity
           style={[styles.title]}
           onPress={() => handleSort("cuota", order)}
@@ -127,9 +133,10 @@ const styles = StyleSheet.create({
   containerTitle: {
     borderTopStartRadius: 13,
     borderTopEndRadius: 13,
+    paddingHorizontal: 5,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
     height: 50,
   },
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontWeight: "bold",
     textAlign: "center",
-    backgroundColor: "red",
+    //backgroundColor: "red",
   },
   texTitle: {
     fontWeight: "bold",
