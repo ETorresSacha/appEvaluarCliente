@@ -48,46 +48,43 @@ const Users = ({ data, color, enable }) => {
               }
             >
               {/* DNI */}
-              <Text style={styles.dataText}>{element?.dni}</Text>
+              <View style={styles.containerItem}>
+                <Text style={styles.text}>{element?.dni}</Text>
+              </View>
 
               {/* Nombre */}
-              <Text
-                style={
-                  enable
-                    ? [styles.textMonto, { marginRight: 20 }]
-                    : [styles.textMonto, { width: 80 }]
-                }
-              >
-                {`${element?.nombre?.split(" ")[0]}`}
-              </Text>
+              <View style={[styles.containerItem, { width: 90 }]}>
+                <Text style={styles.text}>{`${
+                  element?.nombre?.split(" ")[0]
+                }`}</Text>
+              </View>
 
               {/* Fecha */}
-              <Text
-                style={
-                  enable
-                    ? [styles.dataText, { marginRight: 10 }]
-                    : [styles.dataText]
-                }
-              >
-                {enable
-                  ? formatDate(element?.fechaDesembolso)
-                  : formatDate(datePay(element))}
-              </Text>
+              <View style={enable ? [styles.text, {}] : [styles.text]}>
+                <Text style={styles.text}>
+                  {enable
+                    ? formatDate(element?.fechaDesembolso)
+                    : formatDate(datePay(element))}
+                </Text>
+              </View>
 
               {/* Monto */}
-              <Text
+              <View
                 style={
                   enable
-                    ? [styles.textMonto, { marginRight: 10 }]
-                    : [styles.textMonto, { width: 80, paddingLeft: 10 }]
+                    ? [styles.text, {}]
+                    : [styles.text, { width: 70, paddingLeft: 10 }]
                 }
               >
-                {enable
-                  ? element?.capital
-                  : element?.resultPrestamo[0]?.montoCuota}
-              </Text>
+                <Text style={styles.text}>
+                  {enable
+                    ? element?.capital
+                    : element?.resultPrestamo[0]?.montoCuota}
+                </Text>
+              </View>
 
               {/* Icono de la alerta */}
+
               {enable ? null : (
                 <MaterialIcons
                   name="notifications"
@@ -114,6 +111,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 7,
   },
+  containerItem: {
+    backgroundColor: "green",
+  },
   touchItem: {
     display: "flex",
     flex: 1,
@@ -121,9 +121,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
   },
-  dataText: {
-    fontSize: 17,
-    width: 90,
+  text: {
+    fontSize: 15,
     justifyContent: "flex-start",
     color: "cornsilk",
   },
@@ -147,7 +146,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   textMonto: {
-    fontSize: 17,
+    //maxWidth: "20%",
+    width: 70,
+    fontSize: 15,
     color: "cornsilk",
+    backgroundColor: "green",
   },
 });
