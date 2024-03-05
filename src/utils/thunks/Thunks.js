@@ -24,6 +24,7 @@ export const orderData = (type,data,value,enable)=>{
           break;
           
           case 'fecha':
+            //console.log(data);
 
             // Ordena por fecha de desembolso, cuando es llamado desde el componente de "clientes cancelados"
             if (enable){

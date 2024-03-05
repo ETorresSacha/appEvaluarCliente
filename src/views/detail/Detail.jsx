@@ -227,3 +227,4 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+//! TOCA ARREGLAR Y FACTORIZAR EL CÓDIGO

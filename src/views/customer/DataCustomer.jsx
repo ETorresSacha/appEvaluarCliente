@@ -13,17 +13,19 @@ const DataCustomer = ({ data, setData, customer, enable }) => {
   const [order, setOrder] = useState(false);
 
   // Ordenar
+  //! NO ESTA ORDENANDO POR FECHA LOS CLIENTES DE LA ALERTA BLANCO
   const handleSort = (type, value) => {
     // dataFilter toma los valores dependiendo de que componente es llamado la función, "clientes" o "clientes cancelados"
     let dataFilter = !enable
       ? customer?.dataResult
       : customer?.customerCancelled;
+    // console.log(customer?.dataResult);
 
     let result = orderData(type, dataFilter, value, enable);
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
-
+  //console.log(customer.customerRed);
   return (
     <View style={styles.container}>
       <View

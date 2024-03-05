@@ -6,7 +6,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Users = ({ data, color, enable }) => {
   const navigation = useNavigation();
-  //console.log(data);
+  console.log(data);
 
   // estilos dinámico del ícono de alerta
   const [estilos, setEstilos] = useState({
@@ -61,13 +61,13 @@ const Users = ({ data, color, enable }) => {
               </View>
 
               {/* Fecha */}
-              {!enable ? (
+              {enable ? null : (
                 <View>
                   <Text style={styles.text}>
-                    {formatDate(element?.fechaDesembolso)}
+                    {formatDate(element?.fechaPrimeraCuota)}
                   </Text>
                 </View>
-              ) : null}
+              )}
 
               {/* Monto */}
               <View style={{ width: 80, paddingRight: 20 }}>
