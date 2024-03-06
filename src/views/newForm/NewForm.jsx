@@ -141,6 +141,8 @@ const NewForm = (props) => {
         errores={errores}
         setDataPerson={setDataPerson}
         dataPerson={dataPerson}
+        setClean={setClean}
+        editValue={editValue}
       />
       <Calculator
         dataPrestamo={dataPrestamo}

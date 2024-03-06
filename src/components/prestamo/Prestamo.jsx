@@ -30,6 +30,8 @@ const Prestamo = ({
   valuePrest,
   cleanCalculator,
   setCleanCalculator,
+  clean,
+  setClean,
 }) => {
   const { onGetTPM } = UseStorageTPM();
   const [isVisible, setIsVisible] = useState(false);
@@ -65,7 +67,7 @@ const Prestamo = ({
     try {
       let result = await onGetTPM();
       // Para limpiar los datos del componente Calculator
-      if (cleanCalculator) {
+      if (cleanCalculator || clean) {
         setPrestamo({
           capital: "",
           cuotas: "",
@@ -76,6 +78,7 @@ const Prestamo = ({
           periodo: "",
         });
         setCleanCalculator(false);
+        setClean ? setClean(false) : null;
       }
       // Para los componentes de crear nuevo cliente y editar
       else {
@@ -96,7 +99,7 @@ const Prestamo = ({
     React.useCallback(() => {
       setValue(""); // Para setear el periodo a un estado de inicio
       loadTPM();
-    }, [isVisible, valuePrest, cleanCalculator])
+    }, [isVisible, valuePrest, cleanCalculator, clean])
   );
   return (
     <View style={styles.container}>

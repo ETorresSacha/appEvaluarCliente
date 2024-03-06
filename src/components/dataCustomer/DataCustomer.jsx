@@ -1,8 +1,23 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { validationDataPerson } from "../../utils/validation/Validation";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
-const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
+const DataCustomer = ({
+  errores,
+  setErrores,
+  dataPerson,
+  setDataPerson,
+  setClean,
+  editValue,
+}) => {
+  const [cleanData, setCleanData] = useState(false);
   //Todo--> Esta es otra forma de setear y validar los datos (SOLO COMO RECORDATORIO)
   const handleChangeData = (event, type) => {
     setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
@@ -10,9 +25,37 @@ const DataCustomer = ({ errores, setErrores, dataPerson, setDataPerson }) => {
   };
   //Todo--> ****************************************************
 
+  const handleCleanData = () => {
+    // if(cleanData){
+    setDataPerson({
+      nombre: "",
+      apellido: "",
+      dni: "",
+      correo: "",
+      direccion: "",
+      celular: "",
+    });
+    // }
+
+    setCleanData(false);
+  };
+  useEffect(() => {}, []);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>DATOS</Text>
+      <View style={styles.titleDatos}>
+        <Text style={styles.title}>DATOS</Text>
+        {editValue ? null : (
+          <TouchableOpacity onPress={() => setClean(true)}>
+            <FontAwesome5
+              style={styles.icon}
+              color="#FFF"
+              name="eraser"
+              size={30}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
       <View style={styles.containerInput}>
         {/* ------------------- Nombre ------------------ */}
         <View>
@@ -198,11 +241,17 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
   },
+  titleDatos: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 7,
+    backgroundColor: "rgba(36, 146, 224, 0.625)",
+  },
   title: {
     fontSize: 17,
     color: "white",
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
-    paddingLeft: 7,
     paddingVertical: 5,
     fontWeight: "bold",
   },

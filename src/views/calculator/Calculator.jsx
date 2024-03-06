@@ -180,6 +180,7 @@ const Calculator = ({
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <View style={styles.titleEvaluar}>
         <Text style={styles.title}>PRESTAMO</Text>
+
         {!dataPerson ? (
           <TouchableOpacity onPress={() => setCleanCalculator(true)}>
             <FontAwesome5
@@ -204,6 +205,8 @@ const Calculator = ({
           valuePrest={valuePrest}
           cleanCalculator={cleanCalculator}
           setCleanCalculator={setCleanCalculator}
+          clean={clean}
+          setClean={setClean}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}
