@@ -28,9 +28,9 @@ const Prestamo = ({
   setPrestamo,
   editValue,
   valuePrest,
+  cleanCalculator,
 }) => {
   const { onGetTPM } = UseStorageTPM();
-
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState("");
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
@@ -59,17 +59,32 @@ const Prestamo = ({
     }));
   };
 
-  // Carga el valor de la Tasa Prima Mensual
+  //Carga el valor de la Tasa Prima Mensual
   const loadTPM = async () => {
     try {
       let result = await onGetTPM();
-      if (!editValue) {
-        result = !result ? "0.08" : result;
+      // Para limpiar los datos del componente Calculator
+      if (cleanCalculator) {
+        setPrestamo({
+          capital: "",
+          cuotas: "",
+          tea: "",
+          fechaDesembolso: "",
+          fechaPrimeraCuota: "",
+          tasaPrimaMensual: result,
+          periodo: "",
+        });
       }
-      if (editValue) {
-        result = prestamo.tasaPrimaMensual;
+      // Para los componentes de crear nuevo cliente y editar
+      else {
+        if (!editValue) {
+          result = !result ? "0.08" : result;
+        }
+        if (editValue) {
+          result = prestamo.tasaPrimaMensual;
+        }
+        setPrestamo({ ...prestamo, tasaPrimaMensual: result });
       }
-      setPrestamo({ ...prestamo, tasaPrimaMensual: result });
     } catch (error) {
       console.error(error);
     }
@@ -79,7 +94,7 @@ const Prestamo = ({
     React.useCallback(() => {
       setValue(""); // Para setear el periodo a un estado de inicio
       loadTPM();
-    }, [isVisible, valuePrest])
+    }, [isVisible, valuePrest, cleanCalculator])
   );
   return (
     <View style={styles.container}>

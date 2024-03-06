@@ -16,6 +16,8 @@ import { resultCronograma } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import equal from "deep-equal";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
 const Calculator = ({
@@ -37,6 +39,7 @@ const Calculator = ({
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
   const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
+  const [cleanCalculator, setCleanCalculator] = useState(false); // Limpia solo del componente Calculator
 
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
@@ -167,6 +170,16 @@ const Calculator = ({
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <View style={styles.titleEvaluar}>
         <Text style={styles.title}>PRESTAMO</Text>
+        {!dataPerson ? (
+          <TouchableOpacity onPress={() => setCleanCalculator(true)}>
+            <FontAwesome5
+              style={styles.icon}
+              color="#FFF"
+              name="eraser"
+              size={30}
+            />
+          </TouchableOpacity>
+        ) : null}
       </View>
 
       <ScrollView>
@@ -179,6 +192,8 @@ const Calculator = ({
           setPrestamo={setPrestamo}
           editValue={editValue}
           valuePrest={valuePrest}
+          cleanCalculator={cleanCalculator}
+          setCleanCalculator={setCleanCalculator}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}
@@ -267,6 +282,9 @@ const styles = StyleSheet.create({
     color: "white",
     paddingVertical: 5,
     fontWeight: "bold",
+  },
+  icon: {
+    marginRight: 5,
   },
 });
 

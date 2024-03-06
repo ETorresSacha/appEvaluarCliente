@@ -111,7 +111,6 @@ const NewForm = (props) => {
               } else {
                 setClean(true);
                 setValuePrest(false);
-                //navigation.navigate("Nuevo cliente");
               }
             },
             style: "destructive",
