@@ -17,7 +17,6 @@ import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import equal from "deep-equal";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
 const Calculator = ({
@@ -35,7 +34,7 @@ const Calculator = ({
   user,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(false); // Habilita el resultado dependiendo si es del componente NEWFORM o CALCULATOR
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
   const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
@@ -120,6 +119,11 @@ const Calculator = ({
       if (enabled == true && valuesText.some((error) => error !== "")) {
         setEnabled(false);
       }
+      if (!editValue && !dataPerson) {
+        if (!equal(prestamo, copyDataPrestamo)) {
+          setEnabled(false);
+        }
+      }
     }
   }, [prestamo]);
 
@@ -129,6 +133,11 @@ const Calculator = ({
     // Valida
     setErrorsPrestamo(validationDataPrestamo(data));
     let resultError = validationDataPrestamo(data);
+
+    // Crea una copia de los datos del préstamo sólo cuando esta en uso el componente CALCULATOR
+    if (!editValue && !dataPerson) {
+      setCopyDataPrestamo(prestamo);
+    }
 
     // Calcula la cuota
     let valuesText = Object.values(resultError);
@@ -140,7 +149,7 @@ const Calculator = ({
 
       Alert.alert(typeError);
     } else {
-      // El resultado dependerá si los valores del prestamo cambian o no
+      // El resultado dependerá si los valores del préstamo, cambian o no.
       const result = changeValue
         ? user[0].resultPrestamo
         : resultCronograma(data);
@@ -254,21 +263,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-  containerResult: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  resultCuota: {
-    alignItems: "center",
-    height: 40,
-    justifyContent: "center",
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    elevation: 3,
-    backgroundColor: "orange",
-  },
+
   titleEvaluar: {
     display: "flex",
     flexDirection: "row",
@@ -287,5 +282,3 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 });
-
-//! falta el modal para configurar el tipo de prestamo( mensual, trimestral,etc), el ITF "lo mas importante"

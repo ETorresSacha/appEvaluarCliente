@@ -54,7 +54,7 @@ const NewForm = (props) => {
     tasaPrimaMensual: !user ? "" : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
   });
-  //console.log(dataPerson);
+
   useEffect(() => {
     // Limpia es estado
     if (clean) {
