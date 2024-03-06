@@ -70,7 +70,9 @@ const Users = ({ data, color, enable }) => {
 
               {/* Monto */}
               <View style={{ width: 80, paddingRight: 20 }}>
-                <Text style={[styles.text, { textAlign: "right" }]}>
+                <Text
+                  style={[styles.text, { textAlign: "right", color: "orange" }]}
+                >
                   {enable
                     ? element?.capital
                     : element?.resultPrestamo[0]?.montoCuota}

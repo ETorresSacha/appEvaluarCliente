@@ -112,6 +112,7 @@ const Pay = ({ data }) => {
     }
   };
 
+  console.log(data);
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
@@ -247,6 +248,19 @@ const Pay = ({ data }) => {
                 <Text style={styles.subTitle}>Tipo de préstamo</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
                   {data[0].periodo}
+                </Text>
+              </View>
+
+              {/* TEA */}
+              <View
+                style={[
+                  styles.containerSubTitle,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                <Text style={styles.subTitle}>TEA</Text>
+                <Text style={{ color: "white", fontSize: 17 }}>
+                  {data[0].tea} %
                 </Text>
               </View>
             </View>
