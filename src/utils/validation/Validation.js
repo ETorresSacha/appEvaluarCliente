@@ -66,9 +66,9 @@ export const validationDataPerson = (dataPerson) =>{
 //! Validación de los datos del préstamo
 export const validationDataPrestamo = (dataPrestamo) =>{
 
-    let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
-    let ExpRegNumEnt=/^[0-9]?$/;
-
+    let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/; // Expresión regular para aceptar solo números decimales
+    let ExpRegNumEnt=/^[0-9]?$/; // Expresión regular para aceptar solo números enteros <= 9
+    let ExpRegEnt=/^\d*$/ // Expresión regular para aceptar solo números enteros
     let fechaInicio = new Date(dataPrestamo.fechaDesembolso).getTime()
     let fechaFinal = new Date(dataPrestamo.fechaPrimeraCuota).getTime()
 
@@ -106,8 +106,8 @@ export const validationDataPrestamo = (dataPrestamo) =>{
         }
         else
         error = {...error,cuotaCero:"Debe existir por lo menos una cuota"}
-    }
-      if(dataPrestamo.cuotas.match(ExpRegNumEnt)==null){
+        }
+      if(!dataPrestamo.cuotas.match(ExpRegEnt)){
         error={...error, cuotaInvalido:"El número de las cuotas debe ser un número entero"}
        }
       if(dataPrestamo.fechaDesembolso.trim() === "" ) {

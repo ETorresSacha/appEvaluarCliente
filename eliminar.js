@@ -142,3 +142,16 @@ let a = { age: 29, name: "Dionysia" };
 let b = { name: "Dionysia", age: 29 };
 
 console.log(equal(a, b));
+
+
+let numero = 12;
+let decimal = 12.4;
+let obj_numero = new Number(12);
+let cadena = 'Soy una cadena';
+let sin_numero = NaN;
+
+console.log(Number.isInteger(numero));     // true
+console.log(Number.isInteger(decimal));    // false
+console.log(Number.isInteger(obj_numero)); // false
+console.log(Number.isInteger(cadena));     // false
+console.log(Number.isInteger(sin_numero)); // false
