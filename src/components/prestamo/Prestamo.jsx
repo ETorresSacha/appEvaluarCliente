@@ -29,6 +29,7 @@ const Prestamo = ({
   editValue,
   valuePrest,
   cleanCalculator,
+  setCleanCalculator,
 }) => {
   const { onGetTPM } = UseStorageTPM();
   const [isVisible, setIsVisible] = useState(false);
@@ -74,6 +75,7 @@ const Prestamo = ({
           tasaPrimaMensual: result,
           periodo: "",
         });
+        setCleanCalculator(false);
       }
       // Para los componentes de crear nuevo cliente y editar
       else {

@@ -119,6 +119,7 @@ const Calculator = ({
       if (enabled == true && valuesText.some((error) => error !== "")) {
         setEnabled(false);
       }
+      // Para cuando se modifica algún dato del préstamo, el resultado de la cuota ya no será visible
       if (!editValue && !dataPerson) {
         if (!equal(prestamo, copyDataPrestamo)) {
           setEnabled(false);
