@@ -8,7 +8,6 @@ import UseStorageBusiness from "../hooks/UseHookDataNeg";
 import { calculoMora } from "../../utils/calculoCuota/CalculosFuncionesCrediticios";
 
 const Notification = ({ data, color, dataNotification }) => {
-  console.log(dataNotification);
   const { onGetBusiness } = UseStorageBusiness();
   const [message, setMessage] = useState("");
   const [dataNegocio, setDataNegocio] = useState({});
@@ -62,7 +61,7 @@ const Notification = ({ data, color, dataNotification }) => {
 
       color !== null ? setMessage(messagePredetermined) : setMessage(``);
     }
-  }, [cuot, color]);
+  }, [cuot, color, , dataNegocio]);
 
   // Cuota
 
