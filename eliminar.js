@@ -1,3 +1,4 @@
+import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 // let array = [1.5,2.8,0.4,1]
 // let result =array.sort((a,b) => a-b)
 // console.log(result);
@@ -30,10 +31,10 @@
 // console.log(sumaUnicode("30-11-2023",0));
 // console.log(sumaUnicode("21-12-2023",0));
 
-import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
+// // import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 
-let result = format(new Date(2014, 11, 11), 'dd-MM-yyyy')
-console.log(result);
+// // let result = format(new Date(2014, 11, 11), 'dd-MM-yyyy')
+// // console.log(result);
 //=> '2014-02-11'
 
 // var result2 = add(new Date(2014, 8, 1, 10, 19, 50), {
@@ -72,86 +73,90 @@ console.log(result);
 //       let anio,mes,dia
       
 //     }
-    let dates=["15-10-2023","15-11-2023","15-12-2023"]
-  let resultt=dates.map(element=>{
-     let [dia,mes,anio] =element.split("-")
-     console.log( mes-1);
-     if(isFuture(new Date(anio, mes-1, dia))){
-      return element
-     }
-  })
-    //let [anio,mes,dia] =element.split("-")
-    console.log(resultt);
-  let resultDia = dates.find(element=>{
-    let [dia,mes,anio] =element.split("-")
-    return isFuture(new Date(anio, mes-1, dia))
-  })
-  console.log(resultDia);
+//     let dates=["15-10-2023","15-11-2023","15-12-2023"]
+//   let resultt=dates.map(element=>{
+//      let [dia,mes,anio] =element.split("-")
+//      console.log( mes-1);
+//      if(isFuture(new Date(anio, mes-1, dia))){
+//       return element
+//      }
+//   })
+//     //let [anio,mes,dia] =element.split("-")
+//     console.log(resultt);
+//   let resultDia = dates.find(element=>{
+//     let [dia,mes,anio] =element.split("-")
+//     return isFuture(new Date(anio, mes-1, dia))
+//   })
+//   console.log(resultDia);
 
-  console.log(new Date("12-15-2023").getTime())
-let date =new Date()
-const trigger = add(new Date(date), {
-  //years: 2,
-  //months: 9,
-  // weeks: 1,
-  days: 7,
-  //hours: 5,
- // minutes: 2,
-  //seconds: 30,
-});
-console.log(trigger);
-
-
-export const payDate = (periodo, value)=>{
-  console.log(value);
-  const trigger = add(new Date(date), {
-      //years: 2,
-      //months: 9,
-      // weeks: 1,
-      [periodo]: [value],
-      //hours: 5,
-     // minutes: 2,
-      //seconds: 30,
-    });
-    console.log(format(trigger,'dd-MM-yyyy'));
-return trigger 
-}
-let fecha = new Date()
-for (let i=0; i<=5;i++){
-  console.log(format(payDate("days",2),'dd-MM-yyyy'));
-}
+//   console.log(new Date("12-15-2023").getTime())
+// let date =new Date()
+// const trigger = add(new Date(date), {
+//   //years: 2,
+//   //months: 9,
+//   // weeks: 1,
+//   days: 7,
+//   //hours: 5,
+//  // minutes: 2,
+//   //seconds: 30,
+// });
+// console.log(trigger);
 
 
+// export const payDate = (periodo, value)=>{
+//   console.log(value);
+//   const trigger = add(new Date(date), {
+//       //years: 2,
+//       //months: 9,
+//       // weeks: 1,
+//       [periodo]: [value],
+//       //hours: 5,
+//      // minutes: 2,
+//       //seconds: 30,
+//     });
+//     console.log(format(trigger,'dd-MM-yyyy'));
+// return trigger 
+// }
+// let fecha = new Date()
+// for (let i=0; i<=5;i++){
+//   console.log(format(payDate("days",2),'dd-MM-yyyy'));
+// }
 
 
-console.log(format(trigger,'dd-MM-yyyy'));
-console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))
-
-console.log(new Date("12-18-2023").getTime())
-console.log(new Date("12-17-2023").getTime())
-console.log((new Date('01-08-2024').getTime())*(-1))
-console.log(new Date('01-09-2024'))
-
-var assert = require('assert');
-var equal = require('deep-equal');
-var x = { a : { n: 0 } };
-var y = { a : { n: 0 } };
-var z = { a : { n: 1 } };
-console.log(equal(x, y));
-let a = { age: 29, name: "Dionysia" };
-let b = { name: "Dionysia", age: 29 };
-
-console.log(equal(a, b));
 
 
-let numero = 12;
-let decimal = 12.4;
-let obj_numero = new Number(12);
-let cadena = 'Soy una cadena';
-let sin_numero = NaN;
+// console.log(format(trigger,'dd-MM-yyyy'));
+// console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))
 
-console.log(Number.isInteger(numero));     // true
-console.log(Number.isInteger(decimal));    // false
-console.log(Number.isInteger(obj_numero)); // false
-console.log(Number.isInteger(cadena));     // false
-console.log(Number.isInteger(sin_numero)); // false
+// console.log(new Date("12-18-2023").getTime())
+// console.log(new Date("12-17-2023").getTime())
+// console.log((new Date('01-08-2024').getTime())*(-1))
+// console.log(new Date('01-09-2024'))
+
+// var assert = require('assert');
+// var equal = require('deep-equal');
+// var x = { a : { n: 0 } };
+// var y = { a : { n: 0 } };
+// var z = { a : { n: 1 } };
+// console.log(equal(x, y));
+// let a = { age: 29, name: "Dionysia" };
+// let b = { name: "Dionysia", age: 29 };
+
+// console.log(equal(a, b));
+
+
+// let numero = 12;
+// let decimal = 12.4;
+// let obj_numero = new Number(12);
+// let cadena = 'Soy una cadena';
+// let sin_numero = NaN;
+
+// //console.log(Number.isInteger(numero));     // true
+// //console.log(Number.isInteger(decimal));    // false
+// //console.log(Number.isInteger(obj_numero)); // false
+// //console.log(Number.isInteger(cadena));     // false
+// console.log(Number.isInteger(sin_numero)); // false
+let hoy = format(new Date(),"yyyy-MM-dd")
+console.log((new Date(hoy).getTime()))
+console.log(new Date());
+console.log((new Date("2024-03-07").getTime()));

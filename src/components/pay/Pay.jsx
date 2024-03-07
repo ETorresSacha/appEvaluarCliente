@@ -6,7 +6,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 import Loading from "../loading/Loading";
 
-const Pay = ({ data }) => {
+const Pay = ({ data, setDataNotification }) => {
   const { onUpdateStatusPay } = UseStorage();
 
   const [indice, setIndice] = useState(0);
@@ -27,6 +27,7 @@ const Pay = ({ data }) => {
     // Para pagar la cuota
     if (result != undefined) {
       setDataSee(result);
+      setDataNotification(result); // Para las notificaciones
       setIndice(dataSee?.cuota == undefined ? null : dataSee?.cuota - 1);
       setCancelledShare(false);
     }
@@ -35,6 +36,9 @@ const Pay = ({ data }) => {
     if (result == undefined) {
       setIndice(data[0]?.resultPrestamo.length);
       setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
+      setDataNotification(
+        data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]
+      ); // Para las notificaciones
       setCancelledShare(true);
     }
   }, [data, indice, modify, cancelledShare, dataSee]);
@@ -112,7 +116,6 @@ const Pay = ({ data }) => {
     }
   };
 
-  //console.log(data);
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (

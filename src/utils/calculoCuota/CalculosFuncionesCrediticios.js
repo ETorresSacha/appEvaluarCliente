@@ -188,7 +188,7 @@ export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
         // Cálculo de ITF
         let ITF = CuoSinITF*0.00005
-        RITF = Number.parseFloat(ITF).toFixed(2)
+        RITF = Number.parseFloat(ITF).toFixed(3)
 
         // Cálculo de la cuota con ITF
         CuoConITF = parseFloat(CuoSinITF) + parseFloat(RITF)
@@ -212,4 +212,25 @@ export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
     }
 }
 
+
+//TODO --> FRC 
+export const calculoMora = (data, color)=>{
+    let intMoratorio = 0.22 // % --> Diario
+    let ccv = 2 // % (Comisión de Cobranza Variable) --> Se aplica al monto de la cuota
+    
+    // Cálculo de los dias de mora
+    let today = format(new Date(),"yyyy-MM-dd")
+     let fechaInicio = new Date(today).getTime()
+     let fechaFin = new Date(data.fechaPago).getTime()
+
+     let diff = fechaFin - fechaInicio;
+        diff = diff/(1000*60*60*24)
+
+    // Cálculo del interes
+    let i = intMoratorio*data?.capital*diff
+
+    
+    
+
+}
 

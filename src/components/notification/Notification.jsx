@@ -6,8 +6,13 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { formatDate } from "../../utils/thunks/Thunks";
 import UseStorageBusiness from "../hooks/UseHookDataNeg";
 
-const Notification = ({ data, color }) => {
-  console.log(data[0].resultPrestamo);
+const Notification = ({
+  data,
+  color,
+  dataNotificarion,
+  setDataNotificarion,
+}) => {
+  console.log(dataNotificarion);
   const { onGetBusiness } = UseStorageBusiness();
   const [message, setMessage] = useState("");
   const [datePay, setDayPay] = useState();
