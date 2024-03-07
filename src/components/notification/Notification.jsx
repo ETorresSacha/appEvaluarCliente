@@ -5,26 +5,21 @@ import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 import UseStorageBusiness from "../hooks/UseHookDataNeg";
+import { calculoMora } from "../../utils/calculoCuota/CalculosFuncionesCrediticios";
 
-const Notification = ({
-  data,
-  color,
-  dataNotificarion,
-  setDataNotificarion,
-}) => {
-  console.log(dataNotificarion);
+const Notification = ({ data, color, dataNotification }) => {
+  console.log(dataNotification);
   const { onGetBusiness } = UseStorageBusiness();
   const [message, setMessage] = useState("");
-  const [datePay, setDayPay] = useState();
   const [dataNegocio, setDataNegocio] = useState({});
+  const [cuot, setCuot] = useState("");
 
   // Iconos de notificacion
-  const handleIconNotification = (value) => {
+  const handleIconNotification = (value, messageValue) => {
     let aplication;
     switch (value) {
       case "whatsapp":
-        aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${message}`;
-        console.log(message);
+        aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${messageValue}`;
         break;
 
       case "phone-call":
@@ -32,7 +27,7 @@ const Notification = ({
         break;
 
       case "email-fast-outline":
-        aplication = `mailto:${data[0]?.correo}?subject=Pago de la cuota N° ${datePay?.cuota}&body=${message}`;
+        aplication = `mailto:${data[0]?.correo}?subject=Pago de la cuota N° ${dataNotification?.cuota}&body=${messageValue}`;
         break;
     }
     Linking.openURL(aplication);
@@ -52,36 +47,36 @@ const Notification = ({
     loadNegocio();
   }, []);
 
-  // Fecha de pago actualizado
-  useEffect(() => {
-    let result = data[0]?.resultPrestamo.find(
-      (element) => element.statusPay == false
-    );
-
-    if (result != undefined) {
-      setDayPay(result);
-    }
-    if (result == undefined) {
-      setDayPay(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
-    }
-  }, [data]);
-
   // Actualiza mensaje
   useEffect(() => {
-    if (datePay != undefined) {
+    if (dataNotification != undefined) {
       const messagePredetermined = `Hola ${
         data[0]?.nombre?.split(" ")[0]
-      }, tienes una deuda pendiente en la entidad ${
-        dataNegocio[0]?.negocio ? dataNegocio[0]?.negocio : "Financiera"
-      } de ${data[0]?.resultPrestamo[0]?.montoCuota} soles y ${
+      }, tienes una deuda pendiente con ${
+        dataNegocio[0]?.negocio ? dataNegocio[0]?.negocio : " La Financiera"
+      } de ${cuot} soles y ${
         color == "red" ? "venció" : "vence"
-      } el día ${formatDate(datePay?.fechaPago)}, ${
+      } el día ${formatDate(dataNotification?.fechaPago)}, ${
         color == "red" ? "evita que suba tu mora" : "evita la mora"
       } y paga hoy. ¡Gracias!`;
 
       color !== null ? setMessage(messagePredetermined) : setMessage(``);
     }
-  }, [datePay, color]);
+  }, [cuot, color]);
+
+  // Cuota
+
+  useEffect(() => {
+    // Con Mora
+    if (color == "red") {
+      let result = calculoMora(dataNotification);
+      setCuot(result);
+    }
+    //Sin mora
+    else {
+      setCuot(dataNotification?.montoCuota);
+    }
+  }, [color, cuot]);
 
   return (
     <View style={styles.container}>
@@ -93,19 +88,19 @@ const Notification = ({
           name="whatsapp"
           size={50}
           style={{ color: "rgb(66, 242, 46)" }}
-          onPress={() => handleIconNotification("whatsapp")}
+          onPress={() => handleIconNotification("whatsapp", message)}
         />
         <Feather
           name="phone-call"
           size={50}
           style={{ color: "rgb(46, 164, 242)" }}
-          onPress={() => handleIconNotification("phone-call")}
+          onPress={() => handleIconNotification("phone-call", message)}
         />
         <MaterialCommunityIcons
           name="email-fast-outline"
           size={50}
           style={{ color: "rgb(224, 240, 242)" }}
-          onPress={() => handleIconNotification("email-fast-outline")}
+          onPress={() => handleIconNotification("email-fast-outline", message)}
         />
       </View>
     </View>

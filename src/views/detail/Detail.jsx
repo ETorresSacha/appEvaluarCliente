@@ -17,7 +17,7 @@ import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
 
 const Detail = (props) => {
-  const [dataNotificarion, setDataNotification] = useState([]); // Útil para usar en las notificaciones
+  const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
   const color = props.route.params.typeColor;
   const id = props.route.params.id;
   const enable = props.route.params.enable;
@@ -136,7 +136,7 @@ const Detail = (props) => {
             <Notification
               data={user}
               color={color}
-              dataNotificarion={dataNotificarion}
+              dataNotification={dataNotification}
               setDataNotification={setDataNotification}
             />
             <TouchableOpacity

@@ -213,7 +213,7 @@ export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 }
 
 
-//TODO --> FRC 
+//TODO --> CÁLCULO DE LA MORA
 export const calculoMora = (data, color)=>{
     let intMoratorio = 0.22 // % --> Diario
     let ccv = 2 // % (Comisión de Cobranza Variable) --> Se aplica al monto de la cuota
@@ -221,15 +221,24 @@ export const calculoMora = (data, color)=>{
     // Cálculo de los dias de mora
     let today = format(new Date(),"yyyy-MM-dd")
      let fechaInicio = new Date(today).getTime()
-     let fechaFin = new Date(data.fechaPago).getTime()
+     let fechaFin = new Date(data?.fechaPago).getTime()
 
-     let diff = fechaFin - fechaInicio;
+     let diff = fechaInicio-fechaFin ;
         diff = diff/(1000*60*60*24)
 
     // Cálculo del interes
-    let i = intMoratorio*data?.capital*diff
+    let int = (intMoratorio*data?.capital*diff)/100
+    //! CONTINUAR CON EL CALCULO DEL NUMERO DE MORA, LUEGO LLAMARLO EN EL RESPECTIVO COPONENTE
+    // Cálculo de la comisión de cobranza variable
+    ccv = (ccv*data?.montoCuota)/100
+     // Cálculo de ITF
+     let itf =0.00005*data?.capital
 
-    
+     // Cálculo de la cuota neto a pagar
+     let result = parseFloat(data?.montoCuota) +  parseFloat(int) + parseFloat(ccv) + parseFloat(itf)
+     
+     return result.toFixed(3)
+
     
 
 }
