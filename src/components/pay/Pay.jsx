@@ -112,7 +112,7 @@ const Pay = ({ data }) => {
     }
   };
 
-  console.log(data);
+  //console.log(data);
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (

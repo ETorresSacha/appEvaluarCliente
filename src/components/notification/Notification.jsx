@@ -7,6 +7,7 @@ import { formatDate } from "../../utils/thunks/Thunks";
 import UseStorageBusiness from "../hooks/UseHookDataNeg";
 
 const Notification = ({ data, color }) => {
+  console.log(data[0].resultPrestamo);
   const { onGetBusiness } = UseStorageBusiness();
   const [message, setMessage] = useState("");
   const [datePay, setDayPay] = useState();

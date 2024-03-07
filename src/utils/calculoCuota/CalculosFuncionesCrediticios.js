@@ -165,7 +165,7 @@ export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
         // Cálculo de ITF
         let ITF = CuoSinITF*0.00005
-        RITF = Number.parseFloat(ITF).toFixed(2)
+        RITF = Number.parseFloat(ITF).toFixed(3)
 
         // Cálculo de la cuota con ITF
         CuoConITF = parseFloat(CuoSinITF) + parseFloat(RITF)
