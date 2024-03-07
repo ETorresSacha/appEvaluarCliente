@@ -14,25 +14,36 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import InfNegocio from "./modalOptions/InfNegocio";
 import Configuration from "./modalOptions/Configuration";
+import AcercaApp from "./modalOptions/AcercaApp";
 
-const optionsData = ["Información Negocio", "Recomendar App", "Configuración"];
+const optionsData = [
+  "Información Negocio",
+  "Configuración",
+  "Acerca de la App",
+  "Recomendar App",
+];
 
 const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
   const url = "https://play.google.com/store/apps/details?id=com.pedidosya"; //! este link esta para cambiar, se cambiará cuando se suba a play store
 
   const [enablerNeg, setEnableNeg] = useState(false);
   const [enablerConf, setEnableConf] = useState(false);
+  const [app, setApp] = useState(false);
 
   const options = (value) => {
     switch (value) {
       case "Información Negocio":
         setEnableNeg(true);
         break;
+      case "Configuración":
+        setEnableConf(true);
+        break;
+      case "Acerca de la App":
+        setApp(true);
+        break;
       case "Recomendar App":
         onShare();
         break;
-      case "Configuración":
-        setEnableConf(true);
     }
     onClose();
   };
@@ -91,6 +102,7 @@ const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
         setEnable={setEnable}
       />
       <Configuration enablerConf={enablerConf} setEnableConf={setEnableConf} />
+      <AcercaApp app={app} setApp={setApp} />
     </View>
   );
 };

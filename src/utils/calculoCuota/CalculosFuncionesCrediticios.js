@@ -228,7 +228,7 @@ export const calculoMora = (data, color)=>{
 
     // Cálculo del interes
     let int = (intMoratorio*data?.capital*diff)/100
-    //! CONTINUAR CON EL CALCULO DEL NUMERO DE MORA, LUEGO LLAMARLO EN EL RESPECTIVO COPONENTE
+    
     // Cálculo de la comisión de cobranza variable
     ccv = (ccv*data?.montoCuota)/100
      // Cálculo de ITF
