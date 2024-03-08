@@ -83,22 +83,6 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
     }
   };
 
-  // CERRAR EL MODAL
-  const handleCloseModal = () => {
-    Alert.alert("GUARDAR", "¿Desea guardar los cambios?", [
-      {
-        text: "Si",
-        onPress: async () => handleDataKeep(),
-        style: "destructive",
-      },
-      {
-        text: "No",
-        onPress: async () => setEnableNeg(false),
-        style: "destructive",
-      },
-    ]);
-  };
-
   return (
     <ScrollView style={styles.container}>
       <Modal
@@ -107,7 +91,7 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
         visible={enablerNeg}
         onRequestClose={() => setEnableNeg(false)}
       >
-        <TouchableWithoutFeedback onPress={handleCloseModal}>
+        <TouchableWithoutFeedback onPress={() => setEnableNeg(false)}>
           <View style={styles.modalOverlay} />
         </TouchableWithoutFeedback>
         <View style={styles.modalContent}>

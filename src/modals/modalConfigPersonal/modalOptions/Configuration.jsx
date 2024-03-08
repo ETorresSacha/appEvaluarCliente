@@ -14,15 +14,37 @@ import { validationConfiguration } from "../../../utils/validation/Validation";
 import UseStorageConfiguration from "../../../components/hooks/UseHookTasaPrimaMensual";
 
 const Configuration = ({ enablerConf, setEnableConf }) => {
-  const { onSaveDataConfiguration } = UseStorageConfiguration();
+  const { onSaveDataConfiguration, onGetConfiguration } =
+    UseStorageConfiguration();
   const [data, setData] = useState({
     tpm: "",
     ccv: "",
     intMoratorio: "",
   });
-  //console.log(data);
+
+  // Cargar los datos de la configuración
+
+  const loadCongiguration = async () => {
+    try {
+      let result = await onGetConfiguration();
+      result = result == undefined ? data : result;
+      console.log(result);
+
+      setData({
+        ...data,
+        tpm: result[0]?.tpm,
+        ccv: result[0]?.ccv,
+        intMoratorio: result[0]?.intMoratorio,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadCongiguration();
+  }, []);
   const handleKeep = async (value) => {
-    //console.log(value);
     // Validando
     let error = validationConfiguration(value);
     let valuesError = Object.values(error);
@@ -60,22 +82,26 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
         </View>
         <View>
           <Text style={{ paddingBottom: 10 }}>
-            Ten encuenta que estos datos se guardaran y no seran visibles en la
-            App y solo seran modificados desde esta vista.
+            Estos datos son útiles para los cálculos del crédito y sólo serán
+            modificados desde esta vista.
           </Text>
         </View>
+
+        {/* Tasa Prima Mensual */}
         <View style={styles.containerInput}>
           <Text>Tasa Prima Mensual</Text>
-          <TextInput
-            value={`${data.tpm} %`}
-            style={styles.input}
-            placeholder={"%"}
-            placeholderTextColor="gray"
-            onChangeText={(text) => {
-              setData({ ...data, tpm: text });
-            }}
-            keyboardType="numeric"
-          />
+          <View style={styles.inputView}>
+            <TextInput
+              value={data.tpm}
+              style={styles.input}
+              placeholderTextColor="gray"
+              onChangeText={(text) => {
+                setData({ ...data, tpm: text });
+              }}
+              keyboardType="numeric"
+            />
+            <Text style={{ fontSize: 20 }}>%</Text>
+          </View>
         </View>
         <View style={{ paddingTop: 30 }}>
           <Text style={{ color: "gray" }}>
@@ -83,31 +109,38 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
           </Text>
         </View>
 
+        {/* Interés Moratorio Anual */}
         <View style={styles.containerInput}>
           <Text>Interés Moratorio Anual</Text>
-          <TextInput
-            value={`${data.intMoratorio} %`}
-            style={styles.input}
-            placeholder={"%"}
-            placeholderTextColor="gray"
-            onChangeText={(text) => {
-              setData({ ...data, intMoratorio: text });
-            }}
-            keyboardType="numeric"
-          />
+          <View style={styles.inputView}>
+            <TextInput
+              value={data.intMoratorio}
+              style={styles.input}
+              placeholderTextColor="gray"
+              onChangeText={(text) => {
+                setData({ ...data, intMoratorio: text });
+              }}
+              keyboardType="numeric"
+            />
+            <Text style={{ fontSize: 20 }}>%</Text>
+          </View>
         </View>
+
+        {/* Comisión de Cobranza Variable */}
         <View style={styles.containerInput}>
           <Text>Comisión de Cobranza Variable</Text>
-          <TextInput
-            value={`${data.ccv} %`}
-            style={styles.input}
-            placeholder={"%"}
-            placeholderTextColor="gray"
-            onChangeText={(text) => {
-              setData({ ...data, ccv: text });
-            }}
-            keyboardType="numeric"
-          />
+          <View style={styles.inputView}>
+            <TextInput
+              value={data.ccv}
+              style={styles.input}
+              placeholderTextColor="gray"
+              onChangeText={(text) => {
+                setData({ ...data, ccv: text });
+              }}
+              keyboardType="numeric"
+            />
+            <Text style={{ fontSize: 20 }}>%</Text>
+          </View>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -150,13 +183,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  inputView: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    gap: 5,
+    alignItems: "flex-end",
+  },
   input: {
     alignItems: "center",
     textAlign: "center",
     color: "black",
     borderBottomColor: "black",
     borderBottomWidth: 1,
-    width: 80,
+    width: 60,
     fontSize: 17,
   },
   buttonContainer: {
