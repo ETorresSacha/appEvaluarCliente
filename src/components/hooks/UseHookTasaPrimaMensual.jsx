@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TASA_PRIMA_KEY = "@data_tasaPrima";
 
-const UseStorageTPM = () => {
+const UseStorageConfiguration = () => {
   // GUARDAR INFORMACION
   const saveInfoStorage = async (storageKey, meal) => {
     try {
@@ -19,9 +19,10 @@ const UseStorageTPM = () => {
   //TODO--> TASA PRIMA MENSUAL
 
   //! POST
-  const handleSaveTPM = async (tasaPrimaMedia) => {
+  const handleSaveConfiguration = async (data) => {
+    //console.log(data);
     try {
-      await saveInfoStorage(TASA_PRIMA_KEY, tasaPrimaMedia);
+      await saveInfoStorage(TASA_PRIMA_KEY, data);
 
       return Promise.resolve();
     } catch (error) {
@@ -29,7 +30,7 @@ const UseStorageTPM = () => {
     }
   };
   //! GET
-  const handleGetTPM = async () => {
+  const handleGetConfiguration = async () => {
     try {
       let result = await AsyncStorage.getItem(TASA_PRIMA_KEY);
 
@@ -44,8 +45,8 @@ const UseStorageTPM = () => {
   };
 
   return {
-    onSaveDataTPM: handleSaveTPM,
-    onGetTPM: handleGetTPM,
+    onSaveDataConfiguration: handleSaveConfiguration,
+    onGetConfiguration: handleGetConfiguration,
   };
 };
-export default UseStorageTPM;
+export default UseStorageConfiguration;

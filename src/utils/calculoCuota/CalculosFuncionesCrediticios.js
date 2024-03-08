@@ -218,6 +218,8 @@ export const calculoMora = (data, color)=>{
     let intMoratorio = 0.22 // % --> Diario
     let ccv = 2 // % (Comisión de Cobranza Variable) --> Se aplica al monto de la cuota
     
+    // % de interes moratorio diario
+     intMoratorio = (Math.pow(1 +intMoratorio / 100, 1 / 360) - 1) * 100;
     // Cálculo de los dias de mora
     let today = format(new Date(),"yyyy-MM-dd")
      let fechaInicio = new Date(today).getTime()
@@ -228,7 +230,7 @@ export const calculoMora = (data, color)=>{
 
     // Cálculo del interes
     let int = (intMoratorio*data?.capital*diff)/100
-    
+
     // Cálculo de la comisión de cobranza variable
     ccv = (ccv*data?.montoCuota)/100
      // Cálculo de ITF

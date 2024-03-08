@@ -1,6 +1,6 @@
 //TODO --> FÓRMULAS
 // Cálculo de la tasa efectiva mensual, semanal, quincenal, diario
-export const TEM = (data)=>{ //! tenemos que pasarle tambien el dato del periodo
+export const TEM = (data)=>{ 
     let periodo
     switch (data?.periodo) {
         case 'Mensual':
