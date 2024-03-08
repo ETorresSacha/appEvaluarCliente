@@ -23,7 +23,14 @@ const optionsData = [
   "Recomendar App",
 ];
 
-const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
+const ModalConfigPersonal = ({
+  visible,
+  onClose,
+  setDataHome,
+  setEnable,
+  dataConfiguration,
+  setDataConfiguration,
+}) => {
   const url = "https://play.google.com/store/apps/details?id=com.pedidosya"; //! este link esta para cambiar, se cambiará cuando se suba a play store
 
   const [enablerNeg, setEnableNeg] = useState(false);
@@ -101,7 +108,12 @@ const ModalConfigPersonal = ({ visible, onClose, setDataHome, setEnable }) => {
         setDataHome={setDataHome}
         setEnable={setEnable}
       />
-      <Configuration enablerConf={enablerConf} setEnableConf={setEnableConf} />
+      <Configuration
+        enablerConf={enablerConf}
+        setEnableConf={setEnableConf}
+        dataConfiguration={dataConfiguration}
+        setDataConfiguration={setDataConfiguration}
+      />
       <AcercaApp app={app} setApp={setApp} />
     </View>
   );

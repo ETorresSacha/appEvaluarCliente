@@ -11,7 +11,6 @@ import {
 import DatePrestamo from "../date/DatePrestamo";
 import { useFocusEffect } from "@react-navigation/native";
 
-import UseStorageTPM from "../hooks/UseHookTasaPrimaMensual";
 import ModalCofigTPM from "../../modals/modalCofigTPM/ModalCofigTPM";
 
 const infoPeriod = [
@@ -33,7 +32,7 @@ const Prestamo = ({
   clean,
   setClean,
 }) => {
-  const { onGetTPM } = UseStorageTPM();
+  //const { onGetTPM } = UseStorageTPM();
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState("");
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
@@ -98,7 +97,7 @@ const Prestamo = ({
   useFocusEffect(
     React.useCallback(() => {
       setValue(""); // Para setear el periodo a un estado de inicio
-      loadTPM();
+      //loadTPM();
     }, [isVisible, valuePrest, cleanCalculator, clean])
   );
   return (
@@ -339,3 +338,7 @@ const styles = StyleSheet.create({
     borderColor: "red",
   },
 });
+
+//! COMO HEMOS MODIFICADO LA TASA PRIMA MENSUAL, TENEMOS QUE MODIFICAR VARIOS COMPONENTES
+//! PRIMERO EL COMPONENTE CALCULATOR, DESPUES NEWFORM, DETALLE( LAS NOTIFICACIONES), EDITAR
+//! LA IDEA ES PASARLO ESOS PARAMETROS POR PROPS CON LA FINALIDAD DE LLAMAR A LA FUNCION SOLO UNA VEZ

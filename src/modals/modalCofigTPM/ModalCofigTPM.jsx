@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
+//import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
 import { validationTPM } from "../../utils/validation/Validation";
 
 const ModalCofigTPM = ({

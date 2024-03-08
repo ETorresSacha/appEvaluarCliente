@@ -8,42 +8,18 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { TEM } from "../../../utils/calculoCuota/Formulas";
+import React from "react";
 import { validationConfiguration } from "../../../utils/validation/Validation";
-import UseStorageConfiguration from "../../../components/hooks/UseHookTasaPrimaMensual";
+import UseStorageConfiguration from "../../../components/hooks/UseHookConfiguration";
 
-const Configuration = ({ enablerConf, setEnableConf }) => {
-  const { onSaveDataConfiguration, onGetConfiguration } =
-    UseStorageConfiguration();
-  const [data, setData] = useState({
-    tpm: "",
-    ccv: "",
-    intMoratorio: "",
-  });
+const Configuration = ({
+  enablerConf,
+  setEnableConf,
+  dataConfiguration,
+  setDataConfiguration,
+}) => {
+  const { onSaveDataConfiguration } = UseStorageConfiguration();
 
-  // Cargar los datos de la configuración
-
-  const loadCongiguration = async () => {
-    try {
-      let result = await onGetConfiguration();
-      result = result == undefined ? data : result;
-      console.log(result);
-
-      setData({
-        ...data,
-        tpm: result[0]?.tpm,
-        ccv: result[0]?.ccv,
-        intMoratorio: result[0]?.intMoratorio,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    loadCongiguration();
-  }, []);
   const handleKeep = async (value) => {
     // Validando
     let error = validationConfiguration(value);
@@ -53,7 +29,7 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
       let typeError = valuesError.find((element) => element != ""); // Busca el tipo de error que existe
       Alert.alert(typeError);
     } else {
-      await onSaveDataConfiguration(data);
+      await onSaveDataConfiguration(value);
       setEnableConf(false);
     }
   };
@@ -68,7 +44,7 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
         <View style={styles.modalOverlay} />
       </TouchableWithoutFeedback>
       <View style={styles.modalContent}>
-        <View>
+        <View style={{ paddingBottom: 10 }}>
           <Text
             style={{
               color: "black",
@@ -92,11 +68,11 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
           <Text>Tasa Prima Mensual</Text>
           <View style={styles.inputView}>
             <TextInput
-              value={data.tpm}
+              value={dataConfiguration.tpm}
               style={styles.input}
               placeholderTextColor="gray"
               onChangeText={(text) => {
-                setData({ ...data, tpm: text });
+                setDataConfiguration({ ...dataConfiguration, tpm: text });
               }}
               keyboardType="numeric"
             />
@@ -114,11 +90,14 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
           <Text>Interés Moratorio Anual</Text>
           <View style={styles.inputView}>
             <TextInput
-              value={data.intMoratorio}
+              value={dataConfiguration.intMoratorio}
               style={styles.input}
               placeholderTextColor="gray"
               onChangeText={(text) => {
-                setData({ ...data, intMoratorio: text });
+                setDataConfiguration({
+                  ...dataConfiguration,
+                  intMoratorio: text,
+                });
               }}
               keyboardType="numeric"
             />
@@ -131,11 +110,11 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
           <Text>Comisión de Cobranza Variable</Text>
           <View style={styles.inputView}>
             <TextInput
-              value={data.ccv}
+              value={dataConfiguration.ccv}
               style={styles.input}
               placeholderTextColor="gray"
               onChangeText={(text) => {
-                setData({ ...data, ccv: text });
+                setDataConfiguration({ ...dataConfiguration, ccv: text });
               }}
               keyboardType="numeric"
             />
@@ -145,7 +124,7 @@ const Configuration = ({ enablerConf, setEnableConf }) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.btnCalcular}
-            onPress={() => handleKeep(data)}
+            onPress={() => handleKeep(dataConfiguration)}
           >
             <Text style={styles.textBtn}>Guardar</Text>
           </TouchableOpacity>

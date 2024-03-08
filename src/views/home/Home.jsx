@@ -18,6 +18,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import { fondoImagen } from "../../../assets/fondos.avif";
+import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 
 const user = {
   name: "Erik Torres Sacha",
@@ -29,24 +30,22 @@ const img =
 
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
+  const { onGetConfiguration } = UseStorageConfiguration();
   const [isVisible, setIsVisible] = useState(false);
   const [enable, setEnable] = useState(false); // Para visualizar los cambios en el home
-  const [data, setData] = useState([]);
+  const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
+  const [dataConfiguration, setDataConfiguration] = useState({});
 
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
     try {
       const result = await onGetBusiness();
-      setData(result == undefined ? data : result);
+      setDataBusiness(result == undefined ? dataBusiness : result);
       setEnable(false);
     } catch (error) {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    loadNegocio();
-  }, [enable]);
 
   // Cerrar el modal
   const handleModalClose = async (shouldUpdate) => {
@@ -55,6 +54,29 @@ const Home = () => {
     }
     setIsVisible(false);
   };
+
+  // Cargar los datos de la configuración
+  const loadCongiguration = async () => {
+    try {
+      let result = await onGetConfiguration();
+      //result = result == undefined ? data : result;
+      //console.log(result);
+
+      setDataConfiguration({
+        ...dataConfiguration,
+        tpm: !result ? "0.08" : result[0]?.tpm,
+        ccv: !result ? "2" : result[0]?.ccv,
+        intMoratorio: !result ? "20" : result[0]?.intMoratorio,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadNegocio();
+    loadCongiguration();
+  }, [enable]);
 
   return (
     <View style={styles.container}>
@@ -80,8 +102,10 @@ const Home = () => {
       <ModalConfigPersonal
         visible={isVisible}
         onClose={handleModalClose}
-        setDataHome={setData}
+        setDataHome={setDataBusiness}
         setEnable={setEnable}
+        dataConfiguration={dataConfiguration}
+        setDataConfiguration={setDataConfiguration}
       />
 
       {/* BIENVENIDO */}
@@ -92,7 +116,9 @@ const Home = () => {
         <View style={styles.containerSwitch}>
           <View style={{ display: "flex", flexDirection: "row" }}>
             <Text style={styles.subTitle}>
-              {!data[0]?.negocio ? "Tu Financiera" : data[0]?.negocio}
+              {!dataBusiness[0]?.negocio
+                ? "Tu Financiera"
+                : dataBusiness[0]?.negocio}
             </Text>
           </View>
         </View>
