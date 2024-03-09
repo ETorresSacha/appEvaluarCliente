@@ -35,7 +35,7 @@ export const calculoFRCA = (data) =>{
 //TODO --> CRONOGRAMA DE PAGOS
  export const cronPagos = (data)=>{
 
-    const TSegM = parseFloat(data.tasaPrimaMensual[0]) // %  //! tercero aqui. este dato es en porcentaje, y es el valor de cada seguro, por lo que es modificable(tenerlo presente)
+    const TSegM = parseFloat(data?.tasaPrimaMensual) // % 
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []

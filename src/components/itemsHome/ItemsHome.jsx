@@ -12,11 +12,12 @@ import { BlurView } from "expo-blur";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const ItemsHome = () => {
+const ItemsHome = ({ dataConfiguration }) => {
+  //console.log(dataConfiguration);
   const navigation = useNavigation();
 
-  const handleOnPress = (value) => {
-    navigation.navigate(value);
+  const handleOnPress = (value, data) => {
+    navigation.navigate(value, { data: data ? data : null });
   };
   return (
     <View style={styles.container}>
@@ -41,7 +42,7 @@ const ItemsHome = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => handleOnPress("Calculadora")}
+        onPress={() => handleOnPress("Calculadora", dataConfiguration)}
         style={styles.item}
       >
         <Ionicons name="calculator" size={100} color="rgb(224, 205, 36)" />

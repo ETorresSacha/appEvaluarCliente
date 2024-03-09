@@ -11,7 +11,7 @@ import {
 import DatePrestamo from "../date/DatePrestamo";
 import { useFocusEffect } from "@react-navigation/native";
 
-import ModalCofigTPM from "../../modals/modalCofigTPM/ModalCofigTPM";
+//import ModalCofigTPM from "../../modals/modalCofigTPM/ModalCofigTPM";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -62,37 +62,37 @@ const Prestamo = ({
   };
 
   //Carga el valor de la Tasa Prima Mensual
-  const loadTPM = async () => {
-    try {
-      let result = await onGetTPM();
-      // Para limpiar los datos del componente Calculator
-      if (cleanCalculator || clean) {
-        setPrestamo({
-          capital: "",
-          cuotas: "",
-          tea: "",
-          fechaDesembolso: "",
-          fechaPrimeraCuota: "",
-          tasaPrimaMensual: result,
-          periodo: "",
-        });
-        setCleanCalculator(false);
-        setClean ? setClean(false) : null;
-      }
-      // Para los componentes de crear nuevo cliente y editar
-      else {
-        if (!editValue) {
-          result = !result ? "0.08" : result;
-        }
-        if (editValue) {
-          result = prestamo.tasaPrimaMensual;
-        }
-        setPrestamo({ ...prestamo, tasaPrimaMensual: result });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const loadTPM = async () => {
+  //   try {
+  //     let result = await onGetTPM();
+  //     // Para limpiar los datos del componente Calculator
+  //     if (cleanCalculator || clean) {
+  //       setPrestamo({
+  //         capital: "",
+  //         cuotas: "",
+  //         tea: "",
+  //         fechaDesembolso: "",
+  //         fechaPrimeraCuota: "",
+  //         tasaPrimaMensual: result,
+  //         periodo: "",
+  //       });
+  //       setCleanCalculator(false);
+  //       setClean ? setClean(false) : null;
+  //     }
+  //     // Para los componentes de crear nuevo cliente y editar
+  //     else {
+  //       if (!editValue) {
+  //         result = !result ? "0.08" : result;
+  //       }
+  //       if (editValue) {
+  //         result = prestamo.tasaPrimaMensual;
+  //       }
+  //       setPrestamo({ ...prestamo, tasaPrimaMensual: result });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -128,13 +128,13 @@ const Prestamo = ({
       </View>
 
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      <ModalCofigTPM
+      {/* <ModalCofigTPM
         isVisible={isVisible}
         setIsVisible={setIsVisible}
         editValue={editValue}
         setPrestamo={setPrestamo}
         prestamo={prestamo}
-      />
+      /> */}
 
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>

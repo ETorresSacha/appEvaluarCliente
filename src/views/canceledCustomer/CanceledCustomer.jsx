@@ -4,6 +4,7 @@ import Customer from "../customer/Customer";
 
 const CanceledCustomer = () => {
   const [enable, setEnable] = useState(true);
+  //console.log(enable);
 
   return (
     <View style={styles.container}>

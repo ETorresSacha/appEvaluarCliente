@@ -8,9 +8,13 @@ import { format } from "date-fns";
 import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
 import DataCustomer from "./DataCustomer";
+import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 
 const Customer = ({ enable }) => {
   const { onGetCronograma } = UseStorage();
+  const { onGetConfiguration } = UseStorageConfiguration();
+  const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
+  //! aqui hay un error cuando vamos a nuevo cliente, mandamos con props pero cuando vuelve ya no recibe ninguna props(data)
   const [day, setDay] = useState("");
   const [on, setOn] = useState(false);
   const [data, setData] = useState({
@@ -25,7 +29,7 @@ const Customer = ({ enable }) => {
     customerCancelled: [],
     dataResult: [],
   });
-
+  // console.log(dataConfiguration);
   // Traer los datos del local storage
   const loadCustomer = async () => {
     try {
@@ -58,11 +62,36 @@ const Customer = ({ enable }) => {
       });
     }
   };
+  // Cargar los datos de la configuración
+  const loadCongiguration = async () => {
+    try {
+      let result = await onGetConfiguration();
+      //result = result == undefined ? data : result;
+      //console.log(result);
+
+      setDataConfiguration({
+        ...dataConfiguration,
+        tpm: !result ? "0.08" : result[0]?.tpm,
+        ccv: !result ? "2" : result[0]?.ccv,
+        intMoratorio: !result ? "20" : result[0]?.intMoratorio,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     loadNegocio();
+  //     loadCongiguration();
+  //   }, [enable])
+  // );
 
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
       setTimeout(setOn, 1, true);
+      loadCongiguration();
 
       //return () => unsubscribe();
     }, [])
@@ -73,8 +102,16 @@ const Customer = ({ enable }) => {
 
   return (
     <View style={styles.container}>
-      <Header title={!enable ? "Clientes" : "Clientes cancelados"} />
-      <NavBar data={data} setData={setData} enable={enable} />
+      <Header
+        title={enable ? "Clientes" : "Clientes cancelados"}
+        //dataConfiguration={dataConfiguration}
+      />
+      <NavBar
+        data={data}
+        setData={setData}
+        enable={enable}
+        dataConfiguration={dataConfiguration}
+      />
       {on == false ? (
         <Loading />
       ) : (

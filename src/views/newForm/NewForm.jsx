@@ -18,13 +18,13 @@ const NewForm = (props) => {
   const uuid = uuidv4();
   const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
-
   const [errorsP, setErrorsP] = useState({});
   const [errores, setErrores] = useState({});
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
   const [dataPrestamo, setDataPrestamo] = useState({});
   const [valueError, setValueError] = useState(false);
+  const dataConfiguration = props.route.params.dataConfiguration; // Datos de la configuración
 
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
@@ -34,7 +34,7 @@ const NewForm = (props) => {
   const id = props.route.params ? props.route.params.id : null;
   const enable = props.route.params ? props.route.params.enable : null;
   // ****/
-
+  //
   const [dataPerson, setDataPerson] = useState({
     uuid: !user ? uuid : user[0].uuid,
     nombre: !user ? "" : user[0].nombre,
@@ -51,7 +51,7 @@ const NewForm = (props) => {
     fechaDesembolso: !user ? "" : user[0].fechaDesembolso,
     fechaPrimeraCuota: !user ? "" : user[0].fechaPrimeraCuota,
     periodo: !user ? "" : user[0].periodo,
-    tasaPrimaMensual: !user ? "" : user[0].tasaPrimaMensual,
+    tasaPrimaMensual: !user ? dataConfiguration?.tpm : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
   });
 
@@ -135,6 +135,7 @@ const NewForm = (props) => {
         id={id}
         color={color}
         enable={enable}
+        dataConfiguration={dataConfiguration}
       />
       <DataCustomer
         setErrores={setErrores}

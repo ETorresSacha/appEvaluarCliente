@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 const DetailCalculator = ({ resultCuota, periodo }) => {
-  console.log(resultCuota);
   const cuota = resultCuota[0]?.montoCuota;
   return (
     <View style={styles.container}>

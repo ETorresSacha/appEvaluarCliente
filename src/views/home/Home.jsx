@@ -34,7 +34,7 @@ const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [enable, setEnable] = useState(false); // Para visualizar los cambios en el home
   const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
-  const [dataConfiguration, setDataConfiguration] = useState({});
+  const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
 
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
@@ -73,10 +73,12 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    loadNegocio();
-    loadCongiguration();
-  }, [enable]);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadNegocio();
+      loadCongiguration();
+    }, [enable])
+  );
 
   return (
     <View style={styles.container}>
@@ -129,7 +131,7 @@ const Home = () => {
       </View> */}
 
       {/* ITEMS DE LAS OPCIONES */}
-      <ItemsHome />
+      <ItemsHome dataConfiguration={dataConfiguration} />
     </View>
   );
 };

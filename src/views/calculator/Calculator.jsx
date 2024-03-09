@@ -32,6 +32,7 @@ const Calculator = ({
   setValuePrest,
   editValue,
   user,
+  route,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false); // Habilita el resultado dependiendo si es del componente NEWFORM o CALCULATOR
@@ -39,7 +40,9 @@ const Calculator = ({
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
   const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
   const [cleanCalculator, setCleanCalculator] = useState(false); // Limpia solo del componente Calculator
-
+  //const user = props.route.params ? props.route.params.user : null;
+  // const dataConfiguration = !oute ? null : oute.params.data.tpm; // Las propiedades de la configuracion, "tpm"
+  //console.log(dataPerson);
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
@@ -47,7 +50,9 @@ const Calculator = ({
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
     periodo: !dataPerson ? "" : dataPerson.periodo,
-    tasaPrimaMensual: !dataPerson ? "" : dataPerson.tasaPrimaMensual,
+    tasaPrimaMensual: !dataPerson
+      ? route.params.data.tpm
+      : dataPerson.tasaPrimaMensual,
   });
 
   // Todo--> COMPONENTE NEWFORM
@@ -164,7 +169,7 @@ const Calculator = ({
             fechaDesembolso: prestamo?.fechaDesembolso,
             fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
             periodo: prestamo?.periodo,
-            tasaPrimaMensual: prestamo.tasaPrimaMensual,
+            tasaPrimaMensual: prestamo?.tasaPrimaMensual,
             resultPrestamo: result,
           })
         : setResultCuota(result);

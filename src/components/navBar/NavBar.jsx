@@ -11,12 +11,15 @@ import { Button, Icon, Input } from "@rneui/themed";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const NavBar = ({ data, setData, enable }) => {
+const NavBar = ({ data, setData, enable, dataConfiguration }) => {
+  // console.log(dataConfiguration);
   const navigation = useNavigation();
   const [textSearch, setText] = useState("");
 
   const handleAddPress = () => {
-    navigation.navigate("Nuevo cliente");
+    navigation.navigate("Nuevo cliente", {
+      dataConfiguration: dataConfiguration,
+    });
   };
 
   // Busqueda por nombre y dni
