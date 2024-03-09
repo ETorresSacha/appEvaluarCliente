@@ -35,14 +35,12 @@ const Calculator = ({
   route,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
-  const [enabled, setEnabled] = useState(false); // Habilita el resultado dependiendo si es del componente NEWFORM o CALCULATOR
+  const [enabled, setEnabled] = useState(false); // Habilita el resultado del componente NEWFORM
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
   const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
   const [cleanCalculator, setCleanCalculator] = useState(false); // Limpia solo del componente Calculator
-  //const user = props.route.params ? props.route.params.user : null;
-  // const dataConfiguration = !oute ? null : oute.params.data.tpm; // Las propiedades de la configuracion, "tpm"
-  //console.log(dataPerson);
+
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
@@ -54,7 +52,7 @@ const Calculator = ({
       ? route.params.data.tpm
       : dataPerson.tasaPrimaMensual,
   });
-
+  console.log(prestamo);
   // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
     React.useCallback(() => {
@@ -100,8 +98,8 @@ const Calculator = ({
 
   //Limpia el estado
   useEffect(() => {
-    if (clean !== undefined) {
-      if (clean) {
+    if (clean !== undefined || cleanCalculator != undefined) {
+      if (clean || cleanCalculator) {
         setPrestamo({
           capital: "",
           cuotas: "",
@@ -109,12 +107,15 @@ const Calculator = ({
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
           periodo: "",
+          tasaPrimaMensual: !dataPerson
+            ? route.params.data.tpm
+            : dataPerson.tasaPrimaMensual,
         });
-        setClean(false);
+        setClean ? setClean(false) : setCleanCalculator(false);
         setEnabled(false);
       }
     }
-  }, [clean]);
+  }, [clean, cleanCalculator]);
 
   // Todo--> COMPONENTE CALCULATOR
   useEffect(() => {

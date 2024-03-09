@@ -102,7 +102,7 @@ const Prestamo = ({
   );
   return (
     <View style={styles.container}>
-      {/* ------------------ TASA PRIMA MENSUAL ------------------*/}
+      {/* ------------------ TASA PRIMA MENSUAL ------------------
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>Tasa Prima Mensual: </Text>
@@ -125,7 +125,7 @@ const Prestamo = ({
             <AntDesign style={styles.icon} color="#FFF" name="edit" size={30} />
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
 
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
       {/* <ModalCofigTPM
@@ -259,7 +259,7 @@ const Prestamo = ({
 export default Prestamo;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingTop: 15, gap: 25 },
+  container: { flex: 1, paddingTop: 30, gap: 25 },
   title: {
     fontSize: 17,
     color: "white",
