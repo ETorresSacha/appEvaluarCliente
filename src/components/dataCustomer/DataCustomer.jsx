@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -39,7 +39,6 @@ const DataCustomer = ({
 
     setCleanData(false);
   };
-  useEffect(() => {}, []);
 
   return (
     <View style={styles.container}>
@@ -276,7 +275,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     alignContent: "center",
-    //backgroundColor: "honeydew",
   },
   alertError: {
     marginTop: 3,
@@ -285,7 +283,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     alignContent: "center",
-    //backgroundColor: "honeydew",
   },
   input: {
     height: 30,

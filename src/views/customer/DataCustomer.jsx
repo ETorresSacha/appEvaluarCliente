@@ -19,7 +19,6 @@ const DataCustomer = ({
   const [order, setOrder] = useState(false);
 
   // Ordenar
-  //! NO ESTA ORDENANDO POR FECHA LOS CLIENTES DE LA ALERTA BLANCO
   const handleSort = (type, value) => {
     // dataFilter toma los valores dependiendo de que componente es llamado la función, "clientes" o "clientes cancelados"
     let dataFilter = !enable
@@ -76,15 +75,12 @@ const DataCustomer = ({
         </TouchableOpacity>
 
         {!enable ? (
-          <View
-            style={[styles.title, {}]}
-            //onPress={() => handleSort("cuota", order)}
-          >
+          <View style={[styles.title, {}]}>
             <Text style={styles.texTitle}>ALERTA</Text>
           </View>
         ) : null}
       </View>
-      {/* Renderza los datos  */}
+      {/* Renderiza los datos  */}
       <ScrollView style={styles.containerCuotas}>
         {
           // Cuando no existe ningun cliente guardado
@@ -172,7 +168,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontWeight: "bold",
     textAlign: "center",
-    //backgroundColor: "red",
   },
   texTitle: {
     fontWeight: "bold",

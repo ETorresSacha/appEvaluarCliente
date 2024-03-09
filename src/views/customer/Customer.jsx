@@ -14,7 +14,6 @@ const Customer = ({ enable }) => {
   const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
-  //! aqui hay un error cuando vamos a nuevo cliente, mandamos con props pero cuando vuelve ya no recibe ninguna props(data)
   const [day, setDay] = useState("");
   const [on, setOn] = useState(false);
   const [data, setData] = useState({
@@ -29,7 +28,7 @@ const Customer = ({ enable }) => {
     customerCancelled: [],
     dataResult: [],
   });
-  // console.log(dataConfiguration);
+
   // Traer los datos del local storage
   const loadCustomer = async () => {
     try {
@@ -66,8 +65,6 @@ const Customer = ({ enable }) => {
   const loadCongiguration = async () => {
     try {
       let result = await onGetConfiguration();
-      //result = result == undefined ? data : result;
-      //console.log(result);
 
       setDataConfiguration({
         ...dataConfiguration,
@@ -79,13 +76,6 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
-
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     loadNegocio();
-  //     loadCongiguration();
-  //   }, [enable])
-  // );
 
   useFocusEffect(
     React.useCallback(() => {
@@ -102,10 +92,7 @@ const Customer = ({ enable }) => {
 
   return (
     <View style={styles.container}>
-      <Header
-        title={enable ? "Clientes" : "Clientes cancelados"}
-        //dataConfiguration={dataConfiguration}
-      />
+      <Header title={enable ? "Clientes" : "Clientes cancelados"} />
       <NavBar
         data={data}
         setData={setData}
@@ -134,5 +121,3 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
 });
-
-//! puede dar la posibilidad de que se resuma el codigo uniendo es SetCustomer y setData

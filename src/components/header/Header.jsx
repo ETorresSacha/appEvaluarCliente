@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 
@@ -54,10 +54,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "cornsilk",
     fontWeight: "bold",
-  },
-  profileImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 24,
   },
 });

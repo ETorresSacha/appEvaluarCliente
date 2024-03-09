@@ -1,19 +1,11 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
-import { BlurView } from "expo-blur";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const ItemsHome = ({ dataConfiguration }) => {
-  //console.log(dataConfiguration);
   const navigation = useNavigation();
 
   const handleOnPress = (value, data) => {
@@ -79,10 +71,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     display: "flex",
     alignItems: "center",
-  },
-  blur: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
   },
 });

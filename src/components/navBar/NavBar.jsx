@@ -2,26 +2,25 @@ import {
   StyleSheet,
   Text,
   View,
-  Alert,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Button, Icon, Input } from "@rneui/themed";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const NavBar = ({ data, setData, enable, dataConfiguration }) => {
-  // console.log(dataConfiguration);
   const navigation = useNavigation();
   const [textSearch, setText] = useState("");
 
+  // Direcciona para crear un nuevo cliente
   const handleAddPress = () => {
     navigation.navigate("Nuevo cliente", {
       dataConfiguration: dataConfiguration,
     });
   };
 
+  //BUSCAR
   // Busqueda por nombre y dni
   const handleSearch = (text) => {
     let busqueda = parseInt(text);
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingHorizontal: 1,
-    //paddingVertical: 10,
     justifyContent: "space-evenly",
     alignItems: "center",
   },
@@ -115,9 +113,6 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-  title: {
-    fontSize: 15,
-  },
   input: {
     backgroundColor: "beige",
     paddingHorizontal: 8,
@@ -140,9 +135,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderBottomRightRadius: 15,
     borderTopRightRadius: 15,
-  },
-  inputDateContainer: {
-    backgroundColor: "rgb(68, 132, 222)",
-    alignItems: "center",
   },
 });

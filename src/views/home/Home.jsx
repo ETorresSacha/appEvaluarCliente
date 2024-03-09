@@ -1,23 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Pressable,
-  Image,
-} from "react-native";
-import CustomerType from "../../components/customerType/CustomerType";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, Pressable, Image } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-import Header from "../../components/header/Header";
 import ItemsHome from "../../components/itemsHome/ItemsHome";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-//import ModalConfigNotification from "../../modals/modalConfigNotification/ModalConfigNotification";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
-import { fondoImagen } from "../../../assets/fondos.avif";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 
 const user = {
@@ -47,20 +34,10 @@ const Home = () => {
     }
   };
 
-  // Cerrar el modal
-  const handleModalClose = async (shouldUpdate) => {
-    if (shouldUpdate) {
-      Alert.alert("Se guardó correctamente");
-    }
-    setIsVisible(false);
-  };
-
   // Cargar los datos de la configuración
   const loadCongiguration = async () => {
     try {
       let result = await onGetConfiguration();
-      //result = result == undefined ? data : result;
-      //console.log(result);
 
       setDataConfiguration({
         ...dataConfiguration,
@@ -71,6 +48,14 @@ const Home = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  // Cerrar el modal
+  const handleModalClose = async (shouldUpdate) => {
+    if (shouldUpdate) {
+      Alert.alert("Se guardó correctamente");
+    }
+    setIsVisible(false);
   };
 
   useFocusEffect(
@@ -125,10 +110,6 @@ const Home = () => {
           </View>
         </View>
       </View>
-
-      {/* <View style={styles.containerLogo}>
-        <Image source={{ uri: user.uri }} style={styles.logo}></Image>
-      </View> */}
 
       {/* ITEMS DE LAS OPCIONES */}
       <ItemsHome dataConfiguration={dataConfiguration} />
