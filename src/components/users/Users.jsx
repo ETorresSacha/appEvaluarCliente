@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { datePay, formatDate } from "../../utils/thunks/Thunks";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
-const Users = ({ data, color, enable }) => {
+const Users = ({ data, color, enable, dataConfiguration }) => {
   const navigation = useNavigation();
 
   // estilos dinámico del ícono de alerta
@@ -44,6 +44,7 @@ const Users = ({ data, color, enable }) => {
                   id: element.uuid,
                   typeColor: color ? color : null,
                   enable: enable ? enable : null,
+                  dataConfiguration: dataConfiguration,
                 })
               }
             >

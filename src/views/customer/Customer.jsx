@@ -120,6 +120,7 @@ const Customer = ({ enable }) => {
           setData={setData}
           customer={customer}
           enable={enable}
+          dataConfiguration={dataConfiguration}
         />
       )}
     </View>

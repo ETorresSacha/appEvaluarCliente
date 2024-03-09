@@ -214,10 +214,9 @@ export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
 
 //TODO --> CÁLCULO DE LA MORA
-export const calculoMora = (data, color)=>{
-    let intMoratorio = 0.22 // % --> Diario
-    let ccv = 2 // % (Comisión de Cobranza Variable) --> Se aplica al monto de la cuota
-    
+export const calculoMora = (data, dataConfiguration)=>{
+    let intMoratorio =parseFloat(dataConfiguration?.intMoratorio)  // % --> Diario
+    let ccv = parseFloat(dataConfiguration?.cvv) // % (Comisión de Cobranza Variable) --> Se aplica al monto de la cuota
     // % de interes moratorio diario
      intMoratorio = (Math.pow(1 +intMoratorio / 100, 1 / 360) - 1) * 100;
     // Cálculo de los dias de mora

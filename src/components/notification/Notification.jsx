@@ -7,7 +7,7 @@ import { formatDate } from "../../utils/thunks/Thunks";
 import UseStorageBusiness from "../hooks/UseHookDataNeg";
 import { calculoMora } from "../../utils/calculoCuota/CalculosFuncionesCrediticios";
 
-const Notification = ({ data, color, dataNotification }) => {
+const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
   const { onGetBusiness } = UseStorageBusiness();
   const [message, setMessage] = useState("");
   const [dataNegocio, setDataNegocio] = useState({});
@@ -68,7 +68,7 @@ const Notification = ({ data, color, dataNotification }) => {
   useEffect(() => {
     // Con Mora
     if (color == "red") {
-      let result = calculoMora(dataNotification);
+      let result = calculoMora(dataNotification, dataConfiguration);
       setCuot(result);
     }
     //Sin mora

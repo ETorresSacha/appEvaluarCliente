@@ -21,6 +21,7 @@ const Detail = (props) => {
   const color = props.route.params.typeColor;
   const id = props.route.params.id;
   const enable = props.route.params.enable;
+  const dataConfiguration = props.route.params.dataConfiguration;
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
 
@@ -138,6 +139,7 @@ const Detail = (props) => {
               color={color}
               dataNotification={dataNotification}
               setDataNotification={setDataNotification}
+              dataConfiguration={dataConfiguration}
             />
             <TouchableOpacity
               style={styles.verCronograma}

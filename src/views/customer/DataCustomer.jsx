@@ -9,7 +9,13 @@ import React, { useState } from "react";
 import Users from "../../components/users/Users";
 import { orderData } from "../../utils/thunks/Thunks";
 
-const DataCustomer = ({ data, setData, customer, enable }) => {
+const DataCustomer = ({
+  data,
+  setData,
+  customer,
+  enable,
+  dataConfiguration,
+}) => {
   const [order, setOrder] = useState(false);
 
   // Ordenar
@@ -96,13 +102,32 @@ const DataCustomer = ({ data, setData, customer, enable }) => {
           ) : !enable ? (
             //  clienteS guardados
             <View>
-              <Users data={customer.customerRed} color={"red"} />
-              <Users data={customer.customerYellow} color={"yellow"} />
-              <Users data={customer.customerGreen} color={"rgb(66, 242, 46)"} />
-              <Users data={customer.customer} />
+              <Users
+                data={customer.customerRed}
+                dataConfiguration={dataConfiguration}
+                color={"red"}
+              />
+              <Users
+                data={customer.customerYellow}
+                dataConfiguration={dataConfiguration}
+                color={"yellow"}
+              />
+              <Users
+                data={customer.customerGreen}
+                dataConfiguration={dataConfiguration}
+                color={"rgb(66, 242, 46)"}
+              />
+              <Users
+                data={customer.customer}
+                dataConfiguration={dataConfiguration}
+              />
             </View>
           ) : (
-            <Users data={customer?.customerCancelled} enable={enable} />
+            <Users
+              data={customer?.customerCancelled}
+              dataConfiguration={dataConfiguration}
+              enable={enable}
+            />
           )
         }
       </ScrollView>
