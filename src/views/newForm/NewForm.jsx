@@ -25,7 +25,7 @@ const NewForm = (props) => {
   const [dataPrestamo, setDataPrestamo] = useState({});
   const [valueError, setValueError] = useState(false);
   const dataConfiguration = props.route.params.dataConfiguration; // Datos de la configuración
-
+  console.log(dataConfiguration);
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
   const user = props.route.params ? props.route.params.user : null;
@@ -54,7 +54,7 @@ const NewForm = (props) => {
     tasaPrimaMensual: !user ? dataConfiguration?.tpm : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
   });
-
+  //console.log(dataPerson);
   useEffect(() => {
     // Limpia es estado
     if (clean) {
@@ -73,7 +73,9 @@ const NewForm = (props) => {
         fechaDesembolso: "",
         fechaPrimeraCuota: "",
         periodo: "",
-        tasaPrimaMensual: "",
+        tasaPrimaMensual: !user
+          ? dataConfiguration?.tpm
+          : user[0].tasaPrimaMensual,
         resultPrestamo: [],
       });
     }
@@ -158,6 +160,7 @@ const NewForm = (props) => {
         setValuePrest={setValuePrest}
         editValue={editValue}
         user={user}
+        dataConfiguration={dataConfiguration}
       />
       <TouchableOpacity style={styles.buttonContainer} onPress={handleDataKeep}>
         <Text style={styles.text}>Guardar</Text>

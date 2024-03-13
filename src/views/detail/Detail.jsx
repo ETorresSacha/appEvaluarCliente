@@ -53,6 +53,7 @@ const Detail = (props) => {
       color,
       id,
       enable,
+      dataConfiguration,
     });
   };
   // Eliminar

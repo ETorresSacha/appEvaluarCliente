@@ -32,6 +32,7 @@ const Calculator = ({
   setValuePrest,
   editValue,
   user,
+  dataConfiguration,
   route,
 }) => {
   const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
@@ -40,7 +41,8 @@ const Calculator = ({
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
   const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
   const [cleanCalculator, setCleanCalculator] = useState(false); // Limpia solo del componente Calculator
-
+  //console.log(route);
+  //console.log("tpm: " + dataConfiguration.tpm);
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
@@ -52,6 +54,8 @@ const Calculator = ({
       ? route.params.data.tpm
       : dataPerson.tasaPrimaMensual,
   });
+  //console.log(route);
+
   console.log(prestamo);
   // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
@@ -65,6 +69,7 @@ const Calculator = ({
 
   // Valida los datos de forma continua, útil en el componente NEWFORM
   useEffect(() => {
+    console.log("changeValue: " + changeValue);
     if (errorsP !== undefined) {
       let resulView = false;
 
@@ -80,9 +85,21 @@ const Calculator = ({
         setValuePrest(false);
       } else {
         if (editValue) {
-          if (equal(prestamo, copyDataPrestamo)) {
+          let prestamoCopy = { ...prestamo, tasaPrimaMensual: null };
+          let copyDataPrestamoCopy = {
+            ...copyDataPrestamo,
+            tasaPrimaMensual: null,
+          };
+          //console.log(prestamoCopy);
+          //console.log(copyDataPrestamoCopy);
+          //console.log(equal(prestamoCopy, copyDataPrestamoCopy));
+          if (equal(prestamoCopy, copyDataPrestamoCopy)) {
             setChangeValue(true);
-          } else {
+          } else if (!equal(prestamoCopy, copyDataPrestamoCopy)) {
+            // setPrestamo({
+            //   ...prestamo,
+            //   tasaPrimaMensual: dataConfiguration?.tpm,
+            // });
             setChangeValue(false);
           }
         }
@@ -94,7 +111,7 @@ const Calculator = ({
         handleCalcular(prestamo);
       }
     }
-  }, [prestamo, changeValue]);
+  }, [prestamo, changeValue, copyDataPrestamo]);
 
   //Limpia el estado
   useEffect(() => {
@@ -157,6 +174,8 @@ const Calculator = ({
       Alert.alert(typeError);
     } else {
       // El resultado dependerá si los valores del préstamo, cambian o no.
+      //console.log(route);
+      console.log(data);
       const result = changeValue
         ? user[0].resultPrestamo
         : resultCronograma(data);
