@@ -56,7 +56,7 @@ const Calculator = ({
   });
   //console.log(route);
 
-  console.log(prestamo);
+  //console.log(prestamo);
   // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
     React.useCallback(() => {
@@ -68,8 +68,10 @@ const Calculator = ({
   );
 
   // Valida los datos de forma continua, útil en el componente NEWFORM
+  const [prestamoModify, setPrestamoModify] = useState(false);
+  console.log("prestamoModify: " + prestamoModify);
   useEffect(() => {
-    console.log("changeValue: " + changeValue);
+    //console.log("changeValue: " + changeValue);
     if (errorsP !== undefined) {
       let resulView = false;
 
@@ -90,18 +92,23 @@ const Calculator = ({
             ...copyDataPrestamo,
             tasaPrimaMensual: null,
           };
-          //console.log(prestamoCopy);
-          //console.log(copyDataPrestamoCopy);
+          console.log(prestamoCopy);
+          console.log(copyDataPrestamoCopy);
           //console.log(equal(prestamoCopy, copyDataPrestamoCopy));
           if (equal(prestamoCopy, copyDataPrestamoCopy)) {
             setChangeValue(true);
+            setPrestamoModify(false);
           } else if (!equal(prestamoCopy, copyDataPrestamoCopy)) {
-            // setPrestamo({
-            //   ...prestamo,
-            //   tasaPrimaMensual: dataConfiguration?.tpm,
-            // });
+            setPrestamoModify(true);
             setChangeValue(false);
           }
+          // if (prestamoModify) {
+          //   setPrestamo({
+          //     ...prestamo,
+          //     tasaPrimaMensual: dataConfiguration?.tpm,
+          //   });
+          // setPrestamoModify(false);
+          // }
         }
         resulView = true;
         setEnabled(true);
@@ -111,6 +118,7 @@ const Calculator = ({
         handleCalcular(prestamo);
       }
     }
+    //}, [prestamo, changeValue, copyDataPrestamo]);
   }, [prestamo, changeValue, copyDataPrestamo]);
 
   //Limpia el estado
@@ -175,7 +183,7 @@ const Calculator = ({
     } else {
       // El resultado dependerá si los valores del préstamo, cambian o no.
       //console.log(route);
-      console.log(data);
+      //console.log(data);
       const result = changeValue
         ? user[0].resultPrestamo
         : resultCronograma(data);
@@ -311,3 +319,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 });
+
+//! fucniona casi todo, cuando se edita los nombres no altera el prestamo y cuando se cambia el
+//! prestamo reinicia de cero,
+//! LO QUE FALTA ES QUE CUANDO SE CAMBIA ALGUN DATO DEBE DE GUARDARSE CON LA NUEVA TPM, SI NO HAY CAMBIOS NO DEBE DE ALTERAR EL PRESTAMO

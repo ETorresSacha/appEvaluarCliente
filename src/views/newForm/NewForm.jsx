@@ -25,7 +25,7 @@ const NewForm = (props) => {
   const [dataPrestamo, setDataPrestamo] = useState({});
   const [valueError, setValueError] = useState(false);
   const dataConfiguration = props.route.params.dataConfiguration; // Datos de la configuración
-  console.log(dataConfiguration);
+  //console.log(dataConfiguration);
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
   const user = props.route.params ? props.route.params.user : null;
