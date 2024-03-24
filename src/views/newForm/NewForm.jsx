@@ -5,6 +5,7 @@ import {
   Alert,
   Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
@@ -130,7 +131,7 @@ const NewForm = (props) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Header
         title={editValue ? " Editar cliente" : "Nuevo cliente"}
         back={"Clientes"}
@@ -139,32 +140,37 @@ const NewForm = (props) => {
         enable={enable}
         dataConfiguration={dataConfiguration}
       />
-      <DataCustomer
-        setErrores={setErrores}
-        errores={errores}
-        setDataPerson={setDataPerson}
-        dataPerson={dataPerson}
-        setClean={setClean}
-        editValue={editValue}
-      />
-      <Calculator
-        errorsP={errorsP}
-        setErrorsP={setErrorsP}
-        clean={clean}
-        setClean={setClean}
-        dataPerson={dataPerson}
-        setDataPerson={setDataPerson}
-        valuePrest={valuePrest}
-        setValueError={setValueError}
-        setValuePrest={setValuePrest}
-        editValue={editValue}
-        user={user}
-        dataConfiguration={dataConfiguration}
-      />
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleDataKeep}>
-        <Text style={styles.text}>Guardar</Text>
-      </TouchableOpacity>
-    </ScrollView>
+      <ScrollView>
+        <DataCustomer
+          setErrores={setErrores}
+          errores={errores}
+          setDataPerson={setDataPerson}
+          dataPerson={dataPerson}
+          setClean={setClean}
+          editValue={editValue}
+        />
+        <Calculator
+          errorsP={errorsP}
+          setErrorsP={setErrorsP}
+          clean={clean}
+          setClean={setClean}
+          dataPerson={dataPerson}
+          setDataPerson={setDataPerson}
+          valuePrest={valuePrest}
+          setValueError={setValueError}
+          setValuePrest={setValuePrest}
+          editValue={editValue}
+          user={user}
+          dataConfiguration={dataConfiguration}
+        />
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={handleDataKeep}
+        >
+          <Text style={styles.text}>Guardar</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
   );
 };
 
