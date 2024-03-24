@@ -311,7 +311,3 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 });
-
-//! fucniona casi todo, cuando se edita los nombres no altera el prestamo y cuando se cambia el
-//! prestamo reinicia de cero,
-//! LO QUE FALTA ES QUE CUANDO SE CAMBIA ALGUN DATO DEBE DE GUARDARSE CON LA NUEVA TPM, SI NO HAY CAMBIOS NO DEBE DE ALTERAR EL PRESTAMO
