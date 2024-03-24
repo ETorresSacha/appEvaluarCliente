@@ -40,6 +40,7 @@ const Calculator = ({
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
   const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
   const [cleanCalculator, setCleanCalculator] = useState(false); // Limpia solo del componente Calculator
+  const [resultView, setResultView] = useState(true);
   const [valueTPM, setValueTPM] = useState("");
   const [cuota, setCuota] = useState();
 
@@ -66,8 +67,6 @@ const Calculator = ({
   );
 
   // Valida los datos de forma continua, útil en el componente NEWFORM
-  const [prestamoModify, setPrestamoModify] = useState(false);
-  const [resultView, setResultView] = useState(true);
 
   useEffect(() => {
     if (errorsP !== undefined) {
@@ -89,21 +88,12 @@ const Calculator = ({
 
           if (equal(prestamoCopy, copyDataPrestamoCopy)) {
             setChangeValue(true);
-            setPrestamoModify(false);
           } else {
-            setPrestamoModify(true);
             setChangeValue(false);
           }
-          // if (prestamoModify) {
-          //   setPrestamo({
-          //     ...prestamo,
-          //     tasaPrimaMensual: dataConfiguration?.tpm,
-          //   });
-          // setPrestamoModify(false);
-          // }
         }
         setResultView(false);
-        //resulView = true;
+
         setEnabled(true);
         setValueError(true);
       }
@@ -111,8 +101,7 @@ const Calculator = ({
         handleCalcular(prestamo);
       }
     }
-    //}, [prestamo, changeValue, copyDataPrestamo]);
-  }, [prestamo, changeValue, copyDataPrestamo, valueTPM]);
+  }, [prestamo, changeValue, copyDataPrestamo, valueTPM, resultView]);
 
   //Limpia el estado
   useEffect(() => {
@@ -129,6 +118,7 @@ const Calculator = ({
             ? route.params.data.tpm
             : dataPerson.tasaPrimaMensual,
         });
+        setResultView(true);
         setClean ? setClean(false) : setCleanCalculator(false);
         setEnabled(false);
       }
@@ -174,18 +164,15 @@ const Calculator = ({
 
       Alert.alert(typeError);
     } else {
-      // El resultado dependerá si los valores del préstamo, cambian o no.
-      //console.log(route);
-      //console.log(data);
-      //! CAMBIA EL VALOR PERO TOMA UN TIEMPO QUE SE NOTA, ESTO NO DEBE DE NOTARSE, EL CAMBIO DEBE DE SER AL INSTANTE
       const result = changeValue
         ? user[0].resultPrestamo
         : resultCronograma({
             ...data,
-            tasaPrimaMensual: dataConfiguration.tpm,
+            tasaPrimaMensual: !route
+              ? dataConfiguration.tpm
+              : route.params.data.tpm,
           });
-
-      if (dataPerson !== undefined) {
+      if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
           capital: prestamo?.capital,
@@ -241,6 +228,7 @@ const Calculator = ({
           clean={clean}
           setClean={setClean}
           dataPerson={dataPerson}
+          route={route}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}

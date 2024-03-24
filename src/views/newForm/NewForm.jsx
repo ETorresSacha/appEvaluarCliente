@@ -24,7 +24,7 @@ const NewForm = (props) => {
   const [valuePrest, setValuePrest] = useState(false);
   const [valueError, setValueError] = useState(false);
   const dataConfiguration = props.route.params.dataConfiguration; // Datos de la configuración
-  //console.log(dataConfiguration);
+
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
   const user = props.route.params ? props.route.params.user : null;
@@ -102,6 +102,7 @@ const NewForm = (props) => {
           {
             text: "Si",
             onPress: async () => {
+              setValuePrest(false);
               await onSaveCronograma(dataPerson, editValue);
               if (editValue) {
                 navigation.navigate("Detalle", {
@@ -112,7 +113,6 @@ const NewForm = (props) => {
                 });
               } else {
                 setClean(true);
-                setValuePrest(false);
               }
             },
             style: "destructive",

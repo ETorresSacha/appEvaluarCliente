@@ -32,6 +32,7 @@ const Prestamo = ({
   setCleanCalculator,
   clean,
   setClean,
+  route,
 }) => {
   //const { onGetTPM } = UseStorageTPM();
   const [isVisible, setIsVisible] = useState(false);
@@ -119,7 +120,8 @@ const Prestamo = ({
         >
           <View>
             <Text style={[styles.legend, { fontSize: 20 }]}>
-              {dataPerson.tasaPrimaMensual} {" %"}
+              {!route ? dataPerson.tasaPrimaMensual : route.params.data.tpm}{" "}
+              {" %"}
             </Text>
           </View>
           <TouchableOpacity onPress={() => setIsVisible(true)}>
