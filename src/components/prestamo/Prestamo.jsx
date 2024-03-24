@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { View, StyleSheet, Text, TextInput } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
 import { useFocusEffect } from "@react-navigation/native";
-
-//import ModalCofigTPM from "../../modals/modalCofigTPM/ModalCofigTPM";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -33,7 +25,6 @@ const Prestamo = ({
   clean,
   setClean,
 }) => {
-  //const { onGetTPM } = UseStorageTPM();
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState("");
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
@@ -62,56 +53,13 @@ const Prestamo = ({
     }));
   };
 
-  //Carga el valor de la Tasa Prima Mensual
-  // const loadTPM = async () => {
-  //   try {
-  //     let result = await onGetTPM();
-  //     // Para limpiar los datos del componente Calculator
-  //     if (cleanCalculator || clean) {
-  //       setPrestamo({
-  //         capital: "",
-  //         cuotas: "",
-  //         tea: "",
-  //         fechaDesembolso: "",
-  //         fechaPrimeraCuota: "",
-  //         tasaPrimaMensual: result,
-  //         periodo: "",
-  //       });
-  //       setCleanCalculator(false);
-  //       setClean ? setClean(false) : null;
-  //     }
-  //     // Para los componentes de crear nuevo cliente y editar
-  //     else {
-  //       if (!editValue) {
-  //         result = !result ? "0.08" : result;
-  //       }
-  //       if (editValue) {
-  //         result = prestamo.tasaPrimaMensual;
-  //       }
-  //       setPrestamo({ ...prestamo, tasaPrimaMensual: result });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   useFocusEffect(
     React.useCallback(() => {
       setValue(""); // Para setear el periodo a un estado de inicio
-      //loadTPM();
     }, [isVisible, valuePrest, cleanCalculator, clean])
   );
   return (
     <View style={styles.container}>
-      {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
-      {/* <ModalCofigTPM
-        isVisible={isVisible}
-        setIsVisible={setIsVisible}
-        editValue={editValue}
-        setPrestamo={setPrestamo}
-        prestamo={prestamo}
-      /> */}
-
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
