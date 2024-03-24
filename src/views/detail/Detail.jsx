@@ -6,7 +6,7 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Icon } from "@rneui/themed";
 import UseStorage from "../../components/hooks/UseHookStorage";
@@ -80,6 +80,7 @@ const Detail = (props) => {
       },
     ]);
   };
+
   return (
     <View style={styles.container}>
       {user.length == 0 ? (

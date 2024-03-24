@@ -64,7 +64,6 @@ const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
   }, [cuot, color, , dataNegocio]);
 
   // Cuota
-
   useEffect(() => {
     // Con Mora
     if (color == "red") {

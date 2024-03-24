@@ -215,10 +215,14 @@ export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
 //TODO --> CÁLCULO DE LA MORA
 export const calculoMora = (data, dataConfiguration)=>{
+
     let intMoratorio =parseFloat(dataConfiguration?.intMoratorio)  // % --> Diario
-    let ccv = parseFloat(dataConfiguration?.cvv) // % (Comisión de Cobranza Variable) --> Se aplica al monto de la cuota
+    
+    let ccv = parseFloat(dataConfiguration?.ccv) // % (Comisión de Cobranza Variable) --> Se aplica al monto de la cuota
+
     // % de interes moratorio diario
      intMoratorio = (Math.pow(1 +intMoratorio / 100, 1 / 360) - 1) * 100;
+
     // Cálculo de los dias de mora
     let today = format(new Date(),"yyyy-MM-dd")
      let fechaInicio = new Date(today).getTime()
@@ -232,13 +236,14 @@ export const calculoMora = (data, dataConfiguration)=>{
 
     // Cálculo de la comisión de cobranza variable
     ccv = (ccv*data?.montoCuota)/100
+
      // Cálculo de ITF
      let itf =0.00005*data?.capital
 
      // Cálculo de la cuota neto a pagar
      let result = parseFloat(data?.montoCuota) +  parseFloat(int) + parseFloat(ccv) + parseFloat(itf)
      
-     return result.toFixed(3)
+     return result.toFixed(2)
 
     
 
