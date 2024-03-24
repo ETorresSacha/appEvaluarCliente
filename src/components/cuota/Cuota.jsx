@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 const Cuota = ({ cuota, changeValue, dataPerson }) => {
   const navigation = useNavigation();
   const cuota2 = dataPerson.resultPrestamo[0]?.montoCuota;
+
   const handleRouteCronograma = () => {
     navigation.navigate("Cronograma", { data: dataPerson.resultPrestamo });
   };

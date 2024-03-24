@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { View, StyleSheet, Text, TextInput } from "react-native";
@@ -13,19 +13,14 @@ const infoPeriod = [
 ];
 
 const Prestamo = ({
-  dataPerson,
   errorsPrestamo,
   setErrorsPrestamo,
   prestamo,
   setPrestamo,
-  editValue,
   valuePrest,
   cleanCalculator,
-  setCleanCalculator,
   clean,
-  setClean,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState("");
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
 
@@ -56,7 +51,7 @@ const Prestamo = ({
   useFocusEffect(
     React.useCallback(() => {
       setValue(""); // Para setear el periodo a un estado de inicio
-    }, [isVisible, valuePrest, cleanCalculator, clean])
+    }, [valuePrest, cleanCalculator, clean])
   );
   return (
     <View style={styles.container}>

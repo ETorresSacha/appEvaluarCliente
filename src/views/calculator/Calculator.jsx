@@ -67,7 +67,6 @@ const Calculator = ({
   );
 
   // Valida los datos de forma continua, útil en el componente NEWFORM
-
   useEffect(() => {
     if (errorsP !== undefined) {
       setErrorsP(validationDataPrestamo(prestamo));
@@ -144,17 +143,14 @@ const Calculator = ({
 
   // Todo--> PARA AMBOS COMPONENTES
   const handleCalcular = async (data) => {
-    //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
-    // Valida
-    setErrorsPrestamo(validationDataPrestamo(data));
-    let resultError = validationDataPrestamo(data);
-
     // Crea una copia de los datos del préstamo sólo cuando esta en uso el componente CALCULATOR
     if (!editValue && !dataPerson) {
       setCopyDataPrestamo(prestamo);
     }
-
-    // Calcula la cuota
+    //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
+    // Valida
+    setErrorsPrestamo(validationDataPrestamo(data));
+    let resultError = validationDataPrestamo(data);
     let valuesText = Object.values(resultError);
 
     if (valuesText.some((error) => error !== "")) {
@@ -163,7 +159,9 @@ const Calculator = ({
       setEnabled(false);
 
       Alert.alert(typeError);
-    } else {
+    }
+    // Calcula la cuota
+    else {
       const result = changeValue
         ? user[0].resultPrestamo
         : resultCronograma({
