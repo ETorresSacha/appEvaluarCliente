@@ -228,7 +228,6 @@ const Calculator = ({
           clean={clean}
           setClean={setClean}
           dataPerson={dataPerson}
-          route={route}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}

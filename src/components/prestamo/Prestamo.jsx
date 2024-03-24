@@ -32,7 +32,6 @@ const Prestamo = ({
   setCleanCalculator,
   clean,
   setClean,
-  route,
 }) => {
   //const { onGetTPM } = UseStorageTPM();
   const [isVisible, setIsVisible] = useState(false);
@@ -104,32 +103,6 @@ const Prestamo = ({
   );
   return (
     <View style={styles.container}>
-      {/* ------------------ TASA PRIMA MENSUAL ------------------ */}
-      <View style={styles.formItem}>
-        <View style={styles.legendContainer}>
-          <Text style={styles.legend}>Tasa Prima Mensual: </Text>
-        </View>
-        <View
-          style={[
-            {
-              display: "flex",
-              flexDirection: "row",
-              marginRight: 10,
-            },
-          ]}
-        >
-          <View>
-            <Text style={[styles.legend, { fontSize: 20 }]}>
-              {!route ? dataPerson.tasaPrimaMensual : route.params.data.tpm}{" "}
-              {" %"}
-            </Text>
-          </View>
-          <TouchableOpacity onPress={() => setIsVisible(true)}>
-            <AntDesign style={styles.icon} color="#FFF" name="edit" size={30} />
-          </TouchableOpacity>
-        </View>
-      </View>
-
       {/* -- CONFIGURACIÓN DEL MODAL (TASA PRIMA MENSUAL) --*/}
       {/* <ModalCofigTPM
         isVisible={isVisible}
