@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Customer from "../customer/Customer";
 
 const CanceledCustomer = () => {
-  const [enable, setEnable] = useState(true);
+  const [enable, setEnable] = useState(true); //  Habilita el componente de los clientes cancelados
   //console.log(enable);
 
   return (

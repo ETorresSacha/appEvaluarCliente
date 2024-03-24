@@ -76,7 +76,6 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
-
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
@@ -92,7 +91,7 @@ const Customer = ({ enable }) => {
 
   return (
     <View style={styles.container}>
-      <Header title={enable ? "Clientes" : "Clientes cancelados"} />
+      <Header title={!enable ? "Clientes" : "Clientes cancelados"} />
       <NavBar
         data={data}
         setData={setData}

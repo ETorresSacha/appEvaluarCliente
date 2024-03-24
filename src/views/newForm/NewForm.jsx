@@ -22,7 +22,6 @@ const NewForm = (props) => {
   const [errores, setErrores] = useState({});
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
-  const [dataPrestamo, setDataPrestamo] = useState({});
   const [valueError, setValueError] = useState(false);
   const dataConfiguration = props.route.params.dataConfiguration; // Datos de la configuración
   //console.log(dataConfiguration);
@@ -54,7 +53,7 @@ const NewForm = (props) => {
     tasaPrimaMensual: !user ? dataConfiguration?.tpm : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
   });
-  //console.log(dataPerson);
+
   useEffect(() => {
     // Limpia es estado
     if (clean) {
@@ -109,6 +108,7 @@ const NewForm = (props) => {
                   id: id,
                   typeColor: null,
                   enable: enable ? enable : null,
+                  dataConfiguration: dataConfiguration,
                 });
               } else {
                 setClean(true);
@@ -148,7 +148,6 @@ const NewForm = (props) => {
         editValue={editValue}
       />
       <Calculator
-        dataPrestamo={dataPrestamo}
         errorsP={errorsP}
         setErrorsP={setErrorsP}
         clean={clean}

@@ -20,7 +20,6 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 const img =
   "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
 const Calculator = ({
-  dataPrestamo,
   errorsP,
   setErrorsP,
   clean,
@@ -35,14 +34,15 @@ const Calculator = ({
   dataConfiguration,
   route,
 }) => {
-  const [resultCuota, setResultCuota] = useState(); // Útil para la vista de la calculadora
+  const [resultCuota, setResultCuota] = useState(""); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false); // Habilita el resultado del componente NEWFORM
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
   const [changeValue, setChangeValue] = useState(false); // Cuando cambian los valores del prestamo
   const [cleanCalculator, setCleanCalculator] = useState(false); // Limpia solo del componente Calculator
-  //console.log(route);
-  //console.log("tpm: " + dataConfiguration.tpm);
+  const [valueTPM, setValueTPM] = useState("");
+  const [cuota, setCuota] = useState();
+
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
@@ -50,55 +50,47 @@ const Calculator = ({
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
     periodo: !dataPerson ? "" : dataPerson.periodo,
-    tasaPrimaMensual: !dataPerson
-      ? route.params.data.tpm
-      : dataPerson.tasaPrimaMensual,
   });
-  //console.log(route);
 
-  //console.log(prestamo);
   // Todo--> COMPONENTE NEWFORM
   useFocusEffect(
     React.useCallback(() => {
       setCopyDataPrestamo(prestamo);
+      setValueTPM(dataPerson?.tasaPrimaMensual);
+      setCuota(dataPerson?.resultPrestamo[0]?.montoCuota);
+
       if (valuePrest) {
         setErrorsPrestamo(validationDataPrestamo(prestamo));
       }
-    }, [valuePrest, setValueError])
+    }, [valuePrest, setValueError, copyDataPrestamo])
   );
 
   // Valida los datos de forma continua, útil en el componente NEWFORM
   const [prestamoModify, setPrestamoModify] = useState(false);
-  console.log("prestamoModify: " + prestamoModify);
-  useEffect(() => {
-    //console.log("changeValue: " + changeValue);
-    if (errorsP !== undefined) {
-      let resulView = false;
+  const [resultView, setResultView] = useState(true);
 
+  useEffect(() => {
+    if (errorsP !== undefined) {
       setErrorsP(validationDataPrestamo(prestamo));
 
       let resultError = validationDataPrestamo(prestamo);
       let resultVal = Object.values(resultError);
 
       if (resultVal.some((error) => error !== "")) {
-        resulView = false;
         setEnabled(false);
         setValueError(false);
         setValuePrest(false);
       } else {
         if (editValue) {
-          let prestamoCopy = { ...prestamo, tasaPrimaMensual: null };
+          let prestamoCopy = { ...prestamo };
           let copyDataPrestamoCopy = {
             ...copyDataPrestamo,
-            tasaPrimaMensual: null,
           };
-          console.log(prestamoCopy);
-          console.log(copyDataPrestamoCopy);
-          //console.log(equal(prestamoCopy, copyDataPrestamoCopy));
+
           if (equal(prestamoCopy, copyDataPrestamoCopy)) {
             setChangeValue(true);
             setPrestamoModify(false);
-          } else if (!equal(prestamoCopy, copyDataPrestamoCopy)) {
+          } else {
             setPrestamoModify(true);
             setChangeValue(false);
           }
@@ -110,16 +102,17 @@ const Calculator = ({
           // setPrestamoModify(false);
           // }
         }
-        resulView = true;
+        setResultView(false);
+        //resulView = true;
         setEnabled(true);
         setValueError(true);
       }
-      if (resulView) {
+      if (!resultView) {
         handleCalcular(prestamo);
       }
     }
     //}, [prestamo, changeValue, copyDataPrestamo]);
-  }, [prestamo, changeValue, copyDataPrestamo]);
+  }, [prestamo, changeValue, copyDataPrestamo, valueTPM]);
 
   //Limpia el estado
   useEffect(() => {
@@ -144,7 +137,7 @@ const Calculator = ({
 
   // Todo--> COMPONENTE CALCULATOR
   useEffect(() => {
-    if (dataPrestamo == undefined) {
+    if (dataPerson == undefined) {
       let resultError = validationDataPrestamo(prestamo);
       let valuesText = Object.values(resultError);
       if (enabled == true && valuesText.some((error) => error !== "")) {
@@ -184,23 +177,30 @@ const Calculator = ({
       // El resultado dependerá si los valores del préstamo, cambian o no.
       //console.log(route);
       //console.log(data);
+      //! CAMBIA EL VALOR PERO TOMA UN TIEMPO QUE SE NOTA, ESTO NO DEBE DE NOTARSE, EL CAMBIO DEBE DE SER AL INSTANTE
       const result = changeValue
         ? user[0].resultPrestamo
-        : resultCronograma(data);
+        : resultCronograma({
+            ...data,
+            tasaPrimaMensual: dataConfiguration.tpm,
+          });
 
-      dataPerson !== undefined
-        ? setDataPerson({
-            ...dataPerson,
-            capital: prestamo?.capital,
-            cuotas: prestamo?.cuotas,
-            tea: prestamo?.tea,
-            fechaDesembolso: prestamo?.fechaDesembolso,
-            fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
-            periodo: prestamo?.periodo,
-            tasaPrimaMensual: prestamo?.tasaPrimaMensual,
-            resultPrestamo: result,
-          })
-        : setResultCuota(result);
+      if (dataPerson !== undefined) {
+        setDataPerson({
+          ...dataPerson,
+          capital: prestamo?.capital,
+          cuotas: prestamo?.cuotas,
+          tea: prestamo?.tea,
+          fechaDesembolso: prestamo?.fechaDesembolso,
+          fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
+          periodo: prestamo?.periodo,
+          tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration.tpm,
+          resultPrestamo: result,
+        });
+      } else {
+        setResultCuota(result);
+      }
+
       setEnabled(true);
     }
   };
@@ -240,10 +240,11 @@ const Calculator = ({
           setCleanCalculator={setCleanCalculator}
           clean={clean}
           setClean={setClean}
+          dataPerson={dataPerson}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}
-          {dataPrestamo !== undefined ? null : (
+          {dataPerson !== undefined ? null : (
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={styles.btnCalcular}
@@ -254,10 +255,14 @@ const Calculator = ({
             </View>
           )}
           {/* ------------------ RESULTADO ------------------*/}
-          {dataPrestamo !== undefined ? (
-            dataPrestamo ? (
+          {dataPerson !== undefined ? (
+            dataPerson ? (
               enabled ? (
-                <Cuota dataPerson={dataPerson} />
+                <Cuota
+                  cuota={cuota}
+                  changeValue={changeValue}
+                  dataPerson={dataPerson}
+                />
               ) : null
             ) : null
           ) : enabled ? (

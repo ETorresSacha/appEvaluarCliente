@@ -36,6 +36,8 @@ export const calculoFRCA = (data) =>{
  export const cronPagos = (data)=>{
 
     const TSegM = parseFloat(data?.tasaPrimaMensual) // % 
+    console.log(data);
+    console.log("tseg:"+TSegM);
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []

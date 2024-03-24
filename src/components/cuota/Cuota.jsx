@@ -2,10 +2,9 @@ import React from "react";
 import { View, StyleSheet, Alert, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const Cuota = ({ dataPerson }) => {
+const Cuota = ({ cuota, changeValue, dataPerson }) => {
   const navigation = useNavigation();
-  const cuota = dataPerson.resultPrestamo[0]?.montoCuota;
-
+  const cuota2 = dataPerson.resultPrestamo[0]?.montoCuota;
   const handleRouteCronograma = () => {
     navigation.navigate("Cronograma", { data: dataPerson.resultPrestamo });
   };
@@ -17,7 +16,7 @@ const Cuota = ({ dataPerson }) => {
           style={styles.button}
           onPress={() => Alert.alert("Cannot press this one")}
         >
-          <Text style={styles.text}>{cuota}</Text>
+          <Text style={styles.text}>{changeValue ? cuota : cuota2}</Text>
         </Pressable>
       </View>
       <View>
