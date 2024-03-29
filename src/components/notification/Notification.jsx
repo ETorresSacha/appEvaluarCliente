@@ -51,9 +51,9 @@ const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
     if (dataNotification != undefined) {
       const messagePredetermined = `Hola ${
         data[0]?.nombre?.split(" ")[0]
-      }, tienes una deuda pendiente con ${
+      }, tienes una deuda pendiente con la financiera "${
         dataNegocio[0]?.negocio ? dataNegocio[0]?.negocio : " La Financiera"
-      } de ${cuot} soles y ${
+      }" de ${cuot} soles y ${
         color == "red" ? "venció" : "vence"
       } el día ${formatDate(dataNotification?.fechaPago)}, ${
         color == "red" ? "evita que suba tu mora" : "evita la mora"
