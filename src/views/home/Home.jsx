@@ -6,6 +6,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
+import Alerta from "../alert/Alerta";
 
 const user = {
   name: "Erik Torres Sacha",
@@ -84,7 +85,7 @@ const Home = () => {
           />
         </Pressable>
       </View>
-
+      <Alerta />
       {/* MODAL OPCIONES */}
       <ModalConfigPersonal
         visible={isVisible}

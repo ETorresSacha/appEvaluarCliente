@@ -55,12 +55,12 @@ const Alerta = () => {
   };
 
   const handleCrearAlerta = async () => {
-    if (withAlert) {
-      await scheduleTodoNotification();
-      Alert("se guardo correctamente");
-    } else {
-      console.log("no hay alerta");
-    }
+    //if (withAlert) {
+    await scheduleTodoNotification();
+    Alert("se guardo correctamente");
+    ///} else {
+    // console.log("no hay alerta");
+    //}
   };
 
   // const registerForPushNotificationsAsyn = async ()=>{
@@ -120,7 +120,7 @@ const Alerta = () => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.textConfiguration}>CONFIGURACIÓN</Text>
+        {/* <Text style={styles.textConfiguration}>CONFIGURACIÓN</Text>
         <View>
           <View style={styles.containerSwitch}>
             <View style={styles.switchBtn}>
@@ -151,7 +151,7 @@ const Alerta = () => {
             //onChangeText={onChangeText}
             //value={text}
           />
-        </View>
+        </View> */}
         <Button
           style={{
             fontSize: 20,
@@ -168,9 +168,9 @@ const Alerta = () => {
           CREAR ALERTA
         </Button>
       </View>
-      <View>
+      {/* <View>
         <Text style={styles.textConfiguration}>MENSAJE</Text>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -179,9 +179,9 @@ export default Alerta;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: "rgb(31, 36, 36)",
-    display: "flex",
+    //display: "flex",
   },
   textConfiguration: {
     fontSize: 17,
