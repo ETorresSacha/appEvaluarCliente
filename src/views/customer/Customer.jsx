@@ -9,6 +9,7 @@ import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
 import DataCustomer from "./DataCustomer";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
+import Alerta from "../alert/Alerta";
 
 const Customer = ({ enable }) => {
   const { onGetCronograma } = UseStorage();
@@ -97,6 +98,10 @@ const Customer = ({ enable }) => {
         setData={setData}
         enable={enable}
         dataConfiguration={dataConfiguration}
+      />
+      <Alerta
+        dataRed={customer.customerRed}
+        dataGreen={customer.customerGreen}
       />
       {on == false ? (
         <Loading />

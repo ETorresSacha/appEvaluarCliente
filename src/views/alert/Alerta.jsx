@@ -14,9 +14,10 @@ Notifications.setNotificationHandler({
   }),
 });
 
-const Alerta = () => {
+const Alerta = ({ dataRed, dataGreen }) => {
   const [withAlert, setWithAlert] = useState(false);
-
+  console.log(dataRed?.length);
+  console.log(dataGreen?.length);
   var resultAgregardia = add(new Date(2014, 8, 1, 10, 19, 50), {
     years: 2,
     months: 9,
@@ -43,8 +44,8 @@ const Alerta = () => {
     try {
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: "alerta erik",
-          body: "nuestra notificacion",
+          title: "Clientes por cobrar",
+          body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
           data: { clientes: "a" },
         },
         trigger,
