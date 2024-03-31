@@ -85,7 +85,7 @@ const Home = () => {
           />
         </Pressable>
       </View>
-      <Alerta />
+      {/* //<Alerta /> */}
       {/* MODAL OPCIONES */}
       <ModalConfigPersonal
         visible={isVisible}

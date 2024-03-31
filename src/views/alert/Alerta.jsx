@@ -36,8 +36,8 @@ const Alerta = () => {
       // weeks: 1,
       //days: 7,
       //hours: 5,
-      minutes: 1,
-      //seconds: 30,
+      //minutes: 1,
+      seconds: 10,
     });
 
     try {
@@ -45,6 +45,7 @@ const Alerta = () => {
         content: {
           title: "alerta erik",
           body: "nuestra notificacion",
+          data: { clientes: "a" },
         },
         trigger,
       });
@@ -57,7 +58,7 @@ const Alerta = () => {
   const handleCrearAlerta = async () => {
     //if (withAlert) {
     await scheduleTodoNotification();
-    Alert("se guardo correctamente");
+    Alert.alert("se guardo correctamente");
     ///} else {
     // console.log("no hay alerta");
     //}
