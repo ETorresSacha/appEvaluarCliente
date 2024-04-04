@@ -99,10 +99,13 @@ const Customer = ({ enable }) => {
         enable={enable}
         dataConfiguration={dataConfiguration}
       />
+
+      {/* Notificaciones de los clientes por cobrar */}
       <Alerta
         dataRed={customer.customerRed}
         dataGreen={customer.customerGreen}
       />
+
       {on == false ? (
         <Loading />
       ) : (

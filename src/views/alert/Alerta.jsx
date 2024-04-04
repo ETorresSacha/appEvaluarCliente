@@ -16,8 +16,7 @@ Notifications.setNotificationHandler({
 
 const Alerta = ({ dataRed, dataGreen }) => {
   const [withAlert, setWithAlert] = useState(false);
-  console.log(dataRed?.length);
-  console.log(dataGreen?.length);
+
   var resultAgregardia = add(new Date(2014, 8, 1, 10, 19, 50), {
     years: 2,
     months: 9,
@@ -48,7 +47,7 @@ const Alerta = ({ dataRed, dataGreen }) => {
           body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
           data: { clientes: "a" },
         },
-        trigger,
+        trigger: null,
       });
       console.log("notificacion creada");
     } catch (error) {
@@ -64,14 +63,6 @@ const Alerta = ({ dataRed, dataGreen }) => {
     // console.log("no hay alerta");
     //}
   };
-
-  // const registerForPushNotificationsAsyn = async ()=>{
-  //   let token
-  //   if(Device.isDevice){
-  //     const {status: exi}
-
-  //   }
-  // }
 
   const [expoPushToken, setExpoPushToken] = useState("");
   useEffect(() => {
@@ -111,13 +102,20 @@ const Alerta = ({ dataRed, dataGreen }) => {
           projectId: "553ec5b6-a8cb-413a-a68c-6698a073d3ac",
         })
       ).data;
-      console.log(token);
     } else {
       alert("Must use physical device for Push Notifications");
     }
 
     return token;
   }
+  useEffect(() => {
+    var Xmas95 = new Date();
+    var minutos = Xmas95.getMinutes();
+    if (minutos == 22) {
+      handleCrearAlerta();
+      console.log(minutos); // 15
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -165,7 +163,7 @@ const Alerta = ({ dataRed, dataGreen }) => {
             justifyContent: "center",
           }}
           styleDisabled={{ color: "red" }}
-          onPress={() => handleCrearAlerta()}
+          //onPress={() => handleCrearAlerta()}
         >
           CREAR ALERTA
         </Button>
@@ -227,4 +225,6 @@ const styles = StyleSheet.create({
   },
 });
 
-//! TRABAJAR EN ESTE COMPONENTE
+//! HACER QUE LA ALERTA SE LLAME  A UNA HORA EN ESPECIFICO, CADA DIA
+//! QUE LA ALERTA SEA LLAMDO DIARIAMENTE SIN EJECUTAR LA APLICACION
+//! EL BOTON DE CREAR ALERTA NO EXISTA, QUE SE EJECUTE DE MANERA AUTOMATICA

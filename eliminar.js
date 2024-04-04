@@ -160,3 +160,11 @@ let hoy = format(new Date(),"yyyy-MM-dd")
 console.log((new Date(hoy).getTime()))
 console.log(new Date());
 console.log((new Date("2024-03-07").getTime()));
+var Xmas95 = new Date();
+var hours = Xmas95.getHours();
+
+console.log(hours); // 23
+var Xmas95 = new Date();
+var minutos = Xmas95.getMinutes();
+
+console.log(minutos); // 15
