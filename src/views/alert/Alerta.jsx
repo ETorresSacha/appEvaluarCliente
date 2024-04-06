@@ -30,6 +30,18 @@ const Alerta = ({ dataRed, dataGreen }) => {
   //! NOTIFICACIONES DE EXPO
   const scheduleTodoNotification = async () => {
     const date = new Date();
+    const timeAlert = () => {
+      let horaProgramada = new Date();
+      horaProgramada.setHours(16);
+      horaProgramada.setMinutes(31);
+      horaProgramada.setSeconds(0);
+      //console.log("hora programada: " + horaProgramada);
+
+      //return horaProgramada.getTime() - horaActual.getTime();
+      return horaProgramada;
+    };
+    const trigger2 = timeAlert();
+    console.log(trigger2);
     const trigger = add(new Date(date), {
       //years: 2,
       //months: 9,
@@ -39,6 +51,7 @@ const Alerta = ({ dataRed, dataGreen }) => {
       //minutes: 1,
       seconds: 10,
     });
+    console.log(trigger);
 
     try {
       await Notifications.scheduleNotificationAsync({
@@ -47,7 +60,7 @@ const Alerta = ({ dataRed, dataGreen }) => {
           body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
           data: { clientes: "a" },
         },
-        trigger: null,
+        trigger: trigger2,
       });
       console.log("notificacion creada");
     } catch (error) {
@@ -108,13 +121,29 @@ const Alerta = ({ dataRed, dataGreen }) => {
 
     return token;
   }
+  const [minute, setMinute] = useState();
+  // useEffect(() => {
+  //   var Xmas95 = new Date();
+  //   var minutos = Xmas95.getMinutes();
+  //   if (minutos == 30) {
+  //     handleCrearAlerta();
+  //     console.log(minutos); // 15
+  //   }
+  // }, []);
+
+  // const timeAlert = () => {
+  //   let horaActual = new Date();
+  //   let horaProgramada = new Date();
+  //   horaProgramada.setHours(18);
+  //   horaProgramada.setMinutes(46);
+  //   horaProgramada.setSeconds(0);
+
+  //   return horaProgramada.getTime() - horaActual.getTime();
+  // };
   useEffect(() => {
-    var Xmas95 = new Date();
-    var minutos = Xmas95.getMinutes();
-    if (minutos == 22) {
-      handleCrearAlerta();
-      console.log(minutos); // 15
-    }
+    setTimeout(() => {
+      console.log("holalalalaal");
+    }, 1000);
   }, []);
 
   return (
@@ -163,7 +192,7 @@ const Alerta = ({ dataRed, dataGreen }) => {
             justifyContent: "center",
           }}
           styleDisabled={{ color: "red" }}
-          //onPress={() => handleCrearAlerta()}
+          onPress={() => handleCrearAlerta()}
         >
           CREAR ALERTA
         </Button>

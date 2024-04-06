@@ -168,3 +168,14 @@ var Xmas95 = new Date();
 var minutos = Xmas95.getMinutes();
 
 console.log(minutos); // 15
+
+const timeAlert = ()=>{
+    let horaActual = new Date();
+    let horaProgramada = new Date()
+    horaProgramada.setHours(18)
+    horaProgramada.setMinutes(43)
+    horaProgramada.setSeconds(0)
+
+    return horaProgramada.getTime()-horaActual.getTime()
+}
+console.log(timeAlert());
