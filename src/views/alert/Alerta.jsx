@@ -15,44 +15,19 @@ Notifications.setNotificationHandler({
 });
 
 const Alerta = ({ dataRed, dataGreen }) => {
-  const [withAlert, setWithAlert] = useState(false);
+  // PROGRAMAR A LA HORA QUE SE LANZARÁ LA ALERTA
+  const timeAlert = () => {
+    let horaActual = new Date();
+    let horaProgramada = new Date();
+    horaProgramada.setHours(9);
+    horaProgramada.setMinutes(0);
+    horaProgramada.setSeconds(0);
 
-  var resultAgregardia = add(new Date(2014, 8, 1, 10, 19, 50), {
-    years: 2,
-    months: 9,
-    weeks: 1,
-    days: 7,
-    hours: 5,
-    minutes: 9,
-    seconds: 30,
-  });
+    return horaProgramada.getTime() - horaActual.getTime();
+  };
 
   //! NOTIFICACIONES DE EXPO
   const scheduleTodoNotification = async () => {
-    const date = new Date();
-    const timeAlert = () => {
-      let horaProgramada = new Date();
-      horaProgramada.setHours(16);
-      horaProgramada.setMinutes(31);
-      horaProgramada.setSeconds(0);
-      //console.log("hora programada: " + horaProgramada);
-
-      //return horaProgramada.getTime() - horaActual.getTime();
-      return horaProgramada;
-    };
-    const trigger2 = timeAlert();
-    console.log(trigger2);
-    const trigger = add(new Date(date), {
-      //years: 2,
-      //months: 9,
-      // weeks: 1,
-      //days: 7,
-      //hours: 5,
-      //minutes: 1,
-      seconds: 10,
-    });
-    console.log(trigger);
-
     try {
       await Notifications.scheduleNotificationAsync({
         content: {
@@ -60,21 +35,11 @@ const Alerta = ({ dataRed, dataGreen }) => {
           body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
           data: { clientes: "a" },
         },
-        trigger: trigger2,
+        trigger: null,
       });
-      console.log("notificacion creada");
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleCrearAlerta = async () => {
-    //if (withAlert) {
-    await scheduleTodoNotification();
-    Alert.alert("se guardo correctamente");
-    ///} else {
-    // console.log("no hay alerta");
-    //}
   };
 
   const [expoPushToken, setExpoPushToken] = useState("");
@@ -121,66 +86,16 @@ const Alerta = ({ dataRed, dataGreen }) => {
 
     return token;
   }
-  const [minute, setMinute] = useState();
-  // useEffect(() => {
-  //   var Xmas95 = new Date();
-  //   var minutos = Xmas95.getMinutes();
-  //   if (minutos == 30) {
-  //     handleCrearAlerta();
-  //     console.log(minutos); // 15
-  //   }
-  // }, []);
 
-  // const timeAlert = () => {
-  //   let horaActual = new Date();
-  //   let horaProgramada = new Date();
-  //   horaProgramada.setHours(18);
-  //   horaProgramada.setMinutes(46);
-  //   horaProgramada.setSeconds(0);
-
-  //   return horaProgramada.getTime() - horaActual.getTime();
-  // };
   useEffect(() => {
-    setTimeout(() => {
-      console.log("holalalalaal");
-    }, 1000);
+    setTimeout(async () => {
+      await scheduleTodoNotification();
+    }, timeAlert());
   }, []);
 
   return (
     <View style={styles.container}>
       <View>
-        {/* <Text style={styles.textConfiguration}>CONFIGURACIÓN</Text>
-        <View>
-          <View style={styles.containerSwitch}>
-            <View style={styles.switchBtn}>
-              <Text style={styles.subTitle}>Alerta</Text>
-              <Switch
-                activeText={"On"}
-                inActiveText={"Off"}
-                onValueChange={(value) => {
-                  setWithAlert(value);
-                }}
-                value={withAlert}
-              />
-            </View>
-            {withAlert && (
-              <Text style={{ color: "grey", fontSize: 12, maxWidth: "95%" }}>
-                Recibirás una alerta a la hora que establezcas para este
-                recordatorio.
-              </Text>
-            )}
-          </View>
-          <View>
-            <Text style={styles.subTitle}>Mensaje</Text>
-          </View>
-          <TextInput
-            style={styles.input}
-            placeholder="Correo"
-            placeholderTextColor="gray"
-            //onChangeText={onChangeText}
-            //value={text}
-          />
-        </View> */}
         <Button
           style={{
             fontSize: 20,
@@ -192,7 +107,6 @@ const Alerta = ({ dataRed, dataGreen }) => {
             justifyContent: "center",
           }}
           styleDisabled={{ color: "red" }}
-          onPress={() => handleCrearAlerta()}
         >
           CREAR ALERTA
         </Button>
