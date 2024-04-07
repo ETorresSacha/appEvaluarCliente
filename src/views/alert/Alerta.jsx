@@ -12,9 +12,7 @@ Notifications.setNotificationHandler({
 });
 
 const Alerta = ({ dataRed, dataGreen }) => {
-  // PROGRAMAR A LA HORA QUE SE LANZARÁ LA ALERTA
-
-  //! NOTIFICACIONES DE EXPO
+  //! Mensaje de la notificación y repetir las notificaciones diariamente
   const scheduleTodoNotification = async () => {
     try {
       // Solicitar permiso para enviar notificaciones
@@ -51,6 +49,14 @@ const Alerta = ({ dataRed, dataGreen }) => {
     }
   };
 
+  // LLamado a la función
+  useEffect(() => {
+    setTimeout(async () => {
+      await scheduleTodoNotification();
+    }, 0);
+  }, []);
+
+  //! Obtención del token
   const [expoPushToken, setExpoPushToken] = useState("");
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) =>
@@ -96,12 +102,6 @@ const Alerta = ({ dataRed, dataGreen }) => {
     return token;
   }
 
-  useEffect(() => {
-    setTimeout(async () => {
-      await scheduleTodoNotification();
-    }, 0);
-  }, []);
-
   return <View style={styles.container}></View>;
 };
 
@@ -109,49 +109,7 @@ export default Alerta;
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     backgroundColor: "rgb(31, 36, 36)",
-    //display: "flex",
-  },
-  textConfiguration: {
-    fontSize: 17,
-    color: "white",
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
-    paddingLeft: 7,
-    paddingVertical: 5,
-    fontWeight: "bold",
-  },
-  input: {
-    height: 80,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderColor: "white",
-    color: "cornsilk",
-    borderRadius: 10,
-  },
-  subTitle: {
-    fontSize: 15,
-    color: "white",
-    fontWeight: "bold",
-  },
-  containerSwitch: {
-    padding: 10,
-    height: 80,
-    display: "flex",
-    flexDirection: "column",
-    //backgroundColor: "red",
-    //justifyContent: "space-evenly",
-  },
-  switchBtn: {
-    display: "flex",
-    flexDirection: "row",
-    // backgroundColor: "orange",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  btnSwitch: {
-    width: 50,
   },
 });
 
