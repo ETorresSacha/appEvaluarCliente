@@ -22,6 +22,24 @@ const optionsStack = {
 
 const Stack = createNativeStackNavigator();
 const Routes = () => {
+  // useEffect(() => {
+  //   // Manejar la apertura de la notificación
+  //   Notifications.addNotificationResponseReceivedListener((response) => {
+  //     // Obtener datos de la notificación (si es necesario)
+  //     const notificationData = response.notification.request.content.data;
+
+  //     // Navegar a la pantalla deseada
+  //     if (notificationData.screen === "Clientes") {
+  //       // Navegar a la pantalla de detalles
+  //       navigation.navigate("Clientes");
+  //     }
+  //   });
+
+  //   return () => {
+  //     // Limpiar el listener al desmontar el componente
+  //     Notifications.removeNotificationSubscription();
+  //   };
+  // }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator

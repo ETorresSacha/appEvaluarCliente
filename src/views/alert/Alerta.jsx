@@ -1,10 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Switch, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
-import { add } from "date-fns";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
-
-import Button from "react-native-button";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -16,54 +13,42 @@ Notifications.setNotificationHandler({
 
 const Alerta = ({ dataRed, dataGreen }) => {
   // PROGRAMAR A LA HORA QUE SE LANZARÁ LA ALERTA
-  const timeAlert = () => {
-    let horaActual = new Date();
-    let horaProgramada = new Date();
-    horaProgramada.setHours(9);
-    horaProgramada.setMinutes(0);
-    horaProgramada.setSeconds(0);
-
-    return horaProgramada.getTime() - horaActual.getTime();
-  };
 
   //! NOTIFICACIONES DE EXPO
   const scheduleTodoNotification = async () => {
     try {
-      let horaProgramada = new Date();
-      horaProgramada.setHours(21);
-      horaProgramada.setMinutes(15);
-      horaProgramada.setSeconds(0);
-      //console.log(horaProgramada.getMinutes());
-      var resultAgregardia2 = add(new Date(), {
-        // years: 2,
-        // months: 9,
-        // weeks: 1,
-        // days: 7,
-        // hours: 5,
-        // minutes: 9,
-        seconds: 20,
-      });
-      let resultAgregardia = horaProgramada;
-      console.log("result2: " + resultAgregardia2);
-      console.log("result: " + resultAgregardia);
-      console.log("resultt: " + new Date(resultAgregardia2));
+      // Solicitar permiso para enviar notificaciones
+      const { status } = await Notifications.requestPermissionsAsync();
 
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: "Clientes por cobrar",
-          body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
-          //data: { clientes: "a" },
-        },
-        trigger: resultAgregardia,
-      });
+      if (status === "granted") {
+        // Configuramos la notificación para que se repita diariamente a las 9:00 AM
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: "Clientes por cobrar",
+            body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
+            //screen: "Clientes", // Nombre de la pantalla a la que se debe redirigir --> esta para analizar
+          },
+          trigger: {
+            hour: 23,
+            minute: 52,
+            repeats: true, // Esto hace que la notificación se repita diariamente
+          },
+          ios: {
+            sound: true,
+          },
+          android: {
+            sound: true,
+            priority: "high",
+            sticky: false,
+            vibrate: true,
+          },
+        });
+      } else {
+        console.log("Permiso de notificación denegado.");
+      }
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleCrearAlerta = async () => {
-    Alert.alert("se guardo correctamente");
-    await scheduleTodoNotification();
   };
 
   const [expoPushToken, setExpoPushToken] = useState("");
@@ -112,36 +97,12 @@ const Alerta = ({ dataRed, dataGreen }) => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log("clicc aurtometico");
-      handleCrearAlerta();
+    setTimeout(async () => {
+      await scheduleTodoNotification();
     }, 0);
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <View>
-        <Button
-          style={{
-            fontSize: 20,
-            color: "orange",
-            borderColor: "orange",
-            borderWidth: 1,
-            borderRadius: 10,
-            //width: 100,
-            justifyContent: "center",
-          }}
-          styleDisabled={{ color: "red" }}
-          onPress={() => handleCrearAlerta()}
-        >
-          CREAR ALERTA
-        </Button>
-      </View>
-      {/* <View>
-        <Text style={styles.textConfiguration}>MENSAJE</Text>
-      </View> */}
-    </View>
-  );
+  return <View style={styles.container}></View>;
 };
 
 export default Alerta;
@@ -197,3 +158,32 @@ const styles = StyleSheet.create({
 //! HACER QUE LA ALERTA SE LLAME  A UNA HORA EN ESPECIFICO, CADA DIA
 //! QUE LA ALERTA SEA LLAMDO DIARIAMENTE SIN EJECUTAR LA APLICACION
 //! EL BOTON DE CREAR ALERTA NO EXISTA, QUE SE EJECUTE DE MANERA AUTOMATICA
+
+//? ESTO ES UNA OPCION PARA ENVIAR NOTIFICAIONES AUN CUANDO LA APLICACION NO ESTA EN USO
+// const admin = require('firebase-admin');
+// const serviceAccount = require('./path/to/serviceAccountKey.json');
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: 'https://your-project-id.firebaseio.com',
+// });
+
+// const registrationToken = 'Expo Push Token del dispositivo';
+
+// const message = {
+//   data: {
+//     title: 'Título de la Notificación',
+//     body: 'Cuerpo de la Notificación',
+//   },
+//   token: registrationToken,
+// };
+
+// admin
+//   .messaging()
+//   .send(message)
+//   .then((response) => {
+//     console.log('Notificación enviada con éxito:', response);
+//   })
+//   .catch((error) => {
+//     console.log('Error al enviar la notificación:', error);
+//   });
