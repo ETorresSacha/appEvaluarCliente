@@ -29,17 +29,41 @@ const Alerta = ({ dataRed, dataGreen }) => {
   //! NOTIFICACIONES DE EXPO
   const scheduleTodoNotification = async () => {
     try {
+      let horaProgramada = new Date();
+      horaProgramada.setHours(21);
+      horaProgramada.setMinutes(15);
+      horaProgramada.setSeconds(0);
+      //console.log(horaProgramada.getMinutes());
+      var resultAgregardia2 = add(new Date(), {
+        // years: 2,
+        // months: 9,
+        // weeks: 1,
+        // days: 7,
+        // hours: 5,
+        // minutes: 9,
+        seconds: 20,
+      });
+      let resultAgregardia = horaProgramada;
+      console.log("result2: " + resultAgregardia2);
+      console.log("result: " + resultAgregardia);
+      console.log("resultt: " + new Date(resultAgregardia2));
+
       await Notifications.scheduleNotificationAsync({
         content: {
           title: "Clientes por cobrar",
           body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
-          data: { clientes: "a" },
+          //data: { clientes: "a" },
         },
-        trigger: null,
+        trigger: resultAgregardia,
       });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleCrearAlerta = async () => {
+    Alert.alert("se guardo correctamente");
+    await scheduleTodoNotification();
   };
 
   const [expoPushToken, setExpoPushToken] = useState("");
@@ -88,9 +112,10 @@ const Alerta = ({ dataRed, dataGreen }) => {
   }
 
   useEffect(() => {
-    setTimeout(async () => {
-      await scheduleTodoNotification();
-    }, timeAlert());
+    setTimeout(() => {
+      console.log("clicc aurtometico");
+      handleCrearAlerta();
+    }, 0);
   }, []);
 
   return (
@@ -107,6 +132,7 @@ const Alerta = ({ dataRed, dataGreen }) => {
             justifyContent: "center",
           }}
           styleDisabled={{ color: "red" }}
+          onPress={() => handleCrearAlerta()}
         >
           CREAR ALERTA
         </Button>
