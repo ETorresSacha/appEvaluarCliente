@@ -27,8 +27,8 @@ const Alerta = ({ dataRed, dataGreen }) => {
             //screen: "Clientes", // Nombre de la pantalla a la que se debe redirigir --> esta para analizar
           },
           trigger: {
-            hour: 23,
-            minute: 52,
+            hour: 9,
+            minute: 0,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
@@ -113,9 +113,7 @@ const styles = StyleSheet.create({
   },
 });
 
-//! HACER QUE LA ALERTA SE LLAME  A UNA HORA EN ESPECIFICO, CADA DIA
 //! QUE LA ALERTA SEA LLAMDO DIARIAMENTE SIN EJECUTAR LA APLICACION
-//! EL BOTON DE CREAR ALERTA NO EXISTA, QUE SE EJECUTE DE MANERA AUTOMATICA
 
 //? ESTO ES UNA OPCION PARA ENVIAR NOTIFICAIONES AUN CUANDO LA APLICACION NO ESTA EN USO
 // const admin = require('firebase-admin');
