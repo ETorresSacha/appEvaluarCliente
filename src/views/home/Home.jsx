@@ -9,7 +9,7 @@ import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration
 
 const user = {
   name: "Erik Torres Sacha",
-  uri: "https://media.licdn.com/dms/image/D4E03AQH-M4FFjGHveA/profile-displayphoto-shrink_400_400/0/1693329901508?e=1704931200&v=beta&t=07dlpl6eAU2K3xnJx0oL0-v76Br4jWK0Acj9BXkgCfc",
+  uri: "https://cdn-icons-png.flaticon.com/512/8676/8676906.png",
 };
 
 const img =
