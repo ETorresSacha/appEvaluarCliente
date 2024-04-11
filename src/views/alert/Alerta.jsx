@@ -27,8 +27,8 @@ const Alerta = ({ dataRed, dataGreen }) => {
             //screen: "Clientes", // Nombre de la pantalla a la que se debe redirigir --> esta para analizar
           },
           trigger: {
-            hour: 9,
-            minute: 0,
+            hour: 21,
+            minute: 50,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
