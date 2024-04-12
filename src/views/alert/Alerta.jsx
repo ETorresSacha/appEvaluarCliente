@@ -15,6 +15,9 @@ const Alerta = ({ dataRed, dataGreen }) => {
   //! Mensaje de la notificación y repetir las notificaciones diariamente
   const scheduleTodoNotification = async () => {
     try {
+      // Limpiar todas las notificaciones programadas existentes
+      await Notifications.cancelAllScheduledNotificationsAsync();
+
       // Solicitar permiso para enviar notificaciones
       const { status } = await Notifications.requestPermissionsAsync();
 
@@ -112,34 +115,3 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(31, 36, 36)",
   },
 });
-
-//! QUE LA ALERTA SEA LLAMDO DIARIAMENTE SIN EJECUTAR LA APLICACION
-
-//? ESTO ES UNA OPCION PARA ENVIAR NOTIFICAIONES AUN CUANDO LA APLICACION NO ESTA EN USO
-// const admin = require('firebase-admin');
-// const serviceAccount = require('./path/to/serviceAccountKey.json');
-
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: 'https://your-project-id.firebaseio.com',
-// });
-
-// const registrationToken = 'Expo Push Token del dispositivo';
-
-// const message = {
-//   data: {
-//     title: 'Título de la Notificación',
-//     body: 'Cuerpo de la Notificación',
-//   },
-//   token: registrationToken,
-// };
-
-// admin
-//   .messaging()
-//   .send(message)
-//   .then((response) => {
-//     console.log('Notificación enviada con éxito:', response);
-//   })
-//   .catch((error) => {
-//     console.log('Error al enviar la notificación:', error);
-//   });
