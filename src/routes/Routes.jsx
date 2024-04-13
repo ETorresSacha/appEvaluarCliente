@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../views/home/Home";
@@ -10,6 +10,8 @@ import Calculator from "../views/calculator/Calculator";
 import Alerta from "../views/alert/Alerta";
 import CanceledCustomer from "../views/canceledCustomer/CanceledCustomer";
 
+import { Notifications } from "expo";
+//import * as Notifications from "expo-notifications";
 //const Tab = createBottomTabNavigator();
 const optionsStack = {
   //statusBarColor: "rgb(31, 36, 36)",
@@ -22,6 +24,19 @@ const optionsStack = {
 
 const Stack = createNativeStackNavigator();
 const Routes = () => {
+  useEffect(() => {
+    Notifications?.addNotificationResponseReceivedListener(
+      handleNotificationResponse
+    );
+  }, []);
+
+  const handleNotificationResponse = (response) => {
+    const screenName = response.notification.request.content.data.screen;
+    if (screenName) {
+      // Navegar a la vista especificada
+      navigation.navigate(screenName);
+    }
+  };
   return (
     <NavigationContainer>
       <Stack.Navigator

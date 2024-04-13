@@ -25,12 +25,14 @@ const Alerta = ({ dataRed, dataGreen }) => {
         await Notifications.scheduleNotificationAsync({
           content: {
             title: "Clientes por cobrar",
+
             body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
             //screen: "Clientes", // Nombre de la pantalla a la que se debe redirigir --> esta para analizar
+            data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 9,
-            minute: 0,
+            hour: 22,
+            minute: 8,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
@@ -68,3 +70,5 @@ const Alerta = ({ dataRed, dataGreen }) => {
 };
 
 export default Alerta;
+
+//! tenemos que buscar la forma como redirigir al componente correcto o deseado
