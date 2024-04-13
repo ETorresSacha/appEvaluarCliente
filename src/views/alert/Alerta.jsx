@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Notifications from "expo-notifications";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
 import registerForPushNotificationsAsync from "./getToken";
-
+import { useNavigation } from "@react-navigation/native";
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -11,6 +12,16 @@ Notifications.setNotificationHandler({
 });
 
 const Alerta = ({ dataRed, dataGreen }) => {
+  const [expoPushToken, setExpoPushToken] = useState("");
+  // Notifications.addNotificationResponseReceivedListener((response) => {
+  //   const screenName = response.notification.request.content.data.screen;
+  //   const navigation = useNavigation();
+
+  //   if (screenName) {
+  //     // Navega a la pantalla especificada
+  //     navigation.navigate(screenName);
+  //   }
+  // });
   //! Mensaje de la notificación y repetir las notificaciones diariamente
   const scheduleTodoNotification = async () => {
     try {
@@ -31,8 +42,8 @@ const Alerta = ({ dataRed, dataGreen }) => {
             data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 22,
-            minute: 8,
+            hour: 8,
+            minute: 44,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
@@ -61,14 +72,20 @@ const Alerta = ({ dataRed, dataGreen }) => {
   }, []);
 
   //! Obtención del token
-  const [expoPushToken, setExpoPushToken] = useState("");
+
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) =>
       setExpoPushToken(token)
     );
   }, []);
+  //return <View style={styles.containerContainer}></View>;
 };
 
+const styles = StyleSheet.create({
+  containerContainer: {
+    flex: 1,
+  },
+});
 export default Alerta;
 
 //! tenemos que buscar la forma como redirigir al componente correcto o deseado

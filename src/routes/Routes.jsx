@@ -22,21 +22,21 @@ const optionsStack = {
   headerTitleAlign: "center",
 };
 
-const Stack = createNativeStackNavigator();
 const Routes = () => {
-  useEffect(() => {
-    Notifications?.addNotificationResponseReceivedListener(
-      handleNotificationResponse
-    );
-  }, []);
+  const Stack = createNativeStackNavigator();
+  // useEffect(() => {
+  //   Notifications?.addNotificationResponseReceivedListener(
+  //     handleNotificationResponse
+  //   );
+  // }, []);
 
-  const handleNotificationResponse = (response) => {
-    const screenName = response.notification.request.content.data.screen;
-    if (screenName) {
-      // Navegar a la vista especificada
-      navigation.navigate(screenName);
-    }
-  };
+  // const handleNotificationResponse = (response) => {
+  //   const screenName = response.notification.request.content.data.screen;
+  //   if (screenName) {
+  //     // Navegar a la vista especificada
+  //     navigation.navigate(screenName);
+  //   }
+  // };
   return (
     <NavigationContainer>
       <Stack.Navigator
