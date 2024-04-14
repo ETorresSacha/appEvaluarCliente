@@ -13,15 +13,15 @@ Notifications.setNotificationHandler({
 
 const Alerta = ({ dataRed, dataGreen }) => {
   const [expoPushToken, setExpoPushToken] = useState("");
-  // Notifications.addNotificationResponseReceivedListener((response) => {
-  //   const screenName = response.notification.request.content.data.screen;
-  //   const navigation = useNavigation();
+  const navigation = useNavigation();
+  Notifications.addNotificationResponseReceivedListener((response) => {
+    const screenName = response.notification.request.content.data.screen;
 
-  //   if (screenName) {
-  //     // Navega a la pantalla especificada
-  //     navigation.navigate(screenName);
-  //   }
-  // });
+    if (screenName) {
+      // Navega a la pantalla especificada
+      navigation.navigate(screenName);
+    }
+  });
   //! Mensaje de la notificación y repetir las notificaciones diariamente
   const scheduleTodoNotification = async () => {
     try {
@@ -42,8 +42,8 @@ const Alerta = ({ dataRed, dataGreen }) => {
             data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 8,
-            minute: 44,
+            hour: 23,
+            minute: 13,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
