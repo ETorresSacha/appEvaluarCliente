@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ModalDate from "../modalDate/ModalDate";
-import { Input } from "@rneui/themed";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { formatDate } from "../../utils/thunks/Thunks";
@@ -94,7 +93,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    //paddingTop: 12,
   },
 
   formItem: {
@@ -142,7 +140,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   legendContainer: {
-    //flex: 1,
     width: 180,
   },
 });

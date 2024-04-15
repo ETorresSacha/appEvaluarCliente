@@ -61,34 +61,10 @@ const UseStorageBusiness = () => {
     }
   };
 
-  //! UPDATE//
-
-  const handleUpdateBusiness = async (data) => {
-    // try {
-    //   const resultGet = await handleGetCronograma();
-    //   let indice;
-    //   resultGet?.find((element, index) => {
-    //     if (
-    //       element.uuid == (data?.uuid == undefined ? data[0].uuid : data?.uuid)
-    //     ) {
-    //       indice = index;
-    //     }
-    //   });
-    //   let newObjeto = data?.uuid == undefined ? data[0] : data;
-    //   resultGet.splice(indice, 1, newObjeto);
-    //   await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
-    //   return Promise.resolve();
-    //   // return resultGet;
-    // } catch (error) {
-    //   return console.error(error);
-    // }
-    //! esta para verificar
-  };
   return {
     onSaveDataBusiness: handleSaveBusiness,
     onGetBusiness: handleGetBusiness,
     onDeleteBusiness: handleDeleteBusiness,
-    onUpdateBusiness: handleUpdateBusiness,
   };
 };
 export default UseStorageBusiness;

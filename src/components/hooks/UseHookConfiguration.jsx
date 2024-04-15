@@ -20,7 +20,6 @@ const UseStorageConfiguration = () => {
 
   //! POST
   const handleSaveConfiguration = async (data) => {
-    //console.log(data);
     try {
       await saveInfoStorage(TASA_PRIMA_KEY, data);
 

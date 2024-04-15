@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Button, Icon } from "@rneui/themed";
 
 const Ingresos = () => {
