@@ -101,10 +101,13 @@ const Customer = ({ enable }) => {
       />
 
       {/* Notificaciones de los clientes por cobrar */}
-      <Alerta
-        dataRed={customer.customerRed}
-        dataGreen={customer.customerGreen}
-      />
+      {customer.customerGreen?.length != 0 ||
+      customer.customerRed?.length != 0 ? (
+        <Alerta
+          dataRed={customer.customerRed}
+          dataGreen={customer.customerGreen}
+        />
+      ) : null}
 
       {on == false ? (
         <Loading />

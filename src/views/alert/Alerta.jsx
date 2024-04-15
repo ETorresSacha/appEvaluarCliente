@@ -15,15 +15,15 @@ const Alerta = ({ dataRed, dataGreen }) => {
   const [expoPushToken, setExpoPushToken] = useState("");
   // Redirigido al componente cuando la notificacion es llamado
 
-  // const navigation = useNavigation();
-  // Notifications.addNotificationResponseReceivedListener((response) => {
-  //   const screenName = response.notification.request.content.data.screen;
+  const navigation = useNavigation();
+  Notifications.addNotificationResponseReceivedListener((response) => {
+    const screenName = response.notification.request.content.data.screen;
 
-  //   if (screenName) {
-  //     // Navega a la pantalla especificada
-  //     navigation.navigate(screenName);
-  //   }
-  // });
+    if (screenName) {
+      // Navega a la pantalla especificada
+      navigation.navigate(screenName);
+    }
+  });
 
   //! Mensaje de la notificación y repetir las notificaciones diariamente
   const scheduleTodoNotification = async () => {
@@ -39,14 +39,12 @@ const Alerta = ({ dataRed, dataGreen }) => {
         await Notifications.scheduleNotificationAsync({
           content: {
             title: "Clientes por cobrar",
-
             body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
-            //screen: "Clientes", // Nombre de la pantalla a la que se debe redirigir --> esta para analizar
             data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 19,
-            minute: 17,
+            hour: 9,
+            minute: 0,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
