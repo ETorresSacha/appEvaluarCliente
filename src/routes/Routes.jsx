@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../views/home/Home";
@@ -9,15 +9,8 @@ import Customer from "../views/customer/Customer";
 import Calculator from "../views/calculator/Calculator";
 import Alerta from "../views/alert/Alerta";
 import CanceledCustomer from "../views/canceledCustomer/CanceledCustomer";
-import { useNavigation } from "@react-navigation/native";
-//import { Notifications } from "expo";
 
-import * as Notifications from "expo-notifications";
-
-//import * as Notifications from "expo-notifications";
-//const Tab = createBottomTabNavigator();
 const optionsStack = {
-  //statusBarColor: "rgb(31, 36, 36)",
   headerStyle: {
     backgroundColor: "rgb(31, 36, 36)",
   },
@@ -27,29 +20,6 @@ const optionsStack = {
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
-  // useEffect(() => {
-  // //   Notifications?.addNotificationResponseReceivedListener(
-  // //     handleNotificationResponse
-  // //   );
-  // // }, []);
-
-  // // const handleNotificationResponse = (response) => {
-  // //   const screenName = response.notification.request.content.data.screen;
-  // //   if (screenName) {
-  // //     // Navegar a la vista especificada
-  // //     navigation.navigate(screenName);
-  // //   }
-  // // };
-  // const navigation = useNavigation();
-
-  // Notifications.addNotificationResponseReceivedListener((response) => {
-  //   const screenName = response.notification.request.content.data.screen;
-
-  //   if (screenName) {
-  //     // Navega a la pantalla especificada
-  //     navigation.navigate(screenName);
-  //   }
-  // });
 
   return (
     <NavigationContainer>

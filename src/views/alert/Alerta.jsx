@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as Notifications from "expo-notifications";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
 import registerForPushNotificationsAsync from "./getToken";
 import { useNavigation } from "@react-navigation/native";
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -13,15 +13,18 @@ Notifications.setNotificationHandler({
 
 const Alerta = ({ dataRed, dataGreen }) => {
   const [expoPushToken, setExpoPushToken] = useState("");
-  const navigation = useNavigation();
-  Notifications.addNotificationResponseReceivedListener((response) => {
-    const screenName = response.notification.request.content.data.screen;
+  // Redirigido al componente cuando la notificacion es llamado
 
-    if (screenName) {
-      // Navega a la pantalla especificada
-      navigation.navigate(screenName);
-    }
-  });
+  // const navigation = useNavigation();
+  // Notifications.addNotificationResponseReceivedListener((response) => {
+  //   const screenName = response.notification.request.content.data.screen;
+
+  //   if (screenName) {
+  //     // Navega a la pantalla especificada
+  //     navigation.navigate(screenName);
+  //   }
+  // });
+
   //! Mensaje de la notificación y repetir las notificaciones diariamente
   const scheduleTodoNotification = async () => {
     try {
@@ -42,8 +45,8 @@ const Alerta = ({ dataRed, dataGreen }) => {
             data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 23,
-            minute: 13,
+            hour: 19,
+            minute: 17,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
@@ -78,14 +81,6 @@ const Alerta = ({ dataRed, dataGreen }) => {
       setExpoPushToken(token)
     );
   }, []);
-  //return <View style={styles.containerContainer}></View>;
 };
 
-const styles = StyleSheet.create({
-  containerContainer: {
-    flex: 1,
-  },
-});
 export default Alerta;
-
-//! tenemos que buscar la forma como redirigir al componente correcto o deseado
