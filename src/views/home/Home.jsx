@@ -13,16 +13,12 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
-
 import fondoHome from "../.././../assets/fondoHome.jpg";
 
 const user = {
   name: "Erik Torres Sacha",
   uri: "https://cdn-icons-png.flaticon.com/512/8676/8676906.png",
 };
-
-const img =
-  "https://img2.wallspic.com/crops/6/2/5/5/7/175526/175526-luz-smartphone-agua-morado-liquido-1242x2688.jpg";
 
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
