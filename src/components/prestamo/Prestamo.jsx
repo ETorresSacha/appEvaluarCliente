@@ -179,20 +179,6 @@ export default Prestamo;
 
 const styles = StyleSheet.create({
   container: { flex: 1, paddingTop: 30, gap: 25 },
-  title: {
-    fontSize: 17,
-    color: "white",
-    paddingVertical: 5,
-    fontWeight: "bold",
-  },
-  titleEvaluar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 7,
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
-  },
 
   formItem: {
     paddingHorizontal: 5,
@@ -257,7 +243,3 @@ const styles = StyleSheet.create({
     borderColor: "red",
   },
 });
-
-//! COMO HEMOS MODIFICADO LA TASA PRIMA MENSUAL, TENEMOS QUE MODIFICAR VARIOS COMPONENTES
-//! PRIMERO EL COMPONENTE CALCULATOR, DESPUES NEWFORM, DETALLE( LAS NOTIFICACIONES), EDITAR
-//! LA IDEA ES PASARLO ESOS PARAMETROS POR PROPS CON LA FINALIDAD DE LLAMAR A LA FUNCION SOLO UNA VEZ

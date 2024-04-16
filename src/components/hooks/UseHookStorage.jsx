@@ -21,9 +21,6 @@ const UseStorage = () => {
         return Promise.resolve();
       }
 
-      // Editar
-      // Editar el status
-
       // Si la lista esta vacia
       await AsyncStorage.setItem(storageKey, JSON.stringify([meal]));
 
@@ -96,7 +93,6 @@ const UseStorage = () => {
   //! UPDATE
   // UPDATE STATUS DEL PRESTAMO
   const handleUpdateStatusPay = async (data) => {
-    //console.log(data);
     try {
       const resultGet = await handleGetCronograma();
       let indice;

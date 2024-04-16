@@ -6,7 +6,6 @@ import {
   ScrollView,
   Pressable,
   Modal,
-  Switch,
   Alert,
   TouchableWithoutFeedback,
 } from "react-native";
@@ -24,7 +23,6 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
   });
 
   // Cargar los datos de la financiera
-
   const loadNegocio = async () => {
     try {
       let result = await onGetBusiness();
@@ -86,7 +84,6 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
   return (
     <ScrollView style={styles.container}>
       <Modal
-        // style={styles.container}
         transparent={true}
         visible={enablerNeg}
         onRequestClose={() => setEnableNeg(false)}
@@ -155,41 +152,6 @@ const InfNegocio = ({ enablerNeg, setEnableNeg, setDataHome, setEnable }) => {
               keyboardType="numeric"
             />
           </View>
-          {/* ------------------ RECIBIR NOTIFICACIONES ------------------*/}
-          {/* <View style={styles.containerConfiguration}>
-            <View
-              style={{
-                height: 65,
-                justifyContent: "center",
-                gap: 10,
-              }}
-            >
-              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
-                Recibir Notificaciones
-              </Text>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Switch
-                value={data.notification}
-                onValueChange={(value) => {
-                  // setAlert(value);
-                  setData({ ...data, notification: value });
-                }}
-                trackColor={{ false: "grey", true: "rgb(63, 252, 236)" }}
-                thumbColor={alert ? "rgb(63, 252, 236)" : "#f4f3f4"}
-              />
-              <Text
-                style={{
-                  color: "black",
-                  paddingBottom: 10,
-                  fontSize: 17,
-                  fontWeight: "bold",
-                }}
-              >
-                {alert ? "ON" : "OFF"}
-              </Text>
-            </View>
-          </View> */}
           <Pressable style={styles.buttonContainer} onPress={handleDataKeep}>
             <Text style={styles.textGuardar}>Guardar</Text>
           </Pressable>
@@ -224,7 +186,6 @@ const styles = StyleSheet.create({
 
   containerText: {
     marginTop: 10,
-    //gap: 5,
   },
   titleText: {
     paddingLeft: 20,
@@ -267,4 +228,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-//! cuando inicias los datos no se visualiza los datos guardados en el modal, y tampoco se actualiza cuando se guarda

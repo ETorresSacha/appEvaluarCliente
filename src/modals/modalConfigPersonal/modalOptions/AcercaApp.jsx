@@ -31,12 +31,12 @@ const AcercaApp = ({ app, setApp }) => {
         </Text>
         <Text style={{ paddingBottom: 10 }}>
           Esta app te ayuda a llevar una buena administración de tus clientes,
-          los cobros entre otros.
+          recordar los corbros pendientes entre otros.
         </Text>
 
         <Text>Nombre: App Evaluar</Text>
         <Text>Versión: 1.0.0</Text>
-        <Text>Creador: TorreDev</Text>
+        <Text>Creador: k31</Text>
         <Text>Contacto: +51 - 964626322</Text>
       </View>
     </Modal>

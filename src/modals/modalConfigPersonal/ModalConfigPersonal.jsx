@@ -3,15 +3,11 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Switch,
   Share,
   Pressable,
   TouchableWithoutFeedback,
 } from "react-native";
-import { Button, Icon, Input } from "@rneui/themed";
-import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
 import InfNegocio from "./modalOptions/InfNegocio";
 import Configuration from "./modalOptions/Configuration";
 import AcercaApp from "./modalOptions/AcercaApp";

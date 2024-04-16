@@ -24,7 +24,7 @@ const Configuration = ({
     // Validando
     let error = validationConfiguration(value);
     let valuesError = Object.values(error);
-    console.log(valuesError);
+
     if (valuesError.some((error) => error != "")) {
       let typeError = valuesError.find((element) => element != ""); // Busca el tipo de error que existe
       Alert.alert(typeError);

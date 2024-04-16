@@ -7,13 +7,13 @@ import {
   Switch,
   Pressable,
 } from "react-native";
-import { Button, Icon, Input } from "@rneui/themed";
-import React, { useEffect, useState } from "react";
+import { Button, Icon } from "@rneui/themed";
+import React, { useState } from "react";
 
 const ModalConfigNotification = ({ onClose, visible }) => {
   const [nameInstitution, setNameInstitution] = useState("");
   const [alert, setAlert] = useState(false);
-  console.log(nameInstitution);
+
   return (
     <Modal
       visible={visible}
@@ -77,11 +77,7 @@ const ModalConfigNotification = ({ onClose, visible }) => {
             </View>
           </View>
           <Pressable style={styles.saveContainer}>
-            <Button
-              icon={<Icon name="save" size={28} />}
-              //onPress={() => onClose()}
-              type="clear"
-            />
+            <Button icon={<Icon name="save" size={28} />} type="clear" />
             <Text style={{ fontSize: 17, fontWeight: "bold" }}>Guardar</Text>
           </Pressable>
         </View>

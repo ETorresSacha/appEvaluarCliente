@@ -8,8 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-//import UseStorageTPM from "../../components/hooks/UseHookTasaPrimaMensual";
+import React, { useState } from "react";
 import { validationTPM } from "../../utils/validation/Validation";
 
 const ModalCofigTPM = ({
