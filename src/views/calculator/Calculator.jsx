@@ -6,7 +6,7 @@ import {
   Alert,
   TouchableOpacity,
   ScrollView,
-  Image,
+  ImageBackground,
 } from "react-native";
 import Prestamo from "../../components/prestamo/Prestamo";
 import DetailCalculator from "../../components/detailCalculator/DetailCalculator";
@@ -17,8 +17,8 @@ import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import equal from "deep-equal";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-const img =
-  "https://i.pinimg.com/originals/fe/6f/35/fe6f35a1ceedf8421c5fd776390bee12.jpg";
+import fondoCalculadora from "../../../assets/fondoCalculadora.jpg";
+
 const Calculator = ({
   errorsP,
   setErrorsP,
@@ -191,10 +191,10 @@ const Calculator = ({
   };
 
   return (
-    <View style={styles.container}>
-      {errorsP == undefined ? (
-        <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
-      ) : null}
+    <ImageBackground
+      source={errorsP == undefined ? fondoCalculadora : null}
+      style={styles.container}
+    >
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <View style={styles.titleEvaluar}>
         <Text style={styles.title}>PRESTAMO</Text>
@@ -258,7 +258,7 @@ const Calculator = ({
           ) : null}
         </View>
       </ScrollView>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -266,7 +266,8 @@ export default Calculator;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgb(31, 36, 36)",
+    resizeMode: "cover", // o 'contain' según tu preferencia
+    padding: 12,
   },
   buttonContainer: {
     justifyContent: "center",
