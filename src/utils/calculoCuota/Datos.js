@@ -86,17 +86,16 @@ const ITF = 0.005 // Impuesto a las Transacciones Financieras (0.005%)
 
 TEM = ((Math.pow((1+(TEA/100)),(periodo/360)))-1)*100 //%
 TEM = Number.parseFloat(TEM).toFixed(2)
-console.log(TEM);
 
 // CALCULO DE LA TED
 
 TED = ((Math.pow((1+(TEM/100)),(1/30)))-1)*100 //%
-console.log(TED);
+
 
 // CALCULO DE LA TASA DE SEGURO DE DESGRAVAMEN DIARIO
 
 TSegDD = (TSegM/30)*100  //%
-console.log(TSegDD);
+
 
 // CALCULO DEL FACTOR DE RETORNO DE CAPITAL (FRC)
 TED = TED/100

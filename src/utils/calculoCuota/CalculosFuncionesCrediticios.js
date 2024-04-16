@@ -2,7 +2,7 @@ import { CapitalCuo, FRC, IntCuo, MonSegDM, TSegDD } from "./Formulas"
 import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 
 //TODO --> CRONOGRAMA DE LA FECHA
-// Esta función solo calcula la fecha mensual, no se utilizará pero se dejará para analizar su lógica
+// Esta función solo calcula la fecha mensual, no se utilizará, pero se dejará para analizar su lógica
 export const sumarMes = (data,i)=>{
 
     let fechaPago =""

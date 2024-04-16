@@ -14,7 +14,7 @@ export const validationDataPerson = (dataPerson) =>{
      celularError:""
 
     }
-        //Expresión Regular Email
+    //Expresión Regular Email
     let ExpRegEmail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
     let ExpRegNumEnt=/^[0-9]+$/;
     // Datos en blanco
@@ -121,9 +121,7 @@ export const validationDataPrestamo = (dataPrestamo) =>{
 
       }
 
-
     return error
-
 }
 
 //! Validación de los datos del préstamo
@@ -160,7 +158,6 @@ export const validationTPM = (data)=>{
 }
 
 export const validationConfiguration = (data)=>{
-    console.log(data);
 
     let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
     let error = {
@@ -205,9 +202,6 @@ export const validationConfiguration = (data)=>{
        if(data?.ccv.match(ExpRegNumDec)==null){
         error={...error, errorccvDecimal:"Comisión de Cobranza Variable: \nDato inválido"}
        }
-
-
-       
     return error
 }
 

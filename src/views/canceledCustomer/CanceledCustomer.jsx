@@ -4,7 +4,6 @@ import Customer from "../customer/Customer";
 
 const CanceledCustomer = () => {
   const [enable, setEnable] = useState(true); //  Habilita el componente de los clientes cancelados
-  //console.log(enable);
 
   return (
     <View style={styles.container}>

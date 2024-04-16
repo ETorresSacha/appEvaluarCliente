@@ -200,5 +200,3 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-
-//! 4. carga pero se demora en visaulaixar, eso tenemos que corregir

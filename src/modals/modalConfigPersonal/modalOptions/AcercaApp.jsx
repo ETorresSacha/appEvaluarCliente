@@ -31,7 +31,7 @@ const AcercaApp = ({ app, setApp }) => {
         </Text>
         <Text style={{ paddingBottom: 10 }}>
           Esta app te ayuda a llevar una buena administración de tus clientes,
-          recordar los corbros pendientes entre otros.
+          recordar los cobros pendientes entre otros.
         </Text>
 
         <Text>Nombre: App Evaluar</Text>

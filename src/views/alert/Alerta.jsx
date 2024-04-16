@@ -13,8 +13,8 @@ Notifications.setNotificationHandler({
 
 const Alerta = ({ dataRed, dataGreen }) => {
   const [expoPushToken, setExpoPushToken] = useState("");
-  // Redirigido al componente cuando la notificacion es llamado
 
+  // Redirigido al componente cuando la notificacion es llamado
   const navigation = useNavigation();
   Notifications.addNotificationResponseReceivedListener((response) => {
     const screenName = response.notification.request.content.data.screen;
@@ -43,8 +43,8 @@ const Alerta = ({ dataRed, dataGreen }) => {
             data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 20,
-            minute: 51,
+            hour: 9,
+            minute: 0,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {

@@ -56,8 +56,8 @@ const Detail = (props) => {
       dataConfiguration,
     });
   };
-  // Eliminar
 
+  // Eliminar
   const handleDelete = async (data) => {
     try {
       const result = await onDeleteCustomer(data);
@@ -236,4 +236,3 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-//! TOCA ARREGLAR Y FACTORIZAR EL CÓDIGO

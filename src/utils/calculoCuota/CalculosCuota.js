@@ -1,6 +1,6 @@
  import {TED, TEM } from "./Formulas"
 
-import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC, sumarMes } from "./CalculosFuncionesCrediticios";
+import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC } from "./CalculosFuncionesCrediticios";
 
 //TODO --> TASA EFECTIVA
 export const tasaEfectiva = (data)=>{
@@ -36,8 +36,6 @@ export const calculoFRCA = (data) =>{
  export const cronPagos = (data)=>{
 
     const TSegM = parseFloat(data?.tasaPrimaMensual) // % 
-    console.log(data);
-    console.log("tseg:"+TSegM);
     let cronograma=[]
     let acumFRCA = []
     let newCapital = []
@@ -67,7 +65,7 @@ export const calculoFRCA = (data) =>{
  //TODO --> AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
  export const resultCronograma = (data)=>{
 
-    const result = cronPagos(data) //! despues sigue aqui
+    const result = cronPagos(data) 
   
     let cuotas = []
     let promCuota

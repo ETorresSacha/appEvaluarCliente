@@ -124,8 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
     backgroundColor: "rgb(31, 36, 36)",
-    //alignItems: "center",
-    //justifyContent: "center",
   },
   conteinerHeader: {
     display: "flex",
@@ -143,15 +141,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "bold",
   },
-  content: {
-    marginVertical: 16,
-  },
+
   institutionTitle: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    //backgroundColor: "rgba(36, 146, 224, 0.625)",
     paddingHorizontal: 15,
   },
   containerSwitch: {
@@ -175,20 +170,5 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-  },
-  fondo: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-  },
-  containerLogo: {
-    marginVertical: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logo: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
   },
 });
