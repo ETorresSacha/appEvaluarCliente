@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Pressable, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Pressable,
+  Image,
+  ImageBackground,
+} from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import ItemsHome from "../../components/itemsHome/ItemsHome";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPersonal";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
+
+import fondoHome from "../.././../assets/fondoHome.jpg";
 
 const user = {
   name: "Erik Torres Sacha",
@@ -66,8 +75,9 @@ const Home = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image>
+    <ImageBackground source={fondoHome} style={styles.background}>
+      {/* <View style={styles.container}> */}
+      {/* <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image> */}
 
       {/* HEADER */}
       <View style={styles.conteinerHeader}>
@@ -113,13 +123,20 @@ const Home = () => {
 
       {/* ITEMS DE LAS OPCIONES */}
       <ItemsHome dataConfiguration={dataConfiguration} />
-    </View>
+      {/* </View> */}
+    </ImageBackground>
   );
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: "cover", // o 'contain' según tu preferencia
+    padding: 12,
+    //justifyContent: "center",
+  },
   container: {
     flex: 1,
     padding: 12,
