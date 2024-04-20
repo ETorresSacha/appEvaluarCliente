@@ -34,7 +34,7 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
 
               {/* Etiqueta de porcentaje */}
               <SvgText
-                fill="white"
+                fill="black"
                 fontSize="12"
                 fontWeight="bold"
                 x={

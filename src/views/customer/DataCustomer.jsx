@@ -19,6 +19,7 @@ const DataCustomer = ({
 }) => {
   const [order, setOrder] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  console.log(data);
 
   // Ordenar
   const handleSort = (type, value) => {
@@ -147,7 +148,11 @@ const DataCustomer = ({
         </TouchableOpacity>
       </View>
       {/* Modal de la leyenda */}
-      <ModalLeyenda isVisible={isVisible} setIsVisible={setIsVisible} />
+      <ModalLeyenda
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        customer={customer}
+      />
     </View>
   );
 };
