@@ -8,6 +8,7 @@ import {
 import React, { useState } from "react";
 import Users from "../../components/users/Users";
 import { orderData } from "../../utils/thunks/Thunks";
+import ModalLeyenda from "../../modals/modalLeyenda/ModalLeyenda";
 
 const DataCustomer = ({
   data,
@@ -17,6 +18,7 @@ const DataCustomer = ({
   dataConfiguration,
 }) => {
   const [order, setOrder] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Ordenar
   const handleSort = (type, value) => {
@@ -134,7 +136,18 @@ const DataCustomer = ({
             ? customer.dataResult.length
             : customer.customerCancelled.length}
         </Text>
+
+        <TouchableOpacity
+          style={[styles.title]}
+          onPress={() => setIsVisible(true)}
+        >
+          <Text style={[styles.texTitle, { width: enable ? 100 : null }]}>
+            Leyenda
+          </Text>
+        </TouchableOpacity>
       </View>
+      {/* Modal de la leyenda */}
+      <ModalLeyenda isVisible={isVisible} setIsVisible={setIsVisible} />
     </View>
   );
 };
