@@ -41,7 +41,7 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
             fontWeight="bold"
             fill="black"
           >
-            100 %
+            {numDatos.length == 1 ? "100 %" : "0 %"}
           </Text>
         </Svg>
       ) : (
