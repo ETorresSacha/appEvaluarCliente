@@ -9,18 +9,16 @@ import React from "react";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import PieChart from "./PieChart";
 
-//const data = [30, 40, 20, 10]; // Datos para el diagrama de pastel
-// const colors = ["#FF5733", "#C70039", "#900C3F", "#581845"]; // Colores para cada segmento
-
 const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
   const data = [
     customer?.customerRed ? customer?.customerRed?.length : 0,
     customer?.customerYellow ? customer?.customerYellow?.length : 0,
     customer?.customerGreen ? customer?.customerGreen?.length : 0,
     customer?.customer ? customer?.customer?.length : 0,
-  ]; // Datos para el diagrama de pastel
+  ];
 
   const colors = ["#FF0000", "#FFFF00", "#008000", "#FFF8DC"]; // Colores para cada segmento
+
   return (
     <Modal
       style={styles.container}
@@ -41,13 +39,14 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
               textAlign: "center",
             }}
           >
-            INFORMACIÓN DE LA FECHA DE PAGO
+            INFORMACIÓN
           </Text>
         </View>
 
         <View style={styles.graficoContainer}>
           {/* Gráfico */}
           <PieChart data={data} colors={colors} size={200} />
+
           {/* Leyenda */}
           <View style={styles.containerLeyendaIcono}>
             {["Vencidos", "Hoy", "Mañana", "Al día"].map((element, index) => (
@@ -62,42 +61,9 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
                   name="notifications"
                   style={{ color: `${colors[index]}`, fontSize: 30 }}
                 />
-                <Text
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    color: "white",
-                    width: 70,
-                    paddingTop: 5,
-                    paddingHorizontal: 5,
-                  }}
-                >
-                  {element}
-                </Text>
-                <View
-                  style={{
-                    alignContent: "center",
-                    textAlign: "center",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      color: "orange",
-                      width: 15,
-                      height: 20,
-                      borderRadius: 5,
-                      justifyContent: "center",
-                      textAlign: "center",
-                      alignItems: "center",
-                      alignContent: "center",
-                    }}
-                  >
-                    {data[index]}
-                  </Text>
+                <Text style={styles.leyenda}>{element}</Text>
+                <View style={styles.containerTitleLeyenda}>
+                  <Text style={styles.titleLeyenda}>{data[index]}</Text>
                 </View>
               </View>
             ))}
@@ -113,8 +79,6 @@ export default ModalLeyenda;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: "rgb(31, 36, 36)",
-    //backgroundColor: "black",
   },
   modalOverlay: {
     flex: 1,
@@ -125,7 +89,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "rgba(6, 18, 20, 0.836)",
-    //backgroundColor: "white",
     borderRadius: 2,
     borderColor: "white",
     position: "absolute",
@@ -142,8 +105,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    //justifyContent: "space-between",
-    //backgroundColor: "blue",
   },
   graficoContainer: {
     flex: 1,
@@ -151,5 +112,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 20,
     justifyContent: "space-evenly",
+  },
+  containerTitleLeyenda: {
+    alignContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  leyenda: {
+    display: "flex",
+    flexDirection: "row",
+    color: "white",
+    width: 70,
+    paddingTop: 5,
+    paddingHorizontal: 5,
+  },
+  titleLeyenda: {
+    display: "flex",
+    flexDirection: "row",
+    color: "orange",
+    width: 15,
+    height: 20,
+    borderRadius: 5,
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    alignContent: "center",
   },
 });
