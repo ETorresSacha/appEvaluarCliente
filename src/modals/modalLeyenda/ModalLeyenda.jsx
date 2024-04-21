@@ -13,11 +13,6 @@ import PieChart from "./PieChart";
 // const colors = ["#FF5733", "#C70039", "#900C3F", "#581845"]; // Colores para cada segmento
 
 const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
-  console.log(typeof customer?.customer?.length);
-  console.log(customer?.customerGreen?.length);
-  console.log(customer?.customerYellow?.length);
-  console.log(customer?.customerRed?.length);
-
   const data = [
     customer?.customerRed ? customer?.customerRed?.length : 0,
     customer?.customerYellow ? customer?.customerYellow?.length : 0,
@@ -51,7 +46,9 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
         </View>
 
         <View style={styles.graficoContainer}>
+          {/* Gráfico */}
           <PieChart data={data} colors={colors} size={200} />
+          {/* Leyenda */}
           <View style={styles.containerLeyendaIcono}>
             {["Vencidos", "Hoy", "Mañana", "Al día"].map((element, index) => (
               <View
@@ -128,6 +125,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "rgba(6, 18, 20, 0.836)",
+    //backgroundColor: "white",
     borderRadius: 2,
     borderColor: "white",
     position: "absolute",
