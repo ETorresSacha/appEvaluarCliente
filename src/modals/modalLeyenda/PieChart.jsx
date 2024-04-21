@@ -1,21 +1,13 @@
 import React from "react";
 import { View } from "react-native";
-import Svg, {
-  G,
-  Path,
-  Circle,
-  Rect,
-  Text,
-  Text as SvgText,
-} from "react-native-svg";
+import Svg, { G, Path, Circle, Text, Text as SvgText } from "react-native-svg";
 
 const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
   const total = data.reduce((acc, value) => acc + value, 0);
-  console.log("total: " + total);
   const radius = size / 2;
   let startAngle = 0;
 
-  // Cantidad de datos diferentes de cero
+  // Número de datos diferentes de cero
   const numDatos = [];
   data.map((element) => {
     if (element != 0) numDatos.push(element);
@@ -26,12 +18,12 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
   const centerY = radius + 5; // Y-coordinate del centro del círculo
   const resultColor = (element) => element != 0; // color del círculo
   const resultIndexColor = data.findIndex(resultColor);
-  //
+
   return (
-    <View style={{ backgroundColor: "grey" }}>
+    <View>
       {numDatos.length == 1 || numDatos.length == 0 ? (
         <Svg height={2 * radius + 10} width={2 * radius + 10}>
-          {/* Círculo */}
+          {/* Cuando existe solo un dato */}
           <Circle
             cx={centerX}
             cy={centerY}
@@ -54,6 +46,7 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
         </Svg>
       ) : (
         <Svg width={size} height={size}>
+          {/* Más de un dato */}
           {data.map((value, index) => {
             const percentage = (value / total) * 100;
 
@@ -72,7 +65,7 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
             const colorWithTransparency = `${
               colors[index % colors.length]
             }${Math.round(transparency * 255).toString(16)}`;
-            console.log(percentage);
+
             return (
               <G key={index}>
                 <Path d={pathData} fill={colorWithTransparency} />
@@ -82,7 +75,6 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
                   fill="black"
                   fontSize="12"
                   fontWeight="bold"
-                  //alienItem="center"
                   x={
                     radius +
                     radius *
@@ -95,14 +87,6 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
                       0.6 *
                       Math.sin(startAngle - (percentage * Math.PI) / radius)
                   }
-                  // x={
-                  //   radius +
-                  //   radius * 0.8 * Math.cos((startAngle + endAngle) / 2)
-                  // }
-                  // y={
-                  //   radius +
-                  //   radius * 0.8 * Math.sin((startAngle + endAngle) / 2)
-                  // }
                   textAnchor="middle"
                 >
                   {percentage != 0 ? `${percentage.toFixed(1)}%` : null}
