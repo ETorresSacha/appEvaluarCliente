@@ -45,7 +45,8 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
             x={centerX}
             y={centerY}
             textAnchor="middle"
-            fontSize="16"
+            fontSize="12"
+            fontWeight="bold"
             fill="black"
           >
             100 %
@@ -71,33 +72,41 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
             const colorWithTransparency = `${
               colors[index % colors.length]
             }${Math.round(transparency * 255).toString(16)}`;
-
+            console.log(percentage);
             return (
               <G key={index}>
                 <Path d={pathData} fill={colorWithTransparency} />
 
                 {/* Etiqueta de porcentaje */}
-                {/* <SvgText
-                fill="black"
-                fontSize="12"
-                fontWeight="bold"
-                //alienItem="center"
-                x={
-                  radius +
-                  radius *
-                    0.6 *
-                    Math.cos(startAngle - (percentage * Math.PI) / 360)
-                }
-                y={
-                  radius +
-                  radius *
-                    0.6 *
-                    Math.sin(startAngle - (percentage * Math.PI) / 360)
-                }
-                textAnchor="middle"
-              >
-                {`${percentage.toFixed(1)}%`}
-              </SvgText> */}
+                <SvgText
+                  fill="black"
+                  fontSize="12"
+                  fontWeight="bold"
+                  //alienItem="center"
+                  x={
+                    radius +
+                    radius *
+                      0.6 *
+                      Math.cos(startAngle - (percentage * Math.PI) / radius)
+                  }
+                  y={
+                    radius +
+                    radius *
+                      0.6 *
+                      Math.sin(startAngle - (percentage * Math.PI) / radius)
+                  }
+                  // x={
+                  //   radius +
+                  //   radius * 0.8 * Math.cos((startAngle + endAngle) / 2)
+                  // }
+                  // y={
+                  //   radius +
+                  //   radius * 0.8 * Math.sin((startAngle + endAngle) / 2)
+                  // }
+                  textAnchor="middle"
+                >
+                  {percentage != 0 ? `${percentage.toFixed(1)}%` : null}
+                </SvgText>
               </G>
             );
           })}
