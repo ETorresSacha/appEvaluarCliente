@@ -25,7 +25,7 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
     customer?.customerRed ? customer?.customerRed?.length : 0,
   ]; // Datos para el diagrama de pastel
   console.log(data);
-  const colors = ["#FFF8DC", "#008000", "#FFFF00", "#FF0000"]; // Colores para cada segmento
+  const colors = ["#FF0000", "#FFFF00", "#008000", "#FFF8DC"]; // Colores para cada segmento
   return (
     <Modal
       style={styles.container}
@@ -50,9 +50,32 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
         </View>
         <View style={styles.graficoContainer}>
           <PieChart data={data} colors={colors} size={200} />
-          <View style={styles.leyendaIcono}>
-            <MaterialIcons name="notifications" style={{ color: "red" }} />
-            <Text>Leyenda</Text>
+          <View style={styles.containerLeyendaIcono}>
+            {["Vencidos", "Hoy", "Mañana", "Al día"].map((element, index) => (
+              <View
+                key={index}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <MaterialIcons
+                  name="notifications"
+                  style={{ color: `${colors[index]}`, fontSize: 30 }}
+                />
+                <Text
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    color: "white",
+                    width: 60,
+                    paddingTop: 5,
+                  }}
+                >
+                  {element}
+                </Text>
+              </View>
+            ))}
           </View>
         </View>
       </View>
@@ -84,11 +107,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
-  leyendaIcono: {
+  containerLeyendaIcono: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    //justifyContent: "space-between",
+    backgroundColor: "blue",
   },
   graficoContainer: {
     flex: 1,
