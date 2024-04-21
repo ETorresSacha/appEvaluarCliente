@@ -59,7 +59,7 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
       </Svg>
 
       {/* Leyenda */}
-      <View
+      {/* <View
         style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}
       >
         {data.map((value, index) => (
@@ -82,7 +82,7 @@ const PieChart = ({ data, colors, size = 200, transparency = 1.0 }) => {
             <SvgText>{`Segmento ${index + 1}`}</SvgText>
           </View>
         ))}
-      </View>
+      </View> */}
     </View>
   );
 };
