@@ -19,7 +19,6 @@ const DataCustomer = ({
 }) => {
   const [order, setOrder] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  console.log(data);
 
   // Ordenar
   const handleSort = (type, value) => {
@@ -138,14 +137,17 @@ const DataCustomer = ({
             : customer.customerCancelled.length}
         </Text>
 
-        <TouchableOpacity
-          style={[styles.title]}
-          onPress={() => setIsVisible(true)}
-        >
-          <Text style={[styles.texTitle, { width: enable ? 100 : null }]}>
-            Leyenda
-          </Text>
-        </TouchableOpacity>
+        {/* Ícono de la leyenda */}
+        {!enable ? (
+          <TouchableOpacity
+            style={[styles.title]}
+            onPress={() => setIsVisible(true)}
+          >
+            <Text style={[styles.texTitle, { width: enable ? 100 : null }]}>
+              Leyenda
+            </Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
       {/* Modal de la leyenda */}
       <ModalLeyenda
