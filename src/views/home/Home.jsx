@@ -15,7 +15,7 @@ import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import fondoHome from "../.././../assets/fondoHome.jpg";
 import logo from "../../../assets/credicheck.png";
-
+// este es un ejemplo que ayudara para verificar los cambios
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
   const { onGetConfiguration } = UseStorageConfiguration();
