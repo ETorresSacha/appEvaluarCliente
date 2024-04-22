@@ -14,11 +14,11 @@ import ModalConfigPersonal from "../../modals/modalConfigPersonal/ModalConfigPer
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import fondoHome from "../.././../assets/fondoHome.jpg";
-
-const user = {
-  name: "Erik Torres Sacha",
-  uri: "https://cdn-icons-png.flaticon.com/512/8676/8676906.png",
-};
+import logo from "../../../assets/credicheck.png";
+// const user = {
+//   name: "Erik Torres Sacha",
+//   uri: "https://www.shutterstock.com/image-vector/money-logo-design-vector-illustrative-260nw-2034757577.jpg",
+// };
 
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
@@ -78,7 +78,7 @@ const Home = () => {
       {/* HEADER */}
       <View style={styles.conteinerHeader}>
         <View style={styles.rightConteiner}>
-          <Image source={{ uri: user.uri }} style={styles.profileImage}></Image>
+          <Image source={logo} style={styles.profileImage}></Image>
         </View>
         <Pressable
           style={styles.leftConteiner}
