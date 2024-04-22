@@ -15,10 +15,6 @@ import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import fondoHome from "../.././../assets/fondoHome.jpg";
 import logo from "../../../assets/credicheck.png";
-// const user = {
-//   name: "Erik Torres Sacha",
-//   uri: "https://www.shutterstock.com/image-vector/money-logo-design-vector-illustrative-260nw-2034757577.jpg",
-// };
 
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
@@ -72,9 +68,6 @@ const Home = () => {
 
   return (
     <ImageBackground source={fondoHome} style={styles.background}>
-      {/* <View style={styles.container}> */}
-      {/* <Image source={{ uri: img }} style={[StyleSheet.absoluteFill]}></Image> */}
-
       {/* HEADER */}
       <View style={styles.conteinerHeader}>
         <View style={styles.rightConteiner}>
@@ -131,7 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover", // o 'contain' según tu preferencia
     padding: 12,
-    //justifyContent: "center",
   },
   container: {
     flex: 1,
