@@ -16,18 +16,48 @@ const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
   // Iconos de notificacion
   const handleIconNotification = (value, messageValue) => {
     let aplication;
+    const phoneNumber = data[0]?.celular;
     switch (value) {
       case "whatsapp":
-        aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${messageValue}`;
+        // // aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${messageValue}`;
+        // // break;
+        // Verificar si el número de teléfono tiene un prefijo internacional
+        const isInternational = phoneNumber.startsWith("+");
+
+        // Si no tiene un prefijo internacional, agregar el código de país de WhatsApp
+        const whatsappPhoneNumber = isInternational
+          ? phoneNumber
+          : `+51${phoneNumber}`;
+
+        // Codificar el mensaje para enviarlo por WhatsApp
+        const encodedMessage = encodeURIComponent(messageValue);
+
+        // Construir el enlace para abrir WhatsApp con el mensaje predefinido
+        aplication = `whatsapp://send?phone=${whatsappPhoneNumber}&text=${encodedMessage}`;
         break;
 
       case "phone-call":
         aplication = `tel:${data[0]?.celular}`;
         break;
 
+      // const handlePhoneCall = (phoneNumber) => {
+      //   const phoneUrl = `tel:${phoneNumber}`;
+      //   Linking.openURL(phoneUrl)
+      //     .catch((error) => {
+      //       console.error('Error al intentar realizar la llamada telefónica:', error);
+      //     });
+      // };
+
       case "email-fast-outline":
         aplication = `mailto:${data[0]?.correo}?subject=Pago de la cuota N° ${dataNotification?.cuota}&body=${messageValue}`;
         break;
+      // const handleSendEmail = (recipientEmail, subject, body) => {
+      //   const emailUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      //   Linking.openURL(emailUrl)
+      //     .catch((error) => {
+      //       console.error('Error al intentar enviar el correo electrónico:', error);
+      //     });
+      // };
     }
     Linking.openURL(aplication);
   };
