@@ -30,5 +30,6 @@ por whatsapp, correo electrónico y ralizar llamada), cancelar el pago y tambié
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/7a18f218-fef2-4fde-baf5-45721200c6aa" alt="Nuevo cliente" width="200">
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/d5a187e7-2957-4c6c-a90a-549052b55382" alt="Leyenda" width="200">
 </div>
-
+### ¡IMPORTANTE!
+Esta aplicacion actualmente esta disponible para Android. 
 
