@@ -14,14 +14,10 @@ La aplicación cuenta con las vista:
 
 <div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/4b6f11a2-3ce1-47bf-931d-a2793114f0d3" alt="Home" width="200">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/e6fedbca-7a02-4e68-bfc9-077ed168f70a" alt="Clientes" width="200">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Clientes cancelados" width="200">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/5e785c0a-c700-4084-a809-3a95a4daafe1" alt="Evaluar" width="200"> 
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/e6fedbca-7a02-4e68-bfc9-077ed168f70a" alt="Clientes" width="200">
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Clientes cancelados" width="200">
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/5e785c0a-c700-4084-a809-3a95a4daafe1" alt="Evaluar" width="200"> 
 </div>
-
-
-
-
 
 ## Funcionalidaddes
 Dentro de las funcionalidades mas destacadas se muestran:
@@ -29,10 +25,9 @@ Dentro de las funcionalidades mas destacadas se muestran:
 por whatsapp, correo electrónico y ralizar llamada), cancelar el pago y también permite ver el cronograma de pago.
 * **Nuevo  cliente:** Permite agregar a la lista a un nuevo cliente.
 * **Leyenda:** Mediante un diagrama nos permite visualizar los tipos de clientes que tenemos registrados.
-* <div style="display: flex; justify-content: space-between;">
+<div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/3f4ff3c1-2d12-4799-9b4e-ecf8b2f11557" alt="Home" width="200">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/a8144880-8e1c-43e2-8852-1f8e7c1ed785" alt="Clientes" width="200">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Clientes cancelados" width="200">
-
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/a8144880-8e1c-43e2-8852-1f8e7c1ed785" alt="Clientes" width="200">
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Clientes cancelados" width="200">
 </div>
 
