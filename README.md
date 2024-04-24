@@ -8,14 +8,14 @@
 ## Vistas
 La aplicación cuenta con las vista:
 *Home: En donde se muestra las opciones de ingresar a los Clientes, Clientes cancelados y evaluar (calcula las cuotas por el periodo determinado)
-*Clientes: En esta vista muestra todos los clientes registrados que tienen una deuda pendiente.
-*Clientes cancelados: En esta vista muestra todos los clientes que ya cancelaron su cuenta, sirve como un registros de tus clientes mas recurrentes.
-*Evaluar: Permite evaluar la cantidad de la cuota a pagar de acuerdo al periodo seleccionado.
+**Clientes:** En esta vista muestra todos los clientes registrados que tienen una deuda pendiente.
+**Clientes cancelados:** En esta vista muestra todos los clientes que ya cancelaron su cuenta, sirve como un registros de tus clientes mas recurrentes.
+**Evaluar:** Permite evaluar la cantidad de la cuota a pagar de acuerdo al periodo seleccionado.
 <div style="display: flex; justify-content: space-between;">
-  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/4b6f11a2-3ce1-47bf-931d-a2793114f0d3" alt="Descripción de la imagen" width="300">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/e6fedbca-7a02-4e68-bfc9-077ed168f70a" alt="Descripción de la imagen" width="300">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Descripción de la imagen" width="300">
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/5e785c0a-c700-4084-a809-3a95a4daafe1" alt="Descripción de la imagen" width="300"> 
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/4b6f11a2-3ce1-47bf-931d-a2793114f0d3" alt="Descripción de la imagen" width="200">
+<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/e6fedbca-7a02-4e68-bfc9-077ed168f70a" alt="Descripción de la imagen" width="200">
+<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Descripción de la imagen" width="200">
+<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/5e785c0a-c700-4084-a809-3a95a4daafe1" alt="Descripción de la imagen" width="200"> 
 </div>
 
 
