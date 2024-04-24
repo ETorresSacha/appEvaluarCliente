@@ -19,8 +19,8 @@ const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
     const phoneNumber = data[0]?.celular;
     switch (value) {
       case "whatsapp":
-        // // aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${messageValue}`;
-        // // break;
+        // aplication = `whatsapp://send?phone=${data[0]?.celular}&text=${messageValue}`;
+        // break;
         // Verificar si el número de teléfono tiene un prefijo internacional
         const isInternational = phoneNumber.startsWith("+");
 
