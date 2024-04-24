@@ -11,6 +11,11 @@ La aplicación cuenta con las vista:
 **Clientes:** En esta vista muestra todos los clientes registrados que tienen una deuda pendiente.
 **Clientes cancelados:** En esta vista muestra todos los clientes que ya cancelaron su cuenta, sirve como un registros de tus clientes mas recurrentes.
 **Evaluar:** Permite evaluar la cantidad de la cuota a pagar de acuerdo al periodo seleccionado.
+* **Home:** En donde se muestra las opciones de ingresar a los Clientes, Clientes cancelados y evaluar (calcula las cuotas por el periodo determinado).
+* **Clientes:** En esta vista muestra todos los clientes registrados que tienen una deuda pendiente.
+* **Clientes cancelados:** En esta vista muestra todos los clientes que ya cancelaron su cuenta, sirve como un registro de tus clientes más recurrentes.
+* **Evaluar:** Permite evaluar la cantidad de la cuota a pagar de acuerdo al periodo seleccionado.
+
 <div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/4b6f11a2-3ce1-47bf-931d-a2793114f0d3" alt="Descripción de la imagen" width="200">
 <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/e6fedbca-7a02-4e68-bfc9-077ed168f70a" alt="Descripción de la imagen" width="200">
