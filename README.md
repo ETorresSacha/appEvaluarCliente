@@ -1,5 +1,5 @@
 # CREDICHECK
-<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/9dc12dd4-cf5b-4617-9f1c-05b4d9f93df1" alt="Descripción de la imagen" width="300">
+<img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/9dc12dd4-cf5b-4617-9f1c-05b4d9f93df1" alt="Descripción de la imagen" width="200">
 
 
 ## ¿Prestas dinero y te dificulta llevar un registro de tus clientes?
@@ -28,6 +28,7 @@ por whatsapp, correo electrónico y ralizar llamada), cancelar el pago y tambié
 <div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/3f4ff3c1-2d12-4799-9b4e-ecf8b2f11557" alt="Detalle" width="200">
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/7a18f218-fef2-4fde-baf5-45721200c6aa" alt="Nuevo cliente" width="200">
-  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Leyenda" width="200">
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/d5a187e7-2957-4c6c-a90a-549052b55382" alt="Leyenda" width="200">
 </div>
+
 
