@@ -20,6 +20,7 @@ La aplicación cuenta con las vista:
 </div>
 
 ## Funcionalidaddes
+
 Dentro de las funcionalidades mas destacadas se muestran:
 * **Detalle:** Visualizamos los datos registrados y el detalle del tipo de préstamo. Dentro esta vista podemos editar, eliminar el cliente, realizar el pago del cliente, notificaciones (sirve para mandar mensajes
 por whatsapp, correo electrónico y ralizar llamada), cancelar el pago y también permite ver el cronograma de pago.
@@ -30,6 +31,8 @@ por whatsapp, correo electrónico y ralizar llamada), cancelar el pago y tambié
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/7a18f218-fef2-4fde-baf5-45721200c6aa" alt="Nuevo cliente" width="200">
   <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/d5a187e7-2957-4c6c-a90a-549052b55382" alt="Leyenda" width="200">
 </div>
+
+
 ### ¡IMPORTANTE!
 Esta aplicacion actualmente esta disponible para Android. 
 
