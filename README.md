@@ -1,5 +1,5 @@
 # CREDICHECK
-<img src="![credicheck](https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/9dc12dd4-cf5b-4617-9f1c-05b4d9f93df1)" alt="Descripción de la imagen" width="100">
+<img src="(https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/9dc12dd4-cf5b-4617-9f1c-05b4d9f93df1)" alt="Descripción de la imagen" width="100">
 
 ## ¿Prestas dinero y te dificulta llevar un registro de tus clientes?
 "CrediCheck es una aplicación que ayuda a llevar el control de los clientes y permite recordar cuándo se debe cobrar a través de notificaciones."
