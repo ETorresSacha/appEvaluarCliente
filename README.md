@@ -8,8 +8,8 @@
 ## Vistas
 La aplicación cuenta con las vista:
 * **Home:** En donde se muestra las opciones de ingresar a los Clientes, Clientes cancelados y evaluar (calcula las cuotas por el periodo determinado).
-* **Clientes:** En esta vista muestra todos los clientes registrados que tienen una deuda pendiente.
-* **Clientes cancelados:** En esta vista muestra todos los clientes que ya cancelaron su cuenta, sirve como un registro de tus clientes más recurrentes.
+* **Clientes:** En esta vista muestra todos los clientes registrados con una deuda pendiente.
+* **Clientes cancelados:** En esta vista muestra todos los clientes que ya cancelaron su deuda, sirve como un registro de los clientes más recurrentes.
 * **Evaluar:** Permite evaluar la cantidad de la cuota a pagar de acuerdo al periodo seleccionado.
 
 <div style="display: flex; justify-content: space-between;">
@@ -22,8 +22,7 @@ La aplicación cuenta con las vista:
 ## Funcionalidaddes
 
 Dentro de las funcionalidades mas destacadas se muestran:
-* **Detalle:** Visualizamos los datos registrados y el detalle del tipo de préstamo. Dentro esta vista podemos editar, eliminar el cliente, realizar el pago del cliente, notificaciones (sirve para mandar mensajes
-por whatsapp, correo electrónico y ralizar llamada), cancelar el pago y también permite ver el cronograma de pago.
+* **Detalle:** Visualizamos los datos registrados y el detalle del préstamo. Dentro de esta vista podemos editar, eliminar el cliente, realizar el pago de la cuota,asi como también, cancelar el mismo, notificaciones (sirve para mandar mensajes por whatsapp, correo electrónico y ralizar llamadas) y también permite ver el cronograma de pagos.
 * **Nuevo  cliente:** Permite agregar a la lista a un nuevo cliente.
 * **Leyenda:** Mediante un diagrama nos permite visualizar los tipos de clientes que tenemos registrados.
 <div style="display: flex; justify-content: space-between;">
