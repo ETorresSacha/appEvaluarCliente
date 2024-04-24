@@ -26,8 +26,8 @@ por whatsapp, correo electrónico y ralizar llamada), cancelar el pago y tambié
 * **Nuevo  cliente:** Permite agregar a la lista a un nuevo cliente.
 * **Leyenda:** Mediante un diagrama nos permite visualizar los tipos de clientes que tenemos registrados.
 <div style="display: flex; justify-content: space-between;">
-  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/3f4ff3c1-2d12-4799-9b4e-ecf8b2f11557" alt="Home" width="200">
-  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/a8144880-8e1c-43e2-8852-1f8e7c1ed785" alt="Clientes" width="200">
-  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Clientes cancelados" width="200">
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/3f4ff3c1-2d12-4799-9b4e-ecf8b2f11557" alt="Detalle" width="200">
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/7a18f218-fef2-4fde-baf5-45721200c6aa" alt="Nuevo cliente" width="200">
+  <img src="https://github.com/ETorresSacha/appEvaluarCliente/assets/122553836/b20c36b8-53b7-4c81-800d-dd8afbd1d465" alt="Leyenda" width="200">
 </div>
 
