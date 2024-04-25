@@ -11,7 +11,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-const Alerta = ({ dataRed, dataGreen }) => {
+const Alerta = ({ dataYellow, dataRed }) => {
   const [expoPushToken, setExpoPushToken] = useState("");
 
   // Redirigido al componente cuando la notificacion es llamado
@@ -39,12 +39,12 @@ const Alerta = ({ dataRed, dataGreen }) => {
         await Notifications.scheduleNotificationAsync({
           content: {
             title: "Clientes por cobrar",
-            body: ` Para hoy  ${dataGreen.length}, vencidos ${dataRed.length}`,
+            body: ` Para hoy  ${dataYellow.length}, vencidos ${dataRed.length}`,
             data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 9,
-            minute: 0,
+            hour: 21,
+            minute: 17,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {

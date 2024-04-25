@@ -101,11 +101,11 @@ const Customer = ({ enable }) => {
       />
 
       {/* Notificaciones de los clientes por cobrar */}
-      {customer.customerGreen?.length != 0 ||
+      {customer.customerYellow?.length != 0 ||
       customer.customerRed?.length != 0 ? (
         <Alerta
           dataRed={customer.customerRed}
-          dataGreen={customer.customerGreen}
+          dataYellow={customer.customerYellow}
         />
       ) : null}
 
