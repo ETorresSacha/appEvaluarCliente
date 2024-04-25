@@ -40,24 +40,9 @@ const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
         aplication = `tel:${data[0]?.celular}`;
         break;
 
-      // const handlePhoneCall = (phoneNumber) => {
-      //   const phoneUrl = `tel:${phoneNumber}`;
-      //   Linking.openURL(phoneUrl)
-      //     .catch((error) => {
-      //       console.error('Error al intentar realizar la llamada telefónica:', error);
-      //     });
-      // };
-
       case "email-fast-outline":
         aplication = `mailto:${data[0]?.correo}?subject=Pago de la cuota N° ${dataNotification?.cuota}&body=${messageValue}`;
         break;
-      // const handleSendEmail = (recipientEmail, subject, body) => {
-      //   const emailUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      //   Linking.openURL(emailUrl)
-      //     .catch((error) => {
-      //       console.error('Error al intentar enviar el correo electrónico:', error);
-      //     });
-      // };
     }
     Linking.openURL(aplication);
   };
