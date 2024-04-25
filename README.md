@@ -35,3 +35,20 @@ Dentro de las funcionalidades mas destacadas se muestran:
 ### ¡IMPORTANTE!
 Esta aplicacion actualmente esta disponible para Android. 
 
+
+###
+
+<h3 align="left">🛠 Lenguajes y herramientas</h3>
+
+###
+
+<div align="left">
+  <img src="https://cdn.icon-icons.com/icons2/2389/PNG/512/expo_logo_icon_145293.png" height="40" alt="Expo logo" />
+  <img src="https://cdn.worldvectorlogo.com/logos/react-native-1.svg" height="40" alt="Expo logo" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
+  <img width="12" />
+
+</div>
+
