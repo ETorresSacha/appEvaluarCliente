@@ -17,6 +17,8 @@ import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration
 import fondoHome from "../.././../assets/fondoHome.jpg";
 import logo from "../../../assets/credicheck.png";
 
+import * as XLSX from "xlsx";
+
 // import * as FileSystem from "expo-file-system";
 // import { shareAsync } from "expo-sharing";
 // const downloadFromUrl = async () => {
@@ -65,6 +67,7 @@ const shareCSVFile = async () => {
 
     // Guardar el archivo CSV en el sistema de archivos local del dispositivo
     const fileUri = `${FileSystem.documentDirectory}data.csv`;
+    console.log(fileUri);
     await FileSystem.writeAsStringAsync(fileUri, csvData, {
       encoding: FileSystem.EncodingType.UTF8,
     });
@@ -80,7 +83,39 @@ const shareCSVFile = async () => {
     console.error("Error al compartir el archivo CSV:", error);
   }
 };
+//! esta parte esta para corregir
+const handleExportToExcel = () => {
+  const data = [
+    { name: "John", age: 30, city: "New York" },
+    { name: "Jane", age: 25, city: "San Francisco" },
+    { name: "Bob", age: 35, city: "Los Angeles" },
+  ];
 
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+  // Generar un blob a partir del libro de trabajo
+  // const fileUri = `${FileSystem.documentDirectory}excel`;
+  // console.log(fileUri);
+  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+  const blob = new Blob([excelBuffer], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  });
+
+  // Crear un objeto URL desde el blob
+  const url = URL.createObjectURL(blob);
+
+  // Crear un enlace para descargar el archivo Excel
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "data.xlsx";
+  link.click();
+
+  // Liberar el objeto URL creado
+  URL.revokeObjectURL(url);
+};
+//! hasta aqui
 // Llama a la función para compartir el archivo CSV
 //shareCSVFile();
 //!! ESTA PARA PROBAR ESTA FUNCION, NO SE QUE DARA?
