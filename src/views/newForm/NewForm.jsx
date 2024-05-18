@@ -11,12 +11,12 @@ import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
 import { useNavigation } from "@react-navigation/native";
-import { v4 as uuidv4 } from "uuid";
+//import { v4 as uuidv4 } from "uuid";
 import { validationDataPerson } from "../../utils/validation/Validation";
 import Header from "../../components/header/Header";
 
 const NewForm = (props) => {
-  const uuid = uuidv4();
+  // const uuid = uuidv4();
   const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
   const [errorsP, setErrorsP] = useState({});
@@ -36,7 +36,7 @@ const NewForm = (props) => {
   // ****/
   //
   const [dataPerson, setDataPerson] = useState({
-    uuid: !user ? uuid : user[0].uuid,
+    // uuid: !user ? uuid : user[0].uuid,
     nombre: !user ? "" : user[0].nombre,
     apellido: !user ? "" : user[0].apellido,
     dni: !user ? "" : user[0].dni,
@@ -59,7 +59,7 @@ const NewForm = (props) => {
     // Limpia es estado
     if (clean) {
       setDataPerson({
-        uuid,
+        //uuid,
         nombre: "",
         apellido: "",
         dni: "",

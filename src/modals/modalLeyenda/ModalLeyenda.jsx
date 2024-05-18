@@ -45,7 +45,7 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
 
         <View style={styles.graficoContainer}>
           {/* Gráfico */}
-          <PieChart data={data} colors={colors} size={200} />
+          {/* <PieChart data={data} colors={colors} size={200} /> */}
 
           {/* Leyenda */}
           <View style={styles.containerLeyendaIcono}>

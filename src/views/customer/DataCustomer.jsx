@@ -19,7 +19,7 @@ const DataCustomer = ({
 }) => {
   const [order, setOrder] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
+  console.log(data);
   // Ordenar
   const handleSort = (type, value) => {
     // dataFilter toma los valores dependiendo de que componente es llamado la función, "clientes" o "clientes cancelados"
