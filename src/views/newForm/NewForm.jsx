@@ -11,12 +11,13 @@ import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
 import { useNavigation } from "@react-navigation/native";
-//import { v4 as uuidv4 } from "uuid";
+import "react-native-get-random-values"; // generea valores aleatorios para que el uuid no se repita
+import { v4 as uuidv4 } from "uuid";
 import { validationDataPerson } from "../../utils/validation/Validation";
 import Header from "../../components/header/Header";
 
 const NewForm = (props) => {
-  // const uuid = uuidv4();
+  const uuid = uuidv4();
   const navigation = useNavigation();
   const { onSaveCronograma } = UseStorage();
   const [errorsP, setErrorsP] = useState({});
@@ -33,10 +34,10 @@ const NewForm = (props) => {
   const color = props.route.params ? props.route.params.typeColor : null;
   const id = props.route.params ? props.route.params.id : null;
   const enable = props.route.params ? props.route.params.enable : null;
-  // ****/
-  //
+  // ****
+
   const [dataPerson, setDataPerson] = useState({
-    // uuid: !user ? uuid : user[0].uuid,
+    uuid: !user ? uuid : user[0].uuid,
     nombre: !user ? "" : user[0].nombre,
     apellido: !user ? "" : user[0].apellido,
     dni: !user ? "" : user[0].dni,
@@ -54,12 +55,12 @@ const NewForm = (props) => {
     tasaPrimaMensual: !user ? dataConfiguration?.tpm : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
   });
-
+  //console.log(uuid);
   useEffect(() => {
     // Limpia es estado
     if (clean) {
       setDataPerson({
-        //uuid,
+        uuid,
         nombre: "",
         apellido: "",
         dni: "",
