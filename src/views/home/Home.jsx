@@ -136,6 +136,25 @@ const Home = () => {
   const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
   const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
 
+  //TODO
+  const generateExcel = () => {
+    let wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.aoa_to_sheet([
+      ["Name", "Age", "City"],
+      ["John Doe", 30, "New York"],
+      ["Jane Doe", 25, "Los Angeles"],
+    ]);
+    XLSX.utils.book_append_sheet(wb, ws, "firstSheet", true);
+    const base64 = XLSX.write(wb, { type: "base64" });
+    const filename = FileSystem.documentDirectory + "myExcel";
+    FileSystem.writeAsStringAsync(filename, base64, {
+      encoding: FileSystem.EncodingType.Base64,
+    }).then(() => {
+      Sharing.shareAsync(filename);
+    });
+  };
+
+  //TODO
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
     try {
@@ -201,7 +220,7 @@ const Home = () => {
           />
         </Pressable>
       </View>
-      <Button title="Download From URL" onPress={shareCSVFile}></Button>
+      <Button title="Download From URL" onPress={generateExcel}></Button>
       {/* 
       <ExcelFile
         element={<Button> Exportar a Excel</Button>}
