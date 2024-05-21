@@ -19,6 +19,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.16",
     "@rneui/themed": "^4.0.0-rc.8",
+    "buffer": "^6.0.3",
     "date-fns": "^2.30.0",
     "deep-equal": "^2.2.3",
     "expo": "^51.0.0",
