@@ -18,116 +18,11 @@ import fondoHome from "../.././../assets/fondoHome.jpg";
 import logo from "../../../assets/credicheck.png";
 
 import * as XLSX from "xlsx";
-
-// import * as FileSystem from "expo-file-system";
-// import { shareAsync } from "expo-sharing";
-// const downloadFromUrl = async () => {
-//   const filename = "smaill.mp4";
-//   FileSystem.downloadAsync;
-//   const result = await FileSystem.downloadAsync();
-//   console.log(result);
-//   save(result.uri);
-// };
-// const save = () => {
-//   shareAsync(uri);
-// };
-// const [download, setDownload] = useState();
-// const descarga = async () => {
-//   const { uri } = await download.downloadAsync();
-//   console.log(uri);
-// };
-
 import * as Sharing from "expo-sharing";
 import * as FileSystem from "expo-file-system";
+//import * as FileSystem from "expo-file-system";
+import { shareAsync } from "expo-sharing";
 
-const ciudades = [
-  {
-    ciudad: "Ciudad de México",
-    población: 852145,
-    entidad: "Ciudad de México",
-    país: "México",
-  },
-  {
-    ciudad: "Lima",
-    población: 252145,
-    entidad: "Lima",
-    país: "Perú",
-  },
-  {
-    ciudad: "Santiago",
-    población: 102145,
-    entidad: "Santiago",
-    país: "Chile",
-  },
-];
-const shareCSVFile = async () => {
-  try {
-    // Datos CSV de ejemplo
-    const csvData = "Nombre,Apellido,Edad\nJohn,Doe,30\nJane,Smith,25\n";
-
-    // Guardar el archivo CSV en el sistema de archivos local del dispositivo
-    const fileUri = `${FileSystem.documentDirectory}data.csv`;
-    console.log(fileUri);
-    await FileSystem.writeAsStringAsync(fileUri, csvData, {
-      encoding: FileSystem.EncodingType.UTF8,
-    });
-
-    // Compartir el archivo utilizando expo-sharing
-    await Sharing.shareAsync(fileUri, {
-      mimeType: "text/csv",
-      dialogTitle: "Compartir archivo CSV",
-    });
-
-    console.log("Archivo CSV compartido correctamente");
-  } catch (error) {
-    console.error("Error al compartir el archivo CSV:", error);
-  }
-};
-//! esta parte esta para corregir
-const handleExportToExcel = () => {
-  const data = [
-    { name: "John", age: 30, city: "New York" },
-    { name: "Jane", age: 25, city: "San Francisco" },
-    { name: "Bob", age: 35, city: "Los Angeles" },
-  ];
-
-  const worksheet = XLSX.utils.json_to_sheet(data);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-  // Generar un blob a partir del libro de trabajo
-  // const fileUri = `${FileSystem.documentDirectory}excel`;
-  // console.log(fileUri);
-  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
-  const blob = new Blob([excelBuffer], {
-    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  });
-
-  // Crear un objeto URL desde el blob
-  const url = URL.createObjectURL(blob);
-
-  // Crear un enlace para descargar el archivo Excel
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "data.xlsx";
-  link.click();
-
-  // Liberar el objeto URL creado
-  URL.revokeObjectURL(url);
-};
-//! hasta aqui
-// Llama a la función para compartir el archivo CSV
-//shareCSVFile();
-//!! ESTA PARA PROBAR ESTA FUNCION, NO SE QUE DARA?
-//import ExportExcel from "react-export-excel"; //!
-//import React from "react";
-// import ReactExport from "react-export-excel";
-
-// const ExcelFile = ReactExport.ExcelFile;
-// const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-// const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
-
-// este es un ejemplo que ayudara para verificar los cambios
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
   const { onGetConfiguration } = UseStorageConfiguration();
@@ -135,24 +30,12 @@ const Home = () => {
   const [enable, setEnable] = useState(false); // Para visualizar los cambios en el home
   const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
   const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
-
+  const data = [
+    { name: "John", age: 30, city: "New York" },
+    { name: "Jane", age: 25, city: "Los Angeles" },
+    { name: "Peter", age: 40, city: "Chicago" },
+  ];
   //TODO
-  const generateExcel = () => {
-    let wb = XLSX.utils.book_new();
-    let ws = XLSX.utils.aoa_to_sheet([
-      ["Name", "Age", "City"],
-      ["John Doe", 30, "New York"],
-      ["Jane Doe", 25, "Los Angeles"],
-    ]);
-    XLSX.utils.book_append_sheet(wb, ws, "firstSheet", true);
-    const base64 = XLSX.write(wb, { type: "base64" });
-    const filename = FileSystem.documentDirectory + "myExcel";
-    FileSystem.writeAsStringAsync(filename, base64, {
-      encoding: FileSystem.EncodingType.Base64,
-    }).then(() => {
-      Sharing.shareAsync(filename);
-    });
-  };
 
   //TODO
   // Cargar los datos de la financiera
@@ -197,12 +80,6 @@ const Home = () => {
     }, [enable])
   );
 
-  //! EXPORTAR UN ARCHIVO EXCEL
-
-  // const ExcelFile = ExportExcel.ExcelFile;
-  // const ExcelSheet = ExportExcel.ExcelSheet;
-  // const ExcelColumn = ExportExcel.ExcelColumn;
-
   return (
     <ImageBackground source={fondoHome} style={styles.background}>
       {/* HEADER */}
@@ -220,19 +97,8 @@ const Home = () => {
           />
         </Pressable>
       </View>
-      <Button title="Download From URL" onPress={generateExcel}></Button>
-      {/* 
-      <ExcelFile
-        element={<Button> Exportar a Excel</Button>}
-        filename="Ciudades"
-      >
-        <ExcelSheet data={ciudades} name="Ciudades pobladas">
-          <ExcelColumn label="ciudad" Value="ciudad" />
-          <ExcelColumn label="población" Value="población" />
-          <ExcelColumn label="entidad" Value="entidad" />
-          <ExcelColumn label="país" Value="país" />
-        </ExcelSheet>
-      </ExcelFile> */}
+      {/* <Button title="Download From URL" onPress={handleExportToExcel}></Button> */}
+
       {/* MODAL OPCIONES */}
       <ModalConfigPersonal
         visible={isVisible}
