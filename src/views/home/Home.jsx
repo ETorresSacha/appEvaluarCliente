@@ -32,6 +32,8 @@ const Home = () => {
   const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
 
   //TODO
+  //! VAMOS A ELIMINAR LIBRERIAS QUE ESTAN DE MAS, TAMBIEN VAMOS A ORDENAR EL CODIGO Y UBICAR UNA POSICION DE DONDE EXPORTAREMOS
+  //! DESPUES BUSCAMOS LA FOR DE IMPORTAR EL EXCEL DE CUALQUIER PARTE Y HACEMOS QUE LEA CORRECTAMENTE LA APLICACION
   const data = [
     { name: "John", age: 30, city: "New York" },
     { name: "Jane", age: 25, city: "Los Angeles" },
@@ -166,7 +168,6 @@ const Home = () => {
 
       {/* ITEMS DE LAS OPCIONES */}
       <ItemsHome dataConfiguration={dataConfiguration} />
-      {/* </View> */}
     </ImageBackground>
   );
 };
