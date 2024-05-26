@@ -8,6 +8,8 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
+import ExportarData from "./ExportarData";
+import ImportarData from "./ImportarData";
 
 const optionsData = ["Exportar Data", "Importar Data"];
 
@@ -18,11 +20,10 @@ const ModalOptionsCustomer = ({ visible, setIsVisible }) => {
   const options = (value) => {
     switch (value) {
       case "Exportar Data":
-        setEnableNeg(true);
+        setExportData(true);
         break;
       case "Importar Data":
-        setEnableConf(true);
-        break;
+        setImportData(true);
         break;
     }
     setIsVisible(false);
@@ -48,6 +49,10 @@ const ModalOptionsCustomer = ({ visible, setIsVisible }) => {
           })}
         </View>
       </Modal>
+
+      {/* MODALES DE LAS OPCIONES */}
+      <ExportarData exportData={exportData} setExportData={setExportData} />
+      <ImportarData importData={importData} setImportData={setImportData} />
     </View>
   );
 };
