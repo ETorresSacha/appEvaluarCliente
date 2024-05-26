@@ -14,7 +14,7 @@ import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptions
 const Header = ({ title, dataConfiguration, back, id, enable }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
-
+  console.log(title);
   return (
     <View style={styles.conteiner}>
       {/* Retornar */}
@@ -43,26 +43,20 @@ const Header = ({ title, dataConfiguration, back, id, enable }) => {
       </View>
 
       {/* Opciones para exportar e importar data */}
-      <Pressable
-        style={styles.optionsCustomer}
-        onPress={() => setIsVisible(true)}
-      >
-        <SimpleLineIcons
-          name="options-vertical"
-          style={{ color: "cornsilk", fontSize: 25 }}
-        />
-      </Pressable>
+      {title == "Clientes" ? (
+        <Pressable
+          style={styles.optionsCustomer}
+          onPress={() => setIsVisible(true)}
+        >
+          <SimpleLineIcons
+            name="options-vertical"
+            style={{ color: "cornsilk", fontSize: 25 }}
+          />
+        </Pressable>
+      ) : null}
 
       {/* Modal opciones */}
       <ModalOptionsCustomer visible={isVisible} setIsVisible={setIsVisible} />
-      {/* <ModalConfigPersonal
-        visible={isVisible}
-        onClose={handleModalClose}
-        setDataHome={setDataBusiness}
-        setEnable={setEnable}
-        dataConfiguration={dataConfiguration}
-        setDataConfiguration={setDataConfiguration}
-      /> */}
     </View>
   );
 };
