@@ -14,7 +14,7 @@ import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptions
 const Header = ({ title, dataConfiguration, back, id, enable }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
-  console.log(title);
+
   return (
     <View style={styles.conteiner}>
       {/* Retornar */}

@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "rgba(6, 18, 20, 0.836)",
-    borderRadius: 2,
     borderColor: "white",
     position: "absolute",
     top: "30%",
