@@ -13,8 +13,8 @@ import ImportarData from "./ImportarData";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const optionsData = [
-  { name: "Exportar Data", symbolName: "database-export" },
-  { name: "Importar Data", symbolName: "database-import" },
+  { name: "Exportar Data", symbolName: "database-arrow-right" },
+  { name: "Importar Data", symbolName: "database-arrow-left" },
 ];
 
 const ModalOptionsCustomer = ({ visible, setIsVisible }) => {
@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "white",
-    padding: 5,
+    paddingRight: 7,
+    paddingBottom: 7,
     position: "absolute",
     top: "1%",
     right: "1%",
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "white",
     alignSelf: "flex-end",
+    paddingLeft: 2,
   },
   optionsDataStyle: {
     borderRadius: 2,
