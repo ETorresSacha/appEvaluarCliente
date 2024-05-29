@@ -6,7 +6,6 @@ import {
   Pressable,
   Image,
   ImageBackground,
-  Button,
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import ItemsHome from "../../components/itemsHome/ItemsHome";
@@ -17,12 +16,6 @@ import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration
 import fondoHome from "../.././../assets/fondoHome.jpg";
 import logo from "../../../assets/credicheck.png";
 
-import * as XLSX from "xlsx";
-import * as Sharing from "expo-sharing";
-import * as FileSystem from "expo-file-system";
-import { Base64 } from "js-base64";
-import { Buffer } from "buffer";
-
 const Home = () => {
   const { onGetBusiness } = UseStorageBusiness();
   const { onGetConfiguration } = UseStorageConfiguration();
@@ -31,54 +24,6 @@ const Home = () => {
   const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
   const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
 
-  //TODO
-  //! VAMOS A ELIMINAR LIBRERIAS QUE ESTAN DE MAS, TAMBIEN VAMOS A ORDENAR EL CODIGO Y UBICAR UNA POSICION DE DONDE EXPORTAREMOS
-  //! DESPUES BUSCAMOS LA FOR DE IMPORTAR EL EXCEL DE CUALQUIER PARTE Y HACEMOS QUE LEA CORRECTAMENTE LA APLICACION
-  const data = [
-    { name: "John", age: 30, city: "New York" },
-    { name: "Jane", age: 25, city: "Los Angeles" },
-    { name: "Peter", age: 40, city: "Chicago" },
-  ];
-
-  const createExcel = async () => {
-    // Convertir el array de objetos a un array de arrays
-    const worksheetData = [
-      Object.keys(data[0]), // Encabezados
-      ...data.map((item) => Object.values(item)), // Filas de datos
-    ];
-
-    // Crear una nueva hoja de cálculo
-    const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-
-    // Crear un nuevo libro de trabajo
-    const workbook = XLSX.utils.book_new();
-
-    // Añadir la hoja de cálculo al libro de trabajo
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-    // Generar el archivo Excel en formato binario
-    const excelBinary = XLSX.write(workbook, {
-      type: "binary",
-      bookType: "xlsx",
-    });
-
-    // Convertir el binario a un buffer
-    const buffer = Buffer.from(excelBinary, "binary");
-
-    // Convertir el buffer a una cadena base64
-    const excelBase64 = buffer.toString("base64");
-
-    // Guardar el archivo en el sistema de archivos
-    const filePath = FileSystem.documentDirectory + "data.xlsx";
-    await FileSystem.writeAsStringAsync(filePath, excelBase64, {
-      encoding: FileSystem.EncodingType.Base64,
-    });
-
-    // Compartir el archivo
-    await Sharing.shareAsync(filePath);
-  };
-
-  //TODO
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
     try {
@@ -138,7 +83,6 @@ const Home = () => {
           />
         </Pressable>
       </View>
-      <Button title="Download From URL" onPress={createExcel}></Button>
 
       {/* MODAL OPCIONES */}
       <ModalConfigPersonal

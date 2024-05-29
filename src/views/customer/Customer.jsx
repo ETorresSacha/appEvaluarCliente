@@ -11,6 +11,13 @@ import DataCustomer from "./DataCustomer";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import Alerta from "../alert/Alerta";
 
+// este array solo es prueba, se eliminará
+const dataExcel = [
+  { name: "John", age: 30, city: "New York" },
+  { name: "Jane", age: 25, city: "Los Angeles" },
+  { name: "Peter", age: 40, city: "Chicago" },
+];
+
 const Customer = ({ enable }) => {
   const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
@@ -92,7 +99,10 @@ const Customer = ({ enable }) => {
 
   return (
     <View style={styles.container}>
-      <Header title={!enable ? "Clientes" : "Clientes cancelados"} />
+      <Header
+        title={!enable ? "Clientes" : "Clientes cancelados"}
+        dataExcel={!enable ? dataExcel : null}
+      />
       <NavBar
         data={data}
         setData={setData}

@@ -7,24 +7,24 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import ExportarData from "./ExportarData";
 import ImportarData from "./ImportarData";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { createExcel } from "./createExcel";
 
 const optionsData = [
-  { name: "Exportar Data", symbolName: "database-export" },
-  { name: "Importar Data", symbolName: "database-import" },
+  { name: "Exportar Data", symbolName: "database-arrow-right" },
+  { name: "Importar Data", symbolName: "database-arrow-left" },
 ];
 
-const ModalOptionsCustomer = ({ visible, setIsVisible }) => {
-  const [exportData, setExportData] = useState(false);
+const ModalOptionsCustomer = ({ visible, setIsVisible, dataExcel }) => {
   const [importData, setImportData] = useState(false);
 
   const options = (value) => {
     switch (value) {
       case "Exportar Data":
-        setExportData(true);
+        //! NOTA: tener en cuenta que debemos de eliminar el modal exportData.jsx (si no es necesario)
+        createExcel(dataExcel);
         break;
       case "Importar Data":
         setImportData(true);
@@ -64,7 +64,6 @@ const ModalOptionsCustomer = ({ visible, setIsVisible }) => {
       </Modal>
 
       {/* MODALES DE LAS OPCIONES */}
-      <ExportarData exportData={exportData} setExportData={setExportData} />
       <ImportarData importData={importData} setImportData={setImportData} />
     </View>
   );
@@ -81,7 +80,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "white",
-    padding: 5,
+    paddingRight: 7,
+    paddingBottom: 7,
     position: "absolute",
     top: "1%",
     right: "1%",
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "white",
     alignSelf: "flex-end",
+    paddingLeft: 2,
   },
   optionsDataStyle: {
     borderRadius: 2,
