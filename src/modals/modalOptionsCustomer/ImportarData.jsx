@@ -9,6 +9,7 @@ import {
   Alert,
 } from "react-native";
 import React from "react";
+import ImportExcel from "./importExcel";
 
 const ImportarData = ({ importData, setImportData }) => {
   return (
@@ -22,6 +23,7 @@ const ImportarData = ({ importData, setImportData }) => {
       </TouchableWithoutFeedback>
       <View style={styles.modalContent}>
         <Text>Import data</Text>
+        <ImportExcel />
       </View>
     </Modal>
   );
