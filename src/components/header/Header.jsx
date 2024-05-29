@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptionsCustomer";
 
-const Header = ({ title, dataConfiguration, back, id, enable }) => {
+const Header = ({ title, dataConfiguration, back, id, enable, dataExcel }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
 
@@ -55,8 +55,12 @@ const Header = ({ title, dataConfiguration, back, id, enable }) => {
         </Pressable>
       ) : null}
 
-      {/* Modal opciones */}
-      <ModalOptionsCustomer visible={isVisible} setIsVisible={setIsVisible} />
+      {/* Modal opciones para exportar e importar data*/}
+      <ModalOptionsCustomer
+        visible={isVisible}
+        setIsVisible={setIsVisible}
+        dataExcel={dataExcel}
+      />
     </View>
   );
 };
