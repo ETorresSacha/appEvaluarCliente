@@ -16,6 +16,7 @@ const dataExcel = [
   { name: "John", age: 30, city: "New York" },
   { name: "Jane", age: 25, city: "Los Angeles" },
   { name: "Peter", age: 40, city: "Chicago" },
+  { name: "Erik", age: 32, city: "Perú" },
 ];
 
 const Customer = ({ enable }) => {

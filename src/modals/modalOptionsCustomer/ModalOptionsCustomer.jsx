@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import ImportarData from "./ImportarData";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { createExcel } from "./createExcel";
+import { createExcel } from "./exportExcel";
 
 const optionsData = [
   { name: "Exportar Data", symbolName: "database-arrow-right" },
