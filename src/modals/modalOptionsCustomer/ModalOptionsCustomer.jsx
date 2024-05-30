@@ -6,20 +6,22 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import ImportarData from "./ImportarData";
-
+import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { createExcel } from "./exportExcel";
+import { importExcel } from "./importExcel";
 
 const optionsData = [
   { name: "Exportar Data", symbolName: "database-arrow-right" },
   { name: "Importar Data", symbolName: "database-arrow-left" },
 ];
 
-const ModalOptionsCustomer = ({ visible, setIsVisible, dataExcel }) => {
-  const [importData, setImportData] = useState(false);
-
+const ModalOptionsCustomer = ({
+  visible,
+  setIsVisible,
+  dataExcel,
+  setDataImport,
+}) => {
   const options = (value) => {
     switch (value) {
       case "Exportar Data":
@@ -27,7 +29,7 @@ const ModalOptionsCustomer = ({ visible, setIsVisible, dataExcel }) => {
         createExcel(dataExcel);
         break;
       case "Importar Data":
-        setImportData(true);
+        importExcel(setDataImport);
         break;
     }
     setIsVisible(false);
@@ -62,9 +64,6 @@ const ModalOptionsCustomer = ({ visible, setIsVisible, dataExcel }) => {
           })}
         </View>
       </Modal>
-
-      {/* MODALES DE LAS OPCIONES */}
-      <ImportarData importData={importData} setImportData={setImportData} />
     </View>
   );
 };
