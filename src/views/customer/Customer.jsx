@@ -20,6 +20,10 @@ const dataExcel = [
 ];
 
 const Customer = ({ enable }) => {
+  //! PRUEBA PARA IMPORT DATA, ESTA PARA CAMBIAR
+  const [dataImport, setDataImport] = useState([]); //TODO--> Sirve para importar la data y los guarda en esta constante
+  console.log(dataImport);
+  //!
   const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
@@ -103,6 +107,7 @@ const Customer = ({ enable }) => {
       <Header
         title={!enable ? "Clientes" : "Clientes cancelados"}
         dataExcel={!enable ? dataExcel : null}
+        setDataImport={!enable ? setDataImport : null}
       />
       <NavBar
         data={data}

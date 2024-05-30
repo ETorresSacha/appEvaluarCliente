@@ -11,7 +11,15 @@ import { useNavigation } from "@react-navigation/native";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptionsCustomer";
 
-const Header = ({ title, dataConfiguration, back, id, enable, dataExcel }) => {
+const Header = ({
+  title,
+  dataConfiguration,
+  back,
+  id,
+  enable,
+  dataExcel,
+  setDataImport,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
 
@@ -60,6 +68,7 @@ const Header = ({ title, dataConfiguration, back, id, enable, dataExcel }) => {
         visible={isVisible}
         setIsVisible={setIsVisible}
         dataExcel={dataExcel}
+        setDataImport={setDataImport}
       />
     </View>
   );
