@@ -22,8 +22,12 @@ const dataExcel = [
 const Customer = ({ enable }) => {
   //! PRUEBA PARA IMPORT DATA, ESTA PARA CAMBIAR
   const [dataImport, setDataImport] = useState([]); //TODO--> Sirve para importar la data y los guarda en esta constante
-  console.log(dataImport);
+
+  // dataImport.map(
+  //   (element) => (element.resultPrestamo = JSON.parse(element?.resultPrestamo))
+  // );
   //!
+  console.log(dataImport);
   const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
@@ -33,6 +37,7 @@ const Customer = ({ enable }) => {
     dataResult: [],
     dataResultCopy: [],
   });
+  //console.log(data.dataResult);
   const [customer, SetCustomer] = useState({
     customerGreen: [],
     customerYellow: [],
@@ -106,7 +111,7 @@ const Customer = ({ enable }) => {
     <View style={styles.container}>
       <Header
         title={!enable ? "Clientes" : "Clientes cancelados"}
-        dataExcel={!enable ? dataExcel : null}
+        dataExcelExport={!enable ? data?.dataResult : null}
         setDataImport={!enable ? setDataImport : null}
       />
       <NavBar

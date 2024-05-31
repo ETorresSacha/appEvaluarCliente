@@ -17,7 +17,7 @@ const Header = ({
   back,
   id,
   enable,
-  dataExcel,
+  dataExcelExport,
   setDataImport,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -67,7 +67,7 @@ const Header = ({
       <ModalOptionsCustomer
         visible={isVisible}
         setIsVisible={setIsVisible}
-        dataExcel={dataExcel}
+        dataExcelExport={dataExcelExport}
         setDataImport={setDataImport}
       />
     </View>

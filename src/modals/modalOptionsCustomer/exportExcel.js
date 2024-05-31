@@ -5,6 +5,9 @@ import { Base64 } from "js-base64";
 import { Buffer } from "buffer";
 
 export const createExcel = async (data) => {
+
+    data.map((element)=> element.resultPrestamo=JSON.stringify(element?.resultPrestamo))
+
     // Convertir el array de objetos a un array de arrays
     const worksheetData = [
       Object.keys(data[0]), // Encabezados
