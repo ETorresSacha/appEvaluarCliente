@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { createExcel } from "./exportExcel";
 import { importExcel } from "./importExcel";
@@ -19,14 +19,14 @@ const optionsData = [
 const ModalOptionsCustomer = ({
   visible,
   setIsVisible,
-  dataExcel,
+  dataExcelExport,
   setDataImport,
 }) => {
   const options = (value) => {
     switch (value) {
       case "Exportar Data":
         //! NOTA: tener en cuenta que debemos de eliminar el modal exportData.jsx (si no es necesario)
-        createExcel(dataExcel);
+        createExcel(dataExcelExport);
         break;
       case "Importar Data":
         importExcel(setDataImport);
