@@ -23,11 +23,17 @@ const Customer = ({ enable }) => {
   //! PRUEBA PARA IMPORT DATA, ESTA PARA CAMBIAR
   const [dataImport, setDataImport] = useState([]); //TODO--> Sirve para importar la data y los guarda en esta constante
 
-  // dataImport.map(
-  //   (element) => (element.resultPrestamo = JSON.parse(element?.resultPrestamo))
-  // );
+  dataImport.map((element) => {
+    element.resultPrestamo = element?.resultPrestamo.replace(/\\/g, "");
+    element.resultPrestamo = element?.resultPrestamo.slice(1, -1);
+    return (element.resultPrestamo = element?.resultPrestamo.slice(1, -1));
+  });
+
+  dataImport.map(
+    (element) => (element.resultPrestamo = JSON.parse(element?.resultPrestamo))
+  );
   //!
-  console.log(dataImport);
+  console.log(typeof dataImport[0]?.resultPrestamo);
   const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
@@ -37,7 +43,7 @@ const Customer = ({ enable }) => {
     dataResult: [],
     dataResultCopy: [],
   });
-  //console.log(data.dataResult);
+  //console.log(data.dataResult[0]?.resultPrestamo);
   const [customer, SetCustomer] = useState({
     customerGreen: [],
     customerYellow: [],
