@@ -21,6 +21,7 @@ const ModalOptionsCustomer = ({
   setIsVisible,
   dataExcelExport,
   setDataImport,
+  setValueImport,
 }) => {
   const options = (value) => {
     switch (value) {
@@ -29,7 +30,8 @@ const ModalOptionsCustomer = ({
         createExcel(dataExcelExport);
         break;
       case "Importar Data":
-        importExcel(setDataImport);
+        setValueImport(true);
+        //importExcel(setDataImport);
         break;
     }
     setIsVisible(false);

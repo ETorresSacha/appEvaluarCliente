@@ -19,6 +19,7 @@ const Header = ({
   enable,
   dataExcelExport,
   setDataImport,
+  setValueImport,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
@@ -69,6 +70,7 @@ const Header = ({
         setIsVisible={setIsVisible}
         dataExcelExport={dataExcelExport}
         setDataImport={setDataImport}
+        setValueImport={setValueImport}
       />
     </View>
   );
