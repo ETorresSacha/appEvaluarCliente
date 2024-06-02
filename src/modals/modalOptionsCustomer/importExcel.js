@@ -1,7 +1,8 @@
 import * as DocumentPicker from 'expo-document-picker';
 import * as XLSX from 'xlsx';
+import { editImportData } from '../../views/customer/editImportData';
 
-export const importExcel = async (setData) => {
+export const importExcel = async (setDataImport) => {
   try {
     // Permitir al usuario seleccionar un archivo
     const result = await DocumentPicker.getDocumentAsync({
@@ -28,7 +29,10 @@ export const importExcel = async (setData) => {
       // Convertir el primer sheet a JSON
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(worksheet);
-      setData(json);
+      //setDataImport(json);
+      //console.log(json);
+      setDataImport(editImportData(json))
+
     };
     reader.readAsArrayBuffer(blob);
   } catch (error) {
