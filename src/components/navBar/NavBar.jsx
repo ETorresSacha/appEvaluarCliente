@@ -8,6 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Entypo from "@expo/vector-icons/Entypo";
 
 const NavBar = ({ data, setData, enable, dataConfiguration }) => {
   const navigation = useNavigation();
@@ -68,6 +69,7 @@ const NavBar = ({ data, setData, enable, dataConfiguration }) => {
       </View>
       {!enable ? (
         <TouchableOpacity style={styles.button} onPress={handleAddPress}>
+          <Entypo name="add-user" size={25} color="white" />
           <Text style={styles.text}>Nuevo</Text>
         </TouchableOpacity>
       ) : null}
@@ -97,17 +99,15 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    width: 80,
-    height: 40,
+    width: 50,
+    height: 50,
     justifyContent: "center",
-    paddingHorizontal: 10,
     borderRadius: 10,
     elevation: 3,
     backgroundColor: "orange",
   },
   text: {
-    fontSize: 17,
-    lineHeight: 21,
+    fontSize: 10,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
