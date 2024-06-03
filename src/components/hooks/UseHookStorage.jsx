@@ -34,7 +34,7 @@ const UseStorage = () => {
   //! POST AND UPDATE CUSTOMER
   const handleSaveCronograma = async (dataPerson, editValue) => {
     let indice;
-
+    console.log("data person" + dataPerson);
     try {
       // Editar
       if (editValue) {

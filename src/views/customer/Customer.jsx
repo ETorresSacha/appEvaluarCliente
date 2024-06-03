@@ -13,7 +13,8 @@ import Alerta from "../alert/Alerta";
 import { editImportData } from "./editImportData";
 import { importExcel } from "../../modals/modalOptionsCustomer/importExcel";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const MY_DATA_KEY = "@data_customerr"; //! tenemos que poner esta variable en ignorar
 // este array solo es prueba, se eliminará
 const dataExcel = [
   { name: "John", age: 30, city: "New York" },
@@ -23,58 +24,7 @@ const dataExcel = [
 ];
 
 const Customer = ({ enable }) => {
-  const { onSaveCronograma } = UseStorageBusiness();
-
-  //! PRUEBA PARA IMPORT DATA, ESTA PARA CAMBIAR
-  const [dataImport, setDataImport] = useState([]); //TODO--> Sirve para importar la data y los guarda en esta constante
-  const [valueImport, setValueImport] = useState(false);
-  // dataImport.map((element) => {
-  //   element.resultPrestamo = element?.resultPrestamo.replace(/\\/g, "");
-  //   element.resultPrestamo = element?.resultPrestamo.slice(1, -1);
-  //   return (element.resultPrestamo = element?.resultPrestamo.slice(1, -1));
-  // });
-
-  // dataImport.map(
-  //   (element) => (element.resultPrestamo = JSON.parse(element?.resultPrestamo))
-  // );
-  useFocusEffect(
-    React.useCallback(() => {
-      if (valueImport) {
-        if (data.dataResult.length == 0) {
-          importExcel(setDataImport);
-        } else {
-          Alert.alert(
-            "¡ALERTA!",
-            "Existen datos guardados. Si continúa, se borrarán los datos actuales.",
-            [
-              {
-                text: "Si",
-                //! CUANDO EXISTEN DATOS EN LA APLICACION, Y SE QUIERE IMPORTAR DATOS,
-                //!DEBE DAR UN AVISO QUE SE BORRARAN TODOS, CUANDO SE EJECUTA PRIMERO DEBE DE ELIMINAR
-                //! TODOS LOS DATOS Y DESPUES SETEAR EL ESTADO PARA FINALMENTE GUARDAR TODOS LOS DATOS EN EL STORAGE
-                onPress: async () => {
-                  importExcel(setDataImport);
-                },
-                style: "destructive",
-              },
-              {
-                text: "No",
-                style: "destructive",
-              },
-            ]
-          );
-        }
-        setValueImport(false);
-      }
-
-      //return () => unsubscribe();
-    }, [valueImport])
-  );
-  //!
-  // console.log(valueImport);
-  // console.log(dataImport);
-  // console.log(typeof dataImport[0]?.resultPrestamo);
-  const { onGetCronograma } = UseStorage();
+  const { onGetCronograma, onSaveCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
   const [day, setDay] = useState("");
@@ -83,7 +33,7 @@ const Customer = ({ enable }) => {
     dataResult: [],
     dataResultCopy: [],
   });
-  console.log(data.dataResult);
+
   const [customer, SetCustomer] = useState({
     customerGreen: [],
     customerYellow: [],
@@ -107,6 +57,49 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
+
+  //! PRUEBA PARA IMPORT DATA, ESTA PARA CAMBIAR
+  const [dataImport, setDataImport] = useState([]); //TODO--> Sirve para importar la data y los guarda en esta constante
+  const [valueImport, setValueImport] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (valueImport) {
+        if (data.dataResult == undefined) {
+          importExcel(setDataImport);
+          //onSaveCronograma(dataImport);
+        } else {
+          Alert.alert(
+            "¡ALERTA!",
+            "Existen datos guardados. Si continúa, se borrarán los datos actuales.",
+            [
+              {
+                text: "Si",
+                //! CUANDO EXISTEN DATOS EN LA APLICACION, Y SE QUIERE IMPORTAR DATOS,
+                //!DEBE DAR UN AVISO QUE SE BORRARAN TODOS, CUANDO SE EJECUTA PRIMERO DEBE DE ELIMINAR
+                //! TODOS LOS DATOS Y DESPUES SETEAR EL ESTADO PARA FINALMENTE GUARDAR TODOS LOS DATOS EN EL STORAGE
+                onPress: async () => {
+                  await AsyncStorage.clear();
+                  importExcel(setDataImport);
+                  //!NOTA: tengo que crear una nuevo hook que ayude a guardar todos loas datos en el storage
+                  //onSaveCronograma(dataImport);
+                },
+                style: "destructive",
+              },
+              {
+                text: "No",
+                style: "destructive",
+              },
+            ]
+          );
+        }
+        setValueImport(false);
+      }
+
+      //return async () => await onSaveCronograma(dataImport);
+    }, [valueImport, data])
+  );
+  //!
 
   // clasificación de los clientes de acuerdo a la fecha de pago
   const resultCustomer = () => {

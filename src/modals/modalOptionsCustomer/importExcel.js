@@ -8,8 +8,8 @@ export const importExcel = async (setDataImport) => {
     const result = await DocumentPicker.getDocumentAsync({
       type: ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'],
     });
-
-    if (result.type === 'cancel') {
+    
+    if (result.canceled === true) {
       console.log('User cancelled the picker');
       return;
     }
@@ -29,8 +29,8 @@ export const importExcel = async (setDataImport) => {
       // Convertir el primer sheet a JSON
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(worksheet);
-      //setDataImport(json);
-      //console.log(json);
+
+      // Edita los valores que son de tipo string a json
       setDataImport(editImportData(json))
 
     };
