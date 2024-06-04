@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
-import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptionsCustomer";
+import Entypo from "@expo/vector-icons/Entypo";
 
 const Header = ({
   title,
@@ -40,10 +35,7 @@ const Header = ({
             : navigation.navigate(back ? back : "Home")
         }
       >
-        <AntDesign
-          name="arrowleft"
-          style={{ color: "cornsilk", fontSize: 40 }}
-        />
+        <Entypo name="reply" style={{ color: "cornsilk", fontSize: 35 }} />
       </TouchableOpacity>
 
       {/* Title */}
@@ -53,15 +45,16 @@ const Header = ({
 
       {/* Opciones para exportar e importar data */}
       {title == "Clientes" ? (
-        <Pressable
+        <TouchableOpacity
           style={styles.optionsCustomer}
           onPress={() => setIsVisible(true)}
         >
-          <SimpleLineIcons
-            name="options-vertical"
-            style={{ color: "cornsilk", fontSize: 25 }}
+          <MaterialCommunityIcons
+            name="database"
+            size={40}
+            color="rgb(36, 224, 221)"
           />
-        </Pressable>
+        </TouchableOpacity>
       ) : null}
 
       {/* Modal opciones para exportar e importar data*/}

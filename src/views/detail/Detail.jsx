@@ -15,6 +15,7 @@ import Pay from "../../components/pay/Pay";
 import Notification from "../../components/notification/Notification";
 import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
+import Entypo from "@expo/vector-icons/Entypo";
 
 const Detail = (props) => {
   const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
@@ -101,7 +102,7 @@ const Detail = (props) => {
                       style={styles.icon}
                       onPress={() => edit(user)}
                     >
-                      <Icon name="edit" size={30} color="cornsilk" />
+                      <Entypo name="feather" size={30} color="cornsilk" />
                     </TouchableOpacity>
                   )}
                   <TouchableOpacity
