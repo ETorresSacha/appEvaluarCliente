@@ -10,11 +10,8 @@ import Loading from "../../components/loading/Loading";
 import DataCustomer from "./DataCustomer";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import Alerta from "../alert/Alerta";
-import { editImportData } from "./editImportData";
-import { importExcel } from "../../modals/modalOptionsCustomer/importExcel";
-import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-const MY_DATA_KEY = "@data_customerr"; //! tenemos que poner esta variable en ignorar
+import { renderImportData } from "./renderImportData";
+
 // este array solo es prueba, se eliminará
 const dataExcel = [
   { name: "John", age: 30, city: "New York" },
@@ -24,7 +21,7 @@ const dataExcel = [
 ];
 
 const Customer = ({ enable }) => {
-  const { onGetCronograma, onSaveCronograma } = UseStorage();
+  const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
   const [day, setDay] = useState("");
@@ -33,7 +30,6 @@ const Customer = ({ enable }) => {
     dataResult: [],
     dataResultCopy: [],
   });
-
   const [customer, SetCustomer] = useState({
     customerGreen: [],
     customerYellow: [],
@@ -42,64 +38,35 @@ const Customer = ({ enable }) => {
     customerCancelled: [],
     dataResult: [],
   });
+  const [dataImport, setDataImport] = useState([]); // Necesario para importar la data
+  const [valueImport, setValueImport] = useState(false); // Necesario para importar la data
 
   // Traer los datos del local storage
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-
       setData({
         ...data,
-        dataResult: resultCustomer, // == undefined ? data.dataResult : resultCustomer,
-        dataResultCopy: resultCustomer, //== undefined ? data.dataResult : resultCustomer,
+        dataResult: resultCustomer,
+        dataResultCopy: resultCustomer,
       });
     } catch (error) {
       console.error(error);
     }
   };
 
-  //! PRUEBA PARA IMPORT DATA, ESTA PARA CAMBIAR
-  const [dataImport, setDataImport] = useState([]); //TODO--> Sirve para importar la data y los guarda en esta constante
-  const [valueImport, setValueImport] = useState(false);
-
+  // Importar data
   useFocusEffect(
     React.useCallback(() => {
-      if (valueImport) {
-        if (data.dataResult == undefined) {
-          importExcel(setDataImport);
-          //onSaveCronograma(dataImport);
-        } else {
-          Alert.alert(
-            "¡ALERTA!",
-            "Existen datos guardados. Si continúa, se borrarán los datos actuales.",
-            [
-              {
-                text: "Si",
-                //! CUANDO EXISTEN DATOS EN LA APLICACION, Y SE QUIERE IMPORTAR DATOS,
-                //!DEBE DAR UN AVISO QUE SE BORRARAN TODOS, CUANDO SE EJECUTA PRIMERO DEBE DE ELIMINAR
-                //! TODOS LOS DATOS Y DESPUES SETEAR EL ESTADO PARA FINALMENTE GUARDAR TODOS LOS DATOS EN EL STORAGE
-                onPress: async () => {
-                  await AsyncStorage.clear();
-                  importExcel(setDataImport);
-                  //!NOTA: tengo que crear una nuevo hook que ayude a guardar todos loas datos en el storage
-                  //onSaveCronograma(dataImport);
-                },
-                style: "destructive",
-              },
-              {
-                text: "No",
-                style: "destructive",
-              },
-            ]
-          );
-        }
-        setValueImport(false);
-      }
-
-      //return async () => await onSaveCronograma(dataImport);
-    }, [valueImport, data])
+      renderImportData(
+        valueImport,
+        setValueImport,
+        data,
+        dataImport,
+        setDataImport
+      );
+    }, [valueImport, dataImport])
   );
-  //!
 
   // clasificación de los clientes de acuerdo a la fecha de pago
   const resultCustomer = () => {
