@@ -14,7 +14,7 @@ import { editImportData } from "./editImportData";
 import { importExcel } from "../../modals/modalOptionsCustomer/importExcel";
 import UseStorageBusiness from "../../components/hooks/UseHookDataNeg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const MY_DATA_KEY = "@data_customerr"; //! tenemos que poner esta variable en ignorar
+//const MY_DATA_KEY = "@data_customerr"; //! tenemos que poner esta variable en ignorar
 // este array solo es prueba, se eliminará
 const dataExcel = [
   { name: "John", age: 30, city: "New York" },
@@ -47,7 +47,7 @@ const Customer = ({ enable }) => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
-
+      //console.log(resultCustomer);
       setData({
         ...data,
         dataResult: resultCustomer, // == undefined ? data.dataResult : resultCustomer,
@@ -65,9 +65,8 @@ const Customer = ({ enable }) => {
   useFocusEffect(
     React.useCallback(() => {
       if (valueImport) {
-        if (data.dataResult == undefined) {
+        if (data?.dataResult?.length == 0) {
           importExcel(setDataImport);
-          //onSaveCronograma(dataImport);
         } else {
           Alert.alert(
             "¡ALERTA!",
@@ -75,15 +74,7 @@ const Customer = ({ enable }) => {
             [
               {
                 text: "Si",
-                //! CUANDO EXISTEN DATOS EN LA APLICACION, Y SE QUIERE IMPORTAR DATOS,
-                //!DEBE DAR UN AVISO QUE SE BORRARAN TODOS, CUANDO SE EJECUTA PRIMERO DEBE DE ELIMINAR
-                //! TODOS LOS DATOS Y DESPUES SETEAR EL ESTADO PARA FINALMENTE GUARDAR TODOS LOS DATOS EN EL STORAGE
-                onPress: async () => {
-                  await AsyncStorage.clear();
-                  importExcel(setDataImport);
-                  //!NOTA: tengo que crear una nuevo hook que ayude a guardar todos loas datos en el storage
-                  //onSaveCronograma(dataImport);
-                },
+                onPress: async () => importExcel(setDataImport),
                 style: "destructive",
               },
               {
@@ -95,9 +86,13 @@ const Customer = ({ enable }) => {
         }
         setValueImport(false);
       }
+      const saveImport = async () => {
+        await onSaveCronograma(dataImport, "import");
+      };
+      dataImport.length != 0 ? saveImport() : null;
 
       //return async () => await onSaveCronograma(dataImport);
-    }, [valueImport, data])
+    }, [valueImport, dataImport])
   );
   //!
 

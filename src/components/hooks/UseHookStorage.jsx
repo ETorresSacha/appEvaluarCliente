@@ -36,18 +36,24 @@ const UseStorage = () => {
     let indice;
     console.log("data person" + dataPerson);
     try {
-      // Editar
       if (editValue) {
         let resultGet = await handleGetCronograma();
-
-        resultGet?.find((element, index) => {
-          if (element.uuid == dataPerson?.uuid) {
-            indice = index;
-          }
-        });
-        resultGet.splice(indice, 1, dataPerson);
-        await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
-        return Promise.resolve();
+        if (editValue == "import") {
+          // resultGet.splice();
+          await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(dataPerson));
+          return Promise.resolve();
+        }
+        // Editar
+        else {
+          resultGet?.find((element, index) => {
+            if (element.uuid == dataPerson?.uuid) {
+              indice = index;
+            }
+          });
+          resultGet.splice(indice, 1, dataPerson);
+          await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(resultGet));
+          return Promise.resolve();
+        }
       }
 
       // Nuevo cliente
@@ -63,7 +69,7 @@ const UseStorage = () => {
     //await AsyncStorage.clear(MY_DATA_KEY);
     try {
       let result = await AsyncStorage.getItem(MY_DATA_KEY);
-
+      console.log("result" + result);
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
 
