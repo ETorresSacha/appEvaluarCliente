@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
@@ -11,14 +11,6 @@ import DataCustomer from "./DataCustomer";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import Alerta from "../alert/Alerta";
 import { renderImportData } from "./renderImportData";
-
-// este array solo es prueba, se eliminará
-const dataExcel = [
-  { name: "John", age: 30, city: "New York" },
-  { name: "Jane", age: 25, city: "Los Angeles" },
-  { name: "Peter", age: 40, city: "Chicago" },
-  { name: "Erik", age: 32, city: "Perú" },
-];
 
 const Customer = ({ enable }) => {
   const { onGetCronograma } = UseStorage();
@@ -55,7 +47,7 @@ const Customer = ({ enable }) => {
     }
   };
 
-  // Importar data
+  //Importar data
   useFocusEffect(
     React.useCallback(() => {
       renderImportData(
@@ -117,8 +109,6 @@ const Customer = ({ enable }) => {
     <View style={styles.container}>
       <Header
         title={!enable ? "Clientes" : "Clientes cancelados"}
-        dataExcelExport={!enable ? data?.dataResult : null}
-        setDataImport={!enable ? setDataImport : null}
         setValueImport={setValueImport}
       />
       <NavBar

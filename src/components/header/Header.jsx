@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptionsCustomer";
@@ -12,8 +11,6 @@ const Header = ({
   back,
   id,
   enable,
-  dataExcelExport,
-  setDataImport,
   setValueImport,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -61,8 +58,6 @@ const Header = ({
       <ModalOptionsCustomer
         visible={isVisible}
         setIsVisible={setIsVisible}
-        dataExcelExport={dataExcelExport}
-        setDataImport={setDataImport}
         setValueImport={setValueImport}
       />
     </View>

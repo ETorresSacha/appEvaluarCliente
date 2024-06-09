@@ -1,18 +1,24 @@
 import * as XLSX from "xlsx";
 import * as Sharing from "expo-sharing";
 import * as FileSystem from "expo-file-system";
-import { Base64 } from "js-base64";
 import { Buffer } from "buffer";
+import UseStorage from "../../components/hooks/UseHookStorage";
 
-export const createExcel = async (data) => {
+const { onGetCronograma } = UseStorage();
 
-    data.map((element)=> element.resultPrestamo=JSON.stringify(element?.resultPrestamo))
+export const createExcel = async () => {
 
-    // Convertir el array de objetos a un array de arrays
-    const worksheetData = [
-      Object.keys(data[0]), // Encabezados
-      ...data.map((item) => Object.values(item)), // Filas de datos
-    ];
+  // Traemos todos los datos guardados en el storage
+  const resultCustomer = await onGetCronograma();
+
+  // Convertimos el resultPrestamos de cada elemento a un string
+  resultCustomer.map((element)=> element.resultPrestamo=JSON.stringify(element?.resultPrestamo))
+
+  // Convertir el array de objetos a un array de arrays
+  const worksheetData = [
+     Object.keys(resultCustomer[0]), // Encabezados
+    ...resultCustomer.map((item) => Object.values(item)), // Filas de datos
+  ];
 
     // Crear una nueva hoja de cálculo
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
