@@ -33,7 +33,6 @@ const Customer = ({ enable }) => {
     dataResult: [],
     dataResultCopy: [],
   });
-
   const [customer, SetCustomer] = useState({
     customerGreen: [],
     customerYellow: [],
@@ -47,6 +46,7 @@ const Customer = ({ enable }) => {
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
+      console.log(resultCustomer);
 
       setData({
         ...data,
@@ -61,45 +61,56 @@ const Customer = ({ enable }) => {
   //! PRUEBA PARA IMPORT DATA, ESTA PARA CAMBIAR
   const [dataImport, setDataImport] = useState([]); //TODO--> Sirve para importar la data y los guarda en esta constante
   const [valueImport, setValueImport] = useState(false);
-
   useFocusEffect(
     React.useCallback(() => {
       if (valueImport) {
-        if (data.dataResult == undefined) {
-          importExcel(setDataImport);
-          //onSaveCronograma(dataImport);
-        } else {
-          Alert.alert(
-            "¡ALERTA!",
-            "Existen datos guardados. Si continúa, se borrarán los datos actuales.",
-            [
-              {
-                text: "Si",
-                //! CUANDO EXISTEN DATOS EN LA APLICACION, Y SE QUIERE IMPORTAR DATOS,
-                //!DEBE DAR UN AVISO QUE SE BORRARAN TODOS, CUANDO SE EJECUTA PRIMERO DEBE DE ELIMINAR
-                //! TODOS LOS DATOS Y DESPUES SETEAR EL ESTADO PARA FINALMENTE GUARDAR TODOS LOS DATOS EN EL STORAGE
-                onPress: async () => {
-                  await AsyncStorage.clear();
-                  importExcel(setDataImport);
-                  //!NOTA: tengo que crear una nuevo hook que ayude a guardar todos loas datos en el storage
-                  //onSaveCronograma(dataImport);
-                },
-                style: "destructive",
-              },
-              {
-                text: "No",
-                style: "destructive",
-              },
-            ]
-          );
-        }
+        importExcel(setDataImport);
+
+        //else {
+        // Alert.alert(
+        //   "¡ALERTA!",
+        //   "Existen datos guardados. Si continúa, se borrarán los datos actuales.",
+        //   [
+        //     {
+        //       text: "Si",
+        //       //! CUANDO EXISTEN DATOS EN LA APLICACION, Y SE QUIERE IMPORTAR DATOS,
+        //       //!DEBE DAR UN AVISO QUE SE BORRARAN TODOS, CUANDO SE EJECUTA PRIMERO DEBE DE ELIMINAR
+        //       //! TODOS LOS DATOS Y DESPUES SETEAR EL ESTADO PARA FINALMENTE GUARDAR TODOS LOS DATOS EN EL STORAGE
+        //       onPress: async () => {
+        //         //await AsyncStorage.clear();
+        //         importExcel(setDataImport);
+        //         const saveImport = async () => {
+        //           await onSaveCronograma("hola");
+        //         };
+        //         saveImport();
+        //         //!NOTA: tengo que crear una nuevo hook que ayude a guardar todos loas datos en el storage
+        //         //onSaveCronograma(dataImport);
+        //       },
+        //       style: "destructive",
+        //     },
+        //     {
+        //       text: "No",
+        //       style: "destructive",
+        //     },
+        //   ]
+        // );
+        //}
         setValueImport(false);
       }
+      // if (data.dataResult == undefined) {
+      //   importExcel(setDataImport);
+      //   onSaveCronograma(dataImport, "import");
+      // }
+      const saveImport = async () => {
+        await onSaveCronograma(dataImport, "import");
+      };
+      dataImport.length == 0 ? null : saveImport();
 
       //return async () => await onSaveCronograma(dataImport);
-    }, [valueImport, data])
+    }, [valueImport, dataImport])
   );
   //!
+  //console.log(dataImport[1]);
 
   // clasificación de los clientes de acuerdo a la fecha de pago
   const resultCustomer = () => {
@@ -139,13 +150,15 @@ const Customer = ({ enable }) => {
       setTimeout(setOn, 1, true);
       loadCongiguration();
 
-      //return () => unsubscribe();
+      //return () => resultCustomer();
     }, [])
   );
+
   useEffect(() => {
     resultCustomer();
   }, [data]);
 
+  console.log(customer);
   return (
     <View style={styles.container}>
       <Header

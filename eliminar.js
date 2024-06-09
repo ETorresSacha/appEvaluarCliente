@@ -190,3 +190,8 @@ var resultAgregardia = add(new Date(2014, 8, 1, 10, 19, 50), {
     minutes: 9,
     seconds: 30,
   });
+let newvariable=["hola","como estas"]
+  var myFish = ["angel", "clown", "drum", "mandarin", "sturgeon"];
+var removed = myFish.splice(0,1,newvariable);
+console.log(myFish);
+console.log(removed);

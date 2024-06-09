@@ -98,7 +98,7 @@ const DataCustomer = ({
               </Text>
             </View>
           ) : !enable ? (
-            //  clienteS guardados
+            //  clientes guardados
             <View>
               <Users
                 data={customer.customerRed}
