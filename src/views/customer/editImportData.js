@@ -1,3 +1,4 @@
+
 export const editImportData =(data)=>{
   try {
     data.map(
@@ -6,13 +7,7 @@ export const editImportData =(data)=>{
     return data
     
   } catch (error) {
-    return error
-  }
-        // data.map((element) => {
-        //     element.resultPrestamo = element?.resultPrestamo.replace(/\\/g, "");
-        //     element.resultPrestamo = element?.resultPrestamo.slice(1, -1);
-        //     return (element.resultPrestamo = element?.resultPrestamo.slice(1, -1));
-        //   });
-        
-          
+      return {error:error}
+  }            
 }
+

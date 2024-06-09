@@ -34,12 +34,11 @@ const UseStorage = () => {
   //! POST AND UPDATE CUSTOMER
   const handleSaveCronograma = async (dataPerson, editValue) => {
     let indice;
-    console.log("data person" + dataPerson);
     try {
+      // importar data
       if (editValue) {
         let resultGet = await handleGetCronograma();
         if (editValue == "import") {
-          // resultGet.splice();
           await AsyncStorage.setItem(MY_DATA_KEY, JSON.stringify(dataPerson));
           return Promise.resolve();
         }
@@ -69,7 +68,6 @@ const UseStorage = () => {
     //await AsyncStorage.clear(MY_DATA_KEY);
     try {
       let result = await AsyncStorage.getItem(MY_DATA_KEY);
-      console.log("result" + result);
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
 

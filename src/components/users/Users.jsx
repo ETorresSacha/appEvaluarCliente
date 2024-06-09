@@ -6,7 +6,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Users = ({ data, color, enable, dataConfiguration }) => {
   const navigation = useNavigation();
-
+  console.log(data); //! cuando se exporta despues se entra a detalle y vuelves a la vista de los usuarios existe un error (sucede cuando se exporta)
   // estilos dinámico del ícono de alerta
   const [estilos, setEstilos] = useState({
     fontSize: 40,
@@ -65,6 +65,7 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
                 <View>
                   <Text style={styles.text}>
                     {formatDate(datePay(element))}
+                    {/* fecha */}
                   </Text>
                 </View>
               )}
