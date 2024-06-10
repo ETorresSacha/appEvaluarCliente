@@ -2,11 +2,8 @@
 
 import { Alert } from "react-native";
 import { importExcel } from "../../modals/modalOptionsCustomer/importExcel";
-import UseStorage from "../../components/hooks/UseHookStorage";
 
-const {  onSaveCronograma } = UseStorage();
-
-export const renderImportData =(valueImport,setValueImport, data, dataImport, setDataImport)=>{
+export const renderImportData =(valueImport,setValueImport, data,setData)=>{
     if (valueImport) {
       if (data?.dataResult?.length != 0) {
         Alert.alert(
@@ -15,7 +12,7 @@ export const renderImportData =(valueImport,setValueImport, data, dataImport, se
           [
             {
               text: "Si",
-              onPress: async () => importExcel(setDataImport),
+              onPress: async () => importExcel(data,setData),
               style: "destructive",
             },
             {
@@ -25,19 +22,8 @@ export const renderImportData =(valueImport,setValueImport, data, dataImport, se
           ]
         );
       } else {
-        importExcel(setDataImport); // importa
+        importExcel(data,setData); // importa
       }
       setValueImport(false);
-    }
-    const saveImport = async () => {
-      await onSaveCronograma(dataImport, "import"); // guarda en el storage
-    };
-    if (dataImport.length != 0) {
-      if (dataImport.error) {
-        setDataImport([]); // vuelve a setear el estado como estaba en un inicio
-        return Alert.alert("Los datos no son válidos");
-      } else {
-        saveImport();
-      }
     }
   }

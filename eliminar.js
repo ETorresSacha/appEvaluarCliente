@@ -190,3 +190,10 @@ var resultAgregardia = add(new Date(2014, 8, 1, 10, 19, 50), {
     minutes: 9,
     seconds: 30,
   });
+
+  const dataExcel = [
+    { name: "John", age: 30, city: "New York" },
+    { name: "Jane", age: 25, city: "Los Angeles" },
+    { name: "Peter", age: 40, city: "Chicago" },
+    { name: "Erik", age: 32, city: "Perú" },
+  ];

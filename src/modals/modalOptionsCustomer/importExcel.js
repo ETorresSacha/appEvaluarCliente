@@ -1,8 +1,11 @@
 import * as DocumentPicker from 'expo-document-picker';
 import * as XLSX from 'xlsx';
 import { editImportData } from '../../views/customer/editImportData';
+import { Alert } from "react-native";
+import UseStorage from '../../components/hooks/UseHookStorage';
+const {  onSaveCronograma } = UseStorage();
 
-export const importExcel = async (setDataImport) => {
+export const importExcel = async (data,setData) => {
   try {
     // Permitir al usuario seleccionar un archivo
     const result = await DocumentPicker.getDocumentAsync({
@@ -30,17 +33,33 @@ export const importExcel = async (setDataImport) => {
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(worksheet);
 
-      // Edita los valores que son de tipo string a json
-      setDataImport(editImportData(json))
+      //todo--> Edita los valores que son de tipo string a json
+      const resultData = editImportData(json)
 
+      //todo--> Guarda los datos importados en el storage y setea es estado
+      const saveImport = async () => {
+          await onSaveCronograma(resultData, "import"); // guarda en el storage
+
+          setData({                                    // Setea el estado
+            ...data,
+            dataResult: resultData,
+            dataResultCopy: resultData,
+          });
+      };
+
+      if (resultData.length != 0) {
+        if (resultData.error) {                        // Cuando ocurre un error
+          return Alert.alert("Los datos no son válidos");
+        } else {
+          saveImport();                                // Guarda
+        }
+      }
+      //     todo--------------------------*-----------------------todo
     };
+
     reader.readAsArrayBuffer(blob);
   } catch (error) {
     console.error('Error:', error);
   }
 };
-
-//         {data.map((row, index) => (
-//           <Text key={index}>{JSON.stringify(row)}</Text>
-//         ))}
 

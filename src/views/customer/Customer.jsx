@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
@@ -11,14 +11,6 @@ import DataCustomer from "./DataCustomer";
 import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import Alerta from "../alert/Alerta";
 import { renderImportData } from "./renderImportData";
-
-// este array solo es prueba, se eliminará
-const dataExcel = [
-  { name: "John", age: 30, city: "New York" },
-  { name: "Jane", age: 25, city: "Los Angeles" },
-  { name: "Peter", age: 40, city: "Chicago" },
-  { name: "Erik", age: 32, city: "Perú" },
-];
 
 const Customer = ({ enable }) => {
   const { onGetCronograma } = UseStorage();
@@ -38,10 +30,9 @@ const Customer = ({ enable }) => {
     customerCancelled: [],
     dataResult: [],
   });
-  const [dataImport, setDataImport] = useState([]); // Necesario para importar la data
   const [valueImport, setValueImport] = useState(false); // Necesario para importar la data
 
-  // Traer los datos del local storage
+  // Trae los datos del local storage
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
@@ -54,19 +45,6 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
-
-  // Importar data
-  useFocusEffect(
-    React.useCallback(() => {
-      renderImportData(
-        valueImport,
-        setValueImport,
-        data,
-        dataImport,
-        setDataImport
-      );
-    }, [valueImport, dataImport])
-  );
 
   // clasificación de los clientes de acuerdo a la fecha de pago
   const resultCustomer = () => {
@@ -100,6 +78,8 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
+
+  // Renderiza
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
@@ -113,12 +93,17 @@ const Customer = ({ enable }) => {
     resultCustomer();
   }, [data]);
 
+  // Función para importar data
+  useFocusEffect(
+    React.useCallback(() => {
+      renderImportData(valueImport, setValueImport, data, setData);
+    }, [valueImport])
+  );
+
   return (
     <View style={styles.container}>
       <Header
         title={!enable ? "Clientes" : "Clientes cancelados"}
-        dataExcelExport={!enable ? data?.dataResult : null}
-        setDataImport={!enable ? setDataImport : null}
         setValueImport={setValueImport}
       />
       <NavBar
