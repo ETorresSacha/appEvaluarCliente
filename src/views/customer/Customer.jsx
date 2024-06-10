@@ -30,10 +30,9 @@ const Customer = ({ enable }) => {
     customerCancelled: [],
     dataResult: [],
   });
-  const [dataImport, setDataImport] = useState([]); // Necesario para importar la data
   const [valueImport, setValueImport] = useState(false); // Necesario para importar la data
 
-  // Traer los datos del local storage
+  // Trae los datos del local storage
   const loadCustomer = async () => {
     try {
       const resultCustomer = await onGetCronograma();
@@ -46,19 +45,6 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
-
-  //Importar data
-  useFocusEffect(
-    React.useCallback(() => {
-      renderImportData(
-        valueImport,
-        setValueImport,
-        data,
-        dataImport,
-        setDataImport
-      );
-    }, [valueImport, dataImport])
-  );
 
   // clasificación de los clientes de acuerdo a la fecha de pago
   const resultCustomer = () => {
@@ -92,6 +78,8 @@ const Customer = ({ enable }) => {
       console.error(error);
     }
   };
+
+  // Renderiza
   useFocusEffect(
     React.useCallback(() => {
       loadCustomer();
@@ -104,6 +92,13 @@ const Customer = ({ enable }) => {
   useEffect(() => {
     resultCustomer();
   }, [data]);
+
+  // Función para importar data
+  useFocusEffect(
+    React.useCallback(() => {
+      renderImportData(valueImport, setValueImport, data, setData);
+    }, [valueImport])
+  );
 
   return (
     <View style={styles.container}>
