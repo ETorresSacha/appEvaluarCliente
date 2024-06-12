@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React from "react";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import PieChart from "./PieChart";
 
 const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
@@ -17,7 +17,7 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
     customer?.customer ? customer?.customer?.length : 0,
   ];
 
-  const colors = ["#FF0000", "#FFFF00", "#008000", "#FFF8DC"]; // Colores para cada segmento
+  const colors = ["#FF0000", "#FFFF00", "rgb(66, 242, 46)", "#FFF8DC"]; // Colores para cada segmento
 
   return (
     <Modal
@@ -57,10 +57,11 @@ const ModalLeyenda = ({ isVisible, setIsVisible, customer }) => {
                   flexDirection: "row",
                 }}
               >
-                <MaterialIcons
-                  name="notifications"
-                  style={{ color: `${colors[index]}`, fontSize: 30 }}
+                <FontAwesome
+                  name="bell"
+                  style={{ color: `${colors[index]}`, fontSize: 20 }}
                 />
+
                 <Text style={styles.leyenda}>{element}</Text>
                 <View style={styles.containerTitleLeyenda}>
                   <Text style={styles.titleLeyenda}>{data[index]}</Text>

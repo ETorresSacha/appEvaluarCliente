@@ -9,6 +9,8 @@ import React, { useState } from "react";
 import Users from "../../components/users/Users";
 import { orderData } from "../../utils/thunks/Thunks";
 import ModalLeyenda from "../../modals/modalLeyenda/ModalLeyenda";
+import Entypo from "react-native-vector-icons/Entypo";
+import Fontisto from "react-native-vector-icons/Fontisto";
 
 const DataCustomer = ({
   data,
@@ -103,7 +105,7 @@ const DataCustomer = ({
               <Users
                 data={customer.customerRed}
                 dataConfiguration={dataConfiguration}
-                color={"red"}
+                color={"rgb(250, 23, 15)"}
               />
               <Users
                 data={customer.customerYellow}
@@ -130,12 +132,19 @@ const DataCustomer = ({
         }
       </ScrollView>
       <View style={[styles.piePagina]}>
-        <Text style={styles.piePaginaText}>
-          {!enable ? "Total de clientes: " : "Total de clientes cancelados: "}
-          {!enable
-            ? customer.dataResult.length
-            : customer.customerCancelled.length}
-        </Text>
+        <View style={styles.iconoAllUser}>
+          <Entypo
+            name={!enable ? "user" : "remove-user"}
+            style={{ color: "orange", fontSize: 21 }}
+          >
+            <Text style={styles.piePaginaText}>
+              {!enable
+                ? customer.dataResult.length
+                : customer.customerCancelled.length}
+            </Text>
+          </Entypo>
+          <Text style={styles.textPiePagina}>Usuarios</Text>
+        </View>
 
         {/* Ícono de la leyenda */}
         {!enable ? (
@@ -143,9 +152,11 @@ const DataCustomer = ({
             style={[styles.title]}
             onPress={() => setIsVisible(true)}
           >
-            <Text style={[styles.texTitle, { width: enable ? 100 : null }]}>
-              Leyenda
-            </Text>
+            <Fontisto
+              name="pie-chart-2"
+              style={{ color: "orange", fontSize: 21 }}
+            />
+            <Text style={styles.textPiePagina}>Leyenda</Text>
           </TouchableOpacity>
         ) : null}
       </View>
@@ -192,7 +203,7 @@ const styles = StyleSheet.create({
   texTitle: {
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 14,
+    fontSize: 13,
     color: "white",
   },
   containerCuotas: {
@@ -216,10 +227,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: "rgba(36, 146, 224, 0.625)",
-    height: 30,
+    height: 37,
+  },
+  iconoAllUser: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
   },
   piePaginaText: {
-    fontSize: 13,
+    fontSize: 17,
     color: "white",
+  },
+  textPiePagina: {
+    fontSize: 9,
+    color: "white",
+    fontWeight: "bold",
   },
 });
