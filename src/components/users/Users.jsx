@@ -2,14 +2,14 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { datePay, formatDate } from "../../utils/thunks/Thunks";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const Users = ({ data, color, enable, dataConfiguration }) => {
   const navigation = useNavigation();
 
   // estilos dinámico del ícono de alerta
   const [estilos, setEstilos] = useState({
-    fontSize: 40,
+    fontSize: 35,
   });
 
   const cambiarColor = (color) => {
@@ -84,8 +84,8 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
               {/* Icono de la alerta */}
 
               {enable ? null : (
-                <MaterialIcons
-                  name="notifications"
+                <FontAwesome
+                  name="bell"
                   style={color ? estilos : styles.iconAlertOff}
                 />
               )}
@@ -122,6 +122,6 @@ const styles = StyleSheet.create({
   },
   iconAlertOff: {
     color: "cornsilk",
-    fontSize: 40,
+    fontSize: 37,
   },
 });
