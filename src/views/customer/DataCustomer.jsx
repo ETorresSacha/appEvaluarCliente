@@ -135,7 +135,7 @@ const DataCustomer = ({
         <View style={styles.iconoAllUser}>
           <Entypo
             name={!enable ? "user" : "remove-user"}
-            style={{ color: "orange", fontSize: 21 }}
+            style={{ color: "rgb(250, 191, 15)", fontSize: 21 }}
           >
             <Text style={styles.piePaginaText}>
               {!enable
@@ -154,7 +154,7 @@ const DataCustomer = ({
           >
             <Fontisto
               name="pie-chart-2"
-              style={{ color: "orange", fontSize: 21 }}
+              style={{ color: "rgb(207, 250, 15)", fontSize: 21 }}
             />
             <Text style={styles.textPiePagina}>Leyenda</Text>
           </TouchableOpacity>

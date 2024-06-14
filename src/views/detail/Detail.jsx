@@ -102,14 +102,14 @@ const Detail = (props) => {
                       style={styles.icon}
                       onPress={() => edit(user)}
                     >
-                      <Entypo name="feather" size={30} color="cornsilk" />
+                      <Entypo name="pencil" size={30} color="cornsilk" />
                     </TouchableOpacity>
                   )}
                   <TouchableOpacity
                     style={styles.icon}
                     onPress={() => alertDelete(id)}
                   >
-                    <Icon name="delete" size={30} color="cornsilk" />
+                    <Entypo name="trash" size={30} color="cornsilk" />
                   </TouchableOpacity>
                 </View>
               </View>
