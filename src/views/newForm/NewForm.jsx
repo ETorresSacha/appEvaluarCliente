@@ -55,7 +55,7 @@ const NewForm = (props) => {
     tasaPrimaMensual: !user ? dataConfiguration?.tpm : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
   });
-  //console.log(uuid);
+
   useEffect(() => {
     // Limpia es estado
     if (clean) {
