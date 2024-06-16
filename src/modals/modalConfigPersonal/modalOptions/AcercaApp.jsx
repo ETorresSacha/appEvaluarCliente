@@ -36,8 +36,8 @@ const AcercaApp = ({ app, setApp }) => {
 
         <Text>Nombre: App Evaluar</Text>
         <Text>Versión: 1.0.0</Text>
-        <Text>Creador: k31</Text>
-        <Text>Contacto: +51 - 964626322</Text>
+        <Text>Creador: devtorres</Text>
+        <Text>Contacto:devtorresk31@gmail.com</Text>
       </View>
     </Modal>
   );
