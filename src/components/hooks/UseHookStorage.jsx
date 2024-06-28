@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const MY_DATA_KEY = "@data_customerr";
+import { MY_DATA_KEY } from "@env";
+//const MY_DATA_KEY = "@data_customerr";
 
 const UseStorage = () => {
   // GUARDAR INFORMACION

@@ -38,3 +38,6 @@ yarn-error.*
 Datos.js
 eliminar.css
 eliminar.js
+
+# contraseñas
+.env

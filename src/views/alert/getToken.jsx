@@ -1,6 +1,7 @@
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import { Platform } from "react-native";
+import { PROJECTID } from "@env";
 
 async function registerForPushNotificationsAsync() {
   let token;
@@ -30,7 +31,8 @@ async function registerForPushNotificationsAsync() {
     // https://docs.expo.dev/push-notifications/push-notifications-setup/#configure-projectid
     token = (
       await Notifications.getExpoPushTokenAsync({
-        projectId: "553ec5b6-a8cb-413a-a68c-6698a073d3ac",
+        //projectId: "553ec5b6-a8cb-413a-a68c-6698a073d3ac",
+        projectId: PROJECTID,
       })
     ).data;
   } else {
