@@ -62,7 +62,7 @@ const DataCustomer = ({
         </TouchableOpacity>
         {!enable ? (
           <TouchableOpacity
-            style={[styles.title, { width: 80, paddingLeft: 20 }]}
+            style={[styles.title, { width: 80 }]}
             onPress={() => handleSort("fecha", order)}
           >
             <Text style={styles.texTitle}>FECHA DE PAGO</Text>

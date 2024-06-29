@@ -71,9 +71,19 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
               )}
 
               {/* Monto */}
-              <View style={{ width: 80, paddingRight: 20 }}>
+              <View style={{ width: 85, alignItems: "center" }}>
                 <Text
-                  style={[styles.text, { textAlign: "right", color: "orange" }]}
+                  style={[
+                    styles.text,
+                    {
+                      textAlign: "right",
+                      color: "orange",
+                      fontSize:
+                        element?.resultPrestamo[0]?.montoCuota?.length >= 8
+                          ? 13
+                          : 15,
+                    },
+                  ]}
                 >
                   {enable
                     ? element?.capital

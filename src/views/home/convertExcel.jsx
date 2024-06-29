@@ -35,13 +35,3 @@ export const exportToExcel = async (dataArray, fileName) => {
     console.error("Error al exportar a Excel:", error);
   }
 };
-
-// // Uso de la función
-// const myData = [
-//   ["Nombre", "Edad", "Ciudad"],
-//   ["Juan", "25", "Madrid"],
-//   ["María", "30", "Barcelona"],
-//   ["Pedro", "28", "Valencia"],
-// ];
-
-// exportToExcel(myData, "data");
