@@ -135,9 +135,9 @@ const DataCustomer = ({
         <View style={styles.iconoAllUser}>
           <Entypo
             name={!enable ? "user" : "remove-user"}
-            style={{ color: "rgb(250, 191, 15)", fontSize: 21 }}
+            style={{ color: "rgb(250, 191, 15)", fontSize: 30 }}
           ></Entypo>
-          <View style={{ display: "flex", flexDirection: "row" }}>
+          <View style={{ display: "flex", alignItems: "center" }}>
             <Text style={styles.piePaginaText}>
               {!enable
                 ? customer.dataResult.length
@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
+    gap: 5,
   },
   piePaginaText: {
     fontSize: 17,
