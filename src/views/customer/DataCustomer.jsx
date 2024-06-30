@@ -136,14 +136,15 @@ const DataCustomer = ({
           <Entypo
             name={!enable ? "user" : "remove-user"}
             style={{ color: "rgb(250, 191, 15)", fontSize: 21 }}
-          >
+          ></Entypo>
+          <View style={{ display: "flex", flexDirection: "row" }}>
             <Text style={styles.piePaginaText}>
               {!enable
                 ? customer.dataResult.length
                 : customer.customerCancelled.length}
             </Text>
-          </Entypo>
-          <Text style={styles.textPiePagina}>Usuarios</Text>
+            <Text style={styles.textPiePagina}>Clientes</Text>
+          </View>
         </View>
 
         {/* Ícono de la leyenda */}
@@ -231,6 +232,7 @@ const styles = StyleSheet.create({
   },
   iconoAllUser: {
     display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",

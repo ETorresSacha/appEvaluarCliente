@@ -22,6 +22,7 @@ const Customer = ({ enable }) => {
     dataResult: [],
     dataResultCopy: [],
   });
+
   const [customer, SetCustomer] = useState({
     customerGreen: [],
     customerYellow: [],
@@ -96,7 +97,14 @@ const Customer = ({ enable }) => {
   // Función para importar data
   useFocusEffect(
     React.useCallback(() => {
-      renderImportData(valueImport, setValueImport, data, setData);
+      //Función
+      renderImportData(
+        valueImport,
+        setValueImport,
+        data,
+        setData,
+        customer?.dataResult
+      );
     }, [valueImport])
   );
 

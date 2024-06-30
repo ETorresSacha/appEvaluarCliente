@@ -43,8 +43,8 @@ const Alerta = ({ dataYellow, dataRed }) => {
             data: { screen: "Clientes" }, // Vista a la que dirigirse
           },
           trigger: {
-            hour: 9,
-            minute: 0,
+            hour: 17,
+            minute: 11,
             repeats: true, // Esto hace que la notificación se repita diariamente
           },
           ios: {
