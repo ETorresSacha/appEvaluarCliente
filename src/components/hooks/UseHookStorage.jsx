@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const MY_DATA_KEY = "@data_customerr";
+import { MY_DATA_KEY } from "@env";
+//const MY_DATA_KEY = "@data_customerr";
 
 const UseStorage = () => {
   // GUARDAR INFORMACION
@@ -65,14 +65,14 @@ const UseStorage = () => {
 
   //! GET
   const handleGetCronograma = async () => {
-    //await AsyncStorage.clear(MY_DATA_KEY);
+    //await AsyncStorage.clear();
     try {
       let result = await AsyncStorage.getItem(MY_DATA_KEY);
       if (result !== null) {
         const parseCronograma = JSON.parse(result);
 
         return Promise.resolve(parseCronograma);
-      }
+      } else return result;
     } catch (error) {
       return Promise.reject(error);
     }

@@ -27,7 +27,8 @@ const ModalConfigPersonal = ({
   dataConfiguration,
   setDataConfiguration,
 }) => {
-  const url = "https://play.google.com/store/apps/details?id=com.pedidosya"; //! este link esta para cambiar, se cambiará cuando se suba a play store
+  //const url = "https://play.google.com/store/apps/details?id=com.pedidosya"; //! este link esta para cambiar, se cambiará cuando se suba a play store
+  const url = "URL"; //! este link esta para cambiar, se cambiará cuando se suba a play store
 
   const [enablerNeg, setEnableNeg] = useState(false);
   const [enablerConf, setEnableConf] = useState(false);

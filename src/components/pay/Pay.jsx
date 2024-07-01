@@ -171,14 +171,26 @@ const Pay = ({ data, setDataNotification }) => {
               <View
                 style={[
                   styles.containerSubTitle,
-                  { gap: 15, justifyContent: "space-around", width: 130 },
+                  {
+                    gap: 15,
+                    justifyContent: "space-around",
+                    width: 130,
+                  },
                 ]}
               >
                 <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
                   Cuota:
                 </Text>
-                <Text style={[styles.subTitle, { color: "orange" }]}>
-                  S/. {!cancelledShare ? dataSee?.montoCuota : "0"}
+                <Text
+                  style={[
+                    styles.subTitle,
+                    {
+                      color: "orange",
+                      fontSize: dataSee?.montoCuota?.length >= 8 ? 15 : 17,
+                    },
+                  ]}
+                >
+                  S/ {!cancelledShare ? dataSee?.montoCuota : "0"}
                 </Text>
               </View>
             </View>

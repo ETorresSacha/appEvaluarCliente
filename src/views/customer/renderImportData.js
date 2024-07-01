@@ -3,12 +3,16 @@
 import { Alert } from "react-native";
 import { importExcel } from "../../modals/modalOptionsCustomer/importExcel";
 
-export const renderImportData =(valueImport,setValueImport, data,setData)=>{
+import { Text, View, StyleSheet } from 'react-native';
+export const renderImportData =(valueImport,setValueImport, data,setData,customer)=>{
+
     if (valueImport) {
-      if (data?.dataResult?.length != 0) {
+      if (data?.dataResult != null && data?.dataResult?.length != 0) {
+        const customerText = customer?.length !== 0 ? "Clientes" : "Clientes cancelados";
         Alert.alert(
           "¡ALERTA!",
-          "Existen datos guardados. Si continúa, se borrarán los datos actuales.\n ¿Desea continuar?",
+          `Existen ${customerText} guardados. Si continúa, se borrarán los datos actuales.\n ¿Desea continuar?`,
+          
           [
             {
               text: "Si",

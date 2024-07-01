@@ -152,7 +152,7 @@ export const customerData =(data,toDay)=>{
     // Un día antes de la fecha de vencimiento
     let resultGreen = element.resultPrestamo.find(elem=>{
       let [anio,mes,dia] = elem.fechaPago.split('-')
-       return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))==1 && elem.statusPay == false
+       return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))==1 && elem.statusPay == false
       })
 
     //La misma fecha de vencimiento
@@ -161,7 +161,7 @@ export const customerData =(data,toDay)=>{
     // Pasado la fecha de vencimiento
     let resultRed = element.resultPrestamo.find(elem=>{
       let [anio,mes,dia] = elem.fechaPago.split('-')
-         return differenceInDays(new Date(anio,mes,dia), new Date(anioToDay,mesToDay,diaToDay))<0 && elem.statusPay == false
+         return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false
         })
 
     if(resultGreen!==undefined){

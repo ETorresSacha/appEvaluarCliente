@@ -126,8 +126,8 @@ import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFutur
 
 
 // console.log(format(trigger,'dd-MM-yyyy'));
-// console.log(differenceInDays(new Date(2023,12,19), new Date(2023,12,18)))
-
+console.log(differenceInDays(new Date(2023,5,1), new Date(2023,4,30)))
+console.log(new Date(2023,1,));
 // console.log(new Date("12-18-2023").getTime())
 // console.log(new Date("12-17-2023").getTime())
 // console.log((new Date('01-08-2024').getTime())*(-1))

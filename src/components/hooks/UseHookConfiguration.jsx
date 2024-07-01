@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const TASA_PRIMA_KEY = "@data_tasaPrima";
+import { TASA_PRIMA_KEY } from "@env";
+//const TASA_PRIMA_KEY = "@data_tasaPrima";
 
 const UseStorageConfiguration = () => {
   // GUARDAR INFORMACION

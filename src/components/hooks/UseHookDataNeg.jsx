@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const MY_BUSINESS_KEY = "@data_business";
+import { MY_BUSINESS_KEY } from "@env";
+//const MY_BUSINESS_KEY = "@data_business";
 
 const UseStorageBusiness = () => {
   // GUARDAR INFORMACION

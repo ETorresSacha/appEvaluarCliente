@@ -62,7 +62,7 @@ const DataCustomer = ({
         </TouchableOpacity>
         {!enable ? (
           <TouchableOpacity
-            style={[styles.title, { width: 80, paddingLeft: 20 }]}
+            style={[styles.title, { width: 80 }]}
             onPress={() => handleSort("fecha", order)}
           >
             <Text style={styles.texTitle}>FECHA DE PAGO</Text>
@@ -135,15 +135,16 @@ const DataCustomer = ({
         <View style={styles.iconoAllUser}>
           <Entypo
             name={!enable ? "user" : "remove-user"}
-            style={{ color: "rgb(250, 191, 15)", fontSize: 21 }}
-          >
+            style={{ color: "rgb(250, 191, 15)", fontSize: 30 }}
+          ></Entypo>
+          <View style={{ display: "flex", alignItems: "center" }}>
             <Text style={styles.piePaginaText}>
               {!enable
                 ? customer.dataResult.length
                 : customer.customerCancelled.length}
             </Text>
-          </Entypo>
-          <Text style={styles.textPiePagina}>Usuarios</Text>
+            <Text style={styles.textPiePagina}>Clientes</Text>
+          </View>
         </View>
 
         {/* Ícono de la leyenda */}
@@ -231,9 +232,11 @@ const styles = StyleSheet.create({
   },
   iconoAllUser: {
     display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
+    gap: 5,
   },
   piePaginaText: {
     fontSize: 17,
