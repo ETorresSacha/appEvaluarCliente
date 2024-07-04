@@ -57,7 +57,7 @@ const DataCustomer = ({
       </View>
       <View style={styles.containerInput}>
         {/* ------------------- Nombre ------------------ */}
-        <View>
+        <View style={{ width: "49%" }}>
           <View>
             <Text style={styles.subTitle}>Nombre</Text>
           </View>
@@ -85,7 +85,7 @@ const DataCustomer = ({
         </View>
 
         {/* ------------------- Apellido ------------------ */}
-        <View>
+        <View style={{ width: "49%" }}>
           <View>
             <Text style={styles.subTitle}>Apellidos</Text>
           </View>
@@ -110,7 +110,7 @@ const DataCustomer = ({
         </View>
 
         {/* ------------------- DNI ------------------ */}
-        <View>
+        <View style={{ width: "49%" }}>
           <View>
             <Text style={styles.subTitle}>DNI</Text>
           </View>
@@ -142,7 +142,7 @@ const DataCustomer = ({
         </View>
 
         {/* ------------------- Correo ------------------ */}
-        <View>
+        <View style={{ width: "49%" }}>
           <View>
             <Text style={styles.subTitle}>Correo</Text>
           </View>
@@ -174,7 +174,7 @@ const DataCustomer = ({
         </View>
 
         {/* ------------------- Dirección ------------------ */}
-        <View>
+        <View style={{ width: "49%" }}>
           <View>
             <Text style={styles.subTitle}>Dirección</Text>
           </View>
@@ -199,7 +199,7 @@ const DataCustomer = ({
         </View>
 
         {/* ------------------- Celular ------------------ */}
-        <View>
+        <View style={{ width: "49%" }}>
           <View>
             <Text style={styles.subTitle}>Celular</Text>
           </View>
@@ -238,14 +238,15 @@ export default DataCustomer;
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    flex: 1,
+    paddingBottom: 15,
   },
   titleDatos: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 7,
+    paddingHorizontal: 12,
     backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
   title: {
@@ -258,6 +259,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     gap: 7,
     display: "flex",
+    flex: 1,
     paddingHorizontal: 10,
     flexDirection: "row",
     flexWrap: "wrap",
@@ -286,7 +288,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30,
-    width: 185,
+    width: "100%",
     borderWidth: 1,
     borderRadius: 15,
     padding: 2,

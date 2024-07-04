@@ -267,7 +267,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     resizeMode: "cover", // o 'contain' según tu preferencia
-    padding: 12,
+  },
+  titleEvaluar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 12,
+    backgroundColor: "rgba(36, 146, 224, 0.625)",
   },
   buttonContainer: {
     justifyContent: "center",
@@ -292,14 +299,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  titleEvaluar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 7,
-    backgroundColor: "rgba(36, 146, 224, 0.625)",
-  },
   title: {
     fontSize: 17,
     color: "white",
