@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     display: "flex",
   },
   buttonContainer: {
-    marginTop: 15,
+    marginTop: 30,
     alignItems: "center",
     width: 250,
     height: 40,
