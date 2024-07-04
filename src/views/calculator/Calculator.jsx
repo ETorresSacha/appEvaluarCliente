@@ -197,7 +197,7 @@ const Calculator = ({
     >
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <View style={styles.titleEvaluar}>
-        <Text style={styles.title}>PRESTAMO</Text>
+        <Text style={styles.title}>PRÉSTAMO</Text>
 
         {!dataPerson ? (
           <TouchableOpacity onPress={() => setCleanCalculator(true)}>
