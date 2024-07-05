@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import Header from "../../components/header/Header";
 
 const VerCronograma = (props) => {
-  const user = props.route.params.data;
+  const data = props.route.params.data;
   const id = props.route.params.id;
   const enable = props.route.params.enable;
 
@@ -15,8 +15,9 @@ const VerCronograma = (props) => {
         back={id ? "Detalle" : "Nuevo cliente"}
         id={id}
         enable={enable}
+        data={data}
       />
-      <Cronograma data={user} />
+      <Cronograma data={data} />
     </View>
   );
 };

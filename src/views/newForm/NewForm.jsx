@@ -140,6 +140,7 @@ const NewForm = (props) => {
         color={color}
         enable={enable}
         dataConfiguration={dataConfiguration}
+        editValue={editValue}
       />
       <ScrollView>
         <DataCustomer

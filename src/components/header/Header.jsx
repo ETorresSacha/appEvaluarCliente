@@ -12,6 +12,7 @@ const Header = ({
   id,
   enable,
   setValueImport,
+  data,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
@@ -29,7 +30,18 @@ const Header = ({
                 enable: enable ? enable : null,
                 dataConfiguration: dataConfiguration,
               })
-            : navigation.navigate(back ? back : "Home")
+            : navigation.navigate(
+                back
+                  ? back == "Nuevo cliente"
+                    ? "Nuevo cliente"
+                    : back
+                  : "Home",
+                {
+                  dataConfiguration:
+                    back == "Nuevo cliente" ? data?.dataConfiguration : null,
+                  editValue: data?.editValue ? data?.editValue : null,
+                }
+              )
         }
       >
         <Entypo name="reply" style={{ color: "cornsilk", fontSize: 35 }} />

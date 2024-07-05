@@ -215,15 +215,14 @@ const Calculator = ({
         <Prestamo
           errorsPrestamo={errorsPrestamo}
           setErrorsPrestamo={setErrorsPrestamo}
-          errorsP={errorsP}
-          setErrorsP={setErrorsP}
           prestamo={prestamo}
           setPrestamo={setPrestamo}
-          editValue={editValue}
           valuePrest={valuePrest}
           cleanCalculator={cleanCalculator}
-          setCleanCalculator={setCleanCalculator}
           clean={clean}
+          setErrorsP={setErrorsP}
+          errorsP={errorsP}
+          setCleanCalculator={setCleanCalculator}
           setClean={setClean}
           dataPerson={dataPerson}
         />
@@ -247,6 +246,8 @@ const Calculator = ({
                   cuota={cuota}
                   changeValue={changeValue}
                   dataPerson={dataPerson}
+                  dataConfiguration={dataConfiguration}
+                  editValue={editValue}
                 />
               ) : null
             ) : null

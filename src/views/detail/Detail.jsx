@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { Icon } from "@rneui/themed";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import { useNavigation } from "@react-navigation/native";
 import Pay from "../../components/pay/Pay";
