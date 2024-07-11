@@ -7,41 +7,62 @@ import Entypo from "@expo/vector-icons/Entypo";
 
 const Header = ({
   title,
-  dataConfiguration,
+  //dataConfiguration,
   back,
-  id,
-  enable,
-  setValueImport,
+  //id,
+  //enable,
   data,
+  setValueImport,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
 
+  //! error cuando entro primero al cronograma y despues editar
+  const backFunction = (value) => {
+    switch (value) {
+      case "Clientes":
+        navigation.navigate(value, { data: data });
+        break;
+      case "Clientes":
+        navigation.navigate("Home");
+        break;
+      case "Clientes":
+        navigation.navigate("Home");
+        break;
+      case "Clientes":
+        navigation.navigate("Home");
+        break;
+      default:
+        navigation.navigate("Home");
+    }
+  };
+  //  console.log("data header: ", data);
   return (
     <View style={styles.conteiner}>
       {/* Retornar */}
       <TouchableOpacity
         style={styles.leftConteiner}
-        onPress={() =>
-          id
-            ? navigation.navigate("Detalle", {
-                id: id,
-                typeColor: null,
-                enable: enable ? enable : null,
-                dataConfiguration: dataConfiguration,
-              })
-            : navigation.navigate(
-                back
-                  ? back == "Nuevo cliente"
-                    ? "Nuevo cliente"
-                    : back
-                  : "Home",
-                {
-                  dataConfiguration:
-                    back == "Nuevo cliente" ? data?.dataConfiguration : null,
-                  editValue: data?.editValue ? data?.editValue : null,
-                }
-              )
+        onPress={
+          () => backFunction(back)
+          // id
+          //   ? navigation.navigate("Detalle", {
+          //       id: id,
+          //       typeColor: null,
+          //       enable: enable ? enable : null,
+          //       dataConfiguration: dataConfiguration,
+          //     })
+          //   : navigation.navigate(
+          //       back
+          //         ? back == "Nuevo cliente"
+          //           ? "Nuevo cliente"
+          //           : back
+          //         : "Home",
+          //       {
+          //         dataConfiguration:
+          //           back == "Nuevo cliente" ? data?.dataConfiguration : null,
+          //         editValue: data?.editValue ? data?.editValue : null,
+          //       }
+          //     )
         }
       >
         <Entypo name="reply" style={{ color: "cornsilk", fontSize: 35 }} />

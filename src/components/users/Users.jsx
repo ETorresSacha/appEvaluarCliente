@@ -41,10 +41,12 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
               style={styles.touchItem}
               onPress={() =>
                 navigation.navigate("Detalle", {
-                  id: element.uuid,
-                  typeColor: color ? color : null,
-                  enable: enable ? enable : null,
-                  dataConfiguration: dataConfiguration,
+                  data: {
+                    id: element.uuid,
+                    typeColor: color ? color : null,
+                    enable: enable ? enable : undefined,
+                    dataConfiguration: dataConfiguration,
+                  },
                 })
               }
             >

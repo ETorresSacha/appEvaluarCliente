@@ -18,10 +18,10 @@ import Entypo from "@expo/vector-icons/Entypo";
 
 const Detail = (props) => {
   const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
-  const color = props.route.params.typeColor;
-  const id = props.route.params.id;
-  const enable = props.route.params.enable;
-  const dataConfiguration = props.route.params.dataConfiguration;
+  const color = props?.route?.params?.data?.typeColor;
+  const id = props?.route?.params?.data?.id;
+  const enable = props?.route?.params?.data?.enable;
+  const dataConfiguration = props?.route?.params?.data?.dataConfiguration;
   const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
 
@@ -90,7 +90,8 @@ const Detail = (props) => {
           <View>
             <Header
               title={"Detalle"}
-              back={!enable ? "Clientes" : "Clientes cancelados"}
+              back="Clientes"
+              data={!enable ? dataConfiguration : { enable: enable }}
             />
             <View style={styles.containerData}>
               <View style={styles.containerTitle}>

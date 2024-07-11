@@ -12,7 +12,10 @@ import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration
 import Alerta from "../alert/Alerta";
 import { renderImportData } from "./renderImportData";
 
-const Customer = ({ enable }) => {
+const Customer = (props) => {
+  let enable = props?.route?.params?.data?.enable; // Habilita el componente de los clientes cancelados
+  let valueProps = props?.route?.params?.data; // Valores para la configuración del prestamo
+  console.log("data: ", props?.route?.params);
   const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
@@ -67,13 +70,15 @@ const Customer = ({ enable }) => {
   // Cargar los datos de la configuración
   const loadCongiguration = async () => {
     try {
-      let result = await onGetConfiguration();
-
+      // let result = await onGetConfiguration();
+      //!todo--> NOTA: VERIFICAR SI CUANDO SE BORRA TODO LOS VALORES EN EL STORAGE DE LA CONFICGURACION Y NO HAY DATOS
+      //TODO--> SALE ERROR, DE LO CONTRARIO YA NO SERIA NECESARIO CREAR UNA VARIABLE CON USE STATE, SOLO SERIA CONFIGURAR A PARTIR DE LAS
+      // TODOS--> PROPS
       setDataConfiguration({
         ...dataConfiguration,
-        tpm: !result ? "0.08" : result[0]?.tpm,
-        ccv: !result ? "2" : result[0]?.ccv,
-        intMoratorio: !result ? "20" : result[0]?.intMoratorio,
+        tpm: !valueProps ? "0.08" : valueProps?.tpm,
+        ccv: !valueProps ? "2" : valueProps?.ccv,
+        intMoratorio: !valueProps ? "20" : valueProps?.intMoratorio,
       });
     } catch (error) {
       console.error(error);
