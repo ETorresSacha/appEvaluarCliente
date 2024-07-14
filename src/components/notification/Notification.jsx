@@ -7,7 +7,12 @@ import { formatDate } from "../../utils/thunks/Thunks";
 import UseStorageBusiness from "../hooks/UseHookDataNeg";
 import { calculoMora } from "../../utils/calculoCuota/CalculosFuncionesCrediticios";
 
-const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
+const Notification = ({
+  data,
+  typeColor,
+  dataNotification,
+  dataConfiguration,
+}) => {
   const { onGetBusiness } = UseStorageBusiness();
   const [message, setMessage] = useState("");
   const [dataNegocio, setDataNegocio] = useState({});
@@ -69,19 +74,19 @@ const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
       }, tienes una deuda pendiente con la financiera "${
         dataNegocio[0]?.negocio ? dataNegocio[0]?.negocio : " La Financiera"
       }" de ${cuot} soles y ${
-        color == "red" ? "venció" : "vence"
+        typeColor == "red" ? "venció" : "vence"
       } el día ${formatDate(dataNotification?.fechaPago)}, ${
-        color == "red" ? "evita que suba tu mora" : "evita la mora"
+        typeColor == "red" ? "evita que suba tu mora" : "evita la mora"
       } y paga hoy. ¡Gracias!`;
 
-      color !== null ? setMessage(messagePredetermined) : setMessage(``);
+      typeColor !== null ? setMessage(messagePredetermined) : setMessage(``);
     }
-  }, [cuot, color, , dataNegocio]);
+  }, [cuot, typeColor, , dataNegocio]);
 
   // Cuota
   useEffect(() => {
     // Con Mora
-    if (color == "red") {
+    if (typeColor == "red") {
       let result = calculoMora(dataNotification, dataConfiguration);
       setCuot(result);
     }
@@ -89,7 +94,7 @@ const Notification = ({ data, color, dataNotification, dataConfiguration }) => {
     else {
       setCuot(dataNotification?.montoCuota);
     }
-  }, [color, cuot]);
+  }, [typeColor, cuot]);
 
   return (
     <View style={styles.container}>

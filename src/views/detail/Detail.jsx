@@ -17,15 +17,32 @@ import Loading from "../../components/loading/Loading";
 import Entypo from "@expo/vector-icons/Entypo";
 
 const Detail = (props) => {
-  const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
-  const color = props?.route?.params?.data?.typeColor;
-  const id = props?.route?.params?.data?.id;
-  const enable = props?.route?.params?.data?.enable;
-  const dataConfiguration = props?.route?.params?.data?.dataConfiguration;
-  const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
+  const navigation = useNavigation();
 
+  const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
   const [user, setUser] = useState([]);
+  const [valueDetail, setValueDetail] = useState({
+    typeColor: "",
+    id: "",
+    enable: "",
+    dataConfiguration: "",
+  });
+
+  // Actualiza los valores de ValueDetail
+  useFocusEffect(
+    React.useCallback(() => {
+      setValueDetail({
+        ...valueDetail,
+        typeColor: props?.route?.params?.data?.typeColor,
+        id: props?.route?.params?.data?.id,
+        enable: props?.route?.params?.data?.enable,
+        dataConfiguration: props?.route?.params?.data?.dataConfiguration,
+      });
+
+      //return () => unsubscribe();
+    }, [])
+  );
 
   // Trae los datos guardados del local storage
   const loadCustomerId = async (id) => {
@@ -40,9 +57,9 @@ const Detail = (props) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      loadCustomerId(id);
+      loadCustomerId(valueDetail?.id);
       //return () => unsubscribe();
-    }, [])
+    }, [valueDetail])
   );
 
   // Editar
@@ -50,10 +67,10 @@ const Detail = (props) => {
     navigation.navigate("Nuevo cliente", {
       user: value,
       editValue: true,
-      color,
-      id,
-      enable,
-      dataConfiguration,
+      typeColor: valueDetail?.typeColor,
+      id: valueDetail?.id,
+      enable: valueDetail?.enable,
+      dataConfiguration: valueDetail?.dataConfiguration,
     });
   };
 
@@ -61,7 +78,9 @@ const Detail = (props) => {
   const handleDelete = async (data) => {
     try {
       const result = await onDeleteCustomer(data);
-      navigation.navigate(!enable ? "Clientes" : "Clientes cancelados");
+      navigation.navigate(
+        !valueDetail?.enable ? "Clientes" : "Clientes cancelados"
+      );
     } catch (error) {
       console.error();
     }
@@ -91,13 +110,17 @@ const Detail = (props) => {
             <Header
               title={"Detalle"}
               back="Clientes"
-              data={!enable ? dataConfiguration : { enable: enable }}
+              data={
+                !valueDetail?.enable
+                  ? valueDetail?.dataConfiguration
+                  : { enable: valueDetail?.enable }
+              }
             />
             <View style={styles.containerData}>
               <View style={styles.containerTitle}>
                 <Text style={styles.title}>DATOS DEL CLIENTE</Text>
                 <View style={styles.iconos}>
-                  {enable ? null : (
+                  {valueDetail?.enable ? null : (
                     <TouchableOpacity
                       style={styles.icon}
                       onPress={() => edit(user)}
@@ -139,18 +162,18 @@ const Detail = (props) => {
             <Pay data={user} setDataNotification={setDataNotification} />
             <Notification
               data={user}
-              color={color}
+              typeColor={valueDetail?.typeColor}
               dataNotification={dataNotification}
               setDataNotification={setDataNotification}
-              dataConfiguration={dataConfiguration}
+              dataConfiguration={valueDetail?.dataConfiguration}
             />
             <TouchableOpacity
               style={styles.verCronograma}
               onPress={() =>
                 navigation.navigate("Cronograma", {
                   data: user[0].resultPrestamo,
-                  id: id,
-                  enable: enable,
+                  id: valueDetail?.id,
+                  enable: valueDetail?.enable,
                 })
               }
             >

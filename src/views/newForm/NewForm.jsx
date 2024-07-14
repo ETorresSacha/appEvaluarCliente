@@ -25,15 +25,15 @@ const NewForm = (props) => {
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
   const [valueError, setValueError] = useState(false);
-  const dataConfiguration = props.route.params.dataConfiguration; // Datos de la configuración
+  const dataConfiguration = props.route.params?.dataConfiguration; // Datos de la configuración
 
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
-  const user = props.route.params ? props.route.params.user : null;
-  const editValue = props.route.params ? props.route.params.editValue : null;
-  const color = props.route.params ? props.route.params.typeColor : null;
-  const id = props.route.params ? props.route.params.id : null;
-  const enable = props.route.params ? props.route.params.enable : null;
+  const user = props.route.params ? props.route.params?.user : null;
+  const editValue = props.route.params ? props.route.params?.editValue : null;
+  const typeColor = props.route.params ? props.route.params?.typeColor : null;
+  const id = props.route.params ? props.route.params?.id : null;
+  const enable = props.route.params ? props.route.params?.enable : null;
   // ****
 
   const [dataPerson, setDataPerson] = useState({
@@ -135,12 +135,12 @@ const NewForm = (props) => {
     <View style={styles.container}>
       <Header
         title={editValue ? " Editar cliente" : "Nuevo cliente"}
-        back={"Clientes"}
-        id={id}
-        color={color}
-        enable={enable}
-        dataConfiguration={dataConfiguration}
-        editValue={editValue}
+        back={editValue ? "Detalle" : "Clientes"}
+        data={
+          !editValue
+            ? dataConfiguration
+            : { user, editValue, typeColor, id, enable, dataConfiguration }
+        }
       />
       <ScrollView>
         <DataCustomer
