@@ -32,6 +32,7 @@ const Calculator = ({
   editValue,
   user,
   dataConfiguration,
+  valueProps,
   route,
 }) => {
   const [resultCuota, setResultCuota] = useState(""); // Útil para la vista de la calculadora
@@ -114,7 +115,7 @@ const Calculator = ({
           fechaPrimeraCuota: "",
           periodo: "",
           tasaPrimaMensual: !dataPerson
-            ? route.params.data.tpm
+            ? route.params.data?.tpm
             : dataPerson.tasaPrimaMensual,
         });
         setResultView(true);
@@ -167,8 +168,8 @@ const Calculator = ({
         : resultCronograma({
             ...data,
             tasaPrimaMensual: !route
-              ? dataConfiguration.tpm
-              : route.params.data.tpm,
+              ? dataConfiguration?.tpm
+              : route.params.data?.tpm,
           });
       if (dataPerson != undefined) {
         setDataPerson({
@@ -179,7 +180,7 @@ const Calculator = ({
           fechaDesembolso: prestamo?.fechaDesembolso,
           fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
           periodo: prestamo?.periodo,
-          tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration.tpm,
+          tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm,
           resultPrestamo: result,
         });
       } else {
@@ -246,8 +247,7 @@ const Calculator = ({
                   cuota={cuota}
                   changeValue={changeValue}
                   dataPerson={dataPerson}
-                  dataConfiguration={dataConfiguration}
-                  editValue={editValue}
+                  valueProps={valueProps}
                 />
               ) : null
             ) : null

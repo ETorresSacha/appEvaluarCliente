@@ -14,7 +14,7 @@ const ItemsHome = ({ dataConfiguration }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => handleOnPress("Clientes")}
+        onPress={() => handleOnPress("Clientes", dataConfiguration)}
         style={styles.item}
       >
         <FontAwesome name="users" size={100} color="rgb(36, 224, 58)" />
@@ -22,7 +22,7 @@ const ItemsHome = ({ dataConfiguration }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => handleOnPress("Clientes cancelados")}
+        onPress={() => handleOnPress("Clientes", { enable: true })}
         style={styles.item}
       >
         <MaterialCommunityIcons

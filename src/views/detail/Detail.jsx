@@ -17,15 +17,31 @@ import Loading from "../../components/loading/Loading";
 import Entypo from "@expo/vector-icons/Entypo";
 
 const Detail = (props) => {
-  const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
-  const color = props.route.params.typeColor;
-  const id = props.route.params.id;
-  const enable = props.route.params.enable;
-  const dataConfiguration = props.route.params.dataConfiguration;
-  const navigation = useNavigation();
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
-
+  const navigation = useNavigation();
+  const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
   const [user, setUser] = useState([]);
+  const [valueProps, setValueProps] = useState({
+    typeColor: "",
+    id: "",
+    enable: "",
+    dataConfiguration: "",
+  });
+
+  // Actualiza los valores de valueProps
+  useFocusEffect(
+    React.useCallback(() => {
+      setValueProps({
+        ...valueProps,
+        typeColor: props?.route?.params?.typeColor,
+        id: props?.route?.params?.id,
+        enable: props?.route?.params?.enable,
+        dataConfiguration: props?.route?.params?.dataConfiguration,
+      });
+
+      //return () => unsubscribe();
+    }, [])
+  );
 
   // Trae los datos guardados del local storage
   const loadCustomerId = async (id) => {
@@ -40,9 +56,9 @@ const Detail = (props) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      loadCustomerId(id);
+      loadCustomerId(valueProps?.id);
       //return () => unsubscribe();
-    }, [])
+    }, [valueProps])
   );
 
   // Editar
@@ -50,10 +66,10 @@ const Detail = (props) => {
     navigation.navigate("Nuevo cliente", {
       user: value,
       editValue: true,
-      color,
-      id,
-      enable,
-      dataConfiguration,
+      typeColor: valueProps?.typeColor,
+      id: valueProps?.id,
+      enable: valueProps?.enable,
+      dataConfiguration: valueProps?.dataConfiguration,
     });
   };
 
@@ -61,7 +77,9 @@ const Detail = (props) => {
   const handleDelete = async (data) => {
     try {
       const result = await onDeleteCustomer(data);
-      navigation.navigate(!enable ? "Clientes" : "Clientes cancelados");
+      navigation.navigate(
+        !valueProps?.enable ? "Clientes" : "Clientes cancelados"
+      );
     } catch (error) {
       console.error();
     }
@@ -90,13 +108,18 @@ const Detail = (props) => {
           <View>
             <Header
               title={"Detalle"}
-              back={!enable ? "Clientes" : "Clientes cancelados"}
+              back="Clientes"
+              data={
+                !valueProps?.enable
+                  ? valueProps?.dataConfiguration
+                  : { enable: valueProps?.enable }
+              }
             />
             <View style={styles.containerData}>
               <View style={styles.containerTitle}>
                 <Text style={styles.title}>DATOS DEL CLIENTE</Text>
                 <View style={styles.iconos}>
-                  {enable ? null : (
+                  {valueProps?.enable ? null : (
                     <TouchableOpacity
                       style={styles.icon}
                       onPress={() => edit(user)}
@@ -106,7 +129,7 @@ const Detail = (props) => {
                   )}
                   <TouchableOpacity
                     style={styles.icon}
-                    onPress={() => alertDelete(id)}
+                    onPress={() => alertDelete(valueProps?.id)}
                   >
                     <Entypo name="trash" size={30} color="cornsilk" />
                   </TouchableOpacity>
@@ -138,18 +161,20 @@ const Detail = (props) => {
             <Pay data={user} setDataNotification={setDataNotification} />
             <Notification
               data={user}
-              color={color}
+              typeColor={valueProps?.typeColor}
               dataNotification={dataNotification}
               setDataNotification={setDataNotification}
-              dataConfiguration={dataConfiguration}
+              dataConfiguration={valueProps?.dataConfiguration}
             />
             <TouchableOpacity
               style={styles.verCronograma}
               onPress={() =>
                 navigation.navigate("Cronograma", {
-                  data: user[0].resultPrestamo,
-                  id: id,
-                  enable: enable,
+                  user: user[0].resultPrestamo,
+                  id: valueProps?.id,
+                  enable: valueProps?.enable,
+                  typeColor: valueProps?.typeColor,
+                  dataConfiguration: valueProps?.dataConfiguration,
                 })
               }
             >

@@ -8,7 +8,7 @@ const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
 
   useEffect(() => {
-    setUpdatePrestamo(data?.dataPerson ? data?.dataPerson : data);
+    setUpdatePrestamo(data);
   }, [data]);
 
   return (
