@@ -16,7 +16,7 @@ const Header = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
-
+  console.log("data: ", data);
   //! error cuando entro primero al cronograma y despues editar
   const backFunction = (value) => {
     switch (value) {

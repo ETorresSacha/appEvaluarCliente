@@ -4,15 +4,22 @@ import { StyleSheet, View } from "react-native";
 import Header from "../../components/header/Header";
 
 const VerCronograma = (props) => {
-  const user = props.route.params?.user;
-  const id = props.route.params?.id;
-  const enable = props.route.params?.enable;
-  const editValue = props.route.params?.editValue;
-  const typeColor = props.route.params?.typeColor;
-  const dataConfiguration = props.route.params?.dataConfiguration;
+  const user =
+    props.route.params?.dataPerson?.resultPrestamo || props.route.params?.user;
+  const id = props.route.params?.valueProps?.id || props.route.params?.id;
+  const enable =
+    props.route.params?.valueProps?.enable || props.route.params?.enable;
+  const editValue =
+    props.route.params?.valueProps?.editValue || props.route.params?.editValue;
+  const typeColor =
+    props.route.params?.valueProps?.typeColor || props.route.params?.typeColor;
+  const dataConfiguration =
+    props.route.params?.valueProps?.dataConfiguration ||
+    props.route.params?.dataConfiguration;
 
-  const ccv = props.route.params?.ccv;
+  const ccv = props.route.params?.valueProps?.ccv;
   console.log("props: ", props.route.params);
+  console.log("ccv: ", ccv);
   // user: valueProps?.user,
   // id: valueProps?.id,
   // enable: valueProps?.enable,
@@ -25,11 +32,18 @@ const VerCronograma = (props) => {
         title={"Cronograma"}
         back={ccv ? "Nuevo cliente" : editValue ? "Nuevo cliente" : "Detalle"}
         //back={!id ? "Nuevo cliente" : "Detalle"}
-        id={id}
-        enable={enable}
-        data={props.route.params}
+        // id={id}
+        // enable={enable}
+        data={
+          props.route.params?.valueProps || {
+            id,
+            enable,
+            typeColor,
+            dataConfiguration,
+          }
+        }
       />
-      {/* <Cronograma data={user} /> */}
+      <Cronograma data={user} />
     </View>
   );
 };

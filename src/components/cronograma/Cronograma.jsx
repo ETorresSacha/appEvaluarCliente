@@ -6,9 +6,10 @@ import Loading from "../loading/Loading";
 
 const Cronograma = ({ data }) => {
   const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
-
+  console.log("data: ", data);
   useEffect(() => {
-    setUpdatePrestamo(data?.dataPerson ? data?.dataPerson : data);
+    setUpdatePrestamo(data);
+    // setUpdatePrestamo(data?.dataPerson ? data?.dataPerson : data);
   }, [data]);
 
   return (
