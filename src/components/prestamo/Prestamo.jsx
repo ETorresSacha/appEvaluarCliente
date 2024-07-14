@@ -139,6 +139,30 @@ const Prestamo = ({
         </View>
       </View>
 
+      {/* ------------ MENSUAL COPIA -----------*/}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Interes: </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="%"
+            placeholderTextColor="gray"
+            style={
+              !errorsPrestamo.tea
+                ? [styles.input, { borderBottomColor: "white" }]
+                : [styles.input, { borderBottomColor: "red" }]
+            }
+            value={prestamo.interes}
+            defaultValue={prestamo.interes}
+            onChange={(event) => {
+              handleChangeData(event, "interes");
+            }}
+            keyboardType="numeric"
+          />
+        </View>
+      </View>
+
       {/* ------------------ NÚMERO DE CUOTAS ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>

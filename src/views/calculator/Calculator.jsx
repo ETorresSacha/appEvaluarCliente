@@ -12,7 +12,10 @@ import Prestamo from "../../components/prestamo/Prestamo";
 import DetailCalculator from "../../components/detailCalculator/DetailCalculator";
 import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
-import { resultCronograma } from "../../utils/calculoCuota/CalculosCuota";
+import {
+  resultCronograma,
+  resultDeuda,
+} from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import equal from "deep-equal";
@@ -36,6 +39,7 @@ const Calculator = ({
   route,
 }) => {
   const [resultCuota, setResultCuota] = useState(""); // Útil para la vista de la calculadora
+  const [resultCuota1, setResultCuota1] = useState(""); //! es para ver otro tipo de prestamo
   const [enabled, setEnabled] = useState(false); // Habilita el resultado del componente NEWFORM
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
@@ -49,6 +53,7 @@ const Calculator = ({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
     tea: !dataPerson ? "" : dataPerson.tea,
+    interes: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
     periodo: !dataPerson ? "" : dataPerson.periodo,
@@ -171,6 +176,9 @@ const Calculator = ({
               ? dataConfiguration?.tpm
               : route.params.data?.tpm,
           });
+
+      //! esto es una copia, es para un tipo de prestamo independiente, porteriormente se va ver su utilidad
+      const result1 = resultDeuda(data);
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
@@ -185,6 +193,7 @@ const Calculator = ({
         });
       } else {
         setResultCuota(result);
+        setResultCuota1(result1);
       }
 
       setEnabled(true);
@@ -254,6 +263,7 @@ const Calculator = ({
           ) : enabled ? (
             <DetailCalculator
               resultCuota={resultCuota}
+              resultCuota1={resultCuota1}
               periodo={prestamo.periodo}
             />
           ) : null}
