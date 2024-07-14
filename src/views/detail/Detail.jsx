@@ -19,7 +19,6 @@ import Entypo from "@expo/vector-icons/Entypo";
 const Detail = (props) => {
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
   const navigation = useNavigation();
-  console.log("props detail: ", props?.route?.params);
   const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
   const [user, setUser] = useState([]);
   const [valueProps, setValueProps] = useState({
@@ -130,7 +129,7 @@ const Detail = (props) => {
                   )}
                   <TouchableOpacity
                     style={styles.icon}
-                    onPress={() => alertDelete(id)}
+                    onPress={() => alertDelete(valueProps?.id)}
                   >
                     <Entypo name="trash" size={30} color="cornsilk" />
                   </TouchableOpacity>

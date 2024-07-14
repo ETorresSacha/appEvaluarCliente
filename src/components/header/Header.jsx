@@ -5,19 +5,10 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptionsCustomer";
 import Entypo from "@expo/vector-icons/Entypo";
 
-const Header = ({
-  title,
-  //dataConfiguration,
-  back,
-  //id,
-  //enable,
-  data,
-  setValueImport,
-}) => {
+const Header = ({ title, back, data, setValueImport }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
-  console.log("data: ", data);
-  //! error cuando entro primero al cronograma y despues editar
+
   const backFunction = (value) => {
     switch (value) {
       case "Clientes":
@@ -29,41 +20,17 @@ const Header = ({
       case "Nuevo cliente":
         navigation.navigate(value, data);
         break;
-      case "Clientes":
-        navigation.navigate("Home");
-        break;
       default:
         navigation.navigate("Home");
     }
   };
-  //  console.log("data header: ", data);
+
   return (
     <View style={styles.conteiner}>
       {/* Retornar */}
       <TouchableOpacity
         style={styles.leftConteiner}
-        onPress={
-          () => backFunction(back)
-          // id
-          //   ? navigation.navigate("Detalle", {
-          //       id: id,
-          //       typeColor: null,
-          //       enable: enable ? enable : null,
-          //       dataConfiguration: dataConfiguration,
-          //     })
-          //   : navigation.navigate(
-          //       back
-          //         ? back == "Nuevo cliente"
-          //           ? "Nuevo cliente"
-          //           : back
-          //         : "Home",
-          //       {
-          //         dataConfiguration:
-          //           back == "Nuevo cliente" ? data?.dataConfiguration : null,
-          //         editValue: data?.editValue ? data?.editValue : null,
-          //       }
-          //     )
-        }
+        onPress={() => backFunction(back)}
       >
         <Entypo name="reply" style={{ color: "cornsilk", fontSize: 35 }} />
       </TouchableOpacity>

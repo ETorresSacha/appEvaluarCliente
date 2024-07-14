@@ -71,6 +71,7 @@ const Customer = (props) => {
   const loadCongiguration = async () => {
     try {
       // let result = await onGetConfiguration();
+      //!!!!! QUEDA PENDIENTE
       //!todo--> NOTA: VERIFICAR SI CUANDO SE BORRA TODO LOS VALORES EN EL STORAGE DE LA CONFICGURACION Y NO HAY DATOS
       //TODO--> SALE ERROR, DE LO CONTRARIO YA NO SERIA NECESARIO CREAR UNA VARIABLE CON USE STATE, SOLO SERIA CONFIGURAR A PARTIR DE LAS
       // TODOS--> PROPS

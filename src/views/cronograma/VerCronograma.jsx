@@ -18,22 +18,12 @@ const VerCronograma = (props) => {
     props.route.params?.dataConfiguration;
 
   const ccv = props.route.params?.valueProps?.ccv;
-  console.log("props: ", props.route.params);
-  console.log("ccv: ", ccv);
-  // user: valueProps?.user,
-  // id: valueProps?.id,
-  // enable: valueProps?.enable,
-  // editValue: valueProps?.editValue,
-  // typeColor: valueProps?.typeColor,
 
   return (
     <View style={styles.container}>
       <Header
         title={"Cronograma"}
         back={ccv ? "Nuevo cliente" : editValue ? "Nuevo cliente" : "Detalle"}
-        //back={!id ? "Nuevo cliente" : "Detalle"}
-        // id={id}
-        // enable={enable}
         data={
           props.route.params?.valueProps || {
             id,

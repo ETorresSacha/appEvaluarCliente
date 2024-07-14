@@ -2,24 +2,13 @@ import React from "react";
 import { View, StyleSheet, Alert, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const Cuota = ({
-  cuota,
-  changeValue,
-  dataPerson,
-  dataConfiguration,
-  editValue,
-  valueProps,
-  user,
-}) => {
+const Cuota = ({ cuota, changeValue, dataPerson, valueProps }) => {
   const navigation = useNavigation();
+
   const cuota2 = dataPerson.resultPrestamo[0]?.montoCuota;
-  console.log("user: ", user);
+
   const handleRouteCronograma = () => {
     navigation.navigate("Cronograma", { valueProps, dataPerson });
-
-    // dataPerson: dataPerson.resultPrestamo,
-    // dataConfiguration: dataConfiguration,
-    // editValue: editValue,
   };
 
   return (

@@ -32,8 +32,8 @@ const Calculator = ({
   editValue,
   user,
   dataConfiguration,
-  route,
   valueProps,
+  route,
 }) => {
   const [resultCuota, setResultCuota] = useState(""); // Útil para la vista de la calculadora
   const [enabled, setEnabled] = useState(false); // Habilita el resultado del componente NEWFORM
@@ -247,10 +247,7 @@ const Calculator = ({
                   cuota={cuota}
                   changeValue={changeValue}
                   dataPerson={dataPerson}
-                  editValue={editValue}
-                  dataConfiguration={dataConfiguration}
                   valueProps={valueProps}
-                  user={user}
                 />
               ) : null
             ) : null

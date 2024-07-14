@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
@@ -37,32 +36,6 @@ const NewForm = (props) => {
   const typeColor = props.route.params ? props.route.params?.typeColor : null;
   const id = props.route.params ? props.route.params?.id : null;
   const enable = props.route.params ? props.route.params?.enable : null;
-  console.log("newForm: ", props.route.params);
-  // const [valueProps, setValueProps] = useState({
-  //   user: "",
-  //   editValue: "",
-  //   typeColor: "",
-  //   id: "",
-  //   enable: "",
-  //   dataConfiguration,
-  // });
-  //console.log("propspspsps:  ", props.route.params);
-  // Actualiza los valores de valueProps
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     setValueProps({
-  //       ...valueProps,
-  //       user: props.route.params ? props.route.params?.user : null,
-  //       editValue: props.route.params ? props.route.params?.editValue : null,
-  //       typeColor: props.route.params ? props.route.params?.typeColor : null,
-  //       id: props.route.params ? props.route.params?.id : null,
-  //       enable: props.route.params ? props.route.params?.enable : null,
-  //       dataConfiguration: props.route.params,
-  //     });
-
-  //     //return () => unsubscribe();
-  //   }, [])
-  // );
   // ****
 
   const [dataPerson, setDataPerson] = useState({
@@ -159,7 +132,7 @@ const NewForm = (props) => {
       }
     }
   };
-  //! primero tenemos que solucionar que se mande lo mismo que cuando viene desde customer
+
   return (
     <View style={styles.container}>
       <Header
