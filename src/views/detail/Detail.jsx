@@ -19,25 +19,25 @@ import Entypo from "@expo/vector-icons/Entypo";
 const Detail = (props) => {
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
   const navigation = useNavigation();
-
+  console.log("props detail: ", props?.route?.params);
   const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
   const [user, setUser] = useState([]);
-  const [valueDetail, setValueDetail] = useState({
+  const [valueProps, setValueProps] = useState({
     typeColor: "",
     id: "",
     enable: "",
     dataConfiguration: "",
   });
 
-  // Actualiza los valores de ValueDetail
+  // Actualiza los valores de valueProps
   useFocusEffect(
     React.useCallback(() => {
-      setValueDetail({
-        ...valueDetail,
-        typeColor: props?.route?.params?.data?.typeColor,
-        id: props?.route?.params?.data?.id,
-        enable: props?.route?.params?.data?.enable,
-        dataConfiguration: props?.route?.params?.data?.dataConfiguration,
+      setValueProps({
+        ...valueProps,
+        typeColor: props?.route?.params?.typeColor,
+        id: props?.route?.params?.id,
+        enable: props?.route?.params?.enable,
+        dataConfiguration: props?.route?.params?.dataConfiguration,
       });
 
       //return () => unsubscribe();
@@ -57,9 +57,9 @@ const Detail = (props) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      loadCustomerId(valueDetail?.id);
+      loadCustomerId(valueProps?.id);
       //return () => unsubscribe();
-    }, [valueDetail])
+    }, [valueProps])
   );
 
   // Editar
@@ -67,10 +67,10 @@ const Detail = (props) => {
     navigation.navigate("Nuevo cliente", {
       user: value,
       editValue: true,
-      typeColor: valueDetail?.typeColor,
-      id: valueDetail?.id,
-      enable: valueDetail?.enable,
-      dataConfiguration: valueDetail?.dataConfiguration,
+      typeColor: valueProps?.typeColor,
+      id: valueProps?.id,
+      enable: valueProps?.enable,
+      dataConfiguration: valueProps?.dataConfiguration,
     });
   };
 
@@ -79,7 +79,7 @@ const Detail = (props) => {
     try {
       const result = await onDeleteCustomer(data);
       navigation.navigate(
-        !valueDetail?.enable ? "Clientes" : "Clientes cancelados"
+        !valueProps?.enable ? "Clientes" : "Clientes cancelados"
       );
     } catch (error) {
       console.error();
@@ -111,16 +111,16 @@ const Detail = (props) => {
               title={"Detalle"}
               back="Clientes"
               data={
-                !valueDetail?.enable
-                  ? valueDetail?.dataConfiguration
-                  : { enable: valueDetail?.enable }
+                !valueProps?.enable
+                  ? valueProps?.dataConfiguration
+                  : { enable: valueProps?.enable }
               }
             />
             <View style={styles.containerData}>
               <View style={styles.containerTitle}>
                 <Text style={styles.title}>DATOS DEL CLIENTE</Text>
                 <View style={styles.iconos}>
-                  {valueDetail?.enable ? null : (
+                  {valueProps?.enable ? null : (
                     <TouchableOpacity
                       style={styles.icon}
                       onPress={() => edit(user)}
@@ -162,18 +162,20 @@ const Detail = (props) => {
             <Pay data={user} setDataNotification={setDataNotification} />
             <Notification
               data={user}
-              typeColor={valueDetail?.typeColor}
+              typeColor={valueProps?.typeColor}
               dataNotification={dataNotification}
               setDataNotification={setDataNotification}
-              dataConfiguration={valueDetail?.dataConfiguration}
+              dataConfiguration={valueProps?.dataConfiguration}
             />
             <TouchableOpacity
               style={styles.verCronograma}
               onPress={() =>
                 navigation.navigate("Cronograma", {
-                  data: user[0].resultPrestamo,
-                  id: valueDetail?.id,
-                  enable: valueDetail?.enable,
+                  user: user[0].resultPrestamo,
+                  id: valueProps?.id,
+                  enable: valueProps?.enable,
+                  typeColor: valueProps?.typeColor,
+                  dataConfiguration: valueProps?.dataConfiguration,
                 })
               }
             >

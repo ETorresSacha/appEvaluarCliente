@@ -8,18 +8,41 @@ const Cuota = ({
   dataPerson,
   dataConfiguration,
   editValue,
+  valueProps,
+  user,
 }) => {
   const navigation = useNavigation();
   const cuota2 = dataPerson.resultPrestamo[0]?.montoCuota;
-
+  console.log("user: ", user);
   const handleRouteCronograma = () => {
-    navigation.navigate("Cronograma", {
-      data: {
-        dataPerson: dataPerson.resultPrestamo,
-        dataConfiguration: dataConfiguration,
-        editValue: editValue,
-      },
-    });
+    navigation.navigate(
+      "Cronograma",
+      valueProps
+      // data: {
+      //   dataConfiguration: !valueProps?.id
+      //     ? valueProps?.dataConfiguration
+      //     : {
+      //         user: valueProps?.user,
+      //         id: valueProps?.id,
+      //         enable: valueProps?.enable,
+      //         editValue: valueProps?.editValue,
+      //         typeColor: valueProps?.typeColor,
+      //         dataConfiguration: valueProps?.dataConfiguration,
+      //       },
+      // },
+
+      // user: valueProps?.user,
+      // id: valueProps?.id,
+      // enable: valueProps?.enable,
+      // editValue: valueProps?.editValue,
+      // typeColor: valueProps?.typeColor,
+      // dataConfiguration: valueProps?.dataConfiguration,
+      //valueProps
+    );
+
+    // dataPerson: dataPerson.resultPrestamo,
+    // dataConfiguration: dataConfiguration,
+    // editValue: editValue,
   };
 
   return (

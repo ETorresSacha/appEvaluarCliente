@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import DataCustomer from "../../components/dataCustomer/DataCustomer";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import Calculator from "../calculator/Calculator";
@@ -25,7 +26,9 @@ const NewForm = (props) => {
   const [clean, setClean] = useState(false);
   const [valuePrest, setValuePrest] = useState(false);
   const [valueError, setValueError] = useState(false);
-  const dataConfiguration = props.route.params?.dataConfiguration; // Datos de la configuración
+  const dataConfiguration = !props.route.params?.dataConfiguration
+    ? props.route.params
+    : props.route.params?.dataConfiguration; // Datos de la configuración
 
   // TODO --> Editar los datos
   // *** Propiedades que se usan para editar ***
@@ -34,6 +37,32 @@ const NewForm = (props) => {
   const typeColor = props.route.params ? props.route.params?.typeColor : null;
   const id = props.route.params ? props.route.params?.id : null;
   const enable = props.route.params ? props.route.params?.enable : null;
+  console.log("newForm: ", props.route.params);
+  // const [valueProps, setValueProps] = useState({
+  //   user: "",
+  //   editValue: "",
+  //   typeColor: "",
+  //   id: "",
+  //   enable: "",
+  //   dataConfiguration,
+  // });
+  //console.log("propspspsps:  ", props.route.params);
+  // Actualiza los valores de valueProps
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     setValueProps({
+  //       ...valueProps,
+  //       user: props.route.params ? props.route.params?.user : null,
+  //       editValue: props.route.params ? props.route.params?.editValue : null,
+  //       typeColor: props.route.params ? props.route.params?.typeColor : null,
+  //       id: props.route.params ? props.route.params?.id : null,
+  //       enable: props.route.params ? props.route.params?.enable : null,
+  //       dataConfiguration: props.route.params,
+  //     });
+
+  //     //return () => unsubscribe();
+  //   }, [])
+  // );
   // ****
 
   const [dataPerson, setDataPerson] = useState({
@@ -109,7 +138,7 @@ const NewForm = (props) => {
               if (editValue) {
                 navigation.navigate("Detalle", {
                   id: id,
-                  typeColor: null,
+                  typeColor: typeColor,
                   enable: enable ? enable : null,
                   dataConfiguration: dataConfiguration,
                 });
@@ -130,7 +159,7 @@ const NewForm = (props) => {
       }
     }
   };
-
+  //! primero tenemos que solucionar que se mande lo mismo que cuando viene desde customer
   return (
     <View style={styles.container}>
       <Header
@@ -139,7 +168,7 @@ const NewForm = (props) => {
         data={
           !editValue
             ? dataConfiguration
-            : { user, editValue, typeColor, id, enable, dataConfiguration }
+            : { typeColor, id, enable, dataConfiguration }
         }
       />
       <ScrollView>
@@ -164,6 +193,7 @@ const NewForm = (props) => {
           editValue={editValue}
           user={user}
           dataConfiguration={dataConfiguration}
+          valueProps={props.route.params}
         />
         <TouchableOpacity
           style={styles.buttonContainer}

@@ -13,12 +13,10 @@ import Entypo from "@expo/vector-icons/Entypo";
 const NavBar = ({ data, setData, enable, dataConfiguration }) => {
   const navigation = useNavigation();
   const [textSearch, setText] = useState("");
-  console.log("data configuration: ", dataConfiguration);
+
   // Direcciona para crear un nuevo cliente
   const handleAddPress = () => {
-    navigation.navigate("Nuevo cliente", {
-      dataConfiguration: dataConfiguration,
-    });
+    navigation.navigate("Nuevo cliente", dataConfiguration);
   };
 
   //BUSCAR

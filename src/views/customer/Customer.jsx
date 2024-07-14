@@ -15,7 +15,7 @@ import { renderImportData } from "./renderImportData";
 const Customer = (props) => {
   let enable = props?.route?.params?.data?.enable; // Habilita el componente de los clientes cancelados
   let valueProps = props?.route?.params?.data; // Valores para la configuración del prestamo
-  console.log("data: ", props?.route?.params);
+
   const { onGetCronograma } = UseStorage();
   const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
