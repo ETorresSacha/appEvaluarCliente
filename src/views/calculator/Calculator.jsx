@@ -48,6 +48,7 @@ const Calculator = ({
   const [resultView, setResultView] = useState(true);
   const [valueTPM, setValueTPM] = useState("");
   const [cuota, setCuota] = useState();
+  const [valueOption, setValueOption] = useState("option1"); // Selecciona la opción del tipo de prestamo que se desea realizar
 
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
@@ -235,6 +236,8 @@ const Calculator = ({
           setCleanCalculator={setCleanCalculator}
           setClean={setClean}
           dataPerson={dataPerson}
+          valueOption={valueOption}
+          setValueOption={setValueOption}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}

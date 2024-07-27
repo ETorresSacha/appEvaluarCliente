@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Platform } from "react-native";
 import Routes from "./src/routes/Routes";
+import { Provider as PaperProvider, RadioButton } from "react-native-paper";
 
 export default function App() {
   return (
