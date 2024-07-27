@@ -48,8 +48,9 @@ const Calculator = ({
   const [resultView, setResultView] = useState(true);
   const [valueTPM, setValueTPM] = useState("");
   const [cuota, setCuota] = useState();
-  const [valueOption, setValueOption] = useState("option1"); // Selecciona la opción del tipo de prestamo que se desea realizar
+  const [valueOption, setValueOption] = useState("Independiente"); // Selecciona la opción del tipo de prestamo que se desea realizar
 
+  console.log(valueOption);
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
