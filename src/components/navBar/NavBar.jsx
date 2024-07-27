@@ -16,9 +16,7 @@ const NavBar = ({ data, setData, enable, dataConfiguration }) => {
 
   // Direcciona para crear un nuevo cliente
   const handleAddPress = () => {
-    navigation.navigate("Nuevo cliente", {
-      dataConfiguration: dataConfiguration,
-    });
+    navigation.navigate("Nuevo cliente", dataConfiguration);
   };
 
   //BUSCAR

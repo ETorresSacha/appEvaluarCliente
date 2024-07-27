@@ -43,7 +43,7 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
                 navigation.navigate("Detalle", {
                   id: element.uuid,
                   typeColor: color ? color : null,
-                  enable: enable ? enable : null,
+                  enable: enable ? enable : undefined,
                   dataConfiguration: dataConfiguration,
                 })
               }

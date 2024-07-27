@@ -12,7 +12,10 @@ import Prestamo from "../../components/prestamo/Prestamo";
 import DetailCalculator from "../../components/detailCalculator/DetailCalculator";
 import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
-import { resultCronograma } from "../../utils/calculoCuota/CalculosCuota";
+import {
+  resultCronograma,
+  resultDeuda,
+} from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import equal from "deep-equal";
@@ -32,9 +35,11 @@ const Calculator = ({
   editValue,
   user,
   dataConfiguration,
+  valueProps,
   route,
 }) => {
   const [resultCuota, setResultCuota] = useState(""); // Útil para la vista de la calculadora
+  const [resultCuota1, setResultCuota1] = useState(""); //! es para ver otro tipo de prestamo
   const [enabled, setEnabled] = useState(false); // Habilita el resultado del componente NEWFORM
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
@@ -43,11 +48,13 @@ const Calculator = ({
   const [resultView, setResultView] = useState(true);
   const [valueTPM, setValueTPM] = useState("");
   const [cuota, setCuota] = useState();
+  const [valueOption, setValueOption] = useState("option1"); // Selecciona la opción del tipo de prestamo que se desea realizar
 
   const [prestamo, setPrestamo] = useState({
     capital: !dataPerson ? "" : dataPerson.capital,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
     tea: !dataPerson ? "" : dataPerson.tea,
+    interes: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
     periodo: !dataPerson ? "" : dataPerson.periodo,
@@ -114,7 +121,7 @@ const Calculator = ({
           fechaPrimeraCuota: "",
           periodo: "",
           tasaPrimaMensual: !dataPerson
-            ? route.params.data.tpm
+            ? route.params.data?.tpm
             : dataPerson.tasaPrimaMensual,
         });
         setResultView(true);
@@ -167,9 +174,12 @@ const Calculator = ({
         : resultCronograma({
             ...data,
             tasaPrimaMensual: !route
-              ? dataConfiguration.tpm
-              : route.params.data.tpm,
+              ? dataConfiguration?.tpm
+              : route.params.data?.tpm,
           });
+
+      //! esto es una copia, es para un tipo de prestamo independiente, porteriormente se va ver su utilidad
+      const result1 = resultDeuda(data);
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
@@ -179,11 +189,12 @@ const Calculator = ({
           fechaDesembolso: prestamo?.fechaDesembolso,
           fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
           periodo: prestamo?.periodo,
-          tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration.tpm,
+          tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm,
           resultPrestamo: result,
         });
       } else {
         setResultCuota(result);
+        setResultCuota1(result1);
       }
 
       setEnabled(true);
@@ -197,7 +208,7 @@ const Calculator = ({
     >
       {errorsP == undefined ? <Header title={"Evaluar"} back={"Home"} /> : null}
       <View style={styles.titleEvaluar}>
-        <Text style={styles.title}>PRESTAMO</Text>
+        <Text style={styles.title}>PRÉSTAMO</Text>
 
         {!dataPerson ? (
           <TouchableOpacity onPress={() => setCleanCalculator(true)}>
@@ -215,17 +226,18 @@ const Calculator = ({
         <Prestamo
           errorsPrestamo={errorsPrestamo}
           setErrorsPrestamo={setErrorsPrestamo}
-          errorsP={errorsP}
-          setErrorsP={setErrorsP}
           prestamo={prestamo}
           setPrestamo={setPrestamo}
-          editValue={editValue}
           valuePrest={valuePrest}
           cleanCalculator={cleanCalculator}
-          setCleanCalculator={setCleanCalculator}
           clean={clean}
+          setErrorsP={setErrorsP}
+          errorsP={errorsP}
+          setCleanCalculator={setCleanCalculator}
           setClean={setClean}
           dataPerson={dataPerson}
+          valueOption={valueOption}
+          setValueOption={setValueOption}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}
@@ -247,12 +259,14 @@ const Calculator = ({
                   cuota={cuota}
                   changeValue={changeValue}
                   dataPerson={dataPerson}
+                  valueProps={valueProps}
                 />
               ) : null
             ) : null
           ) : enabled ? (
             <DetailCalculator
               resultCuota={resultCuota}
+              resultCuota1={resultCuota1}
               periodo={prestamo.periodo}
             />
           ) : null}

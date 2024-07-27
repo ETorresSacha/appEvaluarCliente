@@ -5,32 +5,32 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import ModalOptionsCustomer from "../../modals/modalOptionsCustomer/ModalOptionsCustomer";
 import Entypo from "@expo/vector-icons/Entypo";
 
-const Header = ({
-  title,
-  dataConfiguration,
-  back,
-  id,
-  enable,
-  setValueImport,
-}) => {
+const Header = ({ title, back, data, setValueImport }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigation = useNavigation();
+
+  const backFunction = (value) => {
+    switch (value) {
+      case "Clientes":
+        navigation.navigate(value, { data: data });
+        break;
+      case "Detalle":
+        navigation.navigate(value, data);
+        break;
+      case "Nuevo cliente":
+        navigation.navigate(value, data);
+        break;
+      default:
+        navigation.navigate("Home");
+    }
+  };
 
   return (
     <View style={styles.conteiner}>
       {/* Retornar */}
       <TouchableOpacity
         style={styles.leftConteiner}
-        onPress={() =>
-          id
-            ? navigation.navigate("Detalle", {
-                id: id,
-                typeColor: null,
-                enable: enable ? enable : null,
-                dataConfiguration: dataConfiguration,
-              })
-            : navigation.navigate(back ? back : "Home")
-        }
+        onPress={() => backFunction(back)}
       >
         <Entypo name="reply" style={{ color: "cornsilk", fontSize: 35 }} />
       </TouchableOpacity>

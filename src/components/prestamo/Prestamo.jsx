@@ -4,6 +4,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { View, StyleSheet, Text, TextInput } from "react-native";
 import DatePrestamo from "../date/DatePrestamo";
 import { useFocusEffect } from "@react-navigation/native";
+import { RadioButton } from "react-native-paper";
 
 const infoPeriod = [
   { label: "Diario", value: "1" },
@@ -20,6 +21,8 @@ const Prestamo = ({
   valuePrest,
   cleanCalculator,
   clean,
+  valueOption,
+  setValueOption,
 }) => {
   const [value, setValue] = useState("");
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
@@ -55,6 +58,44 @@ const Prestamo = ({
   );
   return (
     <View style={styles.container}>
+      <RadioButton.Group
+        onValueChange={(newValue) => setValue(newValue)}
+        value={value}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between", // Asegura espacio entre las opciones
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              width: "40%",
+            }}
+          >
+            <RadioButton value="option1" uncheckedColor="white" />
+            <Text style={{ color: "white" }}>Independiente</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              width: "40%",
+            }}
+          >
+            <RadioButton value="option2" uncheckedColor="white" />
+            <Text
+              style={{ color: "white", borderColor: "green", borderWidth: 1 }}
+            >
+              Institución
+            </Text>
+          </View>
+        </View>
+      </RadioButton.Group>
+
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
@@ -133,6 +174,30 @@ const Prestamo = ({
             defaultValue={prestamo.tea}
             onChange={(event) => {
               handleChangeData(event, "tea");
+            }}
+            keyboardType="numeric"
+          />
+        </View>
+      </View>
+
+      {/* ------------ MENSUAL COPIA -----------*/}
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Interes: </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="%"
+            placeholderTextColor="gray"
+            style={
+              !errorsPrestamo.tea
+                ? [styles.input, { borderBottomColor: "white" }]
+                : [styles.input, { borderBottomColor: "red" }]
+            }
+            value={prestamo.interes}
+            defaultValue={prestamo.interes}
+            onChange={(event) => {
+              handleChangeData(event, "interes");
             }}
             keyboardType="numeric"
           />

@@ -17,28 +17,12 @@ const DataCustomer = ({
   setClean,
   editValue,
 }) => {
-  // const [cleanData, setCleanData] = useState(false);
   //Todo--> Esta es otra forma de setear y validar los datos (SOLO COMO RECORDATORIO)
   const handleChangeData = (event, type) => {
     setDataPerson({ ...dataPerson, [type]: event.nativeEvent.text });
     setErrores(validationDataPerson(dataPerson));
   };
   //Todo--> ****************************************************
-
-  // const handleCleanData = () => {
-  //   // if(cleanData){
-  //   setDataPerson({
-  //     nombre: "",
-  //     apellido: "",
-  //     dni: "",
-  //     correo: "",
-  //     direccion: "",
-  //     celular: "",
-  //   });
-  //   // }
-
-  //   setCleanData(false);
-  // };
 
   return (
     <View style={styles.container}>

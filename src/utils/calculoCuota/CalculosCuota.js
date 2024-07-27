@@ -102,3 +102,17 @@ export const calculoFRCA = (data) =>{
     return cronogramaAjustado
 
  } 
+
+
+
+ //! se creara una funcion para hacer un cálculo de un  préstamo de manera independiente, esta en prueba
+ export const resultDeuda =(data)=>{
+    //TODO--> ESTAMOS EN ESTA PARTE, TOCA REALIZAR LA LÓGICA PARA QUE EL CREDITO SE EFECTUE
+    //TODO--> DE ACUERDO A UN CRONOGRAMA DE PAGO, TIENE QUE VARIAR DE ACUERDO AL PERIODO Y 
+    //TODO--> VER TAMBIEN EL INTERES
+    //! es casi una reestructuracion de todo el credito
+
+    return data
+
+
+ }

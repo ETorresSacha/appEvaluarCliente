@@ -1,13 +1,17 @@
 import { StyleSheet, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Customer from "../customer/Customer";
 
-const CanceledCustomer = () => {
+const CanceledCustomer = (props) => {
   const [enable, setEnable] = useState(true); //  Habilita el componente de los clientes cancelados
+
+  useEffect(() => {
+    setEnable(props.route.params.data.enable);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Customer enable={enable} />
+      <Customer props={props} />
     </View>
   );
 };
