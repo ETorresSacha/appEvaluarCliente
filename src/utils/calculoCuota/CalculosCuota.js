@@ -65,8 +65,11 @@ export const calculoFRCA = (data) =>{
  //TODO --> AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
  export const resultCronograma = (data)=>{
 
-    console.log( "datra: ",data)
-
+    console.log("data: ",data);
+    if(data.tipo == "Independiente"){
+        return console.log(data);
+    }
+else{
     const result = cronPagos(data) 
   
     let cuotas = []
@@ -102,6 +105,9 @@ export const calculoFRCA = (data) =>{
     })
 
     return cronogramaAjustado
+
+}
+
 
  } 
 

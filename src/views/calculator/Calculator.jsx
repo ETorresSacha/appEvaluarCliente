@@ -50,13 +50,12 @@ const Calculator = ({
   const [cuota, setCuota] = useState();
   const [valueOption, setValueOption] = useState("Independiente"); // Selecciona la opción del tipo de prestamo que se desea realizar
 
-  console.log(valueOption);
   const [prestamo, setPrestamo] = useState({
-    tipo: null,
+    tipo: !dataPerson ? valueOption : dataPerson.periodo,
     periodo: !dataPerson ? "" : dataPerson.periodo,
     capital: !dataPerson ? "" : dataPerson.capital,
     tea: !dataPerson ? "" : dataPerson.tea,
-    nteres: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
+    interes: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
     tipoPago: !dataPerson ? "" : dataPerson.tipoPago, //!
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
@@ -197,7 +196,7 @@ const Calculator = ({
           periodo: prestamo?.periodo,
           tipoPago: prestamo?.tipoPago,
           tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm,
-          resultPrestamo: result,
+          // resultPrestamo: result,
         });
       } else {
         setResultCuota(result);
