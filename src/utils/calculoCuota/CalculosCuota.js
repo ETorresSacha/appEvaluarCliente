@@ -65,6 +65,8 @@ export const calculoFRCA = (data) =>{
  //TODO --> AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
  export const resultCronograma = (data)=>{
 
+    console.log( "datra: ",data)
+
     const result = cronPagos(data) 
   
     let cuotas = []
@@ -106,7 +108,8 @@ export const calculoFRCA = (data) =>{
 
 
  //! se creara una funcion para hacer un cálculo de un  préstamo de manera independiente, esta en prueba
- export const resultDeuda =(data)=>{
+ export const cuotaIndependiente =(data)=>{
+    //console.log(data);
     //TODO--> ESTAMOS EN ESTA PARTE, TOCA REALIZAR LA LÓGICA PARA QUE EL CREDITO SE EFECTUE
     //TODO--> DE ACUERDO A UN CRONOGRAMA DE PAGO, TIENE QUE VARIAR DE ACUERDO AL PERIODO Y 
     //TODO--> VER TAMBIEN EL INTERES

@@ -91,12 +91,12 @@ export const validationDataPrestamo = (dataPrestamo) =>{
       if(dataPrestamo.capital?.trim() === ""  ) {
           error = {...error,capital:"Capital incompleto"}
       }
-      if(dataPrestamo.tea.trim() === "" ) {
-          error = {...error,tea:"TEA incompleto"}
-      }
-      if(dataPrestamo.tea.match(ExpRegNumDec)==null){
-        error={...error, teaInvalido:"El valor de la TEA es inválido"}
-       }
+    //   if(dataPrestamo.tea.trim() === "" ) {
+    //       error = {...error,tea:"TEA incompleto"}
+    //   }
+    //   if(dataPrestamo.tea.match(ExpRegNumDec)==null){
+    //     error={...error, teaInvalido:"El valor de la TEA es inválido"}
+    //    }
       if(dataPrestamo.cuotas?.trim() === ""  ) {
           error = {...error,cuotas:"Cuota incompleto"}
       }

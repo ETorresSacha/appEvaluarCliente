@@ -52,13 +52,15 @@ const Calculator = ({
 
   console.log(valueOption);
   const [prestamo, setPrestamo] = useState({
+    tipo: null,
+    periodo: !dataPerson ? "" : dataPerson.periodo,
     capital: !dataPerson ? "" : dataPerson.capital,
-    cuotas: !dataPerson ? "" : dataPerson.cuotas,
     tea: !dataPerson ? "" : dataPerson.tea,
-    interes: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
+    nteres: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
+    cuotas: !dataPerson ? "" : dataPerson.cuotas,
+    tipoPago: !dataPerson ? "" : dataPerson.tipoPago, //!
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
-    periodo: !dataPerson ? "" : dataPerson.periodo,
   });
 
   // Todo--> COMPONENTE NEWFORM
@@ -118,9 +120,11 @@ const Calculator = ({
           capital: "",
           cuotas: "",
           tea: "",
+          interes: "",
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
           periodo: "",
+          tipoPago: "",
           tasaPrimaMensual: !dataPerson
             ? route.params.data?.tpm
             : dataPerson.tasaPrimaMensual,
@@ -178,24 +182,26 @@ const Calculator = ({
               ? dataConfiguration?.tpm
               : route.params.data?.tpm,
           });
-
+      console.log(result);
       //! esto es una copia, es para un tipo de prestamo independiente, porteriormente se va ver su utilidad
-      const result1 = resultDeuda(data);
+      //const result1 = resultDeuda(data);
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
           capital: prestamo?.capital,
           cuotas: prestamo?.cuotas,
           tea: prestamo?.tea,
+          interes: prestamo?.interes,
           fechaDesembolso: prestamo?.fechaDesembolso,
           fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
           periodo: prestamo?.periodo,
+          tipoPago: prestamo?.tipoPago,
           tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm,
           resultPrestamo: result,
         });
       } else {
         setResultCuota(result);
-        setResultCuota1(result1);
+        //setResultCuota1(result1);
       }
 
       setEnabled(true);

@@ -158,7 +158,7 @@ const Prestamo = ({
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
           <Text style={styles.legend}>
-            {valueOption == "Independiente" ? "Interes" : "TEA"}{" "}
+            {valueOption == "Independiente" ? "Interes" : "TEA"}
           </Text>
         </View>
         <View style={styles.inputContainer}>
@@ -170,10 +170,17 @@ const Prestamo = ({
                 ? [styles.input, { borderBottomColor: "white" }]
                 : [styles.input, { borderBottomColor: "red" }]
             }
-            value={prestamo.tea}
-            defaultValue={prestamo.tea}
+            value={
+              valueOption == "Independiente" ? prestamo.interes : prestamo.tea
+            }
+            defaultValue={
+              valueOption == "Independiente" ? prestamo.interes : prestamo.tea
+            }
             onChange={(event) => {
-              handleChangeData(event, "tea");
+              handleChangeData(
+                event,
+                valueOption == "Independiente" ? "interes" : "tea"
+              );
             }}
             keyboardType="numeric"
           />
@@ -209,6 +216,9 @@ const Prestamo = ({
         <RadioButton.Group
           onValueChange={(newValue) => setTypePay(newValue)}
           value={typePay}
+          onChange={(event) => {
+            handleChangeData(event, "tipoPago");
+          }}
         >
           <View style={[styles.formItem, { paddingHorizontal: 0 }]}>
             <View style={styles.legendContainer}>
