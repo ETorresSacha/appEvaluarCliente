@@ -1,6 +1,6 @@
  import {TED, TEM } from "./Formulas"
 
-import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC } from "./CalculosFuncionesCrediticios";
+import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC,calculoCuota } from "./CalculosFuncionesCrediticios";
 
 //TODO --> TASA EFECTIVA
 export const tasaEfectiva = (data)=>{
@@ -46,7 +46,7 @@ export const calculoFRCA = (data) =>{
             {
             cuota:i, 
             fechaPago:paymentDate(data,i-1),
-            fechaDesembolso:data.fechaDesembolso,
+            fechaDesembolso:data?.fechaDesembolso,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),
             FRC :solutionFRC(ted,data,i,acumFRCA),
@@ -65,11 +65,10 @@ export const calculoFRCA = (data) =>{
  //TODO --> AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
  export const resultCronograma = (data)=>{
 
-    console.log("data: ",data);
     if(data.tipo == "Independiente"){
-        return console.log(data);
+        return cuotaIndependiente(data)
     }
-else{
+    else{
     const result = cronPagos(data) 
   
     let cuotas = []
@@ -105,23 +104,22 @@ else{
     })
 
     return cronogramaAjustado
-
 }
-
-
  } 
 
-
-
- //! se creara una funcion para hacer un cálculo de un  préstamo de manera independiente, esta en prueba
+ //TODO --> CRONOGRAMA PARA UN PRÉSTAMO INDEPENDIENTE
  export const cuotaIndependiente =(data)=>{
-    //console.log(data);
-    //TODO--> ESTAMOS EN ESTA PARTE, TOCA REALIZAR LA LÓGICA PARA QUE EL CREDITO SE EFECTUE
-    //TODO--> DE ACUERDO A UN CRONOGRAMA DE PAGO, TIENE QUE VARIAR DE ACUERDO AL PERIODO Y 
-    //TODO--> VER TAMBIEN EL INTERES
-    //! es casi una reestructuracion de todo el credito
+    let cronograma = []
+    for (let i =1; i<=data?.cuotas;i++){
+        cronograma.push({
+            cuota:i,
+            fechaDesembolso:data?.fechaDesembolso,
+            fechaPago: paymentDate(data,i-1),
+            montoCuota:calculoCuota(data,i).toFixed(2),
+            statusPay:false
+        })
+    }
 
-    return data
-
+    return cronograma
 
  }

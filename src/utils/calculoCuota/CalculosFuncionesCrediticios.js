@@ -245,7 +245,21 @@ export const calculoMora = (data, dataConfiguration)=>{
      
      return result.toFixed(2)
 
-    
-
 }
 
+
+//TODO --> CUOTA PARA UN PRÉSTAMO INDEPENDIENTE
+export const calculoCuota = (data,i)=>{
+    let cuota
+
+    if(data?.tipoPago == "Interes"){
+        
+        if(data?.cuotas != i) cuota = data?.capital*data?.interes/100
+        if (data?.cuotas == i) cuota = parseFloat(data?.capital*data?.interes/100)+parseFloat(data?.capital)
+
+    }
+    if (data?.tipoPago == "Fraccionado"){
+        cuota = (parseFloat(data?.capital*data?.interes/100)*(parseInt(data?.cuotas)) + parseFloat(data?.capital))/parseInt(data?.cuotas)
+    }
+    return cuota
+}

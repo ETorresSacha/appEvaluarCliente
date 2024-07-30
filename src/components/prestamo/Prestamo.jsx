@@ -57,7 +57,7 @@ const Prestamo = ({
       setValue(""); // Para setear el periodo a un estado de inicio
     }, [valuePrest, cleanCalculator, clean])
   );
-  console.log(prestamo);
+
   return (
     <View style={styles.container}>
       {/* ------------------ TIPO DE PRÉSTAMO ------------------*/}

@@ -1,17 +1,18 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-const DetailCalculator = ({ resultCuota, resultCuota1, periodo }) => {
+const DetailCalculator = ({ resultCuota, prestamo, periodo }) => {
+  console.log("data: ", resultCuota);
+
   const cuota = resultCuota[0]?.montoCuota;
-  console.log(resultCuota1);
-  const cuotaCopia = resultCuota1?.interes; //! es solo una copia, esta en evaluacion
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.text}>S/. {cuota}</Text>
+        <Text style={styles.text}>S/. {cuota} </Text>
         <Text style={[styles.text, { fontSize: 30 }]}> {periodo}</Text>
-        <Text style={styles.text}>S/. {cuotaCopia}</Text>
-        <Text style={[styles.text, { fontSize: 30 }]}> {periodo}</Text>
+        <Text style={[styles.text, { fontSize: 30 }]}>
+          Última cuota S/. {resultCuota[resultCuota.length - 1]?.montoCuota}
+        </Text>
       </View>
     </View>
   );
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-    paddingTop: 70,
+    paddingTop: 30,
   },
   text: {
     fontSize: 50,

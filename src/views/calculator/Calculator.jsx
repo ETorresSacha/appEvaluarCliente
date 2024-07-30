@@ -39,7 +39,6 @@ const Calculator = ({
   route,
 }) => {
   const [resultCuota, setResultCuota] = useState(""); // Útil para la vista de la calculadora
-  const [resultCuota1, setResultCuota1] = useState(""); //! es para ver otro tipo de prestamo
   const [enabled, setEnabled] = useState(false); // Habilita el resultado del componente NEWFORM
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
@@ -144,6 +143,7 @@ const Calculator = ({
         setEnabled(false);
       }
       // Para cuando se modifica algún dato del préstamo, el resultado de la cuota ya no será visible
+      //! AQUI HAY UN ERROR CUANDO SE MODIFICA ALGUN DATA DESPUES DE CALCULAR EL RESULTADO YA NO CALCULA CORRECTAMENTE, ES EN ESTA PARTE LO QUE TENEMOS QUE CORREGIR
       if (!editValue && !dataPerson) {
         if (!equal(prestamo, copyDataPrestamo)) {
           setEnabled(false);
@@ -182,8 +182,7 @@ const Calculator = ({
               : route.params.data?.tpm,
           });
       console.log(result);
-      //! esto es una copia, es para un tipo de prestamo independiente, porteriormente se va ver su utilidad
-      //const result1 = resultDeuda(data);
+
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
@@ -196,11 +195,10 @@ const Calculator = ({
           periodo: prestamo?.periodo,
           tipoPago: prestamo?.tipoPago,
           tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm,
-          // resultPrestamo: result,
+          resultPrestamo: result,
         });
       } else {
         setResultCuota(result);
-        //setResultCuota1(result1);
       }
 
       setEnabled(true);
@@ -272,8 +270,8 @@ const Calculator = ({
           ) : enabled ? (
             <DetailCalculator
               resultCuota={resultCuota}
-              resultCuota1={resultCuota1}
               periodo={prestamo.periodo}
+              prestamo={prestamo}
             />
           ) : null}
         </View>
