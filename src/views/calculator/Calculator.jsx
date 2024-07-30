@@ -143,6 +143,7 @@ const Calculator = ({
         setEnabled(false);
       }
       // Para cuando se modifica algún dato del préstamo, el resultado de la cuota ya no será visible
+      //! AQUI HAY UN ERROR CUANDO SE MODIFICA ALGUN DATA DESPUES DE CALCULAR EL RESULTADO YA NO CALCULA CORRECTAMENTE, ES EN ESTA PARTE LO QUE TENEMOS QUE CORREGIR
       if (!editValue && !dataPerson) {
         if (!equal(prestamo, copyDataPrestamo)) {
           setEnabled(false);
@@ -270,6 +271,7 @@ const Calculator = ({
             <DetailCalculator
               resultCuota={resultCuota}
               periodo={prestamo.periodo}
+              prestamo={prestamo}
             />
           ) : null}
         </View>
