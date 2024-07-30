@@ -1,6 +1,6 @@
  import {TED, TEM } from "./Formulas"
 
-import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC } from "./CalculosFuncionesCrediticios";
+import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC,calculoCuota } from "./CalculosFuncionesCrediticios";
 
 //TODO --> TASA EFECTIVA
 export const tasaEfectiva = (data)=>{
@@ -65,7 +65,6 @@ export const calculoFRCA = (data) =>{
  //TODO --> AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
  export const resultCronograma = (data)=>{
 
-    console.log("data: ",data);
     if(data.tipo == "Independiente"){
         return cuotaIndependiente(data)
     }
@@ -90,66 +89,37 @@ export const calculoFRCA = (data) =>{
 
         return {
    
-            cuota:element.cuota,//
-            fechaDesembolso:element.fechaDesembolso,//
-            fechaPago: paymentDate(data,i-1),
-            capital: (promCuota-(element.cuotaInteres+element.SegDesgrvamen+itf)).toFixed(2),//
-            interes: element.cuotaInteres.toFixed(2),//
+            cuota:element.cuota,
+            fechaDesembolso:element.fechaDesembolso,
+            fechaPago: element.fechaPago,
+            capital: (promCuota-(element.cuotaInteres+element.SegDesgrvamen+itf)).toFixed(2),
+            interes: element.cuotaInteres.toFixed(2),
             SegDesg:element.SegDesgrvamen.toFixed(2),
             ITF:itf.toFixed(2),
-            montoCuota:promCuota.toFixed(2),//
+            montoCuota:promCuota.toFixed(2),
             dias:element.Dias,
-            statusPay:false//
+            statusPay:false
         }
         
     })
 
     return cronogramaAjustado
-
 }
-
-
  } 
 
- const calculoCuota = (data,i)=>{
-    let cuota
-    console.log("tipo pago",  data?.cuotas == i);
-        //console.log(("i: ",typeof i));
-    if(data?.tipoPago == "Interes"){
-        
-        if(data?.cuotas != i) cuota = data?.capital*data?.interes/100
-        if (data?.cuotas == i) cuota = parseFloat(data?.capital*data?.interes/100)+parseFloat(data?.capital)
-
-    }
-    if (data?.tipoPago == "Fraccionado"){
-        cuota = ((data?.capital*data?.interes/100+data?.capital)+data?.capital)/data?.cuota
-    
-    }
-
-    return cuota
-}
-
- //! se creara una funcion para hacer un cálculo de un  préstamo de manera independiente, esta en prueba
+ //TODO --> CRONOGRAMA PARA UN PRÉSTAMO INDEPENDIENTE
  export const cuotaIndependiente =(data)=>{
     let cronograma = []
     for (let i =1; i<=data?.cuotas;i++){
         cronograma.push({
             cuota:i,
             fechaDesembolso:data?.fechaDesembolso,
-            fechaPago: paymentDate(data,i-1),//
-            montoCuota:calculoCuota(data,i).toFixed(2),//
-            statusPay:false//
+            fechaPago: paymentDate(data,i-1),
+            montoCuota:calculoCuota(data,i).toFixed(2),
+            statusPay:false
         })
-
     }
 
-    
-    //TODO--> ESTAMOS EN ESTA PARTE, TOCA REALIZAR LA LÓGICA PARA QUE EL CREDITO SE EFECTUE
-    //TODO--> DE ACUERDO A UN CRONOGRAMA DE PAGO, TIENE QUE VARIAR DE ACUERDO AL PERIODO Y 
-    //TODO--> VER TAMBIEN EL INTERES
-    //! es casi una reestructuracion de todo el credito
-
     return cronograma
-
 
  }

@@ -39,7 +39,6 @@ const Calculator = ({
   route,
 }) => {
   const [resultCuota, setResultCuota] = useState(""); // Útil para la vista de la calculadora
-  const [resultCuota1, setResultCuota1] = useState(""); //! es para ver otro tipo de prestamo
   const [enabled, setEnabled] = useState(false); // Habilita el resultado del componente NEWFORM
   const [errorsPrestamo, setErrorsPrestamo] = useState([]);
   const [copyDataPrestamo, setCopyDataPrestamo] = useState([]); // Copia los datos iniciales del prestamo
@@ -182,8 +181,7 @@ const Calculator = ({
               : route.params.data?.tpm,
           });
       console.log(result);
-      //! esto es una copia, es para un tipo de prestamo independiente, porteriormente se va ver su utilidad
-      //const result1 = resultDeuda(data);
+
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
@@ -199,8 +197,7 @@ const Calculator = ({
           resultPrestamo: result,
         });
       } else {
-        //setResultCuota(result);
-        //setResultCuota1(result1);
+        setResultCuota(result);
       }
 
       setEnabled(true);
@@ -272,7 +269,6 @@ const Calculator = ({
           ) : enabled ? (
             <DetailCalculator
               resultCuota={resultCuota}
-              resultCuota1={resultCuota1}
               periodo={prestamo.periodo}
             />
           ) : null}
