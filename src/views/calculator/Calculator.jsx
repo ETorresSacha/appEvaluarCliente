@@ -196,10 +196,10 @@ const Calculator = ({
           periodo: prestamo?.periodo,
           tipoPago: prestamo?.tipoPago,
           tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm,
-          // resultPrestamo: result,
+          resultPrestamo: result,
         });
       } else {
-        setResultCuota(result);
+        //setResultCuota(result);
         //setResultCuota1(result1);
       }
 
