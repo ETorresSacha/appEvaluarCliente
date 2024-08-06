@@ -47,16 +47,16 @@ const Calculator = ({
   const [resultView, setResultView] = useState(true);
   const [valueTPM, setValueTPM] = useState("");
   const [cuota, setCuota] = useState();
-  const [valueOption, setValueOption] = useState("Independiente"); // Selecciona la opción del tipo de prestamo que se desea realizar
+  const [tipoPago, setTipoPago] = useState("Interes"); // Selecciona la opción del tipo de prestamo que se desea realizar
 
   const [prestamo, setPrestamo] = useState({
-    tipo: !dataPerson ? valueOption : dataPerson.periodo,
+    // tipo: !dataPerson ? valueOption : dataPerson.periodo,
     periodo: !dataPerson ? "" : dataPerson.periodo,
     capital: !dataPerson ? "" : dataPerson.capital,
-    tea: !dataPerson ? "" : dataPerson.tea,
+    //tea: !dataPerson ? "" : dataPerson.tea, // Es aplicable cuando se trabaja con una entidad financiera
     interes: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
-    tipoPago: !dataPerson ? "" : dataPerson.tipoPago, //!
+    tipoPago: !dataPerson ? tipoPago : dataPerson.tipoPago, //!
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
   });
@@ -117,15 +117,15 @@ const Calculator = ({
         setPrestamo({
           capital: "",
           cuotas: "",
-          tea: "",
+          //tea: "",
           interes: "",
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
           periodo: "",
           tipoPago: "",
-          tasaPrimaMensual: !dataPerson
-            ? route.params.data?.tpm
-            : dataPerson.tasaPrimaMensual,
+          // tasaPrimaMensual: !dataPerson // Aplicable cuando se trabaja con una entidad financiera
+          //   ? route.params.data?.tpm
+          //   : dataPerson.tasaPrimaMensual,
         });
         setResultView(true);
         setClean ? setClean(false) : setCleanCalculator(false);
@@ -154,6 +154,8 @@ const Calculator = ({
 
   // Todo--> PARA AMBOS COMPONENTES
   const handleCalcular = async (data) => {
+    console.log("datacy: ", data);
+
     // Crea una copia de los datos del préstamo sólo cuando esta en uso el componente CALCULATOR
     if (!editValue && !dataPerson) {
       setCopyDataPrestamo(prestamo);
@@ -177,18 +179,18 @@ const Calculator = ({
         ? user[0].resultPrestamo
         : resultCronograma({
             ...data,
-            tasaPrimaMensual: !route
-              ? dataConfiguration?.tpm
-              : route.params.data?.tpm,
+            // tasaPrimaMensual: !route
+            //   ? dataConfiguration?.tpm
+            //   : route.params.data?.tpm,
           });
-      console.log(result);
+      //console.log(result);
 
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
           capital: prestamo?.capital,
           cuotas: prestamo?.cuotas,
-          tea: prestamo?.tea,
+          //tea: prestamo?.tea,
           interes: prestamo?.interes,
           fechaDesembolso: prestamo?.fechaDesembolso,
           fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
@@ -240,8 +242,8 @@ const Calculator = ({
           setCleanCalculator={setCleanCalculator}
           setClean={setClean}
           dataPerson={dataPerson}
-          valueOption={valueOption}
-          setValueOption={setValueOption}
+          tipoPago={tipoPago}
+          setTipoPago={setTipoPago}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}

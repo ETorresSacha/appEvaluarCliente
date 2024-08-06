@@ -21,12 +21,11 @@ const Prestamo = ({
   valuePrest,
   cleanCalculator,
   clean,
-  valueOption,
-  setValueOption,
+  tipoPago,
+  setTipoPago,
 }) => {
   const [value, setValue] = useState("");
   const [placeholderNumCuotas, setPlaceholderNumCuotas] = useState("");
-  const [typePay, setTypePay] = useState(""); //! este estado falta ubicarlo en algun componente correctamnte, por el momento esta aqui solo para cambiear el estado
 
   const renderItem = (item) => {
     return (
@@ -60,43 +59,6 @@ const Prestamo = ({
 
   return (
     <View style={styles.container}>
-      {/* ------------------ TIPO DE PRÉSTAMO ------------------*/}
-      <RadioButton.Group
-        onValueChange={(newValue) => {
-          setValueOption(newValue);
-          setPrestamo({ ...prestamo, tipo: newValue });
-        }}
-        value={valueOption}
-      >
-        <Text style={styles.legend}>TIPO</Text>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}
-        >
-          {["Independiente", "Institución"].map((element, index) => {
-            return (
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  width: "30%",
-                }}
-                key={index}
-              >
-                <RadioButton
-                  value={valueOption == element ? valueOption : element}
-                  uncheckedColor="white"
-                />
-                <Text style={{ color: "white" }}>{element}</Text>
-              </View>
-            );
-          })}
-        </View>
-      </RadioButton.Group>
-
       {/* ------------------ PERIODO ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
@@ -160,9 +122,7 @@ const Prestamo = ({
       {/* ------------------ TEA ó INTERES ------------------*/}
       <View style={styles.formItem}>
         <View style={styles.legendContainer}>
-          <Text style={styles.legend}>
-            {valueOption == "Independiente" ? "Interes" : "TEA"}
-          </Text>
+          <Text style={styles.legend}>Interes</Text>
         </View>
         <View style={styles.inputContainer}>
           <TextInput
@@ -173,17 +133,10 @@ const Prestamo = ({
                 ? [styles.input, { borderBottomColor: "white" }]
                 : [styles.input, { borderBottomColor: "red" }]
             }
-            value={
-              valueOption == "Independiente" ? prestamo.interes : prestamo.tea
-            }
-            defaultValue={
-              valueOption == "Independiente" ? prestamo.interes : prestamo.tea
-            }
+            value={prestamo?.interes}
+            defaultValue={prestamo?.interes}
             onChange={(event) => {
-              handleChangeData(
-                event,
-                valueOption == "Independiente" ? "interes" : "tea"
-              );
+              handleChangeData(event, "interes");
             }}
             keyboardType="numeric"
           />
@@ -215,36 +168,35 @@ const Prestamo = ({
         </View>
       </View>
       {/* ------------------ TIPO DE PAGO ------------------*/}
-      {valueOption == "Independiente" ? (
-        <View style={styles.formItem}>
-          <View style={styles.legendContainer}>
-            <Text style={styles.legend}>Tipo de pago: </Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <RadioButton.Group
-              onValueChange={(newValue) => {
-                setTypePay(newValue);
-                setPrestamo({ ...prestamo, tipoPago: newValue });
-              }}
-              value={typePay}
-            >
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                {["Interes", "Fraccionado"].map((element, index) => {
-                  return (
-                    <View
-                      style={{ flexDirection: "row", alignItems: "center" }}
-                      key={index}
-                    >
-                      <RadioButton value={element} uncheckedColor="white" />
-                      <Text style={{ color: "white" }}>{element}</Text>
-                    </View>
-                  );
-                })}
-              </View>
-            </RadioButton.Group>
-          </View>
+
+      <View style={styles.formItem}>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legend}>Tipo de pago: </Text>
         </View>
-      ) : null}
+        <View style={styles.inputContainer}>
+          <RadioButton.Group
+            onValueChange={(newValue) => {
+              setTipoPago(newValue);
+              setPrestamo({ ...prestamo, tipoPago: newValue });
+            }}
+            value={prestamo?.tipoPago}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              {["Interes", "Fraccionado"].map((element, index) => {
+                return (
+                  <View
+                    style={{ flexDirection: "row", alignItems: "center" }}
+                    key={index}
+                  >
+                    <RadioButton value={element} uncheckedColor="white" />
+                    <Text style={{ color: "white" }}>{element}</Text>
+                  </View>
+                );
+              })}
+            </View>
+          </RadioButton.Group>
+        </View>
+      </View>
 
       {/* ------------------ FECHA DE DESEMBOLSO ------------------*/}
       <DatePrestamo
