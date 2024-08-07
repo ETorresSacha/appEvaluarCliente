@@ -3,6 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 
 const DetailCalculator = ({ resultCuota, prestamo, periodo }) => {
   console.log("data: ", resultCuota);
+  console.log("prestamo: ", prestamo);
 
   const cuota = resultCuota[0]?.montoCuota;
   return (
@@ -10,9 +11,11 @@ const DetailCalculator = ({ resultCuota, prestamo, periodo }) => {
       <View>
         <Text style={styles.text}>S/. {cuota} </Text>
         <Text style={[styles.text, { fontSize: 30 }]}> {periodo}</Text>
-        <Text style={[styles.text, { fontSize: 30 }]}>
-          Última cuota S/. {resultCuota[resultCuota.length - 1]?.montoCuota}
-        </Text>
+        {prestamo?.tipoPago == "Interes" ? (
+          <Text style={[styles.text, { fontSize: 30 }]}>
+            Última cuota S/. {resultCuota[resultCuota.length - 1]?.montoCuota}
+          </Text>
+        ) : null}
       </View>
     </View>
   );

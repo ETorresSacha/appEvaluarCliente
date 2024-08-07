@@ -2,6 +2,8 @@
 
 import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC,calculoCuota } from "./CalculosFuncionesCrediticios";
 
+
+//? ************************ TODO ESTAS FUNCIONES SON APLICABLES PARA UNA FINANCIERA ************************
 //TODO --> TASA EFECTIVA
 export const tasaEfectiva = (data)=>{
 
@@ -62,13 +64,9 @@ export const calculoFRCA = (data) =>{
  
  }
 
- //TODO --> AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA
+ //TODO --> AJUSTANDO LOS RESULTADOS DEL CRONOGRAMA 
  export const resultCronograma = (data)=>{
 
-    if(data.tipo == "Independiente"){
-        return cuotaIndependiente(data)
-    }
-    else{
     const result = cronPagos(data) 
   
     let cuotas = []
@@ -104,9 +102,12 @@ export const calculoFRCA = (data) =>{
     })
 
     return cronogramaAjustado
-}
+
  } 
 
+//? ***************************************************************************************************
+
+//? --------------------- ESTA FUNCIÓN ES APLICABLE CON UN PRÉSTAMO INDEPENDIENTE ---------------------
  //TODO --> CRONOGRAMA PARA UN PRÉSTAMO INDEPENDIENTE
  export const cuotaIndependiente =(data)=>{
     let cronograma = []
@@ -121,5 +122,5 @@ export const calculoFRCA = (data) =>{
     }
 
     return cronograma
-
  }
+ //? --------------------- ---------------------------------------------------- ---------------------

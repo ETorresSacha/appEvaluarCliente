@@ -21,7 +21,6 @@ const Prestamo = ({
   valuePrest,
   cleanCalculator,
   clean,
-  tipoPago,
   setTipoPago,
 }) => {
   const [value, setValue] = useState("");
@@ -129,7 +128,7 @@ const Prestamo = ({
             placeholder="%"
             placeholderTextColor="gray"
             style={
-              !errorsPrestamo.tea
+              !errorsPrestamo.interes
                 ? [styles.input, { borderBottomColor: "white" }]
                 : [styles.input, { borderBottomColor: "red" }]
             }
