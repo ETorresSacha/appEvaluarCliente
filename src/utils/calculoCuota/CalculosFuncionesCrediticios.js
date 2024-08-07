@@ -213,7 +213,8 @@ export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 }
 
 
-//TODO --> CÁLCULO DE LA MORA
+//TODO --> CÁLCULO DE LA MORA 
+//! ESTE COMENTARIO SE BORRARA, ES PARA RECORDAR QUE SE DEBE DE CREAR UNA NUEVA FUNCION PARA CALCULAR LA MORA
 export const calculoMora = (data, dataConfiguration)=>{
 
     let intMoratorio =parseFloat(dataConfiguration?.intMoratorio)  // % --> Diario

@@ -53,18 +53,12 @@ const Configuration = ({
               fontWeight: "bold",
             }}
           >
-            CONFIGURACIÓN
-          </Text>
-        </View>
-        <View>
-          <Text style={{ paddingBottom: 10 }}>
-            Estos datos son útiles para los cálculos del crédito y sólo serán
-            modificados desde esta vista.
+            INTERÉS MORATORIO
           </Text>
         </View>
 
         {/* Tasa Prima Mensual */}
-        <View style={styles.containerInput}>
+        {/* <View style={styles.containerInput}>
           <Text>Tasa Prima Mensual</Text>
           <View style={styles.inputView}>
             <TextInput
@@ -78,16 +72,33 @@ const Configuration = ({
             />
             <Text style={{ fontSize: 20 }}>%</Text>
           </View>
-        </View>
-        <View style={{ paddingTop: 30 }}>
+        </View> */}
+
+        {/* Comisión de Cobranza Variable */}
+        {/* <View style={styles.containerInput}>
+          <Text>Comisión de Cobranza Variable</Text>
+          <View style={styles.inputView}>
+            <TextInput
+              value={dataConfiguration.ccv}
+              style={styles.input}
+              placeholderTextColor="gray"
+              onChangeText={(text) => {
+                setDataConfiguration({ ...dataConfiguration, ccv: text });
+              }}
+              keyboardType="numeric"
+            />
+            <Text style={{ fontSize: 20 }}>%</Text>
+          </View>
+        </View> */}
+
+        {/* Interés Moratorio */}
+        <View style={{ paddingTop: 10 }}>
           <Text style={{ color: "gray" }}>
             Aplicable solo cuando existe mora
           </Text>
         </View>
-
-        {/* Interés Moratorio Anual */}
         <View style={styles.containerInput}>
-          <Text>Interés Moratorio Anual</Text>
+          <Text>Interés Moratorio</Text>
           <View style={styles.inputView}>
             <TextInput
               value={dataConfiguration.intMoratorio}
@@ -105,22 +116,6 @@ const Configuration = ({
           </View>
         </View>
 
-        {/* Comisión de Cobranza Variable */}
-        <View style={styles.containerInput}>
-          <Text>Comisión de Cobranza Variable</Text>
-          <View style={styles.inputView}>
-            <TextInput
-              value={dataConfiguration.ccv}
-              style={styles.input}
-              placeholderTextColor="gray"
-              onChangeText={(text) => {
-                setDataConfiguration({ ...dataConfiguration, ccv: text });
-              }}
-              keyboardType="numeric"
-            />
-            <Text style={{ fontSize: 20 }}>%</Text>
-          </View>
-        </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.btnCalcular}

@@ -77,9 +77,7 @@ const Customer = (props) => {
       // TODOS--> PROPS
       setDataConfiguration({
         ...dataConfiguration,
-        tpm: !valueProps ? "0.08" : valueProps?.tpm,
-        ccv: !valueProps ? "2" : valueProps?.ccv,
-        intMoratorio: !valueProps ? "20" : valueProps?.intMoratorio,
+        intMoratorio: valueProps?.intMoratorio,
       });
     } catch (error) {
       console.error(error);

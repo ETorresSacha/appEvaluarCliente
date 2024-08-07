@@ -105,7 +105,7 @@ const DataCustomer = ({
               <Users
                 data={customer.customerRed}
                 dataConfiguration={dataConfiguration}
-                color={"rgb(250, 23, 15)"}
+                color={"red"}
               />
               <Users
                 data={customer.customerYellow}

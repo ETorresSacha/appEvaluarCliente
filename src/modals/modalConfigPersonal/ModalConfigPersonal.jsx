@@ -14,7 +14,7 @@ import AcercaApp from "./modalOptions/AcercaApp";
 
 const optionsData = [
   "Información Negocio",
-  "Configuración",
+  "Interés moratorio",
   "Acerca de la App",
   "Recomendar App",
 ];
@@ -39,7 +39,7 @@ const ModalConfigPersonal = ({
       case "Información Negocio":
         setEnableNeg(true);
         break;
-      case "Configuración":
+      case "Interés moratorio":
         setEnableConf(true);
         break;
       case "Acerca de la App":
