@@ -110,6 +110,8 @@ export const calculoFRCA = (data) =>{
 //? --------------------- ESTA FUNCIÓN ES APLICABLE CON UN PRÉSTAMO INDEPENDIENTE ---------------------
  //TODO --> CRONOGRAMA PARA UN PRÉSTAMO INDEPENDIENTE
  export const cuotaIndependiente =(data)=>{
+    const interesTotal = parseInt(data?.cuotas)*parseFloat(data?.interes)*parseFloat(data?.capital)/100
+    
     let cronograma = []
     for (let i =1; i<=data?.cuotas;i++){
         cronograma.push({
@@ -117,6 +119,7 @@ export const calculoFRCA = (data) =>{
             fechaDesembolso:data?.fechaDesembolso,
             fechaPago: paymentDate(data,i-1),
             montoCuota:calculoCuota(data,i).toFixed(2),
+            interesTotal:interesTotal,
             statusPay:false
         })
     }

@@ -49,10 +49,10 @@ const Calculator = ({
   const [prestamo, setPrestamo] = useState({
     periodo: !dataPerson ? "" : dataPerson.periodo,
     capital: !dataPerson ? "" : dataPerson.capital,
-    //tea: !dataPerson ? "" : dataPerson.tea, // Es aplicable cuando se trabaja con una entidad financiera
+    //tea: !dataPerson ? "" : dataPerson.tea, //? Es aplicable cuando se trabaja con una entidad financiera
     interes: !dataPerson ? "" : dataPerson.interes,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
-    tipoPago: !dataPerson ? tipoPago : dataPerson.tipoPago,
+    tipoPago: !editValue ? tipoPago : dataPerson.tipoPago,
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
   });
@@ -118,7 +118,7 @@ const Calculator = ({
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
           periodo: "",
-          tipoPago: "",
+          tipoPago: tipoPago,
           // tasaPrimaMensual: !dataPerson //todo-- Aplicable cuando se trabaja con una entidad financiera
           //   ? route.params.data?.tpm
           //   : dataPerson.tasaPrimaMensual,
@@ -181,7 +181,7 @@ const Calculator = ({
       const result = changeValue
         ? user[0].resultPrestamo
         : cuotaIndependiente(data);
-      //console.log(result);
+      console.log("result: ", result);
 
       if (dataPerson != undefined) {
         setDataPerson({

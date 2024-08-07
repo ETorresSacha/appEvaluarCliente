@@ -7,7 +7,6 @@ export const validationDataPerson = (dataPerson) =>{
      apellidos:"",
      dni:"",
      dniError:"",
-     correo:"",
      correoError:"",
      direccion:"",
      celular:"",
@@ -37,13 +36,12 @@ export const validationDataPerson = (dataPerson) =>{
         error = {...error,dniError : "Se aceptan únicamente ocho caracteres para el número de DNI."}
     }
        
-   if(  dataPerson.correo.trim() === ""  ) {
-       error = {...error,correo:"Correo incompleto."}
+   if(  dataPerson.correo.trim() != ""  ) {
+    if(dataPerson.correo.match(ExpRegEmail) == null ){
+        error = {...error, correoError:"No es una dirección de correo electrónico válido."}
+    }
    }
 
-   if(dataPerson.correo.match(ExpRegEmail) == null ){
-       error = {...error, correoError:"No es una dirección de correo electrónico válido."}
-   }
    if(  dataPerson.direccion.trim() === ""  ) {
        error = {...error,direccion:"Dirección incompleto."}
    }
@@ -71,7 +69,6 @@ export const validationDataPrestamo = (dataPrestamo) =>{
     let ExpRegEnt=/^\d*$/ // Expresión regular para aceptar solo números enteros
     let fechaInicio = new Date(dataPrestamo.fechaDesembolso).getTime()
     let fechaFinal = new Date(dataPrestamo.fechaPrimeraCuota).getTime()
-console.log("dataPrestamovv",dataPrestamo);
 
     let error = {
      periodo:"",

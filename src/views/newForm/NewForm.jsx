@@ -50,11 +50,13 @@ const NewForm = (props) => {
     // Datos del préstamo
     capital: !user ? "" : user[0].capital,
     cuotas: !user ? "" : user[0].cuotas,
-    tea: !user ? "" : user[0].tea,
+    //tea: !user ? "" : user[0].tea, //? Aplicable para un entidad financiera
+    //tasaPrimaMensual: !user ? dataConfiguration?.tpm : user[0].tasaPrimaMensual, //? Aplicable para un entidad financiera
+    interes: !user ? "" : user[0].interes,
+    tipoPago: !user ? "" : user[0].tipoPago,
     fechaDesembolso: !user ? "" : user[0].fechaDesembolso,
     fechaPrimeraCuota: !user ? "" : user[0].fechaPrimeraCuota,
     periodo: !user ? "" : user[0].periodo,
-    tasaPrimaMensual: !user ? dataConfiguration?.tpm : user[0].tasaPrimaMensual,
     resultPrestamo: !user ? [] : user[0].resultPrestamo,
   });
 
@@ -72,13 +74,14 @@ const NewForm = (props) => {
         cancelled: false,
         capital: "",
         cuotas: "",
-        tea: "",
+        //tea: "",
+        interes: "",
         fechaDesembolso: "",
         fechaPrimeraCuota: "",
         periodo: "",
-        tasaPrimaMensual: !user
-          ? dataConfiguration?.tpm
-          : user[0].tasaPrimaMensual,
+        // tasaPrimaMensual: !user
+        //   ? dataConfiguration?.tpm
+        //   : user[0].tasaPrimaMensual,
         resultPrestamo: [],
       });
     }
