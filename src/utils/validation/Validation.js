@@ -71,12 +71,15 @@ export const validationDataPrestamo = (dataPrestamo) =>{
     let ExpRegEnt=/^\d*$/ // Expresión regular para aceptar solo números enteros
     let fechaInicio = new Date(dataPrestamo.fechaDesembolso).getTime()
     let fechaFinal = new Date(dataPrestamo.fechaPrimeraCuota).getTime()
+console.log("dataPrestamovv",dataPrestamo);
 
     let error = {
      periodo:"",
      capital:"",
-     tea:"",
-     teaInvalido:"",
+     //tea:"",
+     //teaInvalido:"",
+     interes:"",
+     interesInvalido:"",
      cuotas:"",
      cuotaCero:"",
      cuotaInvalido:"",
@@ -91,13 +94,25 @@ export const validationDataPrestamo = (dataPrestamo) =>{
       if(dataPrestamo.capital?.trim() === ""  ) {
           error = {...error,capital:"Capital incompleto"}
       }
+      if (dataPrestamo?.tipo == "Independiente"){
+
+      }
+      //TODO-- Es aplicable para una entidad financiera
     //   if(dataPrestamo.tea.trim() === "" ) {
     //       error = {...error,tea:"TEA incompleto"}
     //   }
     //   if(dataPrestamo.tea.match(ExpRegNumDec)==null){
     //     error={...error, teaInvalido:"El valor de la TEA es inválido"}
     //    }
-      if(dataPrestamo.cuotas?.trim() === ""  ) {
+    //TODO ----------------------------------------------------------
+
+    if(dataPrestamo.interes.trim() === "" ) {
+          error = {...error,interes:"Interes incompleto"}
+      }
+    if(dataPrestamo.interes.match(ExpRegNumDec)==null){
+        error={...error, interesInvalido:"El valor del interes es inválido"}
+       }
+    if(dataPrestamo.cuotas?.trim() === ""  ) {
           error = {...error,cuotas:"Cuota incompleto"}
       }
       if(dataPrestamo.cuotas?.trim() <= 0  ) {

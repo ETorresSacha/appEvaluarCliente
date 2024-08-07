@@ -12,10 +12,7 @@ import Prestamo from "../../components/prestamo/Prestamo";
 import DetailCalculator from "../../components/detailCalculator/DetailCalculator";
 import { useFocusEffect } from "@react-navigation/native";
 import { validationDataPrestamo } from "../../utils/validation/Validation";
-import {
-  resultCronograma,
-  resultDeuda,
-} from "../../utils/calculoCuota/CalculosCuota";
+import { cuotaIndependiente } from "../../utils/calculoCuota/CalculosCuota";
 import Cuota from "../../components/cuota/Cuota";
 import Header from "../../components/header/Header";
 import equal from "deep-equal";
@@ -47,16 +44,15 @@ const Calculator = ({
   const [resultView, setResultView] = useState(true);
   const [valueTPM, setValueTPM] = useState("");
   const [cuota, setCuota] = useState();
-  const [valueOption, setValueOption] = useState("Independiente"); // Selecciona la opción del tipo de prestamo que se desea realizar
+  const [tipoPago, setTipoPago] = useState("Interes"); // Selecciona la opción del tipo de pago que quiere realizar
 
   const [prestamo, setPrestamo] = useState({
-    tipo: !dataPerson ? valueOption : dataPerson.periodo,
     periodo: !dataPerson ? "" : dataPerson.periodo,
     capital: !dataPerson ? "" : dataPerson.capital,
-    tea: !dataPerson ? "" : dataPerson.tea,
-    interes: !dataPerson ? "" : dataPerson.interes, //! esta variable todavia no ha sido declarado en el new form, que sera util cuando funciona y cuando se guardara los datos
+    //tea: !dataPerson ? "" : dataPerson.tea, // Es aplicable cuando se trabaja con una entidad financiera
+    interes: !dataPerson ? "" : dataPerson.interes,
     cuotas: !dataPerson ? "" : dataPerson.cuotas,
-    tipoPago: !dataPerson ? "" : dataPerson.tipoPago, //!
+    tipoPago: !dataPerson ? tipoPago : dataPerson.tipoPago,
     fechaDesembolso: !dataPerson ? "" : dataPerson.fechaDesembolso,
     fechaPrimeraCuota: !dataPerson ? "" : dataPerson.fechaPrimeraCuota,
   });
@@ -117,15 +113,15 @@ const Calculator = ({
         setPrestamo({
           capital: "",
           cuotas: "",
-          tea: "",
+          //tea: "",
           interes: "",
           fechaDesembolso: "",
           fechaPrimeraCuota: "",
           periodo: "",
           tipoPago: "",
-          tasaPrimaMensual: !dataPerson
-            ? route.params.data?.tpm
-            : dataPerson.tasaPrimaMensual,
+          // tasaPrimaMensual: !dataPerson //todo-- Aplicable cuando se trabaja con una entidad financiera
+          //   ? route.params.data?.tpm
+          //   : dataPerson.tasaPrimaMensual,
         });
         setResultView(true);
         setClean ? setClean(false) : setCleanCalculator(false);
@@ -143,7 +139,6 @@ const Calculator = ({
         setEnabled(false);
       }
       // Para cuando se modifica algún dato del préstamo, el resultado de la cuota ya no será visible
-      //! AQUI HAY UN ERROR CUANDO SE MODIFICA ALGUN DATA DESPUES DE CALCULAR EL RESULTADO YA NO CALCULA CORRECTAMENTE, ES EN ESTA PARTE LO QUE TENEMOS QUE CORREGIR
       if (!editValue && !dataPerson) {
         if (!equal(prestamo, copyDataPrestamo)) {
           setEnabled(false);
@@ -158,7 +153,7 @@ const Calculator = ({
     if (!editValue && !dataPerson) {
       setCopyDataPrestamo(prestamo);
     }
-    //! OJO: FALTA CUADRAR BIEN LAS CUOTAS CON EL CRONOGRAMA REAL
+
     // Valida
     setErrorsPrestamo(validationDataPrestamo(data));
     let resultError = validationDataPrestamo(data);
@@ -173,22 +168,27 @@ const Calculator = ({
     }
     // Calcula la cuota
     else {
+      //todo-- Aplicable cuando se trabaja con una financiera
+      // const result = changeValue
+      //   ? user[0].resultPrestamo
+      //   : resultCronograma({
+      //       ...data,
+      // tasaPrimaMensual: !route
+      //   ? dataConfiguration?.tpm
+      //   : route.params.data?.tpm,
+      //     });
+      //todo.................................................
       const result = changeValue
         ? user[0].resultPrestamo
-        : resultCronograma({
-            ...data,
-            tasaPrimaMensual: !route
-              ? dataConfiguration?.tpm
-              : route.params.data?.tpm,
-          });
-      console.log(result);
+        : cuotaIndependiente(data);
+      //console.log(result);
 
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
           capital: prestamo?.capital,
           cuotas: prestamo?.cuotas,
-          tea: prestamo?.tea,
+          //tea: prestamo?.tea,
           interes: prestamo?.interes,
           fechaDesembolso: prestamo?.fechaDesembolso,
           fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
@@ -240,8 +240,7 @@ const Calculator = ({
           setCleanCalculator={setCleanCalculator}
           setClean={setClean}
           dataPerson={dataPerson}
-          valueOption={valueOption}
-          setValueOption={setValueOption}
+          setTipoPago={setTipoPago}
         />
         <View>
           {/* ------------------ CALCULAR ------------------*/}
