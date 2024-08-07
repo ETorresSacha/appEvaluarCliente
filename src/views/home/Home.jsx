@@ -42,9 +42,9 @@ const Home = () => {
 
       setDataConfiguration({
         ...dataConfiguration,
-        tpm: !result ? "0.08" : result[0]?.tpm,
-        ccv: !result ? "2" : result[0]?.ccv,
-        intMoratorio: !result ? "20" : result[0]?.intMoratorio,
+        // tpm: !result ? "0.08" : result[0]?.tpm, //? Usar con una financiera
+        // ccv: !result ? "2" : result[0]?.ccv, //? Usar con una financiera
+        intMoratorio: !result ? "" : result[0]?.intMoratorio,
       });
     } catch (error) {
       console.error(error);

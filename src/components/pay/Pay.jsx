@@ -115,6 +115,7 @@ const Pay = ({ data, setDataNotification }) => {
       setCancelledShare(false);
     }
   };
+  console.log(dataSee);
 
   return (
     <View style={styles.container}>
@@ -219,7 +220,20 @@ const Pay = ({ data, setDataNotification }) => {
               >
                 <Text style={styles.subTitle}>Total del préstamo</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
-                  S/. {data[0].capital}
+                  S/ {data[0].capital}
+                </Text>
+              </View>
+
+              {/* Total del interes */}
+              <View
+                style={[
+                  styles.containerSubTitle,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                <Text style={styles.subTitle}>Total del interes</Text>
+                <Text style={{ color: "white", fontSize: 17 }}>
+                  S/ {dataSee?.interesTotal}
                 </Text>
               </View>
 
@@ -266,16 +280,16 @@ const Pay = ({ data, setDataNotification }) => {
                 </Text>
               </View>
 
-              {/* TEA */}
+              {/* INTERES */}
               <View
                 style={[
                   styles.containerSubTitle,
                   { justifyContent: "space-between" },
                 ]}
               >
-                <Text style={styles.subTitle}>TEA</Text>
+                <Text style={styles.subTitle}>Interes</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
-                  {data[0].tea} %
+                  {data[0].interes} %
                 </Text>
               </View>
             </View>

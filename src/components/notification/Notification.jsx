@@ -17,6 +17,8 @@ const Notification = ({
   const [message, setMessage] = useState("");
   const [dataNegocio, setDataNegocio] = useState({});
   const [cuot, setCuot] = useState("");
+  console.log("dataConfiguration: ", dataConfiguration);
+  console.log("dataNotification:", dataNotification);
 
   // Iconos de notificacion
   const handleIconNotification = (value, messageValue) => {
@@ -87,7 +89,10 @@ const Notification = ({
   useEffect(() => {
     // Con Mora
     if (typeColor == "red") {
+      //! TENEMOS QUE CREAR UNA NUEVA FUNCION PARA EL CALCULO DE LA MORA PERO SOLO PARA EL PRESTAMO INDEPENDIENTE
       let result = calculoMora(dataNotification, dataConfiguration);
+      console.log("result: ", result);
+
       setCuot(result);
     }
     //Sin mora
@@ -95,6 +100,7 @@ const Notification = ({
       setCuot(dataNotification?.montoCuota);
     }
   }, [typeColor, cuot]);
+  console.log(typeColor);
 
   return (
     <View style={styles.container}>
