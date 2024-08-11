@@ -183,15 +183,15 @@ export const validationConfiguration = (data)=>{
         errorIntMoratorioCero:"",
         errorIntMoratorioDecimal:""
        }
-       if( data?.tpm.trim() ==  "" ){
-        error={...error, errorTPM:"Tasa Prima Mensual vacio "}
-       }
-       if( parseFloat(data?.tpm.trim()) <=0 ){
-        error={...error, errorTPMCero:"Tasa Prima Mensual: \n El valor debe de ser mayor que cero "}
-       }
-       if(data?.tpm.match(ExpRegNumDec)==null){
-        error={...error, errorTPMDecimal:"Tasa Prima Mensual: \n Dato inválido"}
-       }
+    //    if( data?.tpm.trim() ==  "" ){
+    //     error={...error, errorTPM:"Tasa Prima Mensual vacio "}
+    //    }
+    //    if( parseFloat(data?.tpm.trim()) <=0 ){
+    //     error={...error, errorTPMCero:"Tasa Prima Mensual: \n El valor debe de ser mayor que cero "}
+    //    }
+    //    if(data?.tpm.match(ExpRegNumDec)==null){
+    //     error={...error, errorTPMDecimal:"Tasa Prima Mensual: \n Dato inválido"}
+    //    }
 
        
        if( data?.intMoratorio.trim() == "" ){
@@ -205,15 +205,15 @@ export const validationConfiguration = (data)=>{
        }
 
 
-       if( data?.ccv.trim() == "" ){
-        error={...error, errorccv:"Comisión de Cobranza Variable vacio "}
-       }
-       if( parseFloat(data?.ccv.trim()) <= 0 ){
-        error={...error, errorccvCero:"Comisión de Cobranza Variable:\n El valor debe de ser mayor que cero "}
-       }
-       if(data?.ccv.match(ExpRegNumDec)==null){
-        error={...error, errorccvDecimal:"Comisión de Cobranza Variable: \nDato inválido"}
-       }
+    //    if( data?.ccv.trim() == "" ){
+    //     error={...error, errorccv:"Comisión de Cobranza Variable vacio "}
+    //    }
+    //    if( parseFloat(data?.ccv.trim()) <= 0 ){
+    //     error={...error, errorccvCero:"Comisión de Cobranza Variable:\n El valor debe de ser mayor que cero "}
+    //    }
+    //    if(data?.ccv.match(ExpRegNumDec)==null){
+    //     error={...error, errorccvDecimal:"Comisión de Cobranza Variable: \nDato inválido"}
+    //    }
     return error
 }
 
