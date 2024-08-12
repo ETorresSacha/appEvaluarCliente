@@ -2,10 +2,8 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 const DetailCalculator = ({ resultCuota, prestamo, periodo }) => {
-  console.log("data: ", resultCuota);
-  console.log("prestamo: ", prestamo);
-
   const cuota = resultCuota[0]?.montoCuota;
+
   return (
     <View style={styles.container}>
       <View>
