@@ -249,7 +249,8 @@ export const calculoMora = (data, dataConfiguration)=>{
 }
 
 
-//TODO --> CUOTA PARA UN PRÉSTAMO INDEPENDIENTE
+//TODO -->PRÉSTAMO INDEPENDIENTE
+// Cálculo de la cuota
 export const calculoCuota = (data,i)=>{
     let cuota
 
@@ -264,3 +265,27 @@ export const calculoCuota = (data,i)=>{
     }
     return cuota
 }
+
+// Cálculo de la mora (interés del interés)
+export const mora =(data, dataConfiguration)=>{
+
+    let intMoratorio =parseFloat(dataConfiguration?.intMoratorio)  // % --> Diario
+
+    // % de interes moratorio diario
+     intMoratorio = intMoratorio/100;
+
+    // Cálculo de los dias de mora
+    let today = format(new Date(),"yyyy-MM-dd")
+     let fechaInicio = new Date(today).getTime()
+     let fechaFin = new Date(data?.fechaPago).getTime()
+
+     let diff = fechaInicio-fechaFin ;
+        diff = diff/(1000*60*60*24)
+
+    // Cálculo del interes
+    let int = (intMoratorio*data?.montoCuota*diff)
+
+     
+     return int.toFixed(2)
+}
+

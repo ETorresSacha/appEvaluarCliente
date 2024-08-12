@@ -116,6 +116,7 @@ export const calculoFRCA = (data) =>{
     for (let i =1; i<=data?.cuotas;i++){
         cronograma.push({
             cuota:i,
+            capital: data?.capital,
             fechaDesembolso:data?.fechaDesembolso,
             fechaPago: paymentDate(data,i-1),
             montoCuota:calculoCuota(data,i).toFixed(2),

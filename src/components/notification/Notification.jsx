@@ -5,7 +5,10 @@ import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 import UseStorageBusiness from "../hooks/UseHookDataNeg";
-import { calculoMora } from "../../utils/calculoCuota/CalculosFuncionesCrediticios";
+import {
+  calculoMora,
+  mora,
+} from "../../utils/calculoCuota/CalculosFuncionesCrediticios";
 
 const Notification = ({
   data,
@@ -90,8 +93,9 @@ const Notification = ({
     // Con Mora
     if (typeColor == "red") {
       //! TENEMOS QUE CREAR UNA NUEVA FUNCION PARA EL CALCULO DE LA MORA PERO SOLO PARA EL PRESTAMO INDEPENDIENTE
-      let result = calculoMora(dataNotification, dataConfiguration);
-      console.log("result: ", result);
+      //! YA ESTA LA MORA, ESTE SERA SUMADO A AL CUOTA PARA CALCULAR LA NUEVA CUOTA.
+      //! ES NECESARIO QUE CUANDO EXISTE MORA SE CAMBIE LA NUEVA CUOTA. ASI COMO LA FECHA CANBIA TAMHIEN EL MONTO DE LA DEUDA DEJE CAMHIAR
+      let result = mora(dataNotification, dataConfiguration);
 
       setCuot(result);
     }
@@ -100,7 +104,6 @@ const Notification = ({
       setCuot(dataNotification?.montoCuota);
     }
   }, [typeColor, cuot]);
-  console.log(typeColor);
 
   return (
     <View style={styles.container}>
