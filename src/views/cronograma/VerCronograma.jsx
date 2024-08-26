@@ -23,7 +23,7 @@ const VerCronograma = (props) => {
     <View style={styles.container}>
       <Header
         title={"Cronograma"}
-        back={ccv ? "Nuevo cliente" : editValue ? "Nuevo cliente" : "Detalle"}
+        back={ccv ? "Nuevo cliente" : !editValue ? "Nuevo cliente" : "Detalle"}
         data={
           props.route.params?.valueProps || {
             id,

@@ -115,7 +115,6 @@ const Pay = ({ data, setDataNotification }) => {
       setCancelledShare(false);
     }
   };
-  console.log(dataSee);
 
   return (
     <View style={styles.container}>
