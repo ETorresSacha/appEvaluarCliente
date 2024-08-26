@@ -38,6 +38,9 @@ const NewForm = (props) => {
   const enable = props.route.params ? props.route.params?.enable : null;
   // ****
 
+  console.log("dataConfiguration: ", dataConfiguration);
+  console.log("id: ", id);
+
   const [dataPerson, setDataPerson] = useState({
     uuid: !user ? uuid : user[0].uuid,
     nombre: !user ? "" : user[0].nombre,

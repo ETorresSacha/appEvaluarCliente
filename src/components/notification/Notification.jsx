@@ -20,8 +20,6 @@ const Notification = ({
   const [message, setMessage] = useState("");
   const [dataNegocio, setDataNegocio] = useState({});
   const [cuot, setCuot] = useState("");
-  console.log("dataConfiguration: ", dataConfiguration);
-  console.log("dataNotification:", dataNotification);
 
   // Iconos de notificacion
   const handleIconNotification = (value, messageValue) => {
