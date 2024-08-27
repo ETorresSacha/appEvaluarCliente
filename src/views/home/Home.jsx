@@ -35,6 +35,7 @@ const Home = () => {
       console.error(error);
     }
   };
+  console.log(dataConfiguration);
 
   // Cargar los datos de la configuración
   const loadCongiguration = async () => {
