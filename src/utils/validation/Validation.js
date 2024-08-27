@@ -171,7 +171,7 @@ export const validationTPM = (data)=>{
 
 export const validationConfiguration = (data)=>{
 
-    let ExpRegNumDec=/^[0-9]+(\.[0-9]+)?$/;
+    const ExpRegNumDec = /^(0(\.[1-9]\d*)?|[1-9]\d*(\.\d*)?)$/;
     let error = {
         errorTPM:"",
         errorTPMCero:"",
@@ -194,16 +194,16 @@ export const validationConfiguration = (data)=>{
     //    }
 
        
-       if( data?.intMoratorio.trim() == "" ){
-        error={...error, errorIntMoratorio:"Interés Moratorio Anual vacio "}
+       if( data?.intMoratorio?.trim() == "" ){
+        error={...error, errorIntMoratorio:'No se admite un valor vacio, en su defecto asigne "0"'}
        }
-       if( parseFloat(data?.intMoratorio.trim()) <= 0 ){
-        error={...error, errorIntMoratorioCero:"Interés Moratorio Anual: \n El valor debe de ser mayor que cero "}
-       }
-       if(data?.intMoratorio.match(ExpRegNumDec)==null){
-        error={...error, errorIntMoratorioDecimal:"Interés Moratorio Anual:\n Dato inválido"}
-       }
+    //    if( parseFloat(data?.intMoratorio.trim()) <= 0 ){
+    //     error={...error, errorIntMoratorioCero:"Interés Moratorio Anual: \n El valor debe de ser mayor que cero "}
+    //    }
 
+       if(data?.intMoratorio.match(ExpRegNumDec)==null){
+        error={...error, errorIntMoratorioDecimal:"Dato inválido"}
+       }
 
     //    if( data?.ccv.trim() == "" ){
     //     error={...error, errorccv:"Comisión de Cobranza Variable vacio "}
