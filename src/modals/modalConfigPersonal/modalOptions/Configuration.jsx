@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React from "react";
+import equal from "deep-equal";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
 import { validationConfiguration } from "../../../utils/validation/Validation";
 import UseStorageConfiguration from "../../../components/hooks/UseHookConfiguration";
 
@@ -17,9 +19,12 @@ const Configuration = ({
   setEnableConf,
   dataConfiguration,
   setDataConfiguration,
+  copy,
+  setCopy,
 }) => {
   const { onSaveDataConfiguration } = UseStorageConfiguration();
 
+  const lo = dataConfiguration;
   const handleKeep = async (value) => {
     // Validando
     let error = validationConfiguration(value);
@@ -33,6 +38,23 @@ const Configuration = ({
       setEnableConf(false);
     }
   };
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     setCopy(dataConfiguration);
+  //     //return () => unsubscribe();
+  //   }, [])
+  // );
+  console.log("copycopycopy: ", copy);
+
+  console.log("dataConfigurationooo: ", dataConfiguration?.intMoratorio);
+  const onPressConfig = () => {
+    if (!equal(copy, dataConfiguration)) {
+      Alert.alert("desea guardar los cambios?");
+      setEnableConf(false);
+    } else {
+      setEnableConf(false);
+    }
+  };
   return (
     <Modal
       style={styles.container}
@@ -40,7 +62,7 @@ const Configuration = ({
       visible={enablerConf}
       onRequestClose={() => setEnableConf(false)}
     >
-      <TouchableWithoutFeedback onPress={() => setEnableConf(false)}>
+      <TouchableWithoutFeedback onPress={() => onPressConfig()}>
         <View style={styles.modalOverlay} />
       </TouchableWithoutFeedback>
       <View style={styles.modalContent}>
@@ -101,7 +123,7 @@ const Configuration = ({
           <Text>Interés Moratorio</Text>
           <View style={styles.inputView}>
             <TextInput
-              value={dataConfiguration.intMoratorio}
+              value={dataConfiguration?.intMoratorio}
               style={styles.input}
               placeholderTextColor="gray"
               onChangeText={(text) => {

@@ -26,6 +26,8 @@ const ModalConfigPersonal = ({
   setEnable,
   dataConfiguration,
   setDataConfiguration,
+  copy,
+  setCopy,
 }) => {
   //const url = "https://play.google.com/store/apps/details?id=com.pedidosya"; //! este link esta para cambiar, se cambiará cuando se suba a play store
   const url = "URL"; //! este link esta para cambiar, se cambiará cuando se suba a play store
@@ -110,6 +112,8 @@ const ModalConfigPersonal = ({
         setEnableConf={setEnableConf}
         dataConfiguration={dataConfiguration}
         setDataConfiguration={setDataConfiguration}
+        copy={copy}
+        setCopy={setCopy}
       />
       <AcercaApp app={app} setApp={setApp} />
     </View>

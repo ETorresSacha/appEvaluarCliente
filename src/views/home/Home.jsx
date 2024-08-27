@@ -23,7 +23,7 @@ const Home = () => {
   const [enable, setEnable] = useState(false); // Para visualizar los cambios en el home
   const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
   const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
-
+  const [copy, setCopy] = useState({});
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
     try {
@@ -40,11 +40,16 @@ const Home = () => {
     try {
       let result = await onGetConfiguration();
 
+      setCopy({
+        ...dataConfiguration,
+        intMoratorio: !result ? "0" : result[0]?.intMoratorio,
+      });
+
       setDataConfiguration({
         ...dataConfiguration,
         // tpm: !result ? "0.08" : result[0]?.tpm, //? Usar con una financiera
         // ccv: !result ? "2" : result[0]?.ccv, //? Usar con una financiera
-        intMoratorio: !result ? "" : result[0]?.intMoratorio,
+        intMoratorio: !result ? "0" : result[0]?.intMoratorio,
       });
     } catch (error) {
       console.error(error);
@@ -63,8 +68,10 @@ const Home = () => {
     React.useCallback(() => {
       loadNegocio();
       loadCongiguration();
-    }, [enable])
+    }, [enable, setDataConfiguration])
   );
+
+  console.log("dataConfigurationk: ", dataConfiguration);
 
   return (
     <ImageBackground source={fondoHome} style={styles.background}>
@@ -92,6 +99,8 @@ const Home = () => {
         setEnable={setEnable}
         dataConfiguration={dataConfiguration}
         setDataConfiguration={setDataConfiguration}
+        copy={copy}
+        setCopy={setCopy}
       />
 
       {/* BIENVENIDO */}
