@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import equal from "deep-equal";
 import React from "react";
 import { validationConfiguration } from "../../../utils/validation/Validation";
 import UseStorageConfiguration from "../../../components/hooks/UseHookConfiguration";
@@ -17,6 +18,7 @@ const Configuration = ({
   setEnableConf,
   dataConfiguration,
   setDataConfiguration,
+  copy,
 }) => {
   const { onSaveDataConfiguration } = UseStorageConfiguration();
 
@@ -33,6 +35,32 @@ const Configuration = ({
       setEnableConf(false);
     }
   };
+
+  // Modificaión de la tasa moratoria
+  const onPressConfig = () => {
+    if (!equal(copy, dataConfiguration)) {
+      Alert.alert("GUARDAR", "¿Desea guardar los cambios?", [
+        {
+          text: "Si",
+          onPress: async () => {
+            handleKeep(dataConfiguration);
+            setEnableConf(false);
+          },
+          style: "destructive",
+        },
+        {
+          text: "No",
+          style: "destructive",
+          onPress: async () => {
+            setEnableConf(false);
+            setDataConfiguration(copy);
+          },
+        },
+      ]);
+    } else {
+      setEnableConf(false);
+    }
+  };
   return (
     <Modal
       style={styles.container}
@@ -40,7 +68,7 @@ const Configuration = ({
       visible={enablerConf}
       onRequestClose={() => setEnableConf(false)}
     >
-      <TouchableWithoutFeedback onPress={() => setEnableConf(false)}>
+      <TouchableWithoutFeedback onPress={() => onPressConfig()}>
         <View style={styles.modalOverlay} />
       </TouchableWithoutFeedback>
       <View style={styles.modalContent}>
@@ -101,7 +129,7 @@ const Configuration = ({
           <Text>Interés Moratorio</Text>
           <View style={styles.inputView}>
             <TextInput
-              value={dataConfiguration.intMoratorio}
+              value={dataConfiguration?.intMoratorio}
               style={styles.input}
               placeholderTextColor="gray"
               onChangeText={(text) => {

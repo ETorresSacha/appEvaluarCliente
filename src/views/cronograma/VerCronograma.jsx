@@ -17,13 +17,13 @@ const VerCronograma = (props) => {
     props.route.params?.valueProps?.dataConfiguration ||
     props.route.params?.dataConfiguration;
 
-  const ccv = props.route.params?.valueProps?.ccv;
+  const ccv = props.route.params?.valueProps?.intMoratorio;
 
   return (
     <View style={styles.container}>
       <Header
         title={"Cronograma"}
-        back={ccv ? "Nuevo cliente" : !editValue ? "Nuevo cliente" : "Detalle"}
+        back={ccv ? "Nuevo cliente" : editValue ? "Nuevo cliente" : "Detalle"}
         data={
           props.route.params?.valueProps || {
             id,

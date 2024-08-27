@@ -23,6 +23,7 @@ const Home = () => {
   const [enable, setEnable] = useState(false); // Para visualizar los cambios en el home
   const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
   const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
+  const [copy, setCopy] = useState({}); // Sirve para verificar si se nota el cambio del interes moratorio
 
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
@@ -40,11 +41,17 @@ const Home = () => {
     try {
       let result = await onGetConfiguration();
 
+      //copia
+      setCopy({
+        ...dataConfiguration,
+        intMoratorio: !result ? "0" : result[0]?.intMoratorio,
+      });
+
       setDataConfiguration({
         ...dataConfiguration,
         // tpm: !result ? "0.08" : result[0]?.tpm, //? Usar con una financiera
         // ccv: !result ? "2" : result[0]?.ccv, //? Usar con una financiera
-        intMoratorio: !result ? "" : result[0]?.intMoratorio,
+        intMoratorio: !result ? "0" : result[0]?.intMoratorio,
       });
     } catch (error) {
       console.error(error);
@@ -63,7 +70,7 @@ const Home = () => {
     React.useCallback(() => {
       loadNegocio();
       loadCongiguration();
-    }, [enable])
+    }, [enable, setDataConfiguration])
   );
 
   return (
@@ -92,6 +99,7 @@ const Home = () => {
         setEnable={setEnable}
         dataConfiguration={dataConfiguration}
         setDataConfiguration={setDataConfiguration}
+        copy={copy}
       />
 
       {/* BIENVENIDO */}

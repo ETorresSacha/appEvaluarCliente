@@ -6,7 +6,7 @@ const CanceledCustomer = (props) => {
   const [enable, setEnable] = useState(true); //  Habilita el componente de los clientes cancelados
 
   useEffect(() => {
-    setEnable(props.route.params.data.enable);
+    setEnable(props.route?.params?.data?.enable);
   }, []);
 
   return (
