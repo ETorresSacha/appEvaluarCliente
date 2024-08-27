@@ -23,7 +23,8 @@ const Home = () => {
   const [enable, setEnable] = useState(false); // Para visualizar los cambios en el home
   const [dataBusiness, setDataBusiness] = useState([]); // Para los datos de la informacion del negocio
   const [dataConfiguration, setDataConfiguration] = useState({}); //Datos de la configuración
-  const [copy, setCopy] = useState({});
+  const [copy, setCopy] = useState({}); // Sirve para verificar si se nota el cambio del interes moratorio
+
   // Cargar los datos de la financiera
   const loadNegocio = async () => {
     try {
@@ -40,6 +41,7 @@ const Home = () => {
     try {
       let result = await onGetConfiguration();
 
+      //copia
       setCopy({
         ...dataConfiguration,
         intMoratorio: !result ? "0" : result[0]?.intMoratorio,
@@ -71,8 +73,6 @@ const Home = () => {
     }, [enable, setDataConfiguration])
   );
 
-  console.log("dataConfigurationk: ", dataConfiguration);
-
   return (
     <ImageBackground source={fondoHome} style={styles.background}>
       {/* HEADER */}
@@ -100,7 +100,6 @@ const Home = () => {
         dataConfiguration={dataConfiguration}
         setDataConfiguration={setDataConfiguration}
         copy={copy}
-        setCopy={setCopy}
       />
 
       {/* BIENVENIDO */}

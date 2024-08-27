@@ -9,8 +9,7 @@ import {
   Alert,
 } from "react-native";
 import equal from "deep-equal";
-import { useFocusEffect } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { validationConfiguration } from "../../../utils/validation/Validation";
 import UseStorageConfiguration from "../../../components/hooks/UseHookConfiguration";
 
@@ -20,11 +19,9 @@ const Configuration = ({
   dataConfiguration,
   setDataConfiguration,
   copy,
-  setCopy,
 }) => {
   const { onSaveDataConfiguration } = UseStorageConfiguration();
 
-  const lo = dataConfiguration;
   const handleKeep = async (value) => {
     // Validando
     let error = validationConfiguration(value);
@@ -38,19 +35,28 @@ const Configuration = ({
       setEnableConf(false);
     }
   };
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     setCopy(dataConfiguration);
-  //     //return () => unsubscribe();
-  //   }, [])
-  // );
-  console.log("copycopycopy: ", copy);
 
-  console.log("dataConfigurationooo: ", dataConfiguration?.intMoratorio);
+  // Modificaión de la tasa moratoria
   const onPressConfig = () => {
     if (!equal(copy, dataConfiguration)) {
-      Alert.alert("desea guardar los cambios?");
-      setEnableConf(false);
+      Alert.alert("GUARDAR", "¿Desea guardar los cambios?", [
+        {
+          text: "Si",
+          onPress: async () => {
+            handleKeep(dataConfiguration);
+            setEnableConf(false);
+          },
+          style: "destructive",
+        },
+        {
+          text: "No",
+          style: "destructive",
+          onPress: async () => {
+            setEnableConf(false);
+            setDataConfiguration(copy);
+          },
+        },
+      ]);
     } else {
       setEnableConf(false);
     }
