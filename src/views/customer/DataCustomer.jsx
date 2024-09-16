@@ -33,6 +33,7 @@ const DataCustomer = ({
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
+  console.log("customer: ", customer);
 
   return (
     <View style={styles.container}>
@@ -90,8 +91,8 @@ const DataCustomer = ({
           // Cuando no existe ningun cliente guardado
           data.dataResult == undefined ||
           (enable
-            ? customer.customerCancelled.length == 0
-            : customer.dataResult.length == 0) ? (
+            ? customer?.customerCancelled?.length == 0
+            : customer?.dataResult?.length == 0) ? (
             <View style={styles.containerNoCustomers}>
               <Text style={{ color: "cornsilk" }}>
                 {enable
@@ -103,22 +104,22 @@ const DataCustomer = ({
             //  clienteS guardados
             <View>
               <Users
-                data={customer.customerRed}
+                data={customer?.customerRed}
                 dataConfiguration={dataConfiguration}
                 color={"red"}
               />
               <Users
-                data={customer.customerYellow}
+                data={customer?.customerYellow}
                 dataConfiguration={dataConfiguration}
                 color={"yellow"}
               />
               <Users
-                data={customer.customerGreen}
+                data={customer?.customerGreen}
                 dataConfiguration={dataConfiguration}
                 color={"rgb(66, 242, 46)"}
               />
               <Users
-                data={customer.customer}
+                data={customer?.customer}
                 dataConfiguration={dataConfiguration}
               />
             </View>
