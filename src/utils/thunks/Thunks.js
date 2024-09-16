@@ -106,13 +106,13 @@ if(n==1){
 
 let toDay = format(new Date(), 'MM-dd-yyyy')
 
- let result=datesFilter.find(element=>toDay===element)
+ let result=datesFilter?.find(element=>toDay===element)
 
  if(result !==undefined){
   resultDia=result
  }
  else{
-  result = datesFilter.find(element=>{
+  result = datesFilter?.find(element=>{
     let [mes,dia,anio] =element.split("-")
  
     return isFuture(new Date(anio, mes-1, dia))
@@ -149,33 +149,53 @@ export const customerData =(data,toDay)=>{
     // Resultado de todos los datos sin cancelar
       dataResult.push(element)
 
-    // Un día antes de la fecha de vencimiento
-    let resultGreen = element.resultPrestamo.find(elem=>{
-      let [anio,mes,dia] = elem.fechaPago.split('-')
-       return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))==1 && elem.statusPay == false
+
+      element.resultPrestamo.find(elem=>{
+        let [anio,mes,dia] = elem.fechaPago.split('-')
+
+        if(differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false){
+          return customerRed.push(element)
+        }
+        else if(toDay==elem.fechaPago && elem.statusPay == false){
+          return customerYellow.push(element)
+        }
+        else if (differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))==1 && elem.statusPay == false){
+          return customerGreen.push(element)
+        }
+        else{
+          return customer.push(element)
+        }
       })
 
-    //La misma fecha de vencimiento
-    let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago && elem.statusPay == false)
+
+
+    // Un día antes de la fecha de vencimiento
+    // let resultGreen = element.resultPrestamo.find(elem=>{
+    //   let [anio,mes,dia] = elem.fechaPago.split('-')
+    //    return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))==1 && elem.statusPay == false
+    //   })
+
+    // La misma fecha de vencimiento
+    // let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago && elem.statusPay == false)
 
     // Pasado la fecha de vencimiento
-    let resultRed = element.resultPrestamo.find(elem=>{
-      let [anio,mes,dia] = elem.fechaPago.split('-')
-         return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false
-        })
+    // let resultRed = element.resultPrestamo.find(elem=>{
+    //   let [anio,mes,dia] = elem.fechaPago.split('-')
+    //      return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false
+    //     })
 
-    if(resultGreen!==undefined){
-      customerGreen.push(element)
-      }
-     if(resultYellow!==undefined){
-       customerYellow.push(element)
-     }
-    if(resultRed!==undefined){
-      customerRed.push(element)
-    }
-     if (resultGreen == undefined && resultYellow == undefined && resultRed == undefined){
-       customer.push(element)
-     }
+    // if(resultGreen!==undefined){
+    //   customerGreen.push(element)
+    //   }
+    //  if(resultYellow!==undefined){
+    //    customerYellow.push(element)
+    //  }
+    // if(resultRed!==undefined){
+    //   customerRed.push(element)
+    // }
+    //  if (resultGreen == undefined && resultYellow == undefined && resultRed == undefined){
+    //    customer.push(element)
+    //  }
   }
   
   // Deuda cancelado
@@ -202,7 +222,7 @@ return {
 export const datePay = (data)=>{
   let result;
     if (data != undefined) {
-      result = data.resultPrestamo.find(
+      result = data.resultPrestamo?.find(
         (element) => element.statusPay == false
       );
     }

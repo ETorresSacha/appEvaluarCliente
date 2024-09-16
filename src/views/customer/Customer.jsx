@@ -67,6 +67,7 @@ const Customer = (props) => {
       });
     }
   };
+
   // Cargar los datos de la configuración
   const loadCongiguration = async () => {
     try {

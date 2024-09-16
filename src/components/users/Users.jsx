@@ -21,6 +21,7 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
   useEffect(() => {
     if (color) cambiarColor(color);
   }, [color]);
+  console.log("data: ", data);
 
   return (
     <View>
