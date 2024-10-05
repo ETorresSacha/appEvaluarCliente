@@ -1,46 +1,31 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { datePay, formatDate } from "../../utils/thunks/Thunks";
+import { datePay } from "../../utils/thunks/Thunks";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import {
-  compareAsc,
-  format,
-  add,
-  formatDistance,
-  getDate,
-  isFuture,
-  isEqual,
-  differenceInDays,
-} from "date-fns";
 
 const Users = ({ data, color, enable, dataConfiguration, day }) => {
-  const [fechaPay, setFechaPay] = useState("");
   const navigation = useNavigation();
-  let [anioToDay, mesToDay, diaToDay] = day.split("-");
 
+  //todo--> se guardará este código, como para recordar la funcionalida, puede ser útil en otra aplicación
   // estilos dinámico del ícono de alerta
-  const [estilos, setEstilos] = useState({
-    fontSize: 35,
-  });
+  // const [estilos, setEstilos] = useState({
+  //   fontSize: 35,
+  // });
 
-  const cambiarColor = (color) => {
-    const estilosCopia = { ...estilos };
-    estilosCopia.color = color;
-    setEstilos(estilosCopia);
-  };
-
-  console.log(fechaPay);
+  // const cambiarColor = (color) => {
+  //   const estilosCopia = { ...estilos };
+  //   estilosCopia.color = color;
+  //   setEstilos(estilosCopia);
+  // };
 
   // useEffect(() => {
   //   if (color) cambiarColor(color);
   // }, [color]);
-  //console.log("data: ", data);
-
+  //todo--> se guardará este código, como para recordar la funcionalida, puede ser útil en otra aplicación
   return (
     <View>
       {data?.map((element, index) => {
-        // setFechaPay(datePay(element, day)?.color);
         return (
           <View
             key={element.uuid}
