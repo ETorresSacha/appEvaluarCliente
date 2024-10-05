@@ -3,17 +3,11 @@ import { View, StyleSheet } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
-import {
-  customerData,
-  customerDataFilter,
-  dataCustomer,
-  orderData,
-} from "../../utils/thunks/Thunks";
+import { customerData, orderData } from "../../utils/thunks/Thunks";
 import { format } from "date-fns";
 import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
 import DataCustomer from "./DataCustomer";
-import UseStorageConfiguration from "../../components/hooks/UseHookConfiguration";
 import Alerta from "../alert/Alerta";
 import { renderImportData } from "./renderImportData";
 
@@ -22,7 +16,6 @@ const Customer = (props) => {
   let valueProps = props?.route?.params?.data; // Valores para la configuración del prestamo
 
   const { onGetCronograma } = UseStorage();
-  const { onGetConfiguration } = UseStorageConfiguration();
   const [dataConfiguration, setDataConfiguration] = useState({}); // Datos de la configuración
   const [day, setDay] = useState("");
   const [on, setOn] = useState(false);
@@ -55,6 +48,7 @@ const Customer = (props) => {
   const resultCustomer = () => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
+
     if (result?.resultDataResult) {
       SetCustomer({
         ...customer,
