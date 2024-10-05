@@ -130,217 +130,49 @@ return resultDia
 
 //TODO--> CLASIFICACIÓN DE LOS CLIENTES POR SU ESTADO DE PAGO
 
-export const customerData =(data,toDay)=>{
-  let customerGreen=[]
-  let customerYellow=[]
-  let customerRed=[]
-  let customer =[]
+export const customerData =(data)=>{
   let customerCancelled =[]
   let dataResult = []
-
-  let [anioToDay,mesToDay,diaToDay] = toDay.split('-')
-
  data?.map(element=>{
-
 
   // Deuda sin cancelar
    if(element.cancelled == false){
-
-    // Resultado de todos los datos sin cancelar
       dataResult.push(element)
-
-
-      // element.resultPrestamo.find(elem=>{
-      //   let [anio,mes,dia] = elem.fechaPago.split('-')
-
-      //   if(differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false){
-      //     return customerRed.push(element)
-      //   }
-      //   else if(toDay==elem.fechaPago && elem.statusPay == false){
-      //     return customerYellow.push(element)
-      //   }
-      //   else if (differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))==1 && elem.statusPay == false){
-      //     return customerGreen.push(element)
-      //   }
-      //   else{
-      //     return customer.push(element)
-      //   }
-      // })
-
-  // Pasado la fecha de vencimiento
-  let resultRed = element.resultPrestamo.find(elem=>{
-    let [anio,mes,dia] = elem.fechaPago.split('-')
-       return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false
-      })
-
- // La misma fecha de vencimiento
-  let resultYellow = element.resultPrestamo.find(elem=>toDay==elem.fechaPago && elem.statusPay == false)
-  // let resultYellow = element.resultPrestamo.find(elem=>{
-  //   let [anio,mes,dia] = elem.fechaPago.split('-')
-  //   let redData =[]
-  //   if(differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false) redData.push(elem)
-  //   return  !redData.some(obj2 => elem.dni === obj2.dni);
-  //return null
-    // if (differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))<0 && elem.statusPay == false) {}
-    // else return elem
-  //)
- 
-  // Un día antes de la fecha de vencimiento
-    let resultGreen = element.resultPrestamo.find(elem=>{
-      let [anio,mes,dia] = elem.fechaPago.split('-')
-       return differenceInDays(new Date(anio,mes-1,dia), new Date(anioToDay,mesToDay-1,diaToDay))==1 && elem.statusPay == false
-      })
-
-  
-    if(resultGreen!==undefined){
-      customerGreen.push(element)
-      }
-     if(resultYellow!==undefined){
-      //!resultYellow.some(obj2 => obj1.id === obj2.id);
-       customerYellow.push(element)
-     }
-    if(resultRed!==undefined){
-      customerRed.push(element)
-    }
-     if (resultGreen == undefined && resultYellow == undefined && resultRed == undefined){
-       customer.push(element)
-     }
-  }
-  
-  // Deuda cancelado
+   }
+   // Deuda cancelado
   else{
     customerCancelled.push(element)
-  }
-
- }
+  }}
  )
 
-
 return {
-  resultCustumerGreen:customerGreen,
-  resultCustomerYellow:customerYellow,
-  resultCustomerRed:customerRed,
-  resultCustomer:customer,
   resultCustomerCancelled:customerCancelled,
   resultDataResult : dataResult
 }
 
 }
 
-export const customerDataFilter = (value,toDay)=>{
-  const data = customerData(value,toDay)
-  // resultYellow = data.resultCustomerYellow.filter(element=>{
-  //   if (element.statusPay == false)
-  //   return !data.resultCustomerRed.some(obj2 => element.ndi == obj2.ndi);
-  // })
-  let resultYellow =[]
-   data?.resultCustomerYellow?.map(elem=>{
-    let result = elem.resultPrestamo.find(e=>toDay==e.fechaPago && e.statusPay == false)
-    if(result!==undefined){
-
-      resultYellow.push(elem)
-     }
-  })
-
- 
- // let resultYellow = data.resultCustomerYellow.find(elem=>toDay==elem.resultPrestamo.fechaPago && elem.resultPrestamo.statusPay == false)
-  let resultGreen = data.resultCustumerGreen.find(elem=>toDay==elem.fechaPago && elem.statusPay == false)
-  // resultGreen = data.resultCustumerGreen.filter(element=>{
-  //   return !data.resultCustomerRed.some(obj2 => ( element.statusPay == false) == (obj2.statusPay == false));
-  // })
-
-  return {
-    resultCustumerGreen:resultGreen,
-    resultCustomerYellow:resultYellow,
-    resultCustomerRed:data.resultCustomerRed,
-    resultCustomer:data.resultCustomer,
-    resultCustomerCancelled:data.resultCustomerCancelled,
-    resultDataResult : data.resultDataResult
-  }
-}
-
-//! esto es para crear una nueva funcion, que mas adelante sera evaluado y deperndera si sera eliminado
-export const dataCustomer = (data,toDay)=>{
-
-    let customer =[]
-    let customerCancelled =[]
-
-  
-    let [anioToDay,mesToDay,diaToDay] = toDay.split('-')
-  
-  
-   data?.map(element=>{
-  
-  
-    // Deuda sin cancelar
-     if(element.cancelled == false){
-      // Resultado de todos los datos sin cancelar
-     
-      customer.push(element)
-    }
-    
-    // Deuda cancelado
-    else{
-      customerCancelled.push(element)
-    }
-   }
-   )
-   //orderData('fecha',data,value,enable)
-  
-  
-  return {
-    //resultCustomer:orderData("fecha", customer, false, false),
-    resultCustomer:customer,
-    resultCustomerCancelled:customerCancelled,
-  }
-  
-  
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //TODO--> FECHA DE PAGO
 export const datePay = (data,day)=>{
+
   let result;
   let color
   let [anioToDay, mesToDay, diaToDay] = day.split("-");
  
 
-
-    if (data != undefined) {
+    if (data != undefined) { // Calcula la fecha de pago
       result = data.resultPrestamo?.find(
         (element) => element.statusPay == false
       );
+
       let [anio, mes, dia] = result.fechaPago.split("-");
-      if (
-        differenceInDays(new Date(anio, mes - 1, dia),new Date(anioToDay, mesToDay - 1, diaToDay)) < 0
-      ) {
-        color = "red";
-      } else if (day == result.fechaPago) {
-        color = "yellow";
-      } else if (
-        differenceInDays(new Date(anio, mes - 1, dia),new Date(anioToDay, mesToDay - 1, diaToDay)) == 1
-      ) {
-        color = "rgb(66, 242, 46)";
-      } else {
-        color = "cornsilk";
-      }
       
+      // Clasifica el color de las alertas, de acuerdo a la fecha de pago
+      if (differenceInDays(new Date(anio, mes - 1, dia),new Date(anioToDay, mesToDay - 1, diaToDay)) < 0) {color = "red"} 
+      else if (day == result.fechaPago) {color = "yellow"} 
+      else if (differenceInDays(new Date(anio, mes - 1, dia),new Date(anioToDay, mesToDay - 1, diaToDay)) == 1) {color = "rgb(66, 242, 46)"} 
+      else {color = "cornsilk"}
     }
     
     return result == undefined ? null : {fecha:formatDate(result.fechaPago),color:color};
