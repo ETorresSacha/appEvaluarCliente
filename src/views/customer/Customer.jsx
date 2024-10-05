@@ -3,7 +3,12 @@ import { View, StyleSheet } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import NavBar from "../../components/navBar/NavBar";
-import { customerData } from "../../utils/thunks/Thunks";
+import {
+  customerData,
+  customerDataFilter,
+  dataCustomer,
+  orderData,
+} from "../../utils/thunks/Thunks";
 import { format } from "date-fns";
 import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
@@ -39,7 +44,8 @@ const Customer = (props) => {
   // Trae los datos del local storage
   const loadCustomer = async () => {
     try {
-      const resultCustomer = await onGetCronograma();
+      let resultCustomer = await onGetCronograma();
+      resultCustomer = orderData("fecha", resultCustomer, false, enable); // ordena de forma ascendente de acuerdo a la fecha
       setData({
         ...data,
         dataResult: resultCustomer,
@@ -54,7 +60,7 @@ const Customer = (props) => {
   const resultCustomer = () => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
-
+    //let result = customerDataFilter(data.dataResult, day);
     if (result?.resultCustomer) {
       SetCustomer({
         ...customer,
@@ -67,6 +73,10 @@ const Customer = (props) => {
       });
     }
   };
+
+  //! ****************************************
+
+  //! *****************************************
 
   // Cargar los datos de la configuración
   const loadCongiguration = async () => {
@@ -144,6 +154,7 @@ const Customer = (props) => {
           customer={customer}
           enable={enable}
           dataConfiguration={dataConfiguration}
+          day={day}
         />
       )}
     </View>

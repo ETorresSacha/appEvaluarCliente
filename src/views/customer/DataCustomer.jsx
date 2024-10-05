@@ -18,8 +18,9 @@ const DataCustomer = ({
   customer,
   enable,
   dataConfiguration,
+  day,
 }) => {
-  const [order, setOrder] = useState(false);
+  const [order, setOrder] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
   // Ordenar
@@ -33,7 +34,7 @@ const DataCustomer = ({
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
-  console.log("customer: ", customer);
+  // console.log("customer: ", customer);
 
   return (
     <View style={styles.container}>
@@ -103,7 +104,7 @@ const DataCustomer = ({
           ) : !enable ? (
             //  clienteS guardados
             <View>
-              <Users
+              {/* <Users
                 data={customer?.customerRed}
                 dataConfiguration={dataConfiguration}
                 color={"red"}
@@ -121,6 +122,12 @@ const DataCustomer = ({
               <Users
                 data={customer?.customer}
                 dataConfiguration={dataConfiguration}
+              />
+              <Text>PARA COMPROBAR</Text> */}
+              <Users
+                data={customer?.dataResult}
+                dataConfiguration={dataConfiguration}
+                day={day}
               />
             </View>
           ) : (
