@@ -3,9 +3,21 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { datePay, formatDate } from "../../utils/thunks/Thunks";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import {
+  compareAsc,
+  format,
+  add,
+  formatDistance,
+  getDate,
+  isFuture,
+  isEqual,
+  differenceInDays,
+} from "date-fns";
 
-const Users = ({ data, color, enable, dataConfiguration }) => {
+const Users = ({ data, color, enable, dataConfiguration, day }) => {
+  const [fechaPay, setFechaPay] = useState("");
   const navigation = useNavigation();
+  let [anioToDay, mesToDay, diaToDay] = day.split("-");
 
   // estilos dinámico del ícono de alerta
   const [estilos, setEstilos] = useState({
@@ -18,14 +30,17 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
     setEstilos(estilosCopia);
   };
 
-  useEffect(() => {
-    if (color) cambiarColor(color);
-  }, [color]);
-  console.log("data: ", data);
+  console.log(fechaPay);
+
+  // useEffect(() => {
+  //   if (color) cambiarColor(color);
+  // }, [color]);
+  //console.log("data: ", data);
 
   return (
     <View>
       {data?.map((element, index) => {
+        // setFechaPay(datePay(element, day)?.color);
         return (
           <View
             key={element.uuid}
@@ -65,7 +80,7 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
               {enable ? null : (
                 <View>
                   <Text style={styles.text}>
-                    {formatDate(datePay(element))}
+                    {datePay(element, day).fecha}
                     {/* fecha */}
                   </Text>
                 </View>
@@ -97,7 +112,7 @@ const Users = ({ data, color, enable, dataConfiguration }) => {
               {enable ? null : (
                 <FontAwesome
                   name="bell"
-                  style={color ? estilos : styles.iconAlertOff}
+                  style={{ fontSize: 35, color: datePay(element, day)?.color }}
                 />
               )}
             </TouchableOpacity>
@@ -133,6 +148,6 @@ const styles = StyleSheet.create({
   },
   iconAlertOff: {
     color: "cornsilk",
-    fontSize: 37,
+    fontSize: 35,
   },
 });
