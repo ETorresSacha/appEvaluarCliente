@@ -34,7 +34,6 @@ const DataCustomer = ({
     setData({ ...data, dataResult: result });
     setOrder(!value);
   };
-  // console.log("customer: ", customer);
 
   return (
     <View style={styles.container}>
@@ -104,26 +103,6 @@ const DataCustomer = ({
           ) : !enable ? (
             //  clienteS guardados
             <View>
-              {/* <Users
-                data={customer?.customerRed}
-                dataConfiguration={dataConfiguration}
-                color={"red"}
-              />
-              <Users
-                data={customer?.customerYellow}
-                dataConfiguration={dataConfiguration}
-                color={"yellow"}
-              />
-              <Users
-                data={customer?.customerGreen}
-                dataConfiguration={dataConfiguration}
-                color={"rgb(66, 242, 46)"}
-              />
-              <Users
-                data={customer?.customer}
-                dataConfiguration={dataConfiguration}
-              />
-              <Text>PARA COMPROBAR</Text> */}
               <Users
                 data={customer?.dataResult}
                 dataConfiguration={dataConfiguration}

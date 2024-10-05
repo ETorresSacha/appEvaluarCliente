@@ -30,12 +30,7 @@ const Customer = (props) => {
     dataResult: [],
     dataResultCopy: [],
   });
-
   const [customer, SetCustomer] = useState({
-    customerGreen: [],
-    customerYellow: [],
-    customerRed: [],
-    customer: [],
     customerCancelled: [],
     dataResult: [],
   });
@@ -60,23 +55,14 @@ const Customer = (props) => {
   const resultCustomer = () => {
     setDay(format(new Date(), "yyyy-MM-dd"));
     let result = customerData(data.dataResult, day);
-    //let result = customerDataFilter(data.dataResult, day);
-    if (result?.resultCustomer) {
+    if (result?.resultDataResult) {
       SetCustomer({
         ...customer,
-        customerGreen: result.resultCustumerGreen,
-        customerYellow: result.resultCustomerYellow,
-        customerRed: result.resultCustomerRed,
-        customer: result.resultCustomer,
         customerCancelled: result?.resultCustomerCancelled,
         dataResult: result.resultDataResult,
       });
     }
   };
-
-  //! ****************************************
-
-  //! *****************************************
 
   // Cargar los datos de la configuración
   const loadCongiguration = async () => {
