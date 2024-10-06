@@ -177,3 +177,12 @@ export const datePay = (data,day)=>{
     
     return result == undefined ? null : {fecha:formatDate(result.fechaPago),color:color};
 }
+
+//TODO--> FILTRAR LOS CLIENTES DE ACUERDO A SU ESTADO DE PAGO
+export const filterCustomer = (data, day) => {
+  let red = data?.dataResult.map((element) => datePay(element, day)).filter((ele) => ele.color == "red").length;
+  let yellow = data?.dataResult.map((element) => datePay(element, day)).filter((ele) => ele.color == "yellow").length;
+  let green = data?.dataResult.map((element) => datePay(element, day)).filter((ele) => ele.color == "rgb(66, 242, 46)").length;
+  let white = data?.dataResult.map((element) => datePay(element, day)).filter((ele) => ele.color == "cornsilk").length;
+  return { red, yellow, green, white };
+};
