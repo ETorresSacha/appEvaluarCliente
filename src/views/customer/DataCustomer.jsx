@@ -153,6 +153,7 @@ const DataCustomer = ({
         isVisible={isVisible}
         setIsVisible={setIsVisible}
         customer={customer}
+        day={day}
       />
     </View>
   );
