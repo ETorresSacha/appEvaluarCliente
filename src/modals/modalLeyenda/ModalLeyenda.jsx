@@ -8,75 +8,34 @@ import {
 import React from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import PieChart from "./PieChart";
-import { useFocusEffect } from "@react-navigation/native";
-import {
-  compareAsc,
-  format,
-  add,
-  formatDistance,
-  getDate,
-  isFuture,
-  isEqual,
-  differenceInDays,
-} from "date-fns";
+
+import { datePay } from "../../utils/thunks/Thunks";
+
+const filterCustomer = (data, day) => {
+  let red = data?.dataResult
+    .map((element) => datePay(element, day))
+    .filter((ele) => ele.color == "red").length;
+  let yellow = data?.dataResult
+    .map((element) => datePay(element, day))
+    .filter((ele) => ele.color == "yellow").length;
+  let green = data?.dataResult
+    .map((element) => datePay(element, day))
+    .filter((ele) => ele.color == "rgb(66, 242, 46)").length;
+  let white = data?.dataResult
+    .map((element) => datePay(element, day))
+    .filter((ele) => ele.color == "cornsilk").length;
+  return { red, yellow, green, white };
+};
 
 const ModalLeyenda = ({ isVisible, setIsVisible, customer, day }) => {
   const data = [
-    customer?.customerRed ? customer?.customerRed?.length : 0,
-    customer?.customerYellow ? customer?.customerYellow?.length : 0,
-    customer?.customerGreen ? customer?.customerGreen?.length : 0,
-    customer?.customer ? customer?.customer?.length : 0,
+    customer?.dataResult ? filterCustomer(customer, day).red : 0,
+    customer?.dataResult ? filterCustomer(customer, day).yellow : 0,
+    customer?.dataResult ? filterCustomer(customer, day).green : 0,
+    customer?.dataResult ? filterCustomer(customer, day).white : 0,
   ];
 
   const colors = ["#FF0000", "#FFFF00", "rgb(66, 242, 46)", "#FFF8DC"]; // Colores para cada segmento
-  //console.log("customerrr: ", customer.dataResult[0]);
-  //console.log("customerCancelled: ", customer.customerCancelled);
-  // let [red, yellow, green, white] = 0;
-  let red = [];
-  let yellow = [];
-  let green = [];
-  let white = [];
-
-  const filterCustomer = () => {
-    customer.dataResult.map((element) => {
-      let [anioToDay, mesToDay, diaToDay] = day.split("-");
-      let result = element.resultPrestamo?.find((ele) => {
-        let [anio, mes, dia] = ele.fechaPago.split("-");
-        if (ele.statusPay == false) {
-          if (
-            differenceInDays(
-              new Date(anio, mes - 1, dia),
-              new Date(anioToDay, mesToDay - 1, diaToDay)
-            ) < 0
-          ) {
-            red.push(element);
-          } else if (day == ele.fechaPago) {
-            yellow.push(element);
-          } else if (
-            differenceInDays(
-              new Date(anio, mes - 1, dia),
-              new Date(anioToDay, mesToDay - 1, diaToDay)
-            ) == 1
-          ) {
-            green.push(element);
-          } else {
-            white.push(element);
-          }
-        }
-      });
-    });
-    return { red, yellow, green, white };
-  };
-  console.log("red: ", filterCustomer().red);
-  console.log("yellow: ", filterCustomer().yellow);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      filterCustomer();
-
-      //return () => unsubscribe();
-    }, [])
-  );
 
   return (
     <Modal
