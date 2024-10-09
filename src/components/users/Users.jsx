@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { datePay } from "../../utils/thunks/Thunks";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-const Users = ({ data, color, enable, dataConfiguration, day }) => {
+const Users = ({ data, enable, dataConfiguration, day }) => {
   const navigation = useNavigation();
 
   //todo--> se guardará este código, como para recordar la funcionalida, puede ser útil en otra aplicación
@@ -23,6 +23,8 @@ const Users = ({ data, color, enable, dataConfiguration, day }) => {
   //   if (color) cambiarColor(color);
   // }, [color]);
   //todo--> se guardará este código, como para recordar la funcionalida, puede ser útil en otra aplicación
+  // console.log("color user: ", color);
+
   return (
     <View>
       {data?.map((element, index) => {
@@ -42,8 +44,8 @@ const Users = ({ data, color, enable, dataConfiguration, day }) => {
               style={styles.touchItem}
               onPress={() =>
                 navigation.navigate("Detalle", {
-                  id: element.uuid,
-                  typeColor: color ? color : null,
+                  id: element?.uuid,
+                  typeColor: !enable ? datePay(element, day)?.color : null,
                   enable: enable ? enable : undefined,
                   dataConfiguration: dataConfiguration,
                 })

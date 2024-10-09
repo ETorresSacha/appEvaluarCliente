@@ -8,24 +8,7 @@ import {
 import React from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import PieChart from "./PieChart";
-
-import { datePay } from "../../utils/thunks/Thunks";
-
-const filterCustomer = (data, day) => {
-  let red = data?.dataResult
-    .map((element) => datePay(element, day))
-    .filter((ele) => ele.color == "red").length;
-  let yellow = data?.dataResult
-    .map((element) => datePay(element, day))
-    .filter((ele) => ele.color == "yellow").length;
-  let green = data?.dataResult
-    .map((element) => datePay(element, day))
-    .filter((ele) => ele.color == "rgb(66, 242, 46)").length;
-  let white = data?.dataResult
-    .map((element) => datePay(element, day))
-    .filter((ele) => ele.color == "cornsilk").length;
-  return { red, yellow, green, white };
-};
+import { filterCustomer } from "../../utils/thunks/Thunks";
 
 const ModalLeyenda = ({ isVisible, setIsVisible, customer, day }) => {
   const data = [
