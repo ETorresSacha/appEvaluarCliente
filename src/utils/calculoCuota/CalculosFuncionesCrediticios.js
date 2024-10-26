@@ -129,7 +129,7 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 }
 
 
-//TODO --> CRONOGRAMA DE PAGO PARA UN PRÉSTAMO DE UN ENTIDAD FINANCIERA (INTERES COMPUESTO)
+//TODO --> CUOTA INTERES Y CAPITAL
 export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
     let resultDiasMes = diasXmes(data,i)

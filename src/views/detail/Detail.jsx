@@ -98,6 +98,7 @@ const Detail = (props) => {
       },
     ]);
   };
+  console.log("user: ", user);
 
   return (
     <View style={styles.container}>

@@ -117,6 +117,14 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
     }
   };
 
+  //! OJO: EN ESTA PARTE LO QUE ESTAMOS PENSANDO ES AÑADIR UNA CUOTA NETA, SIN ENBARGO, PARA ESO NECESITAMOS QUE
+  //! SE CREE UNA  CUOTA QUE SERA SIN LA MORA, LA CUOTA NETA SERA LA QUE SERA UNA SUMA ENTRE LA CUOTA MENSUAL Y SI EXISTE UNA MORA
+  //! SE SUMARA.
+
+  //! VER TAMBIEN VAMOS A VER SI LA MORA VA SER VISIBLE CUANDO EXISTA O NO EXISTA LA MORA, ESO ESTA PARA VER, OTRO TAMBIEN AÑADIREMOS LOS DIAS DE MORA
+  //! CREO QUE TAMBIEN VAMOS A QUITAR ALGUNOS ELEMENTOS, TENEMOS QUE VER SI SON O NO NECESARIOS
+  //! POR ULTIMO Y NO MENOS IMPORTANTE, VAMOS A VER SI AÑADIMOS EL COLOR ROJO COMO SIMBOLO DE QUE ESTE CLIENTE SE ENCUENTRA EN MORA, ESTO SERA EN LOS PAGOS DEL DETALLE.
+
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
@@ -187,11 +195,11 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                     styles.subTitle,
                     {
                       color: "orange",
-                      fontSize: dataSee?.montoCuota?.length >= 8 ? 15 : 17,
+                      fontSize: dataSee?.cuotaNeto?.length >= 8 ? 15 : 17,
                     },
                   ]}
                 >
-                  S/ {!cancelledShare ? dataSee?.montoCuota : "0"}
+                  S/ {!cancelledShare ? dataSee?.cuotaNeto : "0"}
                 </Text>
               </View>
             </View>
@@ -301,7 +309,7 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
               >
                 <Text style={styles.subTitle}>CUOTA</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
-                  S/ {!cancelledShare ? dataSee?.montoCuota : "0"}
+                  S/ {!cancelledShare ? dataSee?.cuotaNeto : "0"}
                 </Text>
               </View>
               {/* MORA */}
