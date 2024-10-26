@@ -1,6 +1,8 @@
 import { CapitalCuo, FRC, IntCuo, monInt, MonSegDM, montCap, TSegDD } from "./Formulas"
 import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 
+
+//? ************************ TODO ESTAS FUNCIONES SON APLICABLES PARA UNA FINANCIERA ************************
 //TODO --> CRONOGRAMA DE LA FECHA
 // Esta función solo calcula la fecha mensual, no se utilizará, pero se dejará para analizar su lógica
 export const sumarMes = (data,i)=>{
@@ -249,6 +251,10 @@ export const calculoMora = (data, dataConfiguration)=>{
 }
 
 
+//? ***************************************************************************************************
+
+//? --------------------- ESTA FUNCIÓN ES APLICABLE CON UN PRÉSTAMO INDEPENDIENTE ---------------------
+
 //TODO -->CRONOGRAMA DE PAGO PARA UN PRÉSTAMO INDEPENDIENTE (INTERES SIMPLE)
 // Cálculo de la cuota
 export const calculoCuota = (data,i)=>{
@@ -315,6 +321,7 @@ export const mora =(data, dataConfiguration)=>{
 
     let intMoratorio =parseFloat(dataConfiguration?.intMoratorio)  // % --> Diario
 
+
     // % de interes moratorio diario
      intMoratorio = intMoratorio/100;
 
@@ -326,10 +333,13 @@ export const mora =(data, dataConfiguration)=>{
      let diff = fechaInicio-fechaFin ;
         diff = diff/(1000*60*60*24)
 
+        console.log("dias:",intMoratorio);
+        
+
     // Cálculo del interes
-    let int = (intMoratorio*data?.montoCuota*diff)
+    let int = (intMoratorio*data?.cuotaCapital*diff)
 
      
-     return int.toFixed(2)
+     return parseFloat(int).toFixed(2)
 }
 

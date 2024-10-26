@@ -6,43 +6,20 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 import Loading from "../loading/Loading";
 
-const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
+const Pay = ({
+  data,
+  indice,
+  setIndice,
+  modify,
+  dataSee,
+  cancelledShare,
+  setCancelledShare,
+  updatePrestamo,
+  intMora,
+}) => {
   const { onUpdateStatusPay } = UseStorage();
-
-  const [indice, setIndice] = useState(0);
-  const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
-  const [modify, setModify] = useState([]); // Editar el status del pago
-  const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
-  const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
-  const [payShare, setPayShere] = useState([]);
+  const [payShare, setPayShere] = useState([]); // Guardar el pago
   const [enable, setEnable] = useState(false); // Boton de cancelar pago (ON OFF)
-  console.log("intMora: ", dataSee);
-
-  useEffect(() => {
-    setModify(data);
-    setUpdatePrestamo(data[0]?.resultPrestamo);
-
-    let result = data[0]?.resultPrestamo.find(
-      (element) => element.statusPay == false
-    );
-    // Para pagar la cuota
-    if (result != undefined) {
-      setDataSee(result);
-      setDataNotification(result); // Para las notificaciones
-      setIndice(dataSee?.cuota == undefined ? null : dataSee?.cuota - 1);
-      setCancelledShare(false);
-    }
-
-    // Cuando la cuota ya esta cancelado
-    if (result == undefined) {
-      setIndice(data[0]?.resultPrestamo.length);
-      setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
-      setDataNotification(
-        data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]
-      ); // Para las notificaciones
-      setCancelledShare(true);
-    }
-  }, [data, indice, modify, cancelledShare, dataSee]);
 
   useEffect(() => {
     // Buscamos la última cuota pagado (útil cuando la cuenta esta cancelado)
@@ -125,6 +102,8 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
   //! CREO QUE TAMBIEN VAMOS A QUITAR ALGUNOS ELEMENTOS, TENEMOS QUE VER SI SON O NO NECESARIOS
   //! POR ULTIMO Y NO MENOS IMPORTANTE, VAMOS A VER SI AÑADIMOS EL COLOR ROJO COMO SIMBOLO DE QUE ESTE CLIENTE SE ENCUENTRA EN MORA, ESTO SERA EN LOS PAGOS DEL DETALLE.
 
+  console.log(typeof intMora);
+
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
@@ -163,13 +142,11 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                 paddingBottom: 15,
               }}
             >
-              <View style={[styles.containerSubTitle, { gap: 15 }]}>
+              <View style={[styles.containerSubTitle, { gap: 7 }]}>
                 <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
                   Fecha de pago:
                 </Text>
-                <Text
-                  style={[styles.subTitle, { width: 100, color: "orange" }]}
-                >
+                <Text style={[styles.subTitle, { width: 90, color: "orange" }]}>
                   {!cancelledShare
                     ? dataSee?.fechaPago == undefined
                       ? null
@@ -199,7 +176,10 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                     },
                   ]}
                 >
-                  S/ {!cancelledShare ? dataSee?.cuotaNeto : "0"}
+                  S/{" "}
+                  {!cancelledShare
+                    ? parseFloat(dataSee?.cuotaNeto) + intMora
+                    : "0"}
                 </Text>
               </View>
             </View>
@@ -228,7 +208,7 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
               >
                 <Text style={styles.subTitle}>Total del préstamo</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
-                  S/ {data[0].capital}
+                  S/ {dataSee?.capital}
                 </Text>
               </View>
 
@@ -242,36 +222,6 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                 <Text style={styles.subTitle}>Total del interes</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
                   S/ {dataSee?.interesTotal}
-                </Text>
-              </View>
-
-              {/* Cuotas canceladas */}
-              <View
-                style={[
-                  styles.containerSubTitle,
-                  { justifyContent: "space-between" },
-                ]}
-              >
-                <Text style={styles.subTitle}>Cuotas canceladas</Text>
-                <Text style={{ color: "white", fontSize: 17 }}>
-                  {!cancelledShare
-                    ? `${dataSee?.cuota - 1}/${updatePrestamo?.length}`
-                    : "0"}
-                </Text>
-              </View>
-
-              {/* Cuotas pendientes */}
-              <View
-                style={[
-                  styles.containerSubTitle,
-                  { justifyContent: "space-between" },
-                ]}
-              >
-                <Text style={styles.subTitle}>Cuotas pendientes</Text>
-                <Text style={{ color: "white", fontSize: 17 }}>
-                  {!cancelledShare
-                    ? updatePrestamo.length - (dataSee?.cuota - 1)
-                    : "0"}
                 </Text>
               </View>
 
@@ -320,7 +270,7 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                 ]}
               >
                 <Text style={styles.subTitle}>Mora</Text>
-                <Text style={{ color: "white", fontSize: 17 }}>0</Text>
+                <Text style={{ color: "white", fontSize: 17 }}>{intMora}</Text>
               </View>
             </View>
           </View>
