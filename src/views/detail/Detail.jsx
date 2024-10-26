@@ -158,7 +158,12 @@ const Detail = (props) => {
                 </View>
               </View>
             </View>
-            <Pay data={user} setDataNotification={setDataNotification} />
+            <Pay
+              data={user}
+              setDataNotification={setDataNotification}
+              typeColor={valueProps?.typeColor}
+              intMora={valueProps?.dataConfiguration}
+            />
             <Notification
               data={user}
               typeColor={valueProps?.typeColor}
