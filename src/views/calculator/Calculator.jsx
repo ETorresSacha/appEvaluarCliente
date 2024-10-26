@@ -62,7 +62,7 @@ const Calculator = ({
     React.useCallback(() => {
       setCopyDataPrestamo(prestamo);
       setValueTPM(dataPerson?.tasaPrimaMensual);
-      setCuota(dataPerson?.resultPrestamo[0]?.montoCuota);
+      setCuota(dataPerson?.resultPrestamo[0]?.cuotaNeto);
 
       if (valuePrest) {
         setErrorsPrestamo(validationDataPrestamo(prestamo));
@@ -181,7 +181,7 @@ const Calculator = ({
       const result = changeValue
         ? user[0].resultPrestamo
         : cuotaIndependiente(data);
-
+      console.log("result: ", result);
       if (dataPerson != undefined) {
         setDataPerson({
           ...dataPerson,
@@ -193,7 +193,7 @@ const Calculator = ({
           fechaPrimeraCuota: prestamo?.fechaPrimeraCuota,
           periodo: prestamo?.periodo,
           tipoPago: prestamo?.tipoPago,
-          tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm,
+          tasaPrimaMensual: changeValue ? valueTPM : dataConfiguration?.tpm, //! ESTA PARTE DEBEMOS YA CORREGIR, SI SE ELIMINA O SE QUEDA
           resultPrestamo: result,
         });
       } else {

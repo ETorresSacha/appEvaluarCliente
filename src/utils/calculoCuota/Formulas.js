@@ -76,6 +76,26 @@ export const TCEA =(tm,n)=>{
 }
 
 
+//TODO--> Fórmulas para un cálculo de interes simple
+// Cálculo del monto interés
+export  const monInt=(capital,interes,tiempo,i)=>{
+   const  result = (capital*interes*tiempo)/(tiempo-i)
+
+    return Number.parseFloat(result).toFixed(2)
+
+}
+
+// Cálculo del monto capítal
+export const montCap=(capital,tiempo)=>{
+    const result = capital/tiempo
+    return Number.parseFloat(result).toFixed(2)
+}
+
+// Cálculo de la mora
+
+// Cálculo del interés neto
+
+
 
 
 

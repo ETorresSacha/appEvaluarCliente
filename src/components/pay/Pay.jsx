@@ -6,7 +6,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 import Loading from "../loading/Loading";
 
-const Pay = ({ data, setDataNotification }) => {
+const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
   const { onUpdateStatusPay } = UseStorage();
 
   const [indice, setIndice] = useState(0);
@@ -16,6 +16,7 @@ const Pay = ({ data, setDataNotification }) => {
   const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
   const [payShare, setPayShere] = useState([]);
   const [enable, setEnable] = useState(false); // Boton de cancelar pago (ON OFF)
+  console.log("intMora: ", dataSee);
 
   useEffect(() => {
     setModify(data);
@@ -290,6 +291,28 @@ const Pay = ({ data, setDataNotification }) => {
                 <Text style={{ color: "white", fontSize: 17 }}>
                   {data[0].interes} %
                 </Text>
+              </View>
+              {/* CUOTA */}
+              <View
+                style={[
+                  styles.containerSubTitle,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                <Text style={styles.subTitle}>CUOTA</Text>
+                <Text style={{ color: "white", fontSize: 17 }}>
+                  S/ {!cancelledShare ? dataSee?.montoCuota : "0"}
+                </Text>
+              </View>
+              {/* MORA */}
+              <View
+                style={[
+                  styles.containerSubTitle,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                <Text style={styles.subTitle}>Mora</Text>
+                <Text style={{ color: "white", fontSize: 17 }}>0</Text>
               </View>
             </View>
           </View>

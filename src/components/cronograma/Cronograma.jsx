@@ -54,7 +54,7 @@ const Cronograma = ({ data }) => {
                   <Text style={styles.dataText}>
                     {formatDate(element.fechaPago)}
                   </Text>
-                  <Text style={styles.dataText}>{element.montoCuota}</Text>
+                  <Text style={styles.dataText}>{element.cuotaNeto}</Text>
                   <Checkbox
                     style={styles.checkbox}
                     value={element.statusPay}

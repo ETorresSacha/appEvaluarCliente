@@ -1,4 +1,4 @@
-import { CapitalCuo, FRC, IntCuo, MonSegDM, TSegDD } from "./Formulas"
+import { CapitalCuo, FRC, IntCuo, monInt, MonSegDM, montCap, TSegDD } from "./Formulas"
 import { compareAsc, format,add,formatDistance, differenceInDays,getDate,isFuture} from 'date-fns'
 
 //TODO --> CRONOGRAMA DE LA FECHA
@@ -129,7 +129,7 @@ export const solutionFRC = (ted,data,i,acumFRCA)=>{
 }
 
 
-//TODO --> CUOTA INTERES Y CAPITAL
+//TODO --> CRONOGRAMA DE PAGO PARA UN PRÉSTAMO DE UN ENTIDAD FINANCIERA (INTERES COMPUESTO)
 export const CuotInt = (data,i,tem,periodo,resultFRCA,newCapital,TSegM)=>{
 
     let resultDiasMes = diasXmes(data,i)
@@ -249,7 +249,7 @@ export const calculoMora = (data, dataConfiguration)=>{
 }
 
 
-//TODO -->PRÉSTAMO INDEPENDIENTE
+//TODO -->CRONOGRAMA DE PAGO PARA UN PRÉSTAMO INDEPENDIENTE (INTERES SIMPLE)
 // Cálculo de la cuota
 export const calculoCuota = (data,i)=>{
     let cuota
@@ -264,6 +264,50 @@ export const calculoCuota = (data,i)=>{
         cuota = (parseFloat(data?.capital*data?.interes/100)*(parseInt(data?.cuotas)) + parseFloat(data?.capital))/parseInt(data?.cuotas)
     }
     return cuota
+}
+// Cálculo de la cuota interés, la cuota capital y el saldo capital
+export const cuotInterSimple =(capital,interes,tiempo,i,newCapital)=>{
+
+    let resultCapital
+    let resultCuoInt
+    let resultCuoCap
+
+    if(i === 0){
+
+         // Cuota interes
+         resultCuoInt = monInt(capital,interes,tiempo,i)
+         
+         // Cuota capital
+         resultCuoCap =  montCap(capital,tiempo)
+         
+         //Capital restante
+         resultCapital = capital-resultCuoCap
+         newCapital.push(resultCapital)
+      
+    }
+    else{
+
+        // Cuota interes
+        resultCuoInt = monInt(newCapital[0],interes,tiempo,i)
+        
+        // Cuota capital
+        resultCuoCap =  montCap(capital,tiempo)
+        
+        //Capital restante
+        resultCapital = (newCapital[0])-resultCuoCap
+        resultCapital = Number.parseFloat(resultCapital).toFixed(2)
+        newCapital.shift()
+        newCapital.push(resultCapital)
+ 
+    }
+
+
+    return {
+        resultInt:parseFloat(resultCuoInt).toFixed(2),
+        resultCuo: parseFloat(resultCuoCap).toFixed(2),
+        resultCap:resultCapital,
+        resultCuoNeto: (parseFloat(resultCuoInt)+parseFloat(resultCuoCap)).toFixed(2)
+    }
 }
 
 // Cálculo de la mora (interés del interés)

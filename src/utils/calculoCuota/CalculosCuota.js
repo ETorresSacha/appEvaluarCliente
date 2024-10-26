@@ -1,6 +1,6 @@
  import {TED, TEM } from "./Formulas"
 
-import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC,calculoCuota } from "./CalculosFuncionesCrediticios";
+import {  CuotInt, diasAcum, diasXmes, paymentDate, solutionFRC,calculoCuota, cuotInterSimple } from "./CalculosFuncionesCrediticios";
 
 
 //? ************************ TODO ESTAS FUNCIONES SON APLICABLES PARA UNA FINANCIERA ************************
@@ -110,21 +110,32 @@ export const calculoFRCA = (data) =>{
 //? --------------------- ESTA FUNCIÓN ES APLICABLE CON UN PRÉSTAMO INDEPENDIENTE ---------------------
  //TODO --> CRONOGRAMA PARA UN PRÉSTAMO INDEPENDIENTE
  export const cuotaIndependiente =(data)=>{
+
     const interesTotal = parseInt(data?.cuotas)*parseFloat(data?.interes)*parseFloat(data?.capital)/100
+    let capital = parseFloat(data?.capital)
+    let interes =parseFloat(data?.interes)/100
+    let tiempo =parseInt(data?.cuotas)
     
-    let cronograma = []
+    let cronograma=[]
+    let newCapital = []
+   
     for (let i =1; i<=data?.cuotas;i++){
         cronograma.push({
             cuota:i,
-            capital: data?.capital,
+            capital: capital.toFixed(2),
             fechaDesembolso:data?.fechaDesembolso,
             fechaPago: paymentDate(data,i-1),
-            montoCuota:calculoCuota(data,i).toFixed(2),
             interesTotal:interesTotal,
-            statusPay:false
+            statusPay:false,
+            Dias:diasXmes(data,i-1), 
+            DiasAcum:diasAcum(data,i-1),
+            cuotaInteres:cuotInterSimple(capital,interes,tiempo,i-1,newCapital).resultInt,
+            cuotaCapital:cuotInterSimple(capital,interes,tiempo,i-1,newCapital).resultCuo,
+            saldoCapital:cuotInterSimple(capital,interes,tiempo,i-1,newCapital).resultCap,
+            cuotaNeto:cuotInterSimple(capital,interes,tiempo,i-1,newCapital).resultCuoNeto,
         })
     }
-
+            
     return cronograma
  }
  //? --------------------- ---------------------------------------------------- ---------------------
