@@ -16,6 +16,7 @@ const Pay = ({
   setCancelledShare,
   updatePrestamo,
   intMora,
+  color,
 }) => {
   const { onUpdateStatusPay } = UseStorage();
   const [payShare, setPayShere] = useState([]); // Guardar el pago
@@ -102,8 +103,6 @@ const Pay = ({
   //! CREO QUE TAMBIEN VAMOS A QUITAR ALGUNOS ELEMENTOS, TENEMOS QUE VER SI SON O NO NECESARIOS
   //! POR ULTIMO Y NO MENOS IMPORTANTE, VAMOS A VER SI AÑADIMOS EL COLOR ROJO COMO SIMBOLO DE QUE ESTE CLIENTE SE ENCUENTRA EN MORA, ESTO SERA EN LOS PAGOS DEL DETALLE.
 
-  console.log(typeof intMora);
-
   return (
     <View style={styles.container}>
       {updatePrestamo == undefined ? (
@@ -138,15 +137,15 @@ const Pay = ({
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-evenly",
+                justifyContent: "space-around",
                 paddingBottom: 15,
               }}
             >
-              <View style={[styles.containerSubTitle, { gap: 7 }]}>
+              <View style={[styles.containerSubTitle, { gap: 3 }]}>
                 <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
                   Fecha de pago:
                 </Text>
-                <Text style={[styles.subTitle, { width: 90, color: "orange" }]}>
+                <Text style={[styles.subTitle, { color: "orange" }]}>
                   {!cancelledShare
                     ? dataSee?.fechaPago == undefined
                       ? null
@@ -157,28 +156,24 @@ const Pay = ({
               <View
                 style={[
                   styles.containerSubTitle,
-                  {
-                    gap: 15,
-                    justifyContent: "space-around",
-                    width: 130,
-                  },
+                  { justifyContent: "space-around", gap: 3 },
                 ]}
               >
                 <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
-                  Cuota:
+                  Cuota total:
                 </Text>
                 <Text
                   style={[
                     styles.subTitle,
                     {
-                      color: "orange",
+                      color: color == "red" ? color : "orange",
                       fontSize: dataSee?.cuotaNeto?.length >= 8 ? 15 : 17,
                     },
                   ]}
                 >
                   S/{" "}
                   {!cancelledShare
-                    ? parseFloat(dataSee?.cuotaNeto) + intMora
+                    ? parseFloat(dataSee?.cuotaNeto) + parseFloat(intMora)
                     : "0"}
                 </Text>
               </View>
@@ -257,7 +252,7 @@ const Pay = ({
                   { justifyContent: "space-between" },
                 ]}
               >
-                <Text style={styles.subTitle}>CUOTA</Text>
+                <Text style={styles.subTitle}>Cuota</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
                   S/ {!cancelledShare ? dataSee?.cuotaNeto : "0"}
                 </Text>
@@ -270,7 +265,14 @@ const Pay = ({
                 ]}
               >
                 <Text style={styles.subTitle}>Mora</Text>
-                <Text style={{ color: "white", fontSize: 17 }}>{intMora}</Text>
+                <Text
+                  style={{
+                    color: color == "red" ? color : "white",
+                    fontSize: 17,
+                  }}
+                >
+                  S/ {parseFloat(intMora).toFixed(2)}
+                </Text>
               </View>
             </View>
           </View>
@@ -333,7 +335,7 @@ const styles = StyleSheet.create({
   },
 
   subTitle: {
-    fontSize: 17,
+    fontSize: 16,
     //fontWeight: "bold",
     color: "cornsilk",
   },

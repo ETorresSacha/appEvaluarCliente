@@ -203,6 +203,7 @@ const Detail = (props) => {
               setCancelledShare={setCancelledShare}
               updatePrestamo={updatePrestamo}
               intMora={intMora}
+              color={valueProps?.typeColor}
             />
             <Notification
               data={user}
