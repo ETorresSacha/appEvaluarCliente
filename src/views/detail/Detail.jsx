@@ -6,7 +6,7 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import UseStorage from "../../components/hooks/UseHookStorage";
 import { useNavigation } from "@react-navigation/native";
@@ -15,11 +15,11 @@ import Notification from "../../components/notification/Notification";
 import Header from "../../components/header/Header";
 import Loading from "../../components/loading/Loading";
 import Entypo from "@expo/vector-icons/Entypo";
+import { mora } from "../../utils/calculoCuota/CalculosFuncionesCrediticios";
 
 const Detail = (props) => {
   const { onGetCronograma, onDeleteCustomer } = UseStorage();
   const navigation = useNavigation();
-  const [dataNotification, setDataNotification] = useState(); // Útil para usar en las notificaciones
   const [user, setUser] = useState([]);
   const [valueProps, setValueProps] = useState({
     typeColor: "",
@@ -27,6 +27,41 @@ const Detail = (props) => {
     enable: "",
     dataConfiguration: "",
   });
+  const [intMora, setIntMora] = useState(0);
+  const [indice, setIndice] = useState(0); // Para modificar el índice correcto cuando se realiza un pago
+  const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
+  const [modify, setModify] = useState([]); // Para editar el status del pago
+  const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
+  const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
+
+  useEffect(() => {
+    setModify(user);
+    setUpdatePrestamo(user[0]?.resultPrestamo);
+
+    let result = user[0]?.resultPrestamo.find(
+      (element) => element.statusPay == false
+    );
+    // Para pagar la cuota
+    if (result != undefined) {
+      setDataSee(result);
+
+      setIndice(dataSee?.cuota == undefined ? null : dataSee?.cuota - 1);
+      setCancelledShare(false);
+    }
+
+    // Cuando la cuota ya esta cancelado
+    if (result == undefined) {
+      setIndice(user[0]?.resultPrestamo.length);
+      setDataSee(user[0]?.resultPrestamo[user[0]?.resultPrestamo.length - 1]);
+      setCancelledShare(true);
+    }
+
+    // Cálculo de la mora
+    if (valueProps?.typeColor == "red") {
+      let resultMora = mora(result, valueProps?.dataConfiguration);
+      setIntMora(resultMora);
+    }
+  }, [user, indice, modify, cancelledShare, dataSee]);
 
   // Actualiza los valores de valueProps
   useFocusEffect(
@@ -98,7 +133,6 @@ const Detail = (props) => {
       },
     ]);
   };
-  console.log("user: ", user);
 
   return (
     <View style={styles.container}>
@@ -161,15 +195,20 @@ const Detail = (props) => {
             </View>
             <Pay
               data={user}
-              setDataNotification={setDataNotification}
-              typeColor={valueProps?.typeColor}
-              intMora={valueProps?.dataConfiguration}
+              indice={indice}
+              setIndice={setIndice}
+              modify={modify}
+              dataSee={dataSee}
+              cancelledShare={cancelledShare}
+              setCancelledShare={setCancelledShare}
+              updatePrestamo={updatePrestamo}
+              intMora={intMora}
+              color={valueProps?.typeColor}
             />
             <Notification
               data={user}
               typeColor={valueProps?.typeColor}
-              dataNotification={dataNotification}
-              setDataNotification={setDataNotification}
+              dataNotification={dataSee} //
               dataConfiguration={valueProps?.dataConfiguration}
             />
             <TouchableOpacity

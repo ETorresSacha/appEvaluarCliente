@@ -68,7 +68,6 @@ const Notification = ({
   useEffect(() => {
     loadNegocio();
   }, []);
-  console.log(dataConfiguration);
 
   // Actualiza mensaje
   useEffect(() => {

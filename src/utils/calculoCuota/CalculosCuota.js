@@ -125,7 +125,7 @@ export const calculoFRCA = (data) =>{
             capital: capital.toFixed(2),
             fechaDesembolso:data?.fechaDesembolso,
             fechaPago: paymentDate(data,i-1),
-            interesTotal:interesTotal,
+            interesTotal:interesTotal.toFixed(2),
             statusPay:false,
             Dias:diasXmes(data,i-1), 
             DiasAcum:diasAcum(data,i-1),

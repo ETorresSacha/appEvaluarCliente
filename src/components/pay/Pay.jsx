@@ -6,43 +6,21 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { formatDate } from "../../utils/thunks/Thunks";
 import Loading from "../loading/Loading";
 
-const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
+const Pay = ({
+  data,
+  indice,
+  setIndice,
+  modify,
+  dataSee,
+  cancelledShare,
+  setCancelledShare,
+  updatePrestamo,
+  intMora,
+  color,
+}) => {
   const { onUpdateStatusPay } = UseStorage();
-
-  const [indice, setIndice] = useState(0);
-  const [updatePrestamo, setUpdatePrestamo] = useState([]); // ResultPrestamo
-  const [modify, setModify] = useState([]); // Editar el status del pago
-  const [dataSee, setDataSee] = useState([]); // Datos que se renderizará
-  const [cancelledShare, setCancelledShare] = useState(false); // Cuota cancelada
-  const [payShare, setPayShere] = useState([]);
+  const [payShare, setPayShere] = useState([]); // Guardar el pago
   const [enable, setEnable] = useState(false); // Boton de cancelar pago (ON OFF)
-  console.log("intMora: ", dataSee);
-
-  useEffect(() => {
-    setModify(data);
-    setUpdatePrestamo(data[0]?.resultPrestamo);
-
-    let result = data[0]?.resultPrestamo.find(
-      (element) => element.statusPay == false
-    );
-    // Para pagar la cuota
-    if (result != undefined) {
-      setDataSee(result);
-      setDataNotification(result); // Para las notificaciones
-      setIndice(dataSee?.cuota == undefined ? null : dataSee?.cuota - 1);
-      setCancelledShare(false);
-    }
-
-    // Cuando la cuota ya esta cancelado
-    if (result == undefined) {
-      setIndice(data[0]?.resultPrestamo.length);
-      setDataSee(data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]);
-      setDataNotification(
-        data[0]?.resultPrestamo[data[0]?.resultPrestamo.length - 1]
-      ); // Para las notificaciones
-      setCancelledShare(true);
-    }
-  }, [data, indice, modify, cancelledShare, dataSee]);
 
   useEffect(() => {
     // Buscamos la última cuota pagado (útil cuando la cuenta esta cancelado)
@@ -159,17 +137,15 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-evenly",
+                justifyContent: "space-around",
                 paddingBottom: 15,
               }}
             >
-              <View style={[styles.containerSubTitle, { gap: 15 }]}>
+              <View style={[styles.containerSubTitle, { gap: 3 }]}>
                 <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
                   Fecha de pago:
                 </Text>
-                <Text
-                  style={[styles.subTitle, { width: 100, color: "orange" }]}
-                >
+                <Text style={[styles.subTitle, { color: "orange" }]}>
                   {!cancelledShare
                     ? dataSee?.fechaPago == undefined
                       ? null
@@ -180,26 +156,25 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
               <View
                 style={[
                   styles.containerSubTitle,
-                  {
-                    gap: 15,
-                    justifyContent: "space-around",
-                    width: 130,
-                  },
+                  { justifyContent: "space-around", gap: 3 },
                 ]}
               >
                 <Text style={[styles.subTitle, { fontWeight: "bold" }]}>
-                  Cuota:
+                  Cuota total:
                 </Text>
                 <Text
                   style={[
                     styles.subTitle,
                     {
-                      color: "orange",
+                      color: color == "red" ? color : "orange",
                       fontSize: dataSee?.cuotaNeto?.length >= 8 ? 15 : 17,
                     },
                   ]}
                 >
-                  S/ {!cancelledShare ? dataSee?.cuotaNeto : "0"}
+                  S/{" "}
+                  {!cancelledShare
+                    ? parseFloat(dataSee?.cuotaNeto) + parseFloat(intMora)
+                    : "0"}
                 </Text>
               </View>
             </View>
@@ -228,7 +203,7 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
               >
                 <Text style={styles.subTitle}>Total del préstamo</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
-                  S/ {data[0].capital}
+                  S/ {dataSee?.capital}
                 </Text>
               </View>
 
@@ -242,36 +217,6 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                 <Text style={styles.subTitle}>Total del interes</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
                   S/ {dataSee?.interesTotal}
-                </Text>
-              </View>
-
-              {/* Cuotas canceladas */}
-              <View
-                style={[
-                  styles.containerSubTitle,
-                  { justifyContent: "space-between" },
-                ]}
-              >
-                <Text style={styles.subTitle}>Cuotas canceladas</Text>
-                <Text style={{ color: "white", fontSize: 17 }}>
-                  {!cancelledShare
-                    ? `${dataSee?.cuota - 1}/${updatePrestamo?.length}`
-                    : "0"}
-                </Text>
-              </View>
-
-              {/* Cuotas pendientes */}
-              <View
-                style={[
-                  styles.containerSubTitle,
-                  { justifyContent: "space-between" },
-                ]}
-              >
-                <Text style={styles.subTitle}>Cuotas pendientes</Text>
-                <Text style={{ color: "white", fontSize: 17 }}>
-                  {!cancelledShare
-                    ? updatePrestamo.length - (dataSee?.cuota - 1)
-                    : "0"}
                 </Text>
               </View>
 
@@ -307,7 +252,7 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                   { justifyContent: "space-between" },
                 ]}
               >
-                <Text style={styles.subTitle}>CUOTA</Text>
+                <Text style={styles.subTitle}>Cuota</Text>
                 <Text style={{ color: "white", fontSize: 17 }}>
                   S/ {!cancelledShare ? dataSee?.cuotaNeto : "0"}
                 </Text>
@@ -320,7 +265,14 @@ const Pay = ({ data, setDataNotification, typeColor, intMora }) => {
                 ]}
               >
                 <Text style={styles.subTitle}>Mora</Text>
-                <Text style={{ color: "white", fontSize: 17 }}>0</Text>
+                <Text
+                  style={{
+                    color: color == "red" ? color : "white",
+                    fontSize: 17,
+                  }}
+                >
+                  S/ {parseFloat(intMora).toFixed(2)}
+                </Text>
               </View>
             </View>
           </View>
@@ -383,7 +335,7 @@ const styles = StyleSheet.create({
   },
 
   subTitle: {
-    fontSize: 17,
+    fontSize: 16,
     //fontWeight: "bold",
     color: "cornsilk",
   },
